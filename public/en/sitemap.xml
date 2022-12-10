@@ -47,7 +47,72 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/tryhackme_olympus/</loc>
+    <lastmod>2022-11-25T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/wordpress/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_hardening/</loc>
+    <lastmod>2022-11-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_amsi_bypass/</loc>
+    <lastmod>2022-11-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/subdomains_enumeration/</loc>
+    <lastmod>2022-11-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_mimikatz/</loc>
+    <lastmod>2022-11-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_persistence/</loc>
+    <lastmod>2022-11-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_privilege_escalation/</loc>
+    <lastmod>2022-11-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_using_credentials/</loc>
+    <lastmod>2022-11-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_download_and_execute/</loc>
+    <lastmod>2022-11-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/escape_breakout/</loc>
+    <lastmod>2022-11-03T04:33:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/office_attacks/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
     <loc>https://www.grayhatfreelancing.com/docs/bind_shell_cheatsheet/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/methodology_and_enumeration/</loc>
     <lastmod>2022-11-03T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -57,13 +122,78 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/hash_cracking/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/linux_persistence/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/linux_privilege_escalation/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/metasploit_cheatsheet/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/windows_dpapi/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
     <loc>https://www.grayhatfreelancing.com/docs/microsoft_azure_cloud/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/network_discovery/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/network_pivoting_techniques/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/mssql_server_cheatsheet/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</loc>
+    <lastmod>2022-11-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/source_code_management/</loc>
     <lastmod>2022-11-03T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url><url>
     <loc>https://www.grayhatfreelancing.com/docs/docker_pentesting/</loc>
     <lastmod>2022-10-26T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/miscellaneous_tricks/</loc>
+    <lastmod>2022-10-26T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/graphql_injection/</loc>
+    <lastmod>2022-10-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url><url>
@@ -117,7 +247,152 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/dns_rebinding/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
     <loc>https://www.grayhatfreelancing.com/docs/file_inclusion/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/http_parameter_pollution/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/insecure_deserialization/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/insecure_direct_object_references/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/insecure_file_uploads/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/insecure_management_interfaces/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/insecure_source_code_management/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/java_rmi/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/json_web_token/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/kuburnetes/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/latex_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/ldap_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/nosql_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/oauth/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/open_url_redirection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/race_conditions/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/request_smuggling/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/saml_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/server_side_request_forgery/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/server_side_template_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/sql_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/tabnabbing/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/type_juggling/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/web_cache_deception/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/web_sockets/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/xxe_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/xpath_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/xslt_injection/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url><url>
+    <loc>https://www.grayhatfreelancing.com/docs/xss_injection/</loc>
     <lastmod>2022-10-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

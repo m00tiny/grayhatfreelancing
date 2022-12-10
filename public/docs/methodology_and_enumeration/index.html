@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Methodologies and resources for bug hunting and enumeration of live environments.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Bug Hunting Methodology and Enumeration" />
+<meta property="og:description" content="Methodologies and resources for bug hunting and enumeration of live environments." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/methodology_and_enumeration/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Bug Hunting Methodology and Enumeration | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="active">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Bug Hunting Methodology and Enumeration</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#bug-hunting-methodology-and-enumeration">Bug Hunting Methodology and Enumeration</a>
+      <ul>
+        <li><a href="#passive-recon">Passive recon</a></li>
+        <li><a href="#active-recon">Active recon</a></li>
+        <li><a href="#list-all-the-subdirectories-and-files">List all the subdirectories and files</a></li>
+        <li><a href="#looking-for-web-vulnerabilities">Looking for Web vulnerabilities</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="bug-hunting-methodology-and-enumeration">
+  Bug Hunting Methodology and Enumeration
+  <a class="anchor" href="#bug-hunting-methodology-and-enumeration">#</a>
+</h1>
+<h2 id="passive-recon">
+  Passive recon
+  <a class="anchor" href="#passive-recon">#</a>
+</h2>
+<ul>
+<li>
+<p>Using Shodan (
+  <a href="https://www.shodan.io/">https://www.shodan.io/</a>) to detect similar app</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>can be integrated with nmap <span style="color:#f92672">(</span>https://github.com/glennzw/shodan-hq-nse<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>nmap --script shodan-hq.nse --script-args <span style="color:#e6db74">&#39;apikey=&lt;yourShodanAPIKey&gt;,target=&lt;hackme&gt;&#39;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Using The Wayback Machine (
+  <a href="https://archive.org/web/">https://archive.org/web/</a>) to detect forgotten endpoints</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>look <span style="color:#66d9ef">for</span> JS files, old links
+</span></span><span style="display:flex;"><span>curl -sX GET <span style="color:#e6db74">&#34;http://web.archive.org/cdx/search/cdx?url=&lt;targetDomain.com&gt;&amp;output=text&amp;fl=original&amp;collapse=urlkey&amp;matchType=prefix&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Using 
+  <a href="https://github.com/laramies/theHarvester">The Harvester</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python theHarvester<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>b all <span style="color:#f92672">-</span>d domain<span style="color:#f92672">.</span>com
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="active-recon">
+  Active recon
+  <a class="anchor" href="#active-recon">#</a>
+</h2>
+<ul>
+<li>
+<p>
+  <a href="/docs/network_discovery/">Network discovery</a> with masscan, nmap etc.</p>
+</li>
+<li>
+<p>rpcclient</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ rpcclient -U <span style="color:#e6db74">&#39;%&#39;</span> <span style="color:#f92672">[</span>target host<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>rpcclient $&gt; querydominfo
+</span></span><span style="display:flex;"><span>Domain: WORKGROUP
+</span></span><span style="display:flex;"><span>Server: METASPLOITABLE
+</span></span><span style="display:flex;"><span>Comment: metasploitable server <span style="color:#f92672">(</span>Samba 3.0.20-Debian<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Total Users: <span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rpcclient $&gt; enumdomusers
+</span></span><span style="display:flex;"><span>user:<span style="color:#f92672">[</span>games<span style="color:#f92672">]</span> rid:<span style="color:#f92672">[</span>0x3f2<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>user:<span style="color:#f92672">[</span>nobody<span style="color:#f92672">]</span> rid:<span style="color:#f92672">[</span>0x1f5<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>user:<span style="color:#f92672">[</span>bind<span style="color:#f92672">]</span> rid:<span style="color:#f92672">[</span>0x4ba<span style="color:#f92672">]</span>
+</span></span></code></pre></div></li>
+<li>
+<p>enum4linux</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>enum4linux v0.8.9 <span style="color:#f92672">(</span>http://labs.portcullis.co.uk/application/enum4linux/<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Usage: ./enum4linux.pl <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span> ip
+</span></span><span style="display:flex;"><span>-U        get userlist
+</span></span><span style="display:flex;"><span>-M        get machine list*
+</span></span><span style="display:flex;"><span>-S        get sharelist
+</span></span><span style="display:flex;"><span>-P        get password policy information
+</span></span><span style="display:flex;"><span>-G        get group and member list
+</span></span><span style="display:flex;"><span>-d        be detailed, applies to -U and -S
+</span></span><span style="display:flex;"><span>-u user   specify username to use <span style="color:#f92672">(</span>default “”<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>-p pass   specify password to use <span style="color:#f92672">(</span>default “”
+</span></span><span style="display:flex;"><span>-a        Do all simple enumeration <span style="color:#f92672">(</span>-U -S -G -P -r -o -n -i<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>-o        Get OS information
+</span></span><span style="display:flex;"><span>-i        Get printer information
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==============================</span>
+</span></span><span style="display:flex;"><span>|   Users on XXX.XXX.XXX.XXX |
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==============================</span>
+</span></span><span style="display:flex;"><span>index: 0x1 Account: games Name: games Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>index: 0x2 Account: nobody Name: nobody Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>index: 0x3 Account: bind Name: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span> Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>index: 0x4 Account: proxy Name: proxy Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>index: 0x5 Account: syslog Name: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span> Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>index: 0x6 Account: user Name: just a user,111,, Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>index: 0x7 Account: www-data Name: www-data Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>index: 0x8 Account: root Name: root Desc: <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Zone Transfer</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>host -t ns domain.local
+</span></span><span style="display:flex;"><span>domain.local name server master.domain.local.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>host master.domain.local        
+</span></span><span style="display:flex;"><span>master.domain.local has address <span style="color:#ae81ff">192.168</span>.1.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dig axfr domain.local @192.168.1.1
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="list-all-the-subdirectories-and-files">
+  List all the subdirectories and files
+  <a class="anchor" href="#list-all-the-subdirectories-and-files">#</a>
+</h2>
+<ul>
+<li>
+<p>Using BFAC (Backup File Artifacts Checker): An automated tool that checks for backup artifacts that may disclose the web-application&rsquo;s source code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/mazen160/bfac
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Check a single URL
+</span></span><span style="display:flex;"><span>bfac --url http://example.com/test.php --level <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Check a list of URLs
+</span></span><span style="display:flex;"><span>bfac --list testing_list.txt
+</span></span></code></pre></div></li>
+<li>
+<p>Using DirBuster or GoBuster</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./gobuster -u http://buffered.io/ -w words.txt -t <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>-u url
+</span></span><span style="display:flex;"><span>-w wordlist
+</span></span><span style="display:flex;"><span>-t threads
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>More subdomain :
+</span></span><span style="display:flex;"><span>./gobuster -m dns -w subdomains.txt -u google.com -i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>gobuster -w wordlist -u URL -r -e
+</span></span></code></pre></div></li>
+<li>
+<p>Using a script to detect all phpinfo.php files in a range of IPs (CIDR can be found with a whois)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> ipa in 98.13<span style="color:#f92672">{</span>6..9<span style="color:#f92672">}</span>.<span style="color:#f92672">{</span>0..255<span style="color:#f92672">}</span>.<span style="color:#f92672">{</span>0..255<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>wget -t <span style="color:#ae81ff">1</span> -T <span style="color:#ae81ff">3</span> http://<span style="color:#e6db74">${</span>ipa<span style="color:#e6db74">}</span>/phpinfo.php; <span style="color:#66d9ef">done</span> &amp;
+</span></span></code></pre></div></li>
+<li>
+<p>Using a script to detect all .htpasswd files in a range of IPs</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> ipa in 98.13<span style="color:#f92672">{</span>6..9<span style="color:#f92672">}</span>.<span style="color:#f92672">{</span>0..255<span style="color:#f92672">}</span>.<span style="color:#f92672">{</span>0..255<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>wget -t <span style="color:#ae81ff">1</span> -T <span style="color:#ae81ff">3</span> http://<span style="color:#e6db74">${</span>ipa<span style="color:#e6db74">}</span>/.htpasswd; <span style="color:#66d9ef">done</span> &amp;
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="looking-for-web-vulnerabilities">
+  Looking for Web vulnerabilities
+  <a class="anchor" href="#looking-for-web-vulnerabilities">#</a>
+</h2>
+<ul>
+<li>
+<p>Look for private information in GitHub repos with GitRob</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/michenriksen/gitrob.git
+</span></span><span style="display:flex;"><span>gitrob analyze johndoe --site<span style="color:#f92672">=</span>https://github.acme.com --endpoint<span style="color:#f92672">=</span>https://github.acme.com/api/v3 --access-tokens<span style="color:#f92672">=</span>token1,token2
+</span></span></code></pre></div></li>
+<li>
+<p>Explore the website with a proxy (ZAP/Burp Suite)</p>
+<ol>
+<li>Start proxy, visit the main target site and perform a Forced Browse to discover files and directories</li>
+<li>Map technologies used with Wappalyzer and Burp Suite (or ZAP) proxy</li>
+<li>Explore and understand available functionality, noting areas that correspond to vulnerability types</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Burp Proxy configuration on port <span style="color:#ae81ff">8080</span> <span style="color:#f92672">(</span>in .bashrc<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>alias set_proxy_burp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gsettings set org.gnome.system.proxy.http host &#34;http://localhost&#34;;gsettings set org.gnome.system.proxy.http port 8080;gsettings set org.gnome.system.proxy mode &#34;manual&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>alias set_proxy_normal<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gsettings set org.gnome.system.proxy mode &#34;none&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span> launch Burp with : java -jar burpsuite_free_v*.jar &amp;
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://gist.github.com/gbedoya/10935137">WAHH Task Checklist</a> copied from 
+  <a href="http://mdsec.net/wahh/tasks.html">http://mdsec.net/wahh/tasks.html</a></p>
+</li>
+<li>
+<p>Subscribe to the site and pay for the additional functionality to test</p>
+</li>
+<li>
+<p>Launch a Nikto scan in case you missed something</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>nikto -h http<span style="color:#960050;background-color:#1e0010">:</span>//domain.example.com
+</span></span></code></pre></div></li>
+<li>
+<p>Payment functionality - 
+  <a href="https://twitter.com/gwendallecoguic/status/988138794686779392">@gwendallecoguic</a></p>
+<blockquote>
+<p>if the webapp you&rsquo;re testing uses an external payment gateway, check the doc to find the test credit numbers, purchase something and if the webapp didn&rsquo;t disable the test mode, it will be free</p>
+</blockquote>
+<p>From 
+  <a href="https://stripe.com/docs/testing#cards">https://stripe.com/docs/testing#cards</a> : &ldquo;Use any of the following test card numbers, a valid expiration date in the future, and any random CVC number, to create a successful payment. Each test card&rsquo;s billing country is set to U.S. &quot;
+e.g :</p>
+</li>
+</ul>
+<p>Test card numbers and tokens</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">NUMBER</th>
+<th style="text-align:left">BRAND</th>
+<th style="text-align:left">TOKEN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">4242424242424242</td>
+<td style="text-align:left">Visa</td>
+<td style="text-align:left">tok_visa</td>
+</tr>
+<tr>
+<td style="text-align:left">4000056655665556</td>
+<td style="text-align:left">Visa (debit)</td>
+<td style="text-align:left">tok_visa_debit</td>
+</tr>
+<tr>
+<td style="text-align:left">5555555555554444</td>
+<td style="text-align:left">Mastercard</td>
+<td style="text-align:left">tok_mastercard</td>
+</tr>
+</tbody>
+</table>
+<p>International test card numbers and tokens</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">NUMBER</th>
+<th style="text-align:left">TOKEN</th>
+<th style="text-align:left">COUNTRY</th>
+<th style="text-align:left">BRAND</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">4000000400000008</td>
+<td style="text-align:left">tok_at</td>
+<td style="text-align:left">Austria (AT)</td>
+<td style="text-align:left">Visa</td>
+</tr>
+<tr>
+<td style="text-align:left">4000000560000004</td>
+<td style="text-align:left">tok_be</td>
+<td style="text-align:left">Belgium (BE)</td>
+<td style="text-align:left">Visa</td>
+</tr>
+<tr>
+<td style="text-align:left">4000002080000001</td>
+<td style="text-align:left">tok_dk</td>
+<td style="text-align:left">Denmark (DK)</td>
+<td style="text-align:left">Visa</td>
+</tr>
+<tr>
+<td style="text-align:left">4000002460000001</td>
+<td style="text-align:left">tok_fi</td>
+<td style="text-align:left">Finland (FI)</td>
+<td style="text-align:left">Visa</td>
+</tr>
+<tr>
+<td style="text-align:left">4000002500000003</td>
+<td style="text-align:left">tok_fr</td>
+<td style="text-align:left">France (FR)</td>
+<td style="text-align:left">Visa</td>
+</tr>
+</tbody>
+</table>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="http://blog.it-securityguard.com/bugbounty-yahoo-phpinfo-php-disclosure-2/">[BugBounty] Yahoo phpinfo.php disclosure - Patrik Fehrenbach</a></li>
+<li>
+  <a href="https://hackertarget.com/nmap-cheatsheet-a-quick-reference-guide/">Nmap CheatSheet - HackerTarget</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/methodology_and_enumeration.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#bug-hunting-methodology-and-enumeration">Bug Hunting Methodology and Enumeration</a>
+      <ul>
+        <li><a href="#passive-recon">Passive recon</a></li>
+        <li><a href="#active-recon">Active recon</a></li>
+        <li><a href="#list-all-the-subdirectories-and-files">List all the subdirectories and files</a></li>
+        <li><a href="#looking-for-web-vulnerabilities">Looking for Web vulnerabilities</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

