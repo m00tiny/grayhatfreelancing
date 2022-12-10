@@ -1,5 +1,5 @@
 +++
-title = "Finding API Key Leaks"
+title = "API Key Leaks"
 date = "2022-10-16"
 description = "Tips and tricks for sniffing out API key leaks; where to look and how to find them."
 +++

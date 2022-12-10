@@ -3,6 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.grayhatfreelancing.com/zh/categories/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,6 +22,8 @@
                 />
   </url><url>
     <loc>https://www.grayhatfreelancing.com/zh/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -37,6 +41,8 @@
                 />
   </url><url>
     <loc>https://www.grayhatfreelancing.com/zh/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"

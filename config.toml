@@ -2,11 +2,24 @@
 
 baseURL = 'https://www.grayhatfreelancing.com/'
 title = 'Gray Hat Freelancing'
+subtitle = 'He who would fight monsters should take care that he does not become one.'
+GitHubUser = 'm00tiny'
 theme = 'hugo-book'
+copyright = '2022'
+enableRobotsTXT = true
+googleAnalytics = 'UA-124168691-2'
+rssLimit = 30
+authorName = 'Stuart Gray'
+DisqusShortname = 'vital-reaction'
 
 # Book configuration
-disablePathToLower = true
+disablePathToLower = false
 enableGitInfo = true
+
+[sitemap]
+  changefreq = 'weekly'
+  filename = 'sitemap.xml'
+  priority = 0.9
 
 # Needed for mermaid/katex shortcodes
 [markup]
@@ -40,12 +53,12 @@ enableGitInfo = true
 # [[menu.before]]
 [[menu.after]]
   name = "Github"
-  url = "https://github.com/alex-shpak/hugo-book"
+  url = "https://github.com/m00tiny/"
   weight = 10
 
 [[menu.after]]
-  name = "Hugo Themes"
-  url = "https://themes.gohugo.io/hugo-book/"
+  name = "Contribute"
+  url = "https://github.com/m00tiny/grayhatfreelancing"
   weight = 20
 
 [params]
@@ -73,7 +86,7 @@ enableGitInfo = true
 
   # Set source repository location.
   # Used for 'Last Modified' and 'Edit this page' links.
-  BookRepo = 'https://github.com/alex-shpak/hugo-book'
+  BookRepo = 'https://github.com/m00tiny/grayhatfreelancing'
 
   # (Optional, default 'commit') Specifies commit portion of the link to the page's last modified
   # commit hash for 'doc' page type.
@@ -101,7 +114,7 @@ enableGitInfo = true
   # By default partals/docs/comments.html includes Disqus template
   # See https://gohugo.io/content-management/comments/#configure-disqus
   # Can be overwritten by same param in page frontmatter
-  BookComments = true
+  BookComments = false
 
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables portable links and link checks in markdown pages.

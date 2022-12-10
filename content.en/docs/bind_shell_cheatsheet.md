@@ -1,6 +1,5 @@
 +++
-author = "m00tiny"
-title = Bind Shell Cheatsheet"
+title = "Bind Shell Cheatsheet"
 date = "2022-11-03"
 description = "Some quick, easy and normal bind shells for pentesting."
 +++

