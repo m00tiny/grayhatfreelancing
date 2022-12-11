@@ -2,7 +2,16 @@
 title = 'Olympus - TryHackMe Walkthrough'
 date = '2022-11-25'
 description = 'A step-by-step walkthrough on how to complete the Olympus capture the flag room on TryHackMe.com'
-include_toc = 'true'
+categories = [
+    'Walkthroughs',
+    'TryHackMe',
+    ]
+tags = [
+    'ctf',
+    'sql injection',
+    'attack surface mapping',
+    'password cracking',
+    ]
 +++
 
 ## Task 1 | Connection

@@ -3,6 +3,7 @@ title = "Directory Traversal"
 datee = 2022-10-16 01:39:00
 description = "All about directory traversal techniques, methods, payloads, how/why/when they work."
 +++
+
 # Directory traversal
 
 > A directory or path traversal consists in exploiting insufficient security validation / sanitization of user-supplied input file names, so that characters representing "traverse to parent directory" are passed through to the file APIs.
