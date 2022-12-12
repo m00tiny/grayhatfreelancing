@@ -10,7 +10,7 @@ enableRobotsTXT = true
 googleAnalytics = 'UA-124168691-2'
 rssLimit = 30
 authorName = 'Stuart Gray'
-DisqusShortname = 'vital-reaction'
+disqusShortname = 'vital-reaction'
 
 # Book configuration
 disablePathToLower = false
@@ -40,14 +40,9 @@ enableGitInfo = true
   weight = 1
 
 [languages.ru]
-  languageName = 'Russian'
-  contentDir = 'content.ru'
+  languageName = 'Ukrainian'
+  contentDir = 'content.uk'
   weight = 2
-
-[languages.zh]
-  languageName = 'Chinese'
-  contentDir = 'content.zh'
-  weight = 3
 
 [menu]
 # [[menu.before]]
@@ -77,7 +72,7 @@ enableGitInfo = true
 
   # (Optional, default none) Set leaf bundle to render as side menu
   # When not specified file structure and weights will be used
-  # BookMenuBundle = '/menu'
+  BookMenuBundle = '/menu'
 
   # (Optional, default docs) Specify root page to render child pages as menu.
   # Page is resoled by .GetPage function: https://gohugo.io/functions/getpage/
@@ -93,12 +88,12 @@ enableGitInfo = true
   # Requires 'BookRepo' param.
   # Value used to construct a URL consisting of BookRepo/BookCommitPath/<commit-hash>
   # Github uses 'commit', Bitbucket uses 'commits'
-  # BookCommitPath = 'commit'
+  BookCommitPath = 'commit'
 
   # Enable "Edit this page" links for 'doc' page type.
   # Disabled by default. Uncomment to enable. Requires 'BookRepo' param.
   # Edit path must point to root directory of repo.
-  BookEditPath = 'edit/main/exampleSite'
+  # BookEditPath = 'edit/main/exampleSite'
 
   # Configure the date format used on the pages
   # - In git information

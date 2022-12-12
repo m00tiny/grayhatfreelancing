@@ -22,7 +22,7 @@ We're going to get started by adding *olympus.thm* to our */etc/hosts* file to a
 ## Task 2 | Flag Submission
 Let's dive into the enumeration. We'll kick off with quick nmap and some file and directory brute forcing.
 
-{% highlight bash %}
+```
 Nmap scan report for olympus.thm (10.10.94.239)
 Host is up, received reset ttl 61 (0.097s latency).
 Scanned at 2022-11-25 12:15:42 EST for 18s
@@ -42,7 +42,7 @@ PORT   STATE SERVICE REASON         VERSION
 | http-methods:
 |_  Supported Methods: GET HEAD POST OPTIONS
 |_http-server-header: Apache/2.4.41 (Ubuntu)
-{% endhighlight bash %}
+```
 
 We can see on the homepage, which has some nice CSS that the "it-department" flat out tells us that the old version of the website is still available somewhere, so we kick of the enumeration scanning.
 We find some non-traditional versions of some folders we expect and some 403 folders, I used dirsearch just because I typically use ffuf and I felt like using something different.  It actually enumerated all of the /phpmyadmin/ despite that they all returned 403.. some other folders we bumped into were /javascript/, /static/ and none of these were useful until I tried some other smaller wordlists **big.txt from dirb exposed the directory /~webmaster/** which landed me on a CMS. First step complete. Time to start finding some vulnerabilities and exposing some flags.
@@ -68,10 +68,10 @@ Searching for a flag as the `www-data` user was unsucessful for me. So, I set my
 
 ### Flag 3
 There's no more users to escalate too, so we assume there's a hidden flag. I search environment variables and don't find anything and start assume I'm going to have to break out of a container or VM as root. So, I go for root. But I do find all these random files in /var/www/html that I didn't know were sitting there (recalling the reverse shell dropped us in / and not /var/www/html) it's not available from the http service. So I check out these files and I noticed these two lines:
-{% highlight php %}
+```
 $suid_bd = "/lib/defended/libc.so.99";
 $shell = "uname -a; w; $suid_bd";
-{% endhighlight php %}
+```
 To me this looks exactly like a malicious library that's going to pop a root shell, so I just run it manually `uname -a; w; /lib/defended/libc.so.99` and sure it enough I get the coveted `#` ..  `cd /root` and there's your flag:
 
 **flag{D4mN!_Y0u_G0T_m3_:)_}**
