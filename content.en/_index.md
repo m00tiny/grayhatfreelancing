@@ -6,16 +6,16 @@ type: docs
 # Gray Hat Freelancing Blog
 
 {{< columns >}}
-## Happy Holidays! So, long 2022
+## Happy Holidays!
 
 Gray Hat Freelancing is on a break until after the new year. We have had a
 wonderful year here; made tons of progress in every direction that we could
 hope for. And, we're happy to check out for now. And just reward ourselves
-by not paying any attention for a brief moment.
+by not paying any attention for a brief moment. So long, 2022..
 
 <--->
 
-## Coming.. 2023... Mobile...
+## Coming.. 2023..
 
 We're gearing up to a do a huge focus on mobile in 2023. Starting with Android,
 obviously. And we'll be sure to cover some much needed iOS stuff as well.  This
