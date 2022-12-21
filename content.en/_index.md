@@ -3,22 +3,24 @@ title: Introduction
 type: docs
 ---
 
-# Acerbo datus maxime
+# Gray Hat Freelancing Blog
 
 {{< columns >}}
-## Astris ipse furtiva
+## Happy Holidays! So, long 2022
 
-Est in vagis et Pittheus tu arge accipiter regia iram vocatur nurus. Omnes ut
-olivae sensit **arma sorori** deducit, inesset **crudus**, ego vetuere aliis,
-modo arsit? Utinam rapta fiducia valuere litora _adicit cursu_, ad facies
+Gray Hat Freelancing is on a break until after the new year. We have had a
+wonderful year here; made tons of progress in every direction that we could
+hope for. And, we're happy to check out for now. And just reward ourselves
+by not paying any attention for a brief moment.
 
 <--->
 
-## Suis quot vota
+## Coming.. 2023... Mobile...
 
-Ea _furtique_ risere fratres edidit terrae magis. Colla tam mihi tenebat:
-miseram excita suadent es pecudes iam. Concilio _quam_ velatus posset ait quod
-nunc! Fragosis suae dextra geruntur functus vulgata.
+We're gearing up to a do a huge focus on mobile in 2023. Starting with Android,
+obviously. And we'll be sure to cover some much needed iOS stuff as well.  This
+this moment in time is something I'd always been looking forward to. Getting
+started, I'd dreamed of a time when basically everything was forcibly connected.
 {{< /columns >}}
 
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Walkthroughs on Gray Hat Freelancing</title>
+    <link>https://www.grayhatfreelancing.com/categories/walkthroughs/</link>
+    <description>Recent content in Walkthroughs on Gray Hat Freelancing</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2022</copyright>
+    <lastBuildDate>Fri, 25 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/categories/walkthroughs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TryHackMe - Olympus Walkthrough</title>
+      <link>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</link>
+      <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</guid>
+      <description>Task 1 | Connection # https://tryhackme.com/room/olympusroom is a medium difficulty room on [https://tryhackme.com/](TryHackMe training platform) by Gavroche.
+It&amp;rsquo;s primary focus is sql injection, in my opinion, with a slant on enumeration and systems comprehension.
+We&amp;rsquo;re going to get started by adding olympus.thm to our /etc/hosts file to assist with enumeration.. this is recommended in the description and I&amp;rsquo;ve adopted it as a solid sign that we&amp;rsquo;ll need to do subdomain enumeration.</description>
+    </item>
+    
+  </channel>
+</rss>

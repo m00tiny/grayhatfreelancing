@@ -12,11 +12,6 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://www.grayhatfreelancing.com/zh/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="ru"
                 href="https://www.grayhatfreelancing.com/ru/categories/"
                 />
@@ -31,11 +26,6 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://www.grayhatfreelancing.com/zh/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="ru"
                 href="https://www.grayhatfreelancing.com/ru/"
                 />
@@ -47,11 +37,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://www.grayhatfreelancing.com/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://www.grayhatfreelancing.com/zh/tags/"
                 />
     <xhtml:link
                 rel="alternate"

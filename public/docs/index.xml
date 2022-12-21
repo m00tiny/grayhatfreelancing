@@ -24,17 +24,6 @@ CrackMapExec
     </item>
     
     <item>
-      <title>Olympus - TryHackMe Walkthrough</title>
-      <link>https://www.grayhatfreelancing.com/docs/tryhackme_olympus/</link>
-      <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/tryhackme_olympus/</guid>
-      <description>Task 1 | Connection # https://tryhackme.com/room/olympusroom is a medium difficulty room on [https://tryhackme.com/](TryHackMe training platform) by Gavroche.
-It&amp;rsquo;s primary focus is sql injection, in my opinion, with a slant on enumeration and systems comprehension.
-We&amp;rsquo;re going to get started by adding olympus.thm to our /etc/hosts file to assist with enumeration.. this is recommended in the description and I&amp;rsquo;ve adopted it as a solid sign that we&amp;rsquo;ll need to do subdomain enumeration.</description>
-    </item>
-    
-    <item>
       <title>Wordpress Security</title>
       <link>https://www.grayhatfreelancing.com/docs/wordpress/</link>
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
@@ -308,6 +297,16 @@ Tools # Dockscan : Dockscan is security vulnerability and audit scanner for Dock
       <guid>https://www.grayhatfreelancing.com/docs/miscellaneous_tricks/</guid>
       <description>Miscellaneous &amp;amp; Tricks # All the tricks that couldn&amp;rsquo;t be classified somewhere else.
 Send a message to another user # # Windows PS C:\&amp;gt; msg Swissky /SERVER:CRASHLAB &amp;#34;Stop rebooting the XXXX service !&amp;#34; PS C:\&amp;gt; msg * /V /W /SERVER:CRASHLAB &amp;#34;Hello all !&amp;#34; # Linux $ wall &amp;#34;Stop messing with the XXX service !&amp;#34; $ wall -n &amp;#34;System will go down for 2 hours maintenance at 13:00 PM&amp;#34; # &amp;#34;-n&amp;#34; only for root $ who $ write root pts/2	# press Ctrl+D after typing the message.</description>
+    </item>
+    
+    <item>
+      <title>GraphQL Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/graphql_injection/</link>
+      <pubDate>Mon, 17 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/graphql_injection/</guid>
+      <description>GraphQL injection # GraphQL is a query language for APIs and a runtime for fulfilling those queries with existing data. A GraphQL service is created by defining types and fields on those types, then providing functions for each field on each type
+Tools # GraphQLmap - Scripting engine to interact with a graphql endpoint for pentesting purposes GraphQL-voyager - Represent any GraphQL API as an interactive graph GraphQL Security Toolkit - GraphQL Security Research Material Graphql-path-enum - Lists the different ways of reaching a given type in a GraphQL schema GraphQL IDE - An extensive IDE for exploring GraphQL API&amp;rsquo;s ClairvoyanceX - Obtain GraphQL API schema despite disabled introspection InQL - A Burp Extension for GraphQL Security Testing Insomnia - Cross-platform HTTP and GraphQL Client AutoGraphql + introspection CrackQL - A GraphQL password brute-force and fuzzing utility.</description>
     </item>
     
   </channel>

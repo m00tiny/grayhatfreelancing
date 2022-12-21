@@ -1,5 +1,5 @@
 +++
-title = 'Olympus - TryHackMe Walkthrough'
+title = 'TryHackMe - Olympus Walkthrough'
 date = '2022-11-25'
 description = 'A step-by-step walkthrough on how to complete the Olympus capture the flag room on TryHackMe.com'
 categories = [

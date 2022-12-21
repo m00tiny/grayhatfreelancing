@@ -1,6 +1,7 @@
 +++
+type = "docs"
 title = "Directory Traversal"
-datee = 2022-10-16 01:39:00
+date = "2022-10-16"
 description = "All about directory traversal techniques, methods, payloads, how/why/when they work."
 +++
 

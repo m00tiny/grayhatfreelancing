@@ -2,13 +2,6 @@
 headless: true
 ---
 
-- [**Walkthroughs**]({{< relref "/docs/walkthroughs" >}})
-- [TryHackMe.com]({{ relref "/docs/walkthroughs/tryhackme" >}})
-- - [Easy]({{< relref "/docs/walkthroughs/tryhackme/easy" >}})
-- - [Medium]({{< relref "/docs/walkthroughs/tryhackme/medium" >}})
-- - - [Olympus]({{< relref "/docs/walkthroughs/tryhackme/medium/olympusroom" >}})
-- - [Hard]({{< relref "/docs/walkthroughs/tryhackme/hard" >}})
-- - [Insane]({{< relref "/docs/walkthroughs/tryhackme/insane" >}})
 - [**Example Site**]({{< relref "/docs/example" >}})
 - [Table of Contents]({{< relref "/docs/example/table-of-contents" >}})
   - [With ToC]({{< relref "/docs/example/table-of-contents/with-toc" >}})

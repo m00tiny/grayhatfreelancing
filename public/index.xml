@@ -64,11 +64,11 @@ CrackMapExec
     </item>
     
     <item>
-      <title>Olympus - TryHackMe Walkthrough</title>
-      <link>https://www.grayhatfreelancing.com/docs/tryhackme_olympus/</link>
+      <title>TryHackMe - Olympus Walkthrough</title>
+      <link>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</link>
       <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.grayhatfreelancing.com/docs/tryhackme_olympus/</guid>
+      <guid>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</guid>
       <description>Task 1 | Connection # https://tryhackme.com/room/olympusroom is a medium difficulty room on [https://tryhackme.com/](TryHackMe training platform) by Gavroche.
 It&amp;rsquo;s primary focus is sql injection, in my opinion, with a slant on enumeration and systems comprehension.
 We&amp;rsquo;re going to get started by adding olympus.thm to our /etc/hosts file to assist with enumeration.. this is recommended in the description and I&amp;rsquo;ve adopted it as a solid sign that we&amp;rsquo;ll need to do subdomain enumeration.</description>
