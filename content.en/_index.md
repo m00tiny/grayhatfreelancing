@@ -24,20 +24,12 @@ started, I'd dreamed of a time when basically everything was forcibly connected.
 {{< /columns >}}
 
 
-## Tempora nisi nunc
+## Anyone else sitting on bug bounties?
 
-Lorem **markdownum** emicat gestu. Cannis sol pressit ducta. **Est** Idaei,
-tremens ausim se tutaeque, illi ulnis hausit, sed, lumina cutem. Quae avis
-sequens!
+I don't know what's going on with the state of bug bounty hunting these days. But, I swear, I'm not used to sitting on so many damn bounties.  Even the vendors that are traditionally great at being responsive seem to have started to slow their roll. I'm not talking about "over the holidays" either.. this started earlier. Maybe it's the economy?
 
-    var panel = ram_design;
-    if (backup + system) {
-        file.readPoint = network_native;
-        sidebar_engine_device(cell_tftp_raster,
-                dual_login_paper.adf_vci.application_reader_design(
-                graphicsNvramCdma, lpi_footer_snmp, integer_model));
-    }
+Oh well, most of them are confirmed, at least. So, it's just about waiting on triage and then getting paid. No big deal.
 
-## Locis suis novi cum suoque decidit eadem
+## ToeDoes
 
-Idmoniae ripis, at aves, ali missa adest, ut _et autem_, et ab?
+We've got a "to do list" mobile app coming out soon. Basically all of the features from the premium apps in a clean and responsive design, for free. There's a small persistent ad in the version that'll be available on the Play Store. But, nothing that takes over the screen and no video ads. Plus, if you want to be free from it, the source is available on Github. Links coming soon, waiting for it to publish first. Check it out, rate and comment on the store. Thanks!
