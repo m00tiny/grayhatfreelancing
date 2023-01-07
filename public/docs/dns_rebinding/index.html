@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1439,18 +1429,15 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#dns-rebinding">#</a>
 </h1>
 <blockquote>
-<p>DNS rebinding changes the IP address of an attacker controlled machine name to the IP address of a target application, bypassing the 
-  <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">same-origin policy</a> and thus allowing the browser to make arbitrary requests to the target application and read their responses.</p>
+<p>DNS rebinding changes the IP address of an attacker controlled machine name to the IP address of a target application, bypassing the <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">same-origin policy</a> and thus allowing the browser to make arbitrary requests to the target application and read their responses.</p>
 </blockquote>
 <h2 id="tools">
   Tools
   <a class="anchor" href="#tools">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/nccgroup/singularity">Singularity of Origin</a> - is a tool to perform DNS rebinding attacks.</li>
-<li>
-  <a href="http://rebind.it/">Singularity of Origin Web Client</a> (manager interface, port scanner and autoattack)</li>
+<li><a href="https://github.com/nccgroup/singularity">Singularity of Origin</a> - is a tool to perform DNS rebinding attacks.</li>
+<li><a href="http://rebind.it/">Singularity of Origin Web Client</a> (manager interface, port scanner and autoattack)</li>
 </ul>
 <h2 id="exploitation">
   Exploitation
@@ -1464,12 +1451,9 @@ If the server returns an error message (e.g. 404 or similar), the server has mos
 <p>Then, if the service is vulnerable, we can abuse DNS rebinding by following these steps:</p>
 <ol>
 <li>Register a domain.</li>
-<li>
-  <a href="https://github.com/nccgroup/singularity/wiki/Setup-and-Installation">Setup Singularity of Origin</a>.</li>
-<li>Edit the 
-  <a href="https://github.com/nccgroup/singularity/blob/master/html/autoattack.html">autoattack HTML page</a> for your needs.</li>
-<li>Browse to &ldquo;
-  <a href="http://rebinder.your.domain:8080/autoattack.html%22">http://rebinder.your.domain:8080/autoattack.html"</a>.</li>
+<li><a href="https://github.com/nccgroup/singularity/wiki/Setup-and-Installation">Setup Singularity of Origin</a>.</li>
+<li>Edit the <a href="https://github.com/nccgroup/singularity/blob/master/html/autoattack.html">autoattack HTML page</a> for your needs.</li>
+<li>Browse to &ldquo;<a href="http://rebinder.your.domain:8080/autoattack.html%22">http://rebinder.your.domain:8080/autoattack.html"</a>.</li>
 <li>Wait for the attack to finish (it can take few seconds/minutes).</li>
 </ol>
 <h2 id="protection-bypasses">
@@ -1479,8 +1463,7 @@ If the server returns an error message (e.g. 404 or similar), the server has mos
 <blockquote>
 <p>Most DNS protections are implemented in the form of blocking DNS responses containing unwanted IP addresses at the perimeter, when DNS responses enter the internal network. The most common form of protection is to block private IP addresses as defined in RFC 1918 (i.e. 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16). Some tools allow to additionally block localhost (127.0.0.0/8), local (internal) networks, or 0.0.0.0/0 network ranges.</p>
 </blockquote>
-<p>In the case where DNS protection are enabled (generally disabled by default), NCC Group has documented multiple 
-  <a href="https://github.com/nccgroup/singularity/wiki/Protection-Bypasses">DNS protection bypasses</a> that can be used.</p>
+<p>In the case where DNS protection are enabled (generally disabled by default), NCC Group has documented multiple <a href="https://github.com/nccgroup/singularity/wiki/Protection-Bypasses">DNS protection bypasses</a> that can be used.</p>
 <h3 id="0000">
   0.0.0.0
   <a class="anchor" href="#0000">#</a>
@@ -1512,8 +1495,7 @@ Then, the local, internal DNS server will resolve the CNAME.</p>
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/nccgroup/singularity/wiki/How-Do-DNS-Rebinding-Attacks-Work%3F">How Do DNS Rebinding Attacks Work? - nccgroup, 2019</a></li>
+<li><a href="https://github.com/nccgroup/singularity/wiki/How-Do-DNS-Rebinding-Attacks-Work%3F">How Do DNS Rebinding Attacks Work? - nccgroup, 2019</a></li>
 </ul>
 </article>
  

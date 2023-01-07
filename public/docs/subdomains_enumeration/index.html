@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1480,8 +1470,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#using-google-dorks-and-google-transparency-report">#</a>
 </h3>
 <p>You need to include subdomains ;)
-
-  <a href="https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&amp;incl_exp=true&amp;incl_sub=true">https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&incl_exp=true&incl_sub=true</a></p>
+<a href="https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&amp;incl_exp=true&amp;incl_sub=true">https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&incl_exp=true&incl_sub=true</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>site:*.domain.com -www
 </span></span><span style="display:flex;"><span>site:domain.com filetype:pdf
 </span></span><span style="display:flex;"><span>site:domain.com inurl:<span style="color:#e6db74">&#39;&amp;&#39;</span>
@@ -1542,8 +1531,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Final results
 </span></span><span style="display:flex;"><span>aquatone-gather --domain example.com
-</span></span></code></pre></div><p>Alternatively, you can use the 
-  <a href="https://hub.docker.com/r/txt3rob/aquatone-docker/">Docker image</a> provided by txt3rob.</p>
+</span></span></code></pre></div><p>Alternatively, you can use the <a href="https://hub.docker.com/r/txt3rob/aquatone-docker/">Docker image</a> provided by txt3rob.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//hub.docker.com/r/txt3rob/aquatone-docker/
 </span></span><span style="display:flex;"><span>docker pull txt3rob/aquatone-docker
 </span></span><span style="display:flex;"><span>docker run -it txt3rob/aquatone-docker aq example.com
@@ -1565,8 +1553,7 @@ https://github.com/alex-shpak/hugo-book
 <p>It&rsquo;s recommended to use massdns in order to resolve the result of <code>AltDNS</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>WORDLIST_PERMUTATION=<span style="color:#e6db74">&#34;./Altdns/words.txt&#34;</span>
 </span></span><span style="display:flex;"><span>python2.7 ./Altdns/altdns.py -i /tmp/inputdomains.txt -o /tmp/out.txt -w $WORDLIST_PERMUTATION
-</span></span></code></pre></div><p>Alternatively you can use 
-  <a href="https://github.com/subfinder/goaltdns">goaltdns</a></p>
+</span></span></code></pre></div><p>Alternatively you can use <a href="https://github.com/subfinder/goaltdns">goaltdns</a></p>
 <h3 id="using-massdns">
   Using MassDNS
   <a class="anchor" href="#using-massdns">#</a>
@@ -1582,8 +1569,7 @@ https://github.com/alex-shpak/hugo-book
   Subdomain take over
   <a class="anchor" href="#subdomain-take-over">#</a>
 </h2>
-<p>Check 
-  <a href="https://github.com/EdOverflow/can-i-take-over-xyz">Can I take over xyz</a> by EdOverflow for a list of services and how to claim (sub)domains with dangling DNS records.</p>
+<p>Check <a href="https://github.com/EdOverflow/can-i-take-over-xyz">Can I take over xyz</a> by EdOverflow for a list of services and how to claim (sub)domains with dangling DNS records.</p>
 <h3 id="using-tko-subs">
   Using tko-subs
   <a class="anchor" href="#using-tko-subs">#</a>
@@ -1608,10 +1594,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://0xpatrik.com/takeover-proofs/">Subdomain Takeover: Proof Creation for Bug Bounties - Patrik Hudak</a></li>
-<li>
-  <a href="https://0xpatrik.com/subdomain-takeover-basics/">Subdomain Takeover: Basics - Patrik Hudak</a></li>
+<li><a href="https://0xpatrik.com/takeover-proofs/">Subdomain Takeover: Proof Creation for Bug Bounties - Patrik Hudak</a></li>
+<li><a href="https://0xpatrik.com/subdomain-takeover-basics/">Subdomain Takeover: Basics - Patrik Hudak</a></li>
 </ul>
 </article>
  

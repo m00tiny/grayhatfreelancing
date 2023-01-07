@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1474,26 +1464,18 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#tools">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/Shopify/kubeaudit">kubeaudit</a> - Audit Kubernetes clusters against common security concerns</li>
-<li>
-  <a href="https://kubesec.io/">kubesec.io</a> - Security risk analysis for Kubernetes resources</li>
-<li>
-  <a href="https://github.com/aquasecurity/kube-bench">kube-bench</a> - Checks whether Kubernetes is deployed securely by running 
-  <a href="https://www.cisecurity.org/benchmark/kubernetes/">CIS Kubernetes Benchmark</a></li>
-<li>
-  <a href="https://github.com/aquasecurity/kube-hunter">kube-hunter</a> - Hunt for security weaknesses in Kubernetes clusters</li>
-<li>
-  <a href="https://katacoda.com/courses/kubernetes">katacoda</a> - Learn Kubernetes using interactive broser-based scenarios</li>
-<li>
-  <a href="https://github.com/armosec/kubescape">kubescape</a> - Automate Kubernetes cluster scans to identify security issues</li>
+<li><a href="https://github.com/Shopify/kubeaudit">kubeaudit</a> - Audit Kubernetes clusters against common security concerns</li>
+<li><a href="https://kubesec.io/">kubesec.io</a> - Security risk analysis for Kubernetes resources</li>
+<li><a href="https://github.com/aquasecurity/kube-bench">kube-bench</a> - Checks whether Kubernetes is deployed securely by running <a href="https://www.cisecurity.org/benchmark/kubernetes/">CIS Kubernetes Benchmark</a></li>
+<li><a href="https://github.com/aquasecurity/kube-hunter">kube-hunter</a> - Hunt for security weaknesses in Kubernetes clusters</li>
+<li><a href="https://katacoda.com/courses/kubernetes">katacoda</a> - Learn Kubernetes using interactive broser-based scenarios</li>
+<li><a href="https://github.com/armosec/kubescape">kubescape</a> - Automate Kubernetes cluster scans to identify security issues</li>
 </ul>
 <h2 id="container-environment">
   Container Environment
   <a class="anchor" href="#container-environment">#</a>
 </h2>
-<p>Containers within a Kubernetes cluster automatically have certain information made available to them through their 
-  <a href="https://kubernetes.io/docs/concepts/containers/container-environment/">container environment</a>. Additional information may have been made available through the volumes, environment variables, or the downward API, but this section covers only what is made available by default.</p>
+<p>Containers within a Kubernetes cluster automatically have certain information made available to them through their <a href="https://kubernetes.io/docs/concepts/containers/container-environment/">container environment</a>. Additional information may have been made available through the volumes, environment variables, or the downward API, but this section covers only what is made available by default.</p>
 <h3 id="service-account">
   Service Account
   <a class="anchor" href="#service-account">#</a>
@@ -1510,12 +1492,10 @@ https://github.com/alex-shpak/hugo-book
 <p>The <code>KUBERNETES_SERVICE_HOST</code> and <code>KUBERNETES_SERVICE_PORT</code> environment variables are automatically provided to the container. They contain the IP address and port number of the Kubernetes master node.  If <code>kubectl</code> is installed, it will use these values automatically. If not, the values can be used to determine the correct IP address to send API requests to.</p>
 <pre tabindex="0"><code>KUBERNETES_SERVICE_HOST=192.168.154.228
 KUBERNETES_SERVICE_PORT=443
-</code></pre><p>Additionally, 
-  <a href="https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services">environment variables</a> are automatically created for each Kubernetes service running in the current namespace when the container was created.  The environment variables are named using two patterns:</p>
+</code></pre><p>Additionally, <a href="https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services">environment variables</a> are automatically created for each Kubernetes service running in the current namespace when the container was created.  The environment variables are named using two patterns:</p>
 <ul>
 <li>A simplified <code>{SVCNAME}_SERVICE_HOST</code> and <code>{SVCNAME}_SERVICE_PORT</code> contain the IP address and default port number for the service.</li>
-<li>A 
-  <a href="https://docs.docker.com/network/links/#environment-variables">Docker links</a> collection of variables named <code>{SVCNAME}_PORT_{NUM}_{PROTOCOL}_{PROTO|PORT|ADDR}</code> for each port the service exposes.</li>
+<li>A <a href="https://docs.docker.com/network/links/#environment-variables">Docker links</a> collection of variables named <code>{SVCNAME}_PORT_{NUM}_{PROTOCOL}_{PROTO|PORT|ADDR}</code> for each port the service exposes.</li>
 </ul>
 <p>For example, all of the following environment variables would be available if a <code>redis-master</code> service were running with port 6379 exposed:</p>
 <pre tabindex="0"><code>REDIS_MASTER_SERVICE_HOST=10.0.0.11
@@ -1529,8 +1509,7 @@ REDIS_MASTER_PORT_6379_TCP_ADDR=10.0.0.11
   Simulating <code>kubectl</code> API Requests
   <a class="anchor" href="#simulating-kubectl-api-requests">#</a>
 </h3>
-<p>Most containers within a Kubernetes cluster won&rsquo;t have the <code>kubectl</code> utility installed. If running the 
-  <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux">one-line <code>kubectl</code> installer</a> within the container isn&rsquo;t an option, you may need to craft Kubernetes HTTP API requests manually. This can be done by using <code>kubectl</code> <em>locally</em> to determine the correct API request to send from the container.</p>
+<p>Most containers within a Kubernetes cluster won&rsquo;t have the <code>kubectl</code> utility installed. If running the <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux">one-line <code>kubectl</code> installer</a> within the container isn&rsquo;t an option, you may need to craft Kubernetes HTTP API requests manually. This can be done by using <code>kubectl</code> <em>locally</em> to determine the correct API request to send from the container.</p>
 <ol>
 <li>Run the desired command at the maximum verbosity level using <code>kubectl -v9 ...</code></li>
 <li>The output will include HTTP API endpoint URL, the request body, and an example curl command.</li>
@@ -1538,8 +1517,7 @@ REDIS_MASTER_PORT_6379_TCP_ADDR=10.0.0.11
 <li>Replace the masked &ldquo;Authorization: Bearer&rdquo; token value with the contents of <code>/var/run/secrets/kubernetes.io/serviceaccount/token</code> from the container.</li>
 <li>If the request had a body, ensure the &ldquo;Content-Type: application/json&rdquo; header is included and send the request body using the customary method (for curl, use the <code>--data</code> flag).</li>
 </ol>
-<p>For example, this output was used to create the 
-  <a href="/#service-account-permissions">Service Account Permissions</a> request:</p>
+<p>For example, this output was used to create the <a href="#service-account-permissions">Service Account Permissions</a> request:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># NOTE: only the Authorization and Content-Type headers are required. The rest can be omitted.</span>
 </span></span><span style="display:flex;"><span>$ kubectl -v9 auth can-i --list
 </span></span><span style="display:flex;"><span>I1028 <span style="color:#ae81ff">18</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">58</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">38.192352</span>   <span style="color:#ae81ff">76118</span> loader.go<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">359</span>] Config loaded from file /home/example/.kube/config
@@ -1586,9 +1564,7 @@ The following can be used to determine the service account&rsquo;s permissions:<
   Privileged Containers
   <a class="anchor" href="#privileged-containers">#</a>
 </h3>
-<p>Kubernetes supports a wide range of 
-  <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">security contexts</a> for container and pod execution. The most important of these is the &ldquo;privileged&rdquo; 
-  <a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/">security policy</a> which makes the host node&rsquo;s devices available under the container&rsquo;s <code>/dev</code> directory. This means having access to the host&rsquo;s Docker socket file (allowing arbitrary container actions) in addition to the host&rsquo;s root disks (which can be used to escape the container entirely).</p>
+<p>Kubernetes supports a wide range of <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">security contexts</a> for container and pod execution. The most important of these is the &ldquo;privileged&rdquo; <a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/">security policy</a> which makes the host node&rsquo;s devices available under the container&rsquo;s <code>/dev</code> directory. This means having access to the host&rsquo;s Docker socket file (allowing arbitrary container actions) in addition to the host&rsquo;s root disks (which can be used to escape the container entirely).</p>
 <p>While there is no official way to check for privileged mode from <em>within</em> a container, checking if <code>/dev/kmsg</code> exists will usually suffice.</p>
 <h2 id="rbac-configuration">
   RBAC Configuration
@@ -1735,16 +1711,11 @@ Create a malicious RoleBinging.json file.</p>
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://securityboulevard.com/2019/08/kubernetes-pentest-methodology-part-1">Kubernetes Pentest Methodology Part 1 - by Or Ida on August 8, 2019</a></li>
-<li>
-  <a href="https://securityboulevard.com/2019/09/kubernetes-pentest-methodology-part-2">Kubernetes Pentest Methodology Part 2 - by Or Ida on September 5, 2019</a></li>
-<li>
-  <a href="https://securityboulevard.com/2019/11/kubernetes-pentest-methodology-part-3">Kubernetes Pentest Methodology Part 3 - by Or Ida on November 21, 2019</a></li>
-<li>
-  <a href="https://hackernoon.com/capturing-all-the-flags-in-bsidessf-ctf-by-pwning-our-infrastructure-3570b99b4dd0">Capturing all the flags in BSidesSF CTF by pwning our infrastructure - Hackernoon</a></li>
-<li>
-  <a href="https://labs.bishopfox.com/tech-blog/bad-pods-kubernetes-pod-privilege-escalation">Kubernetes Pod Privilege Escalation</a></li>
+<li><a href="https://securityboulevard.com/2019/08/kubernetes-pentest-methodology-part-1">Kubernetes Pentest Methodology Part 1 - by Or Ida on August 8, 2019</a></li>
+<li><a href="https://securityboulevard.com/2019/09/kubernetes-pentest-methodology-part-2">Kubernetes Pentest Methodology Part 2 - by Or Ida on September 5, 2019</a></li>
+<li><a href="https://securityboulevard.com/2019/11/kubernetes-pentest-methodology-part-3">Kubernetes Pentest Methodology Part 3 - by Or Ida on November 21, 2019</a></li>
+<li><a href="https://hackernoon.com/capturing-all-the-flags-in-bsidessf-ctf-by-pwning-our-infrastructure-3570b99b4dd0">Capturing all the flags in BSidesSF CTF by pwning our infrastructure - Hackernoon</a></li>
+<li><a href="https://labs.bishopfox.com/tech-blog/bad-pods-kubernetes-pod-privilege-escalation">Kubernetes Pod Privilege Escalation</a></li>
 </ul>
 </article>
  

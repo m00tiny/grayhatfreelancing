@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1448,10 +1438,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#tools">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/SAMLRaider/SAMLRaider">SAML Raider - Burp Extension</a></li>
-<li>
-  <a href="https://www.zaproxy.org/docs/desktop/addons/saml-support/">SAML Support - ZAP Addon</a></li>
+<li><a href="https://github.com/SAMLRaider/SAMLRaider">SAML Raider - Burp Extension</a></li>
+<li><a href="https://www.zaproxy.org/docs/desktop/addons/saml-support/">SAML Support - ZAP Addon</a></li>
 </ul>
 <h2 id="authentication-bypass">
   Authentication Bypass
@@ -1536,8 +1524,7 @@ https://github.com/alex-shpak/hugo-book
   XML Comment Handling
   <a class="anchor" href="#xml-comment-handling">#</a>
 </h3>
-<p>A threat actor who already has authenticated access into a SSO system can authenticate as another user without that individual’s SSO password. This 
-  <a href="https://www.bleepstatic.com/images/news/u/986406/attacks/Vulnerabilities/SAML-flaw.png">vulnerability</a> has multiple CVE in the following libraries and products.</p>
+<p>A threat actor who already has authenticated access into a SSO system can authenticate as another user without that individual’s SSO password. This <a href="https://www.bleepstatic.com/images/news/u/986406/attacks/Vulnerabilities/SAML-flaw.png">vulnerability</a> has multiple CVE in the following libraries and products.</p>
 <ul>
 <li>OneLogin - python-saml - CVE-2017-11427</li>
 <li>OneLogin - ruby-saml - CVE-2017-11428</li>
@@ -1589,10 +1576,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#extensible-stylesheet-language-transformation">#</a>
 </h3>
 <p>An XSLT can be carried out by using the <code>transform</code> element.</p>
-<p>
-  <img src="http://sso-attacks.org/images/4/49/XSLT1.jpg" alt="http://sso-attacks.org/images/4/49/XSLT1.jpg" /> <br>
-Picture from 
-  <a href="http://sso-attacks.org/XSLT_Attack">http://sso-attacks.org/XSLT_Attack</a></p>
+<p><img src="http://sso-attacks.org/images/4/49/XSLT1.jpg" alt="http://sso-attacks.org/images/4/49/XSLT1.jpg" /> <br>
+Picture from <a href="http://sso-attacks.org/XSLT_Attack">http://sso-attacks.org/XSLT_Attack</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;ds:Signature</span> <span style="color:#a6e22e">xmlns:ds=</span><span style="color:#e6db74">&#34;http://www.w3.org/2000/09/xmldsig#&#34;</span><span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span>  ...
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;ds:Transforms&gt;</span>
@@ -1615,30 +1600,18 @@ Picture from
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://blog.compass-security.com/2015/07/saml-burp-extension/">SAML Burp Extension - ROLAND BISCHOFBERGER - JULY 24, 2015</a></li>
-<li>
-  <a href="http://www.economyofmechanism.com/github-saml">The road to your codebase is paved with forged assertions - @ilektrojohn - March 13, 2017</a></li>
-<li>
-  <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/SAML_Security_Cheat_Sheet.md">SAML_Security_Cheat_Sheet.md - OWASP</a></li>
-<li>
-  <a href="https://www.usenix.org/system/files/conference/usenixsecurity12/sec12-final91-8-23-12.pdf">On Breaking SAML: Be Whoever You Want to Be - Juraj Somorovsky, Andreas Mayer, Jorg Schwenk, Marco Kampmann, and Meiko Jensen</a></li>
-<li>
-  <a href="https://blog.centrify.com/saml/">Making Headlines: SAML - March 19, 2018 - Torsten George</a></li>
-<li>
-  <a href="https://www.kb.cert.org/vuls/id/475445/">Vulnerability Note VU#475445 - 2018-02-27 - Carnegie Mellon University</a></li>
-<li>
-  <a href="https://pulsesecurity.co.nz/advisories/WebLogic-SAML-Vulnerabilities">ORACLE WEBLOGIC - MULTIPLE SAML VULNERABILITIES (CVE-2018-2998/CVE-2018-2933) - Denis Andzakovic - Jul 18, 2018</a></li>
-<li>
-  <a href="https://www.redteam-pentesting.de/de/advisories/rt-sa-2017-013/-truncation-of-saml-attributes-in-shibboleth-2">Truncation of SAML Attributes in Shibboleth 2 - 2018-01-15 - redteam-pentesting.de</a></li>
-<li>
-  <a href="https://blog.netspi.com/attacking-sso-common-saml-vulnerabilities-ways-find/">Attacking SSO: Common SAML Vulnerabilities and Ways to Find Them - March 7th, 2017 - Jem Jensen</a></li>
-<li>
-  <a href="https://epi052.gitlab.io/notes-to-self/blog/2019-03-07-how-to-test-saml-a-methodology/">How to Hunt Bugs in SAML; a Methodology - Part I - @epi052</a></li>
-<li>
-  <a href="https://epi052.gitlab.io/notes-to-self/blog/2019-03-13-how-to-test-saml-a-methodology-part-two/">How to Hunt Bugs in SAML; a Methodology - Part II - @epi052</a></li>
-<li>
-  <a href="https://epi052.gitlab.io/notes-to-self/blog/2019-03-16-how-to-test-saml-a-methodology-part-three/">How to Hunt Bugs in SAML; a Methodology - Part III - @epi052</a></li>
+<li><a href="https://blog.compass-security.com/2015/07/saml-burp-extension/">SAML Burp Extension - ROLAND BISCHOFBERGER - JULY 24, 2015</a></li>
+<li><a href="http://www.economyofmechanism.com/github-saml">The road to your codebase is paved with forged assertions - @ilektrojohn - March 13, 2017</a></li>
+<li><a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/SAML_Security_Cheat_Sheet.md">SAML_Security_Cheat_Sheet.md - OWASP</a></li>
+<li><a href="https://www.usenix.org/system/files/conference/usenixsecurity12/sec12-final91-8-23-12.pdf">On Breaking SAML: Be Whoever You Want to Be - Juraj Somorovsky, Andreas Mayer, Jorg Schwenk, Marco Kampmann, and Meiko Jensen</a></li>
+<li><a href="https://blog.centrify.com/saml/">Making Headlines: SAML - March 19, 2018 - Torsten George</a></li>
+<li><a href="https://www.kb.cert.org/vuls/id/475445/">Vulnerability Note VU#475445 - 2018-02-27 - Carnegie Mellon University</a></li>
+<li><a href="https://pulsesecurity.co.nz/advisories/WebLogic-SAML-Vulnerabilities">ORACLE WEBLOGIC - MULTIPLE SAML VULNERABILITIES (CVE-2018-2998/CVE-2018-2933) - Denis Andzakovic - Jul 18, 2018</a></li>
+<li><a href="https://www.redteam-pentesting.de/de/advisories/rt-sa-2017-013/-truncation-of-saml-attributes-in-shibboleth-2">Truncation of SAML Attributes in Shibboleth 2 - 2018-01-15 - redteam-pentesting.de</a></li>
+<li><a href="https://blog.netspi.com/attacking-sso-common-saml-vulnerabilities-ways-find/">Attacking SSO: Common SAML Vulnerabilities and Ways to Find Them - March 7th, 2017 - Jem Jensen</a></li>
+<li><a href="https://epi052.gitlab.io/notes-to-self/blog/2019-03-07-how-to-test-saml-a-methodology/">How to Hunt Bugs in SAML; a Methodology - Part I - @epi052</a></li>
+<li><a href="https://epi052.gitlab.io/notes-to-self/blog/2019-03-13-how-to-test-saml-a-methodology-part-two/">How to Hunt Bugs in SAML; a Methodology - Part II - @epi052</a></li>
+<li><a href="https://epi052.gitlab.io/notes-to-self/blog/2019-03-16-how-to-test-saml-a-methodology-part-three/">How to Hunt Bugs in SAML; a Methodology - Part III - @epi052</a></li>
 </ul>
 </article>
  

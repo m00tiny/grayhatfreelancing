@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1441,8 +1431,7 @@ https://github.com/alex-shpak/hugo-book
   Exploitation
   <a class="anchor" href="#exploitation">#</a>
 </h2>
-<p>Let’s say there’s a <code>well known</code> website - 
-  <a href="https://famous-website.tld/">https://famous-website.tld/</a>. And let&rsquo;s assume that there&rsquo;s a link like :</p>
+<p>Let’s say there’s a <code>well known</code> website - <a href="https://famous-website.tld/">https://famous-website.tld/</a>. And let&rsquo;s assume that there&rsquo;s a link like :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//famous-website.tld/signup<span style="color:#66d9ef">?</span>redirectUrl=https<span style="color:#960050;background-color:#1e0010">:</span>//famous-website.tld/account
 </span></span></code></pre></div><p>After signing up you get redirected to your account, this redirection is specified by the <code>redirectUrl</code> parameter in the URL.<br>
 What happens if we change the <code>famous-website.tld/account</code> to <code>evil-website.tld</code>?</p>
@@ -1453,31 +1442,21 @@ What happens if we change the <code>famous-website.tld/account</code> to <code>e
   <a class="anchor" href="#http-redirection-status-code---3xx">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://httpstatuses.com/300">300 Multiple Choices</a></li>
-<li>
-  <a href="https://httpstatuses.com/301">301 Moved Permanently</a></li>
-<li>
-  <a href="https://httpstatuses.com/302">302 Found</a></li>
-<li>
-  <a href="https://httpstatuses.com/303">303 See Other</a></li>
-<li>
-  <a href="https://httpstatuses.com/304">304 Not Modified</a></li>
-<li>
-  <a href="https://httpstatuses.com/305">305 Use Proxy</a></li>
-<li>
-  <a href="https://httpstatuses.com/307">307 Temporary Redirect</a></li>
-<li>
-  <a href="https://httpstatuses.com/308">308 Permanent Redirect</a></li>
+<li><a href="https://httpstatuses.com/300">300 Multiple Choices</a></li>
+<li><a href="https://httpstatuses.com/301">301 Moved Permanently</a></li>
+<li><a href="https://httpstatuses.com/302">302 Found</a></li>
+<li><a href="https://httpstatuses.com/303">303 See Other</a></li>
+<li><a href="https://httpstatuses.com/304">304 Not Modified</a></li>
+<li><a href="https://httpstatuses.com/305">305 Use Proxy</a></li>
+<li><a href="https://httpstatuses.com/307">307 Temporary Redirect</a></li>
+<li><a href="https://httpstatuses.com/308">308 Permanent Redirect</a></li>
 </ul>
 <h2 id="fuzzing">
   Fuzzing
   <a class="anchor" href="#fuzzing">#</a>
 </h2>
-<p>Replace 
-  <a href="https://www.whitelisteddomain.tld">www.whitelisteddomain.tld</a> from <em>Open-Redirect-payloads.txt</em> with a specific white listed domain in your test case</p>
-<p>To do this simply modify the WHITELISTEDDOMAIN with value 
-  <a href="https://www.test.com">www.test.com</a> to your test case URL.</p>
+<p>Replace <a href="https://www.whitelisteddomain.tld">www.whitelisteddomain.tld</a> from <em>Open-Redirect-payloads.txt</em> with a specific white listed domain in your test case</p>
+<p>To do this simply modify the WHITELISTEDDOMAIN with value <a href="https://www.test.com">www.test.com</a> to your test case URL.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>WHITELISTEDDOMAIN=<span style="color:#e6db74">&#34;www.test.com&#34;</span> &amp;&amp; sed <span style="color:#e6db74">&#39;s/www.whitelisteddomain.tld/&#39;</span><span style="color:#e6db74">&#34;</span>$WHITELISTEDDOMAIN<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;/&#39;</span> Open-Redirect-payloads.txt &gt; Open-Redirect-payloads-burp-<span style="color:#e6db74">&#34;</span>$WHITELISTEDDOMAIN<span style="color:#e6db74">&#34;</span>.txt &amp;&amp; echo <span style="color:#e6db74">&#34;</span>$WHITELISTEDDOMAIN<span style="color:#e6db74">&#34;</span> | awk <span style="color:#f92672">-F</span>. <span style="color:#e6db74">&#39;{print &#34;https://&#34;$0&#34;.&#34;$NF}&#39;</span> &gt;&gt; Open-Redirect-payloads-burp-<span style="color:#e6db74">&#34;</span>$WHITELISTEDDOMAIN<span style="color:#e6db74">&#34;</span>.txt
 </span></span></code></pre></div><h2 id="filter-bypass">
   Filter Bypass
@@ -1554,18 +1533,12 @@ What happens if we change the <code>famous-website.tld/account</code> to <code>e
 </h2>
 <ul>
 <li>filedescriptor</li>
-<li>
-  <a href="https://gist.github.com/stefanocoding/8cdc8acf5253725992432dedb1c9c781">You do not need to run 80 reconnaissance tools to get access to user accounts - @stefanocoding</a></li>
-<li>
-  <a href="https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet">OWASP - Unvalidated Redirects and Forwards Cheat Sheet</a></li>
-<li>
-  <a href="https://github.com/cujanovic/Open-Redirect-Payloads">Cujanovic - Open-Redirect-Payloads</a></li>
-<li>
-  <a href="https://pentester.land/cheatsheets/2018/11/02/open-redirect-cheatsheet.html">Pentester Land - Open Redirect Cheat Sheet</a></li>
-<li>
-  <a href="https://s0cket7.com/open-redirect-vulnerability/">Open Redirect Vulnerability - AUGUST 15, 2018 - s0cket7</a></li>
-<li>
-  <a href="https://i.blackhat.com/USA-19/Thursday/us-19-Birch-HostSplit-Exploitable-Antipatterns-In-Unicode-Normalization.pdf">Host/Split
+<li><a href="https://gist.github.com/stefanocoding/8cdc8acf5253725992432dedb1c9c781">You do not need to run 80 reconnaissance tools to get access to user accounts - @stefanocoding</a></li>
+<li><a href="https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet">OWASP - Unvalidated Redirects and Forwards Cheat Sheet</a></li>
+<li><a href="https://github.com/cujanovic/Open-Redirect-Payloads">Cujanovic - Open-Redirect-Payloads</a></li>
+<li><a href="https://pentester.land/cheatsheets/2018/11/02/open-redirect-cheatsheet.html">Pentester Land - Open Redirect Cheat Sheet</a></li>
+<li><a href="https://s0cket7.com/open-redirect-vulnerability/">Open Redirect Vulnerability - AUGUST 15, 2018 - s0cket7</a></li>
+<li><a href="https://i.blackhat.com/USA-19/Thursday/us-19-Birch-HostSplit-Exploitable-Antipatterns-In-Unicode-Normalization.pdf">Host/Split
 Exploitable Antipatterns in Unicode Normalization - BlackHat US 2019</a></li>
 </ul>
 </article>

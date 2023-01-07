@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.c3b45b6301b51f548f0398109b6e109d45abf1314e421f8ba62cf6f72646f958.js" integrity="sha256-w7RbYwG1H1SPA5gQm24QnUWr8TFOQh&#43;Lpiz29yZG&#43;Vg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4e979c41ea1da3eadea6cff7d8575b0664a8627f9c4b12e833490d3df55a9f7b.js" integrity="sha256-TpecQeodo&#43;reps/32FdbBmSoYn&#43;cSxLoM0kNPfVan3s=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -81,10 +81,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  
-    
-  
-
 
 
 <ul class="book-languages">
@@ -98,12 +94,6 @@ https://github.com/alex-shpak/hugo-book
     </label>
 
     <ul>
-      
-      <li>
-        <a href="https://www.grayhatfreelancing.com/ru/">
-          Ukrainian
-        </a>
-      </li>
       
     </ul>
   </li>
@@ -1452,12 +1442,9 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#tools">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://github.com/almandin/fuxploider">Fuxploider</a></li>
-<li>
-  <a href="https://portswigger.net/bappstore/b2244cbb6953442cb3c82fa0a0d908fa">Burp &gt; Upload Scanner</a></li>
-<li>
-  <a href="https://www.zaproxy.org/blog/2021-08-20-zap-fileupload-addon/">ZAP &gt; FileUpload AddOn</a></li>
+<li><a href="https://github.com/almandin/fuxploider">Fuxploider</a></li>
+<li><a href="https://portswigger.net/bappstore/b2244cbb6953442cb3c82fa0a0d908fa">Burp &gt; Upload Scanner</a></li>
+<li><a href="https://www.zaproxy.org/blog/2021-08-20-zap-fileupload-addon/">ZAP &gt; FileUpload AddOn</a></li>
 </ul>
 <h2 id="exploits">
   Exploits
@@ -1535,13 +1522,11 @@ https://github.com/alex-shpak/hugo-book
 <li><code>Content-Type : image/gif</code></li>
 <li><code>Content-Type : image/png</code></li>
 <li><code>Content-Type : image/jpeg</code></li>
-<li>Content-Type wordlist: 
-  <a href="https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/web/content-type.txt">SecLists/content-type.txt</a></li>
+<li>Content-Type wordlist: <a href="https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/web/content-type.txt">SecLists/content-type.txt</a></li>
 <li>Set the Content-Type twice: once for unallowed type and once for allowed.</li>
 </ul>
 </li>
-<li>
-  <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">Magic Bytes</a>
+<li><a href="https://en.wikipedia.org/wiki/List_of_file_signatures">Magic Bytes</a>
 <ul>
 <li>Sometimes applications identify file types based on their first signature bytes. Adding/replacing them in a file might trick the application.
 <ul>
@@ -1581,12 +1566,9 @@ https://github.com/alex-shpak/hugo-book
 <li>Picture Metadata, hide the payload inside a comment tag in the metadata.</li>
 <li>Picture Resize, hide the payload within the compression algorithm in order to bypass a resize. Also defeating <code>getimagesize()</code> and <code>imagecreatefromgif()</code>.
 <ul>
-<li>
-  <a href="https://virtualabs.fr/Nasty-bulletproof-Jpegs-l">JPG</a>: use createBulletproofJPG.py</li>
-<li>
-  <a href="https://blog.isec.pl/injection-points-in-popular-image-formats/">PNG</a>: use createPNGwithPLTE.php</li>
-<li>
-  <a href="https://blog.isec.pl/injection-points-in-popular-image-formats/">GIF</a>: use createGIFwithGlobalColorTable.php</li>
+<li><a href="https://virtualabs.fr/Nasty-bulletproof-Jpegs-l">JPG</a>: use createBulletproofJPG.py</li>
+<li><a href="https://blog.isec.pl/injection-points-in-popular-image-formats/">PNG</a>: use createPNGwithPLTE.php</li>
+<li><a href="https://blog.isec.pl/injection-points-in-popular-image-formats/">GIF</a>: use createGIFwithGlobalColorTable.php</li>
 </ul>
 </li>
 </ul>
@@ -1594,8 +1576,7 @@ https://github.com/alex-shpak/hugo-book
   Picture with custom metadata
   <a class="anchor" href="#picture-with-custom-metadata">#</a>
 </h3>
-<p>Create a custom picture and insert exif tag with <code>exiftool</code>. A list of multiple exif tags can be found at 
-  <a href="https://exiv2.org/tags.html">exiv2.org</a></p>
+<p>Create a custom picture and insert exif tag with <code>exiftool</code>. A list of multiple exif tags can be found at <a href="https://exiv2.org/tags.html">exiv2.org</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>convert -size 110x110 xc<span style="color:#960050;background-color:#1e0010">:</span>white payload.jpg
 </span></span><span style="display:flex;"><span>exiftool -Copyright=<span style="color:#e6db74">&#34;PayloadsAllTheThings&#34;</span> -Artist=<span style="color:#e6db74">&#34;Pentest&#34;</span> -ImageUniqueID=<span style="color:#e6db74">&#34;Example&#34;</span> payload.jpg
 </span></span><span style="display:flex;"><span>exiftool -Comment=<span style="color:#e6db74">&#34;&lt;?php echo &#39;Command:&#39;; if(</span>$_POST<span style="color:#e6db74">){system(</span>$_POST<span style="color:#e6db74">[&#39;cmd&#39;]);} __halt_compiler();&#34;</span> img.jpg
@@ -1605,21 +1586,15 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <p>If you are trying to upload files to a :</p>
 <ul>
-<li>PHP server, take a look at the 
-  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Apache%20.htaccess">.htaccess</a> trick to execute code.</li>
-<li>ASP server, take a look at the 
-  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20IIS%20web.config">web.config</a> trick to execute code.</li>
+<li>PHP server, take a look at the <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Apache%20.htaccess">.htaccess</a> trick to execute code.</li>
+<li>ASP server, take a look at the <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20IIS%20web.config">web.config</a> trick to execute code.</li>
 </ul>
 <p>Configuration files examples</p>
 <ul>
-<li>
-  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Apache%20.htaccess">.htaccess</a></li>
-<li>
-  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20IIS%20web.config">web.config</a></li>
-<li>
-  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Busybox%20httpd.conf">httpd.conf</a></li>
-<li>
-  <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Python%20__init__.py">__init__.py</a></li>
+<li><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Apache%20.htaccess">.htaccess</a></li>
+<li><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20IIS%20web.config">web.config</a></li>
+<li><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Busybox%20httpd.conf">httpd.conf</a></li>
+<li><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Python%20__init__.py">__init__.py</a></li>
 </ul>
 <p>Alternatively you may be able to upload a JSON file with a custom scripts, try to overwrite a dependency manager configuration file.</p>
 <ul>
@@ -1670,38 +1645,25 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <p>Upload the XML file to <code>$JETTY_BASE/webapps/</code></p>
 <ul>
-<li>
-  <a href="https://raw.githubusercontent.com/Mike-n1/tips/main/JettyShell.xml">JettyShell.xml - From Mikhail Klyuchnikov</a></li>
+<li><a href="https://raw.githubusercontent.com/Mike-n1/tips/main/JettyShell.xml">JettyShell.xml - From Mikhail Klyuchnikov</a></li>
 </ul>
 <h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li>
-  <a href="https://virtualabs.fr/Nasty-bulletproof-Jpegs-l">Bulletproof Jpegs Generator - Damien &ldquo;virtualabs&rdquo; Cauquil</a></li>
-<li>
-  <a href="https://secgeek.net/bookfresh-vulnerability/">BookFresh Tricky File Upload Bypass to RCE, NOV 29, 2014 - AHMED ABOUL-ELA</a></li>
-<li>
-  <a href="https://www.idontplaydarts.com/2012/06/encoding-web-shells-in-png-idat-chunks/">Encoding Web Shells in PNG IDAT chunks, 04-06-2012, phil</a></li>
-<li>
-  <a href="https://phil242.wordpress.com/2014/02/23/la-png-qui-se-prenait-pour-du-php/">La PNG qui se prenait pour du PHP, 23 février 2014</a></li>
-<li>
-  <a href="https://www.exploit-db.com/docs/english/45074-file-upload-restrictions-bypass.pdf">File Upload restrictions bypass - Haboob Team</a></li>
-<li>
-  <a href="https://docs.google.com/presentation/d/1-YwXl9rhzSvvqVvE_bMZo2ab-0O5wRNTnzoihB9x6jI/edit#slide=id.ga2ef157b83_1_0">File Upload - Mahmoud M. Awali / @0xAwali</a></li>
-<li>
-  <a href="https://red.0xbad53c.com/red-team-operations/initial-access/webshells/iis-soap">IIS - SOAP</a></li>
-<li>
-  <a href="https://pyn3rd.github.io/2022/05/07/Arbitrary-File-Upload-Tricks-In-Java/">Arbitrary File Upload Tricks In Java - pyn3rd</a></li>
-<li>
-  <a href="https://book.hacktricks.xyz/pentesting-web/file-upload">File Upload - HackTricks</a></li>
-<li>
-  <a href="https://blog.isec.pl/injection-points-in-popular-image-formats/">Injection points in popular image formats - Daniel Kalinowski‌‌ - Nov 8, 2019</a></li>
-<li>
-  <a href="https://twitter.com/ptswarm/status/1555184661751648256/">A tip for getting RCE in Jetty apps with just one XML file! - Aug 4, 2022 - PT SWARM / @ptswarm</a></li>
-<li>
-  <a href="https://swarm.ptsecurity.com/jetty-features-for-hacking-web-apps/">Jetty Features for Hacking Web Apps - September 15, 2022 - Mikhail Klyuchnikov</a></li>
+<li><a href="https://virtualabs.fr/Nasty-bulletproof-Jpegs-l">Bulletproof Jpegs Generator - Damien &ldquo;virtualabs&rdquo; Cauquil</a></li>
+<li><a href="https://secgeek.net/bookfresh-vulnerability/">BookFresh Tricky File Upload Bypass to RCE, NOV 29, 2014 - AHMED ABOUL-ELA</a></li>
+<li><a href="https://www.idontplaydarts.com/2012/06/encoding-web-shells-in-png-idat-chunks/">Encoding Web Shells in PNG IDAT chunks, 04-06-2012, phil</a></li>
+<li><a href="https://phil242.wordpress.com/2014/02/23/la-png-qui-se-prenait-pour-du-php/">La PNG qui se prenait pour du PHP, 23 février 2014</a></li>
+<li><a href="https://www.exploit-db.com/docs/english/45074-file-upload-restrictions-bypass.pdf">File Upload restrictions bypass - Haboob Team</a></li>
+<li><a href="https://docs.google.com/presentation/d/1-YwXl9rhzSvvqVvE_bMZo2ab-0O5wRNTnzoihB9x6jI/edit#slide=id.ga2ef157b83_1_0">File Upload - Mahmoud M. Awali / @0xAwali</a></li>
+<li><a href="https://red.0xbad53c.com/red-team-operations/initial-access/webshells/iis-soap">IIS - SOAP</a></li>
+<li><a href="https://pyn3rd.github.io/2022/05/07/Arbitrary-File-Upload-Tricks-In-Java/">Arbitrary File Upload Tricks In Java - pyn3rd</a></li>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/file-upload">File Upload - HackTricks</a></li>
+<li><a href="https://blog.isec.pl/injection-points-in-popular-image-formats/">Injection points in popular image formats - Daniel Kalinowski‌‌ - Nov 8, 2019</a></li>
+<li><a href="https://twitter.com/ptswarm/status/1555184661751648256/">A tip for getting RCE in Jetty apps with just one XML file! - Aug 4, 2022 - PT SWARM / @ptswarm</a></li>
+<li><a href="https://swarm.ptsecurity.com/jetty-features-for-hacking-web-apps/">Jetty Features for Hacking Web Apps - September 15, 2022 - Mikhail Klyuchnikov</a></li>
 </ul>
 </article>
  
