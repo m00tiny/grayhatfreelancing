@@ -3,6 +3,7 @@ title = "Wordpress Security"
 date = '2022-11-20'
 description = 'Common misconfigurations, risky default settings, major mistakes, and general methodologies that are useful when pentesting/bug hunting/auditing wordpress websites.'
 +++
+# WordPress Security
 
 ## Wordpress Tools:
  - [https://github.com/wpscanteam/wpscan](WPScan) - One of the better tools at it's just.
