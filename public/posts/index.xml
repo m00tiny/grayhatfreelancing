@@ -12,7 +12,7 @@
       <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
       
       <guid>https://www.grayhatfreelancing.com/posts/update-github-repo/</guid>
-      <description>Updating Github Repos # Yeah, I agree. Once they removed the easy ability to push updates to a repository after cloning (over http(s)). It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
+      <description>Updating Github Repos # println(&amp;ldquo;Hamming difference of: ${count}&amp;quot;)It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
 Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &amp;lt;your repo&amp;gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github.</description>
     </item>
     

