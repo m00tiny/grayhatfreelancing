@@ -6,21 +6,19 @@ type: docs
 # Gray Hat Freelancing Blog
 
 {{< columns >}}
-## Happy Holidays!
+## We're back!
 
-Gray Hat Freelancing is on a break until after the new year. We have had a
-wonderful year here; made tons of progress in every direction that we could
-hope for. And, we're happy to check out for now. And just reward ourselves
-by not paying any attention for a brief moment. So long, 2022..
+[sinkhole](https://github.com/xoreaxeaxeax/sinkhole)
+[polyglots](https://en.wikipedia.org/wiki/Polyglot_(computing)
 
 <--->
 
-## Coming.. 2023..
+## UTF-7
 
-We're gearing up to a do a huge focus on mobile in 2023. Starting with Android,
-obviously. And we'll be sure to cover some much needed iOS stuff as well.  This
-this moment in time is something I'd always been looking forward to. Getting
-started, I'd dreamed of a time when basically everything was forcibly connected.
+Always remember to test:
+```
++ADw-script+AD4-alert(1)+ADw-/script+AD4-
+```
 {{< /columns >}}
 
 

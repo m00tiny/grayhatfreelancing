@@ -16,6 +16,9 @@ HackTheBox Academy is connected to HackerOne.
 [TryHackMe](https://tryhackme.com/)
 Tryhackme is another formidable learning platform. Some rooms are simply walkthroughs where you can read, learn and basically just type what they tell you, other rooms require some self-study to complete and there's also challenge rooms, CTFs and King of the Hill competition mode!
 
+[ProvingGrounds](https://portal.offensive-security.com/labs/play)
+Offensive Security's Proving Grounds. This place also has training areas for learning, CTF machines for playing and testing your skills and more. Less organized but just as powerful as TryHackMe or HackTheBox
+
 [RootMe](https://www.root-me.org/)
 Rootme is another resource for online hosted virtual machines to hack.
 
