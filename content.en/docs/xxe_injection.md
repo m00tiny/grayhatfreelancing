@@ -470,7 +470,7 @@ Then update the file `zip -u xxe.docx [Content_Types].xml`
 
 Tool : https://github.com/BuffaloWill/oxml_xxe
 
-```xml
+```bash
 DOCX/XLSX/PPTX
 ODT/ODG/ODP/ODS
 SVG
@@ -484,7 +484,7 @@ GIF (experimental)
 
 Structure of the XLSX:
 
-```
+```bash
 $ 7z l xxe.xlsx
 [...]
    Date      Time    Attr         Size   Compressed  Name
@@ -506,7 +506,7 @@ Extract Excel file: `7z x -oXXE xxe.xlsx`
 
 Rebuild Excel file:
 
-```
+```bash
 $ cd XXE
 $ 7z u ../xxe.xlsx *
 ```
@@ -541,7 +541,7 @@ And using FTP instead of HTTP allows to retrieve much larger files.
 
 Serve DTD and receive FTP payload using [xxeserv](https://github.com/staaldraad/xxeserv):
 
-```
+```bash
 $ xxeserv -o files.log -p 2121 -w -wd public -wp 8000
 ```
 

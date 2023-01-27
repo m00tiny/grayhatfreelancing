@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.049d4847a3aa1cf53d39e61af77abeb9ec59a646f1c2966b651eb9ac73e137b9.js" integrity="sha256-BJ1IR6OqHPU9OeYa93q&#43;uexZpkbxwpZrZR65rHPhN7k=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.42c24b49fa2bd9a7bdb11c30a43d00df4dab358db93fecefd18b800583cb7f3f.js" integrity="sha256-QsJLSfor2ae9sRwwpD0A302rNY25P&#43;zv0YuABYPLfz8=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -1248,7 +1248,7 @@ Here are a few:</p>
 <ul>
 <li>
 <p><a href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">LinPEAS - Linux Privilege Escalation Awesome Script</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wget <span style="color:#e6db74">&#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&#34;</span> -O linpeas.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget <span style="color:#e6db74">&#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&#34;</span> -O linpeas.sh
 </span></span><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&#34;</span> -o linpeas.sh
 </span></span><span style="display:flex;"><span>./linpeas.sh -a <span style="color:#75715e">#all checks - deeper system enumeration, but it takes longer to complete.</span>
 </span></span><span style="display:flex;"><span>./linpeas.sh -s <span style="color:#75715e">#superfast &amp; stealth - This will bypass some time consuming checks. In stealth mode Nothing will be written to the disk.</span>
@@ -1256,13 +1256,14 @@ Here are a few:</p>
 </span></span></code></pre></div></li>
 <li>
 <p><a href="https://github.com/liamg/traitor">Traitor - Linux Privielege Escalation</a></p>
-<pre tabindex="0"><code class="language-Automatically" data-lang="Automatically">
-Nearly all of GTFOBins
-Writeable docker.sock
-CVE-2022-0847 (Dirty pipe)
-CVE-2021-4034 (pwnkit)
-CVE-2021-3560
-</code></pre></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Automatically exploit low-hanging fruit to pop a root shell. Linux privilege escalation made easy! Traitor packages up a bunch of methods to exploit local misconfigurations and vulnerabilities in order to pop a root shell:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Nearly all of GTFOBins
+</span></span><span style="display:flex;"><span>Writeable docker.sock
+</span></span><span style="display:flex;"><span>CVE-2022-0847 <span style="color:#f92672">(</span>Dirty pipe<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>CVE-2021-4034 <span style="color:#f92672">(</span>pwnkit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>CVE-2021-3560
+</span></span></code></pre></div></li>
 <li>
 <p><a href="https://github.com/diego-treitos/linux-smart-enumeration">LinuxSmartEnumeration - Linux enumeration tools for pentesting and CTFs</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wget <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh&#34;</span> -O lse.sh

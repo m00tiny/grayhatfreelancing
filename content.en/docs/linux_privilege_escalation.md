@@ -13,7 +13,7 @@ Here are a few:
 
 - [LinPEAS - Linux Privilege Escalation Awesome Script](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
 
-    ```powershell
+    ```bash
     wget "https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh" -O linpeas.sh
     curl "https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh" -o linpeas.sh
     ./linpeas.sh -a #all checks - deeper system enumeration, but it takes longer to complete.
@@ -23,7 +23,8 @@ Here are a few:
     
 - [Traitor - Linux Privielege Escalation](https://github.com/liamg/traitor)
 
-    ```Automatically exploit low-hanging fruit to pop a root shell. Linux privilege escalation made easy! Traitor packages up a bunch of methods to exploit local misconfigurations and vulnerabilities in order to pop a root shell:
+    ```bash
+    Automatically exploit low-hanging fruit to pop a root shell. Linux privilege escalation made easy! Traitor packages up a bunch of methods to exploit local misconfigurations and vulnerabilities in order to pop a root shell:
 
     Nearly all of GTFOBins
     Writeable docker.sock

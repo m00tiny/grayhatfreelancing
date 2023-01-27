@@ -39,7 +39,7 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
 You need to include subdomains ;)
 https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&incl_exp=true&incl_sub=true
 
-```bash
+```
 site:*.domain.com -www
 site:domain.com filetype:pdf
 site:domain.com inurl:'&'

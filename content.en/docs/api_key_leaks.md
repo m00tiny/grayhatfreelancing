@@ -13,7 +13,7 @@ description = "Tips and tricks for sniffing out API key leaks; where to look and
 - [KeyFinder - is a tool that let you find keys while surfing the web!](https://github.com/momenbasel/KeyFinder)
 - [Keyhacks - is a repository which shows quick ways in which API keys leaked by a bug bounty program can be checked to see if they're valid.](https://github.com/streaak/keyhacks)
 - [truffleHog - Find credentials all over the place](https://github.com/trufflesecurity/truffleHog)
-    ```ps1
+    ```bash
     docker run -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
     docker run -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --org=trufflesecurity
     trufflehog git https://github.com/trufflesecurity/trufflehog.git
@@ -52,7 +52,7 @@ Impact:
 
 ### Algolia
 
-```powershell
+```bash
 curl --request PUT \
   --url https://<application-id>-1.algolianet.com/1/indexes/<example-index>/settings \
   --header 'content-type: application/json' \

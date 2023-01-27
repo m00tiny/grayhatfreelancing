@@ -8,14 +8,14 @@ type: docs
 {{< columns >}}
 ## We're back!
 
-[sinkhole](https://github.com/xoreaxeaxeax/sinkhole)
-[polyglots](https://en.wikipedia.org/wiki/Polyglot_(computing)
+[sinkhole](https://github.com/xoreaxeaxeax/sinkhole)  
+[polyglots](https://en.wikipedia.org/wiki/Polyglot_(computing))  
 
 <--->
 
 ## UTF-7
 
-Always remember to test:
+Always remember to test UTF-7:
 ```
 +ADw-script+AD4-alert(1)+ADw-/script+AD4-
 ```

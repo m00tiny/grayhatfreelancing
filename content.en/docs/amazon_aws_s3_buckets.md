@@ -1,5 +1,4 @@
 +++
-author = "m00tiny"
 title = "Amazon AWS S3 Buckets"
 date = "2022-10-16"
 description = "Finding, accessing and exploiting Amazon S3 buckets. Where to look, how to look and ways to leverage features of Amazon S3 buckets to maximize your impac on you target."
@@ -23,7 +22,7 @@ AWSAccessKeyId=[ENTER HERE YOUR KEY]
 AWSSecretKey=[ENTER HERE YOUR KEY]
 ```
 
-```javascript
+```bash
 aws configure --profile nameofprofile
 ```
 

