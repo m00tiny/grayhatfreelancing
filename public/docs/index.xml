@@ -6,7 +6,17 @@
     <description>Recent content in Docs on Gray Hat Freelancing</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2022</copyright>
-    <lastBuildDate>Sun, 15 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exercism Solutions</title>
+      <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
+      <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/exercism_solutions/</guid>
+      <description>Exercism Solutions # These solutions are provided so that you can check your work or get an idea, if you&amp;rsquo;re stuck. If you use them to cheat, understand that you&amp;rsquo;re only cheating yourself. That goes for everything on this website.
+Python # armstrong numbers # import math def is_armstrong_number(number): &amp;#34;&amp;#34;&amp;#34; A number is an &amp;#34;armstrong&amp;#34; number if the sum of the powers of it&amp;#39;s length applied to each digit in the number adds up to the number :param number: int - returns True if number is an amrstrong &amp;#34;&amp;#34;&amp;#34; power = len(str(number)) sums = [] for i in str(number): sums.</description>
+    </item>
+    
     <item>
       <title>Brute Force Cracking</title>
       <link>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</link>
@@ -297,16 +307,6 @@ Get-SQLDatabase -Username sa -Password Password1234 -Instance &amp;#34;&amp;lt;D
       <guid>https://www.grayhatfreelancing.com/docs/source_code_management/</guid>
       <description>Source Code Management # Enumeration # Using SCMKit - Source Code Management Attack Toolkit
 Discover repositories being used in a particular SCM system SCMKit.exe -s gitlab -m listrepo -c userName:password -u https://gitlab.something.local SCMKit.exe -s gitlab -m listrepo -c apiKey -u https://gitlab.something.local Search for repositories by repository name in a particular SCM system SCMKit.exe -s github -m searchrepo -c userName:password -u https://github.something.local -o &amp;#34;some search term&amp;#34; SCMKit.exe -s gitlab -m searchrepo -c apikey -u https://gitlab.</description>
-    </item>
-    
-    <item>
-      <title>Docker Security</title>
-      <link>https://www.grayhatfreelancing.com/docs/docker_pentesting/</link>
-      <pubDate>Wed, 26 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/docker_pentesting/</guid>
-      <description>Docker Pentest # Docker is a set of platform as a service (PaaS) products that uses OS-level virtualization to deliver software in packages called containers.
-Tools # Dockscan : Dockscan is security vulnerability and audit scanner for Docker installations dockscan unix:///var/run/docker.sock dockscan -r html -o myreport -v tcp://example.com:5422 DeepCe : Docker Enumeration, Escalation of Privileges and Container Escapes (DEEPCE) ./deepce.sh ./deepce.sh --no-enumeration --exploit PRIVILEGED --username deepce --password deepce ./deepce.sh --no-enumeration --exploit SOCK --shadow .</description>
     </item>
     
   </channel>

