@@ -5,7 +5,7 @@ title = 'Gray Hat Freelancing'
 subtitle = 'He who would fight monsters should take care that he does not become one.'
 GitHubUser = 'm00tiny'
 theme = 'hugo-book'
-copyright = '2022'
+copyright = '2023'
 enableRobotsTXT = true
 googleAnalytics = 'UA-124168691-2'
 rssLimit = 30
@@ -38,11 +38,6 @@ enableGitInfo = true
   languageName = 'English'
   contentDir = 'content.en'
   weight = 1
-
-[languages.uk]
-  languageName = 'Ukrainian'
-  contentDir = 'content.uk'
-  weight = 2
 
 [menu]
 # [[menu.before]]

@@ -10,13 +10,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.grayhatfreelancing.com/docs/exercism_solutions/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-01-28T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-01-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-28T12:50:16-05:00" />
 <title>Exercism Solutions | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.64a87728b093e11175fa525a70ea4e519792eb379261a69cf96cc7a68c370634.js" integrity="sha256-ZKh3KLCT4RF1&#43;lJacOpOUZeS6zeSYaac&#43;WzHpow3BjQ=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.eb97e3a67ba9a5346ac6cb4e83705c55d14246724edb7b4ee5d0dc134c450d5a.js" integrity="sha256-65fjpnuppTRqxstOg3BcVdFCRnJO23tO5dDcE0xFDVo=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -75,29 +75,6 @@ https://github.com/alex-shpak/hugo-book
   <ul id="book-search-results"></ul>
 </div>
 
-
-
-  
-
-
-
-
-
-<ul class="book-languages">
-  <li>
-    <input type="checkbox" id="languages" class="toggle" />
-    <label for="languages" class="flex justify-between">
-      <a role="button" class="flex align-center">
-        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
-        English
-      </a>
-    </label>
-
-    <ul>
-      
-    </ul>
-  </li>
-</ul>
 
 
 
@@ -1165,6 +1142,15 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#hello-world">Hello World!</a></li>
             <li><a href="#two-fer">Two Fer</a></li>
             <li><a href="#leap">Leap</a></li>
+            <li><a href="#meltdown-mitigation">Meltdown Mitigation</a></li>
+            <li><a href="#triangle">Triangle</a></li>
+            <li><a href="#collatz-conjecture">Collatz Conjecture</a></li>
+            <li><a href="#difference-of-squares">Difference of Squares</a></li>
+          </ul>
+        </li>
+        <li><a href="#kotlin">Kotlin</a>
+          <ul>
+            <li><a href="#collatz-calculator">Collatz Calculator</a></li>
           </ul>
         </li>
       </ul>
@@ -1409,6 +1395,190 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><h3 id="meltdown-mitigation">
+  Meltdown Mitigation
+  <a class="anchor" href="#meltdown-mitigation">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;Functions to prevent a nuclear meltdown.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_criticality_balanced</span>(temperature, neutrons_emitted):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Verify criticality is balanced.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param temperature: int or float - temperature value in kelvin.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param neutrons_emitted: int or float - number of neutrons emitted per second.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: bool - is criticality balanced?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    A reactor is said to be critical if it satisfies the following conditions:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - The temperature is less than 800 K.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - The number of neutrons emitted per second is greater than 500.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - The product of temperature and neutrons emitted per second is less than 500000.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> temperature <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">800</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> neutrons_emitted <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">500</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> temperature <span style="color:#f92672">*</span> neutrons_emitted <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">500000</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reactor_efficiency</span>(voltage, current, theoretical_max_power):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assess reactor efficiency zone.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param voltage: int or float - voltage value.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param current: int or float - current value.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param theoretical_max_power: int or float - power that corresponds to a 100</span><span style="color:#e6db74">% e</span><span style="color:#e6db74">fficiency.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: str - one of (&#39;green&#39;, &#39;orange&#39;, &#39;red&#39;, or &#39;black&#39;).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Efficiency can be grouped into 4 bands:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1. green -&gt; efficiency of 80</span><span style="color:#e6db74">% o</span><span style="color:#e6db74">r more,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2. orange -&gt; efficiency of less than 80% but at least 60%,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3. red -&gt; efficiency below 60%, but still 30</span><span style="color:#e6db74">% o</span><span style="color:#e6db74">r more,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4. black -&gt;  less than 30</span><span style="color:#e6db74">% e</span><span style="color:#e6db74">fficient.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    The percentage value is calculated as
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    (generated power/ theoretical max power)*100
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    where generated power = voltage * current
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    generated_power <span style="color:#f92672">=</span> voltage <span style="color:#f92672">*</span> current <span style="color:#f92672">/</span> theoretical_max_power <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> generated_power <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">80</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;green&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> generated_power <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">60</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;orange&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> generated_power <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">30</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;red&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;black&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fail_safe</span>(temperature, neutrons_produced_per_second, threshold):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assess and return status code for the reactor.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param temperature: int or float - value of the temperature in kelvin.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param neutrons_produced_per_second: int or float - neutron flux.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param threshold: int or float - threshold for category.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return: str - one of (&#39;LOW&#39;, &#39;NORMAL&#39;, &#39;DANGER&#39;).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1. &#39;LOW&#39; -&gt; `temperature * neutrons per second` &lt; 90</span><span style="color:#e6db74">% o</span><span style="color:#e6db74">f `threshold`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2. &#39;NORMAL&#39; -&gt; `temperature * neutrons per second` +/- 10</span><span style="color:#e6db74">% o</span><span style="color:#e6db74">f `threshold`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3. &#39;DANGER&#39; -&gt; `temperature * neutrons per second` is not in the above-stated ranges
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> temperature <span style="color:#f92672">*</span> neutrons_produced_per_second <span style="color:#f92672">&lt;</span> threshold <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.9</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;LOW&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> <span style="color:#ae81ff">0.9</span> <span style="color:#f92672">*</span> threshold <span style="color:#f92672">&lt;=</span> temperature <span style="color:#f92672">*</span> neutrons_produced_per_second <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1.1</span> <span style="color:#f92672">*</span> threshold:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;NORMAL&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;DANGER&#39;</span>
+</span></span></code></pre></div><h3 id="triangle">
+  Triangle
+  <a class="anchor" href="#triangle">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">equilateral</span>(sides):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isosceles</span>(sides):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">2</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> sides[<span style="color:#ae81ff">2</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;</span> sides[<span style="color:#ae81ff">0</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;</span> sides[<span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> sides[<span style="color:#ae81ff">2</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">!=</span> sides[<span style="color:#ae81ff">0</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">!=</span> sides[<span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">scalene</span>(sides):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> sides[<span style="color:#ae81ff">2</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;</span> sides[<span style="color:#ae81ff">0</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> sides[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;</span> sides[<span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> sides[<span style="color:#ae81ff">2</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sides[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> sides[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> sides[<span style="color:#ae81ff">2</span>]
+</span></span></code></pre></div><h3 id="collatz-conjecture">
+  Collatz Conjecture
+  <a class="anchor" href="#collatz-conjecture">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">steps</span>(number):
+</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> number <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Only positive integers are allowed&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> number <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> number <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            number <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            number <span style="color:#f92672">*=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>            number <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count
+</span></span></code></pre></div><h3 id="difference-of-squares">
+  Difference of Squares
+  <a class="anchor" href="#difference-of-squares">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">square_of_sum</span>(number):
+</span></span><span style="display:flex;"><span>    squares <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(number <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        squares <span style="color:#f92672">+=</span> i
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(squares <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum_of_squares</span>(number):
+</span></span><span style="display:flex;"><span>    sums <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(number <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        sums <span style="color:#f92672">+=</span> i <span style="color:#f92672">*</span> i
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(sums)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">difference_of_squares</span>(number):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(square_of_sum(number) <span style="color:#f92672">-</span> sum_of_squares(number))
+</span></span></code></pre></div><h2 id="kotlin">
+  Kotlin
+  <a class="anchor" href="#kotlin">#</a>
+</h2>
+<h3 id="collatz-calculator">
+  Collatz Calculator
+  <a class="anchor" href="#collatz-calculator">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>object CollatzCalculator <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  fun <span style="color:#a6e22e">computeStepCount</span><span style="color:#f92672">(</span>start<span style="color:#f92672">:</span> Int<span style="color:#f92672">):</span> Int <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  var count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  var run <span style="color:#f92672">=</span> start
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">while</span> <span style="color:#f92672">(</span>run <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>	 <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>run <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>			count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>			run <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>			count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>			run <span style="color:#f92672">*=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>			run <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>	 <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> count
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
 </span></span></code></pre></div></article>
  
       
@@ -1417,6 +1587,12 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
+
+  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/ec98ff53b899f070bc57f5c3219baad5b9ed4112" title='Last modified by Stuart Gray | January 28, 2023' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>January 28, 2023</span>
+    </a>
+  </div>
 
 
 
@@ -1457,6 +1633,15 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#hello-world">Hello World!</a></li>
             <li><a href="#two-fer">Two Fer</a></li>
             <li><a href="#leap">Leap</a></li>
+            <li><a href="#meltdown-mitigation">Meltdown Mitigation</a></li>
+            <li><a href="#triangle">Triangle</a></li>
+            <li><a href="#collatz-conjecture">Collatz Conjecture</a></li>
+            <li><a href="#difference-of-squares">Difference of Squares</a></li>
+          </ul>
+        </li>
+        <li><a href="#kotlin">Kotlin</a>
+          <ul>
+            <li><a href="#collatz-calculator">Collatz Calculator</a></li>
           </ul>
         </li>
       </ul>
