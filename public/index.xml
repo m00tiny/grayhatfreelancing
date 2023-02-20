@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Cobalt Strike</title>
+      <link>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</guid>
+      <description>Cobalt Strike # Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
+$ sudo apt-get update $ sudo apt-get install openjdk-11-jdk $ sudo apt install proxychains socat $ sudo update-java-alternatives -s java-1.</description>
+    </item>
+    
+    <item>
       <title>Exercism Solutions</title>
       <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
       <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
@@ -202,16 +212,6 @@ look for JS files, old links curl -sX GET &amp;#34;http://web.archive.org/cdx/se
 python theHarvester.py -b all -d domain.com Active recon # Network discovery with masscan, nmap etc.
 rpcclient
 $ rpcclient -U &amp;#39;%&amp;#39; [target host] rpcclient $&amp;gt; querydominfo Domain: WORKGROUP Server: METASPLOITABLE Comment: metasploitable server (Samba 3.</description>
-    </item>
-    
-    <item>
-      <title>Cobalt Strike</title>
-      <link>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</guid>
-      <description>Cobalt Strike # Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
-$ sudo apt-get update $ sudo apt-get install openjdk-11-jdk $ sudo apt install proxychains socat $ sudo update-java-alternatives -s java-1.</description>
     </item>
     
     <item>

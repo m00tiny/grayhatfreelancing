@@ -260,3 +260,4 @@ function reqListener() {
 * [Advanced CORS Exploitation Techniques - Corben Leo - June 16, 2018](https://www.corben.io/advanced-cors-techniques/)
 * [PortSwigger Web Security Academy: CORS](https://portswigger.net/web-security/cors)
 * [CORS Misconfigurations Explained - Detectify Blog](https://blog.detectify.com/2018/04/26/cors-misconfigurations-explained/)
+* [trufflesecurity/of-cors - Exploit CORS misconfigurations on the internal networks](https://github.com/trufflesecurity/of-cors) 

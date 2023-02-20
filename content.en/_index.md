@@ -22,12 +22,7 @@ Always remember to test UTF-7:
 {{< /columns >}}
 
 
-## Anyone else sitting on bug bounties?
+## **Yawn's** 
 
-I don't know what's going on with the state of bug bounty hunting these days. But, I swear, I'm not used to sitting on so many damn bounties.  Even the vendors that are traditionally great at being responsive seem to have started to slow their roll. I'm not talking about "over the holidays" either.. this started earlier. Maybe it's the economy?
+Some times I get really bored with computers. This is literally just a collection of stuff.  ;)
 
-Oh well, most of them are confirmed, at least. So, it's just about waiting on triage and then getting paid. No big deal.
-
-## ToeDoes
-
-We've got a "to do list" mobile app coming out soon. Basically all of the features from the premium apps in a clean and responsive design, for free. There's a small persistent ad in the version that'll be available on the Play Store. But, nothing that takes over the screen and no video ads. Plus, if you want to be free from it, the source is available on Github. Links coming soon, waiting for it to publish first. Check it out, rate and comment on the store. Thanks!

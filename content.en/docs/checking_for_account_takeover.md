@@ -6,6 +6,10 @@ description = "All about account take over techniques, methods, payloads, how/wh
 
 # Account Takeover
 
+## Tools
+
+- [Unisub - is a tool that can suggest potential unicode characters that may be converted to a given character](https://github.com/tomnomnom/hacks/tree/master/unisub).
+
 ## Password Reset Feature
 
 ### Password Reset Token Leak Via Referrer
@@ -237,3 +241,4 @@ Enter the code **000000** or **null** to bypass 2FA protection.
 - [Broken Cryptography & Account Takeovers - Harsh Bothra - September 20, 2020](https://speakerdeck.com/harshbothra/broken-cryptography-and-account-takeovers?slide=28)
 - [Hacking Grindr Accounts with Copy and Paste - Troy HUNT & Wassime BOUIMADAGHENE - 03 OCTOBER 2020](https://www.troyhunt.com/hacking-grindr-accounts-with-copy-and-paste/)
 - [CTFd Account Takeover](https://nvd.nist.gov/vuln/detail/CVE-2020-7245)
+- [Unicode pentester cheatsheet](https://gosecure.github.io/unicode-pentester-cheatsheet/) can be used to find list of suitable unicode characters based on platform.

