@@ -1,9 +1,11 @@
 +++
 title = "Amazon AWS S3 Buckets"
-date = "2022-10-16"
+date = "2023-03-02"
 description = "Finding, accessing and exploiting Amazon S3 buckets. Where to look, how to look and ways to leverage features of Amazon S3 buckets to maximize your impac on you target."
 +++
 # Amazon Bucket S3 AWS
+
+Amazon S3 (Simple Storage Service) Buckets are data object storage buckets hosted on Amazon's cloud service. Being in the cloud it's a highly scalable data storge service and it allows you to set all sorts of permissions and other controls around your data. That said, there's often plenty of juicy information in Amazon S3 buckets.. there's also often nothing more than just images and such. But, still.
 
 ## AWS Configuration
 

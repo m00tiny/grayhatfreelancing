@@ -10,6 +10,11 @@ include_toc = 'true'
 
 Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
 
+### WikiRaider
+
+Generate wordlists fit for your "target audience".
+[https://github.com/NorthwaveSecurity/wikiraider](https://github.com/NorthwaveSecurity/wikiraider)
+
 ### Crunch
 ```bash
 crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet
