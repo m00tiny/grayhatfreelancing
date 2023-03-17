@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Security Innovations - Shred - Command and Control</title>
+      <link>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</link>
+      <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</guid>
+      <description>Ooooooh, yeah. I did it, because the range hasn&amp;rsquo;t changed for over a fucking year. That&amp;rsquo;s lazy on their part. The security industry evolves, your ranges should too. Here, I will be using https://caido.io/ instead of Burp or ZAProxy for this&amp;hellip; why? No particular reason. Just to be fair and showcase that such a thing exists. There&amp;rsquo;s also Charles, and many others.
+&amp;quot;&amp;gt;&amp;lt;plaintext&amp;gt; - Breaks the search feature, there&amp;rsquo;s cross site scripting here.</description>
+    </item>
+    
+    <item>
       <title>Updating a github repository after cloning</title>
       <link>https://www.grayhatfreelancing.com/posts/update-github-repo/</link>
       <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
