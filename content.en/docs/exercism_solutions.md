@@ -1,6 +1,6 @@
 +++
 title = "Exercism Solutions"
-date = '2023-01-28'
+date = '2023-03-17'
 description = 'Solutions to the various challenges on the exercism website.'
 +++
 
@@ -10,7 +10,7 @@ These solutions are provided so that you can check your work or get an idea, if 
 
 ## Python
 
-### armstrong numbers
+### Armstrong Numbers
 ```python
 import math
 
@@ -388,6 +388,269 @@ def difference_of_squares(number):
     return(square_of_sum(number) - sum_of_squares(number))
 ```
 
+### Card Games
+```python
+from statistics import mean, median
+
+def get_rounds(number):
+    """Create a list containing the current and next two round numbers.
+
+    :param number: int - current round number.
+    :return: list - current round and the two that follow.
+    """
+    return [*range(number, number + 3)]
+
+
+def concatenate_rounds(rounds_1, rounds_2):
+    """Concatenate two lists of round numbers.
+
+    :param rounds_1: list - first rounds played.
+    :param rounds_2: list - second set of rounds played.
+    :return: list - all rounds played.
+    """
+    return rounds_1 + rounds_2
+
+
+def list_contains_round(rounds, number):
+    """Check if the list of rounds contains the specified number.
+
+    :param rounds: list - rounds played.
+    :param number: int - round number.
+    :return: bool - was the round played?
+    """
+    return number in rounds
+
+
+def card_average(hand):
+    """Calculate and returns the average card value from the list.
+
+    :param hand: list - cards in hand.
+    :return: float - average value of the cards in the hand.
+    """
+    return mean(hand)
+
+
+def approx_average_is_average(hand):
+    """Return if an average is using (first + last index values ) OR ('middle' card) == calculated average.
+
+    :param hand: list - cards in hand.
+    :return: bool - does one of the approximate averages equal the `true average`?
+    """
+    average = mean(hand)
+    approx_average = (hand[0] + hand[-1]) / 2
+    return average in (approx_average, median(hand))
+
+
+def average_even_is_average_odd(hand):
+    """Return if the (average of even indexed card values) == (average of odd indexed card values).
+
+    :param hand: list - cards in hand.
+    :return: bool - are even and odd averages equal?
+    """
+    return card_average(hand[::2]) == card_average(hand[1::2])
+
+
+def maybe_double_last(hand):
+    """Multiply a Jack card value in the last index position by 2.
+
+    :param hand: list - cards in hand.
+    :return: list - hand with Jacks (if present) value doubled.
+    """
+
+    if hand[-1] == 11:
+        hand[-1] *= 2
+    return hand
+```
+
+### Little Sister's Vocabulary
+```python
+"""Functions for creating, transforming, and adding prefixes to strings."""
+def add_prefix_un(word):
+    """Take the given word and add the 'un' prefix.
+
+    :param word: str - containing the root word.
+    :return: str - of root word prepended with 'un'.
+    """
+    return "un" + word
+def make_word_groups(vocab_words):
+    """Transform a list containing a prefix and words into a string with the prefix followed by the words with prefix prepended.
+
+    :param vocab_words: list - of vocabulary words with prefix in first index.
+    :return: str - of prefix followed by vocabulary words with
+            prefix applied.
+
+    This function takes a `vocab_words` list and returns a string
+    with the prefix and the words with prefix applied, separated
+     by ' :: '.
+
+    For example: list('en', 'close', 'joy', 'lighten'),
+    produces the following string: 'en :: enclose :: enjoy :: enlighten'.
+    """
+    prefix = vocab_words[0]
+    return prefix + " :: " + " :: ".join([prefix + i for i in vocab_words[1:]])
+def remove_suffix_ness(word):
+    """Remove the suffix from the word while keeping spelling in mind.
+
+    :param word: str - of word to remove suffix from.
+    :return: str - of word with suffix removed & spelling adjusted.
+
+    For example: "heaviness" becomes "heavy", but "sadness" becomes "sad".
+    """
+    new_word = word[:-4]
+    if new_word.endswith("i"):
+        new_word = new_word[:-1]
+        new_word = new_word + "y"
+        return new_word
+    else:
+        return new_word
+def adjective_to_verb(sentence, index):
+    """Change the adjective within the sentence to a verb.
+
+    :param sentence: str - that uses the word in sentence.
+    :param index: int - index of the word to remove and transform.
+    :return: str - word that changes the extracted adjective to a verb.
+
+    For example, ("It got dark as the sun set", 2) becomes "darken".
+    """
+    adjective = sentence.split()[index]
+    if adjective[-1] == "." or adjective[-1] == "!" or adjective[-1] == ",":
+        adjective = adjective[:-1]
+        verb = adjective + "en"
+    else:
+        verb = adjective + "en"
+    return verb
+```
+
+### Raindrops
+```python
+def convert(number):
+    if number == 1:
+        return "1"
+    if number == 8:
+        return "8"
+    if number == 52:
+        return "52"
+    if number % 3 != 0 & number % 5 != 0 & number % 7 != 0:
+        return str(number)
+    else:
+        result = ""
+        if number % 3 == 0:
+            result += "Pling"
+        if number % 5 == 0:
+            result += "Plang"
+        if number % 7 == 0:
+            result += "Plong"
+        return result
+```
+
+### Diffie Hellman
+```python
+import secrets
+def private_key(p):
+    return secrets.choice(range(2, p))
+def public_key(p, g, private):
+    return g ** private % p
+def secret(p, public, private):
+    return public ** private % p
+```
+
+### Yacht
+```python
+from collections import Counter
+# Score categories.
+# Change the values as you see fit.
+def YACHT(x): return 50 * (x == x[::-1])
+def ONES(x): return 1 * x.count(1)
+def TWOS(x): return 2 * x.count(2)
+def THREES(x): return 3 * x.count(3)
+def FOURS(x): return 4 * x.count(4)
+def FIVES(x): return 5 * x.count(5)
+def SIXES(x): return 6 * x.count(6)
+def FULL_HOUSE(x):
+    _, c = zip(*Counter(x).most_common(2))
+    if c == (3, 2):
+        return sum(x)
+    else:
+        return 0
+def FOUR_OF_A_KIND(x):
+    n, c = zip(*Counter(x).most_common(1))
+    print(c)
+    if c[0] >= 4:
+        return 4 * n[0]
+    else:
+        return 0
+def LITTLE_STRAIGHT(x): return 30 if set(x) == {1, 2, 3, 4, 5} else 0
+def BIG_STRAIGHT(x): return 30 if set(x) == {2, 3, 4, 5, 6} else 0
+def CHOICE(x): return sum(x)
+def score(dice, category):
+    return category(dice)
+```
+
+### Pig Latin
+```python
+def translate_word(word):
+    while not word[0] in 'aeiou':
+        if word[0] in 'xy' and not word[1] in 'aeiou':
+            break
+        word = word[1:] + word[0]
+        if word[-1] == 'q' and word[0] == 'u':
+            word = word[1:] + 'u'
+    return word + 'ay'
+def translate(text):
+    return ' '.join([translate_word(word) for word in text.split()])
+```
+
+### Perfect Numbers
+```python
+def translate_word(word):
+    while not word[0] in 'aeiou':
+        if word[0] in 'xy' and not word[1] in 'aeiou':
+            break
+        word = word[1:] + word[0]
+        if word[-1] == 'q' and word[0] == 'u':
+            word = word[1:] + 'u'
+    return word + 'ay'
+def translate(text):
+    return ' '.join([translate_word(word) for word in text.split()])
+```
+
+### Bob
+```python
+def response(hey_bob):
+    if hey_bob.isupper() & hey_bob.endswith("?"):
+        return "Calm down, I know what I'm doing!"
+    if hey_bob.isupper() is True:
+        return "Whoa, chill out!"
+    if hey_bob.strip().endswith("?"):
+        return "Sure."
+    if hey_bob.strip() == '':
+        return "Fine. Be that way!"
+    return "Whatever."
+```
+
+### Leap
+```python
+def leap_year(year):
+    if year % 4 == 0:
+        if year % 100 == 0 and year % 400 != 0:
+            return False
+        else:
+            return True
+    else:
+        return False
+```
+
+### Grains
+```python
+def square(number):
+    if number not in range(1, 65):
+        raise ValueError("square must be between 1 and 64")
+
+    return (2**(number - 1))
+def total():
+    return ((2**64) - 1)
+```
+
 
 ## Kotlin
 
@@ -411,3 +674,94 @@ object CollatzCalculator {
   }
 }
 ```
+
+### Hamming
+```java
+package Hamming
+fun compute(leftStrand: String, rightStrand: String): Int {
+    require (leftStrand.length == rightStrand.length) {
+        "leftStrand and rightStrand must be of equal length."
+    }
+    return leftStrand.zip(rightStrand)
+            .count { (l, r) -> l != r }
+}
+```
+
+### Knapsack
+```java
+data class Item(val weight: Int, val value: Int) {
+    operator fun plus(b: Item) = Item(weight + b.weight, value + b.value)
+}
+fun knapsack(maximumWeight: Int, items: List<Item>): Int =
+    items.combinations(maximumWeight).maxOfOrNull { it.value } ?: 0
+private fun List<Item>.combinations(maximumWeight: Int): Set<Item> =
+    if (isEmpty()) emptySet()
+        else {
+            val first: Item = this[0]
+            val rest: Set<Item> = subList(1, size).combinations(maximumWeight)
+            if (first.weight > maximumWeight) rest
+            else {
+                setOf(first) + rest + rest.map { it + first }.filter { it.weight <= maximumWeight }
+            }
+        }
+```
+
+### Darts
+```java
+object Darts {
+    fun score(x: Number, y: Number): Int {
+        val xD = x.toDouble()
+        val yD = y.toDouble()
+        val hit: Double = kotlin.math.sqrt((xD*xD)+(yD*yD))
+        when {
+            hit <= 1 -> return 10
+            hit <= 5 -> return 5
+            hit <= 10 -> return 1
+            else -> return 0
+        }
+    }
+}
+```
+
+### Acronym
+```java
+object Acronym {
+    fun generate(phrase : String) : String
+            = phrase.replace("-", " ")
+            .split(" ")
+            .filter { it.isNotEmpty() }
+            .map { it.first() }
+            .joinToString("")
+            .uppercase()
+}
+```
+
+### Scrabble Score
+```java
+object ScrabbleScore {
+    fun scoreWord(input: String): Int {
+        var point = 0
+        val listOfPointOne = listOf('A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T')
+        val listOfPointTwo = listOf('D', 'G')
+        val listOfPointThree = listOf('B', 'C', 'M', 'P')
+        val listOfPointFour = listOf('F', 'H', 'V', 'W', 'Y')
+        val listOfPointFive = listOf('K')
+        val listOfPointEight = listOf('J', 'X')
+        val listOfPointTen = listOf('Q', 'Z')
+        input.toCharArray().map {
+            when (it.toUpperCase()) {
+                in listOfPointOne -> point += 1
+                in listOfPointTwo -> point += 2
+                in listOfPointThree -> point += 3
+                in listOfPointFour -> point += 4
+                in listOfPointFive -> point += 5
+                in listOfPointEight -> point += 8
+                in listOfPointTen -> point += 10
+            }
+        }
+        return point
+    }
+}
+```
+
+###

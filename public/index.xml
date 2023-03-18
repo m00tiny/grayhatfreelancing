@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Exercism Solutions</title>
+      <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
+      <pubDate>Fri, 17 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/exercism_solutions/</guid>
+      <description>Exercism Solutions # These solutions are provided so that you can check your work or get an idea, if you&amp;rsquo;re stuck. If you use them to cheat, understand that you&amp;rsquo;re only cheating yourself. That goes for everything on this website.
+Python # Armstrong Numbers # import math def is_armstrong_number(number): &amp;#34;&amp;#34;&amp;#34; A number is an &amp;#34;armstrong&amp;#34; number if the sum of the powers of it&amp;#39;s length applied to each digit in the number adds up to the number :param number: int - returns True if number is an amrstrong &amp;#34;&amp;#34;&amp;#34; power = len(str(number)) sums = [] for i in str(number): sums.</description>
+    </item>
+    
+    <item>
       <title>Security Innovations - Shred - Command and Control</title>
       <link>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</link>
       <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
@@ -43,16 +53,6 @@ Tools # XSRFProbe - The Prime Cross Site Request Forgery Audit and Exploitation 
       <guid>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</guid>
       <description>Cobalt Strike # Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
 $ sudo apt-get update $ sudo apt-get install openjdk-11-jdk $ sudo apt install proxychains socat $ sudo update-java-alternatives -s java-1.</description>
-    </item>
-    
-    <item>
-      <title>Exercism Solutions</title>
-      <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
-      <pubDate>Sat, 28 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/exercism_solutions/</guid>
-      <description>Exercism Solutions # These solutions are provided so that you can check your work or get an idea, if you&amp;rsquo;re stuck. If you use them to cheat, understand that you&amp;rsquo;re only cheating yourself. That goes for everything on this website.
-Python # armstrong numbers # import math def is_armstrong_number(number): &amp;#34;&amp;#34;&amp;#34; A number is an &amp;#34;armstrong&amp;#34; number if the sum of the powers of it&amp;#39;s length applied to each digit in the number adds up to the number :param number: int - returns True if number is an amrstrong &amp;#34;&amp;#34;&amp;#34; power = len(str(number)) sums = [] for i in str(number): sums.</description>
     </item>
     
     <item>
