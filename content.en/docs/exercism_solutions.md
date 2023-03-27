@@ -651,6 +651,41 @@ def total():
     return ((2**64) - 1)
 ```
 
+### Isogram
+```python
+def is_isogram(string):
+    for i in "abcdefghijklmnopqrstuvwxyz":
+        count = 0
+        for j in string.lower():
+            if i == j:
+                count += 1
+                if count > 1:
+                    return False
+    return True
+```
+
+### All Your Base
+```python
+def rebase(input_base, digits, output_base):
+    if input_base < 2:
+        raise ValueError('input base must be >= 2')
+    if output_base < 2:
+        raise ValueError('output base must be >= 2')
+    if not all(0 <= d < input_base for d in digits):
+        raise ValueError('all digits must satisfy 0 <= d < input base')
+    decimal = 0
+    for d in digits:
+        decimal = decimal * input_base + d
+    if decimal == 0: return [0]
+    out_digits = []
+    while decimal > 0:
+        decimal, digit = divmod(decimal, output_base)
+        out_digits.insert(0, digit)
+    return out_digits
+```
+
+
+
 
 ## Kotlin
 

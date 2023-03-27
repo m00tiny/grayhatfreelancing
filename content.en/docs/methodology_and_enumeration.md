@@ -30,7 +30,7 @@ include_toc = 'true'
 
 ## Active recon
 
-* [Network discovery](Network_Discovery.md) with masscan, nmap etc.
+* [Network discovery](https://www.grayhatfreelancing.com/docs/Network_Discovery/) with masscan, nmap etc.
 
 * rpcclient
 
