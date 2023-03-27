@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.grayhatfreelancing.com/docs/exercism_solutions/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-03-17T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-03-18T02:40:12-04:00" />
+<meta property="article:modified_time" content="2023-03-27T03:49:08-04:00" />
 <title>Exercism Solutions | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -105,6 +105,58 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
 
   
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/dotnet/" class="">.NET Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/node/" class="">Node Insecure Deserialization</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/insecure_deserialization/php/" class="">PHP Insecure Deserialization</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -737,19 +789,6 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   
 
   
-    <a href="/docs/insecure_deserialization/" class="">Insecure Deserialization</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/insecure_direct_object_references/" class="">Insecure Direct Object References</a>
   
 
@@ -1184,6 +1223,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
             <li><a href="#grains">Grains</a></li>
             <li><a href="#isogram">Isogram</a></li>
             <li><a href="#all-your-base">All Your Base</a></li>
+            <li><a href="#pangram">Pangram</a></li>
           </ul>
         </li>
         <li><a href="#kotlin">Kotlin</a>
@@ -1894,6 +1934,14 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
 </span></span><span style="display:flex;"><span>        decimal, digit <span style="color:#f92672">=</span> divmod(decimal, output_base)
 </span></span><span style="display:flex;"><span>        out_digits<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">0</span>, digit)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> out_digits
+</span></span></code></pre></div><h3 id="pangram">
+  Pangram
+  <a class="anchor" href="#pangram">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_pangram</span>(sentence):
+</span></span><span style="display:flex;"><span>    alphabet <span style="color:#f92672">=</span> list(map(chr, range(<span style="color:#ae81ff">97</span>, <span style="color:#ae81ff">123</span>)))
+</span></span><span style="display:flex;"><span>    formattedString <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(c <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> sentence <span style="color:#66d9ef">if</span> c<span style="color:#f92672">.</span>isalpha())<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> set(alphabet) <span style="color:#f92672">==</span> set(formattedString)
 </span></span></code></pre></div><h2 id="kotlin">
   Kotlin
   <a class="anchor" href="#kotlin">#</a>
@@ -2021,9 +2069,9 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/8610d22dfa244a451ec6bd8449b3b47ce1a0c349" title='Last modified by Stuart Gray | March 18, 2023' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/170e09c69d03d9f0089272c912f6a07bbfd04bb7" title='Last modified by Stuart Gray | March 27, 2023' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>March 18, 2023</span>
+      <span>March 27, 2023</span>
     </a>
   </div>
 
@@ -2082,6 +2130,7 @@ window.__h82AlnkH6D91__("WyJwdWItNDAxMjI3NTM3MTAyMjg5NCIsW251bGwsbnVsbCxudWxsLCJ
             <li><a href="#grains">Grains</a></li>
             <li><a href="#isogram">Isogram</a></li>
             <li><a href="#all-your-base">All Your Base</a></li>
+            <li><a href="#pangram">Pangram</a></li>
           </ul>
         </li>
         <li><a href="#kotlin">Kotlin</a>

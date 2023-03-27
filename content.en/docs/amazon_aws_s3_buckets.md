@@ -3,6 +3,7 @@ title = "Amazon AWS S3 Buckets"
 date = "2023-03-02"
 description = "Finding, accessing and exploiting Amazon S3 buckets. Where to look, how to look and ways to leverage features of Amazon S3 buckets to maximize your impac on you target."
 +++
+
 # Amazon Bucket S3 AWS
 
 Amazon S3 (Simple Storage Service) Buckets are data object storage buckets hosted on Amazon's cloud service. Being in the cloud it's a highly scalable data storge service and it allows you to set all sorts of permissions and other controls around your data. That said, there's often plenty of juicy information in Amazon S3 buckets.. there's also often nothing more than just images and such. But, still.
@@ -18,7 +19,7 @@ sudo apt install awscli
 You can get your credential here https://console.aws.amazon.com/iam/home?#/security_credential
 but you need an aws account, free tier account : https://aws.amazon.com/s/dm/optimization/server-side-test/free-tier/free_np/
 
-```javascript
+```js
 aws configure
 AWSAccessKeyId=[ENTER HERE YOUR KEY]
 AWSSecretKey=[ENTER HERE YOUR KEY]
@@ -141,7 +142,7 @@ $ sudo mount /dev/xvda1 /mnt
 
 Amazon exposes an internal service every EC2 instance can query for instance metadata about the host. If you found an SSRF vulnerability that runs on EC2, try requesting :
 
-```powershell
+```bash
 http://169.254.169.254/latest/meta-data/
 http://169.254.169.254/latest/user-data/
 http://169.254.169.254/latest/meta-data/iam/security-credentials/IAM_USER_ROLE_HERE will return the AccessKeyID, SecretAccessKey, and Token

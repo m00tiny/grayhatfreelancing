@@ -684,7 +684,13 @@ def rebase(input_base, digits, output_base):
     return out_digits
 ```
 
-
+### Pangram
+```python
+def is_pangram(sentence):
+    alphabet = list(map(chr, range(97, 123)))
+    formattedString = ''.join(c for c in sentence if c.isalpha()).lower()
+    return set(alphabet) == set(formattedString)
+```
 
 
 ## Kotlin

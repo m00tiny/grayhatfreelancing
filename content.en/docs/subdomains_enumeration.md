@@ -4,6 +4,7 @@ date = '2022-11-04'
 description = 'Mostly just one-liners for tools used during subdomain enumeration. It might seem lame, but this is pretty important.'
 include_toc = 'true'
 +++
+
 # Subdomains Enumeration
 
 ## Enumerate all subdomains (only if the scope is *.domain.ext)
@@ -36,9 +37,8 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
 
 ### Using Google Dorks and Google Transparency Report
 
-You need to include subdomains ;)
-https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&incl_exp=true&incl_sub=true
-
+You need to include subdomains
+[https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&incl_exp=true&incl_sub=true](https://www.google.com/transparencyreport/https/ct/?hl=en-US#domain=[DOMAIN]g&incl_exp=true&incl_sub=true)
 ```
 site:*.domain.com -www
 site:domain.com filetype:pdf
@@ -65,7 +65,7 @@ python sublist3r.py -b -d example.com
 
 ### Using Subfinder
 
-```powershell
+```bash
 go get github.com/subfinder/subfinder
 ./Subfinder/subfinder --set-config PassivetotalUsername='USERNAME',PassivetotalKey='KEY'
 ./Subfinder/subfinder --set-config RiddlerEmail="EMAIL",RiddlerPassword="PASSWORD"
@@ -74,9 +74,9 @@ go get github.com/subfinder/subfinder
 ./Subfinder/subfinder -d example.com -o /tmp/results_subfinder.txt
 ```
 
-### Using Findomain
+### Using findomain
 
-```powershell
+```bash
 $ wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
 $ chmod +x findomain-linux
 $ findomain_spyse_token="YourAccessToken"
@@ -87,28 +87,34 @@ $ ./findomain-linux -t example.com -o
 
 ### Using Aquatone - old version (Ruby)
 
-```powershell
+```bash
 gem install aquatone
+```
 
 Discover subdomains : results in ~/aquatone/example.com/hosts.txt
+```bash
 aquatone-discover --domain example.com
 aquatone-discover --domain example.com --threads 25
 aquatone-discover --domain example.com --sleep 5 --jitter 30
 aquatone-discover --set-key shodan o1hyw8pv59vSVjrZU3Qaz6ZQqgM91ihQ
+```
 
 Active scans : results in ~/aquatone/example.com/urls.txt
+```bash
 aquatone-scan --domain example.com
 aquatone-scan --domain example.com --ports 80,443,3000,8080
 aquatone-scan --domain example.com --ports large
 aquatone-scan --domain example.com --threads 25
+```
 
 Final results
+```bash
 aquatone-gather --domain example.com
 ```
 
 Alternatively, you can use the [Docker image](https://hub.docker.com/r/txt3rob/aquatone-docker/) provided by txt3rob.
 
-```powershell
+```bash
 https://hub.docker.com/r/txt3rob/aquatone-docker/
 docker pull txt3rob/aquatone-docker
 docker run -it txt3rob/aquatone-docker aq example.com
@@ -116,7 +122,7 @@ docker run -it txt3rob/aquatone-docker aq example.com
 
 ### Using Aquatone - new version (Go)
 
-```powershell
+```bash
 # Subfinder version
 ./Subfinder/subfinder -d $1 -r 8.8.8.8,1.1.1.1 -nW -o /tmp/subresult$1
 cat /tmp/subresult$1 | ./Aquatone/aquatone -ports large -out /tmp/aquatone$1
@@ -130,7 +136,7 @@ cat /tmp/hosts.txt | ./Aquatone/aquatone -ports large -out /tmp/aquatone$1
 
 It's recommended to use massdns in order to resolve the result of `AltDNS`
 
-```powershell
+```python
 WORDLIST_PERMUTATION="./Altdns/words.txt"
 python2.7 ./Altdns/altdns.py -i /tmp/inputdomains.txt -o /tmp/out.txt -w $WORDLIST_PERMUTATION
 ```
@@ -139,14 +145,14 @@ Alternatively you can use [goaltdns](https://github.com/subfinder/goaltdns)
 
 ### Using MassDNS
 
-```powershell
+```bash
 DNS_RESOLVERS="./resolvers.txt"
 cat /tmp/results_subfinder.txt | massdns -r $DNS_RESOLVERS -t A -o S -w /tmp/results_subfinder_resolved.txt
 ```
 
 ### Using Nmap
 
-```powershell
+```bash
 nmap -sn --script hostmap-crtsh host_to_scan.tld
 ```
 
@@ -156,7 +162,7 @@ Check [Can I take over xyz](https://github.com/EdOverflow/can-i-take-over-xyz) b
 
 ### Using tko-subs
 
-```powershell
+```bash
 go get github.com/anshumanbh/tko-subs
 ./bin/tko-subs -domains=./lists/domains_tkos.txt -data=./lists/providers-data.csv  
 ```
@@ -171,7 +177,7 @@ chmod +x sub_brute.rb
 
 ### Using SubOver
 
-```powershell
+```bash
 go get github.com/Ice3man543/SubOver
 ./SubOver -l subdomains.txt
 ```
