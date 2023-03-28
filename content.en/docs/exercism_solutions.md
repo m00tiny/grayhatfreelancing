@@ -1031,3 +1031,19 @@ object Raindrops {
     }
 }
 ```
+
+### Armstrong Numbers
+```java
+import kotlin.math.pow
+object ArmstrongNumber {
+    fun check(input: Int): Boolean {
+        val str = input.toString()
+        val len = input.toString().length
+        var result: Double = 0.0
+        for (c in str) {
+            result += c.digitToInt().toDouble().pow(len)
+        }
+        return input == result.toInt()
+    }
+}
+```

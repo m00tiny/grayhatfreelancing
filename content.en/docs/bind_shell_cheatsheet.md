@@ -2,7 +2,9 @@
 title = "Bind Shell Cheatsheet"
 date = "2022-11-03"
 description = "Some quick, easy and normal bind shells for pentesting."
+include_tco = 'true'
 +++
+
 # Bind Shell
 
 ## Perl

