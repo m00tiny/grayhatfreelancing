@@ -1,6 +1,6 @@
 +++
 title = "Exercism Solutions"
-date = '2023-03-17'
+date = '2023-03-27'
 description = 'Solutions to the various challenges on the exercism website.'
 +++
 
@@ -695,6 +695,8 @@ def is_pangram(sentence):
 
 ## Kotlin
 
+We are aware the syntax highlighting says "Java", that shouldn't be alarming to anyone.
+
 ### Collatz Calculator
 ```java
 object CollatzCalculator {
@@ -805,4 +807,227 @@ object ScrabbleScore {
 }
 ```
 
-###
+### Affine Cipher
+```java
+object AffineCipher {
+    private const val alphabet = "abcdefghijklmnopqrstuvwxyz"
+    private const val m = alphabet.length
+    fun encode(input: String, a: Int, b: Int): String {
+        require(coprime(a)) { "a and m must be coprime." }
+        return input.toLowerCase()
+            .filter { it.isLetterOrDigit() }
+            .map { encodedLetter(it, a, b) }
+            .joinToString("")
+            .chunked(5)
+            .joinToString(" ")
+    }
+    private fun encodedLetter(c: Char, a: Int, b: Int): Char {
+        if (c.isDigit()) return c
+        val x = alphabet.indexOf(c)
+        return alphabet[(a * x + b) % m]
+    }
+    private fun coprime(a: Int) = mminverse(a) in (0 until m)
+    private fun mminverse(a: Int): Int {
+        for (n in 0 until m) {
+            if ((a * n) % m == 1) {
+                return n
+            }
+        }
+        return -1
+    }
+    fun decode(input: String, a: Int, b: Int): String {
+        require(coprime(a)) { "a and m must be coprime." }
+        return input.filter { it.isLetterOrDigit() }
+            .map { decodedLetter(it, a, b) }
+            .joinToString("")
+    }
+    private fun decodedLetter(c: Char, a: Int, b: Int): Char {
+        if (c.isDigit()) return c
+        val y = alphabet.indexOf(c)
+        return alphabet[Math.floorMod((mminverse(a) * (y - b)), m)]
+    }
+}
+```
+
+### Resistor Color
+```java
+object ResistorColor {
+
+    fun colorCode(input: String) = colors().indexOf(input)
+
+    fun colors(): List<String> = listOf("black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white")
+
+}
+```
+
+### Resistor Color Duo
+```java
+
+object ResistorColorDuo {
+    fun value(vararg colors: Color): Int {
+        return (colors[0].ordinal * 10) + colors[1].ordinal
+    }
+}
+```
+
+### Resistor Color Trio
+```java
+object ResistorColorTrio {
+    fun text(vararg input: Color): String {
+        val number = "${input[0].ordinal}${input[1].ordinal}${"0".repeat(input[2].ordinal)}"
+        val zeros = "$number".drop(1).filter{it == '0'}.count()
+        return "$number".dropLast(zeros-(zeros % 3)).plus(" ${Unit.values().get(zeros / 3)}").toLowerCase()
+    }
+}
+```
+
+### Pangram
+```java
+object Pangram {
+    fun isPangram(input: String): Boolean {
+        val lettersUsed = mutableSetOf<Char>()
+        input.lowercase()
+            .filter { it.isLetter() }
+            .forEach { lettersUsed.add(it) }
+        println(lettersUsed)
+        return lettersUsed.size == 26
+    }
+}
+```
+
+### DND Character
+```java
+import kotlin.math.*
+import kotlin.random.*
+class DndCharacter {
+    val strength: Int = ability()
+    val dexterity: Int = ability()
+    val constitution: Int = ability()
+    val intelligence: Int = ability()
+    val wisdom: Int = ability()
+    val charisma: Int = ability()
+    val hitpoints: Int = 10 + modifier(constitution)
+    companion object {
+        fun ability(): Int {
+            val stats = IntArray(4) { Random.nextInt(1 until 6) }.toMutableList()
+            for (i in 1 until 4) {
+                stats.add(Random.nextInt(1 until 6))
+            }
+            stats.sorted()
+            return stats.takeLast(3).sum()
+        }
+        fun modifier(score: Int): Int {
+            return floor((score - 10.toDouble()) / 2.toDouble()).toInt()
+        }
+    }
+}
+```
+
+### Reverse String
+```java
+fun reverse(input: String): String {
+    val reversed: MutableList<Char> = mutableListOf<Char>()
+    var end: Int = input.length
+    for (i in input.indices) {
+      reversed.add(input[end])
+      end =- 1
+    }
+    return reversed.joinToString()
+```
+
+### Yacht
+```java
+object Yacht {
+    fun solve(category: YachtCategory, vararg dices: Int) =
+            when (category) {
+                YachtCategory.YACHT -> if (dices.groupBy { it }.any { it.value.size == 5 })
+                    50
+                else
+                    0
+                YachtCategory.FULL_HOUSE -> if (dices.groupBy { it }.any { it.value.size == 3 }
+                        && dices.groupBy { it }.any { it.value.size == 2 })
+                    dices.sum()
+                else
+                    0
+                YachtCategory.FOUR_OF_A_KIND -> if (dices.groupBy { it }.any { it.value.size >= 4 })
+                    dices.groupBy { it }.filter { it.value.size >= 4 }.map { it.key }[0] * 4
+                else
+                    0
+                YachtCategory.LITTLE_STRAIGHT -> if (dices.count { it == 1 } == 1
+                        && dices.count { it == 2 } == 1
+                        && dices.count { it == 3 } == 1
+                        && dices.count { it == 4 } == 1
+                        && dices.count { it == 5 } == 1)
+                    30
+                else
+                    0
+                YachtCategory.BIG_STRAIGHT -> if (dices.count { it == 2 } == 1
+                        && dices.count { it == 3 } == 1
+                        && dices.count { it == 4 } == 1
+                        && dices.count { it == 5 } == 1
+                        && dices.count { it == 6 } == 1)
+                    30
+                else
+                    0
+                YachtCategory.ONES -> dices.filter { it == 1 }.sum()
+                YachtCategory.TWOS -> dices.filter { it == 2 }.sum()
+                YachtCategory.THREES -> dices.filter { it == 3 }.sum()
+                YachtCategory.FOURS -> dices.filter { it == 4 }.sum()
+                YachtCategory.FIVES -> dices.filter { it == 5 }.sum()
+                YachtCategory.SIXES -> dices.filter { it == 6 }.sum()
+                YachtCategory.CHOICE -> dices.sum()
+            }
+}
+```
+
+### Secret Handshsake
+```java
+object HandshakeCalculator {
+    private infix fun Int.hasBitSet(bit: Int): Boolean = ((this shr bit) and 0x1) == 1
+    fun calculateHandshake(number: Int): List<Signal> {
+        return mutableListOf<Signal>().apply {
+            if (number hasBitSet 0) add(Signal.WINK)
+            if (number hasBitSet 1) add(Signal.DOUBLE_BLINK)
+            if (number hasBitSet 2) add(Signal.CLOSE_YOUR_EYES)
+            if (number hasBitSet 3) add(Signal.JUMP)
+            if (number hasBitSet 4) reverse()
+        }
+    }
+}
+```
+
+### Difference of Squares
+```java
+private fun Int.squared() = this * this
+class Squares(private val value: Int) {
+    fun squareOfSum() = 1.rangeTo(value).sum().squared()
+    fun sumOfSquares() = 1.rangeTo(value).map(Int::squared).sum()
+    fun difference() = squareOfSum() - sumOfSquares()
+}
+```
+
+### RNA Transcription
+```java
+fun transcribeToRna(dna: String): String = dna.map{
+    when(it) {
+        'G' -> 'C'
+        'C' -> 'G'
+        'T' -> 'A'
+        'A' -> 'U'
+        else ->it
+    }
+}.joinToString(separator="")
+```
+
+### Raindrops
+```java
+object Raindrops {
+
+    fun convert(n: Int): String = buildString {
+        if (n % 3 == 0) append("Pling")
+        if (n % 5 == 0) append("Plang")
+        if (n % 7 == 0) append("Plong")
+        if (isEmpty()) append(n)
+    }
+}
+```
