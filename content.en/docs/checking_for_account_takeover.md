@@ -1,10 +1,38 @@
 +++
 title = "Account Takeovers"
-date = "2023-03-28"
+date = "2023-03-31"
 description = "All about account take over techniques, methods, payloads, how/why/when they work."
 include_toc = 'true'
 +++ 
 
+# Account Takeover
+
+* [Password Reset Feature](#password-reset-feature)
+    * [Password Reset Token Leak Via Referrer](#password-reset-token-leak-via-referrer)
+    * [Account Takeover Through Password Reset Poisoning](#account-takeover-through-password-reset-poisoning)
+    * [Password Reset Via Email Parameter](#password-reset-via-email-parameter)
+    * [IDOR on API Parameters](#idor-on-api-parameters)
+    * [Weak Password Reset Token](#weak-password-reset-token)
+    * [Leaking Password Reset Token](#leaking-password-reset-token)
+    * [Password Reset Via Username Collision](#password-reset-via-username-collision)
+    * [Account takeover due to unicode normalization issue](#account-takeover-due-to-unicode-normalization-issue)
+* [Account Takeover Via Cross Site Scripting](#account-takeover-via-cross-site-scripting)
+* [Account Takeover Via HTTP Request Smuggling](#account-takeover-via-http-request-smuggling)
+* [Account Takeover via CSRF](#account-takeover-via-csrf)
+* [2FA Bypasses](#2fa-bypasses)
+    * [Response Manipulation](#reponse-manipulation)
+    * [Status Code Manipulation](#status-code-manipulation)
+    * [2FA Code Leakage in Response](#2fa-code-leakage-in-response)
+    * [JS File Analysis](#js-file-analysis)
+    * [2FA Code Reusability](#2fa-code-reusability)
+    * [Lack of Brute-Force Protection](#lack-of-brute-force-protection)
+    * [Missing 2FA Code Integrity Validation](#missing-2fa-code-integrity-validation)
+    * [CSRF on 2FA Disabling](#csrf-on-2fa-disabling)
+    * [Password Reset Disable 2FA](#password-reset-disable-2fa)
+    * [Backup Code Abuse](#backup-code-abuse)
+    * [Clickjacking on 2FA Disabling Page](#clickjacking-on-2fa-disabling-page)
+    * [Enabling 2FA doesn't expire Previously active Sessions](#enabling-2fa-doesnt-expire-previously-active-sessions)
+    * [Bypass 2FA by Force Browsing](#bypass-2fa-by-force-browsing)
     * [Bypass 2FA with null or 000000](#bypass-2fa-with-null-or-000000)
     * [Bypass 2FA with array](#bypass-2fa-with-array)
 * [References](#references)

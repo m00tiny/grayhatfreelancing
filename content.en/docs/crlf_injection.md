@@ -1,14 +1,14 @@
 +++
 title = "CRLF Injection"
-date = "2022-10-16"
+date = "2023-03-23"
 description = "All about CRLF injection techniques, methods, payloads, how/why/when they work."
+include_toc = 'true'
 +++
-# CRLF Injection
 
->The term CRLF refers to Carriage Return (ASCII 13, \r) Line Feed (ASCII 10, \n). They're used to note the termination of a line, however, dealt with differently in today’s popular Operating Systems. For example: in Windows both a CR and LF are required to note the end of a line, whereas in Linux/UNIX a LF is only required. In the HTTP protocol, the CR-LF sequence is always used to terminate a line.
+# Carriage Return Line Feed
 
->A CRLF Injection attack occurs when a user manages to submit a CRLF into an application. This is most commonly done by modifying an HTTP parameter or URL.
-
+> The term CRLF refers to Carriage Return (ASCII 13, \r) Line Feed (ASCII 10, \n). They're used to note the termination of a line, however, dealt with differently in today’s popular Operating Systems. For example: in Windows both a CR and LF are required to note the end of a line, whereas in Linux/UNIX a LF is only required. In the HTTP protocol, the CR-LF sequence is always used to terminate a line.
+> A CRLF Injection attack occurs when a user manages to submit a CRLF into an application. This is most commonly done by modifying an HTTP parameter or URL.
 ## Summary
 
 - [CRLF - Add a cookie](#crlf---add-a-cookie)
@@ -65,7 +65,6 @@ Server: NetDNA-cache/2.2
 Link: <https://example.com/[INJECTION STARTS HERE]
 Content-Length:35
 X-XSS-Protection:0
-
 23
 <svg onload=alert(document.domain)>
 0
@@ -84,12 +83,10 @@ HTTP response
 ```http
 Set-Cookie:en
 Content-Length: 0
-
 HTTP/1.1 200 OK
 Content-Type: text/html
 Last-Modified: Mon, 27 Oct 2060 14:50:18 GMT
 Content-Length: 34
-
 <html>You have been Phished</html>
 ```
 
@@ -108,10 +105,13 @@ Remainder:
 * %E5%98%BE = %3E = \u563e (>)
 * %E5%98%BC = %3C = \u563c (<)
 
+## Labs
+
+* [https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection)
 
 ## Exploitation Tricks
 * Try to search for parameters that lead to redirects and fuzz them
-* Also test the mobile version of the website, sometimes it is different or uses a different backend 
+* Also test the mobile version of the website, sometimes it is different or uses a different backend
 
 ## References
 
