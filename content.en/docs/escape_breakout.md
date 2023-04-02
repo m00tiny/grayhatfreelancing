@@ -1,7 +1,8 @@
 +++
 title = "Application Escape and Breakout"
-date = 2022-11-03 04:33:00
+date = 2023-03-31 04:33:00
 description = "Examples and ideas for escaping and/or breaking out of application restrictions and/or guards."
+include_toc = 'true'
 +++
 # Application Escape and Breakout
 

@@ -1,8 +1,10 @@
 +++
 title = "Java RMI"
-date = '2022-10-16'
+date = '2023-04-01'
 description = 'All about Java RMI techniques, methods, payloads, how/why/when they work.'
+include_toc = 'true'
 +++
+
 # Java RMI
 
 > The attacker can host a MLet file and instruct the JMX service to load MBeans from the remote host. 
