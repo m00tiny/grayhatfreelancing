@@ -2,7 +2,9 @@
 title = "XPATH Injection"
 date = '2022-10-16'
 description = 'All about XPATH injection techniques, methods, payloads, how/why/when they work.'
+include_toc = 'true'
 +++
+
 # XPATH injection
 
 > XPath Injection is an attack technique used to exploit applications that construct XPath (XML Path Language) queries from user-supplied input to query or navigate XML documents.

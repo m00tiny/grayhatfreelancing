@@ -472,6 +472,8 @@ def add_prefix_un(word):
     :return: str - of root word prepended with 'un'.
     """
     return "un" + word
+
+
 def make_word_groups(vocab_words):
     """Transform a list containing a prefix and words into a string with the prefix followed by the words with prefix prepended.
 
@@ -487,7 +489,10 @@ def make_word_groups(vocab_words):
     produces the following string: 'en :: enclose :: enjoy :: enlighten'.
     """
     prefix = vocab_words[0]
+
     return prefix + " :: " + " :: ".join([prefix + i for i in vocab_words[1:]])
+
+
 def remove_suffix_ness(word):
     """Remove the suffix from the word while keeping spelling in mind.
 
@@ -503,6 +508,8 @@ def remove_suffix_ness(word):
         return new_word
     else:
         return new_word
+
+
 def adjective_to_verb(sentence, index):
     """Change the adjective within the sentence to a verb.
 
@@ -690,6 +697,44 @@ def is_pangram(sentence):
     alphabet = list(map(chr, range(97, 123)))
     formattedString = ''.join(c for c in sentence if c.isalpha()).lower()
     return set(alphabet) == set(formattedString)
+```
+
+### Rotational Cipher
+```python
+import string
+
+def rotate(text, key):
+    upper = string.ascii_uppercase
+    lower = string.ascii_lowercase
+    upper_start = ord(upper[0])
+    lower_start = ord(lower[0])
+    out = ''
+    for letter in text:
+        if letter in upper:
+            out += chr(upper_start + (ord(letter) - upper_start + key) % 26)
+        elif letter in lower:
+            out += chr(lower_start + (ord(letter) - lower_start + key) % 26)
+        else:
+            out += letter
+    return(out)
+
+def invrotate(text, key):
+    return(rotate(text, -key))
+```
+
+### Darts
+```python
+from math import sqrt
+
+def score(x: float, y: float) -> int:
+    distance = sqrt(x * x + y * y)
+    if distance > 10:
+        return 0
+    if distance > 5:
+        return 1
+    if distance > 1:
+        return 5
+    return 10
 ```
 
 

