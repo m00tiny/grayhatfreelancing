@@ -1080,15 +1080,139 @@ object Raindrops {
 ### Armstrong Numbers
 ```java
 import kotlin.math.pow
+
 object ArmstrongNumber {
+
     fun check(input: Int): Boolean {
         val str = input.toString()
         val len = input.toString().length
         var result: Double = 0.0
+
         for (c in str) {
             result += c.digitToInt().toDouble().pow(len)
         }
+
         return input == result.toInt()
     }
 }
+```
+
+### Clock
+```java
+class Clock(hh: Int, mm: Int) {
+    private var hh = 0
+    private var mm = 0
+
+    init {
+        setup(hh, mm)
+    }
+
+    fun subtract(minutes: Int) {
+        add(-minutes)
+    }
+
+    fun add(minutes: Int) {
+        setup(hh, mm + minutes)
+    }
+
+    private fun setup(hh: Int, mm: Int) {
+        this.hh = ((hh + mm / 60) % 24)
+        .let { (if (mm % 60 < 0) it - 1 else it) }
+        .let { if (it < 0) it + 24 else it }
+        this.mm = (mm % 60)
+        .let { if (it < 0) it + 60 else it }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other is Clock) return hh == other.hh && mm == other.mm
+        return false
+    }
+
+    override fun toString(): String = "%02d:%02d".format(hh, mm)
+}
+```
+
+### Saddle Points
+```java
+data class MatrixCoordinate(val row: Int, val col: Int)
+class Matrix(private val matrix: List<List<Int>>) {
+
+    private val columns by lazy {
+        (0 until matrix[0].size).map { i -> matrix.map { it[i] } }
+    }
+
+    private val maxInRow by lazy {
+        matrix.map { it.maxOrNull() }
+    }
+
+    private val minInCol by lazy {
+        columns.map { it.minOrNull() }
+    }
+
+    val saddlePoints: Set<MatrixCoordinate> = matrix.mapIndexed { x, row -> row.mapIndexedNotNull { y, it -> if (it == maxInRow[x] && it == minInCol[y]) { MatrixCoordinate(x, y) } else null } }.flatten().toSet()
+ }
+ ```
+
+ ### React
+ ```java
+ class Reactor<T> {
+     interface Subscription {
+         fun cancel()
+     }
+     abstract inner class Cell(
+     internal var usedBy: MutableSet<ComputeCell> = mutableSetOf()
+         ) {
+             abstract var value: T
+         }
+         inner class InputCell(initialValue: T) : Cell() {
+             override var value: T = initialValue
+             set(value) {
+                 field = value
+                 val map = LinkedHashMap<ComputeCell, Int>()
+                 var i = 0
+                 val searchIn = usedBy.toMutableList()
+                 while (searchIn.any()) {
+                     val e = searchIn.removeFirst()
+                     map[e] = i++
+                     searchIn.addAll(e.usedBy)
+                 }
+                 map.toList()
+                 .sortedBy { (_, v) -> v }
+                 .forEach { (k, _) -> k.value = k.updateValue() }
+             }
+         }
+         inner class ComputeCell(
+         private vararg val inputs: Cell,
+         private val calc: (List<T>) -> T,
+             ) : Cell() {
+                 private val callbacks: MutableList<(T) -> Unit> = mutableListOf()
+                 override var value: T = updateValue()
+                 set(value) {
+                     if (field != value) {
+                         field = value
+                         callbacks.forEach { c -> c(value) }
+                     }
+                 }
+                 init {
+                     inputs.forEach { input -> input.usedBy.add(this) }
+                 }
+                 internal fun updateValue(): T {
+                     return calc(inputs.map { cell -> cell.value })
+                 }
+                 fun addCallback(callback: (T) -> Unit): Subscription {
+                     callbacks.add(callback)
+                     return object : Subscription {
+                         override fun cancel() {
+                             callbacks.remove(callback)
+                         }
+                     }
+                 }
+             }
+         }
+```
+
+### Matrix
+```java
+
 ```
