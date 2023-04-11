@@ -1214,5 +1214,124 @@ class Matrix(private val matrix: List<List<Int>>) {
 
 ### Matrix
 ```java
+class Matrix(private val matrixAsString: String) {
+    fun column(colNr: Int): List<Int> {
+        val matrixWhole: List<String> = matrixAsString.split("\n")
+            val matrixCol : MutableList<Int> = mutableListOf()
+                for (i in matrixWhole) {
+                    matrixCol.add(i.split(" ")[colNr-1].toInt())
+                }
+                return matrixCol
+            }
+            fun row(rowNr: Int): List<Int> {
+                val matrixWhole: List<String> = matrixAsString.split("\n")
+                    return matrixWhole[rowNr - 1].split(" ").map{i -> i.toInt()}
+                }
+            }
+```
 
+### Transpose
+```java
+object Transpose {
+
+    fun transpose(input: List<String>): List<String> {
+        if (input.isEmpty()) return emptyList()
+
+        val max = input.maxOf { it.length }
+        var transposed = mutableListOf<String>()
+            for (i in 0 until max) {
+                val line = input.map { it.getOrNull(i)?: 'X' }.joinToString("")
+                transposed.add(line.trimEnd('X').replace('X', ' '))
+            }
+            return transposed
+        }
+    }
+```
+
+### Leap
+```java
+class Year(private val year: Int) {
+    val isLeap: Boolean = when {
+        isDivisibleBy(400) -> true
+        isDivisibleBy(100) -> false
+        isDivisibleBy(4)   -> true
+        else -> false
+    }
+    private fun isDivisibleBy(divisor: Int) = (year % divisor == 0)
+}
+```
+
+### custom-set
+```java
+class CustomSet(vararg param: Int) {
+    private val items :MutableList<Int> = param.toMutableList()
+        fun isEmpty() = this.items.size == 0
+        fun contains(other: Int): Boolean = items.contains(other)
+        fun isSubset(other: CustomSet): Boolean = this.items.size <= other.items.size && this.items.all { other.contains(it) }
+        fun isDisjoint(other: CustomSet): Boolean = this.isEmpty() || other.isEmpty() ||!this.items.any { other.contains(it)}
+        fun intersection(other: CustomSet): CustomSet = CustomSet(*(this.items.filter { other.contains(it)}.toIntArray()))
+        fun add(other: Int) { if (other !in this.items) this.items.add(other)}
+        override fun equals(other: Any?): Boolean = other is CustomSet && this.isSubset(other) && other.isSubset(this)
+        operator fun plus(other: CustomSet): CustomSet = CustomSet(*(other.items+(this.items.filter { !other.contains(it)})).toIntArray())
+        operator fun minus(other: CustomSet): CustomSet = CustomSet(*(this.items.filter { !other.contains(it)}.toIntArray()))
+    }
+ ```
+
+### Space Age
+```java
+class SpaceAge(private val ageInSeconds: Long) {
+    fun onEarth(): Double {
+        return formatRounding(baseAge())
+    }
+    fun onMercury(): Double {
+        return formatRounding(baseAge().div( 0.2408467))
+    }
+    fun onVenus(): Double {
+        return formatRounding(baseAge().div( 0.61519726))
+    }
+    fun onMars(): Double {
+        return formatRounding(baseAge().div( 1.8808158))
+    }
+    fun onJupiter(): Double {
+        return formatRounding(baseAge().div( 11.862615))
+    }
+    fun onSaturn(): Double {
+        return formatRounding(baseAge().div( 29.447498))
+    }
+    fun onUranus(): Double {
+        return formatRounding(baseAge().div( 84.016846))
+    }
+    fun onNeptune(): Double {
+        return formatRounding(baseAge().div( 164.79132))
+    }
+    private fun baseAge(): Double {
+        return ageInSeconds.div(31557600.toDouble())
+    }
+    private fun formatRounding(beforeRound: Double): Double {
+        return "%.2f".format(beforeRound).toDouble()
+    }
+}
+```
+
+### CrptoSquare
+```java
+import kotlin.math.ceil
+import kotlin.math.sqrt
+object CryptoSquare {
+    fun ciphertext(plaintext: String): String {
+        val normalized = plaintext.filter { it.isLetterOrDigit() }.toLowerCase().also { if (it.isEmpty()) return "" }
+        val numCols = ceil(sqrt(normalized.length.toDouble())).toInt()
+        return normalized.chunked(numCols).let { sq ->
+            (0 until numCols).joinToString(" ") { i -> sq.map { it.getOrNull(i) ?: ' ' }.joinToString("")  }
+        }
+    }
+}
+```.
+
+
+## AWK
+
+### Hello World
+```awk
+BEGIN {print "Hello World!"}
 ```
