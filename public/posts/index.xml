@@ -1,42 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Blog on Gray Hat Freelancing</title>
-    <link>https://www.grayhatfreelancing.com/posts/</link>
-    <description>Recent content in Blog on Gray Hat Freelancing</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Security Innovations - Shred - Command and Control</title>
-      <link>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</link>
-      <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</guid>
-      <description>Ooooooh, yeah. I did it, because the range hasn&amp;rsquo;t changed for over a fucking year. That&amp;rsquo;s lazy on their part. The security industry evolves, your ranges should too. Here, I will be using https://caido.io/ instead of Burp or ZAProxy for this&amp;hellip; why? No particular reason. Just to be fair and showcase that such a thing exists. There&amp;rsquo;s also Charles, and many others.
-&amp;quot;&amp;gt;&amp;lt;plaintext&amp;gt; - Breaks the search feature, there&amp;rsquo;s cross site scripting here.</description>
-    </item>
-    
-    <item>
-      <title>Updating a github repository after cloning</title>
-      <link>https://www.grayhatfreelancing.com/posts/update-github-repo/</link>
-      <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/posts/update-github-repo/</guid>
-      <description>Updating Github Repos # println(&amp;ldquo;Hamming difference of: ${count}&amp;quot;)It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
-Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &amp;lt;your repo&amp;gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github.</description>
-    </item>
-    
-    <item>
-      <title>TryHackMe - Olympus Walkthrough</title>
-      <link>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</link>
-      <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</guid>
-      <description>Task 1 | Connection # https://tryhackme.com/room/olympusroom is a medium difficulty room on [https://tryhackme.com/](TryHackMe training platform) by Gavroche.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog on Gray Hat Freelancing</title><link>https://www.grayhatfreelancing.com/posts/</link><description>Recent content in Blog on Gray Hat Freelancing</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>2023</copyright><atom:link href="https://www.grayhatfreelancing.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Security Innovations - Shred - Command and Control</title><link>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</link><pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/posts/securityinnovations-shred-cmdnctrl/</guid><description>Ooooooh, yeah. I did it, because the range hasn&amp;rsquo;t changed for over a fucking year. That&amp;rsquo;s lazy on their part. The security industry evolves, your ranges should too. Here, I will be using https://caido.io/ instead of Burp or ZAProxy for this&amp;hellip; why? No particular reason. Just to be fair and showcase that such a thing exists. There&amp;rsquo;s also Charles, and many others.
+&amp;quot;&amp;gt;&amp;lt;plaintext&amp;gt; - Breaks the search feature, there&amp;rsquo;s cross site scripting here.</description></item><item><title>Updating a github repository after cloning</title><link>https://www.grayhatfreelancing.com/posts/update-github-repo/</link><pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/posts/update-github-repo/</guid><description>Updating Github Repos # println(&amp;ldquo;Hamming difference of: ${count}&amp;quot;)It&amp;rsquo;s been a nuisance to create your own or fork another, clone it, update the remotes for SSH and then get back to business. This reference is just a quick 1, 2, 3&amp;hellip; to-do/check list of steps for ease of reference!
+Create repository on Github - Go to the website and just create one using their form, get the empty skeleton Clone repository - git clone &amp;lt;your repo&amp;gt; Remove remotes - git remote remove origin Add SSH remotes - git remote add origin git@github.</description></item><item><title>TryHackMe - Olympus Walkthrough</title><link>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</link><pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate><guid>https://www.grayhatfreelancing.com/posts/tryhackme_walkthrough_olympus/</guid><description>Task 1 | Connection # https://tryhackme.com/room/olympusroom is a medium difficulty room on [https://tryhackme.com/](TryHackMe training platform) by Gavroche.
 It&amp;rsquo;s primary focus is sql injection, in my opinion, with a slant on enumeration and systems comprehension.
-We&amp;rsquo;re going to get started by adding olympus.thm to our /etc/hosts file to assist with enumeration.. this is recommended in the description and I&amp;rsquo;ve adopted it as a solid sign that we&amp;rsquo;ll need to do subdomain enumeration.</description>
-    </item>
-    
-  </channel>
-</rss>
+We&amp;rsquo;re going to get started by adding olympus.thm to our /etc/hosts file to assist with enumeration.. this is recommended in the description and I&amp;rsquo;ve adopted it as a solid sign that we&amp;rsquo;ll need to do subdomain enumeration.</description></item></channel></rss>
