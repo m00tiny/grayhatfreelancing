@@ -2,6 +2,7 @@
 title = "Tabnabbing"
 date = '2022-10-16'
 description = 'All about tabnabbing techniques, methods, payloads, how/why/when they work.'
+include_toc = 'true'
 +++
 # Tabnabbing
 

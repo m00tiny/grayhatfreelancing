@@ -742,6 +742,1546 @@ def score(x: float, y: float) -> int:
 
 We are aware the syntax highlighting says "Java", that shouldn't be alarming to anyone.
 
+### List Ops
+```java
+fun <T> List<T>.customAppend(list: List<T>): List<T> {
+    return list.customFoldLeft(this) { newList, element -> newList + element }
+}
+fun List<Any>.customConcat(): List<Any> {
+    return customFoldLeft(listOf()) { acc, element ->
+        when (element) {
+            is List<*> -> acc + (element as List<Any>).customConcat()
+            else -> acc + element
+        }
+    }
+}
+fun <T> List<T>.customFilter(predicate: (T) -> Boolean): List<T> {
+    return customFoldLeft(this) { newList, element ->
+        if (predicate(element)) {
+            newList
+        } else newList - element
+    }
+}
+val List<Any>.customSize: Int get() = this.customFoldLeft(0) { acc, _ -> acc + 1 }
+fun <T, U> List<T>.customMap(transform: (T) -> U): List<U> {
+    return customFoldLeft(listOf()) { newList, element -> newList + transform(element) }
+}
+fun <T, U> List<T>.customFoldLeft(initial: U, f: (U, T) -> U): U {
+    if (this.isEmpty()) {
+        return initial
+    } else {
+        return drop(1).customFoldLeft(f(initial, this.first()), f)
+    }
+}
+fun <T, U> List<T>.customFoldRight(initial: U, f: (T, U) -> U): U {
+    if (this.isEmpty()) {
+        return initial
+    } else {
+        return f(this.first(), drop(1).customFoldRight(initial, f))
+    }
+}
+fun <T> List<T>.customReverse(): List<T> {
+    if (this.isEmpty()) {
+        return emptyList()
+    } else {
+        val initial: List<T> = listOf()
+        return customFoldLeft(initial) { newList, element -> listOf(element) + newList }
+    }
+}
+```
+
+### Diffie Hellman
+```java
+import java.math.BigInteger
+import kotlin.random.Random
+object DiffieHellman {
+    fun privateKey(prime: BigInteger): BigInteger =
+        BigInteger.valueOf(1L + Random.nextLong(prime.longValueExact() - 1))
+    fun publicKey(p: BigInteger, g: BigInteger, privateKey: BigInteger): BigInteger =
+        g.modPow(privateKey, p)
+    fun secret(p: BigInteger, publicKey: BigInteger, privateKey: BigInteger): BigInteger =
+        publicKey.modPow(privateKey, p)
+}
+```
+
+### Sublist
+```java
+fun <T> List<T>.relationshipTo(list: List<T>): Relationship {
+    return if (this.size < list.size) {
+        if (isSublist(list, this)) Relationship.SUBLIST else Relationship.UNEQUAL
+    } else if (this.size > list.size) {
+        if (isSublist(this, list)) Relationship.SUPERLIST else Relationship.UNEQUAL
+    } else {
+        if (equals(this, list)) Relationship.EQUAL else Relationship.UNEQUAL
+    }
+}
+private fun <T> isSublist(list: List<T>, subList: List<T>): Boolean {
+    var fromIndex = 0
+    while (fromIndex <= list.size - subList.size) {
+        if (isSublist(fromIndex, list, subList)){
+            return true
+        }
+        fromIndex++
+    }
+    return false
+}
+private fun <T> isSublist(fromIndex: Int, list: List<T>, subList: List<T>): Boolean {
+    for (i in subList.indices) {
+        if (list[i + fromIndex] != subList[i]) {
+            return false
+        }
+    }
+    return true
+}
+private fun <T> equals(l1: List<T>, l2: List<T>): Boolean {
+    for (i in l1.indices) {
+        if (l1[i]!! != l2[i]) {
+            return false
+        }
+    }
+    return true
+}
+enum class Relationship {
+    EQUAL, SUBLIST, SUPERLIST, UNEQUAL
+}
+```
+
+### Simple Cipher
+```java
+private val letters = ('a'..'z').map { it }
+private fun randomString() = (1..100).let { nums ->
+  val rand = java.util.Random()
+  nums.map { letters[0] + rand.nextInt(letters.size) }.joinToString("")
+}
+class Cipher(val key: String = randomString()) {
+  private val shift: Array<Int>
+  init {
+    require(key.isNotEmpty() && key.all { it in letters })
+    shift = key.fold(emptyArray<Int>()) { acc, v ->
+      acc + (v - letters[0])
+    }
+  }
+  fun translate(text: String, f: (Int) -> Int): String {
+    require(text.all { it in letters })
+    return text.foldIndexed(StringBuffer()) { idx, acc, c ->
+      acc.append(letters[(c - letters[0] + f(shift[idx])) % letters.size])
+    }.toString()
+  }
+  fun encode(plainText: String) = translate(plainText) { it }
+  fun decode(cipherText: String) = translate(cipherText) { letters.size - it }
+}
+```
+
+### Say
+```java
+class NumberSpeller {
+    fun say(input: Long): String {
+        require(input in 0..999_999_999_999)
+        if (input == 0L) return "zero"
+        val sliced = input.slice()
+        val len = sliced.size
+        return sliced.withIndex().asSequence().flatMap { (i, n) ->
+            val eng = n.toEnglish().asSequence()
+            when {
+                n == 0L -> sequenceOf()
+                i == len - 1 -> eng
+                else -> eng + phrases[len - i - 2]
+            }
+        }.filter { it.isNotEmpty() }.joinToString(" ")
+    }
+    companion object {
+        val phrases = listOf("thousand", "million", "billion")
+        val smalls = listOf(
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+            "twelve"
+        )
+        val tens = listOf(
+            "twenty",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety"
+        )
+    }
+    private fun Long.slice(): List<Long> {
+        var i = this
+        val r = mutableListOf<Long>()
+        while (i > 0) {
+            r.add(0, i % 1000)
+            i /= 1000
+        }
+        return r
+    }
+    private fun Long.toEnglish(): List<String> {
+        require(this < 1000)
+        val r = mutableListOf<String>()
+        var n = this
+        if (n >= 100) {
+            r.add("${(this / 100).mapSmall()} hundred")
+            n %= 100
+        }
+        r.add(
+            when {
+                n <= 12 -> n.mapSmall()
+                n in (13..19) -> "${(n % 10).mapSmall()}teen"
+                n % 10 == 0L -> tens[n.toInt() / 10 - 2]
+                else -> "${(tens[n.toInt() / 10 - 2])}-${(n % 10).mapSmall()}"
+            }
+        )
+        return r
+    }
+    private fun Long.mapSmall(): String {
+        require(this < 10)
+        return if (this == 0L) "" else smalls[this.toInt() - 1]
+    }
+}
+```
+
+### Rail Fence Cipher
+```java
+typealias Point = Pair<Int,Int>
+class RailFenceCipher(private val rails: Int) {
+  private fun mkPairs(len: Int): List<Point> {
+    val xs = List(len) { it }
+    val ys = List(rails) { it }
+        .let { it + it.reversed().drop(1).dropLast(1) }
+        .let { generateSequence { it } }
+        .flatten()
+    return xs zip ys.take(xs.size).toList()
+  }
+  private val fst = { p: Point -> p.first }
+  private val snd = { p: Point -> p.second }
+  private fun crypt(text: String, sort1: (Point) -> Int, sort2: (Point) -> Int): String {
+    val cs = text.replace("\\s".toRegex(), "").toList()
+    val zig = mkPairs(cs.size).sortedBy(sort1) zip cs
+    return zig.sortedBy { (v,_) -> sort2(v) }
+        .map { it.second }
+        .joinToString("")
+  }
+  fun getEncryptedData(plainText: String) = crypt(plainText, fst, snd)
+  fun getDecryptedData(cipherText: String) = crypt(cipherText, snd, fst)
+}
+```
+
+### Atbash Cipher
+```java
+object Atbash {
+    private val alphabet = ('a'..'z').toList().joinToString("")
+    private val numbers = (0..9).toList().joinToString("")
+    private val e = alphabet + numbers
+    private val er = alphabet.reversed() + numbers
+    private var map: Map<Char, Char> = e.mapIndexed { i, c ->  c to er[i] }.toMap()
+    private val reversedMap = map.entries.associateBy({ it.value }) { it.key }
+    private fun cifra(input: String, map: Map<Char,Char>): String = input
+            .filter { it.isLetterOrDigit() }
+            .toLowerCase()
+            .map { map[it] }.joinToString("")
+    fun encode(input: String): String = cifra(input, map).chunked(5).joinToString(" ")
+    fun decode(input: String): String = cifra(input, reversedMap)
+}
+```
+
+### Grade School
+```java
+class School {
+    private val students = mutableMapOf<Int, MutableList<String>>()
+    fun add(student: String, grade: Int) = students.getOrPut(grade) { mutableListOf() }.add(student)
+    fun grade(grade: Int): List<String> = students[grade]?.sorted() ?: emptyList()
+    fun roster(): List<String> = students.toList().sortedBy { it.first }.flatMap { it.second.sorted() }
+}
+```
+
+### ETL
+```java
+object ETL {
+    fun transform(source: Map<Int, Collection<Char>>): Map<Char, Int> {
+        val result = mutableMapOf<Char, Int>()
+        source.forEach { (score, chars) ->
+            chars.forEach { c -> result[c.lowercaseChar()] = score }
+        }
+        return result
+    }
+}
+```
+
+### Binary Search Tree
+```java
+class BinarySearchTree<T : Comparable<T>> {
+    data class Node<T>(val data: T, var left: Node<T>?, var right: Node<T>?)
+    var root: Node<T>? = null
+    fun insert(value: T) {
+        root = insertHelper(value, root)
+    }
+    private fun insertHelper(value: T, node: Node<T>?): Node<T> {
+        when {
+            node == null -> return Node(value, null, null)
+            value > node.data -> node.right = insertHelper(value, node.right)
+            else -> node.left = insertHelper(value, node.left)
+        }
+        return node
+    }
+    fun asSortedList(): List<T> {
+        return sortedHelper(root!!)
+    }
+    private fun sortedHelper(node: Node<T>?): List<T> {
+        return if (node == null) {
+            emptyList()
+        } else {
+            sortedHelper(node.left) + listOf(node.data) + sortedHelper(node.right)
+        }
+    }
+    fun asLevelOrderList(): List<T> {
+        val nodes = mutableListOf(root)
+        var i = 0
+        while (i < nodes.size) {
+            if (nodes[i]?.left != null) nodes.add(nodes[i]?.left)
+            if (nodes[i]?.right != null) nodes.add(nodes[i]?.right)
+            i++
+        }
+        return nodes.filterNotNull().map { it.data }
+    }
+}
+```
+
+### Change
+```java
+class ChangeCalculator(val coins: List<Int>) {
+    private val sorted = coins.sorted()
+    fun computeMostEfficientChange(grandTotal: Int): List<Int> {
+        require(grandTotal >= 0) { "Negative totals are not allowed." }
+        var changes = (1..grandTotal).fold(listOf<List<Int>?>(listOf<Int>())){ result, amount ->
+            coins
+                .filter { result.getOrNull(amount - it) != null }
+                .map { listOf(it) + result.get(amount - it)!!  }
+                .sortedBy { it.size }
+                .firstOrNull()
+                .let { result.plusElement(it) }
+        }
+        return requireNotNull(changes.lastOrNull()) {
+            "The total $grandTotal cannot be represented in the given currency.."
+        }
+    }
+}
+```
+
+### Spiral Matrix
+```java
+private class Spiral(private val size: Int) {
+    val matrix = Array(size) { Array(size) { 0 } }
+    var value = 1
+    var verticalOffset = 0
+    var horizontalOffset = 0
+    init {
+        fillArray()
+    }
+    private fun upwards() {
+        for (index in matrix.size - 1 downTo 0) {
+            insertAtPosition(index, horizontalOffset)
+        }
+    }
+    private fun backward() {
+        val backwardsIndex = size - 1 - verticalOffset
+        for (index in matrix[backwardsIndex].size - 1 downTo 0) {
+            insertAtPosition(backwardsIndex, index)
+        }
+    }
+    private fun downward() {
+        matrix.forEachIndexed { index, _ ->
+            insertAtPosition(index, size - 1 - horizontalOffset)
+        }
+    }
+    private fun forward() {
+        matrix[verticalOffset].forEachIndexed { index, _ ->
+            insertAtPosition(verticalOffset, index)
+        }
+    }
+    private fun insertAtPosition(index1: Int, horizontalOffset1: Int) {
+        if (matrix[index1][horizontalOffset1] == 0) {
+            matrix[index1][horizontalOffset1] = value
+            value++
+        }
+    }
+    private fun fillArray() {
+        while (value <= (size * size)) {
+            forward()
+            downward()
+            backward()
+            verticalOffset++
+            upwards()
+            horizontalOffset++
+        }
+    }
+}
+object SpiralMatrix {
+    fun ofSize(size: Int): Array<Array<Int>> {
+        if (size == 1)
+            return arrayOf(arrayOf(1))
+        if (size == 0)
+            return emptyArray()
+        return Spiral(size).matrix
+    }
+}
+```
+
+### Matching Brackets
+```java
+import java.util.*
+object MatchingBrackets {
+    fun isValid(input: String): Boolean {
+        val stack = Stack<Char>()
+        try {
+            input.forEach { c ->
+                if (c in listOf('[', '{', '('))
+                    stack.push(c)
+                if (c in listOf(']', '}', ')')) {
+                    val top = stack.pop()
+                    if (top == '[' && c != ']')
+                        return false
+                    else if (top == '(' && c != ')')
+                        return false
+                    else if (top == '{' && c != '}')
+                        return false
+                }
+            }
+        }catch (_: Exception){
+            return false
+        }
+        return stack.isEmpty()
+    }
+}
+```
+
+
+### All Your Base
+```java
+class BaseConverter(val base: Int, val digits: IntArray) {
+    val number: Int
+    init {
+        require(base > 1) { "Bases must be at least 2." }
+        require(digits.isNotEmpty()) { "You must supply at least one digit." }
+        require(digits[0] > 0 || digits.size < 2) { "Digits may not contain leading zeros." }
+        require(digits.all { it >= 0 }) { "Digits may not be negative." }
+        require(digits.all { it < base }) { "All digits must be strictly less than the base." }
+        number = digits.fold(0) { sum: Int, d: Int -> sum * base + d }
+    }
+    fun convertToBase(nb: Int): IntArray {
+        require(nb > 1) { "Bases must be at least 2." }
+        if (number == 0) return IntArray(1)
+        var current = number
+        return generateSequence { current % nb }.takeWhile {
+            current /= nb; current > 0 || it > 0
+        }.toList().reversed().toIntArray()
+    }
+}
+```
+
+### Complex Numbers
+```java
+import kotlin.math.*
+data class ComplexNumber(val real: Double = 0.0, val imag: Double = 0.0) {
+  val abs = sqrt(real * real + imag * imag)
+}
+fun ComplexNumber.conjugate() = ComplexNumber(this.real, -this.imag)
+fun exponential(c: ComplexNumber): ComplexNumber = c.let { (a, b) ->
+  if (a == 0.0)
+    ComplexNumber(cos(b), sin(b))
+  else
+    ComplexNumber(E.pow(a)) * exponential(ComplexNumber(imag=b))
+}
+operator fun ComplexNumber.times(other: ComplexNumber): ComplexNumber {
+  val (a, b, c, d) = t4(this, other)
+  return ComplexNumber(a * c - b * d, b * c + a * d)
+}
+operator fun ComplexNumber.plus(other: ComplexNumber): ComplexNumber {
+  val (a, b, c, d) = t4(this, other)
+  return ComplexNumber(a + c, b + d)
+}
+operator fun ComplexNumber.minus(other: ComplexNumber): ComplexNumber {
+  val (a, b, c, d) = t4(this, other)
+  return ComplexNumber(a - c, b - d)
+}
+operator fun ComplexNumber.div(other: ComplexNumber): ComplexNumber {
+  val (a, b, c, d) = t4(this, other)
+  return ComplexNumber(
+      (a * c + b * d) / (c * c + d * d),
+      (b * c - a * d) / (c * c + d * d))
+}
+private data class Tuple4(
+    val a: Double,
+    val b: Double,
+    val c: Double,
+    val d: Double)
+private fun t4(x: ComplexNumber, y: ComplexNumber): Tuple4 {
+  val (a, b) = x
+  val (c, d) = y
+  return Tuple4(a, b, c, d)
+}
+```
+
+### Prime Factors
+```java
+object PrimeFactorCalculator {
+    fun <T> primeFactors(num: T): List<T> where T : Number {
+        val list = mutableListOf<T>()
+        var number = num.toLong()
+        val primeSequence = (2..Long.MAX_VALUE).asSequence().filter { x -> !(2..x / 2).any { x.rem(it) == 0L } }.iterator()
+        while (number > 1L) {
+            val primeNumber = primeSequence.next()
+            while (number.rem(primeNumber) == 0L) {
+                list += primeNumber.convert(num)
+                number = number.div(primeNumber)
+            }
+        }
+        return list
+    }
+    private fun <T> Long.convert(input: T): T {
+        return when (input) {
+            is Int -> this.toInt()
+            is Double -> this.toDouble()
+            else -> this
+        } as T
+    }
+}
+```
+
+### Pascal's Triangle
+```java
+object PascalsTriangle {
+  fun computeTriangle(rows: Int): List<List<Int>> {
+    require(rows >= 0) { "Rows can't be negative!" }
+    return generateSequence(listOf(1)) { prev ->
+      listOf(1) + prev.windowed(2).map { it.sum() } + listOf(1)
+    }.take(rows).toList()
+  }
+}
+```
+
+### Nth Prime
+```java
+private fun Int.sqrt() = Math.sqrt(this.toDouble()).toInt()
+object Prime {
+    fun nth(n: Int): Int {
+        require(n > 0) { "There is no zeroth prime." }
+        return generateSequence(1, { it + 1 })
+            .filterNot { value -> (2..value.sqrt()).any { value % it == 0 } }
+            .elementAt(n)
+    }
+}
+```
+
+### Kindergarten Garden
+```java
+class KindergartenGarden(private val diagram: String) {
+    private val children = """
+        Alice, Bob, Charlie, David,
+        Eve, Fred, Ginny, Harriet,
+        Ileana, Joseph, Kincaid, Larry
+    """.trimIndent()
+        .split(Regex("\\W+"))
+        .sorted()
+    private val ltrToPlant = mapOf(
+        'V' to "violets",
+        'R' to "radishes",
+        'C' to "clover",
+        'G' to "grass"
+    )
+    private val plants = diagram
+        .lines()
+        .map { it.map(ltrToPlant::get).filterNotNull().chunked(2) }
+        .let { (fst, snd) -> fst.zip(snd) { a, b -> a + b }  }
+    fun getPlantsOfStudent(student: String): List<String> {
+        return children
+            .indexOf(student)
+            .let { plants[it] }
+    }
+}
+```
+
+### Robot Simulator
+Robot.kt
+```java
+import Orientation.*
+class Robot (var gridPosition: GridPosition = GridPosition(0,0),
+             var orientation: Orientation = NORTH){
+    fun turnRight() {
+        orientation  = values()[(orientation.ordinal + 1) % 4]
+    }
+    fun turnLeft() {
+        val new  =
+                when (orientation) {
+                    NORTH -> WEST.ordinal
+                    else -> orientation.ordinal - 1
+                }
+        orientation = values()[new]
+    }
+    fun advance() {
+        gridPosition =
+                when (orientation) {
+                    NORTH -> GridPosition(gridPosition.x, gridPosition.y + 1)
+                    EAST -> GridPosition(gridPosition.x + 1, gridPosition.y)
+                    SOUTH -> GridPosition(gridPosition.x, gridPosition.y - 1)
+                    WEST -> GridPosition(gridPosition.x - 1, gridPosition.y)
+                }
+    }
+    fun simulate(s: String) {
+        s.forEach {
+            when (it) {
+                'L' -> turnLeft()
+                'R' -> turnRight()
+                'A' -> advance()
+            }
+        }
+    }
+}
+```
+
+### Grains
+```java
+package Board
+import java.math.BigInteger
+const val FIRST_SQUARE = 1
+const val LAST_SQUARE = 64
+fun requireValidSquare(n: Int) =
+    require(n in FIRST_SQUARE .. LAST_SQUARE) { "Only integers between 1 and 64 (inclusive) are allowed" }
+fun getGrainCountForSquare(n: Int): BigInteger {
+    requireValidSquare(n)
+    return getGrainCountForValidSquare(n)
+}
+private fun getGrainCountForValidSquare(n: Int) = BigInteger.valueOf(2).pow(n - 1)
+fun getTotalGrainCount() =
+    (FIRST_SQUARE .. LAST_SQUARE)
+    .fold(BigInteger.ZERO) { sum, n ->
+        sum.add(getGrainCountForValidSquare(n))
+    }
+```
+
+### Forth
+```java
+class Forth {
+    private val words = mutableListOf<String>()
+    private val stack = mutableListOf<Int>()
+    private val procedureTitles = mutableListOf<String>()
+    private val procedureOps = mutableListOf<String>()
+    private var recursiveCall = false
+    private var recursiveIndex = 0
+    fun evaluate(vararg line: String): List<Int> {
+        var newWordFound = false
+        var titleFound = false
+        var stringToAdd = ""
+        line.forEach {
+            val wordLine = it.split(' ')
+            val newLine = wordLine.map {x ->
+                x.lowercase()
+            }
+            words.addAll(newLine)
+        }
+        for (command in words) {
+            if (command.all { it.isDigit() } && !newWordFound) {
+                stack.add(command.toInt())
+            }
+            else {
+                if (command.length == 1 && command != ":" && command != ";"
+                    && !command.all { it.isDigit() } && !newWordFound) {
+                    operation(command)
+                }
+                else if (command == ":" && !newWordFound){
+                    newWordFound = true
+                }
+                else if (newWordFound){
+                    if (!titleFound){
+                        if (command.all { it.isDigit() }){
+                            throw Exception("illegal operation")
+                        }
+                        else {
+                            procedureTitles.add(command)
+                            titleFound = true
+                        }
+                    }
+                    else{
+                        if (command != ";")
+                           stringToAdd += " $command"
+                        else{
+                            procedureOps.add(stringToAdd.removePrefix(" "))
+                            stringToAdd = ""
+                            titleFound = false
+                            newWordFound = false
+                        }
+                    }
+                }
+                else if (command.length > 1) {
+                    stackOperation(command)
+                }
+            }
+        }
+        return stack
+    }
+    private fun operation (action: String) {
+        if (procedureTitles.contains(action))
+            otherOpFound(action)
+        else {
+            when (action) {
+                "+" -> {
+                    if (stack.size >= 2) {
+                        val newValue = stack[0] + stack[1]
+                        stack.removeAt(0)
+                        stack.removeAt(0)
+                        stack.add(0, newValue)
+                    } else {
+                        if (stack.size == 0)
+                            throw Exception("empty stack")
+                        else
+                            throw Exception("only one value on the stack")
+                    }
+                }
+                "-" -> {
+                    if (stack.size >= 2) {
+                        val newValue = stack[0] - stack[1]
+                        stack.removeAt(0)
+                        stack.removeAt(0)
+                        stack.add(0, newValue)
+                    } else {
+                        if (stack.size == 0)
+                            throw Exception("empty stack")
+                        else
+                            throw Exception("only one value on the stack")
+                    }
+                }
+                "*" -> {
+                    if (stack.size >= 2) {
+                        val newValue = stack[0] * stack[1]
+                        stack.removeAt(0)
+                        stack.removeAt(0)
+                        stack.add(0, newValue)
+                    } else {
+                        if (stack.size == 0)
+                            throw Exception("empty stack")
+                        else
+                            throw Exception("only one value on the stack")
+                    }
+                }
+                "/" -> {
+                    if (stack.size >= 2) {
+                        if (stack[1] != 0) {
+                            val newValue = stack[0] / stack[1]
+                            stack.removeAt(0)
+                            stack.removeAt(0)
+                            stack.add(0, newValue)
+                        } else
+                            throw Exception("divide by zero")
+                    } else {
+                        if (stack.size == 0)
+                            throw Exception("empty stack")
+                        else
+                            throw Exception("only one value on the stack")
+                    }
+                }
+                else -> println("Error! No operation sent!")
+            }
+        }
+    }
+    private fun stackOperation (action: String) {
+        if (procedureTitles.contains(action))
+            otherOpFound(action)
+        else{
+        when (action) {
+            "dup" -> {
+                if (stack.size >= 1) {
+                    stack.add(stack.last())
+                } else
+                    throw Exception("empty stack")
+            }
+            "drop" -> {
+                if (stack.size >= 1) {
+                    stack.removeAt(stack.lastIndex)
+                } else
+                    throw Exception("empty stack")
+            }
+            "swap" -> {
+                if (stack.size >= 2) {
+                    val newValues = mutableListOf(stack.removeAt(stack.lastIndex))
+                    newValues.add(stack.removeAt(stack.lastIndex))
+                    stack.addAll(newValues)
+                } else {
+                    if (stack.size == 0)
+                        throw Exception("empty stack")
+                    else
+                        throw Exception("only one value on the stack")
+                }
+            }
+            "over" -> {
+                if (stack.size >= 2) {
+                    stack.add(stack[stack.lastIndex - 1])
+                } else {
+                    if (stack.size == 0)
+                        throw Exception("empty stack")
+                    else
+                        throw Exception("only one value on the stack")
+                }
+            }
+            else -> {
+                if (procedureTitles.contains(action))
+                    otherOpFound(action)
+                else
+                    throw Exception("undefined operation")
+            }
+        }
+        }
+    }
+    private fun otherOpFound (word: String) {
+        val indexToUse: Int
+        if (!recursiveCall) {
+            if (procedureTitles.contains(word))
+                indexToUse = procedureTitles.lastIndexOf(word)
+            else {
+                throw Exception(
+                    "Procedure not found!!! word is $word"
+                )
+            }
+        }
+        else{
+            if (procedureTitles.slice(0..recursiveIndex).contains(word)) {
+                recursiveCall = false
+                indexToUse = procedureTitles.slice(0..recursiveIndex).lastIndexOf(word)
+            }
+            else {
+                throw Exception(
+                    "Procedure not found!!! Word $word has not been defined before ${procedureTitles[recursiveIndex]}"
+                )
+            }
+        }
+        val procedureWords = procedureOps[indexToUse].split(" ")
+        for (command in procedureWords){
+            if (command.all { it.isDigit() }) {
+                    stack.add(command.toInt())
+                }
+            else {
+                if (command.length == 1 && command != "!") {
+                    operation(command)
+                }
+                else if (procedureTitles.contains(command)){
+                    recursiveCall = true
+                    stackOperation(command)
+                }
+                else {
+                    stackOperation(command)
+                }
+            }
+        }
+    }
+}
+```
+
+### Sum of Multiples
+```java
+object SumOfMultiples {
+    fun sum(divisors: Set<Int>, limit: Int) = (1 until limit).filter { n ->
+        n.isDivisible(divisors.filter { d -> d > 0 }.toSet()) }.sum()
+    private fun Int.isDivisible(divisors: Set<Int>): Boolean = divisors.any { this % it == 0 }
+}
+```
+
+### Sieve
+```java
+import kotlin.math.sqrt
+object Sieve {
+    fun primesUpTo(max: Int): List<Int> {
+        var numbers = (2..max).toList()
+        val primes = mutableListOf<Int>()
+        while (numbers.isNotEmpty()) {
+            if (numbers.first() > sqrt(max.toDouble())) {
+                primes.addAll(numbers)
+                break
+            }
+            primes.add(numbers.first())
+            numbers = numbers.filter { it % numbers.first() != 0 }
+        }
+        return primes
+    }
+}
+```
+
+### Perfect Numbers
+```java
+enum class Classification { DEFICIENT, PERFECT, ABUNDANT }
+fun classify(naturalNumber: Int) = naturalNumber
+        .let { require(it > 0); it }
+        .compareTo(naturalNumber.factors.sum())
+        .let {
+            when {
+                it < 0 -> Classification.ABUNDANT
+                it == 0 -> Classification.PERFECT
+                else -> Classification.DEFICIENT
+            }
+        }
+private val Int.factors: List<Int>
+    get() = (1..this / 2).fold(emptyList()) { factors, i -> if (this % i == 0) factors.plus(i) else factors }
+```
+
+### Dominoes
+```java
+class ChainNotFoundException : RuntimeException()
+data class Domino(val left: Int, val right: Int)
+object Dominoes {
+    fun formChain(vararg xs: Domino) = formChain(xs.toList())
+    fun formChain(xs: List<Domino>): List<Domino> =
+        if (xs.isEmpty())
+            emptyList()
+        else {
+            val ys = mutableListOf(listOf(xs.first()))
+            go(ys, xs.drop(1))
+            ys.removeIf { it.size != xs.size || it.first().left != it.last().right }
+            if (ys.isEmpty()) throw ChainNotFoundException() else ys.first()
+        }
+    private fun go(acc: MutableList<List<Domino>>, pool: List<Domino>) {
+        if (pool.isEmpty()) return
+        val xs = acc.last()
+        val last = xs.last()
+        pool.filter { last.right == it.left || last.right == it.right }
+            .forEach {
+                acc.add(xs.plus(if (last.right == it.left) it else Domino(it.right, it.left)))
+                go(acc, pool.minus(it))
+            }
+    }
+}
+```
+
+### Minesweeper
+```java
+class MinesweeperBoard(val inputBoard: List<String>) {
+  fun withNumbers(): List<String> =
+    inputBoard.mapIndexed { row, str ->
+      str.mapIndexed { col, cell -> when (cell) {
+          ' ' -> adjacentMines(row, col)
+          else -> cell
+        }
+      }.joinToString("")
+    }
+  private fun adjacentMines(row: Int, col: Int): Char {
+    val count =
+      (Math.max(0, row - 1)..Math.min(inputBoard.size - 1, row + 1))
+        .flatMap { i ->
+          (Math.max(0, col - 1)..Math.min(inputBoard[i].length - 1, col + 1))
+            .map { j ->
+              if (inputBoard[i][j] == '*') 1 else 0
+            }
+        }
+        .sum()
+    return if (count > 0) (count + 48).toChar() else ' '
+  }
+}
+```
+
+### Scale Generator
+```java
+class Scale(private val tonic: String) {
+    private val chromatic = if (tonic.getOrNull(1) == '#') {
+        listOf("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B")
+    } else {
+        listOf("F", "Gb", "G", "Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E")
+    }.run { dropWhile { it.toUpperCase() != tonic.toUpperCase() } + takeWhile { it.toUpperCase() != tonic.toUpperCase() } }
+    fun chromatic(): List<String> = chromatic
+    fun interval(intervals: String): List<String> =
+        intervals.scan(0) { x, y -> x + "mMA".indexOf(y) + 1 }.mapNotNull { chromatic.getOrNull(it) }
+}
+```
+
+### Run Length Encoding
+```java
+object RunLengthEncoding {
+    fun encode(input: String): String =
+        input.replace(Regex("(.)\\1+")) {
+            String.format("%d%s", it.value.length, it.groupValues[1])
+        }
+    fun decode(input: String): String =
+        input.replace(Regex("(\\d+)(.)")) {
+            it.groupValues[2].repeat(it.groupValues[1].toInt())
+        }
+}
+```
+
+### Crypto Square
+```java
+import kotlin.math.ceil
+import kotlin.math.sqrt
+object CryptoSquare {
+    fun ciphertext(plaintext: String): String = plaintext
+            .normalize()
+            .toRectangleMatrix()
+            .transpose()
+            .joinToString(" ")
+    private fun String.normalize() = this.toLowerCase().filter(Char::isLetterOrDigit)
+    private fun String.toRectangleMatrix(): List<String> {
+        val c = numberOfColumns(this)
+        return this.chunked(c) { it.toString().padEnd(c, ' ') }
+    }
+    // Using max(x, 1) in case the string is empty
+    private fun numberOfColumns(s: String) = maxOf(ceil(sqrt(s.length.toDouble())).toInt(), 1)
+    private fun List<String>.transpose(): List<String> =
+            (this.elementAtOrElse(0) { "" }.indices).map { col ->
+                (this.indices).map { row ->
+                    this[row][col]
+                }.joinToString("")
+            }
+}
+```
+
+### Roman Numerals
+```java
+object RomanNumerals {
+    fun value(number: Int): String {
+        require(number < 4000) { "Unsupported Value $number" }
+        return ROMAN.fold(Pair(number, "")) { (arabic, result) , (rem, roman) ->
+            val times = arabic / rem
+            Pair(arabic - rem * times, result + roman.repeat(times))
+        }.second
+    }
+    val ROMAN = listOf(
+        1000 to "M", 900 to "CM", 600 to "CM", 500 to "D", 400 to "CD",
+        100 to "C", 90 to "XC", 50 to "L", 40 to "XL",
+        10 to "X", 9 to "IX", 5 to "V", 4 to "IV", 1 to "I"
+    )
+}
+```
+
+### Series
+```java
+object Series {
+    fun slices(n: Int, s: String): List<List<Int>> {
+        require(n <= s.length && s.isNotBlank())
+        return s.windowed(n) { it.map { c -> "$c".toInt() } }
+    }
+}
+```
+
+### Phone Number
+```java
+class PhoneNumber(input: String) {
+    var number: String? = null
+    init {
+        number = input
+                .replace(Regex("[^0-9]"), "")
+                .let {
+                    when {
+                        it.length == 10
+                                && it.substring(0, 1).matches(Regex("[2-9]"))
+                                && it.substring(3, 4).matches(Regex("[2-9]")) -> it
+                        it.length == 11
+                                && it.first().equals('1') -> it.drop(1)
+                        else -> null
+                    }
+                }
+    }
+}
+```
+
+### Nucleotide Count
+```java
+class Dna (sequence: String) {
+    init {
+        require(sequence.all { c -> c in "ACGT" })
+    }
+    val nucleotideCounts: Map<Char, Int> = sequence.groupBy { it }
+            .mapValuesTo(mutableMapOf('A' to 0,'C' to 0, 'G' to 0, 'T' to 0)) { it.value.size }
+}
+```
+
+### Luhn
+```java
+object Luhn {
+  fun isValid(number: String): Boolean {
+    val (digits, others) = number
+      .filterNot(Char::isWhitespace)
+      .partition(Char::isDigit)
+    if (digits.length <= 1 || others.isNotEmpty()) {
+      return false
+    }
+    val checksum = digits
+      .map { it.toInt() - '0'.toInt() }
+      .reversed()
+      .mapIndexed { index, value ->
+        if (index % 2 == 1 && value < 9) value * 2 % 9 else value
+      }
+      .sum()
+    return checksum % 10 == 0
+  }
+}
+```
+
+### Largest Series Product
+```java
+class Series(input: String) {
+    private val digits = input.map { it.digitToInt() }
+    fun getLargestProduct(span: Int): Long {
+        require(span >= 0 && span <= digits.size) { "span $span, outside of range 0..${digits.size}" }
+        if (span == 0) return 1
+        return digits.windowed(span).maxOf { it.product() }
+    }
+    private fun Iterable<Int>.product() = fold(1L) { acc, e -> acc * e }
+}
+```
+
+### ISBN Verifier
+```java
+class IsbnVerifier {
+    fun isValid(number: String): Boolean =
+        with (number.replace("-", "")) {
+            matches(Regex("\\d{9}[\\dX]")) &&
+            mapIndexed { i, c -> c.asInt() * (10 - i) }.sum() % 11 == 0
+        }
+}
+fun Char.asInt(): Int = if (this.isDigit()) this - '0' else 10
+```
+
+### Beer Song
+```java
+object   BeerSong {
+    val lyrics = verses(99, 0)
+    fun verses(start: Int, end: Int): String {
+        return (start downTo end).map { verse(it) }.joinToString("\n")
+    }
+    fun verse(n: Int): String {
+        return when {
+            n in 2..99 -> "${n} bottles of beer on the wall, ${n} bottles of beer.\nTake one down and pass it around, ${n - 1} ${if (n == 2) "bottle" else "bottles"} of beer on the wall.\n"
+            n == 1 -> "1 bottle of beer on the wall, 1 bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n"
+            n == 0 -> "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
+            n < 0  -> throw IllegalArgumentException("Beer song verse can't be negative")
+            n > 99 -> throw IllegalArgumentException("Beer song only goes up to verse 99")
+            else   -> ""
+        }
+    }
+}
+```
+
+### Bob
+```java
+enum class Request {
+    QUESTION, YELL, ADDRESS, ELSE;
+    companion object {
+        fun parseRequest(request: String) =
+                when {
+                    request.isBlank() -> ADDRESS
+                    request.filter { it.isLetter() }.let { it.isNotEmpty() && it.none { it.isLowerCase() } } -> YELL
+                    request.trimEnd().endsWith('?') -> QUESTION
+                    else -> ELSE
+                }
+    }
+}
+class Bob {
+    companion object {
+        fun hey(request: String) =
+                when (Request.parseRequest(request)) {
+                    Request.QUESTION -> "Sure."
+                    Request.YELL -> "Whoa, chill out!"
+                    Request.ADDRESS -> "Fine. Be that way!"
+                    Request.ELSE -> "Whatever."
+                }
+    }
+}
+```
+
+### Diamond
+```java
+class DiamondPrinter {
+  fun printToList(c : Char): List<String> {
+    require(c in 'A'..'Z')
+    val vp = ('A' until c) + (c downTo 'A')
+    val hp = (c downTo 'A') + ('B'..c)
+    return vp.map { y -> hp.map { x -> if (x == y) y else ' ' }.joinToString("") }
+  }
+}
+```
+
+### Anagram
+```java
+import java.util.stream.Collectors.toSet
+class Anagram(private val s: String) {
+    private val toSortedList: (String) -> List<Char> = { it.toLowerCase().toList().sorted() }
+    fun match(anagrams: Collection<String>): Set<String> {
+        return anagrams.stream()
+                .filter{ it.length == s.length }
+                .filter{ it.toLowerCase() != s.toLowerCase() }
+                .filter{ toSortedList(it) == toSortedList(s) }
+                .collect(toSet())
+    }
+}
+```
+
+### Pig Latin
+```java
+package PigLatin
+fun translate(phrase: String) =
+    Regex(
+        """
+        (?:
+          (?<vowel> [aeiou] | xr | yt )
+        | (?<consonant> ch | \w?qu | rh | thr? | sch | \w )
+        )(?<body> \w+ )
+        """, RegexOption.COMMENTS)
+    .replace(phrase, "\${vowel}\${body}\${consonant}ay")
+```
+
+### Isogram
+```java
+class Isogram {
+    companion object {
+       fun isIsogram(input: String): Boolean{
+           val clean = input.replace(Regex("[ -]"), "")
+           return (clean.length == clean.toLowerCase().toCharArray().distinct().size)
+       }
+    }
+}
+```
+
+### Binary Search
+```java
+object BinarySearch {
+    fun search(list: List<Int>, item: Int): Int =
+            (list.size / 2).let {
+                when {
+                    list.isEmpty() -> throw NoSuchElementException()
+                    list[it] < item -> (it + 1) + search(list.subList(it + 1, list.size), item)
+                    list[it] > item -> search(list.subList(0, it), item)
+                    else -> it
+                }
+            }
+}
+```
+
+### Linked List
+```java
+class Deque<T> {
+    private var first: Node<T>? = null
+    private var last: Node<T>? = null
+    fun push(value: T) {
+        if (first == null) {
+            first = Node(value)
+        } else {
+            if (last == null) {
+                last = first
+            }
+            first = Node(value, right = first)
+            first?.right?.left = first
+        }
+    }
+    fun pop(): T? {
+        val toReturn = first?.value
+        first?.right?.let {
+            first = first!!.right
+            first?.left = null
+            if (first == last) {
+                last = null
+            }
+        } ?: run { first = null }
+        return toReturn
+    }
+    fun unshift(value: T) {
+        if (first == null)
+            push(value)
+        else if (last == null) {
+            last = Node(value, left = first)
+            first?.right = last
+        } else {
+            val add = Node(value, left = last)
+            last?.right = add
+            last = add
+        }
+    }
+    fun shift(): T? {
+        if (last == null) {
+            val ret = first?.value
+            first = null
+            return ret
+        } else {
+            val ret = last?.value
+            last?.left?.right = null
+            if (last?.left == first)
+                last = null
+            else
+                last = last?.left
+            return ret
+        }
+    }
+}
+class Node<T>(var value: T, var left: Node<T>? = null, var right: Node<T>? = null)
+```
+
+### Bank Account
+```java
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicInteger
+class BankAccount {
+    private val _balance: AtomicInteger = AtomicInteger(0)
+    private val closed: AtomicBoolean = AtomicBoolean(false)
+    val balance: Int
+        get() = ifOpen {
+            _balance.get()
+        }
+    fun adjustBalance(amount: Int) = ifOpen {
+        _balance.addAndGet(amount)
+    }
+    fun close() {
+        closed.set(true)
+    }
+    private inline fun <T> ifOpen(action: () -> T): T {
+        if (closed.get()) throw IllegalStateException()
+        return action()
+    }
+}
+```
+
+### Rotational Cipher
+```java
+import java.util.Random
+private val random = Random()
+private fun List<*>.randomSample(n: Int) = (0 until n).map { this[random.nextInt(this.size)] }
+private val names = mutableSetOf<String>()
+private val letters = ('A'..'Z').toList()
+private val numbers = ('0'..'9').toList()
+class Robot {
+    var name: String
+    init {
+        name = generateName()
+    }
+    fun reset() {
+        name = generateName()
+    }
+    private tailrec fun generateName(): String {
+        val name = letters.randomSample(2).plus(numbers.randomSample(3)).joinToString("")
+        return when {
+            names.add(name) -> name
+            else -> generateName()
+        }
+    }
+}
+```
+
+### Robot Name
+```java
+import java.util.Random
+private val random = Random()
+private fun List<*>.randomSample(n: Int) = (0 until n).map { this[random.nextInt(this.size)] }
+private val names = mutableSetOf<String>()
+private val letters = ('A'..'Z').toList()
+private val numbers = ('0'..'9').toList()
+class Robot {
+    var name: String
+    init {
+        name = generateName()
+    }
+    fun reset() {
+        name = generateName()
+    }
+    private tailrec fun generateName(): String {
+        val name = letters.randomSample(2).plus(numbers.randomSample(3)).joinToString("")
+        return when {
+            names.add(name) -> name
+            else -> generateName()
+        }
+    }
+}
+```
+
+### Word Count
+```java
+object WordCount {
+    fun phrase(text: String): Map<String, Int> =
+            text.toLowerCase()
+                .split(Regex("[^a-zA-Z0-9']+"))
+                .filter(String::isNotEmpty)
+                .groupBy { it }.mapValues { it.value.size }
+}
+```
+
+### Flatten-Array
+```java
+object Flattener {
+   fun flatten(nestedList: List<Any?>): List<Any> {
+      return nestedList.flatMap { when(it) {
+         is List<*> -> flatten(it)
+         else -> listOf(it)
+      } }.filterNotNull()
+   }
+}
+```
+
+### Triangle
+```java
+class Triangle<out T : Number>(val a: T, val b: T, val c: T) {
+    init {
+        val sides = listOf(a, b, c).map(Number::toDouble).sorted()
+        require(sides[0] > 0 && sides[0] + sides[1] > sides[2]) {
+            "not a triangle"
+        }
+    }
+    private val numSides = setOf(a, b, c).size
+    val isEquilateral: Boolean = numSides == 1
+    val isIsosceles:   Boolean = numSides <= 2
+    val isScalene:     Boolean = numSides == 3
+}
+```
+
+### Wordy
+```java
+import kotlin.math.pow
+object Wordy {
+    fun answer(input: String): Int {
+        require(input.startsWith("What is ") && input.endsWith("?"))
+        val expression = input.substring("What is ".length, input.length - 1)
+                .replace("by ", "")
+                .replace("th power", "")
+                .replace("raised to the ", "raised ")
+                .split(" ")
+        var result = 0
+        var operation = ""
+        for ((index, value) in expression.withIndex()) {
+            if (index % 2 == 0) {
+                val intValue = value.toInt()
+                when (operation) {
+                    "plus" -> result += intValue
+                    "minus" -> result -= intValue
+                    "multiplied" -> result *= intValue
+                    "divided" -> result /= intValue
+                    "raised" -> result = result.pow(intValue)
+                    "" -> result = intValue
+                }
+                operation = ""
+            } else {
+                operation = value
+            }
+        }
+        if (operation.isNotEmpty()) throw IllegalArgumentException()
+        return result
+    }
+}
+private fun Int.pow(exp: Int) = this.toDouble().pow(exp).toInt()
+```
+
+### Zebra Puzzle
+```java
+import kotlin.math.absoluteValue
+
+enum class Color { Red, Green, Ivory, Yellow, Blue }
+enum class Resident { Englishman, Spaniard, Ukrainian, Norwegian, Japanese }
+enum class Pet { Dog, Snails, Fox, Horse, Zebra }
+enum class Drink { Coffee, Tea, Milk, OrangeJuice, Water }
+enum class Smoke { OldGold, Kools, Chesterfields, LuckyStrike, Parliaments }
+
+data class Solution(
+    val colors: List<Color>,
+    val residents: List<Resident>,
+    val pets: List<Pet>,
+    val drinks: List<Drink>,
+    val smokes: List<Smoke>
+)
+
+class ZebraPuzzle {
+    fun drinksWater() = solution.residents[solution.drinks.indexOf(Drink.Water)].name
+    fun ownsZebra() = solution.residents[solution.pets.indexOf(Pet.Zebra)].name
+
+    private val solution = calculateSolution()
+    private fun calculateSolution(): Solution {
+        for (colors in permutations<Color>().filter { it.matchesColorRules() }) {
+            for (residents in permutations<Resident>().filter { it.matchesResidentRules(colors) }) {
+                for (pets in permutations<Pet>().filter { it.matchesPetRules(residents) }) {
+                    for (drinks in permutations<Drink>().filter { it.matchesDrinkRules(colors, residents) }) {
+                        for (smokes in permutations<Smoke>().filter { it.matchesSmokeRules(colors, residents, drinks, pets) }) {
+                            return Solution(colors, residents, pets, drinks, smokes)
+                        }
+                    }
+                }
+            }
+        }
+        throw Exception("No solution could be found")
+    }
+
+    private fun List<Color>.matchesColorRules() =
+        indexOf(Color.Green) == indexOf(Color.Ivory) + 1
+
+    private fun List<Resident>.matchesResidentRules(colors: List<Color>) =
+        indexOf(Resident.Norwegian) == 0 &&
+                indexOf(Resident.Englishman) == colors.indexOf(Color.Red) &&
+                (indexOf(Resident.Norwegian) - colors.indexOf(Color.Blue)).absoluteValue == 1
+
+    private fun List<Pet>.matchesPetRules(residents: List<Resident>) =
+        indexOf(Pet.Dog) == residents.indexOf(Resident.Spaniard)
+
+    private fun List<Drink>.matchesDrinkRules(colors: List<Color>, residents: List<Resident>) =
+        indexOf(Drink.Coffee) == colors.indexOf(Color.Green) &&
+                indexOf(Drink.Tea) == residents.indexOf(Resident.Ukrainian) &&
+                indexOf(Drink.Milk) == 2
+
+    private fun List<Smoke>.matchesSmokeRules(
+        colors: List<Color>,
+        residents: List<Resident>,
+        drinks: List<Drink>,
+        pets: List<Pet>
+    ) =
+        indexOf(Smoke.OldGold) == pets.indexOf(Pet.Snails) &&
+                indexOf(Smoke.Kools) == colors.indexOf(Color.Yellow) &&
+                (indexOf(Smoke.Chesterfields) - pets.indexOf(Pet.Fox)).absoluteValue == 1 &&
+                (indexOf(Smoke.Kools) - pets.indexOf(Pet.Horse)).absoluteValue == 1 &&
+                indexOf(Smoke.LuckyStrike) == drinks.indexOf(Drink.OrangeJuice) &&
+                indexOf(Smoke.Parliaments) == residents.indexOf(Resident.Japanese)
+}
+
+private inline fun <reified T : Enum<T>> permutations() = enumValues<T>().toList().permutations()
+
+private fun <T> List<T>.permutations(): Sequence<List<T>> =
+    if (size <= 1) sequenceOf(this)
+    else asSequence().flatMap { seq -> (this - seq).permutations().map { listOf(seq) + it } }
+```
+
+### Meetup
+Meetup.kt
+```java
+import java.time.DayOfWeek
+import java.time.LocalDate
+
+import MeetupSchedule.*
+
+class Meetup(_month: Int, _year: Int) {
+    private val year = _year
+    private val month = _month
+    private val monthLength = LocalDate.of(_year, _month, 1).lengthOfMonth()
+    fun day(dayOfWeek: DayOfWeek, schedule: MeetupSchedule): LocalDate {
+        val possibleDays = (1..monthLength).toList()
+            .groupBy { LocalDate.of(year, month, it).dayOfWeek }
+            .getValue(dayOfWeek)
+            .sorted()
+        val meetupDay = when (schedule) {
+            in (FIRST..FOURTH)  -> possibleDays[schedule.ordinal]
+            LAST                -> possibleDays[possibleDays.lastIndex]
+            else                -> possibleDays.first { it in (13..19) }
+        }
+        return LocalDate.of(year, month, meetupDay)
+    }
+}
+```
+
+MeetupSchedule.kt
+```java
+import java.time.DayOfWeek
+import java.time.LocalDate
+
+enum class MeetupSchedule {
+
+    FIRST, SECOND, THIRD, FOURTH, LAST, TEENTH
+
+}
+```
 ### Collatz Calculator
 ```java
 object CollatzCalculator {
