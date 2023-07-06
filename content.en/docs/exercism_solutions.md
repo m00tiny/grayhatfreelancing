@@ -1,6 +1,6 @@
 +++
 title = "Exercism Solutions"
-date = '2023-03-27'
+date = '2023-06-25'
 description = 'Solutions to the various challenges on the exercism website.'
 +++
 
@@ -9,6 +9,124 @@ description = 'Solutions to the various challenges on the exercism website.'
 These solutions are provided so that you can check your work or get an idea, if you're stuck. If you use them to cheat, understand that you're only cheating yourself. That goes for everything on this website.
 
 ## Python
+
+### Pascal's Triangle
+```python
+def rows(row_count, previous_row=[1]):
+    if row_count < 0:
+        raise ValueError("number of rows is negative")
+    elif row_count == 0:
+        return []
+    temp_row = previous_row + [0]
+    new_row = list(map(sum, zip(temp_row, temp_row[::-1])))
+    return [previous_row] + rows(row_count - 1, new_row)
+```
+
+### Resistor Colors
+```python
+COLORS = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"]
+def color_code(color):
+    return COLORS.index(color)
+
+
+def colors():
+    return COLORS
+```
+
+### Resistor Colors Trio
+```python
+import math
+
+COLORS = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"]
+PREFIX = [" ", " kilo", " mega", " giga"]
+
+def label(colors):
+    zeros = str(10 ** COLORS.index(colors[2]))[1:]
+    ohms = int(str(COLORS.index(colors[0])) + str(COLORS.index(colors[1])) + zeros)
+    thousands = 0 if ohms == 0 else int(math.log(ohms, 10)) // 3
+    prefix = PREFIX[thousands]
+
+    if thousands == 0:
+        return  str(ohms) + prefix + "ohms"
+    else:
+        return  str(ohms)[:-thousands*3] + prefix + "ohms"
+```
+
+### Sublist
+```python
+SUBLIST = 1
+SUPERLIST = 2
+EQUAL = 3
+UNEQUAL = 4
+def sublist(list_one, list_two):
+    if list_one == list_two:
+        return EQUAL
+    for i in range(len(list_one) - len(list_two) + 1):
+        if list_one[i:i + len(list_two)] == list_two:
+            return SUPERLIST
+    for i in range(len(list_two) - len(list_one) + 1):
+        if list_two[i:i + len(list_one)] == list_one:
+            return SUBLIST
+    return UNEQUAL
+```
+
+### Little Sister's Essay
+```python
+"""Functions to help edit essay homework using string manipulation."""
+def capitalize_title(title):
+    """Convert the first letter of each word in the title to uppercase if needed.
+
+    :param title: str - title string that needs title casing.
+    :return: str - title string in title case (first letters capitalized).
+    """
+
+    return title.title()
+
+
+def check_sentence_ending(sentence):
+    """Check the ending of the sentence to verify that a period is present.
+
+    :param sentence: str - a sentence to check.
+    :return: bool - return True if punctuated correctly with period, False otherwise.
+    """
+
+    return sentence[-1]=='.'
+
+
+def clean_up_spacing(sentence):
+    """Verify that there isn't any whitespace at the start and end of the sentence.
+
+    :param sentence: str - a sentence to clean of leading and trailing space characters.
+    :return: str - a sentence that has been cleaned of leading and trailing space characters.
+    """
+
+    return sentence.strip(' ')
+
+
+def replace_word_choice(sentence, old_word, new_word):
+    """Replace a word in the provided sentence with a new one.
+
+    :param sentence: str - a sentence to replace words in.
+    :param old_word: str - word to replace.
+    :param new_word: str - replacement word.
+    :return: str - input sentence with new words in place of old words.
+    """
+
+    return sentence.replace(old_word,new_word)
+```
+
+### ISBN Verifier
+```python
+def is_valid(isbn):
+    nums = list(isbn.replace("-", ""))
+    if len(nums)!=10:
+        return False
+    if nums[-1] == "X":
+        nums[-1] = "10"
+    if not all([c.isdigit() for c in nums]):
+        return False
+    return sum(int(x)*y for x,y in zip(nums, range(10, 0, -1))) % 11 == 0
+```
 
 ### Chaitana's Colossal Coaster
 ```python
