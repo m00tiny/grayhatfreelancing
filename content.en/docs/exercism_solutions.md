@@ -10,6 +10,428 @@ These solutions are provided so that you can check your work or get an idea, if 
 
 ## Python
 
+### Ellen's Alien Game
+```python
+"""Solution to Ellen's Alien Game exercise."""
+class Alien:
+    """Create an Alien object with location x_coordinate and y_coordinate.
+
+    Attributes
+    ----------
+    (class)total_aliens_created: int
+    x_coordinate: int - Position on the x-axis.
+    y_coordinate: int - Position on the y-axis.
+    health: int - Amount of health points.
+
+    Methods
+    -------
+    hit(): Decrement Alien health by one point.
+    is_alive(): Return a boolean for if Alien is alive (if health is > 0).
+    teleport(new_x_coordinate, new_y_coordinate): Move Alien object to new coordinates.
+    collision_detection(other): Implementation TBD.
+    """
+    total_aliens_created = 0
+    def __init__(self, x_coordinate, y_coordinate):
+        self.x_coordinate = x_coordinate
+        self.y_coordinate = y_coordinate
+        self.health = 3
+        Alien.total_aliens_created += 1
+    def hit(self):
+        self.health -= 1
+    def is_alive(self):
+        return self.health > 0
+    def teleport(self, new_x, new_y):
+        self.x_coordinate, self.y_coordinate = new_x, new_y
+    def collision_detection(self, other_object):
+        pass
+def new_aliens_collection(alien_start_positions):
+    return [Alien(x_coordinate, y_coordinate) for (x_coordinate, y_coordinate) in alien_start_positions]
+```
+
+### Atbash Cipher
+```python
+def chunk(s,n):
+	return s if(len(s) <= n) else s[:n]+' '+chunk(s[n:],n);
+
+def encode(s):
+	return chunk(''.join([i for i in decode(s) if i.isalnum()]),5);
+
+def decode(s):
+	return ''.join(l if not l.isalpha() else chr(219-ord(l)) for l in s.lower().replace(" ",""));
+```
+
+### Cater Waiter
+```python
+"""Functions for compiling dishes and ingredients for a catering company."""
+from sets_categories_data import (VEGAN,
+                                  VEGETARIAN,
+                                  KETO,
+                                  PALEO,
+                                  OMNIVORE,
+                                  ALCOHOLS,
+                                  SPECIAL_INGREDIENTS)
+def clean_ingredients(dish_name, dish_ingredients):
+    """Remove duplicates from `dish_ingredients`.
+
+    :param dish_name: str - containing the dish name.
+    :param dish_ingredients: list - dish ingredients.
+    :return: tuple - containing (dish_name, ingredient set).
+
+    This function should return a `tuple` with the name of the dish as the first item,
+    followed by the de-duped `set` of ingredients as the second item.
+    """
+    return (dish_name, set(dish_ingredients))
+def check_drinks(drink_name, drink_ingredients):
+    """Append "Cocktail" (alcohol)  or "Mocktail" (no alcohol) to `drink_name`, based on `drink_ingredients`.
+
+    :param drink_name: str - name of the drink.
+    :param drink_ingredients: list - ingredients in the drink.
+    :return: str - drink_name appended with "Mocktail" or "Cocktail".
+
+    The function should return the name of the drink followed by "Mocktail" (non-alcoholic) and drink
+    name followed by "Cocktail" (includes alcohol).
+
+    """
+    drink_kind = "Cocktail" if set(drink_ingredients) & ALCOHOLS else "Mocktail"
+    return f"{drink_name} {drink_kind}"
+def categorize_dish(dish_name, dish_ingredients):
+    """Categorize `dish_name` based on `dish_ingredients`.
+
+    :param dish_name: str - dish to be categorized.
+    :param dish_ingredients: list - ingredients for the dish.
+    :return: str - the dish name appended with ": <CATEGORY>".
+
+    This function should return a string with the `dish name: <CATEGORY>` (which meal category the dish belongs to).
+    `<CATEGORY>` can be any one of  (VEGAN, VEGETARIAN, PALEO, KETO, or OMNIVORE).
+    All dishes will "fit" into one of the categories imported from `sets_categories_data.py`
+
+    """
+    all_categories = [VEGAN, VEGETARIAN, KETO, PALEO, OMNIVORE]
+    cat_names = ["VEGAN", "VEGETARIAN", "KETO", "PALEO", "OMNIVORE"]
+    cat = next(cat_name for cat, cat_name in zip(all_categories, cat_names) if cat >= dish_ingredients)
+    return f"{dish_name}: {cat}"
+def tag_special_ingredients(dish):
+    """Compare `dish` ingredients to `SPECIAL_INGREDIENTS`.
+
+    :param dish: tuple - of (dish name, list of dish ingredients).
+    :return: tuple - containing (dish name, dish special ingredients).
+
+    Return the dish name followed by the `set` of ingredients that require a special note on the dish description.
+    For the purposes of this exercise, all allergens or special ingredients that need to be tracked are in the
+    SPECIAL_INGREDIENTS constant imported from `sets_categories_data.py`.
+    """
+    dish_name, ingreds = dish
+    return (dish_name, SPECIAL_INGREDIENTS & set(ingreds))
+def compile_ingredients(dishes):
+    """Create a master list of ingredients.
+
+    :param dishes: list - of dish ingredient sets.
+    :return: set - of ingredients compiled from `dishes`.
+
+    This function should return a `set` of all ingredients from all listed dishes.
+    """
+    return set.union(*dishes)
+def separate_appetizers(dishes, appetizers):
+    """Determine which `dishes` are designated `appetizers` and remove them.
+
+    :param dishes: list - of dish names.
+    :param appetizers: list - of appetizer names.
+    :return: list - of dish names that do not appear on appetizer list.
+
+    The function should return the list of dish names with appetizer names removed.
+    Either list could contain duplicates and may require de-duping.
+    """
+    return list(set(dishes) - set(appetizers))
+def singleton_ingredients(dishes, intersection):
+    """Determine which `dishes` have a singleton ingredient (an ingredient that only appears once across dishes).
+
+    :param dishes: list - of ingredient sets.
+    :param intersection: constant - can be one of `<CATEGORY>_INTERSECTIONS` constants imported from `sets_categories_data.py`.
+    :return: set - containing singleton ingredients.
+
+    Each dish is represented by a `set` of its ingredients.
+
+    Each `<CATEGORY>_INTERSECTIONS` is an `intersection` of all dishes in the category. `<CATEGORY>` can be any one of:
+        (VEGAN, VEGETARIAN, PALEO, KETO, or OMNIVORE).
+
+    The function should return a `set` of ingredients that only appear in a single dish.
+    """
+    return compile_ingredients(dishes) - intersection
+```
+
+### Wordy
+```python
+def answer(question: str) -> int:
+    question = question.replace("What is ", "").replace("?", "").replace("plus", "+").replace("minus", "-").replace("divided by", "/").replace("multiplied by", "*").split(" ")
+    question.insert(0, "(")
+    question.insert(4, ")")
+
+    q = [x.isalpha() for x in question if x not in ("What", "is")]
+    if any(q):
+        raise ValueError("unknown operation")
+    try:
+        return eval(" ".join(question))
+    except:
+        raise ValueError("syntax error")
+```
+
+### Locomotive Engineer
+```python
+"""Functions which helps the locomotive engineer to keep track of the train."""
+
+
+def get_list_of_wagons(*args):
+    """Return a list of wagons.
+
+    :param: arbitrary number of wagons.
+    :return: list - list of wagons.
+    """
+    return [*args]
+
+
+def fix_list_of_wagons(each_wagons_id, missing_wagons):
+    """Fix the list of wagons.
+
+    :parm each_wagons_id: list - the list of wagons.
+    :parm missing_wagons: list - the list of missing wagons.
+    :return: list - list of wagons.
+    """
+    [[a, b, c, *last], d] = [each_wagons_id, missing_wagons]
+    return [c, *d, *last, a, b]
+
+
+def add_missing_stops(dicts, **kwargs):
+    """Add missing stops to route dict.
+
+    :param route: dict - the dict of routing information.
+    :param: arbitrary number of stops.
+    :return: dict - updated route dictionary.
+    """
+    return {**dicts, 'stops': [*kwargs.values()]}
+
+
+def extend_route_information(route, more_route_information):
+    """Extend route information with more_route_information.
+
+    :param route: dict - the route information.
+    :param more_route_information: dict -  extra route information.
+    :return: dict - extended route information.
+    """
+    return {**route, **more_route_information}
+
+
+def fix_wagon_depot(wagons_rows):
+    """Fix the list of rows of wagons.
+
+    :param wagons_rows: list[list[tuple]] - the list of rows of wagons.
+    :return: list[list[tuple]] - list of rows of wagons.
+    """
+    return [*map(lambda a: list(a), [*zip(*wagons_rows)])]
+```
+
+### RNA Transcription
+```python
+def to_rna(dna_strand):
+    return dna_strand.translate(str.maketrans("GCTA", "CGAU"))
+```
+
+### Inventory Management
+```python
+"""Functions to keep track and alter inventory."""
+from collections import Counter
+
+def create_inventory(items: list[str]) -> dict[str, int]:
+    """Create a dict that tracks the amount (count) of each element on the `items` list.
+
+    :param items: list - list of items to create an inventory from.
+    :return: dict - the inventory dictionary.
+    """
+    return Counter(items)
+
+
+def add_items(inventory: dict[str, int], items: list[str]) -> dict[str, int]:
+    """Add or increment items in inventory using elements from the items `list`.
+
+    :param inventory: dict - dictionary of existing inventory.
+    :param items: list - list of items to update the inventory with.
+    :return: dict - the inventory updated with the new items.
+    """
+    return Counter(items) + Counter(inventory)
+
+
+def decrement_items(inventory: dict[str, int], items: list[str]) -> dict[str, int]:
+    """Decrement items in inventory using elements from the `items` list.
+
+    :param inventory: dict - inventory dictionary.
+    :param items: list - list of items to decrement from the inventory.
+    :return: dict - updated inventory with items decremented.
+    """
+    return {k: 0 if (n := v - items.count(k)) < 0 else n for k, v in inventory.items()}
+
+
+def remove_item(inventory: dict[str, int], item: str) -> dict[str, int]:
+    """Remove item from inventory if it matches `item` string.
+
+    :param inventory: dict - inventory dictionary.
+    :param item: str - item to remove from the inventory.
+    :return: dict - updated inventory with item removed. Current inventory if item does not match.
+    """
+    if item in inventory:
+        del inventory[item]
+    return inventory
+
+
+def list_inventory(inventory: dict[str, int]):
+    """Create a list containing all (item_name, item_count) pairs in inventory.
+
+    :param inventory: dict - an inventory dictionary.
+    :return: list of tuples - list of key, value pairs from the inventory dictionary.
+    """
+    return [(k, v) for k, v in inventory.items() if v > 0]
+```
+
+### Matching Brackets
+```python
+import re
+def is_paired(input_string):
+    brackets, has_pair = re.sub(r"[^{}[\]()]", "", input_string), 1
+    while has_pair:
+        brackets, has_pair = re.subn(r"{}|\[]|\(\)", "", brackets)
+    return not brackets
+```
+
+### Tisbury Treasure Hunt
+```python
+"""Functions to help Azara and Rui locate pirate treasure."""
+
+
+def get_coordinate(record):
+    """Return coordinate value from a tuple containing the treasure name, and treasure coordinate.
+
+    :param record: tuple - with a (treasure, coordinate) pair.
+    :return: str - the extracted map coordinate.
+    """
+    return record[1]
+
+
+def convert_coordinate(coordinate):
+    """Split the given coordinate into tuple containing its individual components.
+
+    :param coordinate: str - a string map coordinate
+    :return: tuple - the string coordinate split into its individual components.
+    """
+    return tuple(coordinate)
+
+
+def compare_records(azara_record, rui_record):
+    """Compare two record types and determine if their coordinates match.
+
+    :param azara_record: tuple - a (treasure, coordinate) pair.
+    :param rui_record: tuple - a (location, tuple(coordinate_1, coordinate_2), quadrant) trio.
+    :return: bool - do the coordinates match?
+    """
+    return convert_coordinate(get_coordinate(azara_record)) == get_coordinate(rui_record)
+
+
+def create_record(azara_record, rui_record):
+    """Combine the two record types (if possible) and create a combined record group.
+
+    :param azara_record: tuple - a (treasure, coordinate) pair.
+    :param rui_record: tuple - a (location, coordinate, quadrant) trio.
+    :return: tuple or str - the combined record (if compatible), or the string "not a match" (if incompatible).
+    """
+    if compare_records(azara_record, rui_record):
+        return azara_record + rui_record
+    return "not a match"
+
+
+def clean_up(combined_record_group):
+    """Clean up a combined record group into a multi-line string of single records.
+
+    :param combined_record_group: tuple - everything from both participants.
+    :return: str - everything "cleaned", excess coordinates and information are removed.
+
+    The return statement should be a multi-lined string with items separated by newlines.
+
+    (see HINTS.md for an example).
+    """
+    return "".join([f"{(record[0], record[2], record[3], record[4])}\n" for record in combined_record_group])
+```
+
+### Square Root
+```python
+def square_root(number):
+    return number ** 0.5
+```
+
+### Making the Grade
+```python
+"""Functions for organizing and calculating student exam scores."""
+
+
+def round_scores(student_scores: list) -> list:
+    """Round all provided student scores.
+
+    :param student_scores: list - float or int of student exam scores.
+    :return: list - student scores *rounded* to nearest integer value.
+    """
+    return list(map(round, student_scores))
+
+
+def count_failed_students(student_scores: list) -> int:
+    """Count the number of failing students out of the group provided.
+
+    :param student_scores: list - containing int student scores.
+    :return: int - count of student scores at or below 40.
+    """
+    return sum(map(lambda n: n <= 40, student_scores))
+
+
+def above_threshold(student_scores: list, threshold: int):
+    """Determine how many of the provided student scores were 'the best' based on the provided threshold.
+
+    :param student_scores: list - of integer scores.
+    :param threshold: int - threshold to cross to be the "best" score.
+    :return: list - of integer scores that are at or above the "best" threshold.
+    """
+    return list(filter(lambda n: n >= threshold, student_scores))
+
+
+def letter_grades(highest):
+    """Create a list of grade thresholds based on the provided highest grade.
+
+    :param highest: int - value of highest exam score.
+    :return: list - of lower threshold scores for each D-A letter grade interval.
+            For example, where the highest score is 100, and failing is <= 40,
+            The result would be [41, 56, 71, 86]:
+
+            41 <= "D" <= 55
+            56 <= "C" <= 70
+            71 <= "B" <= 85
+            86 <= "A" <= 100
+    """
+    return list(map(lambda n: n * (highest - 40) // 4 + 41, [0, 1, 2, 3]))
+
+
+def student_ranking(student_scores: list, student_names: list) -> list:
+    """Organize the student's rank, name, and grade information in ascending order.
+
+    :param student_scores: list - of scores in descending order.
+    :param student_names: list - of string names by exam score in descending order.
+    :return: list - of strings in format ["<rank>. <student name>: <score>"].
+    """
+    return list(map(lambda score: f"{score[0] + 1}. {score[1][1]}: {score[1][0]}", enumerate(reversed(sorted(zip(student_scores, student_names))))))
+
+
+def perfect_score(student_info: list) -> list:
+    """Create a list that contains the name and grade of the first student to make a perfect score on the exam.
+
+    :param student_info: list - of [<student name>, <score>] lists.
+    :return: list - first `[<student name>, 100]` or `[]` if no student score of 100 is found.
+    """
+    return next(filter(lambda info: info[1] == 100, student_info), [])
+```
+
 ### Pascal's Triangle
 ```python
 def rows(row_count, previous_row=[1]):
